@@ -1,0 +1,42 @@
+{
+  "parent": "",
+  "text": "root.txt",
+  "title": "NFF: Girls - Mob Dictionary",
+  "entity_buttons": [
+    {
+      "entity": "hmag:zombie_girl",
+      "x": 230,
+      "y": 10,
+      "page" : 0,
+      "scale": 1.2,
+      "entity_scale": 1.1,
+      "offset_x": -8,
+      "offset_y": -3,
+      "linked_page": "zombie_girl.json",
+      "hover_text": "entity.hmag.zombie_girl"
+    }
+  ],
+  "linked_page_buttons": [
+  ],
+  "images": [
+
+  ],
+  "item_renders": [
+    {
+      "item" : "nffgirls:tab_icon",
+      "x": 25,
+      "y": 14,
+      "page" : 0,
+      "scale": 2.75
+    }
+  ],
+  "recipes": [
+
+  ],
+  "tabula_renders": [
+
+  ],
+  "entity_renders": [
+
+  ]
+}
