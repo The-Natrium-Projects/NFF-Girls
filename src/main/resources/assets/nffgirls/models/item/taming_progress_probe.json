@@ -1,6 +1,6 @@
 {
 	"parent": "minecraft:item/handheld",
 	"textures": {
-		"layer0": "nffgirls:item/befriending_progress_probe"
+		"layer0": "nffgirls:item/taming_progress_probe"
 	}
 }
