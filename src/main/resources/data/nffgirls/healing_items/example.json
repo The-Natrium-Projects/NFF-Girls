@@ -1,0 +1,39 @@
+[
+  "This is an example for healing item data format.",
+  {
+    "desc": "The \"item\" field is the item type's registry key.",
+    "item": "some_mod:some_item",
+
+    "desc1": "The \"amount\" field defines a supplier for output amount. It supports different formats, see below. A single-element array means a single value.",
+    "amount": [5]
+  },
+  {
+    "desc": "The \"tag\" field represents all item types which have the given tag.",
+    "tag": "some_mod:some_tag",
+
+    "desc1": "Two-element double array represents a random value between the two values (the first one MUST be smaller) with uniform distribution.",
+    "amount": [10, 15]
+  },
+  {
+    "desc": "The \"item_predicate\" field represents all item stacks which satisfy the given predicate. The predicate is defined by the registry key of a Function<ItemStack, Boolean> in NaUtils' function registry.",
+    "item_predicate": "some_mod:some_predicate",
+
+    "desc1": "Three-element double array represents a truncated Gaussian-distributed random value between the first 2 values. The third value is \"limit factor\" e.g. 3 represents the border is 3*sigma of the Gaussian distribution. Larger value means the random value is more likely to be around the center of the range.",
+    "amount": [10, 15, 1]
+  },
+  {
+    "item": "some_mod:some_other_item",
+
+    "desc": "Array with double as the first element and two-element double arrays as other elements is a RandomSelection.",
+    "desc1": "For example, the below array means: 0.1 probability for 10, 0.2 probability for 7, and 5 by default (if both 10 and 7 are not picked).",
+    "amount": [5, [7, 0.2], [10, 0.1]]
+  },
+  {
+    "tag": "some_mod:some_other_tag",
+
+    "desc": "The \"item_predicate\" field is a Function<Mob, Double> defined by the registry key in NaUtils' function registry.",
+    "amount_getter": "some_mod:some_function"
+  },
+  "Note that (\"item\", \"tag\" and \"item_predicate\") conflict with each other, and (\"amount\" and \"amount_getter\") conflict with each other."
+
+]
