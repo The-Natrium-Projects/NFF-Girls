@@ -19,6 +19,7 @@ import net.minecraft.util.Mth;
 import net.minecraft.world.Container;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
+import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
@@ -42,14 +43,15 @@ import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.EntityHitResult;
 import net.minecraft.world.phys.Vec3;
 import net.sodiumzh.nautils.entity.ConditionalAttributeModifier;
+import net.sodiumzh.nautils.statics.NaUtilsMathStatics;
+import net.sodiumzh.nautils.math.RndUtil;
 import net.sodiumzh.nautils.statics.NaUtilsContainerStatics;
 import net.sodiumzh.nautils.statics.NaUtilsEntityStatics;
 import net.sodiumzh.nautils.statics.NaUtilsItemStatics;
-import net.sodiumzh.nautils.statics.NaUtilsMathStatics;
 import net.sodiumzh.nautils.statics.NaUtilsParticleStatics;
 import net.sodiumzh.nff.girls.NFFGirls;
-import net.sodiumzh.nff.girls.entity.INFFGirlsTamed;
-import net.sodiumzh.nff.girls.entity.ai.goal.NFFGirlsHmagMeltyMonsterFollowOwnerGoal;
+import net.sodiumzh.nff.girls.befriendmobs.entity.ai.goal.NFFMeltyMonsterFollowOwnerGoal;
+import net.sodiumzh.nff.girls.entity.INFFGirlTamed;
 import net.sodiumzh.nff.girls.entity.ai.goal.NFFGirlsRangedAttackGoal;
 import net.sodiumzh.nff.girls.entity.ai.goal.target.NFFGirlsNearestHostileToOwnerTargetGoal;
 import net.sodiumzh.nff.girls.entity.ai.goal.target.NFFGirlsNearestHostileToSelfTargetGoal;
@@ -59,17 +61,17 @@ import net.sodiumzh.nff.girls.registry.NFFGirlsItems;
 import net.sodiumzh.nff.girls.sound.NFFGirlsSoundPresets;
 import net.sodiumzh.nff.girls.util.NFFGirlsEntityStatics;
 import net.sodiumzh.nff.services.entity.ai.NFFTamedMobAIState;
-import net.sodiumzh.nff.services.entity.ai.goal.presets.NFFWaterAvoidingRandomStrollGoal;
-import net.sodiumzh.nff.services.entity.ai.goal.presets.target.NFFHurtByTargetGoal;
-import net.sodiumzh.nff.services.entity.ai.goal.presets.target.NFFOwnerHurtByTargetGoal;
-import net.sodiumzh.nff.services.entity.ai.goal.presets.target.NFFOwnerHurtTargetGoal;
-import net.sodiumzh.nff.services.entity.capability.HealingItemTable;
+import net.sodiumzh.nff.services.entity.ai.goal.preset.NFFWaterAvoidingRandomStrollGoal;
+import net.sodiumzh.nff.services.entity.ai.goal.preset.target.NFFHurtByTargetGoal;
+import net.sodiumzh.nff.services.entity.ai.goal.preset.target.NFFOwnerHurtByTargetGoal;
+import net.sodiumzh.nff.services.entity.ai.goal.preset.target.NFFOwnerHurtTargetGoal;
+import net.sodiumzh.nautils.entity.ItemApplyingToMobTable;
 import net.sodiumzh.nff.services.entity.capability.wrapper.ILivingDelayedActions;
 import net.sodiumzh.nff.services.entity.taming.NFFTamedStatics;
 import net.sodiumzh.nff.services.inventory.NFFTamedInventoryMenu;
 import net.sodiumzh.nff.services.inventory.NFFTamedMobInventory;
 
-public class HmagMeltyMonsterEntity extends MeltyMonsterEntity implements INFFGirlsTamed, ILivingDelayedActions {
+public class HmagMeltyMonsterEntity extends MeltyMonsterEntity implements INFFGirlTamed, ILivingDelayedActions {
 
 	public static final ConditionalAttributeModifier MODIFIER_SLOWNESS_ON_LOW_STAMINA = 
 			new ConditionalAttributeModifier(Attributes.MOVEMENT_SPEED, -0.5d,  AttributeModifier.Operation.MULTIPLY_TOTAL, living ->
@@ -135,7 +137,7 @@ public class HmagMeltyMonsterEntity extends MeltyMonsterEntity implements INFFGi
 	protected void registerGoals() {
 		goalSelector.addGoal(3, new GoToLavaGoal(this, 1.5D));
 		goalSelector.addGoal(5, new NFFGirlsRangedAttackGoal(this, 1.0D, 30, 40, 8.0F));
-		goalSelector.addGoal(5, new NFFGirlsHmagMeltyMonsterFollowOwnerGoal(this, 1.0d, 5.0f, 2.0f, false));
+		goalSelector.addGoal(5, new NFFMeltyMonsterFollowOwnerGoal(this, 1.0d, 5.0f, 2.0f, false));
 		goalSelector.addGoal(6, new NFFWaterAvoidingRandomStrollGoal(this, 1.0d));
 		goalSelector.addGoal(7, new LookAtPlayerGoal(this, Player.class, 8.0F));
 		goalSelector.addGoal(7, new RandomLookAroundGoal(this));
@@ -175,7 +177,7 @@ public class HmagMeltyMonsterEntity extends MeltyMonsterEntity implements INFFGi
 			Runnable action2 = () -> {
 				action1.run();
 				for (int j = 0; j < 3; ++j)
-					action.accept(NaUtilsMathStatics.randomUnitVector().scale(NaUtilsMathStatics.rndRangedDouble(0, 2)));
+					action.accept(NaUtilsMathStatics.randomUnitVector().scale(RndUtil.rndRangedDouble(0, 2)));
 			};
 			action2.run();
 			this.addMultipleDelayedActions(action2, 3, 6, 9, 12);
@@ -186,7 +188,7 @@ public class HmagMeltyMonsterEntity extends MeltyMonsterEntity implements INFFGi
 			Runnable action3 = () -> {
 				action1.run();
 				for (int j = 0; j < 6; ++j)
-					action.accept(NaUtilsMathStatics.randomUnitVector().scale(NaUtilsMathStatics.rndRangedDouble(0, 2)));
+					action.accept(NaUtilsMathStatics.randomUnitVector().scale(RndUtil.rndRangedDouble(0, 2)));
 			};
 			action3.run();
 			this.addMultipleDelayedActions(action3, 3, 6, 9, 12, 15, 18);
@@ -197,7 +199,7 @@ public class HmagMeltyMonsterEntity extends MeltyMonsterEntity implements INFFGi
 			Runnable action4 = () -> {
 				action1.run();
 				for (int j = 0; j < 9; ++j)
-					action.accept(NaUtilsMathStatics.randomUnitVector().scale(NaUtilsMathStatics.rndRangedDouble(0, 3)));
+					action.accept(NaUtilsMathStatics.randomUnitVector().scale(RndUtil.rndRangedDouble(0, 3)));
 			};
 			action4.run();
 			this.addMultipleDelayedActions(action4, NaUtilsContainerStatics.intRangeArray(2, 20, 2));
@@ -240,7 +242,7 @@ public class HmagMeltyMonsterEntity extends MeltyMonsterEntity implements INFFGi
 		{
 			MMFireball fireball = newFireball(targetPos);
 			this.setStamina(this.getStamina() - 5);
-			this.level().addFreshEntity(fireball);
+			this.level.addFreshEntity(fireball);
 			return Optional.of(fireball);
 		}
 		else return Optional.empty();
@@ -252,7 +254,7 @@ public class HmagMeltyMonsterEntity extends MeltyMonsterEntity implements INFFGi
 		double d2 = targetPos.y - this.getY(0.5D);
 		double d3 = targetPos.z - this.getZ();
 		//double d4 = Math.sqrt(d1 * d1 + d3 * d3) * 0.02D;
-		MMFireball fireballentity = new MMFireball(this.level(), this, d1 /*+ this.getRandom().nextGaussian() * d4*/, d2, d3/* + this.getRandom().nextGaussian() * d4*/);
+		MMFireball fireballentity = new MMFireball(this.level, this, d1 /*+ this.getRandom().nextGaussian() * d4*/, d2, d3/* + this.getRandom().nextGaussian() * d4*/);
 		fireballentity.setPos(fireballentity.getX(), this.getY(0.5D) + 0.5D, fireballentity.getZ());
 		fireballentity.owner = this;
 		return fireballentity;
@@ -288,10 +290,10 @@ public class HmagMeltyMonsterEntity extends MeltyMonsterEntity implements INFFGi
 		}
 		// Lava bath with it can slowly increase the favorability
 		if (this.isInLava() 
-				&& this.level().getBlockState(NaUtilsMathStatics.getBlockPos(this.getEyePosition())).is(Blocks.AIR)
+				&& this.level.getBlockState(new BlockPos(this.getEyePosition())).is(Blocks.AIR)
 				&& this.isOwnerInDimension()
 				&& this.getOwner().isInLava()
-				&& this.level().getBlockState(NaUtilsMathStatics.getBlockPos(this.getOwner().getEyePosition())).is(Blocks.AIR)
+				&& this.level.getBlockState(new BlockPos(this.getOwner().getEyePosition())).is(Blocks.AIR)
 				&& this.getEyePosition().distanceToSqr(this.getOwner().getEyePosition()) < 9d
 				&& this.hasLineOfSight(this.getOwner())
 				&& this.tickCount % 5 == 0)	// Invoke 4 times per second
@@ -312,9 +314,9 @@ public class HmagMeltyMonsterEntity extends MeltyMonsterEntity implements INFFGi
 	// Map items that can heal the mob and healing values here.
 	// Leave it empty if you don't need healing features.
 	@Override
-	public HealingItemTable getHealingItems()
+	public ItemApplyingToMobTable getHealingItems()
 	{
-		return NFFGirlsHealingItems.NONE;
+		return NFFGirlsHealingItems.BLAZE.get();
 	}
 	
 	protected int takingLavaCooldown = 0;
@@ -326,7 +328,7 @@ public class HmagMeltyMonsterEntity extends MeltyMonsterEntity implements INFFGi
 			// For normal interaction
 			if (!player.isShiftKeyDown())
 			{
-				if (!player.level().isClientSide()) 
+				if (!player.level.isClientSide()) 
 				{
 					/* Put checks before healing item check */
 					// You can take a bucket of lava each 5 minutes
@@ -346,7 +348,7 @@ public class HmagMeltyMonsterEntity extends MeltyMonsterEntity implements INFFGi
 					// Use water bucket to suppress setting fire
 					else if (player.getItemInHand(hand).is(Items.WATER_BUCKET) && this.shouldSetFire)
 					{
-						this.level().playSound(player, this.getX(), this.getY(), this.getZ(), SoundEvents.GENERIC_EXTINGUISH_FIRE,
+						this.level.playSound(player, this.getX(), this.getY(), this.getZ(), SoundEvents.GENERIC_EXTINGUISH_FIRE,
 								this.getSoundSource(), 1.0F, this.random.nextFloat() * 0.4F + 0.8F);
 						player.getItemInHand(hand).shrink(1);
 						NaUtilsItemStatics.giveOrDrop(player, new ItemStack(Items.BUCKET));
@@ -355,9 +357,9 @@ public class HmagMeltyMonsterEntity extends MeltyMonsterEntity implements INFFGi
 					// Use Flint and Steel to allow setting fire
 					else if (player.getItemInHand(hand).is(Items.FLINT_AND_STEEL) && !this.shouldSetFire)
 					{
-						this.level().playSound(player, this.getX(), this.getY(), this.getZ(), SoundEvents.FLINTANDSTEEL_USE,
+						this.level.playSound(player, this.getX(), this.getY(), this.getZ(), SoundEvents.FLINTANDSTEEL_USE,
 								this.getSoundSource(), 1.0F, this.random.nextFloat() * 0.4F + 0.8F);
-						if (!this.level().isClientSide)
+						if (!this.level.isClientSide)
 						{
 							player.getItemInHand(hand).hurtAndBreak(1, player, (p) ->
 							{
@@ -368,7 +370,7 @@ public class HmagMeltyMonsterEntity extends MeltyMonsterEntity implements INFFGi
 					}
 					// Healing items
 					else if (this.tryApplyHealingItems(player.getItemInHand(hand)) != InteractionResult.PASS)
-						return InteractionResult.sidedSuccess(player.level().isClientSide);
+						return InteractionResult.sidedSuccess(player.level.isClientSide);
 					// The function above returns PASS when the items are not correct. So when not PASS it should stop here
 					else if (hand == InteractionHand.MAIN_HAND
 							&& NFFGirlsEntityStatics.isOnEitherHand(player, NFFGirlsItems.COMMANDING_WAND.get()))
@@ -379,7 +381,7 @@ public class HmagMeltyMonsterEntity extends MeltyMonsterEntity implements INFFGi
 					else return InteractionResult.PASS;
 				}
 				// Interacted
-				return InteractionResult.sidedSuccess(player.level().isClientSide);
+				return InteractionResult.sidedSuccess(player.level.isClientSide);
 			}
 			// For interaction with shift key down
 			else
@@ -388,7 +390,7 @@ public class HmagMeltyMonsterEntity extends MeltyMonsterEntity implements INFFGi
 				if (hand == InteractionHand.MAIN_HAND && NFFGirlsEntityStatics.isOnEitherHand(player, NFFGirlsItems.COMMANDING_WAND.get()))
 				{
 					NFFTamedStatics.openBefriendedInventory(player, this);
-					return InteractionResult.sidedSuccess(player.level().isClientSide);
+					return InteractionResult.sidedSuccess(player.level.isClientSide);
 				}
 			}
 		} 
@@ -461,7 +463,7 @@ public class HmagMeltyMonsterEntity extends MeltyMonsterEntity implements INFFGi
 	// ==================================================================== //
 	// ========================= General Settings ========================= //
 	// Generally these can be copy-pasted to other INFFTamed classes //
-
+/*
 	@Override
 	public boolean isPersistenceRequired() {
 		return true;
@@ -476,7 +478,7 @@ public class HmagMeltyMonsterEntity extends MeltyMonsterEntity implements INFFGi
 	protected boolean shouldDespawnInPeaceful() {
 		return false;
 	}
-
+*/
 	// ========================= General Settings end ========================= //
 	// ======================================================================== //
 
@@ -508,13 +510,13 @@ public class HmagMeltyMonsterEntity extends MeltyMonsterEntity implements INFFGi
 		{
 			if (pResult.getEntity() instanceof LivingEntity living)
 			{
-				if (!this.level().isClientSide)
+				if (!this.level.isClientSide)
 				{
 					if (!NFFTamedStatics.isLivingAlliedToBM(owner, living))
 						{
 						int i = living.getRemainingFireTicks();
 						living.setSecondsOnFire((int) Math.round(5.0d * (1d + owner.getAttributeValue(Attributes.ATTACK_DAMAGE))));
-						if (!living.hurt(this.level().damageSources().fireball(this, this.owner), (float) (owner.getAttributeValue(Attributes.ATTACK_DAMAGE))))
+						if (!living.hurt(DamageSource.fireball(this, this.owner), (float) (owner.getAttributeValue(Attributes.ATTACK_DAMAGE))))
 						{
 							living.setRemainingFireTicks(i);
 						} else if (this.owner instanceof LivingEntity)
@@ -529,8 +531,8 @@ public class HmagMeltyMonsterEntity extends MeltyMonsterEntity implements INFFGi
 
 		@Override
 		protected void onHitBlock(BlockHitResult pResult) {
-		      BlockState blockstate = this.level().getBlockState(pResult.getBlockPos());
-		      blockstate.onProjectileHit(this.level(), blockstate, pResult, this);
+		      BlockState blockstate = this.level.getBlockState(pResult.getBlockPos());
+		      blockstate.onProjectileHit(this.level, blockstate, pResult, this);
 		      this.discard();
 		}
 	}
@@ -563,7 +565,7 @@ public class HmagMeltyMonsterEntity extends MeltyMonsterEntity implements INFFGi
 		{
 			if (parent.getAIState() == NFFTamedMobAIState.FOLLOW && this.parent.getStamina() > this.parent.getMaxStamina() / 5)
 				return false;
-			return !this.parent.isInLava() && this.isValidTarget(this.parent.level(), this.blockPos) && (!this.parent.getAdditionalInventory().getItem(4).is(Items.LAVA_BUCKET) || this.parent.getStamina() == 0);
+			return !this.parent.isInLava() && this.isValidTarget(this.parent.level, this.blockPos) && (!this.parent.getAdditionalInventory().getItem(4).is(Items.LAVA_BUCKET) || this.parent.getStamina() == 0);
 		}
 
 		@Override

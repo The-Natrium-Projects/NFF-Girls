@@ -22,7 +22,7 @@ import net.minecraft.world.level.block.Block;
 import net.sodiumzh.nautils.statics.NaUtilsContainerStatics;
 import net.sodiumzh.nautils.statics.NaUtilsTagStatics;
 import net.sodiumzh.nff.girls.NFFGirls;
-import net.sodiumzh.nff.girls.entity.INFFGirlsTamed;
+import net.sodiumzh.nff.girls.entity.INFFGirlTamed;
 import net.sodiumzh.nff.girls.entity.ai.goal.IBlockLocator;
 import net.sodiumzh.nff.girls.entity.ai.goal.NFFGirlsFollowOwnerGoal;
 import net.sodiumzh.nff.girls.entity.ai.goal.NFFGirlsLocateBlockGoal;
@@ -33,18 +33,18 @@ import net.sodiumzh.nff.girls.registry.NFFGirlsHealingItems;
 import net.sodiumzh.nff.girls.registry.NFFGirlsItems;
 import net.sodiumzh.nff.girls.sound.NFFGirlsSoundPresets;
 import net.sodiumzh.nff.girls.util.NFFGirlsEntityStatics;
-import net.sodiumzh.nff.services.entity.ai.goal.presets.NFFMeleeAttackGoal;
-import net.sodiumzh.nff.services.entity.ai.goal.presets.NFFWaterAvoidingRandomStrollGoal;
-import net.sodiumzh.nff.services.entity.ai.goal.presets.target.NFFHurtByTargetGoal;
-import net.sodiumzh.nff.services.entity.ai.goal.presets.target.NFFOwnerHurtByTargetGoal;
-import net.sodiumzh.nff.services.entity.ai.goal.presets.target.NFFOwnerHurtTargetGoal;
-import net.sodiumzh.nff.services.entity.capability.HealingItemTable;
+import net.sodiumzh.nff.services.entity.ai.goal.preset.NFFMeleeAttackGoal;
+import net.sodiumzh.nff.services.entity.ai.goal.preset.NFFWaterAvoidingRandomStrollGoal;
+import net.sodiumzh.nff.services.entity.ai.goal.preset.target.NFFHurtByTargetGoal;
+import net.sodiumzh.nff.services.entity.ai.goal.preset.target.NFFOwnerHurtByTargetGoal;
+import net.sodiumzh.nff.services.entity.ai.goal.preset.target.NFFOwnerHurtTargetGoal;
+import net.sodiumzh.nautils.entity.ItemApplyingToMobTable;
 import net.sodiumzh.nff.services.entity.taming.NFFTamedStatics;
 import net.sodiumzh.nff.services.inventory.NFFTamedInventoryMenu;
 import net.sodiumzh.nff.services.inventory.NFFTamedMobInventory;
 import net.sodiumzh.nff.services.inventory.NFFTamedMobInventoryWithHandItems;
 
-public class HmagImpEntity extends ImpEntity implements INFFGirlsTamed, IBlockLocator
+public class HmagImpEntity extends ImpEntity implements INFFGirlTamed, IBlockLocator
 {
 
 	/* Initialization */
@@ -80,9 +80,9 @@ public class HmagImpEntity extends ImpEntity implements INFFGirlsTamed, IBlockLo
 	// Leave it empty if you don't need healing features.
 	@SuppressWarnings("unchecked")
 	@Override
-	public HealingItemTable getHealingItems()
+	public ItemApplyingToMobTable getHealingItems()
 	{
-		return NFFGirlsHealingItems.GENERAL_HUMANOID_0;
+		return NFFGirlsHealingItems.GENERAL_HUMANOID_0.get();
 	}
 
 	@Override
@@ -92,7 +92,7 @@ public class HmagImpEntity extends ImpEntity implements INFFGirlsTamed, IBlockLo
 			// For normal interaction
 			if (!player.isShiftKeyDown())
 			{
-				if (!player.level().isClientSide()) 
+				if (!player.level.isClientSide()) 
 				{
 					/* Put checks before healing item check */
 					/* if (....)
@@ -100,7 +100,7 @@ public class HmagImpEntity extends ImpEntity implements INFFGirlsTamed, IBlockLo
 					 	....
 					 }
 					else */if (this.tryApplyHealingItems(player.getItemInHand(hand)) != InteractionResult.PASS)
-						return InteractionResult.sidedSuccess(player.level().isClientSide);
+						return InteractionResult.sidedSuccess(player.level.isClientSide);
 					// The function above returns PASS when the items are not correct. So when not PASS it should stop here
 					else if (hand == InteractionHand.MAIN_HAND && NFFGirlsEntityStatics.isOnEitherHand(player, NFFGirlsItems.COMMANDING_WAND.get()))
 					{
@@ -110,7 +110,7 @@ public class HmagImpEntity extends ImpEntity implements INFFGirlsTamed, IBlockLo
 					else return InteractionResult.PASS;
 				}
 				// Interacted
-				return InteractionResult.sidedSuccess(player.level().isClientSide);
+				return InteractionResult.sidedSuccess(player.level.isClientSide);
 			}
 			// For interaction with shift key down
 			else
@@ -119,7 +119,7 @@ public class HmagImpEntity extends ImpEntity implements INFFGirlsTamed, IBlockLo
 				if (hand == InteractionHand.MAIN_HAND && NFFGirlsEntityStatics.isOnEitherHand(player, NFFGirlsItems.COMMANDING_WAND.get()))
 				{
 					NFFTamedStatics.openBefriendedInventory(player, this);
-					return InteractionResult.sidedSuccess(player.level().isClientSide);
+					return InteractionResult.sidedSuccess(player.level.isClientSide);
 				}
 			}
 		} 
@@ -205,7 +205,7 @@ public class HmagImpEntity extends ImpEntity implements INFFGirlsTamed, IBlockLo
 	// ==================================================================== //
 	// ========================= General Settings ========================= //
 	// Generally these can be copy-pasted to other INFFTamed classes //
-
+/*
 	@Override
 	public boolean isPersistenceRequired() {
 		return true;
@@ -220,7 +220,7 @@ public class HmagImpEntity extends ImpEntity implements INFFGirlsTamed, IBlockLo
 	protected boolean shouldDespawnInPeaceful() {
 		return false;
 	}
-
+*/
 	// ========================= General Settings end ========================= //
 	// ======================================================================== //
 

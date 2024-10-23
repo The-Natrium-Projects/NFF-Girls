@@ -1,0 +1,18 @@
+[
+  {
+    "item": "minecraft:honey_bottle",
+    "amount": [5]
+  },
+  {
+    "item": "minecraft:bone_meal",
+    "amount": [5]
+  },
+  {
+    "item": "minecraft:spore_blossom",
+    "amount": [15]
+  },
+  {
+    "item": "hmag:mysterious_petal",
+    "amount_getter": "nffgirls:mob_max_health"
+  }
+]

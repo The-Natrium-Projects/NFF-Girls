@@ -26,7 +26,7 @@ import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
 import net.sodiumzh.nautils.statics.NaUtilsItemStatics;
 import net.sodiumzh.nff.girls.NFFGirls;
-import net.sodiumzh.nff.girls.entity.INFFGirlsTamed;
+import net.sodiumzh.nff.girls.entity.INFFGirlTamed;
 import net.sodiumzh.nff.girls.entity.ai.goal.NFFGirlsFlyingFollowOwnerGoal;
 import net.sodiumzh.nff.girls.entity.ai.goal.NFFGirlsHmagFlyingGoal;
 import net.sodiumzh.nff.girls.entity.ai.goal.target.NFFGirlsNearestHostileToOwnerTargetGoal;
@@ -39,15 +39,15 @@ import net.sodiumzh.nff.girls.registry.NFFGirlsHealingItems;
 import net.sodiumzh.nff.girls.registry.NFFGirlsItems;
 import net.sodiumzh.nff.girls.sound.NFFGirlsSoundPresets;
 import net.sodiumzh.nff.girls.util.NFFGirlsEntityStatics;
-import net.sodiumzh.nff.services.entity.ai.goal.presets.NFFFlyingLandGoal;
-import net.sodiumzh.nff.services.entity.ai.goal.presets.NFFFlyingRandomMoveGoal;
-import net.sodiumzh.nff.services.entity.ai.goal.presets.target.NFFHurtByTargetGoal;
-import net.sodiumzh.nff.services.entity.capability.HealingItemTable;
+import net.sodiumzh.nff.services.entity.ai.goal.preset.NFFFlyingLandGoal;
+import net.sodiumzh.nff.services.entity.ai.goal.preset.NFFFlyingRandomMoveGoal;
+import net.sodiumzh.nff.services.entity.ai.goal.preset.target.NFFHurtByTargetGoal;
+import net.sodiumzh.nautils.entity.ItemApplyingToMobTable;
 import net.sodiumzh.nff.services.entity.taming.NFFTamedStatics;
 import net.sodiumzh.nff.services.inventory.NFFTamedInventoryMenu;
 import net.sodiumzh.nff.services.inventory.NFFTamedMobInventory;
 import net.sodiumzh.nff.services.inventory.NFFTamedMobInventoryWithHandItems;
-public class HmagHornetEntity extends HornetEntity implements INFFGirlsTamed
+public class HmagHornetEntity extends HornetEntity implements INFFGirlTamed
 {
 	public HmagHornetEntity(EntityType<? extends HornetEntity> pEntityType, Level pLevel) {
 		super(pEntityType, pLevel);
@@ -94,15 +94,15 @@ public class HmagHornetEntity extends HornetEntity implements INFFGirlsTamed
 			MobEffectInstance instance = living.getActiveEffectsMap().get(MobEffects.POISON);
 			// The expected duration of poison added in super class
 			int superExpectedDuration =	 
-					level().getDifficulty() == Difficulty.NORMAL ? 100 : (
-					level().getDifficulty() == Difficulty.HARD ? 200 : 0);	
+					level.getDifficulty() == Difficulty.NORMAL ? 100 : (
+					level.getDifficulty() == Difficulty.HARD ? 200 : 0);	
 			// If the poison is no stronger than the super class given effect, remove it
 			if (instance != null && instance.getAmplifier() <= 1 && instance.getDuration() <= superExpectedDuration)
 			{
 				living.getActiveEffectsMap().remove(MobEffects.POISON);
 				instance = null;
 			}
-			// Add when don't have poison effect, or have lower level() than this mob's adding level(), or have the same level() but with a shorter duration time 
+			// Add when don't have poison effect, or have lower level than this mob's adding level, or have the same level but with a shorter duration time 
 			if (instance == null 
 					|| instance.getAmplifier() == addPoisonLevel && instance.getDuration() < addPoisonTicks
 					|| instance.getAmplifier() < addPoisonLevel)
@@ -122,9 +122,9 @@ public class HmagHornetEntity extends HornetEntity implements INFFGirlsTamed
 	// Map items that can heal the mob and healing values here.
 	// Leave it empty if you don't need healing features.
 	@Override
-	public HealingItemTable getHealingItems()
+	public ItemApplyingToMobTable getHealingItems()
 	{
-		return NFFGirlsHealingItems.BEE;
+		return NFFGirlsHealingItems.BEE.get();
 	}
 
 	@Override
@@ -133,7 +133,7 @@ public class HmagHornetEntity extends HornetEntity implements INFFGirlsTamed
 		if (!player.isShiftKeyDown())
 		{
 			if (player.getUUID().equals(getOwnerUUID())) {
-				if (!player.level().isClientSide()) 
+				if (!player.level.isClientSide()) 
 				{
 					/* Put checks before healing item check */
 					/* if (....)
@@ -146,19 +146,19 @@ public class HmagHornetEntity extends HornetEntity implements INFFGirlsTamed
 					{
 						if (isHoneyBottle)
 							NaUtilsItemStatics.giveOrDropDefault(player, Items.GLASS_BOTTLE);
-						return InteractionResult.sidedSuccess(player.level().isClientSide);
+						return InteractionResult.sidedSuccess(player.level.isClientSide);
 					}
 					// The function above returns PASS when the items are not correct. So when not PASS it should stop here
 					else if (hand == InteractionHand.MAIN_HAND
 							&& NFFGirlsEntityStatics.isOnEitherHand(player, NFFGirlsItems.COMMANDING_WAND.get()))
 					{
 						switchAIState();
-						return InteractionResult.sidedSuccess(player.level().isClientSide);
+						return InteractionResult.sidedSuccess(player.level.isClientSide);
 					}
 					else return InteractionResult.PASS;
 				}
 				// Interacted
-				return InteractionResult.sidedSuccess(player.level().isClientSide);
+				return InteractionResult.sidedSuccess(player.level.isClientSide);
 			} 
 			else return InteractionResult.PASS;
 		}
@@ -169,7 +169,7 @@ public class HmagHornetEntity extends HornetEntity implements INFFGirlsTamed
 				if (hand == InteractionHand.MAIN_HAND && NFFGirlsEntityStatics.isOnEitherHand(player, NFFGirlsItems.COMMANDING_WAND.get()))
 				{
 					NFFTamedStatics.openBefriendedInventory(player, this);
-					return InteractionResult.sidedSuccess(player.level().isClientSide);
+					return InteractionResult.sidedSuccess(player.level.isClientSide);
 				}
 			}
 			return InteractionResult.PASS;
@@ -214,7 +214,7 @@ public class HmagHornetEntity extends HornetEntity implements INFFGirlsTamed
 	// ==================================================================== //
 	// ========================= General Settings ========================= //
 	// Generally these can be copy-pasted to other INFFTamed classes //
-	
+	/*
 	@Override
 	public boolean isPersistenceRequired() {
 		return true;
@@ -229,7 +229,7 @@ public class HmagHornetEntity extends HornetEntity implements INFFGirlsTamed
 	protected boolean shouldDespawnInPeaceful() {
 		return false;
 	}
-
+*/
 	// ========================= General Settings end ========================= //
 	// ======================================================================== //
 

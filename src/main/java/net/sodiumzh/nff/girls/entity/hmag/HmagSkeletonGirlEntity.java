@@ -18,11 +18,11 @@ import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.sodiumzh.nff.girls.NFFGirls;
+import net.sodiumzh.nff.girls.entity.INFFGirlTamedSunSensitiveMob;
 import net.sodiumzh.nff.girls.entity.INFFGirlsBowShootingMob;
-import net.sodiumzh.nff.girls.entity.INFFGirlsTamedSunSensitiveMob;
 import net.sodiumzh.nff.girls.entity.ai.goal.NFFGirlsFollowOwnerGoal;
-import net.sodiumzh.nff.girls.entity.ai.goal.NFFGirlsHmagSkeletonRangedBowAttackGoal;
 import net.sodiumzh.nff.girls.entity.ai.goal.NFFGirlsSkeletonMeleeAttackGoal;
+import net.sodiumzh.nff.girls.entity.ai.goal.NFFGirlsSkeletonRangedBowAttackGoal;
 import net.sodiumzh.nff.girls.entity.ai.goal.target.NFFGirlsNearestHostileToOwnerTargetGoal;
 import net.sodiumzh.nff.girls.entity.ai.goal.target.NFFGirlsNearestHostileToSelfTargetGoal;
 import net.sodiumzh.nff.girls.entity.ai.goal.target.NFFGirlsOwnerHurtByTargetGoal;
@@ -34,17 +34,17 @@ import net.sodiumzh.nff.girls.registry.NFFGirlsHealingItems;
 import net.sodiumzh.nff.girls.registry.NFFGirlsItems;
 import net.sodiumzh.nff.girls.sound.NFFGirlsSoundPresets;
 import net.sodiumzh.nff.girls.util.NFFGirlsEntityStatics;
-import net.sodiumzh.nff.services.entity.ai.goal.presets.NFFFleeSunGoal;
-import net.sodiumzh.nff.services.entity.ai.goal.presets.NFFRestrictSunGoal;
-import net.sodiumzh.nff.services.entity.ai.goal.presets.NFFWaterAvoidingRandomStrollGoal;
-import net.sodiumzh.nff.services.entity.ai.goal.presets.target.NFFHurtByTargetGoal;
-import net.sodiumzh.nff.services.entity.capability.HealingItemTable;
+import net.sodiumzh.nff.services.entity.ai.goal.preset.NFFFleeSunGoal;
+import net.sodiumzh.nff.services.entity.ai.goal.preset.NFFRestrictSunGoal;
+import net.sodiumzh.nff.services.entity.ai.goal.preset.NFFWaterAvoidingRandomStrollGoal;
+import net.sodiumzh.nff.services.entity.ai.goal.preset.target.NFFHurtByTargetGoal;
+import net.sodiumzh.nautils.entity.ItemApplyingToMobTable;
 import net.sodiumzh.nff.services.entity.taming.NFFTamedStatics;
 import net.sodiumzh.nff.services.inventory.NFFTamedInventoryMenu;
 import net.sodiumzh.nff.services.inventory.NFFTamedMobInventory;
 import net.sodiumzh.nff.services.inventory.NFFTamedMobInventoryWithEquipment;
 
-public class HmagSkeletonGirlEntity extends SkeletonGirlEntity implements INFFGirlsTamedSunSensitiveMob, INFFGirlsBowShootingMob
+public class HmagSkeletonGirlEntity extends SkeletonGirlEntity implements INFFGirlTamedSunSensitiveMob, INFFGirlsBowShootingMob
 {
 
 	
@@ -61,7 +61,7 @@ public class HmagSkeletonGirlEntity extends SkeletonGirlEntity implements INFFGi
 	protected void registerGoals() {
 		goalSelector.addGoal(1, new NFFRestrictSunGoal(this));
 		goalSelector.addGoal(2, new NFFFleeSunGoal(this, 1));
-		goalSelector.addGoal(3, new NFFGirlsHmagSkeletonRangedBowAttackGoal(this, 1.0D, 20, 15.0F));
+		goalSelector.addGoal(3, new NFFGirlsSkeletonRangedBowAttackGoal(this, 1.0D, 20, 15.0F));
 		goalSelector.addGoal(4, new NFFGirlsSkeletonMeleeAttackGoal(this, 1.2d, true));
 		goalSelector.addGoal(5, new NFFGirlsFollowOwnerGoal(this, 1.0d, 5.0f, 2.0f, false)
 				.avoidSunCondition(NFFGirlsEntityStatics::isSunSensitive));
@@ -88,11 +88,9 @@ public class HmagSkeletonGirlEntity extends SkeletonGirlEntity implements INFFGi
 
 	@Override
 	public void aiStep() {
-
 		super.aiStep();
-
 		/* Handle combat AI */
-		if (!this.level().isClientSide)
+		if (!this.level.isClientSide)
 		{
 			if (justShot)
 			{
@@ -117,9 +115,9 @@ public class HmagSkeletonGirlEntity extends SkeletonGirlEntity implements INFFGi
 	/* Interaction */
 
 	@Override
-	public HealingItemTable getHealingItems()
+	public ItemApplyingToMobTable getHealingItems()
 	{
-		return NFFGirlsHealingItems.UNDEAD;
+		return NFFGirlsHealingItems.UNDEAD.get();
 	}
 	
 	@Override
@@ -128,7 +126,7 @@ public class HmagSkeletonGirlEntity extends SkeletonGirlEntity implements INFFGi
 		if (!player.isShiftKeyDown())
 		{
 			if (player.getUUID().equals(getOwnerUUID())) {
-				if (!player.level().isClientSide() && hand == InteractionHand.MAIN_HAND) 
+				if (!player.level.isClientSide() && hand == InteractionHand.MAIN_HAND) 
 				{
 					if (this.tryApplyHealingItems(player.getItemInHand(hand)) != InteractionResult.PASS)
 					{}
@@ -139,7 +137,7 @@ public class HmagSkeletonGirlEntity extends SkeletonGirlEntity implements INFFGi
 					}		
 					else return InteractionResult.PASS;
 				}
-				return InteractionResult.sidedSuccess(player.level().isClientSide);
+				return InteractionResult.sidedSuccess(player.level.isClientSide);
 			}
 			return InteractionResult.PASS;
 		}
@@ -149,7 +147,7 @@ public class HmagSkeletonGirlEntity extends SkeletonGirlEntity implements INFFGi
 				if (hand == InteractionHand.MAIN_HAND && NFFGirlsEntityStatics.isOnEitherHand(player, NFFGirlsItems.COMMANDING_WAND.get()))
 				{
 					NFFTamedStatics.openBefriendedInventory(player, this);
-					return InteractionResult.sidedSuccess(player.level().isClientSide);
+					return InteractionResult.sidedSuccess(player.level.isClientSide);
 				}
 			}
 			return InteractionResult.PASS;
@@ -196,7 +194,7 @@ public class HmagSkeletonGirlEntity extends SkeletonGirlEntity implements INFFGi
 		this.convertToStray();
 		if (!this.isSilent())
 		{
-			this.level().levelEvent((Player) null, 1041, this.blockPosition(), 0);
+			this.level.levelEvent((Player) null, 1041, this.blockPosition(), 0);
 		}
 	}	
 	
@@ -220,8 +218,8 @@ public class HmagSkeletonGirlEntity extends SkeletonGirlEntity implements INFFGi
 	/*@Override
 	public void setupSunImmunityRules() {
 		this.getSunImmunity().putOptional("sunhat", mob -> mob.getMob().getItemBySlot(EquipmentSlot.HEAD).is(NFFGirlsItems.SUNHAT.get()));
-		this.getSunImmunity().putOptional("soul_amulet", mob -> ((INFFGirlsTamed)mob).hasDwmgBauble("soul_amulet"));
-		this.getSunImmunity().putOptional("resis_amulet", mob -> ((INFFGirlsTamed)mob).hasDwmgBauble("resistance_amulet"));
+		this.getSunImmunity().putOptional("soul_amulet", mob -> ((INFFGirlTamed)mob).hasDwmgBauble("soul_amulet"));
+		this.getSunImmunity().putOptional("resis_amulet", mob -> ((INFFGirlTamed)mob).hasDwmgBauble("resistance_amulet"));
 	}*/
 	
 	
@@ -268,7 +266,7 @@ public class HmagSkeletonGirlEntity extends SkeletonGirlEntity implements INFFGi
 	// ==================================================================== //
 	// ========================= General Settings ========================= //
 	// Generally these can be copy-pasted to other INFFTamed classes //
-
+/*
 	@Override
 	public boolean isPersistenceRequired() {
 		return true;
@@ -283,7 +281,7 @@ public class HmagSkeletonGirlEntity extends SkeletonGirlEntity implements INFFGi
 	protected boolean shouldDespawnInPeaceful() {
 		return false;
 	}
-
+*/
 	// ========================= General Settings end ========================= //
 	// ======================================================================== //
 	

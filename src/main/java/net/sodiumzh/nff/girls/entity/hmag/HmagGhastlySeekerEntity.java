@@ -25,8 +25,7 @@ import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
 import net.sodiumzh.nautils.statics.NaUtilsReflectionStatics;
-import net.sodiumzh.nff.girls.NFFGirls;
-import net.sodiumzh.nff.girls.entity.INFFGirlsTamed;
+import net.sodiumzh.nff.girls.entity.INFFGirlTamed;
 import net.sodiumzh.nff.girls.entity.ai.goal.NFFGirlsFlyingFollowOwnerGoal;
 import net.sodiumzh.nff.girls.entity.ai.goal.NFFGirlsHmagFlyingGoal;
 import net.sodiumzh.nff.girls.entity.ai.goal.target.NFFGirlsNearestHostileToOwnerTargetGoal;
@@ -34,19 +33,19 @@ import net.sodiumzh.nff.girls.entity.ai.goal.target.NFFGirlsNearestHostileToSelf
 import net.sodiumzh.nff.girls.entity.ai.movecontrol.NFFGirlsHmagFlyingMoveControl;
 import net.sodiumzh.nff.girls.entity.projectile.NFFGhastFireballEntity;
 import net.sodiumzh.nff.girls.eventlisteners.NFFGirlsEntityEventListeners;
-import net.sodiumzh.nff.girls.inventory.NFFGirlsHmagGhastlySeekerInventoryMenu;
+import net.sodiumzh.nff.girls.inventory.NFFGirlsGhastlySeekerInventoryMenu;
 import net.sodiumzh.nff.girls.registry.NFFGirlsHealingItems;
 import net.sodiumzh.nff.girls.registry.NFFGirlsItems;
 import net.sodiumzh.nff.girls.sound.NFFGirlsSoundPresets;
 import net.sodiumzh.nff.girls.util.NFFGirlsEntityStatics;
 import net.sodiumzh.nff.services.entity.ai.goal.NFFGoal;
-import net.sodiumzh.nff.services.entity.ai.goal.presets.INFFFollowOwner;
-import net.sodiumzh.nff.services.entity.ai.goal.presets.NFFFlyingLandGoal;
-import net.sodiumzh.nff.services.entity.ai.goal.presets.NFFFlyingRandomMoveGoal;
-import net.sodiumzh.nff.services.entity.ai.goal.presets.target.NFFHurtByTargetGoal;
-import net.sodiumzh.nff.services.entity.ai.goal.presets.target.NFFOwnerHurtByTargetGoal;
-import net.sodiumzh.nff.services.entity.ai.goal.presets.target.NFFOwnerHurtTargetGoal;
-import net.sodiumzh.nff.services.entity.capability.HealingItemTable;
+import net.sodiumzh.nff.services.entity.ai.goal.preset.INFFFollowOwner;
+import net.sodiumzh.nff.services.entity.ai.goal.preset.NFFFlyingLandGoal;
+import net.sodiumzh.nff.services.entity.ai.goal.preset.NFFFlyingRandomMoveGoal;
+import net.sodiumzh.nff.services.entity.ai.goal.preset.target.NFFHurtByTargetGoal;
+import net.sodiumzh.nff.services.entity.ai.goal.preset.target.NFFOwnerHurtByTargetGoal;
+import net.sodiumzh.nff.services.entity.ai.goal.preset.target.NFFOwnerHurtTargetGoal;
+import net.sodiumzh.nautils.entity.ItemApplyingToMobTable;
 import net.sodiumzh.nff.services.entity.taming.INFFTamed;
 import net.sodiumzh.nff.services.entity.taming.NFFTamedStatics;
 import net.sodiumzh.nff.services.inventory.NFFTamedInventoryMenu;
@@ -56,7 +55,7 @@ import net.sodiumzh.nff.services.inventory.NFFTamedMobInventory;
  * NOT IMPLEMENTED YET
  */
 
-public class HmagGhastlySeekerEntity extends GhastlySeekerEntity implements INFFGirlsTamed
+public class HmagGhastlySeekerEntity extends GhastlySeekerEntity implements INFFGirlTamed
 {
 	
 	/** Handled in {@link NFFGirlsEntityEventListeners#onLivingSetAttackTarget} */
@@ -110,7 +109,7 @@ public class HmagGhastlySeekerEntity extends GhastlySeekerEntity implements INFF
 	/*@Override
 	public void aiStep()
 	{
-		if (!level().isClientSide)
+		if (!level.isClientSide)
 			super.aiStep();
 		else super.aiStep();
 	}*/
@@ -120,9 +119,9 @@ public class HmagGhastlySeekerEntity extends GhastlySeekerEntity implements INFF
 	// Map items that can heal the mob and healing values here.
 	// Leave it empty if you don't need healing features.
 	@Override
-	public HealingItemTable getHealingItems()
+	public ItemApplyingToMobTable getHealingItems()
 	{
-		return NFFGirlsHealingItems.GHAST;
+		return NFFGirlsHealingItems.GHAST.get();
 	}
 
 	@Override
@@ -132,7 +131,7 @@ public class HmagGhastlySeekerEntity extends GhastlySeekerEntity implements INFF
 			// For normal interaction
 			if (!player.isShiftKeyDown())
 			{
-				if (!player.level().isClientSide()) 
+				if (!player.level.isClientSide()) 
 				{
 					/* Put checks before healing item check */
 					/* if (....)
@@ -140,7 +139,7 @@ public class HmagGhastlySeekerEntity extends GhastlySeekerEntity implements INFF
 					 	....
 					 }
 					else */if (this.tryApplyHealingItems(player.getItemInHand(hand)) != InteractionResult.PASS)
-						return InteractionResult.sidedSuccess(player.level().isClientSide);
+						return InteractionResult.sidedSuccess(player.level.isClientSide);
 					// The function above returns PASS when the items are not correct. So when not PASS it should stop here
 					else if (hand == InteractionHand.MAIN_HAND
 							&& NFFGirlsEntityStatics.isOnEitherHand(player, NFFGirlsItems.COMMANDING_WAND.get()))
@@ -150,7 +149,7 @@ public class HmagGhastlySeekerEntity extends GhastlySeekerEntity implements INFF
 					else return InteractionResult.PASS;
 				}
 				// Interacted
-				return InteractionResult.sidedSuccess(player.level().isClientSide);
+				return InteractionResult.sidedSuccess(player.level.isClientSide);
 			}
 			// For interaction with shift key down
 			else
@@ -158,7 +157,7 @@ public class HmagGhastlySeekerEntity extends GhastlySeekerEntity implements INFF
 				if (hand == InteractionHand.MAIN_HAND && NFFGirlsEntityStatics.isOnEitherHand(player, NFFGirlsItems.COMMANDING_WAND.get()))
 				{
 					NFFTamedStatics.openBefriendedInventory(player, this);
-					return InteractionResult.sidedSuccess(player.level().isClientSide);
+					return InteractionResult.sidedSuccess(player.level.isClientSide);
 				}
 			}
 		} 
@@ -175,7 +174,7 @@ public class HmagGhastlySeekerEntity extends GhastlySeekerEntity implements INFF
 
 	@Override
 	public NFFTamedInventoryMenu makeMenu(int containerId, Inventory playerInventory, Container container) {
-		return new NFFGirlsHmagGhastlySeekerInventoryMenu(containerId, playerInventory, container, this); 
+		return new NFFGirlsGhastlySeekerInventoryMenu(containerId, playerInventory, container, this); 
 	}
 
 	/* Save and Load */
@@ -211,11 +210,6 @@ public class HmagGhastlySeekerEntity extends GhastlySeekerEntity implements INFF
 	// Misc
 	
 	// Indicates which mod this mob belongs to
-	@Deprecated
-	@Override
-	public String getModId() {
-		return NFFGirls.MOD_ID;
-	}
 
 	@Deprecated
 	public float calculateExplosionPower()
@@ -235,7 +229,7 @@ public class HmagGhastlySeekerEntity extends GhastlySeekerEntity implements INFF
 	// ==================================================================== //
 	// ========================= General Settings ========================= //
 	// Generally these can be copy-pasted to other INFFTamed classes //
-
+/*
 	@Override
 	public boolean isPersistenceRequired() {
 		return true;
@@ -244,13 +238,13 @@ public class HmagGhastlySeekerEntity extends GhastlySeekerEntity implements INFF
 	/*@Override
 	public boolean isPreventingPlayerRest(Player pPlayer) {
 		return false;
-	}*/
+	}
 
 	@Override
 	protected boolean shouldDespawnInPeaceful() {
 		return false;
 	}
-
+*/
 	// ========================= General Settings end ========================= //
 	// ======================================================================== //
 
@@ -308,7 +302,7 @@ public class HmagGhastlySeekerEntity extends GhastlySeekerEntity implements INFF
 				if (mob.getAdditionalInventory().getItem(4).isEmpty())
 					return;
 				
-				Level world = this.parent.level();
+				Level world = this.parent.level;
 				++this.attackTimer;
 
 				if (this.attackTimer == 10 && !this.parent.isSilent())

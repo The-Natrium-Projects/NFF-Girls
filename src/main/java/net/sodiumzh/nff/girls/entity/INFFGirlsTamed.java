@@ -35,7 +35,7 @@ import net.sodiumzh.nff.girls.network.NFFGirlsChannels;
 import net.sodiumzh.nff.girls.registry.NFFGirlsCapabilities;
 import net.sodiumzh.nff.girls.registry.NFFGirlsItems;
 import net.sodiumzh.nff.girls.subsystem.baublesystem.NFFGirlsBaubleStatics;
-import net.sodiumzh.nff.services.entity.capability.HealingItemTable;
+import net.sodiumzh.nautils.entity.ItemApplyingToMobTable;
 import net.sodiumzh.nff.services.entity.capability.wrapper.IAttributeMonitor;
 import net.sodiumzh.nff.services.entity.taming.INFFTamed;
 import net.sodiumzh.nff.services.item.NFFMobRespawnerItem;
@@ -230,7 +230,7 @@ public interface INFFGirlsTamed extends INFFTamed, /*IBaubleEquipable, */IAttrib
 	}
 
 	@Override
-	public HealingItemTable getHealingItems();
+	public ItemApplyingToMobTable getHealingItems();
 	
 	// === IItemStackMonitor interface
 	

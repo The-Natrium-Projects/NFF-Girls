@@ -29,7 +29,7 @@ import net.sodiumzh.nautils.statics.NaUtilsContainerStatics;
 import net.sodiumzh.nautils.statics.NaUtilsEntityStatics;
 import net.sodiumzh.nautils.statics.NaUtilsParticleStatics;
 import net.sodiumzh.nff.girls.NFFGirls;
-import net.sodiumzh.nff.girls.entity.INFFGirlsTamedSunSensitiveMob;
+import net.sodiumzh.nff.girls.entity.INFFGirlTamedSunSensitiveMob;
 import net.sodiumzh.nff.girls.entity.ai.goal.NFFGirlsFollowOwnerGoal;
 import net.sodiumzh.nff.girls.entity.ai.goal.target.NFFGirlsNearestHostileToOwnerTargetGoal;
 import net.sodiumzh.nff.girls.entity.ai.goal.target.NFFGirlsNearestHostileToSelfTargetGoal;
@@ -40,18 +40,18 @@ import net.sodiumzh.nff.girls.registry.NFFGirlsHealingItems;
 import net.sodiumzh.nff.girls.registry.NFFGirlsItems;
 import net.sodiumzh.nff.girls.sound.NFFGirlsSoundPresets;
 import net.sodiumzh.nff.girls.util.NFFGirlsEntityStatics;
-import net.sodiumzh.nff.services.entity.ai.goal.presets.NFFFleeSunGoal;
-import net.sodiumzh.nff.services.entity.ai.goal.presets.NFFRestrictSunGoal;
-import net.sodiumzh.nff.services.entity.ai.goal.presets.NFFWaterAvoidingRandomStrollGoal;
-import net.sodiumzh.nff.services.entity.ai.goal.presets.NFFZombieAttackGoal;
-import net.sodiumzh.nff.services.entity.ai.goal.presets.target.NFFHurtByTargetGoal;
-import net.sodiumzh.nff.services.entity.capability.HealingItemTable;
+import net.sodiumzh.nff.services.entity.ai.goal.preset.NFFFleeSunGoal;
+import net.sodiumzh.nff.services.entity.ai.goal.preset.NFFRestrictSunGoal;
+import net.sodiumzh.nff.services.entity.ai.goal.preset.NFFWaterAvoidingRandomStrollGoal;
+import net.sodiumzh.nff.services.entity.ai.goal.preset.NFFZombieAttackGoal;
+import net.sodiumzh.nff.services.entity.ai.goal.preset.target.NFFHurtByTargetGoal;
+import net.sodiumzh.nautils.entity.ItemApplyingToMobTable;
 import net.sodiumzh.nff.services.entity.taming.NFFTamedStatics;
 import net.sodiumzh.nff.services.inventory.NFFTamedInventoryMenu;
 import net.sodiumzh.nff.services.inventory.NFFTamedMobInventory;
 import net.sodiumzh.nff.services.inventory.NFFTamedMobInventoryWithHandItems;
 
-public class HmagCursedDollEntity extends CursedDollEntity implements INFFGirlsTamedSunSensitiveMob {
+public class HmagCursedDollEntity extends CursedDollEntity implements INFFGirlTamedSunSensitiveMob {
 
 	/* Initialization */
 
@@ -103,9 +103,9 @@ public class HmagCursedDollEntity extends CursedDollEntity implements INFFGirlsT
 	// Map items that can heal the mob and healing values here.
 	// Leave it empty if you don't need healing features.
 	@Override
-	public HealingItemTable getHealingItems()
+	public ItemApplyingToMobTable getHealingItems()
 	{
-		return NFFGirlsHealingItems.CLOTH_DOLL;
+		return NFFGirlsHealingItems.CLOTH_DOLL.get();
 
 	}
 
@@ -132,7 +132,7 @@ public class HmagCursedDollEntity extends CursedDollEntity implements INFFGirlsT
 	 */
 	protected boolean giveEnhancingItems()
 	{
-		if (level().isClientSide)
+		if (level.isClientSide)
 			return false;
 		ItemStack handItem = getOwner().getMainHandItem();	
 		if (ENHANCING_ITEMS.contains(handItem.getItem()))
@@ -192,7 +192,6 @@ public class HmagCursedDollEntity extends CursedDollEntity implements INFFGirlsT
 		else return false;
 	}
 	
-	@SuppressWarnings("resource")
 	@Override
 	public InteractionResult mobInteract(Player player, InteractionHand hand)
 	{
@@ -200,13 +199,13 @@ public class HmagCursedDollEntity extends CursedDollEntity implements INFFGirlsT
 			// For normal interaction
 			if (!player.isShiftKeyDown())
 			{
-				if (!player.level().isClientSide()) 
+				if (!player.level.isClientSide()) 
 				{
 					/* Put checks before healing item check */
 					if (giveEnhancingItems())
-						return InteractionResult.sidedSuccess(player.level().isClientSide);
+						return InteractionResult.sidedSuccess(player.level.isClientSide);
 					else if (this.tryApplyHealingItems(player.getItemInHand(hand)) != InteractionResult.PASS)
-						return InteractionResult.sidedSuccess(player.level().isClientSide);
+						return InteractionResult.sidedSuccess(player.level.isClientSide);
 					// The function above returns PASS when the items are not correct. So when not PASS it should stop here
 					else if (hand == InteractionHand.MAIN_HAND
 							&& NFFGirlsEntityStatics.isOnEitherHand(player, NFFGirlsItems.COMMANDING_WAND.get()))
@@ -217,7 +216,7 @@ public class HmagCursedDollEntity extends CursedDollEntity implements INFFGirlsT
 					else return InteractionResult.PASS;
 				}
 				// Interacted
-				return InteractionResult.sidedSuccess(player.level().isClientSide);
+				return InteractionResult.sidedSuccess(player.level.isClientSide);
 			}
 			// For interaction with shift key down
 			else
@@ -226,7 +225,7 @@ public class HmagCursedDollEntity extends CursedDollEntity implements INFFGirlsT
 				if (hand == InteractionHand.MAIN_HAND && NFFGirlsEntityStatics.isOnEitherHand(player, NFFGirlsItems.COMMANDING_WAND.get()))
 				{
 					NFFTamedStatics.openBefriendedInventory(player, this);
-					return InteractionResult.sidedSuccess(player.level().isClientSide);
+					return InteractionResult.sidedSuccess(player.level.isClientSide);
 				}
 			}
 		} 
@@ -276,7 +275,7 @@ public class HmagCursedDollEntity extends CursedDollEntity implements INFFGirlsT
 	public String getModId() {
 		return NFFGirls.MOD_ID;
 	}
-	
+
 	// Sounds
 	
 	@Override
@@ -287,7 +286,7 @@ public class HmagCursedDollEntity extends CursedDollEntity implements INFFGirlsT
 	// ==================================================================== //
 	// ========================= General Settings ========================= //
 	// Generally these can be copy-pasted to other INFFTamed classes //
-
+/*
 	@Override
 	public boolean isPersistenceRequired() {
 		return true;
@@ -302,7 +301,7 @@ public class HmagCursedDollEntity extends CursedDollEntity implements INFFGirlsT
 	protected boolean shouldDespawnInPeaceful() {
 		return false;
 	}
-
+*/
 	// ========================= General Settings end ========================= //
 	// ======================================================================== //
 

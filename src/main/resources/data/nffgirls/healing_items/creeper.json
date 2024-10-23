@@ -1,0 +1,14 @@
+[
+  {
+    "item": "minecraft:gunpowder",
+    "amount": [5]
+  },
+  {
+    "item": "minecraft:redstone",
+    "amount": [5]
+  },
+  {
+    "item": "minecraft:redstone_block",
+    "amount": [15]
+  }
+]
