@@ -1,0 +1,18 @@
+[
+  {
+    "item": "minecraft:honey_bottle",
+    "amount": [5]
+  },
+  {
+    "item": "minecraft:honeycomb",
+    "amount": [10]
+  },
+  {
+    "item": "minecraft:honey_block",
+    "amount": [15]
+  },
+  {
+    "item": "hmag:mysterious_petal",
+    "amount_getter": "nffgirls:mob_max_health"
+  }
+]

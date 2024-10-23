@@ -42,7 +42,7 @@ import net.sodiumzh.nff.girls.util.NFFGirlsEntityStatics;
 import net.sodiumzh.nff.services.entity.ai.goal.preset.NFFFlyingLandGoal;
 import net.sodiumzh.nff.services.entity.ai.goal.preset.NFFFlyingRandomMoveGoal;
 import net.sodiumzh.nff.services.entity.ai.goal.preset.target.NFFHurtByTargetGoal;
-import net.sodiumzh.nff.services.entity.capability.HealingItemTable;
+import net.sodiumzh.nautils.entity.ItemApplyingToMobTable;
 import net.sodiumzh.nff.services.entity.taming.NFFTamedStatics;
 import net.sodiumzh.nff.services.inventory.NFFTamedInventoryMenu;
 import net.sodiumzh.nff.services.inventory.NFFTamedMobInventory;
@@ -122,9 +122,9 @@ public class HmagHornetEntity extends HornetEntity implements INFFGirlsTamed
 	// Map items that can heal the mob and healing values here.
 	// Leave it empty if you don't need healing features.
 	@Override
-	public HealingItemTable getHealingItems()
+	public ItemApplyingToMobTable getHealingItems()
 	{
-		return NFFGirlsHealingItems.BEE;
+		return NFFGirlsHealingItems.BEE.get();
 	}
 
 	@Override

@@ -38,7 +38,7 @@ import net.sodiumzh.nff.services.entity.ai.goal.preset.NFFWaterAvoidingRandomStr
 import net.sodiumzh.nff.services.entity.ai.goal.preset.target.NFFHurtByTargetGoal;
 import net.sodiumzh.nff.services.entity.ai.goal.preset.target.NFFOwnerHurtByTargetGoal;
 import net.sodiumzh.nff.services.entity.ai.goal.preset.target.NFFOwnerHurtTargetGoal;
-import net.sodiumzh.nff.services.entity.capability.HealingItemTable;
+import net.sodiumzh.nautils.entity.ItemApplyingToMobTable;
 import net.sodiumzh.nff.services.entity.taming.NFFTamedStatics;
 import net.sodiumzh.nff.services.inventory.NFFTamedInventoryMenu;
 import net.sodiumzh.nff.services.inventory.NFFTamedMobInventory;
@@ -80,9 +80,9 @@ public class HmagImpEntity extends ImpEntity implements INFFGirlsTamed, IBlockLo
 	// Leave it empty if you don't need healing features.
 	@SuppressWarnings("unchecked")
 	@Override
-	public HealingItemTable getHealingItems()
+	public ItemApplyingToMobTable getHealingItems()
 	{
-		return NFFGirlsHealingItems.GENERAL_HUMANOID_0;
+		return NFFGirlsHealingItems.GENERAL_HUMANOID_0.get();
 	}
 
 	@Override

@@ -45,7 +45,7 @@ import net.sodiumzh.nff.girls.util.NFFGirlsEntityStatics;
 import net.sodiumzh.nff.services.entity.ai.goal.preset.NFFWaterAvoidingRandomStrollGoal;
 import net.sodiumzh.nff.services.entity.ai.goal.preset.target.NFFHurtByTargetGoal;
 import net.sodiumzh.nff.services.entity.ai.goal.preset.target.NFFNearestAttackableTargetGoal;
-import net.sodiumzh.nff.services.entity.capability.HealingItemTable;
+import net.sodiumzh.nautils.entity.ItemApplyingToMobTable;
 import net.sodiumzh.nff.services.entity.taming.NFFTamedStatics;
 import net.sodiumzh.nff.services.entity.taming.preset.NFFTamedEnderManPreset;
 import net.sodiumzh.nff.services.inventory.NFFTamedInventoryMenu;
@@ -99,9 +99,9 @@ public class HmagEnderExecutorEntity extends NFFTamedEnderManPreset implements I
 	// Interaction
 	
 	@Override
-	public HealingItemTable getHealingItems()
+	public ItemApplyingToMobTable getHealingItems()
 	{
-		return NFFGirlsHealingItems.ENDERMAN;
+		return NFFGirlsHealingItems.ENDERMAN.get();
 	}
 	
 	@Override

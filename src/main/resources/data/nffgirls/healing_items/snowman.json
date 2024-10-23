@@ -1,0 +1,18 @@
+[
+  {
+    "item": "minecraft:snowball",
+    "amount": [2]
+  },
+  {
+    "item": "minecraft:snow_block",
+    "amount": [5]
+  },
+  {
+    "item": "minecraft:pumpkin_pie",
+    "amount": [15]
+  },
+  {
+    "item": "minecraft:golden_apple",
+    "amount_getter": "nffgirls:mob_max_health"
+  }
+]

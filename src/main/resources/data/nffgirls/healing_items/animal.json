@@ -1,0 +1,38 @@
+[
+  {
+    "item": "minecraft:cookie",
+    "amount": [5]
+  },
+  {
+    "item": "minecraft:cooked_chicken",
+    "amount": [8]
+  },
+  {
+    "item": "minecraft:cooked_rabbit",
+    "amount": [8]
+  },
+  {
+    "item": "minecraft:cooked_mutton",
+    "amount": [8]
+  },
+  {
+    "item": "minecraft:cooked_beef",
+    "amount": [10]
+  },
+  {
+    "item": "minecraft:cooked_porkchop",
+    "amount": [10]
+  },
+  {
+    "item": "hmag:cooked_ravager_meat",
+    "amount": [30]
+  },
+  {
+    "item": "twilightforest:cooked_meef",
+    "amount": [8]
+  },
+  {
+    "item": "minecraft:golden_apple",
+    "amount_getter": "nffgirls:mob_max_health"
+  }
+]

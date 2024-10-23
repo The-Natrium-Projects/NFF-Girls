@@ -1,0 +1,26 @@
+[
+  {
+    "item": "minecraft:apple",
+    "amount": [5]
+  },
+  {
+    "item": "minecraft:cookie",
+    "amount": [5]
+  },
+  {
+    "item": "minecraft:pumpkin_pie",
+    "amount": [15]
+  },
+  {
+    "item": "hmag:lemon",
+    "amount": [10]
+  },
+  {
+    "item": "hmag:lemon_pie",
+    "amount": [20]
+  },
+  {
+    "item": "minecraft:golden_apple",
+    "amount_getter": "nffgirls:mob_max_health"
+  }
+]

@@ -1,5 +1,6 @@
 package net.sodiumzh.nff.girls;
 
+import net.sodiumzh.nff.girls.registry.*;
 import org.slf4j.Logger;
 import net.sodiumzh.nff.girls.registry.*;
 import com.mojang.logging.LogUtils;
@@ -24,6 +25,8 @@ import net.sodiumzh.nff.girls.registry.NFFGirlsItems;
 import net.sodiumzh.nff.girls.registry.NFFGirlsParticleTypes;
 import net.sodiumzh.nff.girls.registry.NFFGirlsPotions;
 import net.sodiumzh.nff.girls.registry.NFFGirlsRecipes;
+import net.sodiumzh.nff.services.NFFServices;
+import net.sodiumzh.nff.services.registry.NFFCapabilityAttachments;
 
 @Mod(NFFGirls.MOD_ID)
 public class NFFGirls
@@ -55,7 +58,11 @@ public class NFFGirls
         NFFGirlsRecipes.RECIPES.register(modEventBus);
         NFFGirlsParticleTypes.PARTICLE_TYPES.register(modEventBus);
         NFFGirlsPotions.POTIONS.register(modEventBus);
-        
+
+        // NaUtils registries
+        NFFGirlsHealingItems.HEALING_ITEMS.merge();
+        NFFGirlsFunctions.FUNCTIONS.merge();
+
         // Register ourselves for server and other game events we are interested in
         MinecraftForge.EVENT_BUS.register(this);
         redirectSaveDataLocations();

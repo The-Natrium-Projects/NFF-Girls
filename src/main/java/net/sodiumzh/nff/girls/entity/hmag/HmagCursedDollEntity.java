@@ -45,7 +45,7 @@ import net.sodiumzh.nff.services.entity.ai.goal.preset.NFFRestrictSunGoal;
 import net.sodiumzh.nff.services.entity.ai.goal.preset.NFFWaterAvoidingRandomStrollGoal;
 import net.sodiumzh.nff.services.entity.ai.goal.preset.NFFZombieAttackGoal;
 import net.sodiumzh.nff.services.entity.ai.goal.preset.target.NFFHurtByTargetGoal;
-import net.sodiumzh.nff.services.entity.capability.HealingItemTable;
+import net.sodiumzh.nautils.entity.ItemApplyingToMobTable;
 import net.sodiumzh.nff.services.entity.taming.NFFTamedStatics;
 import net.sodiumzh.nff.services.inventory.NFFTamedInventoryMenu;
 import net.sodiumzh.nff.services.inventory.NFFTamedMobInventory;
@@ -103,9 +103,9 @@ public class HmagCursedDollEntity extends CursedDollEntity implements INFFGirlsT
 	// Map items that can heal the mob and healing values here.
 	// Leave it empty if you don't need healing features.
 	@Override
-	public HealingItemTable getHealingItems()
+	public ItemApplyingToMobTable getHealingItems()
 	{
-		return NFFGirlsHealingItems.CLOTH_DOLL;
+		return NFFGirlsHealingItems.CLOTH_DOLL.get();
 
 	}
 

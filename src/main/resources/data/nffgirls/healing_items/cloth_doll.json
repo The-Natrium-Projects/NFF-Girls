@@ -1,0 +1,38 @@
+[
+  {
+    "item": "minecraft:string",
+    "amount": [2]
+  },
+  {
+    "item": "minecraft:white_wool",
+    "amount": [5]
+  },
+  {
+    "item": "minecraft:light_gray_wool",
+    "amount": [5]
+  },
+  {
+    "item": "minecraft:gray_wool",
+    "amount": [5]
+  },
+  {
+    "item": "minecraft:black_wool",
+    "amount": [5]
+  },
+  {
+    "item": "minecraft:brown_wool",
+    "amount": [5]
+  },
+  {
+    "item": "minecraft:lapis_lazuli",
+    "amount": [10]
+  },
+  {
+    "item": "minecraft:emerald",
+    "amount": [15]
+  },
+  {
+    "item": "hmag:cubic_nucleus",
+    "amount_getter": "nffgirls:mob_max_health"
+  }
+]
