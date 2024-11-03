@@ -1,7 +1,8 @@
 package net.sodiumzh.nff.girls.registry;
 
-import com.github.mechalopa.hmag.registry.ModEntityTypes;
+import com.github.mechalopa.hmag.HMaG;
 
+import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.sodiumzh.nff.girls.NFFGirls;
@@ -38,116 +39,116 @@ public class NFFGirlsBefriendingTypes {
 	{
 		
 		event.register(
-				ModEntityTypes.ZOMBIE_GIRL.get(),
-				NFFGirlsEntityTypes.HMAG_ZOMBIE_GIRL.get(),
-				new HmagZombieGirlTamingProcess());
+				new ResourceLocation(HMaG.MODID, "zombie_girl"),
+				new ResourceLocation(NFFGirls.MOD_ID, "hmag_zombie_girl"),
+				NFFGirlsTamingProcesses.VANILLA_UNDEAD_A::get);
 		event.register(
-				ModEntityTypes.SKELETON_GIRL.get(),
-				NFFGirlsEntityTypes.HMAG_SKELETON_GIRL.get(),
-				new HmagSkeletonGirlTamingProcess());		
+				new ResourceLocation(HMaG.MODID, "skeleton_girl"),
+				new ResourceLocation(NFFGirls.MOD_ID, "hmag_skeleton_girl"),
+				NFFGirlsTamingProcesses.VANILLA_UNDEAD_B::get);
 		event.register(
-				ModEntityTypes.HUSK_GIRL.get(),
-				NFFGirlsEntityTypes.HMAG_HUSK_GIRL.get(),
-				new HmagHuskGirlTamingProcess());			
+				new ResourceLocation(HMaG.MODID, "husk_girl"),
+				new ResourceLocation(NFFGirls.MOD_ID, "hmag_husk_girl"),
+				NFFGirlsTamingProcesses.VANILLA_UNDEAD_B::get);
 		event.register(
-				ModEntityTypes.DROWNED_GIRL.get(),
-				NFFGirlsEntityTypes.HMAG_DROWNED_GIRL.get(),
-				new HmagZombieGirlTamingProcess());	
+				new ResourceLocation(HMaG.MODID, "drowned_girl"),
+				new ResourceLocation(NFFGirls.MOD_ID, "hmag_drowned_girl"),
+				NFFGirlsTamingProcesses.VANILLA_UNDEAD_A::get);
 		event.register(
-				ModEntityTypes.CREEPER_GIRL.get(),
-				NFFGirlsEntityTypes.HMAG_CREEPER_GIRL.get(),
-				new HmagCreeperGirlTamingProcess());
+				new ResourceLocation(HMaG.MODID, "creeper_girl"),
+				new ResourceLocation(NFFGirls.MOD_ID, "hmag_creeper_girl"),
+				NFFGirlsTamingProcesses.HMAG_CREEPER_GIRL::get);
 		event.register(
-				ModEntityTypes.ENDER_EXECUTOR.get(),
-				NFFGirlsEntityTypes.HMAG_ENDER_EXECUTOR.get(),
-				new HmagEnderExecutorTamingProcess());	
+				new ResourceLocation(HMaG.MODID, "ender_executor"),
+				new ResourceLocation(NFFGirls.MOD_ID, "hmag_ender_executor"),
+				NFFGirlsTamingProcesses.HMAG_ENDER_EXECUTOR::get);
 		event.register(
-				ModEntityTypes.STRAY_GIRL.get(),
-				NFFGirlsEntityTypes.HMAG_STRAY_GIRL.get(),
-				new HmagSkeletonGirlTamingProcess());	
+				new ResourceLocation(HMaG.MODID, "stray_girl"),
+				new ResourceLocation(NFFGirls.MOD_ID, "hmag_stray_girl"),
+				NFFGirlsTamingProcesses.VANILLA_UNDEAD_B::get);
 		event.register(
-				ModEntityTypes.WITHER_SKELETON_GIRL.get(),
-				NFFGirlsEntityTypes.HMAG_WITHER_SKELETON_GIRL.get(),
-				new HmagWitherSkeletonGirlTamingProcess());
+				new ResourceLocation(HMaG.MODID, "wither_skeleton_girl"),
+				new ResourceLocation(NFFGirls.MOD_ID, "hmag_wither_skeleton_girl"),
+				NFFGirlsTamingProcesses.VANILLA_UNDEAD_C::get);
 		event.register(
-				ModEntityTypes.HORNET.get(),
-				NFFGirlsEntityTypes.HMAG_HORNET.get(),
-				new HmagHornetTamingProcess());
+				new ResourceLocation(HMaG.MODID, "hornet"),
+				new ResourceLocation(NFFGirls.MOD_ID, "hmag_hornet"),
+				NFFGirlsTamingProcesses.HMAG_HORNET::get);
 		event.register(
-				ModEntityTypes.NECROTIC_REAPER.get(),
-				NFFGirlsEntityTypes.HMAG_NECROTIC_REAPER.get(),
-				new HmagNecroticReaperTamingProcess());
+				new ResourceLocation(HMaG.MODID, "necrotic_reaper"),
+				new ResourceLocation(NFFGirls.MOD_ID, "hmag_necrotic_reaper"),
+				NFFGirlsTamingProcesses.HMAG_NECROTIC_REAPER::get);
 		event.register(
-				ModEntityTypes.GHASTLY_SEEKER.get(),
-				NFFGirlsEntityTypes.HMAG_GHASTLY_SEEKER.get(),
-				new HmagGhastlySeekerTamingProcess());
+				new ResourceLocation(HMaG.MODID, "ghastly_seeker"),
+				new ResourceLocation(NFFGirls.MOD_ID, "hmag_ghastly_seeker"),
+				NFFGirlsTamingProcesses.HMAG_GHASTLY_SEEKER::get);
 		event.register(
-				ModEntityTypes.BANSHEE.get(),
-				NFFGirlsEntityTypes.HMAG_BANSHEE.get(),
-				new HmagBansheeTamingProcess());
+				new ResourceLocation(HMaG.MODID, "banshee"),
+				new ResourceLocation(NFFGirls.MOD_ID, "hmag_banshee"),
+				NFFGirlsTamingProcesses.HMAG_BANSHEE::get);
 		event.register(
-				ModEntityTypes.KOBOLD.get(),
-				NFFGirlsEntityTypes.HMAG_KOBOLD.get(),
-				new HmagKoboldTamingProcess());
+				new ResourceLocation(HMaG.MODID, "kobold"),
+				new ResourceLocation(NFFGirls.MOD_ID, "hmag_kobold"),
+				NFFGirlsTamingProcesses.HMAG_KOBOLD::get);
 		event.register(
-				ModEntityTypes.IMP.get(),
-				NFFGirlsEntityTypes.HMAG_IMP.get(),
-				new HmagImpTamingProcess());
+				new ResourceLocation(HMaG.MODID, "imp"),
+				new ResourceLocation(NFFGirls.MOD_ID, "hmag_imp"),
+				NFFGirlsTamingProcesses.HMAG_IMP::get);
 		event.register(
-				ModEntityTypes.HARPY.get(),
-				NFFGirlsEntityTypes.HMAG_HARPY.get(),
-				new HmagHarpyTamingProcess());
+				new ResourceLocation(HMaG.MODID, "harpy"),
+				new ResourceLocation(NFFGirls.MOD_ID, "hmag_harpy"),
+				NFFGirlsTamingProcesses.HMAG_ANIMAL_A::get);
 		event.register(
-				ModEntityTypes.SNOW_CANINE.get(),
-				NFFGirlsEntityTypes.HMAG_SNOW_CANINE.get(),
-				new HmagSnowCanineTamingProcess());
+				new ResourceLocation(HMaG.MODID, "snow_canine"),
+				new ResourceLocation(NFFGirls.MOD_ID, "hmag_snow_canine"),
+				NFFGirlsTamingProcesses.HMAG_ANIMAL_A::get);
 		event.register(
-				ModEntityTypes.SLIME_GIRL.get(),
-				NFFGirlsEntityTypes.HMAG_SLIME_GIRL.get(),
-				new HmagSlimeGirlTamingProcess());
+				new ResourceLocation(HMaG.MODID, "slime_girl"),
+				new ResourceLocation(NFFGirls.MOD_ID, "hmag_slime_girl"),
+				NFFGirlsTamingProcesses.HMAG_SLIME_GIRL::get);
 		event.register(
-				ModEntityTypes.JIANGSHI.get(),
-				NFFGirlsEntityTypes.HMAG_JIANGSHI.get(),
-				new HmagJiangshiTamingProcess());
+				new ResourceLocation(HMaG.MODID, "jiangshi"),
+				new ResourceLocation(NFFGirls.MOD_ID, "hmag_jiangshi"),
+				NFFGirlsTamingProcesses.HMAG_JIANGSHI::get);
 		event.register(
-				ModEntityTypes.DULLAHAN.get(),
-				NFFGirlsEntityTypes.HMAG_DULLAHAN.get(),
-				new HmagSkeletonGirlTamingProcess());
+				new ResourceLocation(HMaG.MODID, "dullahan"),
+				new ResourceLocation(NFFGirls.MOD_ID, "hmag_dullahan"),
+				NFFGirlsTamingProcesses.VANILLA_UNDEAD_B::get);
 		event.register(
-				ModEntityTypes.DODOMEKI.get(),
-				NFFGirlsEntityTypes.HMAG_DODOMEKI.get(),
-				new HmagSkeletonGirlTamingProcess());
+				new ResourceLocation(HMaG.MODID, "dodomeki"),
+				new ResourceLocation(NFFGirls.MOD_ID, "hmag_dodomeki"),
+				NFFGirlsTamingProcesses.VANILLA_UNDEAD_B::get);
 		event.register(
-				ModEntityTypes.ALRAUNE.get(),
-				NFFGirlsEntityTypes.HMAG_ALRAUNE.get(),
-				new HmagAlrauneTamingProcess());
+				new ResourceLocation(HMaG.MODID, "alraune"),
+				new ResourceLocation(NFFGirls.MOD_ID, "hmag_alraune"),
+				NFFGirlsTamingProcesses.HMAG_ALRAUNE::get);
 		event.register(
-				ModEntityTypes.GLARYAD.get(),
-				NFFGirlsEntityTypes.HMAG_GLARYAD.get(),
-				new HmagAlrauneTamingProcess());
+				new ResourceLocation(HMaG.MODID, "glaryad"),
+				new ResourceLocation(NFFGirls.MOD_ID, "hmag_glaryad"),
+				NFFGirlsTamingProcesses.HMAG_GLARYAD::get);
 		event.register(
-				ModEntityTypes.CRIMSON_SLAUGHTERER.get(),
-				NFFGirlsEntityTypes.HMAG_CRIMSON_SLAUGHTERER.get(),
-				new HmagCrimsonSlaughtererTamingProcess());
+				new ResourceLocation(HMaG.MODID, "crimson_slaughterer"),
+				new ResourceLocation(NFFGirls.MOD_ID, "hmag_crimson_slaughterer"),
+				NFFGirlsTamingProcesses.HMAG_CRIMSON_SLAUGHTERER::get);
 		event.register(
-				ModEntityTypes.CURSED_DOLL.get(),
-				NFFGirlsEntityTypes.HMAG_CURSED_DOLL.get(),
-				new HmagCursedDollTamingProcess());
+				new ResourceLocation(HMaG.MODID, "cursed_doll"),
+				new ResourceLocation(NFFGirls.MOD_ID, "hmag_cursed_doll"),
+				NFFGirlsTamingProcesses.HMAG_CURSED_DOLL::get);
 		event.register(
-				ModEntityTypes.REDCAP.get(),
-				NFFGirlsEntityTypes.HMAG_REDCAP.get(),
-				new HmagRedcapTamingProcess());
+				new ResourceLocation(HMaG.MODID, "redcap"),
+				new ResourceLocation(NFFGirls.MOD_ID, "hmag_redcap"),
+				NFFGirlsTamingProcesses.HMAG_REDCAP::get);
 		event.register(
-				ModEntityTypes.JACK_FROST.get(),
-				NFFGirlsEntityTypes.HMAG_JACK_FROST.get(),
-				new HmagJackFrostTamingProcess());
+				new ResourceLocation(HMaG.MODID, "jack_frost"),
+				new ResourceLocation(NFFGirls.MOD_ID, "hmag_jack_frost"),
+				NFFGirlsTamingProcesses.HMAG_JACK_FROST::get);
 		event.register(
-				ModEntityTypes.MELTY_MONSTER.get(),
-				NFFGirlsEntityTypes.HMAG_MELTY_MONSTER.get(),
-				new HmagMeltyMonsterTamingProcess());
+				new ResourceLocation(HMaG.MODID, "melty_monster"),
+				new ResourceLocation(NFFGirls.MOD_ID, "hmag_melty_monster"),
+				NFFGirlsTamingProcesses.HMAG_MELTY_MONSTER::get);
 		event.register(
-				ModEntityTypes.NIGHTWALKER.get(),
-				NFFGirlsEntityTypes.HMAG_NIGHTWALKER.get(),
-				new HmagNightwalkerTamingProcess());
+				new ResourceLocation(HMaG.MODID, "nightwalker"),
+				new ResourceLocation(NFFGirls.MOD_ID, "hmag_nightwalker"),
+				NFFGirlsTamingProcesses.HMAG_NIGHTWALKER::get);
 	}
 }
