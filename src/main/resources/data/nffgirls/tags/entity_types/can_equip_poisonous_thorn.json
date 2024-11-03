@@ -1,4 +1,5 @@
 {
+  "desc": "Mobs with this tag will be allowed to equip bauble 'Poisonous Thorn'.",
   "replace" : false,
   "values" : [ "nffgirls:hmag_hornet",
   	"nffgirls:hmag_crimson_slaughterer"

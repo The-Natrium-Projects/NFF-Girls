@@ -19,6 +19,7 @@ public class NFFGirlsRespawnerItem extends NFFMobRespawnerItem
 	public NFFGirlsRespawnerItem(Properties pProperties)
 	{
 		super(pProperties);
+		this.defaultInstanceOverride(() -> ItemStack.EMPTY);
 	}
 	
 	@Override

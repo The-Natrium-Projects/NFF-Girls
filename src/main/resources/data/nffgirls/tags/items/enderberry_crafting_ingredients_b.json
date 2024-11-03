@@ -1,4 +1,5 @@
 {
+  "desc": "Items with this tag can be used to make Enderberry, in place of Ender Plasm or Ghast Tear.",
   "replace" : false,
   "values" : [ 
       "hmag:ender_plasm",

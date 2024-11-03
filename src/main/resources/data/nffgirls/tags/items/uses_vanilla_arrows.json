@@ -1,6 +1,7 @@
 {
+  "desc": "Bows with this tag will consume Vanilla arrows when used by NFF Girls' tamed mobs.",
   "replace" : false,
-  "values" : [ 
-  	"twilightforest:seeker_bow"
+  "values" : [
+    {"id": "twilightforest:seeker_bow", "required": "false"}
 	]
 }

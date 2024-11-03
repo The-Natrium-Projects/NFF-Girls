@@ -1,4 +1,5 @@
 {
+  "desc": "Mobs with this tag will not be neutral to players with Undead Affinity effect, even if they're undead mobs.",
   "replace" : false,
   "values" : [ "minecraft:wither"
 	 ]

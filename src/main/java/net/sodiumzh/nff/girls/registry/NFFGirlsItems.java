@@ -8,18 +8,15 @@ import com.github.mechalopa.hmag.world.item.ModSwordItem;
 
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.MutableComponent;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.EquipmentSlot;
-import net.minecraft.world.item.ArmorItem;
-import net.minecraft.world.item.ChorusFruitItem;
-import net.minecraft.world.item.Item;
-import net.minecraft.world.item.Rarity;
-import net.minecraft.world.item.SwordItem;
-import net.minecraft.world.item.Tiers;
+import net.minecraft.world.item.*;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.ModList;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
+import net.sodiumzh.nautils.item.NaUtilsItem;
 import net.sodiumzh.nautils.statics.NaUtilsInfoStatics;
 import net.sodiumzh.nff.girls.NFFGirls;
 import net.sodiumzh.nff.girls.entity.INFFGirlsTamed;
@@ -246,12 +243,13 @@ public class NFFGirlsItems {
 			() -> new TradeIntroductionLetterItem(new Item.Properties().stacksTo(1).rarity(Rarity.UNCOMMON)));
 	
 	// Misc
-	public static final RegistryObject<NFFMobRespawnerItem> MOB_RESPAWNER = registerNoTab("mob_respawner", () -> new NFFGirlsRespawnerItem(new Item.Properties()).setRetainBefriendedMobInventory(false));
-	public static final RegistryObject<NFFMobRespawnerItem> MOB_STORAGE_POD = registerNoTab("mob_storage_pod", () -> new NFFGirlsRespawnerItem(new Item.Properties()));
-	public static final RegistryObject<MobCatcherItem> EMPTY_MOB_STORAGE_POD = register("empty_mob_storage_pod", () -> new MobCatcherItem(new Item.Properties(), MOB_STORAGE_POD.get()).canCatchCondition(
-			((m, p) -> (m instanceof INFFGirlsTamed bm && bm.getOwnerUUID().equals(p.getUUID())))));
-	
-	
+	public static final RegistryObject<NFFMobRespawnerItem> MOB_RESPAWNER = registerNoTab("mob_respawner", () -> new NFFGirlsRespawnerItem(new Item.Properties()).setRetainBefriendedMobInventory(false)
+		.setRetainBefriendedMobInventory(false).noDefaultInstance(false).cast());
+	public static final RegistryObject<NFFMobRespawnerItem> MOB_STORAGE_POD = registerNoTab("mob_storage_pod", () -> new NFFGirlsRespawnerItem(new Item.Properties())
+		.redirectDefaultInstance(new ResourceLocation(NFFGirls.MOD_ID, "empty_mob_storage_pod")).cast());
+	public static final RegistryObject<MobCatcherItem> EMPTY_MOB_STORAGE_POD = register("empty_mob_storage_pod", () -> new MobCatcherItem(new Item.Properties(), MOB_STORAGE_POD.get()
+		.canCatchCondition(((m, p) -> (m instanceof INFFGirlsTamed bm && bm.getOwnerUUID().equals(p.getUUID())))));
+
 	// Technical
 	public static final RegistryObject<Item> TAB_ICON = registerDefaultNoTab("tab_icon");
 	
