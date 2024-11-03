@@ -1,4 +1,4 @@
-package net.sodiumzh.nff.girls.entity.handlers.hmag;
+package net.sodiumzh.nff.girls.entity.tamingprocesses.hmag;
 
 import java.util.Map;
 import java.util.function.Supplier;
@@ -13,7 +13,7 @@ public class HmagImpTamingProcess extends NFFGirlsItemDroppingTamingProcess
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public Map<String, Supplier<Double>> getDeltaProc() {
+	public Map<String, Supplier<Double>> getDeltaProcMap() {
 		return NaUtilsContainerStatics.<String, Supplier<Double>>mapOf(
 			MapPair.of("minecraft:apple", () -> RndUtil.rndRangedDouble(0.02, 0.04)),
 			MapPair.of("minecraft:warped_fungus", () -> RndUtil.rndRangedDouble(0.03, 0.05)), 

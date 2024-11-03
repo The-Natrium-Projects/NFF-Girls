@@ -1,4 +1,4 @@
-package net.sodiumzh.nff.girls.entity.handlers.hmag;
+package net.sodiumzh.nff.girls.entity.tamingprocesses.hmag;
 
 import java.util.stream.Stream;
 
@@ -38,6 +38,8 @@ public class HmagHornetTamingProcess extends TamingProcessItemGivingProgress
 				|| item.is(Items.HONEY_BLOCK);
 	}
 
+	/*
+	// No longer needed as remaining item is implemented in the parent class: 0.x.27
 	@Override
 	public TamableInteractionResult handleInteract(TamableInteractArguments args) 
 	{
@@ -54,7 +56,7 @@ public class HmagHornetTamingProcess extends TamingProcessItemGivingProgress
 			NaUtilsItemStatics.giveOrDropDefault(args.getPlayer(), Items.GLASS_BOTTLE);
 		}
 		return res;
-	}
+	}*/
 	
 	@Override
 	public boolean additionalConditions(Player player, Mob mob) {

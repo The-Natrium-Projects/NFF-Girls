@@ -1,4 +1,4 @@
-package net.sodiumzh.nff.girls.entity.handlers.hmag;
+package net.sodiumzh.nff.girls.entity.tamingprocesses.hmag;
 
 import javax.annotation.Nullable;
 
@@ -14,7 +14,7 @@ import net.sodiumzh.nautils.statics.NaUtilsNBTStatics;
 import net.sodiumzh.nff.services.entity.taming.CNFFTamable;
 import net.sodiumzh.nff.services.entity.taming.TamableHatredReason;
 
-public class HmagBansheeTamingProcess extends HmagSkeletonGirlTamingProcess
+public class HmagBansheeTamingProcess extends HmagVanillaUndeadTamingProcess
 {
 	@Override
 	public boolean additionalConditions(Player player, Mob mob)

@@ -1,20 +1,14 @@
-package net.sodiumzh.nff.girls.entity.handlers.hmag;
-
-import java.util.Map;
-import java.util.function.Supplier;
+package net.sodiumzh.nff.girls.entity.tamingprocesses.hmag;
 
 import net.minecraft.nbt.DoubleTag;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.item.ItemStack;
-import net.sodiumzh.nautils.containers.MapPair;
-import net.sodiumzh.nautils.math.RndUtil;
-import net.sodiumzh.nautils.statics.NaUtilsContainerStatics;
 import net.sodiumzh.nautils.statics.NaUtilsEntityStatics;
 import net.sodiumzh.nff.services.entity.taming.CNFFTamable;
 
-public class HmagSnowCanineTamingProcess extends NFFGirlsItemDroppingTamingProcess
+public class HmagAnimalTamingProcess extends NFFGirlsItemDroppingTamingProcess
 {
 
 	@Override
@@ -23,10 +17,11 @@ public class HmagSnowCanineTamingProcess extends NFFGirlsItemDroppingTamingProce
 		super.initCap(cap);
 		cap.getNbt().put("strength", DoubleTag.valueOf(0));
 	}
-	
+
+	/*
 	@SuppressWarnings("unchecked")
 	@Override
-	public Map<String, Supplier<Double>> getDeltaProc() {
+	public Map<String, Supplier<Double>> getDeltaProcMap() {
 		return NaUtilsContainerStatics.<String, Supplier<Double>>mapOf(
 				MapPair.of("minecraft:cooked_chicken", () -> RndUtil.rndRangedDouble(0.04, 0.06)),
 				MapPair.of("minecraft:cooked_rabbit", () -> RndUtil.rndRangedDouble(0.04, 0.06)),
@@ -38,7 +33,7 @@ public class HmagSnowCanineTamingProcess extends NFFGirlsItemDroppingTamingProce
 				MapPair.of("minecraft:golden_apple", () -> RndUtil.rndRangedDouble(0.12, 0.16)),
 				MapPair.of("minecraft:enchanted_golden_apple", () -> RndUtil.rndRangedDouble(0.40, 0.70)));
 	}
-
+*/
 	@Override
 	public int getHoldingItemTime() {
 		return 5 * 20;

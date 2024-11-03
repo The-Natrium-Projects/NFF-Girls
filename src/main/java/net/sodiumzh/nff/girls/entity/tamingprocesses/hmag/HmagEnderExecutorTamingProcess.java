@@ -1,4 +1,4 @@
-package net.sodiumzh.nff.girls.entity.handlers.hmag;
+package net.sodiumzh.nff.girls.entity.tamingprocesses.hmag;
 
 import com.github.mechalopa.hmag.registry.ModItems;
 import com.github.mechalopa.hmag.world.entity.EnderExecutorEntity;
@@ -47,7 +47,7 @@ public class HmagEnderExecutorTamingProcess extends TamingProcessItemGivingProgr
 		return result;
 	}
 	
-	@Override
+	/*@Override
 	protected double getProcValueToAdd(ItemStack item, Player player, Mob mob, double lastProc) {
 		if (item.is(Items.ENDER_EYE))
 			return RndUtil.rndRangedDouble(0.005d, 0.01d);
@@ -70,7 +70,7 @@ public class HmagEnderExecutorTamingProcess extends TamingProcessItemGivingProgr
 		return item.is(Items.ENDER_EYE)
 			|| item.is(ModItems.ENDER_PLASM.get())
 			|| item.is(NFFGirlsItems.ENDER_PIE.get());
-	}
+	}*/
 
 	@Override
 	public boolean additionalConditions(Player player, Mob mob) {

@@ -1,4 +1,4 @@
-package net.sodiumzh.nff.girls.entity.handlers.hmag;
+package net.sodiumzh.nff.girls.entity.tamingprocesses.hmag;
 
 import java.util.ArrayList;
 import java.util.HashMap;

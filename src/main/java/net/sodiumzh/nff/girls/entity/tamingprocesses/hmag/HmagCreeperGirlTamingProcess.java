@@ -1,4 +1,4 @@
-package net.sodiumzh.nff.girls.entity.handlers.hmag;
+package net.sodiumzh.nff.girls.entity.tamingprocesses.hmag;
 
 import java.util.Collection;
 
@@ -194,7 +194,7 @@ public class HmagCreeperGirlTamingProcess extends TamingProcessItemGivingProgres
 	}
 
 
-	@Override
+/*	@Override
 	protected double getProcValueToAdd(ItemStack item, Player player, Mob mob, double lastProc) {
 		double rnd = this.rnd.nextDouble();
 		if (item.is(ModItems.LIGHTNING_PARTICLE.get()))
@@ -204,19 +204,19 @@ public class HmagCreeperGirlTamingProcess extends TamingProcessItemGivingProgres
 		else if (item.is(Items.TNT))
 			return RndUtil.rndRangedDouble(0.03, 0.06);
 		else return 0;
-	}
+	}*/
 
 	@Override
 	public int getItemGivingCooldownTicks() {
 		return 100;
 	}
 
-	@Override
+	/*@Override
 	public boolean isItemAcceptable(ItemStack item) {
 		return item.is(Items.GUNPOWDER)
 				|| item.is(Items.TNT)
 				|| item.is(ModItems.LIGHTNING_PARTICLE.get());
-	}
+	}*/
 
 	@Override
 	public INFFTamed finalActions(Player player, Mob mob)

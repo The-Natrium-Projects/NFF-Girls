@@ -1,4 +1,4 @@
-package net.sodiumzh.nff.girls.entity.handlers.hmag;
+package net.sodiumzh.nff.girls.entity.tamingprocesses.hmag;
 
 import java.util.Map;
 import java.util.function.Supplier;
@@ -11,7 +11,7 @@ public class HmagJackFrostTamingProcess extends NFFGirlsItemDroppingTamingProces
 {
 
 	@Override
-	public Map<String, Supplier<Double>> getDeltaProc() {
+	public Map<String, Supplier<Double>> getDeltaProcMap() {
 		return NaUtilsContainerStatics.<String, Supplier<Double>>mapOf(
 				MapPair.of("minecraft:blue_ice", () -> RndUtil.rndRangedDouble(0.03, 0.06)),
 				MapPair.of("minecraft:lapis_lazuli", () -> RndUtil.rndRangedDouble(0.03, 0.06)),

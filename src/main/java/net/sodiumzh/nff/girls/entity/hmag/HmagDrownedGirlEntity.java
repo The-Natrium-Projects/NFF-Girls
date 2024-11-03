@@ -46,7 +46,7 @@ import net.sodiumzh.nff.services.entity.ai.goal.preset.NFFRandomSwimGoal;
 import net.sodiumzh.nff.services.entity.ai.goal.preset.NFFRestrictSunGoal;
 import net.sodiumzh.nff.services.entity.ai.goal.preset.NFFZombieAttackGoal;
 import net.sodiumzh.nff.services.entity.ai.goal.preset.target.NFFHurtByTargetGoal;
-import net.sodiumzh.nautils.entity.ItemApplyingToMobTable;
+import net.sodiumzh.nautils.entity.MobApplicableItemTable;
 import net.sodiumzh.nff.services.entity.taming.INFFTamedAmphibious;
 import net.sodiumzh.nff.services.entity.taming.NFFTamedStatics;
 import net.sodiumzh.nff.services.inventory.NFFTamedInventoryMenu;
@@ -120,7 +120,7 @@ public class HmagDrownedGirlEntity extends DrownedGirlEntity implements INFFGirl
 	/* Interaction */
 
 	@Override
-	public ItemApplyingToMobTable getHealingItems()
+	public MobApplicableItemTable getHealingItems()
 	{
 		return NFFGirlsHealingItems.UNDEAD.get();
 	}

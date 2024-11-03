@@ -1,5 +1,6 @@
-package net.sodiumzh.nff.girls.entity.handlers.hmag;
+package net.sodiumzh.nff.girls.entity.tamingprocesses.hmag;
 
+import java.util.Objects;
 import java.util.UUID;
 
 import javax.annotation.Nullable;
@@ -272,13 +273,13 @@ public class HmagJiangshiTamingProcess extends NFFTamingProcess
 	{
 		if (CNFFTamable.getCap(mob) == null)
 			return;
-		if (mob instanceof JiangshiEntity && timerKey == "frozen" && player == null)
+		if (mob instanceof JiangshiEntity && Objects.equals(timerKey, "frozen") && player == null)
 		{
 			if (mob.getRandom().nextDouble() < 0.667)
 				mob.spawnAtLocation(NFFGirlsItems.TAOIST_TALISMAN.get().getDefaultInstance());
 			CNFFTamable.getCap(mob).setTimer("freeze_cooldown", 15 * 20);
 		}
-		else if (mob instanceof JiangshiEntity && timerKey == "peach_sword" && player != null)
+		else if (mob instanceof JiangshiEntity && Objects.equals(timerKey, "peach_sword") && player != null)
 		{
 			this.progressDecrease(mob, player);
 		}

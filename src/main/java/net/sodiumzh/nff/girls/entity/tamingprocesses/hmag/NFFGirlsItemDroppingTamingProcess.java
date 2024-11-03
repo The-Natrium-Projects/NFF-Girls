@@ -1,8 +1,9 @@
-package net.sodiumzh.nff.girls.entity.handlers.hmag;
+package net.sodiumzh.nff.girls.entity.tamingprocesses.hmag;
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import java.util.function.Predicate;
 import java.util.function.Supplier;
 
@@ -14,19 +15,20 @@ import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraftforge.registries.ForgeRegistries;
+import net.sodiumzh.nautils.entity.MobApplicableItemTable;
 import net.sodiumzh.nautils.statics.NaUtilsDebugStatics;
 import net.sodiumzh.nautils.statics.NaUtilsEntityStatics;
 import net.sodiumzh.nautils.statics.NaUtilsItemStatics;
 import net.sodiumzh.nautils.statics.NaUtilsNBTStatics;
-import net.sodiumzh.nff.services.entity.taming.CNFFTamable;
-import net.sodiumzh.nff.services.entity.taming.NFFTamingProcess;
-import net.sodiumzh.nff.services.entity.taming.TamableHatredReason;
-import net.sodiumzh.nff.services.entity.taming.TamableInteractArguments;
-import net.sodiumzh.nff.services.entity.taming.TamableInteractionResult;
+import net.sodiumzh.nff.services.entity.taming.*;
+
+import javax.annotation.Nullable;
 
 public abstract class NFFGirlsItemDroppingTamingProcess extends NFFTamingProcess
 {
-	
+	@Nullable
+	protected Supplier<MobApplicableItemTable> tamingItemTableOverride = null;
 	@Override
 	public void initCap(CNFFTamable cap)
 	{
@@ -66,11 +68,15 @@ public abstract class NFFGirlsItemDroppingTamingProcess extends NFFTamingProcess
 	 * Map of accepted item registry ID to the progress function
 	 */
 	@SuppressWarnings("unchecked")
-	public abstract Map<String, Supplier<Double>> getDeltaProc();
+	public Map<String, Supplier<Double>> getDeltaProcMap() {
+		throw new IllegalStateException("NFFGirlsItemDroppingTamingProcess: missing acceptable item info. " +
+				"You must either use MobApplicableItemTable override by calling setItemGivingTableOverride(), " +
+				"or override getDeltaProcMap() to define it in code as a map.");
+	};
 
 	public final Map<Item, Supplier<Double>> getItemDeltaProc()
 	{
-		Map<String, Supplier<Double>> procMap = getDeltaProc();
+		Map<String, Supplier<Double>> procMap = getDeltaProcMap();
 		Map<Item, Supplier<Double>> out = new HashMap<Item, Supplier<Double>>();
 		for (String str: procMap.keySet())
 		{
@@ -87,7 +93,7 @@ public abstract class NFFGirlsItemDroppingTamingProcess extends NFFTamingProcess
 	public boolean canPickUpItem(Mob mob, ItemEntity itemEntity)
 	{
 		// If item type not matching, pass
-		if (!getDeltaProc().keySet().contains(NaUtilsItemStatics.getRegistryKeyStr(itemEntity.getItem())))
+		if (!isItemAcceptableInternal(itemEntity.getItem(), mob))
 			return false;
 		// If item not thrown by player, pass
 		if (itemEntity.getThrower() == null || mob.level.getPlayerByUUID(itemEntity.getThrower()) == null)
@@ -184,7 +190,7 @@ public abstract class NFFGirlsItemDroppingTamingProcess extends NFFTamingProcess
 				String strUUID = player.getStringUUID();
 				double oldProc = CNFFTamable.getCapNbt(mob).getCompound("ongoing_players").contains(strUUID, NaUtilsNBTStatics.TAG_DOUBLE_ID) ?
 						CNFFTamable.getCapNbt(mob).getCompound("ongoing_players").getDouble(strUUID) : 0d;
-				double newProc = oldProc + getItemDeltaProc().get(mob.getItemInHand(InteractionHand.OFF_HAND).getItem()).get();
+				double newProc = oldProc + getProgressGainInternal(mob.getItemInHand(InteractionHand.OFF_HAND), mob);
 				NaUtilsEntityStatics.sendGlintParticlesToLivingDefault(mob);
 				onConsumeItem(mob, mob.getItemInHand(InteractionHand.OFF_HAND), newProc - oldProc);
 				if (newProc >= 1.0d)
@@ -256,5 +262,36 @@ public abstract class NFFGirlsItemDroppingTamingProcess extends NFFTamingProcess
 			return CNFFTamable.getCapNbt(mob).getCompound("ongoing_players").getDouble(player.getStringUUID());
 		}
 		else return 0d;
+	}
+
+	@Nullable
+	public final Supplier<MobApplicableItemTable> getItemGivingTableOverride() { return tamingItemTableOverride; }
+
+	public final NFFGirlsItemDroppingTamingProcess setItemGivingTableOverride(Supplier<MobApplicableItemTable> override)
+	{
+		this.tamingItemTableOverride = override;
+		return this;
+	}
+
+	private boolean isItemAcceptableInternal(ItemStack item, Mob mob)
+	{
+		var table = this.getItemGivingTableOverride();
+		if (table != null)
+			return table.get().getOutput(mob, item) != null;
+		else return this.getItemDeltaProc().containsKey(item.getItem());
+	}
+
+	private double getProgressGainInternal(ItemStack item, Mob mob) {
+
+		var table = this.getItemGivingTableOverride();
+		if (table != null)
+		{
+			var output = table.get().getOutput(mob, item);
+			return output != null ? output.amount() : 0d;
+		}
+		else {
+			var map = this.getItemDeltaProc();
+			return map.containsKey(item.getItem()) ? map.get(item.getItem()).get() : 0d;
+		}
 	}
  }
