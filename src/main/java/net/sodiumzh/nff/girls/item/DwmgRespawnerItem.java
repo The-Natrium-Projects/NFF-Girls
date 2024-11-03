@@ -19,6 +19,7 @@ public class DwmgRespawnerItem extends NFFMobRespawnerItem
 	public DwmgRespawnerItem(Properties pProperties)
 	{
 		super(pProperties);
+		this.defaultInstanceOverride(() -> ItemStack.EMPTY);
 	}
 	
 	@Override

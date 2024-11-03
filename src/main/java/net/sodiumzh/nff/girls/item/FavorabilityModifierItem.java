@@ -19,10 +19,13 @@ public class FavorabilityModifierItem extends NaUtilsItem
 	public FavorabilityModifierItem(Properties pProperties)
 	{
 		super(pProperties.stacksTo(1));
+		this.defaultInstanceOverride(this::initInstance);
 	}
 
-	@Override
-	public ItemStack getDefaultInstance()
+	/**
+	 * Get a initialized instance.
+	 */
+	protected ItemStack initInstance()
 	{
 		ItemStack res = new ItemStack(this);
 		res.getOrCreateTag().putFloat("value", 1f);
