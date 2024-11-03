@@ -49,7 +49,7 @@ public class HmagEnderExecutorTamingProcess extends TamingProcessItemGivingProgr
 		return result;
 	}
 	
-	@Override
+	/*@Override
 	protected double getProcValueToAdd(ItemStack item, Player player, Mob mob, double lastProc) {
 		if (item.is(Items.ENDER_EYE))
 			return NaUtilsMathStatics.rndRangedDouble(0.005d, 0.01d);
@@ -72,7 +72,7 @@ public class HmagEnderExecutorTamingProcess extends TamingProcessItemGivingProgr
 		return item.is(Items.ENDER_EYE)
 			|| item.is(ModItems.ENDER_PLASM.get())
 			|| item.is(NFFGirlsItems.ENDER_PIE.get());
-	}
+	}*/
 
 	@Override
 	public boolean additionalConditions(Player player, Mob mob) {

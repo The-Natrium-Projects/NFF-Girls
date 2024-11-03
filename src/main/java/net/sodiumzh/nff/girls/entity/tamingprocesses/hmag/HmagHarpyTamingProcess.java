@@ -7,7 +7,7 @@ import net.minecraft.world.entity.player.Player;
 import net.sodiumzh.nff.girls.entity.hmag.HmagHarpyEntity;
 import net.sodiumzh.nff.services.entity.taming.INFFTamed;
 
-public class HmagHarpyTamingProcess extends HmagSnowCanineTamingProcess
+public class HmagHarpyTamingProcess extends HmagAnimalTamingProcess
 {
 
 	@Override

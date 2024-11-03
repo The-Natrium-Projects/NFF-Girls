@@ -8,7 +8,7 @@ import net.minecraft.world.item.ItemStack;
 import net.sodiumzh.nautils.statics.NaUtilsMathStatics;
 import net.sodiumzh.nff.girls.registry.NFFGirlsItems;
 
-public class HmagHuskGirlTamingProcess extends HmagZombieGirlTamingProcess
+public class HmagHuskGirlTamingProcess extends HmagVanillaUndeadTamingProcess
 {
 	@Override
 	protected double getProcValueToAdd(ItemStack item, Player player, Mob mob, double lastProc) {

@@ -16,7 +16,7 @@ import net.sodiumzh.nautils.statics.NaUtilsNBTStatics;
 import net.sodiumzh.nff.services.entity.capability.CNFFTamable;
 import net.sodiumzh.nff.services.entity.taming.TamableHatredReason;
 
-public class HmagBansheeTamingProcess extends HmagSkeletonGirlTamingProcess
+public class HmagBansheeTamingProcess extends HmagVanillaUndeadTamingProcess
 {
 	@Override
 	public boolean additionalConditions(Player player, Mob mob)

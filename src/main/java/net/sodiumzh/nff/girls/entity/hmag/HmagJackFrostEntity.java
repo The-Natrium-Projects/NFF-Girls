@@ -29,7 +29,6 @@ import net.minecraft.world.phys.EntityHitResult;
 import net.minecraft.world.phys.Vec3;
 import net.sodiumzh.nautils.function.MutablePredicate;
 import net.sodiumzh.nautils.statics.NaUtilsMathStatics;
-import net.sodiumzh.nautils.math.RndUtil;
 import net.sodiumzh.nff.girls.NFFGirls;
 import net.sodiumzh.nff.girls.entity.INFFGirlsTamed;
 import net.sodiumzh.nff.girls.entity.ai.goal.NFFGirlsFollowOwnerGoal;
@@ -92,7 +91,7 @@ public class HmagJackFrostEntity extends JackFrostEntity implements INFFGirlsTam
 	
 	protected HardSnowballEntity getNewSnowball()
 	{
-		return new BefriendedJackFrostSnowball(this.level(). this);
+		return new BefriendedJackFrostSnowball(this.level(), this);
 	}
 	
 	protected int getThrowLevel()
@@ -130,7 +129,7 @@ public class HmagJackFrostEntity extends JackFrostEntity implements INFFGirlsTam
 			Runnable action2 = () -> {
 				action1.run();
 				for (int j = 0; j < 3; ++j)
-					action.accept(NaUtilsMathStatics.randomUnitVector().scale(RndUtil.rndRangedDouble(0, 2)));
+					action.accept(NaUtilsMathStatics.randomUnitVector().scale(NaUtilsMathStatics.rndRangedDouble(0, 2)));
 			};
 			action2.run();
 			this.addMultipleDelayedActions(action2, 3, 6, 9, 12);
@@ -141,7 +140,7 @@ public class HmagJackFrostEntity extends JackFrostEntity implements INFFGirlsTam
 			Runnable action3 = () -> {
 				action1.run();
 				for (int j = 0; j < 6; ++j)
-					action.accept(NaUtilsMathStatics.randomUnitVector().scale(RndUtil.rndRangedDouble(0, 2)));
+					action.accept(NaUtilsMathStatics.randomUnitVector().scale(NaUtilsMathStatics.rndRangedDouble(0, 2)));
 			};
 			action3.run();
 			this.addMultipleDelayedActions(action3, 3, 6, 9, 12, 15, 18);

@@ -33,7 +33,7 @@ import net.sodiumzh.nff.girls.entity.ai.goal.target.NFFGirlsNearestHostileToSelf
 import net.sodiumzh.nff.girls.entity.ai.movecontrol.NFFGirlsHmagFlyingMoveControl;
 import net.sodiumzh.nff.girls.entity.projectile.NFFGhastFireballEntity;
 import net.sodiumzh.nff.girls.eventlisteners.NFFGirlsEntityEventListeners;
-import net.sodiumzh.nff.girls.inventory.NFFGirlsGhastlySeekerInventoryMenu;
+import net.sodiumzh.nff.girls.inventory.NFFGirlsHmagGhastlySeekerInventoryMenu;
 import net.sodiumzh.nff.girls.registry.NFFGirlsHealingItems;
 import net.sodiumzh.nff.girls.registry.NFFGirlsItems;
 import net.sodiumzh.nff.girls.sound.NFFGirlsSoundPresets;
@@ -174,7 +174,7 @@ public class HmagGhastlySeekerEntity extends GhastlySeekerEntity implements INFF
 
 	@Override
 	public NFFTamedInventoryMenu makeMenu(int containerId, Inventory playerInventory, Container container) {
-		return new NFFGirlsGhastlySeekerInventoryMenu(containerId, playerInventory, container, this); 
+		return new NFFGirlsHmagGhastlySeekerInventoryMenu(containerId, playerInventory, container, this);
 	}
 
 	/* Save and Load */
@@ -302,7 +302,7 @@ public class HmagGhastlySeekerEntity extends GhastlySeekerEntity implements INFF
 				if (mob.getAdditionalInventory().getItem(4).isEmpty())
 					return;
 				
-				Level world = this.parent.level;
+				Level world = this.parent.level();
 				++this.attackTimer;
 
 				if (this.attackTimer == 10 && !this.parent.isSilent())

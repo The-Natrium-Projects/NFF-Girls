@@ -8,6 +8,7 @@ import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.SweetBerryBushBlock;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.material.MapColor;
+import net.minecraft.world.level.material.PushReaction;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.registries.DeferredRegister;
@@ -15,9 +16,9 @@ import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 import net.sodiumzh.nautils.block.BlockMaterial;
 import net.sodiumzh.nff.girls.NFFGirls;
+import net.sodiumzh.nff.girls.block.SoulCakeBlock;
+import net.sodiumzh.nff.girls.block.SoulCarpetBlock;
 import net.sodiumzh.nff.girls.blocks.EnderberryBushBlock;
-import net.sodiumzh.nff.girls.blocks.SoulCakeBlock;
-import net.sodiumzh.nff.girls.blocks.SoulCarpetBlock;
 
 @Mod.EventBusSubscriber(modid = NFFGirls.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class NFFGirlsBlocks {
@@ -60,8 +61,9 @@ public class NFFGirlsBlocks {
 				.lightLevel(bs -> 15)));
 
 	public static final RegistryObject<EnderberryBushBlock> ENDERBERRY_BUSH = NFFGirlsBlocks.BLOCKS.register("enderberry_bush", () ->
-		new EnderberryBushBlock(BlockBehaviour.Properties.of(Material.PLANT)
-			.randomTicks().noCollission().sound(SoundType.SWEET_BERRY_BUSH)
+		new EnderberryBushBlock(BlockBehaviour.Properties.of()
+			.mapColor(MapColor.PLANT).randomTicks()
+			.noCollission().sound(SoundType.SWEET_BERRY_BUSH).pushReaction(PushReaction.DESTROY)
 			.lightLevel(bs -> bs.getValue(EnderberryBushBlock.CAN_GROW_ENDERBERRY) && bs.getValue(EnderberryBushBlock.AGE) < EnderberryBushBlock.MAX_AGE ? 0 : 15)));
 
 	/* Block Items */

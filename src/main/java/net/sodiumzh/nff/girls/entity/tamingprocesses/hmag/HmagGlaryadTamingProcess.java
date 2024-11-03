@@ -21,7 +21,7 @@ import net.sodiumzh.nff.services.entity.taming.TamingProcessItemGivingProgress;
 public class HmagGlaryadTamingProcess extends TamingProcessItemGivingProgress
 {
 
-	@Override
+/*	@Override
 	protected double getProcValueToAdd(ItemStack item, Player player, Mob mob, double oldProc) {
 		if (item.is(Items.SPORE_BLOSSOM))
 			return NaUtilsMathStatics.rndRangedDouble(0.08, 0.16);
@@ -32,9 +32,9 @@ public class HmagGlaryadTamingProcess extends TamingProcessItemGivingProgress
 		else if (item.getItem() != null && item.getItem() instanceof BlockItem blockitem && blockitem.getBlock() instanceof FlowerBlock)
 			return NaUtilsMathStatics.rndRangedDouble(0.06, 0.1);
 		else return 0;
-	}
+	}*/
 
-	@Override
+/*	@Override
 	public boolean isItemAcceptable(ItemStack itemstack) {
 		if (itemstack.is(Items.SPORE_BLOSSOM))
 			return true;
@@ -45,7 +45,7 @@ public class HmagGlaryadTamingProcess extends TamingProcessItemGivingProgress
 		else if (itemstack.getItem() != null && itemstack.getItem() instanceof BlockItem blockitem && blockitem.getBlock() instanceof FlowerBlock)
 			return true;
 		else return false;
-	}
+	}*/
 
 	@Override
 	public boolean additionalConditions(Player player, Mob mob) {

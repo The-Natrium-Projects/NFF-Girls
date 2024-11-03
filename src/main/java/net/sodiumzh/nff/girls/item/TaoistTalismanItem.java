@@ -11,6 +11,7 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.sodiumzh.nff.girls.entity.tamingprocesses.hmag.HmagJiangshiTamingProcess;
 import org.apache.commons.lang3.mutable.MutableObject;
 import net.sodiumzh.nff.services.entity.taming.NFFTamingMapping;
 import net.sodiumzh.nff.services.registry.NFFCapRegistry;

@@ -22,7 +22,6 @@ import net.sodiumzh.nff.girls.entity.INFFGirlsTamed;
 import net.sodiumzh.nff.girls.entity.INFFGirlsBowShootingMob;
 import net.sodiumzh.nff.girls.entity.ai.goal.NFFGirlsFollowOwnerGoal;
 import net.sodiumzh.nff.girls.entity.ai.goal.NFFGirlsSkeletonMeleeAttackGoal;
-import net.sodiumzh.nff.girls.entity.ai.goal.NFFGirlsSkeletonRangedBowAttackGoal;
 import net.sodiumzh.nff.girls.entity.ai.goal.target.NFFGirlsNearestHostileToOwnerTargetGoal;
 import net.sodiumzh.nff.girls.entity.ai.goal.target.NFFGirlsNearestHostileToSelfTargetGoal;
 import net.sodiumzh.nff.girls.entity.ai.goal.target.NFFGirlsOwnerHurtByTargetGoal;
@@ -32,6 +31,7 @@ import net.sodiumzh.nff.girls.registry.NFFGirlsHealingItems;
 import net.sodiumzh.nff.girls.registry.NFFGirlsItems;
 import net.sodiumzh.nff.girls.sound.NFFGirlsSoundPresets;
 import net.sodiumzh.nff.girls.util.NFFGirlsEntityStatics;
+import net.sodiumzh.nff.services.entity.ai.goal.presets.NFFRangedBowAttackGoal;
 import net.sodiumzh.nff.services.entity.ai.goal.presets.NFFWaterAvoidingRandomStrollGoal;
 import net.sodiumzh.nff.services.entity.ai.goal.presets.target.NFFHurtByTargetGoal;
 import net.sodiumzh.nautils.entity.MobApplicableItemTable;
@@ -55,7 +55,7 @@ public class HmagWitherSkeletonGirlEntity extends WitherSkeletonGirlEntity imple
 
 	@Override
 	protected void registerGoals() {
-		goalSelector.addGoal(3, new NFFGirlsSkeletonRangedBowAttackGoal(this, 1.0D, 20, 15.0F));
+		goalSelector.addGoal(3, new NFFRangedBowAttackGoal(this, 1.0D, 20, 15.0F));
 		goalSelector.addGoal(4, new NFFGirlsSkeletonMeleeAttackGoal(this, 1.2d, true));
 		goalSelector.addGoal(5, new NFFGirlsFollowOwnerGoal(this, 1.0d, 5.0f, 2.0f, false));
 		goalSelector.addGoal(6, new NFFWaterAvoidingRandomStrollGoal(this, 1.0d));

@@ -36,6 +36,7 @@ import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
 import net.sodiumzh.nff.girls.entity.INFFGirlsTamed;
+import net.sodiumzh.nff.girls.entity.ai.goal.NFFGirlsHmagCreeperFollowOwnerGoal;
 import net.sodiumzh.nff.girls.entity.ai.goal.NFFGirlsHmagCreeperGirlExplosionAttackGoal;
 import net.sodiumzh.nff.girls.entity.ai.goal.NFFGirlsHmagCreeperGirlMeleeAttackGoal;
 import net.sodiumzh.nff.girls.entity.ai.goal.target.NFFGirlsOwnerHurtByTargetGoal;
@@ -93,7 +94,7 @@ public class HmagCreeperGirlEntity extends NFFTamedCreeperPreset implements INFF
 		this.goalSelector.addGoal(2, new AvoidEntityGoal<>(this, Cat.class, 6.0F, 1.0D, 1.2D));
 		this.goalSelector.addGoal(3, new NFFGirlsHmagCreeperGirlExplosionAttackGoal(this, 1.0D, false));
 		this.goalSelector.addGoal(4, new NFFGirlsHmagCreeperGirlMeleeAttackGoal(this, 1.0d, true));
-		this.goalSelector.addGoal(5, new NFFTamedCreeperFollowOwnerGoal(this, 1.0d, 5.0f, 2.0f, false));
+		this.goalSelector.addGoal(5, new NFFGirlsHmagCreeperFollowOwnerGoal(this, 1.0d, 5.0f, 2.0f, false));
 		this.goalSelector.addGoal(6, new NFFWaterAvoidingRandomStrollGoal(this, 0.8D));
 		this.goalSelector.addGoal(7, new LookAtPlayerGoal(this, Player.class, 8.0F));
 		this.goalSelector.addGoal(7, new RandomLookAroundGoal(this));

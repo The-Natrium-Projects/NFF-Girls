@@ -33,7 +33,7 @@ import net.sodiumzh.nff.girls.entity.ai.goal.target.NFFGirlsNearestHostileToOwne
 import net.sodiumzh.nff.girls.entity.ai.goal.target.NFFGirlsNearestHostileToSelfTargetGoal;
 import net.sodiumzh.nff.girls.entity.ai.goal.target.NFFGirlsOwnerHurtByTargetGoal;
 import net.sodiumzh.nff.girls.entity.ai.goal.target.NFFGirlsOwnerHurtTargetGoal;
-import net.sodiumzh.nff.girls.inventory.NFFGirlsHmagSlimeGirlInventoryMenu;
+import net.sodiumzh.nff.girls.inventory.NFFGirlsSlimeGirlInventoryMenu;
 import net.sodiumzh.nff.girls.item.MagicalGelColorUtils;
 import net.sodiumzh.nff.girls.registry.NFFGirlsHealingItems;
 import net.sodiumzh.nff.girls.registry.NFFGirlsItems;
@@ -163,7 +163,7 @@ public class HmagSlimeGirlEntity extends SlimeGirlEntity implements INFFGirlsTam
 
 	@Override
 	public NFFTamedInventoryMenu makeMenu(int containerId, Inventory playerInventory, Container container) {
-		return new NFFGirlsHmagSlimeGirlInventoryMenu(containerId, playerInventory, container, this);
+		return new NFFGirlsSlimeGirlInventoryMenu(containerId, playerInventory, container, this);
 	}
 
 	/* Save and Load */

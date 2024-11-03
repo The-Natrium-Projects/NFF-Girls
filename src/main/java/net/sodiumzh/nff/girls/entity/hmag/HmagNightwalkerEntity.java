@@ -316,13 +316,13 @@ public class HmagNightwalkerEntity extends NightwalkerEntity implements INFFGirl
 							)
 						)
 				{
-					transformBlocks(this.level(). result.getBlockPos());
-					transformBlocks(this.level(). result.getBlockPos().above());
-					transformBlocks(this.level(). result.getBlockPos().below());
-					transformBlocks(this.level(). result.getBlockPos().east());
-					transformBlocks(this.level(). result.getBlockPos().west());
-					transformBlocks(this.level(). result.getBlockPos().south());
-					transformBlocks(this.level(). result.getBlockPos().north());
+					transformBlocks(this.level(), result.getBlockPos());
+					transformBlocks(this.level(), result.getBlockPos().above());
+					transformBlocks(this.level(), result.getBlockPos().below());
+					transformBlocks(this.level(), result.getBlockPos().east());
+					transformBlocks(this.level(), result.getBlockPos().west());
+					transformBlocks(this.level(), result.getBlockPos().south());
+					transformBlocks(this.level(), result.getBlockPos().north());
 				}
 			}
 		}

@@ -44,14 +44,13 @@ import net.minecraft.world.phys.EntityHitResult;
 import net.minecraft.world.phys.Vec3;
 import net.sodiumzh.nautils.entity.ConditionalAttributeModifier;
 import net.sodiumzh.nautils.statics.NaUtilsMathStatics;
-import net.sodiumzh.nautils.math.RndUtil;
 import net.sodiumzh.nautils.statics.NaUtilsContainerStatics;
 import net.sodiumzh.nautils.statics.NaUtilsEntityStatics;
 import net.sodiumzh.nautils.statics.NaUtilsItemStatics;
 import net.sodiumzh.nautils.statics.NaUtilsParticleStatics;
 import net.sodiumzh.nff.girls.NFFGirls;
-import net.sodiumzh.nff.girls.befriendmobs.entity.ai.goal.NFFMeltyMonsterFollowOwnerGoal;
 import net.sodiumzh.nff.girls.entity.INFFGirlsTamed;
+import net.sodiumzh.nff.girls.entity.ai.goal.NFFGirlsHmagMeltyMonsterFollowOwnerGoal;
 import net.sodiumzh.nff.girls.entity.ai.goal.NFFGirlsRangedAttackGoal;
 import net.sodiumzh.nff.girls.entity.ai.goal.target.NFFGirlsNearestHostileToOwnerTargetGoal;
 import net.sodiumzh.nff.girls.entity.ai.goal.target.NFFGirlsNearestHostileToSelfTargetGoal;
@@ -137,7 +136,7 @@ public class HmagMeltyMonsterEntity extends MeltyMonsterEntity implements INFFGi
 	protected void registerGoals() {
 		goalSelector.addGoal(3, new GoToLavaGoal(this, 1.5D));
 		goalSelector.addGoal(5, new NFFGirlsRangedAttackGoal(this, 1.0D, 30, 40, 8.0F));
-		goalSelector.addGoal(5, new NFFMeltyMonsterFollowOwnerGoal(this, 1.0d, 5.0f, 2.0f, false));
+		goalSelector.addGoal(5, new NFFGirlsHmagMeltyMonsterFollowOwnerGoal(this, 1.0d, 5.0f, 2.0f, false));
 		goalSelector.addGoal(6, new NFFWaterAvoidingRandomStrollGoal(this, 1.0d));
 		goalSelector.addGoal(7, new LookAtPlayerGoal(this, Player.class, 8.0F));
 		goalSelector.addGoal(7, new RandomLookAroundGoal(this));
@@ -177,7 +176,7 @@ public class HmagMeltyMonsterEntity extends MeltyMonsterEntity implements INFFGi
 			Runnable action2 = () -> {
 				action1.run();
 				for (int j = 0; j < 3; ++j)
-					action.accept(NaUtilsMathStatics.randomUnitVector().scale(RndUtil.rndRangedDouble(0, 2)));
+					action.accept(NaUtilsMathStatics.randomUnitVector().scale(NaUtilsMathStatics.rndRangedDouble(0, 2)));
 			};
 			action2.run();
 			this.addMultipleDelayedActions(action2, 3, 6, 9, 12);
@@ -188,7 +187,7 @@ public class HmagMeltyMonsterEntity extends MeltyMonsterEntity implements INFFGi
 			Runnable action3 = () -> {
 				action1.run();
 				for (int j = 0; j < 6; ++j)
-					action.accept(NaUtilsMathStatics.randomUnitVector().scale(RndUtil.rndRangedDouble(0, 2)));
+					action.accept(NaUtilsMathStatics.randomUnitVector().scale(NaUtilsMathStatics.rndRangedDouble(0, 2)));
 			};
 			action3.run();
 			this.addMultipleDelayedActions(action3, 3, 6, 9, 12, 15, 18);
@@ -199,7 +198,7 @@ public class HmagMeltyMonsterEntity extends MeltyMonsterEntity implements INFFGi
 			Runnable action4 = () -> {
 				action1.run();
 				for (int j = 0; j < 9; ++j)
-					action.accept(NaUtilsMathStatics.randomUnitVector().scale(RndUtil.rndRangedDouble(0, 3)));
+					action.accept(NaUtilsMathStatics.randomUnitVector().scale(NaUtilsMathStatics.rndRangedDouble(0, 3)));
 			};
 			action4.run();
 			this.addMultipleDelayedActions(action4, NaUtilsContainerStatics.intRangeArray(2, 20, 2));
@@ -254,7 +253,7 @@ public class HmagMeltyMonsterEntity extends MeltyMonsterEntity implements INFFGi
 		double d2 = targetPos.y - this.getY(0.5D);
 		double d3 = targetPos.z - this.getZ();
 		//double d4 = Math.sqrt(d1 * d1 + d3 * d3) * 0.02D;
-		MMFireball fireballentity = new MMFireball(this.level(). this, d1 /*+ this.getRandom().nextGaussian() * d4*/, d2, d3/* + this.getRandom().nextGaussian() * d4*/);
+		MMFireball fireballentity = new MMFireball(this.level(), this, d1 /*+ this.getRandom().nextGaussian() * d4*/, d2, d3/* + this.getRandom().nextGaussian() * d4*/);
 		fireballentity.setPos(fireballentity.getX(), this.getY(0.5D) + 0.5D, fireballentity.getZ());
 		fireballentity.owner = this;
 		return fireballentity;
@@ -290,10 +289,10 @@ public class HmagMeltyMonsterEntity extends MeltyMonsterEntity implements INFFGi
 		}
 		// Lava bath with it can slowly increase the favorability
 		if (this.isInLava() 
-				&& this.level().getBlockState(new BlockPos(this.getEyePosition())).is(Blocks.AIR)
+				&& this.level().getBlockState(NaUtilsMathStatics.getBlockPos(this.getEyePosition())).is(Blocks.AIR)
 				&& this.isOwnerInDimension()
 				&& this.getOwner().isInLava()
-				&& this.level().getBlockState(new BlockPos(this.getOwner().getEyePosition())).is(Blocks.AIR)
+				&& this.level().getBlockState(NaUtilsMathStatics.getBlockPos(this.getOwner().getEyePosition())).is(Blocks.AIR)
 				&& this.getEyePosition().distanceToSqr(this.getOwner().getEyePosition()) < 9d
 				&& this.hasLineOfSight(this.getOwner())
 				&& this.tickCount % 5 == 0)	// Invoke 4 times per second
@@ -516,7 +515,7 @@ public class HmagMeltyMonsterEntity extends MeltyMonsterEntity implements INFFGi
 						{
 						int i = living.getRemainingFireTicks();
 						living.setSecondsOnFire((int) Math.round(5.0d * (1d + owner.getAttributeValue(Attributes.ATTACK_DAMAGE))));
-						if (!living.hurt(DamageSource.fireball(this, this.owner), (float) (owner.getAttributeValue(Attributes.ATTACK_DAMAGE))))
+						if (!living.hurt(this.damageSources().fireball(this, this.owner), (float) (owner.getAttributeValue(Attributes.ATTACK_DAMAGE))))
 						{
 							living.setRemainingFireTicks(i);
 						} else if (this.owner instanceof LivingEntity)
@@ -532,7 +531,7 @@ public class HmagMeltyMonsterEntity extends MeltyMonsterEntity implements INFFGi
 		@Override
 		protected void onHitBlock(BlockHitResult pResult) {
 		      BlockState blockstate = this.level().getBlockState(pResult.getBlockPos());
-		      blockstate.onProjectileHit(this.level(). blockstate, pResult, this);
+		      blockstate.onProjectileHit(this.level(), blockstate, pResult, this);
 		      this.discard();
 		}
 	}
@@ -565,7 +564,7 @@ public class HmagMeltyMonsterEntity extends MeltyMonsterEntity implements INFFGi
 		{
 			if (parent.getAIState() == NFFTamedMobAIState.FOLLOW && this.parent.getStamina() > this.parent.getMaxStamina() / 5)
 				return false;
-			return !this.parent.isInLava() && this.isValidTarget(this.parent.level, this.blockPos) && (!this.parent.getAdditionalInventory().getItem(4).is(Items.LAVA_BUCKET) || this.parent.getStamina() == 0);
+			return !this.parent.isInLava() && this.isValidTarget(this.parent.level(), this.blockPos) && (!this.parent.getAdditionalInventory().getItem(4).is(Items.LAVA_BUCKET) || this.parent.getStamina() == 0);
 		}
 
 		@Override

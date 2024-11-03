@@ -1,6 +1,7 @@
 package net.sodiumzh.nff.girls.entity.tamingprocesses.hmag;
 
 import java.util.HashSet;
+import java.util.Objects;
 import java.util.UUID;
 
 import javax.annotation.Nullable;
@@ -26,6 +27,7 @@ import net.sodiumzh.nautils.statics.NaUtilsContainerStatics;
 import net.sodiumzh.nautils.statics.NaUtilsEntityStatics;
 import net.sodiumzh.nautils.statics.NaUtilsNBTStatics;
 import net.sodiumzh.nff.girls.entity.ai.goal.NFFGirlsTamableJiangshiMutableLeapGoal;
+import net.sodiumzh.nff.girls.eventlisteners.NFFGirlsEntityEventListeners;
 import net.sodiumzh.nff.girls.item.TaoistTalismanItem;
 import net.sodiumzh.nff.girls.registry.NFFGirlsItems;
 import net.sodiumzh.nff.girls.util.NFFGirlsEntityStatics;
@@ -145,7 +147,7 @@ public class HmagJiangshiTamingProcess extends NFFTamingProcess
 	
 	/**
 	 *  Peach-Wood sword hit
-	 *  Invoked in {@link DwmgEntityEvent#onLivingDamage}
+	 *  Invoked in {@link NFFGirlsEntityEventListeners#onLivingDamage}
 	 */
 	
 	public void onPeachSwordHit(Mob mob, Player player)
@@ -274,13 +276,13 @@ public class HmagJiangshiTamingProcess extends NFFTamingProcess
 	{
 		if (CNFFTamable.getCap(mob) == null)
 			return;
-		if (mob instanceof JiangshiEntity && timerKey == "frozen" && player == null)
+		if (mob instanceof JiangshiEntity && Objects.equals(timerKey, "frozen") && player == null)
 		{
 			if (mob.getRandom().nextDouble() < 0.667)
 				mob.spawnAtLocation(NFFGirlsItems.TAOIST_TALISMAN.get().getDefaultInstance());
 			CNFFTamable.getCap(mob).setTimer("freeze_cooldown", 15 * 20);
 		}
-		else if (mob instanceof JiangshiEntity && timerKey == "peach_sword" && player != null)
+		else if (mob instanceof JiangshiEntity && Objects.equals(timerKey, "peach_sword") && player != null)
 		{
 			this.progressDecrease(mob, player);
 		}

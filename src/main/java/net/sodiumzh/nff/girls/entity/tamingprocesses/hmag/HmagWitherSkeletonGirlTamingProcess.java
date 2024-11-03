@@ -10,7 +10,7 @@ import net.sodiumzh.nautils.math.RandomSelection;
 import net.sodiumzh.nautils.statics.NaUtilsMathStatics;
 import net.sodiumzh.nff.girls.registry.NFFGirlsItems;
 
-public class HmagWitherSkeletonGirlTamingProcess extends HmagZombieGirlTamingProcess
+public class HmagWitherSkeletonGirlTamingProcess extends HmagVanillaUndeadTamingProcess
 {	
 	@Override
 	public boolean isItemAcceptable(ItemStack item)

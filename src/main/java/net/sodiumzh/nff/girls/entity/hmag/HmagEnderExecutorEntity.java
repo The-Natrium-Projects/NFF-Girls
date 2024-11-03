@@ -18,6 +18,8 @@ import net.minecraft.world.Container;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.damagesource.DamageSources;
+import net.minecraft.world.damagesource.DamageTypes;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
@@ -46,7 +48,7 @@ import net.sodiumzh.nff.girls.entity.ai.goal.target.NFFGirlsNearestHostileToOwne
 import net.sodiumzh.nff.girls.entity.ai.goal.target.NFFGirlsNearestHostileToSelfTargetGoal;
 import net.sodiumzh.nff.girls.entity.ai.goal.target.NFFGirlsOwnerHurtByTargetGoal;
 import net.sodiumzh.nff.girls.entity.ai.goal.target.NFFGirlsOwnerHurtTargetGoal;
-import net.sodiumzh.nff.girls.inventory.NFFGirlsEnderExecutorInventory;
+import net.sodiumzh.nff.girls.inventory.NFFGirlsHmagEnderExecutorInventory;
 import net.sodiumzh.nff.girls.inventory.NFFGirlsHmagEnderExecutorInventoryMenu;
 import net.sodiumzh.nff.girls.registry.NFFGirlsBlocks;
 import net.sodiumzh.nff.girls.registry.NFFGirlsHealingItems;
@@ -178,7 +180,7 @@ public class HmagEnderExecutorEntity extends NFFTamedEnderManPreset implements I
 
 	@Override
 	public NFFTamedMobInventory createAdditionalInventory() {
-		return new NFFGirlsEnderExecutorInventory(5, this);
+		return new NFFGirlsHmagEnderExecutorInventory(5, this);
 	}
 
 	@Override
@@ -279,7 +281,7 @@ public class HmagEnderExecutorEntity extends NFFTamedEnderManPreset implements I
 		float f = dmg;
 		if (!(dmgSource.getEntity() != null
 			&& dmgSource.isCreativePlayer())
-			&& dmgSource != DamageSource.OUT_OF_WORLD
+			&& dmgSource.is(DamageTypes.FELL_OUT_OF_WORLD)
 			&& f > 10.0F) {
 			f = 10.0F + (f - 10.0F) * 0.1F;
 		}
@@ -371,7 +373,7 @@ public class HmagEnderExecutorEntity extends NFFTamedEnderManPreset implements I
 		{
 			this.level().playSound((Player)null, target.getX(), target.getY(), target.getZ(), SoundEvents.ENCHANTMENT_TABLE_USE, this.getSoundSource(), 1.0F, this.random.nextFloat() * 0.2F + 0.9F);
 		}
-		return target.hurt(DamageSource.indirectMagic(this, this), damage);
+		return target.hurt(this.damageSources().indirectMagic(this, this), damage);
 	}
 
 	@Override
@@ -426,7 +428,12 @@ public class HmagEnderExecutorEntity extends NFFTamedEnderManPreset implements I
 	{
 		return (this.clientAttackTime + f) / this.getAttackDuration();
 	}
-	
+
+	@Override
+	public float getClientSideAttackTime() {
+		return (float)this.clientAttackTime;
+	}
+
 	public boolean teleportToOwnerInRain(int tryTimes)
 	{
 		if (this.isInWaterOrRain() && !this.isInWater())
@@ -512,7 +519,7 @@ public class HmagEnderExecutorEntity extends NFFTamedEnderManPreset implements I
 	}
 
 	private Optional<BlockPos> findEnderberryBush() {
-		Level level = this.getLevel();
+		Level level = this.level();
 		Predicate<BlockPos> isEnderberry = pos -> level.getBlockState(pos).is(NFFGirlsBlocks.ENDERBERRY_BUSH.get());
 		Predicate<BlockPos> isGrowable = pos -> level.getBlockState(pos).getValue(EnderberryBushBlock.AGE) < EnderberryBushBlock.MAX_AGE
 			&& level.getBlockState(pos).getValue(EnderberryBushBlock.CAN_GROW_ENDERBERRY);
@@ -543,14 +550,14 @@ public class HmagEnderExecutorEntity extends NFFTamedEnderManPreset implements I
 	private boolean doGrowEnderberry() {
 		BlockPos pos = this.getEntityData().get(GROW_ENDERBERRY_POS).orElse(null);
 		if (pos == null) return false;
-		BlockState bs = this.getLevel().getBlockState(pos);
+		BlockState bs = this.level().getBlockState(pos);
 		if (bs.is(NFFGirlsBlocks.ENDERBERRY_BUSH.get()) && bs.getValue(EnderberryBushBlock.CAN_GROW_ENDERBERRY)
 			&& bs.getValue(EnderberryBushBlock.AGE) < EnderberryBushBlock.MAX_AGE)
 		{
 			bs = bs.setValue(EnderberryBushBlock.CAN_GROW_ENDERBERRY, false);
 			bs = bs.setValue(EnderberryBushBlock.AGE, bs.getValue(EnderberryBushBlock.AGE) + 1);
-			this.getLevel().setBlock(pos, bs, 2);
-			this.getLevel().gameEvent(GameEvent.BLOCK_CHANGE, pos, GameEvent.Context.of(bs));
+			this.level().setBlock(pos, bs, 2);
+			this.level().gameEvent(GameEvent.BLOCK_CHANGE, pos, GameEvent.Context.of(bs));
 			this.startGrowEnderberryCooldown();
 			this.getEntityData().set(GROW_ENDERBERRY_POS, Optional.empty());
 			return true;
@@ -619,4 +626,5 @@ public class HmagEnderExecutorEntity extends NFFTamedEnderManPreset implements I
 			this.clientAttackTime = 0;
 		}
 	}
+
 }

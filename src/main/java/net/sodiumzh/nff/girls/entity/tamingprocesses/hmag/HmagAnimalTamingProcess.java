@@ -14,7 +14,7 @@ import net.sodiumzh.nautils.statics.NaUtilsContainerStatics;
 import net.sodiumzh.nautils.statics.NaUtilsEntityStatics;
 import net.sodiumzh.nff.services.entity.capability.CNFFTamable;
 
-public class HmagSnowCanineTamingProcess extends NFFGirlsItemDroppingTamingProcess
+public class HmagAnimalTamingProcess extends NFFGirlsItemDroppingTamingProcess
 {
 
 	@Override
@@ -23,10 +23,11 @@ public class HmagSnowCanineTamingProcess extends NFFGirlsItemDroppingTamingProce
 		super.initCap(cap);
 		cap.getNbt().put("strength", DoubleTag.valueOf(0));
 	}
-	
+
+	/*
 	@SuppressWarnings("unchecked")
 	@Override
-	public Map<String, Supplier<Double>> getDeltaProc() {
+	public Map<String, Supplier<Double>> getDeltaProcMap() {
 		return NaUtilsContainerStatics.<String, Supplier<Double>>mapOf(
 				MapPair.of("minecraft:cooked_chicken", () -> NaUtilsMathStatics.rndRangedDouble(0.04, 0.06)),
 				MapPair.of("minecraft:cooked_rabbit", () -> NaUtilsMathStatics.rndRangedDouble(0.04, 0.06)),
@@ -38,7 +39,7 @@ public class HmagSnowCanineTamingProcess extends NFFGirlsItemDroppingTamingProce
 				MapPair.of("minecraft:golden_apple", () -> NaUtilsMathStatics.rndRangedDouble(0.12, 0.16)),
 				MapPair.of("minecraft:enchanted_golden_apple", () -> NaUtilsMathStatics.rndRangedDouble(0.40, 0.70)));
 	}
-
+*/
 	@Override
 	public int getHoldingItemTime() {
 		return 5 * 20;

@@ -29,7 +29,7 @@ import net.sodiumzh.nff.girls.entity.ai.goal.NFFGirlsFollowOwnerGoal;
 import net.sodiumzh.nff.girls.entity.ai.goal.NFFGirlsLocateBlockGoal;
 import net.sodiumzh.nff.girls.entity.ai.goal.target.NFFGirlsNearestHostileToOwnerTargetGoal;
 import net.sodiumzh.nff.girls.entity.ai.goal.target.NFFGirlsNearestHostileToSelfTargetGoal;
-import net.sodiumzh.nff.girls.inventory.NFFGirlsHmagKoboldInventoryMenu;
+import net.sodiumzh.nff.girls.inventory.NFFGirlsKoboldInventoryMenu;
 import net.sodiumzh.nff.girls.registry.NFFGirlsHealingItems;
 import net.sodiumzh.nff.girls.registry.NFFGirlsItems;
 import net.sodiumzh.nff.girls.sound.NFFGirlsSoundPresets;
@@ -137,7 +137,7 @@ public class HmagKoboldEntity extends KoboldEntity implements INFFGirlsTamed, IB
 
 	@Override
 	public NFFTamedInventoryMenu makeMenu(int containerId, Inventory playerInventory, Container container) {
-		return new NFFGirlsHmagKoboldInventoryMenu(containerId, playerInventory, container, this);
+		return new NFFGirlsKoboldInventoryMenu(containerId, playerInventory, container, this);
 	}
 
 	/* Save and Load */

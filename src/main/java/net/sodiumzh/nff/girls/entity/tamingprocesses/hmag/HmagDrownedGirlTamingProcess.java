@@ -8,9 +8,9 @@ import net.minecraft.world.item.ItemStack;
 import net.sodiumzh.nautils.statics.NaUtilsMathStatics;
 import net.sodiumzh.nff.girls.registry.NFFGirlsItems;
 
-public class HmagDrownedGirlTamingProcess extends HmagZombieGirlTamingProcess
+public class HmagDrownedGirlTamingProcess extends HmagVanillaUndeadTamingProcess
 {
-	@Override
+/*	@Override
 	protected double getProcValueToAdd(ItemStack item, Player player, Mob mob, double lastProc) {
 		double rnd = this.rnd.nextDouble();
 		if (item.is(NFFGirlsItems.SOUL_CAKE_SLICE.get()))
@@ -20,5 +20,5 @@ public class HmagDrownedGirlTamingProcess extends HmagZombieGirlTamingProcess
 		else if (item.is(ModItems.SOUL_APPLE.get()))
 			return NaUtilsMathStatics.rndRangedDouble(0.04, 0.08);
 		else return 0;
-	}
+	}*/
 }
