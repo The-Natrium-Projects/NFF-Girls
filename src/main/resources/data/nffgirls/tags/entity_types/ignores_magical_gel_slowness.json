@@ -1,4 +1,5 @@
 {
+  "desc": "Mobs with this tag will not be affected by the slowness effect of Magical Gel Ball projectile.",
   "replace" : false,
   "values" : [
 	 ]

@@ -1,8 +1,10 @@
 {
+  "desc": "Items with this tag can be used to make Soul Cloth.",
   "replace" : false,
   "values" : [ 
 	  "hmag:necrofiber",
 	  "hmag:lich_cloth",
-	  "hmag:dyssomnia_skin"
+	  "hmag:dyssomnia_skin",
+      "nffgirls:death_crystal_powder"
   ]
 }

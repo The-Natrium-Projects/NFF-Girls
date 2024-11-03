@@ -1,4 +1,5 @@
 {
+  "desc": "Items with this tag can be regarded as HMaG berries for NFF Girls' mechanics e.g. taming.",
   "replace" : false,
   "values" : [ 
 	  "hmag:cureberry", 

@@ -1,4 +1,5 @@
 {
+  "desc": "Items with this tag can be used to make Death Crystal.",
   "replace" : false,
   "values" : [ 
       "minecraft:netherite_scrap",

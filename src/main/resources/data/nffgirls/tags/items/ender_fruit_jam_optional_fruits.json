@@ -1,4 +1,5 @@
 {
+  "desc": "Items with this tag can be used to make Ender Fruit Jam.",
   "replace" : false,
   "values" : [ 
       "minecraft:chorus_fruit",

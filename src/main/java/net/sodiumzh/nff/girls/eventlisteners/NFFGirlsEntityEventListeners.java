@@ -89,6 +89,7 @@ import net.sodiumzh.nff.girls.entity.INFFGirlsTamed;
 import net.sodiumzh.nff.girls.entity.ai.goal.NFFGirlsTamableGhastlySeekerRandomFlyGoal;
 import net.sodiumzh.nff.girls.entity.ai.goal.NFFGirlsTamablePickItemGoal;
 import net.sodiumzh.nff.girls.entity.ai.goal.NFFGirlsTamableWatchHandItemGoal;
+import net.sodiumzh.nff.girls.entity.tamingprocesses.hmag.NFFGirlsItemDroppingTamingProcess;
 import net.sodiumzh.nff.girls.entity.hmag.HmagCreeperGirlEntity;
 import net.sodiumzh.nff.girls.entity.hmag.HmagDrownedGirlEntity;
 import net.sodiumzh.nff.girls.entity.hmag.HmagGhastlySeekerEntity;
