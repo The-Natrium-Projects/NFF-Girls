@@ -1,0 +1,22 @@
+[
+  {
+    "item": "minecraft:blaze_powder",
+    "amount": [0.02, 0.04]
+  },
+  {
+    "item": "minecraft:blaze_rod",
+    "amount": [0.03, 0.06]
+  },
+  {
+    "item": "hmag:burning_core",
+    "amount": [0.03, 0.06]
+  },
+  {
+    "item": "hmag:burning_core_block",
+    "amount": [0.12, 0.24]
+  },
+  {
+    "item": "minecraft:nether_star",
+    "amount": [0.5, [1.01, 0.3]]
+  }
+]

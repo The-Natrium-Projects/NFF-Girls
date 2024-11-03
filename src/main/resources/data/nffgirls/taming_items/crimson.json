@@ -1,0 +1,38 @@
+[
+  {
+    "item": "minecraft:crimson_roots",
+    "amount": [0.02, 0.04]
+  },
+  {
+    "item": "minecraft:weeping_vines",
+    "amount": [0.02, 0.04]
+  },
+  {
+    "item": "minecraft:nether_wart",
+    "amount": [0.03, 0.06]
+  },
+  {
+    "item": "minecraft:crimson_fungus",
+    "amount": [0.03, 0.06]
+  },
+  {
+    "item": "minecraft:shroomlight",
+    "amount": [0.04, 0.08]
+  },
+  {
+    "item": "minecraft:gilded_blackstone",
+    "amount": [0.04, 0.08]
+  },
+  {
+    "item": "minecraft:golden_apple",
+    "amount": [0.08, 0.16]
+  },
+  {
+    "tag": "forge:ingots/netherite",
+    "amount": [0.16, 0.32]
+  },
+  {
+    "item": "minecraft:nether_star",
+    "amount": [0.50, [1.01, 0.20]]
+  }
+]
