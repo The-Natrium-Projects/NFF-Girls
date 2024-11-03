@@ -34,7 +34,7 @@ import net.sodiumzh.nff.girls.util.NFFGirlsEntityStatics;
 import net.sodiumzh.nff.services.entity.ai.goal.preset.NFFMeleeAttackGoal;
 import net.sodiumzh.nff.services.entity.ai.goal.preset.NFFWaterAvoidingRandomStrollGoal;
 import net.sodiumzh.nff.services.entity.ai.goal.preset.target.NFFHurtByTargetGoal;
-import net.sodiumzh.nautils.entity.ItemApplyingToMobTable;
+import net.sodiumzh.nautils.entity.MobApplicableItemTable;
 import net.sodiumzh.nff.services.entity.taming.NFFTamedStatics;
 import net.sodiumzh.nff.services.inventory.NFFTamedInventoryMenu;
 import net.sodiumzh.nff.services.inventory.NFFTamedMobInventory;
@@ -82,7 +82,7 @@ public class HmagGlaryadEntity extends GlaryadEntity implements INFFGirlsTamed
 	// Map items that can heal the mob and healing values here.
 	// Leave it empty if you don't need healing features.
 	@Override
-	public ItemApplyingToMobTable getHealingItems()
+	public MobApplicableItemTable getHealingItems()
 	{
 		return NFFGirlsHealingItems.PLANT.get();
 	}

@@ -28,7 +28,7 @@ public class HmagCrimsonSlaughtererTamingProcess extends TamingProcessItemGiving
 	protected static final AttributeModifier WARPED_BLOCK_KNOCKBACK = new AttributeModifier(WARPED_BLOCK_KNOCKBACK_UUID, "warped_block_knockback",
 			2.0d, AttributeModifier.Operation.ADDITION);
 	
-	@Override
+	/*@Override
 	protected double getProcValueToAdd(ItemStack item, Player player, Mob mob, double oldProc) {
 		if (item.is(Items.CRIMSON_ROOTS))
 			return NaUtilsMathStatics.rndRangedDouble(0.02d, 0.04d);
@@ -66,7 +66,7 @@ public class HmagCrimsonSlaughtererTamingProcess extends TamingProcessItemGiving
 			return true;
 		else return false;
 	}
-
+*/
 	@Override
 	public boolean additionalConditions(Player player, Mob mob) {
 		return isOnWarpedBlock(mob) && satisfiesShroomlightCondition(mob);

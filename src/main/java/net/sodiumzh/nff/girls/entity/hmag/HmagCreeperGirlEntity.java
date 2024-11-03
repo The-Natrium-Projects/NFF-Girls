@@ -49,7 +49,7 @@ import net.sodiumzh.nff.girls.util.NFFGirlsEntityStatics;
 import net.sodiumzh.nff.services.entity.ai.goal.preset.NFFBlockActionGoal;
 import net.sodiumzh.nff.services.entity.ai.goal.preset.NFFWaterAvoidingRandomStrollGoal;
 import net.sodiumzh.nff.services.entity.ai.goal.preset.target.NFFHurtByTargetGoal;
-import net.sodiumzh.nautils.entity.ItemApplyingToMobTable;
+import net.sodiumzh.nautils.entity.MobApplicableItemTable;
 import net.sodiumzh.nff.services.entity.taming.NFFTamedStatics;
 import net.sodiumzh.nff.services.entity.taming.preset.NFFTamedCreeperPreset;
 import net.sodiumzh.nff.services.inventory.NFFTamedInventoryMenu;
@@ -195,7 +195,7 @@ public class HmagCreeperGirlEntity extends NFFTamedCreeperPreset implements INFF
 	/* Interaction */
 	
 	@Override
-	public ItemApplyingToMobTable getHealingItems()
+	public MobApplicableItemTable getHealingItems()
 	{
 		return NFFGirlsHealingItems.CREEPER.get();
 	}
