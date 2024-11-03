@@ -1,0 +1,14 @@
+[
+  {
+    "item": "hmag:lightning_particle",
+    "amount": [0.125, [0.25, 0.30], [0.50, 0.10]]
+  },
+  {
+    "item": "minecraft:gunpowder",
+    "amount": [0.015, 0.03]
+  },
+  {
+    "item": "minecraft:tnt",
+    "amount": [0.03, 0.06]
+  }
+]
