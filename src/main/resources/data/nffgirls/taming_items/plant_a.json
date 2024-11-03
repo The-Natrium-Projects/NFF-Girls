@@ -1,0 +1,18 @@
+[
+  {
+    "item": "minecraft:spore_blossom",
+    "amount": [0.05, 0.1]
+  },
+  {
+    "item": "hmag:mysterious_petal",
+    "amount": [0.1, 0.2]
+  },
+  {
+    "tag": "nffgirls:hmag_berries",
+    "amount": [0.2, 0.3]
+  },
+  {
+    "item_predicate": "nffgirls:is_flower_item_stack",
+    "amount": [0.03, 0.06]
+  }
+]
