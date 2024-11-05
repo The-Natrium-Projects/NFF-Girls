@@ -1,5 +1,6 @@
 package net.sodiumzh.nff.girls.registry;
 
+import java.util.Optional;
 import java.util.function.Supplier;
 
 import com.github.mechalopa.hmag.world.item.ModSwordItem;
@@ -10,6 +11,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.item.*;
 import net.minecraftforge.eventbus.api.IEventBus;
+import net.minecraftforge.fml.ModList;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
@@ -72,6 +74,7 @@ public class NFFGirlsItems {
 	public static final RegistryObject<Item> SOUL_CLOTH = regItemDefault("soul_cloth");
 	public static final RegistryObject<Item> ENDER_FRUIT_JAM = regItem("ender_fruit_jam", new Item.Properties().rarity(Rarity.RARE).craftRemainder(Items.GLASS_BOTTLE));
 	public static final RegistryObject<Item> EVIL_GEM = ITEMS.register("evil_gem", () -> new Item(new Item.Properties().tab(TAB)));
+	public static final RegistryObject<Item> EVIL_GEM_FRAGMENT = ITEMS.register("evil_gem_fragment", () -> new Item(new Item.Properties().tab(TAB)));
 
 	// Foods
 	public static final RegistryObject<Item> SOUL_CAKE_SLICE = regItem("soul_cake_slice", new Item.Properties().food(NFFGirlsFoodProperties.SOUL_CAKE_SLICE).rarity(Rarity.UNCOMMON));
@@ -96,6 +99,14 @@ public class NFFGirlsItems {
 		return () -> NaUtilsInfoStatics.createTranslatable("info.nffgirls.bauble.armor", 
 				String.format("+%.1f", NFFGirlsConfigs.ValueCache.Baubles.BAUBLE_ARMOR_BOOSTING_SCALE * rawValue)).withStyle(ChatFormatting.GRAY); 
 	}
+
+	// Other-mod-depending items
+	private static Optional<RegistryObject<Item>> registerDepending(String key, String dependentID, Supplier<? extends Item> itemSupplier)
+	{
+		return Optional.ofNullable(ModList.get().isLoaded(dependentID) ? ITEMS.register(key, itemSupplier) : null);
+		return Optional.ofNullable(ModList.get().isLoaded(dependentID) ? ITEMS.register(key, itemSupplier) : null);
+	}
+
 	// Registry
 	public static final RegistryObject<SoulAmuletBaubleItem> SOUL_AMULET = ITEMS.register("soul_amulet", () -> new SoulAmuletBaubleItem(
 			"nffgirls:soul_amulet", 1, new Item.Properties().rarity(Rarity.UNCOMMON).tab(TAB))
@@ -188,16 +199,17 @@ public class NFFGirlsItems {
 	// Utility items
 	public static final RegistryObject<TransferringTagItem> TRANSFERRING_TAG = ITEMS.register("transferring_tag", () -> new TransferringTagItem(new Item.Properties().tab(TAB)));
 	public static final RegistryObject<EmptyMagicalGelBottleItem> EMPTY_MAGICAL_GEL_BOTTLE = ITEMS.register("empty_magical_gel_bottle", () -> new EmptyMagicalGelBottleItem(new Item.Properties().tab(TAB)));
-	public static final RegistryObject<MagicalGelBottleItem> MAGICAL_GEL_BOTTLE = ITEMS.register("magical_gel_bottle", () -> new MagicalGelBottleItem(new Item.Properties()));
+	public static final RegistryObject<MagicalGelBottleItem> MAGICAL_GEL_BOTTLE = ITEMS.register("magical_gel_bottle", () -> new MagicalGelBottleItem(new Item.Properties())
+		.redirectDefaultInstance(EMPTY_MAGICAL_GEL_BOTTLE).setGiveCommandUsesDefaultInstance().cast());
 	public static final RegistryObject<MagicalGelBallItem> MAGICAL_GEL_BALL = ITEMS.register("magical_gel_ball", () -> new MagicalGelBallItem(new Item.Properties().tab(TAB)));
 	public static final RegistryObject<TradeIntroductionLetterItem> TRADE_INTRODUCTION_LETTER = ITEMS.register("trade_introduction_letter",
 			() -> new TradeIntroductionLetterItem(new Item.Properties().stacksTo(1).rarity(Rarity.UNCOMMON)));
 	
 	// Misc
 	public static final RegistryObject<NFFMobRespawnerItem> MOB_RESPAWNER = ITEMS.register("mob_respawner", () -> new NFFGirlsRespawnerItem(new Item.Properties())
-		.setRetainBefriendedMobInventory(false).noDefaultInstance(false).cast());
+		.setRetainBefriendedMobInventory(false).setGiveCommandUsesDefaultInstance().cast());
 	public static final RegistryObject<NFFMobRespawnerItem> MOB_STORAGE_POD = ITEMS.register("mob_storage_pod", () -> new NFFGirlsRespawnerItem(new Item.Properties())
-		.redirectDefaultInstance(new ResourceLocation(NFFGirls.MOD_ID, "empty_mob_storage_pod")).cast());
+		.redirectDefaultInstance(new ResourceLocation(NFFGirls.MOD_ID, "empty_mob_storage_pod")).setGiveCommandUsesDefaultInstance().cast());
 	public static final RegistryObject<MobCatcherItem> EMPTY_MOB_STORAGE_POD = ITEMS.register("empty_mob_storage_pod", () -> new MobCatcherItem(new Item.Properties().tab(TAB), MOB_STORAGE_POD.get()).canCatchCondition(
 			((m, p) -> (m instanceof INFFGirlsTamed bm && bm.getOwnerUUID().equals(p.getUUID())))));
 
