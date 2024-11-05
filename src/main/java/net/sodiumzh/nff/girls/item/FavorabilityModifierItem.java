@@ -13,23 +13,24 @@ import net.sodiumzh.nautils.statics.NaUtilsMiscStatics;
 import net.sodiumzh.nautils.statics.NaUtilsParticleStatics;
 import net.sodiumzh.nff.girls.registry.NFFGirlsCapabilities;
 
+import java.util.Optional;
+
 public class FavorabilityModifierItem extends NaUtilsItem
 {
 
 	public FavorabilityModifierItem(Properties pProperties)
 	{
 		super(pProperties.stacksTo(1));
-		this.defaultInstanceOverride(this::initInstance);
 	}
 
 	/**
 	 * Get a initialized instance.
 	 */
-	protected ItemStack initInstance()
+	public Optional<ItemStack> getDefaultInstanceOverride()
 	{
 		ItemStack res = new ItemStack(this);
 		res.getOrCreateTag().putFloat("value", 1f);
-		return res;
+		return Optional.of(res);
 	}
 	
 	public float getValue(ItemStack stack)

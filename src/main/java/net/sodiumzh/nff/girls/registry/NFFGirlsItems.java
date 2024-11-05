@@ -111,9 +111,9 @@ public class NFFGirlsItems {
 	public static final RegistryObject<Item> DEATH_CRYSTAL_POWDER = registerDefault("death_crystal_powder");
 	public static final RegistryObject<Item> SOUL_FLOUR = registerDefault("soul_flour");
 	public static final RegistryObject<Item> SOUL_CLOTH = registerDefault("soul_cloth");
-	public static final RegistryObject<Item> ENDER_FRUIT_JAM = register("ender_fruit_jam", () -> new Item(new Item.Properties().rarity(Rarity.RARE)));
+	public static final RegistryObject<Item> ENDER_FRUIT_JAM = register("ender_fruit_jam", () -> new Item(new Item.Properties().rarity(Rarity.RARE).craftRemainder(Items.GLASS_BOTTLE)));
 	public static final RegistryObject<Item> EVIL_GEM = registerDefault("evil_gem");
-
+	
 	// Foods
 	public static final RegistryObject<Item> SOUL_CAKE_SLICE = register("soul_cake_slice", () -> new Item(new Item.Properties().food(NFFGirlsFoodProperties.SOUL_CAKE_SLICE).rarity(Rarity.UNCOMMON)));
 	public static final RegistryObject<Item> ENDERBERRY = ITEMS.register("enderberry", () -> new ChorusFruitItem(new Item.Properties().food(NFFGirlsFoodProperties.ENDERBERRY).rarity(Rarity.UNCOMMON)));
@@ -138,7 +138,7 @@ public class NFFGirlsItems {
 				String.format("+%.1f", NFFGirlsConfigs.ValueCache.Baubles.BAUBLE_ARMOR_BOOSTING_SCALE * rawValue)).withStyle(ChatFormatting.GRAY); 
 	}
 
-	// Other mod-depending items
+	// Other-mod-depending items
 	private static Optional<RegistryObject<Item>> registerDepending(String key, String dependentID, Supplier<? extends Item> itemSupplier)
 	{
 		return Optional.ofNullable(ModList.get().isLoaded(dependentID) ? ITEMS.register(key, itemSupplier) : null);
@@ -237,7 +237,8 @@ public class NFFGirlsItems {
 	public static final RegistryObject<TransferringTagItem> TRANSFERRING_TAG = register("transferring_tag", () -> new TransferringTagItem(new Item.Properties()));
 	public static final RegistryObject<EmptyMagicalGelBottleItem> EMPTY_MAGICAL_GEL_BOTTLE = register("empty_magical_gel_bottle", () -> new EmptyMagicalGelBottleItem(new Item.Properties()));
 	public static final RegistryObject<MagicalGelBallItem> MAGICAL_GEL_BALL = register("magical_gel_ball", () -> new MagicalGelBallItem(new Item.Properties()));
-	public static final RegistryObject<MagicalGelBottleItem> MAGICAL_GEL_BOTTLE = registerNoTab("magical_gel_bottle", () -> new MagicalGelBottleItem(new Item.Properties()));
+	public static final RegistryObject<MagicalGelBottleItem> MAGICAL_GEL_BOTTLE = registerNoTab("magical_gel_bottle", () -> new MagicalGelBottleItem(new Item.Properties()
+		.redirectDefaultInstance(EMPTY_MAGICAL_GEL_BOTTLE).setGiveCommandUsesDefaultInstance().cast()));
 	public static final RegistryObject<TaoistTalismanItem> TAOIST_TALISMAN = register("taoist_talisman", () -> new TaoistTalismanItem(new Item.Properties()));
 	public static final RegistryObject<TradeIntroductionLetterItem> TRADE_INTRODUCTION_LETTER = register("trade_introduction_letter",
 			() -> new TradeIntroductionLetterItem(new Item.Properties().stacksTo(1).rarity(Rarity.UNCOMMON)));
