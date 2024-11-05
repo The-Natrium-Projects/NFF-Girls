@@ -1,7 +1,9 @@
 package net.sodiumzh.nff.girls.item;
 
 import java.util.List;
+import java.util.Optional;
 
+import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
 import com.github.mechalopa.hmag.registry.ModEntityTypes;
@@ -23,6 +25,7 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
+import net.sodiumzh.nautils.item.NaUtilsItem;
 import net.sodiumzh.nautils.math.HtmlColors;
 import net.sodiumzh.nautils.math.LinearColor;
 import net.sodiumzh.nautils.statics.NaUtilsInfoStatics;
@@ -30,13 +33,13 @@ import net.sodiumzh.nautils.statics.NaUtilsNBTStatics;
 import net.sodiumzh.nff.girls.entity.hmag.HmagSlimeGirlEntity;
 import net.sodiumzh.nff.girls.registry.NFFGirlsItems;
 
-public class MagicalGelBottleItem extends Item
+public class MagicalGelBottleItem extends NaUtilsItem
 {
 
 	public static final LinearColor VANILLA_SLIME_COLOR = LinearColor.fromRGB(100, 172, 81);
 	public static final LinearColor MAGMA_CUBE_COLOR = LinearColor.fromRGB(220, 114, 32);
 	
-	public MagicalGelBottleItem(Properties pProperties)
+	public MagicalGelBottleItem(Item.Properties pProperties)
 	{
 		super(pProperties.stacksTo(1));
 	}
@@ -64,7 +67,12 @@ public class MagicalGelBottleItem extends Item
 		type.setColor(stack, color);
 		return stack;
 	}
-	
+
+	@Nonnull
+	public Optional<ItemStack> getDefaultInstanceOverride() {
+		return Optional.of(create(this));
+	}
+
 	protected boolean checkValid(ItemStack stack)
 	{
 		checkStackType(stack);
@@ -192,13 +200,13 @@ public class MagicalGelBottleItem extends Item
 	}
 	
 	@Override
-	public InteractionResult interactLivingEntity(ItemStack stack, Player player, LivingEntity living, InteractionHand usedHand)
+	public InteractionResult interactLivingEntity(Player player, LivingEntity living, InteractionHand usedHand)
 	{
 		if (!player.level.isClientSide)
 		{
-			if (this.getAmount(stack) <= 0)
+			if (this.getAmount(player.getItemInHand(usedHand)) <= 0)
 			{
-				stack.shrink(1);
+				player.getItemInHand(usedHand).shrink(1);
 				player.spawnAtLocation(NFFGirlsItems.EMPTY_MAGICAL_GEL_BOTTLE.get().getDefaultInstance()).setNoPickUpDelay();//NaUtilsItemStatics.giveOrDropDefault(player, NFFGirlsItems.EMPTY_MAGICAL_GEL_BOTTLE.get());
 			}
 			// Action type: 0 => no action; 1 => collecting; 2 => staining
@@ -208,7 +216,7 @@ public class MagicalGelBottleItem extends Item
 			{
 				if (ms.isTiny())
 				{
-					this.blend(stack, MagicalGelColorUtils.getSlimeColor(ms), 1);
+					this.blend(player.getItemInHand(usedHand), MagicalGelColorUtils.getSlimeColor(ms), 1);
 					ms.discard();
 					action = 1;
 				}
@@ -236,7 +244,7 @@ public class MagicalGelBottleItem extends Item
 			// Stain slime girl
 			else if (living instanceof HmagSlimeGirlEntity sg && sg.isOwnerPresent() && sg.getOwner() == player)
 			{
-				sg.stain(this.getColor(stack));
+				sg.stain(this.getColor(player.getItemInHand(usedHand)));
 				if (sg.getRandom().nextDouble() < 0.25d)
 					sg.spawnAtLocation(NFFGirlsItems.MAGICAL_GEL_BALL.get());
 				action = 2;
@@ -246,15 +254,15 @@ public class MagicalGelBottleItem extends Item
 			if (action == 1)
 			{
 				// The max volume is 6; if trying adding more, drop a magical gel ball after blending
-				while (getAmount(stack) > 6)
+				while (getAmount(player.getItemInHand(usedHand)) > 6)
 				{
-					setAmount(stack, getAmount(stack) - 1);
+					setAmount(player.getItemInHand(usedHand), getAmount(player.getItemInHand(usedHand)) - 1);
 					ItemStack ball = new ItemStack(NFFGirlsItems.MAGICAL_GEL_BALL.get());
 					if (!player.addItem(ball))
 						player.spawnAtLocation(ball);
 				}
-				ItemStack stack1 = stack.copy();
-				stack.shrink(1);
+				ItemStack stack1 = player.getItemInHand(usedHand).copy();
+				player.getItemInHand(usedHand).shrink(1);
 				player.spawnAtLocation(stack1, 1f).setNoPickUpDelay();
 				return InteractionResult.sidedSuccess(living.level.isClientSide);
 			}
@@ -262,17 +270,17 @@ public class MagicalGelBottleItem extends Item
 			{
 				if (!player.isCreative())
 				{
-					if (getAmount(stack) == 1)
+					if (getAmount(player.getItemInHand(usedHand)) == 1)
 					{
-						stack.shrink(1);
+						player.getItemInHand(usedHand).shrink(1);
 						ItemStack stack1 = NFFGirlsItems.EMPTY_MAGICAL_GEL_BOTTLE.get().getDefaultInstance();
 						player.spawnAtLocation(stack1, 1f).setNoPickUpDelay();
 					}
 					else
 					{
-						ItemStack stack1 = stack.copy();
+						ItemStack stack1 = player.getItemInHand(usedHand).copy();
 						this.setAmount(stack1, this.getAmount(stack1) - 1);
-						stack.shrink(1);
+						player.getItemInHand(usedHand).shrink(1);
 						player.spawnAtLocation(stack1, 1f).setNoPickUpDelay();
 					}
 				}
@@ -282,13 +290,7 @@ public class MagicalGelBottleItem extends Item
 		}
 		return InteractionResult.PASS;
 	}
-	
-	@Override
-	public ItemStack getDefaultInstance()
-	{
-		return create(this);
-	}
-	
+
 	@Override
 	public void appendHoverText(ItemStack stack, @Nullable Level level, List<Component> list, TooltipFlag tooltipFlag)
 	{
