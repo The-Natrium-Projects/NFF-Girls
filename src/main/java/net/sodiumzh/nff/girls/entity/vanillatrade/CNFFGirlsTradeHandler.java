@@ -1,8 +1,7 @@
 package net.sodiumzh.nff.girls.entity.vanillatrade;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
+import java.util.*;
+import java.util.function.Predicate;
 
 import javax.annotation.Nullable;
 
@@ -19,8 +18,7 @@ import net.minecraft.world.item.trading.MerchantOffer;
 import net.minecraft.world.item.trading.MerchantOffers;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.network.PacketDistributor;
-import net.sodiumzh.nautils.statics.NaUtilsContainerStatics;
-import net.sodiumzh.nautils.statics.NaUtilsNBTStatics;
+import net.minecraftforge.registries.ForgeRegistries;
 import net.sodiumzh.nautils.capability.SerializableCapabilityProvider;
 import net.sodiumzh.nautils.entity.vanillatrade.CVanillaMerchant;
 import net.sodiumzh.nautils.entity.vanillatrade.VanillaMerchant;
@@ -40,8 +38,7 @@ public interface CNFFGirlsTradeHandler extends CVanillaMerchant
 		NFFGirlsItems.TRADE_INTRODUCTION_LETTER.get().write(res, INFFGirlsTamed.getBM(e));
 		return new MerchantOffer(new ItemStack(Items.WRITABLE_BOOK), res, 1, 0, 0);
 	};
-	
-	
+
 	public void serverTick();
 
 	public INFFGirlsTamed getBM();
@@ -49,6 +46,11 @@ public interface CNFFGirlsTradeHandler extends CVanillaMerchant
 	public List<NFFGirlsTradeOfferMetaData> getMeta();
 	
 	public boolean isValidOffers();
+
+	/**
+	 * Check if this trader has any valid entries in the trade registry.
+	 */
+	public boolean isValidTrader();
 
 	/**
 	 * How many points it needs to get an introduction letter
@@ -125,6 +127,7 @@ public interface CNFFGirlsTradeHandler extends CVanillaMerchant
 		
 		@Override
 		public void generateTrades(){
+			if (!this.isValidTrader()) return;
 			this.getOffersRaw().clear();
 			this.getMeta().clear();
 			List<VanillaTradeListing> trades = 
@@ -132,6 +135,7 @@ public interface CNFFGirlsTradeHandler extends CVanillaMerchant
 				/*var trades = DwmgTradeRegistry.getTradesImmutable(this.getMob().getType(), getProfession(), i);
 				Collection<ItemListing> picked = NaUtilsContainerStatics.getRandomSubset
 						(NaUtilsContainerStatics.iterableToSet(trades), Math.min(2, trades.size()));*/
+			if (trades.isEmpty()) return;
 			for (VanillaTradeListing listing: trades)
 			{
 				MerchantOffer offer = listing.getOffer(getMob(), RND);
@@ -144,6 +148,51 @@ public interface CNFFGirlsTradeHandler extends CVanillaMerchant
 			// Finally add introduction letter entry
 			this.getOffersRaw().add(INTRODUCTION.getOffer(getMob(), RND));
 			this.getMeta().add(new NFFGirlsTradeOfferMetaData(1, 0, false));
+		}
+
+		/**
+		 * Regenerate a specified trade entry at the given position.
+		 * Note: this method is not performance-friendly and should not be called every tick.
+		 */
+		private void regenerateTradeAt(int index)
+		{
+			// Don't allow to regenerate at the introduction letter entry
+			if (index < 0 || index >= this.getOffersRaw().size() - 1) throw new IllegalArgumentException();
+			Set<VanillaTradeListing> available = NFFGirlsTrades.TRADES.getListings(INFFGirlTamed.getBM(this.getMob()).getData().getInitialEntityType())
+				.forLevel(this.getMeta(index).requiredMerchantLevel);
+			if (available.size() == 0) return;
+
+			// Prevent to generate a duplicate of another entry
+			Set<MerchantOffer> existingOffers = new HashSet<>();
+			for (int i = 0 ; i < this.getOffersRaw().size() - 1; ++i)
+			{
+				if (this.getMeta(i).requiredMerchantLevel == this.getMeta(index).requiredMerchantLevel && i != index)
+					existingOffers.add(this.getOffersRaw().get(i));
+			}
+			Predicate<MerchantOffer> exclude = offer -> {
+				for (MerchantOffer existing: existingOffers)
+				{
+					if (existing.getBaseCostA().getItem().equals(offer.getBaseCostA().getItem())
+						&& existing.getResult().getItem().equals(offer.getResult().getItem())
+						&& (existing.getCostB().isEmpty() || existing.getCostB().getItem().equals(offer.getCostB().getItem())))
+						return true;
+				}
+				return false;
+			};
+			MerchantOffer out = null;
+
+			// Try 16 times, give up if failed and keep it unchanged
+			for (int i = 0; i < 16; ++i)
+			{
+				VanillaTradeListing listing = NaUtilsContainerStatics.randomPickCollection(available);
+				out = listing.getOffer(this.getMob(), this.getMob().getRandom());
+				if (!exclude.test(out))
+				{
+					this.getOffersRaw().set(index, out);
+					this.getMeta().set(index, new NFFGirlsTradeOfferMetaData(listing.getMerchantLevel(), 0, !out.getCostB().isEmpty()));
+					return;
+				}
+			}
 		}
 
 		@Override
@@ -183,6 +232,7 @@ public interface CNFFGirlsTradeHandler extends CVanillaMerchant
 		@Override
 		public void serverTick() 
 		{
+			if (!this.isValidTrader()) return;
 			//boolean tryingRegenerate = false;
 			try {
 				this.serverTickInternal();
@@ -213,13 +263,16 @@ public interface CNFFGirlsTradeHandler extends CVanillaMerchant
 		
 		protected void serverTickInternal()
 		{
+
 			// Handle offer uses cache
-			if (this.getOffers().size() != meta.size())
+			if (this.getOffers().size() != meta.size() || !this.isValidOffers() && this.isValidTrader())
 			{
 				/*throw new IllegalStateException(String.format("CNFFGirlsTradeHandler: offer meta data size error. Expected: %d; Actual: %d",
 						this.getOffers().size(), this.meta.size()));*/
 				this.generateTrades();
 			}
+			if (!this.isValidOffers()) return;
+
 			int level = this.getMerchantLevel();
 			if (level != cachedLevel)
 			{
@@ -243,10 +296,22 @@ public interface CNFFGirlsTradeHandler extends CVanillaMerchant
 				{
 					if (this.getMeta(i).requiredMerchantLevel <= this.getMerchantLevel())
 					{
-						if (RND.nextFloat() <= 1d / Math.sqrt(this.getMeta(i).requiredMerchantLevel));
+						if (RND.nextFloat() <= 1d / Math.sqrt(this.getMeta(i).requiredMerchantLevel))
+						{
+							if (this.getMeta().get(i).requiredMerchantLevel >= 5) {
+								if (this.getOffers().get(i).isOutOfStock()) {
+									this.regenerateTradeAt(i);
+									this.getOffers().get(i).resetUses();
+								}
+							}
+							else {
 								this.getOffers().get(i).resetUses();
+							}
+						}
 					}
 				}
+
+				
 				this.restockTimer = this.getBM().getRestockTicks();
 				/*if (getBM().isOwnerInDimension())
 					NaUtilsMiscStatics.printToScreen("Restocked", getBM().getOwner());*/
@@ -337,8 +402,14 @@ public interface CNFFGirlsTradeHandler extends CVanillaMerchant
 		@Override
 		public boolean isValidOffers()
 		{
-			return this.getOffers().size() == this.meta.size() && this.getOffers().size() != 0;
+			return this.getOffers().size() == this.meta.size() && !this.getOffers().isEmpty();
 		}
+
+		public boolean isValidTrader()
+		{
+			return NFFGirlsTrades.TRADES.hasListings(this.getMob().getType(), null);
+		}
+
 
 		@Override
 		public int getRestockTicks() {
