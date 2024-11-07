@@ -18,7 +18,7 @@
     "desc": "The \"item_predicate\" field represents all item stacks which satisfy the given predicate. The predicate is defined by the registry key of a Function<ItemStack, Boolean> in NaUtils' function registry.",
     "item_predicate": "some_mod:some_predicate",
 
-    "desc1": "Three-element double array represents a truncated Gaussian-distributed random value between the first 2 values. The third value is \"limit factor\" e.g. 3 represents the border is 3*sigma of the Gaussian distribution. Larger value means the random value is more likely to be around the center of the range.",
+    "desc1": "Three-element double array represents a truncated Gaussian-distributed random value between the first 2 values. The third value is \"concentration factor\", defined as (max-min)/(2*sigma), in which sigma is the standard deviation of the corresponding Gaussian distribution. Larger value means the random value is more likely to be near the center of the range.",
     "amount": [10, 15, 1]
   },
   {
