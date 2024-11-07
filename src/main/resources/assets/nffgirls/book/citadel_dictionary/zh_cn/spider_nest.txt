@@ -1,0 +1,46 @@
+<NEWLINE>
+<NEWLINE>
+<NEWLINE>
+<NEWLINE>
+<NEWLINE>
+    蜘蛛巢穴是一种魔力驱动的巢穴类
+<NEWLINE>
+生物，自然生成于主世界Y轴0层之下
+<NEWLINE>
+的黑暗区域。
+<NEWLINE>
+    蜘蛛巢穴在攻击时会源源不断地召
+<NEWLINE>
+唤洞穴蜘蛛协助战斗，被杀死时也会
+<NEWLINE>
+生成洞穴蜘蛛。在游戏难度普通及以
+<NEWLINE>
+上时，攻击命中会施加中毒Ⅰ和缓慢
+<NEWLINE>
+Ⅱ效果。
+<NEWLINE>
+    蜘蛛巢穴免疫中毒状态效果，受到
+<NEWLINE>
+的弓箭等弹射物伤害、仙人掌等方块
+<NEWLINE>
+的荆棘伤害和爆炸伤害减半。但由于
+<NEWLINE>
+其本身是一个会移动的蜘蛛巢，故而
+<NEWLINE>
+受到的火焰伤害为原来的 1.5 倍。
+<NEWLINE>
+    蜘蛛巢穴属于节肢生物的一种，因
+<NEWLINE>
+此带有节肢杀手附魔的武器能对其造
+<NEWLINE>
+成更多伤害。同时，蜘蛛巢穴在移动
+<NEWLINE>
+时不受蜘蛛网的影响。
+<NEWLINE>
+    击杀蜘蛛巢穴可能会掉落经验莓果，
+<NEWLINE>
+食用后会少量增加玩家的经验值。同
+<NEWLINE>
+时还会掉落一些稀有物品，如附魔之
+<NEWLINE>
+瓶。

@@ -1,0 +1,32 @@
+<NEWLINE>
+<NEWLINE>
+<NEWLINE>
+<NEWLINE>
+    冰霜女巫是冰雪元素的精灵，自然
+<NEWLINE>
+生成于在主世界Y轴64层及以上的雪地
+<NEWLINE>
+群系中。
+<NEWLINE>
+    冰霜女巫会连续发射具有攻击力的
+<NEWLINE>
+雪球进行远程攻击。
+<NEWLINE>
+    冰霜女巫移动时有类似冰霜行者的
+<NEWLINE>
+效果，会将脚底下的水冻结为冰。
+<NEWLINE>
+    冰霜女巫厌恶高热，会受到2倍的
+<NEWLINE>
+火焰伤害，并且在例如沙漠的炎热的
+<NEWLINE>
+生物群系中也会受到持续伤害。
+<NEWLINE>
+    冰霜女巫在细雪中时会赋予自身生
+<NEWLINE>
+命恢复Ⅰ的状态效果。
+<NEWLINE>
+    击倒冰霜女巫可能会掉落经验莓果，
+<NEWLINE>
+食用后会少量增加玩家的经验值。
+

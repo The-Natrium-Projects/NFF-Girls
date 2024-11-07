@@ -1,0 +1,25 @@
+<NEWLINE>
+<NEWLINE>
+<NEWLINE>
+<NEWLINE>
+    百目鬼是传说中的一种妖灵，自然生
+<NEWLINE>
+成于主世界Y轴64层及以上的针叶林群
+<NEWLINE>
+系中。
+<NEWLINE>
+    百目鬼会使用近战攻击，游戏难度普
+<NEWLINE>
+通及以上时，攻击命中会施加缓慢Ⅰ效
+<NEWLINE>
+果。
+<NEWLINE>
+    百目鬼属于亡灵生物的一种，在阳光
+<NEWLINE>
+下会燃烧。
+<NEWLINE>
+    击倒百目鬼有几率会掉落随机莓果，
+<NEWLINE>
+食用后会给予玩家一项短时的随机药水
+<NEWLINE>
+效果，不论正面还是负面。

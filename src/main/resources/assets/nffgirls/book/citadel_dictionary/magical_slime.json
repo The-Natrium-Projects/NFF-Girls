@@ -1,0 +1,28 @@
+{
+    "parent": "root.json",
+    "text": "magical_slime.txt",
+    "title": "entity.hmag.magical_slime",
+    "linked_page_buttons": [
+    ],
+    "images": [
+    ],
+    "item_renders": [
+    ],
+    "recipes": [
+    ],
+    "tabula_renders": [
+    ],
+    "entity_renders": [
+      {
+        "entity": "hmag:magical_slime",
+        "x": 92,
+        "y": 102,
+        "page" : 0,
+        "scale": 1.0,
+        "rot_x": 30,
+        "rot_y": 225,
+        "rot_z": 0,
+        "follow_cursor": false
+      }
+    ]
+  }

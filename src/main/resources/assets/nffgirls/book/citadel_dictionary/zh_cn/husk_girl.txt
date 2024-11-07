@@ -1,0 +1,17 @@
+<NEWLINE>
+<NEWLINE>
+<NEWLINE>
+<NEWLINE>
+    当主世界自然生成尸壳时，尸壳娘
+<NEWLINE>
+有一定概率替换尸壳生成，这让尸壳娘
+<NEWLINE>
+常见于露天的沙漠生物群系。
+<NEWLINE>
+    除了属性高于尸壳外，尸壳娘的机制
+<NEWLINE>
+和特性与原版尸壳一致。
+<NEWLINE>
+    击倒尸壳娘有概率获得邪恶水晶碎片，
+<NEWLINE>
+这是合成模组中大部分物品的基础材料。

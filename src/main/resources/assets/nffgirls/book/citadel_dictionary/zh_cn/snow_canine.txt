@@ -1,0 +1,31 @@
+<NEWLINE>
+<NEWLINE>
+<NEWLINE>
+<NEWLINE>
+    雪犬娘是活跃于寒冷中的兽类魔物，
+<NEWLINE>
+自然生成于主世界Y轴64层及以上的
+<NEWLINE>
+雪地群系中。
+<NEWLINE>
+    雪犬娘攻击会施加较强力击退效果。
+<NEWLINE>
+    雪犬娘动作灵活，因此受到的摔落
+<NEWLINE>
+伤害减半。
+<NEWLINE>
+    由于狩猎天性，雪犬娘会主动攻击
+<NEWLINE>
+羊和兔子。
+<NEWLINE>
+    击倒雪犬娘有几率会掉落尖牙，这
+<NEWLINE>
+是一种独特素材，用于合成强化锁链
+<NEWLINE>
+等特殊物品，也可以作为箭矢的头部
+<NEWLINE>
+使用。此外，雪犬娘还有概率会掉落
+<NEWLINE>
+治愈莓果，食用后可以治疗少量生命
+<NEWLINE>
+值。
