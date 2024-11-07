@@ -7,6 +7,7 @@ import net.minecraftforge.event.entity.player.PlayerInteractEvent.EntityInteract
 import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
+import net.sodiumzh.nautils.mixin.events.entity.MobInteractEvent;
 import net.sodiumzh.nautils.statics.NaUtilsInfoStatics;
 import net.sodiumzh.nff.girls.NFFGirls;
 import net.sodiumzh.nff.girls.entity.INFFGirlTamed;
@@ -29,12 +30,19 @@ public class NFFGirlsTradeEventListeners
 				)
 		{
 			INFFGirlTamed.getBM(event.getTarget()).asMob().getCapability(NFFGirlsCapabilities.CAP_TRADE_HANDLER).ifPresent(cap -> {
-				cap.openTradingScreen(event.getEntity(), NaUtilsInfoStatics.createTranslatable("info.nffgirls.open_trade"), 1);
-				event.setCanceled(true);
+				if (cap.isValidTrader()) {
+					cap.openTradingScreen(event.getEntity(), NaUtilsInfoStatics.createTranslatable("info.nffgirls.open_trade"), 1);
+					event.setCanceled(true);
+				}
 			});
 		}
 	}
-	
+
+	public static void beforeMobInteract(MobInteractEvent event)
+	{
+
+	}
+
 	@SubscribeEvent
 	public static void onDie(LivingDeathEvent event)
 	{

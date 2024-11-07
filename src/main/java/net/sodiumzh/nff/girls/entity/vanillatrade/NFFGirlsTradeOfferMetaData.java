@@ -7,7 +7,7 @@ public class NFFGirlsTradeOfferMetaData
 {
 	// Minimum merchant level required to unlock this offer. Note: merchant level starts from 1.
 	public int requiredMerchantLevel;
-	// Cached value of usage. Offers locked due to merchant level will always out of stack which wipes the actual used count,
+	// Cached value of usage. Offers locked due to merchant level will be always out of stack which wipes the actual used count,
 	// So store it here and read when the offer is available again.
 	public int cachedUse;
 	// Whether this meta should have input B. If it's true but the input B is missing, it will be regarded as invalid and removed.

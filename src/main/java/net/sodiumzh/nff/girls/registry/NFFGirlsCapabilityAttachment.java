@@ -54,11 +54,8 @@ public class NFFGirlsCapabilityAttachment {
 			{
 				event.addCapability(new ResourceLocation(NFFGirls.MOD_ID, KEY_FAVORABILITY), new CNFFGirlsFavorabilityHandler.Prvd(bm.asMob()));
 				event.addCapability(new ResourceLocation(NFFGirls.MOD_ID, KEY_XP_LEVEL), new CNFFGirlsLevelHandler.Prvd(bm.asMob()));
-				if (NFFGirlsTrades.TRADES.hasListings(bm.asMob().getType(), VillagerProfession.NONE))
-				{
-					event.addCapability(new ResourceLocation(NFFGirls.MOD_ID, KEY_TRADE), 
-							new CNFFGirlsTradeHandler.Prvd(bm, NFFGirlsCapabilities.CAP_TRADE_HANDLER));
-				}
+				event.addCapability(new ResourceLocation(NFFGirls.MOD_ID, KEY_TRADE),
+					new CNFFGirlsTradeHandler.Prvd(bm, NFFGirlsCapabilities.CAP_TRADE_HANDLER));
 			}
 		}
 	}
