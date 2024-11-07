@@ -1,5 +1,6 @@
 package net.sodiumzh.nff.girls;
 
+import net.sodiumzh.nautils.registries.NaUtilsRegistries;
 import net.sodiumzh.nff.girls.registry.*;
 import org.slf4j.Logger;
 import net.sodiumzh.nff.girls.registry.*;
@@ -62,6 +63,8 @@ public class NFFGirls
         // NaUtils registries
         NFFGirlsHealingItems.HEALING_ITEMS.merge();
         NFFGirlsFunctions.FUNCTIONS.merge();
+        NaUtilsRegistries.VANILLA_TRADE_REGISTRIES.register(new ResourceLocation(NFFGirls.MOD_ID, "trade_registry"), () -> NFFGirlsTrades.TRADES);
+        NFFGirlsTrades.LISTINGS.merge();
 
         // Register ourselves for server and other game events we are interested in
         MinecraftForge.EVENT_BUS.register(this);
