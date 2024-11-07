@@ -1,0 +1,96 @@
+<NEWLINE>
+<NEWLINE>
+<NEWLINE>
+<NEWLINE>
+    想要与诅咒玩偶化敌为友，需要玩
+<NEWLINE>
+家亲手修补长年累月下她的身体产生
+<NEWLINE>
+的破损。给予一个羊毛，随后再给予
+<NEWLINE>
+一个线，玩家就可以完成一个“缝补”
+<NEWLINE>
+操作。每个操作后有10秒冷却。每个
+<NEWLINE>
+缝补操作需要一个不同颜色的羊毛，
+<NEWLINE>
+操作8次后成功。
+<NEWLINE>
+    缝补过程中，诅咒玩偶会一直与玩
+<NEWLINE>
+家保持敌对。如果过程中诅咒玩偶击
+<NEWLINE>
+中了玩家且没有被盾牌挡下，之前缝
+<NEWLINE>
+补上的羊毛和线将会随机掉落一个，
+<NEWLINE>
+同时相应的操作会被取消。
+<NEWLINE>
+    诅咒玩偶友好化成功后，可以定制
+<NEWLINE>
+6个饰品栏。虽然诅咒玩偶并非亡灵
+<NEWLINE>
+生物，但可以装备灵魂护符。
+<NEWLINE>
+    玩家可以给予诅咒玩偶不同颜色的
+<NEWLINE>
+羊毛，赋予她不同的增益效果：
+<NEWLINE>
+橙色：抗火30秒
+<NEWLINE>
+黄色：发光30秒
+<NEWLINE>
+红色：力量Ⅰ30秒
+<NEWLINE>
+紫色：力量Ⅱ10秒
+<NEWLINE>
+黄绿：生命恢复Ⅰ30秒
+<NEWLINE>
+绿色：生命恢复Ⅱ10秒
+<NEWLINE>
+淡蓝：速度Ⅰ30秒
+<NEWLINE>
+蓝色：速度Ⅱ15秒
+<NEWLINE>
+青色：速度Ⅲ和虚弱Ⅰ15秒
+<NEWLINE>
+品红：力量Ⅲ和缓慢Ⅰ15秒
+<NEWLINE>
+粉红：移除所有负面效果
+<NEWLINE>
+    所有上述羊毛共享15秒冷却时间。
+<NEWLINE>
+其他颜色羊毛无法付与效果，但是可
+<NEWLINE>
+以用作治疗道具。
+<NEWLINE>
+    诅咒玩偶可以利用以下物品进行治
+<NEWLINE>
+疗，每次使用治疗物品的冷却时间为
+<NEWLINE>
+2秒。
+<NEWLINE>
+    线：每次治疗2生命值；
+<NEWLINE>
+    白色/淡灰色/灰色/黑色/棕色羊毛：
+<NEWLINE>
+每次治疗5生命值；
+<NEWLINE>
+    青金石：每次治疗10生命值；
+<NEWLINE>
+    绿宝石：每次治疗15生命值；
+<NEWLINE>
+    核心立方体：恢复满生命值。
+<NEWLINE>
+    诅咒玩偶的独特交易清单为：
+<NEWLINE>
+等级1：
+<NEWLINE>
+等级2：
+<NEWLINE>
+等级3：
+<NEWLINE>
+等级4：
+<NEWLINE>
+等级5：
+

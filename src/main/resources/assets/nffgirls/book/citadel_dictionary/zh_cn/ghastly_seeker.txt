@@ -1,0 +1,25 @@
+<NEWLINE>
+<NEWLINE>
+<NEWLINE>
+<NEWLINE>
+    当下界自然生成恶魂时，恶魂探索
+<NEWLINE>
+者有较小概率替换恶魂生成，因此邂
+<NEWLINE>
+逅恶魂探索者是一种较为稀有的事件。
+<NEWLINE>
+    恶魂探索者的机制和特性与类似于
+<NEWLINE>
+原版恶魂，但是属性远高于恶魂。此
+<NEWLINE>
+外，恶魂探索者发射的火球离目标尚
+<NEWLINE>
+有一点距离时就会自行引爆，使得反
+<NEWLINE>
+击变得困难。同时，反击的火球对恶
+<NEWLINE>
+魂探索者只能造成两倍伤害。
+<NEWLINE>
+    作为下界生物，恶魂探索者免疫燃
+<NEWLINE>
+烧伤害。

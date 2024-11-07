@@ -1,0 +1,81 @@
+<NEWLINE>
+<NEWLINE>
+<NEWLINE>
+<NEWLINE>
+    想要与百目鬼化敌为友，需要玩家
+<NEWLINE>
+手持礼物右键百目鬼赠予，礼物赠予
+<NEWLINE>
+的冷却时间为10秒。
+<NEWLINE>
+    百目鬼喜爱的礼物及每种礼物增加
+<NEWLINE>
+的友好化进度如下:
+<NEWLINE>
+    灵魂蛋糕切片：每个有1%概率增
+<NEWLINE>
+加1友好化进度，4%概率增加0.75
+<NEWLINE>
+友好化进度, 15%概率增加0.5友好
+<NEWLINE>
+化进度，80%好感度增加0.25友好
+<NEWLINE>
+化进度；
+<NEWLINE>
+    灵魂之果：每个增加0.03 ~ 0.06
+<NEWLINE>
+的友好化进度；
+<NEWLINE>
+    灵魂粉尘：每个增加0.015 ~ 0.03
+<NEWLINE>
+的友好化进度。
+<NEWLINE>
+    化敌为友的过程中，玩家需要全程
+<NEWLINE>
+带有“亡灵亲和”的状态效果，这使
+<NEWLINE>
+百目鬼对玩家中立。同时玩家不能激
+<NEWLINE>
+怒过百目鬼，无论是通过攻击还是在
+<NEWLINE>
+没有“亡灵亲和”效果时接近她。百
+<NEWLINE>
+目鬼一旦被激怒，则需要经过5分钟
+<NEWLINE>
+后原谅玩家，这时可以重新友好化。
+<NEWLINE>
+    玩家一旦激怒百目鬼或失去“亡灵
+<NEWLINE>
+亲和”效果，友好化过程将被中断。
+<NEWLINE>
+    玩家想要获取“亡灵亲和”效果，
+<NEWLINE>
+可以通过吃灵魂蛋糕、灵魂蛋糕切片，
+<NEWLINE>
+站在灵魂地毯上，或佩戴死灵巫师的
+<NEWLINE>
+帽子获得。
+<NEWLINE>
+    百目鬼友好化成功后，可以定制4
+<NEWLINE>
+个饰品栏。
+<NEWLINE>
+    百目鬼可以利用以下物品进行治疗，
+<NEWLINE>
+每次使用治疗物品冷却时间为2秒。
+<NEWLINE>
+    灵魂粉尘：每次治疗5生命值；
+<NEWLINE>
+    灵魂之果：每次治疗15生命值。
+<NEWLINE>
+    百目鬼的独特交易清单为：
+<NEWLINE>
+等级1：
+<NEWLINE>
+等级2：
+<NEWLINE>
+等级3：
+<NEWLINE>
+等级4：
+<NEWLINE>
+等级5：
