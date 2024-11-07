@@ -1,7 +1,7 @@
 {
-  "parent": "root.json",
-  "text": "zombie_girl.txt",
-  "title": "entity.hmag.zombie_girl",
+  "parent": "nffgirls_dictionary.json",
+  "text": "hmag_imp.txt",
+  "title": "entity.nffgirls.hmag_imp",
   "linked_page_buttons": [
   ],
   "images": [
@@ -14,7 +14,7 @@
   ],
   "entity_renders": [
     {
-      "entity": "hmag:zombie_girl",
+      "entity": "nffgirls:hmag_imp",
       "x": 92,
       "y": 102,
       "page" : 0,

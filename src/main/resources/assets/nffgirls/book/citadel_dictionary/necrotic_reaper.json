@@ -1,7 +1,7 @@
 {
   "parent": "root.json",
-  "text": "zombie_girl.txt",
-  "title": "entity.hmag.zombie_girl",
+  "text": "necrotic_reaper.txt",
+  "title": "entity.hmag.necrotic_reaper",
   "linked_page_buttons": [
   ],
   "images": [
@@ -14,7 +14,7 @@
   ],
   "entity_renders": [
     {
-      "entity": "hmag:zombie_girl",
+      "entity": "hmag:necrotic_reaper",
       "x": 92,
       "y": 102,
       "page" : 0,

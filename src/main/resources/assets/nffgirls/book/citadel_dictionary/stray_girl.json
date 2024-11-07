@@ -1,7 +1,7 @@
 {
   "parent": "root.json",
-  "text": "zombie_girl.txt",
-  "title": "entity.hmag.zombie_girl",
+  "text": "stray_girl.txt",
+  "title": "entity.hmag.stray_girl",
   "linked_page_buttons": [
   ],
   "images": [
@@ -14,7 +14,7 @@
   ],
   "entity_renders": [
     {
-      "entity": "hmag:zombie_girl",
+      "entity": "hmag:stray_girl",
       "x": 92,
       "y": 102,
       "page" : 0,

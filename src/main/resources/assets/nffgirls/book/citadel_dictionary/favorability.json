@@ -1,0 +1,26 @@
+{
+  "parent": "nffgirls_dictionary.json",
+  "text": "favorability.txt",
+  "title": "Favorability",
+  "entity_buttons": [
+
+  ],
+  "linked_page_buttons": [
+
+  ],
+  "images": [
+
+  ],
+  "item_renders": [
+
+  ],
+  "recipes": [
+
+  ],
+  "tabula_renders": [
+
+  ],
+  "entity_renders": [
+
+  ]
+}

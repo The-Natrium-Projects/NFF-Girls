@@ -1,0 +1,79 @@
+<NEWLINE>
+<NEWLINE>
+<NEWLINE>
+<NEWLINE>
+    想要与花精灵化敌为友，需要玩家
+<NEWLINE>
+手持礼物右键花精灵赠予，礼物赠予
+<NEWLINE>
+的冷却时间为5秒。同时，为了使花
+<NEWLINE>
+精灵感到舒适，赠予礼物前，花精灵
+<NEWLINE>
+需要拥有生命恢复Ⅲ效果超过10秒，
+<NEWLINE>
+这意味着玩家需要向花精灵投掷喷溅
+<NEWLINE>
+型生命恢复Ⅲ药水来创造合适的条件。
+<NEWLINE>
+    花精灵喜爱的礼物及每种礼物增加
+<NEWLINE>
+的友好化进度如下:
+<NEWLINE>
+    孢子花：每个增加0.05 ~ 0.1的友
+<NEWLINE>
+好化进度；
+<NEWLINE>
+    神秘花瓣：每个增加0.1 ~ 0.2的
+<NEWLINE>
+友好化进度。
+<NEWLINE>
+    治愈莓果/随机莓果/经验莓果：每
+<NEWLINE>
+个增加0.2 ~ 0.3的友好化进度；
+<NEWLINE>
+    任意花朵：每个增加0.03 ~ 0.06
+<NEWLINE>
+的友好化进度。
+<NEWLINE>
+    花精灵友好化成功后，可以定制3
+<NEWLINE>
+个饰品栏。
+<NEWLINE>
+    花精灵可以向敌对生物投掷剧毒种
+<NEWLINE>
+子，造成最多15秒的中毒Ⅰ、虚弱Ⅰ
+<NEWLINE>
+和缓慢Ⅰ效果。该效果不会影响到玩
+<NEWLINE>
+家、其他怪物娘和驯服的动物。
+<NEWLINE>
+    当周围的友方生命值小于50%时，
+<NEWLINE>
+花精灵会投掷治疗种子，提供1点生
+<NEWLINE>
+命值的回复和最多5秒再生Ⅰ效果。
+<NEWLINE>
+    花精灵可以利用以下物品进行治疗，
+<NEWLINE>
+每次使用治疗物品冷却时间为2秒。
+<NEWLINE>
+    小麦种子：每次治疗2生命值；
+<NEWLINE>
+    骨粉：每次治疗5生命值；
+<NEWLINE>
+    孢子花：每次治疗15生命值；
+<NEWLINE>
+    神秘花瓣：恢复满生命值。
+<NEWLINE>
+    花精灵的独特交易清单为：
+<NEWLINE>
+等级1：
+<NEWLINE>
+等级2：
+<NEWLINE>
+等级3：
+<NEWLINE>
+等级4：
+<NEWLINE>
+等级5：
