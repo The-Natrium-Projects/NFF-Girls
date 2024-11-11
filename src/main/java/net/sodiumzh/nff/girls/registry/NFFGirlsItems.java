@@ -78,7 +78,8 @@ public class NFFGirlsItems {
 
 	// Foods
 	public static final RegistryObject<Item> SOUL_CAKE_SLICE = regItem("soul_cake_slice", new Item.Properties().food(NFFGirlsFoodProperties.SOUL_CAKE_SLICE).rarity(Rarity.UNCOMMON));
-	public static final RegistryObject<Item> ENDERBERRY = ITEMS.register("enderberry", () -> new ChorusFruitItem(new Item.Properties().tab(TAB).food(NFFGirlsFoodProperties.ENDERBERRY).rarity(Rarity.UNCOMMON)));
+	public static final RegistryObject<Item> ENDERBERRY = ITEMS.register("enderberry", () -> new EnderberryItem(NFFGirlsBlocks.ENDERBERRY_BUSH.get(),
+		new Item.Properties().tab(TAB).food(NFFGirlsFoodProperties.ENDERBERRY).rarity(Rarity.UNCOMMON)));
 	public static final RegistryObject<Item> ENDER_PIE = ITEMS.register("ender_pie", () -> new Item(new Item.Properties().tab(TAB).food(NFFGirlsFoodProperties.ENDER_PIE).rarity(Rarity.RARE)));
 	
 	// Baubles

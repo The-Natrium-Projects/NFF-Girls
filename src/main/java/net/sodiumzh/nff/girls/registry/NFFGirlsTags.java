@@ -16,7 +16,9 @@ public class NFFGirlsTags
 			(NFFGirls.MOD_ID, "nightwalker_magic_ball_affects");
 	public static final TagKey<Block> CAN_BEFRIEND_NIGHTWALKERS_ON = NaUtilsTagStatics.createBlockTag(
 			NFFGirls.MOD_ID, "can_tame_nightwalkers_on");
-	
+	public static final TagKey<Block> CAN_GROW_ENDERBERRY_ON = NaUtilsTagStatics.createBlockTag(
+		NFFGirls.MOD_ID, "can_grow_enderberry_on");
+
 	public static final TagKey<Item> DEATH_CRYSTAL_INGREDIENTS = NaUtilsTagStatics.createItemTag(
 			NFFGirls.MOD_ID, "death_crystal_ingredients");
 	public static final TagKey<Item> ENDER_FRUIT_JAM_OPTIONAL_FRUITS = NaUtilsTagStatics.createItemTag(
@@ -44,7 +46,8 @@ public class NFFGirlsTags
 			NFFGirls.MOD_ID, "can_equip_soul_amulet");
 	public static final TagKey<EntityType<?>> CAN_EQUIP_POISONOUS_THORN = NaUtilsTagStatics.createEntityTypeTag(
 			NFFGirls.MOD_ID, "can_equip_poisonous_thorn");
-	
+	public static final TagKey<EntityType<?>> NO_TELEPORT_IN_ENDERBERRY_BUSH = NaUtilsTagStatics.createEntityTypeTag(
+		NFFGirls.MOD_ID, "no_teleport_in_enderberry_bush");
 	/*
 	protected static TagKey<Block> blockTag(String name)
 	{

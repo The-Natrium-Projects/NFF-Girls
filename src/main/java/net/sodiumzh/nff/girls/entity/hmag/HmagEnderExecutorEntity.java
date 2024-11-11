@@ -3,14 +3,17 @@ package net.sodiumzh.nff.girls.entity.hmag;
 import javax.annotation.Nullable;
 
 import com.github.mechalopa.hmag.ModConfigs;
+import com.github.mechalopa.hmag.client.util.ModClientUtils;
 import com.github.mechalopa.hmag.world.entity.IBeamAttackMob;
 
+import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
+import net.minecraft.util.Tuple;
 import net.minecraft.world.Container;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
@@ -26,9 +29,16 @@ import net.minecraft.world.entity.monster.Endermite;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.BlockItem;
+import net.minecraft.world.level.ClipContext;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.gameevent.GameEvent;
+import net.minecraft.world.phys.HitResult;
+import net.minecraft.world.phys.Vec3;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 import net.sodiumzh.nff.girls.NFFGirls;
+import net.sodiumzh.nff.girls.blocks.EnderberryBushBlock;
 import net.sodiumzh.nff.girls.entity.ICarriesBlock;
 import net.sodiumzh.nff.girls.entity.INFFGirlsTamed;
 import net.sodiumzh.nff.girls.entity.ai.goal.NFFGirlsFollowOwnerGoal;
@@ -36,12 +46,14 @@ import net.sodiumzh.nff.girls.entity.ai.goal.target.NFFGirlsNearestHostileToOwne
 import net.sodiumzh.nff.girls.entity.ai.goal.target.NFFGirlsNearestHostileToSelfTargetGoal;
 import net.sodiumzh.nff.girls.entity.ai.goal.target.NFFGirlsOwnerHurtByTargetGoal;
 import net.sodiumzh.nff.girls.entity.ai.goal.target.NFFGirlsOwnerHurtTargetGoal;
-import net.sodiumzh.nff.girls.inventory.HmagEnderExecutorInventory;
-import net.sodiumzh.nff.girls.inventory.HmagEnderExecutorInventoryMenu;
+import net.sodiumzh.nff.girls.inventory.NFFGirlsEnderExecutorInventory;
+import net.sodiumzh.nff.girls.inventory.NFFGirlsHmagEnderExecutorInventoryMenu;
+import net.sodiumzh.nff.girls.registry.NFFGirlsBlocks;
 import net.sodiumzh.nff.girls.registry.NFFGirlsHealingItems;
 import net.sodiumzh.nff.girls.registry.NFFGirlsItems;
 import net.sodiumzh.nff.girls.sound.NFFGirlsSoundPresets;
 import net.sodiumzh.nff.girls.util.NFFGirlsEntityStatics;
+import net.sodiumzh.nff.services.entity.ai.NFFTamedMobAIState;
 import net.sodiumzh.nff.services.entity.ai.goal.preset.NFFWaterAvoidingRandomStrollGoal;
 import net.sodiumzh.nff.services.entity.ai.goal.preset.target.NFFHurtByTargetGoal;
 import net.sodiumzh.nff.services.entity.ai.goal.preset.target.NFFNearestAttackableTargetGoal;
@@ -51,12 +63,29 @@ import net.sodiumzh.nff.services.entity.taming.preset.NFFTamedEnderManPreset;
 import net.sodiumzh.nff.services.inventory.NFFTamedInventoryMenu;
 import net.sodiumzh.nff.services.inventory.NFFTamedMobInventory;
 
+import java.util.List;
+import java.util.Optional;
+import java.util.function.Predicate;
+import java.util.stream.Stream;
+
 // Adjusted from EnderExcutor in HMaG
 public class HmagEnderExecutorEntity extends NFFTamedEnderManPreset implements IBeamAttackMob, INFFGirlsTamed, ICarriesBlock
 {
 
+	// This value is by default -20, and increases every tick if it should do beam attack.
+	// Positive means it's doing beam attack. When it reaches the attack duration (40), damage will be dealt.
 	protected static final EntityDataAccessor<Integer> ATTACKING_TIME = SynchedEntityData.defineId(HmagEnderExecutorEntity.class, EntityDataSerializers.INT);
 	protected static final EntityDataAccessor<Integer> ATTACK_TARGET = SynchedEntityData.defineId(HmagEnderExecutorEntity.class, EntityDataSerializers.INT);
+	protected static final EntityDataAccessor<Optional<BlockPos>> GROW_ENDERBERRY_POS =
+		SynchedEntityData.defineId(HmagEnderExecutorEntity.class, EntityDataSerializers.OPTIONAL_BLOCK_POS);
+	protected static final EntityDataAccessor<Integer> GROW_ENDERBERRY_REMAINED_BEAMING_TIME = SynchedEntityData.defineId(HmagEnderExecutorEntity.class, EntityDataSerializers.INT);
+	protected static final EntityDataAccessor<Integer> GROW_ENDERBERRY_REMAINED_COOLDOWN = SynchedEntityData.defineId(HmagEnderExecutorEntity.class, EntityDataSerializers.INT);
+	protected static final int GROW_ENDERBERRY_BEAMING_TIME = 4 * 20;
+	protected static final int GROW_ENDERBERRY_COOLDOWN = 10;//5 * 60 * 20;
+	protected static final double BEAM_ATTACK_MIN_DISTANCE = 1d;
+	protected static final double BEAM_ATTACK_MAX_DISTANCE = 24d;
+	protected static final double GROW_ENDERBERRY_MAX_DISTANCE = 8d;
+
 	protected LivingEntity targetedEntity;
 	protected int clientAttackTime;
 	public boolean reduceDamage = true;
@@ -66,6 +95,10 @@ public class HmagEnderExecutorEntity extends NFFTamedEnderManPreset implements I
 		super.defineSynchedData();
 		entityData.define(ATTACKING_TIME, -20);
 		entityData.define(ATTACK_TARGET, 0);
+		entityData.define(GROW_ENDERBERRY_POS, Optional.empty());
+		entityData.define(GROW_ENDERBERRY_REMAINED_BEAMING_TIME, 0);
+		entityData.define(GROW_ENDERBERRY_REMAINED_COOLDOWN, 0);
+		teleportNotOnHurtByWater = false;
 	}
 	
 	public HmagEnderExecutorEntity(EntityType<? extends HmagEnderExecutorEntity> type, Level worldIn)
@@ -114,8 +147,7 @@ public class HmagEnderExecutorEntity extends NFFTamedEnderManPreset implements I
 				{
 					if (this.tryApplyHealingItems(player.getItemInHand(hand)) != InteractionResult.PASS)
 					{}
-					else if (hand == InteractionHand.MAIN_HAND
-							&& NFFGirlsEntityStatics.isOnEitherHand(player, NFFGirlsItems.COMMANDING_WAND.get()))
+					else if (NFFGirlsEntityStatics.isOnEitherHand(player, NFFGirlsItems.COMMANDING_WAND.get()))
 					{
 						switchAIState();
 					}	
@@ -148,35 +180,6 @@ public class HmagEnderExecutorEntity extends NFFTamedEnderManPreset implements I
 	public NFFTamedMobInventory createAdditionalInventory() {
 		return new HmagEnderExecutorInventory(5, this);
 	}
-	/*
-	@Override
-	public void updateFromInventory() {
-		super.updateFromInventory();
-		if (!this.level.isClientSide) {
-			setItemSlot(EquipmentSlot.MAINHAND, getAdditionalInventory().getItem(0));
-			setItemSlot(EquipmentSlot.OFFHAND, getAdditionalInventory().getItem(1));
-			updateHoldingBlock();
-			setItemSlot(EquipmentSlot.HEAD, ItemStack.EMPTY);
-			setItemSlot(EquipmentSlot.CHEST, ItemStack.EMPTY);
-			setItemSlot(EquipmentSlot.LEGS, ItemStack.EMPTY);
-			setItemSlot(EquipmentSlot.FEET, ItemStack.EMPTY);
-		}
-		
-	}
-
-	@Override
-	public void setInventoryFromMob() {
-
-		super.setInventoryFromMob();
-		if (!this.level.isClientSide) {
-			getAdditionalInventory().setItem(0, getItemBySlot(EquipmentSlot.MAINHAND));
-			getAdditionalInventory().setItem(1, getItemBySlot(EquipmentSlot.OFFHAND));
-			if (getCarriedBlock() != null && !getCarriedBlock().getBlock().equals(Blocks.AIR))
-				getAdditionalInventory().setItem(2, new ItemStack(getCarriedBlock().getBlock().asItem()));
-			else getAdditionalInventory().setItem(2, ItemStack.EMPTY);
-		}
-	}
-*/
 
 	@Override
 	public void setCarryingBlock(BlockState newBlock) {
@@ -214,83 +217,44 @@ public class HmagEnderExecutorEntity extends NFFTamedEnderManPreset implements I
 	// AI
 	
 	public boolean doBeamAttack = true;
-	
-	public void enderExecutorAiStep()
-	{
-		if (!this.level.isClientSide)
+
+	protected void tickHandleBeamAttack() {
+		LivingEntity target = this.getTarget();
+		if (target != null && target.isAlive() && ModConfigs.cachedServer.ENDER_EXECUTOR_BEAM_ATTACK
+			&& doBeamAttack && !this.getAIState().equals(NFFTamedMobAIState.WAIT))
 		{
-			if (this.isAlive() && !this.isNoAi() && this.level.getDifficulty().getId() > 1 && ModConfigs.cachedServer.ENDER_EXECUTOR_BEAM_ATTACK /* Added */ && doBeamAttack)
-			{
-				LivingEntity target = this.getTarget();
-
-				if (target != null && target.isAlive())
-				{
-					double d0 = this.distanceToSqr(target);
-
-					if (this.hasLineOfSight(target) && d0 > 1.0D * 1.0D && d0 <= 24.0D * 24.0D)
-					{
-						int i = this.getAttackingTime();
-						++i;
-
-						if (i == 0)
-						{
-							this.setAttackingTime(i);
-							this.setActiveAttackTarget(target.getId());
-						}
-						else if (i >= this.getAttackDuration())
-						{
-							if (this.getActiveAttackTarget() != null)
-							{
-								if (doBeamAttack 
-										&& this.attackEntityWithBeamAttack(this.getActiveAttackTarget(), 8f + 0.1f * (float)(this.getLevelHandler().getExpectedLevel())) 
-										&& this.teleportNotOnHurtByWater 
-										&& this.random.nextInt(10) == 0)
-								{
-									this.tryTeleportInOtherCases(64);
-								}
-							}
-
-							this.setAttackingTime(-(10 + this.random.nextInt(6)));
-							this.setActiveAttackTarget(0);
-						}
-						else
-						{
-							this.setAttackingTime(i);
-						}
-					}
-					else
-					{
-						this.setAttackingTime(-20);
-						this.setActiveAttackTarget(0);
-					}
+			double d0 = this.distanceToSqr(target);
+			// Case target is still in reach
+			if (this.hasLineOfSight(target) && d0 > BEAM_ATTACK_MIN_DISTANCE * BEAM_ATTACK_MIN_DISTANCE
+				&& d0 <= BEAM_ATTACK_MAX_DISTANCE * BEAM_ATTACK_MAX_DISTANCE) {
+				int i = this.getAttackingTime();
+				++i;
+				// Case to start beam attack
+				if (i == 0) {
+					this.setAttackingTime(i);
+					this.setActiveAttackTarget(target.getId());
 				}
-				else
-				{
-					this.setAttackingTime(-20);
+				// Case to deal damage
+				else if (i >= this.getAttackDuration()) {
+					if (this.getActiveAttackTarget() != null && doBeamAttack)
+						this.attackEntityWithBeamAttack(this.getActiveAttackTarget(), 8f + 0.1f * (float) (this.getLevelHandler().getExpectedLevel()));
+					this.setAttackingTime(-(10 + this.random.nextInt(6)));
+					this.setActiveAttackTarget(0);
 				}
+				// Otherwise
+				else {
+					this.setAttackingTime(i);
+				}
+			}
+			// If missing target, reset attack timer and target
+			else {
+				this.setAttackingTime(-20);
+				this.setActiveAttackTarget(0);
 			}
 		}
 		else
 		{
-			if (this.isAlive() && this.hasActiveAttackTarget())
-			{
-				if (this.clientAttackTime < this.getAttackDuration())
-				{
-					++this.clientAttackTime;
-				}
-
-				LivingEntity target = this.getActiveAttackTarget();
-
-				if (target != null)
-				{
-					this.getLookControl().setLookAt(target, 90.0F, 90.0F);
-					this.getLookControl().tick();
-				}
-			}
-			else
-			{
-				this.clientAttackTime = 0;
-			}
+			this.setAttackingTime(-20);
 		}
 	}
 
@@ -299,48 +263,42 @@ public class HmagEnderExecutorEntity extends NFFTamedEnderManPreset implements I
 	public boolean hurt(DamageSource source, float amount)
 	{
 		{
-			if (this.isInvulnerableTo(source))
-			{
+			if (this.isInvulnerableTo(source)) {
 				return false;
 			}
 			else
 			{
 				float f = amount;
-
-				if (reduceDamage)
-				{
-					if (!(source.getEntity() != null && source.isCreativePlayer()) && source != DamageSource.OUT_OF_WORLD && f > 10.0F)
-					{
-						
-							f = 10.0F + (f - 10.0F) * 0.1F;
-						
-					}
-				}
-/*
-				if (source instanceof IndirectEntityDamageSource)
-				{
-					for (int i = 0; i < 64; ++i)
-					{
-						if (!this.teleportToAvoidProjectile && this.teleport())
-						{
-							return true;
-						}
-					}
-
-					return false;
-				}
-				else*/
-				
-					return super.hurt(source, f);
-				
+				if (reduceDamage) f = this.reduceDamage(source, f);
+				return super.hurt(source, f);
 			}
 		}
 	}
-	
+
+	protected float reduceDamage(DamageSource dmgSource, float dmg) {
+		float f = dmg;
+		if (!(dmgSource.getEntity() != null
+			&& dmgSource.isCreativePlayer())
+			&& dmgSource != DamageSource.OUT_OF_WORLD
+			&& f > 10.0F) {
+			f = 10.0F + (f - 10.0F) * 0.1F;
+		}
+		return f;
+	}
+
 	@Override
 	public void aiStep()
 	{
-		enderExecutorAiStep();
+		if (!this.level.isClientSide)
+		{
+			if (this.isAlive() && !this.isNoAi()) {
+				this.tickHandleBeamAttack();
+				this.tickHandleGrowingEnderberry();
+			}
+		}
+		else {
+			this.tickUpdateClientBeamAttackTime();
+		}
 		super.aiStep();
 	}
 	
@@ -413,9 +371,7 @@ public class HmagEnderExecutorEntity extends NFFTamedEnderManPreset implements I
 		{
 			this.level.playSound((Player)null, target.getX(), target.getY(), target.getZ(), SoundEvents.ENCHANTMENT_TABLE_USE, this.getSoundSource(), 1.0F, this.random.nextFloat() * 0.2F + 0.9F);
 		}
-
-		float f = damage;			
-		return target.hurt(DamageSource.indirectMagic(this, this), f);
+		return target.hurt(DamageSource.indirectMagic(this, this), damage);
 	}
 
 	@Override
@@ -484,13 +440,24 @@ public class HmagEnderExecutorEntity extends NFFTamedEnderManPreset implements I
 		}
 		return false;
 	}
-	
+
+
+
 	@Override
 	public boolean tryTeleportOnWaterHurt(int tryTimes)
 	{
 		if (this.teleportToOwnerInRain(tryTimes))
 			return true;
-		else return super.tryTeleportOnWaterHurt(tryTimes);
+		else {
+			for (int i = 0; i < tryTimes; ++i)
+			{
+				if (this.teleport() && this.hasLineOfSight(this.getOwner()))
+				{
+					return true;
+				}
+			}
+		}
+		return false;
 	}
 	
 	// save&load
@@ -498,59 +465,158 @@ public class HmagEnderExecutorEntity extends NFFTamedEnderManPreset implements I
 	@Override
 	public void readAdditionalSaveData(CompoundTag nbt) {
 		super.readAdditionalSaveData(nbt);
+		setGrowEnderberryRemainedCooldown(nbt.getInt("growEnderberryRemainedCooldown"));
 		NFFTamedStatics.readBefriendedCommonSaveData(this, nbt);
-		/* Add more save data... */
 		this.setInit();
 	}
-	
-	/* IBaubleEquipable interface */
-/*	@Override
-	public HashMap<String, ItemStack> getBaubleSlots() {
-		HashMap<String, ItemStack> map = new HashMap<String, ItemStack>();
-		map.put("0", this.getAdditionalInventory().getItem(3));
-		map.put("1", this.getAdditionalInventory().getItem(4));
-		return map;
+
+	public void addAdditionalSaveData(CompoundTag tag) {
+		super.addAdditionalSaveData(tag);
+		tag.putInt("growEnderberryRemainedCooldown", this.getGrowEnderberryRemainedCooldown());
 	}
-	@Override
-	public BaubleHandler getBaubleHandler() {
-		return DwmgBaubleHandlers.GENERAL;
-	}*/
-	
-	// Sounds
-	
+
 	@Override
 	protected SoundEvent getAmbientSound()
 	{
 		return NFFGirlsSoundPresets.generalAmbient(super.getAmbientSound());
 	}
-	
-	// ------------------ Misc ------------------ //
-	/*
-	@Override
-	public String getModId() {
-		return NFFGirls.MOD_ID;
+
+	/* Grow Enderberry related */
+	public int getGrowEnderberryRemainedCooldown() {
+		return this.getEntityData().get(GROW_ENDERBERRY_REMAINED_COOLDOWN);
 	}
-		*/
-	// ==================================================================== //
-	// ========================= General Settings ========================= //
-	// Generally these can be copy-pasted to other INFFTamed classes //
-/*
-	@Override
-	public boolean isPersistenceRequired() {
+
+	protected void setGrowEnderberryRemainedCooldown(int val) {
+		this.getEntityData().set(GROW_ENDERBERRY_REMAINED_COOLDOWN, val);
+	}
+
+	protected void updateGrowEnderberryTimers() {
+		this.setGrowEnderberryRemainedCooldown(Math.max(this.getGrowEnderberryRemainedCooldown() - 1, 0));
+		this.getEntityData().set(GROW_ENDERBERRY_REMAINED_BEAMING_TIME,
+			Math.max(this.getEntityData().get(GROW_ENDERBERRY_REMAINED_BEAMING_TIME) - 1, 0));
+	}
+
+	private void startGrowEnderberryCooldown() {
+		this.getEntityData().set(GROW_ENDERBERRY_POS, Optional.empty());
+		this.setGrowEnderberryRemainedCooldown(GROW_ENDERBERRY_COOLDOWN);
+	}
+
+	private boolean canSeeEnderberryPos(BlockPos pos) {
+		Vec3 vec3 = new Vec3(this.getX(), this.getEyeY(), this.getZ());
+		Vec3 vec31 = new Vec3(pos.getX(), pos.getY(), pos.getZ());
+		if (vec31.distanceTo(vec3) > GROW_ENDERBERRY_MAX_DISTANCE * GROW_ENDERBERRY_MAX_DISTANCE) {
+			return false;
+		} else {
+			return this.level.clip(new ClipContext(vec3, vec31, ClipContext.Block.COLLIDER, ClipContext.Fluid.NONE, this)).getType() == HitResult.Type.MISS;
+		}
+	}
+
+	private Optional<BlockPos> findEnderberryBush() {
+		Level level = this.getLevel();
+		Predicate<BlockPos> isEnderberry = pos -> level.getBlockState(pos).is(NFFGirlsBlocks.ENDERBERRY_BUSH.get());
+		Predicate<BlockPos> isGrowable = pos -> level.getBlockState(pos).getValue(EnderberryBushBlock.AGE) < EnderberryBushBlock.MAX_AGE
+			&& level.getBlockState(pos).getValue(EnderberryBushBlock.CAN_GROW_ENDERBERRY);
+		List<BlockPos> bushesList = BlockPos.betweenClosedStream(this.getBoundingBox().inflate(GROW_ENDERBERRY_MAX_DISTANCE))
+			.filter(isEnderberry).filter(isGrowable)
+			.map(pos -> new BlockPos(pos.getX(), pos.getY(), pos.getZ()))
+			.toList();
+		return bushesList.isEmpty() ? Optional.empty() : Optional.of(bushesList.get(this.getRandom().nextInt(bushesList.size())));
+	}
+
+	// End enderberry growing action
+	private void resetGrowingEnderberry() {
+		this.getEntityData().set(GROW_ENDERBERRY_POS, Optional.empty());
+		this.getEntityData().set(GROW_ENDERBERRY_REMAINED_BEAMING_TIME, 0);
+	}
+
+	public boolean isBeamingEnderberryBush() {
+		return this.getEntityData().get(GROW_ENDERBERRY_POS).isPresent() && this.getGrowEnderberryRemainedCooldown() <= 0;
+	}
+
+	private boolean startBeamingEnderberry(BlockPos pos) {
+		if (!this.level.getBlockState(pos).is(NFFGirlsBlocks.ENDERBERRY_BUSH.get())) return false;
+		this.getEntityData().set(GROW_ENDERBERRY_POS, Optional.of(pos));
+		this.getEntityData().set(GROW_ENDERBERRY_REMAINED_BEAMING_TIME, GROW_ENDERBERRY_BEAMING_TIME);
 		return true;
 	}
 
-	@Override
-	public boolean isPreventingPlayerRest(Player pPlayer) {
-		return false;
+	private boolean doGrowEnderberry() {
+		BlockPos pos = this.getEntityData().get(GROW_ENDERBERRY_POS).orElse(null);
+		if (pos == null) return false;
+		BlockState bs = this.getLevel().getBlockState(pos);
+		if (bs.is(NFFGirlsBlocks.ENDERBERRY_BUSH.get()) && bs.getValue(EnderberryBushBlock.CAN_GROW_ENDERBERRY)
+			&& bs.getValue(EnderberryBushBlock.AGE) < EnderberryBushBlock.MAX_AGE)
+		{
+			bs = bs.setValue(EnderberryBushBlock.CAN_GROW_ENDERBERRY, false);
+			bs = bs.setValue(EnderberryBushBlock.AGE, bs.getValue(EnderberryBushBlock.AGE) + 1);
+			this.getLevel().setBlock(pos, bs, 2);
+			this.getLevel().gameEvent(GameEvent.BLOCK_CHANGE, pos, GameEvent.Context.of(bs));
+			this.startGrowEnderberryCooldown();
+			this.getEntityData().set(GROW_ENDERBERRY_POS, Optional.empty());
+			return true;
+		}
+		else return false;
 	}
 
-	@Override
-	protected boolean shouldDespawnInPeaceful() {
-		return false;
+	public Optional<BlockPos> getBeamingPos() {
+		return this.getEntityData().get(GROW_ENDERBERRY_POS);
 	}
-*/
-	// ========================= General Settings end ========================= //
-	// ======================================================================== //
 
+	protected void tickHandleGrowingEnderberry() {
+		this.updateGrowEnderberryTimers();
+		if ((this.getTarget() == null || !this.getTarget().isAlive())) {
+			if (this.isBeamingEnderberryBush()) {
+				// Case beaming succeeded
+				if (this.getEntityData().get(GROW_ENDERBERRY_REMAINED_BEAMING_TIME) <= 0) {
+					if (!doGrowEnderberry()) this.resetGrowingEnderberry();
+				}
+				// Case beaming in progress
+				else {
+					if (!this.canSeeEnderberryPos(this.getEntityData().get(GROW_ENDERBERRY_POS).get()))
+						this.resetGrowingEnderberry();
+					else {
+						BlockPos beamingPos = this.getBeamingPos().orElseThrow();
+						this.getLookControl().setLookAt(new Vec3(beamingPos.getX(), beamingPos.getY(), beamingPos.getZ()));
+					}
+				}
+			}
+			// Not beaming and not in cooldown, find and start
+			else if (this.getRandom().nextInt(10) == 0
+				&& this.getGrowEnderberryRemainedCooldown() <= 0)
+			{
+				this.findEnderberryBush().ifPresent(this::startBeamingEnderberry);
+			}
+		}
+	}
+
+	/**
+	 * For renderer accessing the beam end point
+	 */
+	@OnlyIn(Dist.CLIENT)
+	public Optional<Vec3> getBeamEndPoint(float partialTicks) {
+		return this.getTarget() != null ?
+			Optional.of(ModClientUtils.getPosition(this.getTarget(), (double)this.getTarget().getBbHeight() * 0.5D, partialTicks))
+			: this.getBeamingPos().map(pos -> new Vec3(pos.getX() + 0.5d, pos.getY() + 0.5d, pos.getZ() + 0.5d));
+	}
+
+	protected void tickUpdateClientBeamAttackTime() {
+		if (!this.level.isClientSide) throw new RuntimeException();
+		if (this.isAlive() && this.hasActiveAttackTarget())
+		{
+			if (this.clientAttackTime < this.getAttackDuration())
+			{
+				++this.clientAttackTime;
+			}
+			LivingEntity target = this.getActiveAttackTarget();
+			if (target != null)
+			{
+				this.getLookControl().setLookAt(target, 90.0F, 90.0F);
+				this.getLookControl().tick();
+			}
+		}
+		else
+		{
+			this.clientAttackTime = 0;
+		}
+	}
 }
