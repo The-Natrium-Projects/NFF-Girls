@@ -1,0 +1,29 @@
+[
+  [
+    {
+      "action": "settings",
+      "level": 4
+    },
+    {
+      "action": "buy",
+      "item": "iceandfire:ectoplasm",
+      "amount": [12, 16],
+      "price": 1,
+      "maxUses": 4
+    },
+    {
+      "action": "buy",
+      "item": "alexsmobs:soul_heart",
+      "amount": 1,
+      "price": 1,
+      "maxUses": 4
+    },
+    {
+      "action": "buy",
+      "item": "iceandfire:dread_shard",
+      "amount": [16, 20],
+      "price": 1,
+      "maxUses": 4
+    }
+  ]
+]

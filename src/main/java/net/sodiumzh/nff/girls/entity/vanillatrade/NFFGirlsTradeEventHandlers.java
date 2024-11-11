@@ -1,6 +1,7 @@
 package net.sodiumzh.nff.girls.entity.vanillatrade;
 
 import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResult;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import net.minecraftforge.event.entity.living.LivingEvent.LivingTickEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent.EntityInteract;
@@ -33,7 +34,10 @@ public class NFFGirlsTradeEventHandlers
 				if (cap.isValidTrader()) {
 					cap.openTradingScreen(event.getEntity(), NaUtilsInfoStatics.createTranslatable("info.nffgirls.open_trade"), 1);
 					event.setCanceled(true);
+					event.setCancellationResult(InteractionResult.sidedSuccess(event.getEntity().getLevel().isClientSide()));
 				}
+				else event.setCancellationResult(InteractionResult.PASS);
+
 			});
 		}
 	}

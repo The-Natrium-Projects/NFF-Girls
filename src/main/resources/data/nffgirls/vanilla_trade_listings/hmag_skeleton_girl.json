@@ -1,0 +1,54 @@
+[
+  {
+    "action": "settings",
+    "level": 1
+  },
+  {
+    "action": "buy",
+    "item": "alexsmobs:fish_bones",
+    "amount": [24, 36],
+    "price": 1,
+    "maxUses": 4
+  },
+  {
+    "action": "settings",
+    "level": 3
+  },
+  {
+    "action": "buy",
+    "item": "alexsmobs:centipede_leg",
+    "amount": [4, 7],
+    "price": 1,
+    "maxUses": 4
+  },
+  {
+    "action": "settings",
+    "level": 4
+  },
+  {
+    "action": "buy",
+    "item": "alexsmobs:rocky_shell",
+    "amount": [2, 3],
+    "price": 1,
+    "maxUses": 4
+  },
+  {
+    "action": "buy",
+    "item": "iceandfire:troll_tusk",
+    "amount": [4, 6],
+    "price": 1,
+    "maxUses": 4
+  },
+  {
+    "action": "settings",
+    "level": 5
+  },
+  {
+    "action": "sell",
+    "item": "twilightforest:triple_bow",
+    "amount": 1,
+    "price": [40, 48],
+    "maxUses": 1,
+    "weight": 0.5
+  }
+]

@@ -1,0 +1,42 @@
+[
+  {
+    "action": "settings",
+    "level": 2
+  },
+  {
+    "action": "buy",
+    "item": "twilightforest:arctic_fur",
+    "amount": [16, 24],
+    "price": 1,
+    "maxUses": 4
+  },
+  {
+    "action": "settings",
+    "level": 3
+  },
+  {
+    "action": "buy",
+    "item": "iceandfire:troll_leather_frost",
+    "amount": [6, 8],
+    "price": 1,
+    "maxUses": 4
+  },
+  {
+    "action": "buy",
+    "item": "iceandfire:sapphire_gem",
+    "amount": [8, 12],
+    "price": 1,
+    "maxUses": 4
+  },
+  {
+    "action": "settings",
+    "level": 4
+  },
+  {
+    "action": "buy",
+    "item": "iceandfire:ice_dragon_blood",
+    "amount": [2, 3],
+    "price": [4, 8],
+    "maxUses": 4
+  }
+]
