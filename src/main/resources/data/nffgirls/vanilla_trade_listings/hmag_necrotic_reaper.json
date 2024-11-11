@@ -1,0 +1,36 @@
+[
+  {
+    "action": "settings",
+    "level": 1
+  },
+  {
+    "action": "settings",
+    "level": 2
+  },
+  {
+    "action": "settings",
+    "level": 3
+  },
+  {
+    "action": "buy",
+    "item": "alexsmobs:skreecher_soul",
+    "amount": [4, 6],
+    "price": 1,
+    "maxUses": 4
+  },
+  {
+    "action": "settings",
+    "level": 4
+  },
+  {
+    "action": "settings",
+    "level": 5
+  },
+  {
+    "action": "sell",
+    "item": "twilightforest:twilight_scepter",
+    "amount": 1,
+    "price": [24, 32],
+    "maxUses": 1
+  }
+]

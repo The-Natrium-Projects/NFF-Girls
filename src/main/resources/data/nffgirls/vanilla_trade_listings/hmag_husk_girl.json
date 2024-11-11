@@ -1,0 +1,74 @@
+[
+  {
+    "action": "settings",
+    "level": 1
+  },
+  {
+    "action": "buy",
+    "item": "byg:aloe_vera",
+    "amount": [24, 32],
+    "price": 1,
+    "maxUses": 4
+  },
+  {
+    "action": "buy",
+    "item": "byg:baobab_fruit",
+    "amount": [48, 64],
+    "price": 1,
+    "maxUses": 4
+  },
+  {
+    "action": "settings",
+    "level": 3
+  },
+  {
+    "action": "buy",
+    "item": "alexsmobs:rattlesnake_rattle",
+    "amount": [4, 6],
+    "price": 1,
+    "maxUses": 4
+  },
+  {
+    "action": "buy",
+    "item": "alexsmobs:tarantura_hawk_wing_fragment",
+    "amount": [4, 6],
+    "price": 1,
+    "maxUses": 4
+  },
+  {
+    "action": "settings",
+    "level": 4
+  },
+  {
+    "action": "buy",
+    "item": "iceandfire:myrmex_desert_chitin",
+    "amount": [4, 8],
+    "price": 1,
+    "maxUses": 4
+  },
+  {
+    "action": "sell",
+    "item": "alexsmobs:guster_eye",
+    "amount": 1,
+    "price": [6, 12],
+    "maxUses": 2
+  },
+  {
+    "action": "settings",
+    "level": 5
+  },
+  {
+    "action": "sell",
+    "item": "twilightforest:crumble_horn",
+    "amount": 1,
+    "price": [32, 46],
+    "maxUses": 1
+  },
+  {
+    "action": "sell",
+    "item": "iceandfire:deathworm_tounge",
+    "amount": 1,
+    "price": [16, 24],
+    "maxUses": 1
+  }
+]
