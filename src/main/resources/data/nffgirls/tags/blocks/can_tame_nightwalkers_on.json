@@ -1,7 +1,7 @@
 {
   "replace" : false,
-  "values" : [ 
-		"nffgirls:luminous_terracotta",
-		"nffgirls:enhanced_luminous_terracotta"
-	 ]
+  "values" : [
+	  {"id": "nffgirls:luminous_terracotta", "required": false},
+	  {"id": "nffgirls:enhanced_luminous_terracotta", "required": false}
+  ]
 }
