@@ -1,0 +1,43 @@
+[
+  {
+    "action": "settings",
+    "level": 2
+  },
+  {
+    "action": "buy",
+    "item": "alexsmobs:cosmic_cod",
+    "amount": [18, 24],
+    "price": 1,
+    "maxUses": 4
+  },
+  {
+    "action": "settings",
+    "level": 4
+  },
+  {
+    "action": "sell",
+    "item": "alexsmobs:caspid",
+    "amount": 1,
+    "price": [2, 3],
+    "maxUses": 4
+  },
+
+  {
+    "action": "settings",
+    "level": 5
+  },
+  {
+    "action": "sell",
+    "item": "alexsmobs:mimicream",
+    "amount": 2,
+    "price": 1,
+    "maxUses": 4
+  },
+  {
+    "action": "sell",
+    "item": "twilightforest:ender_bow",
+    "amount": 1,
+    "price": [48, 64],
+    "maxUses": 1
+  }
+]

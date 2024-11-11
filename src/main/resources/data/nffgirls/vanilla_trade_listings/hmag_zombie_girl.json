@@ -1,0 +1,24 @@
+[
+  {
+    "action": "settings",
+    "level": 4
+  },
+  {
+    "action": "buy",
+    "item": "iceandfire:troll_skull",
+    "amount": 1,
+    "price": [4, 6],
+    "maxUses": 2
+  },
+  {
+    "action": "settings",
+    "level": 5
+  },
+  {
+    "action": "sell",
+    "item": "twilightforest:zombie_scepter",
+    "amount": 1,
+    "price": [32, 46],
+    "maxUses": 1
+  }
+]

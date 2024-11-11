@@ -1,0 +1,21 @@
+[
+  {
+    "action": "settings",
+    "level": 5
+  },
+  {
+    "action": "sell",
+    "item": "twilightforest:charm_of_keeping_1",
+    "amount": 1,
+    "price": [3, 5],
+    "maxUses": 2
+  },
+  {
+    "action": "sell",
+    "item": "twilightforest:charm_of_keeping_2",
+    "amount": 1,
+    "price": [16, 24],
+    "maxUses": 1,
+    "weight": 0.5
+  }
+]

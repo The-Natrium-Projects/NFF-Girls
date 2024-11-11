@@ -63,8 +63,8 @@ public class NFFGirls
         // NaUtils registries
         NFFGirlsHealingItems.HEALING_ITEMS.merge();
         NFFGirlsFunctions.FUNCTIONS.merge();
-        NaUtilsRegistries.VANILLA_TRADE_REGISTRIES.register(new ResourceLocation(NFFGirls.MOD_ID, "trade_registry"), () -> NFFGirlsTrades.TRADES);
-        NFFGirlsTrades.LISTINGS.merge();
+        //NaUtilsRegistries.VANILLA_TRADE_REGISTRIES.register(new ResourceLocation(NFFGirls.MOD_ID, "trade_registry"), () -> NFFGirlsTrades.TRADES);
+        //NFFGirlsTrades.LISTINGS.merge();
 
         // Register ourselves for server and other game events we are interested in
         MinecraftForge.EVENT_BUS.register(this);

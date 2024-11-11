@@ -1,0 +1,24 @@
+[
+  {
+    "action": "settings",
+    "level": 1
+  },
+  {
+    "action": "buy",
+    "item": "byg:anthracite",
+    "amount": [28, 36],
+    "price": 1,
+    "maxUses": 4
+  },
+  {
+    "action": "settings",
+    "level": 2
+  },
+  {
+    "action": "buy",
+    "item": "byg:brim_powder",
+    "amount": [36, 48],
+    "price": 1,
+    "maxUses": 4
+  }
+]
