@@ -1,0 +1,7 @@
+{
+  "desc": "Living entities with this tag will not teleport in Enderberry Bush.",
+  "replace" : false,
+  "values" : [
+    "nffgirls:hmag_ender_executor"
+  ]
+}
