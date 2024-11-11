@@ -1,0 +1,12 @@
+{
+  "replace" : false,
+  "values" : [
+    "hmag:evil_crystal_block",
+    "hmag:ancient_stone_block",
+    {
+      "desc": "this is 1.20.1 only",
+      "id": "hmag:ender_plasm_block",
+      "required": false
+    }
+  ]
+}

@@ -68,11 +68,10 @@ public class NFFGirlsHmagEnderExecutorRenderer extends MobRenderer<HmagEnderExec
 		endermanmodel.carrying = blockstate != null;
 		endermanmodel.creepy = entity.isCreepy();
 		LivingEntity target = entity.getActiveAttackTarget();
-		endermanmodel.beamAttacking = entity.hasActiveAttackTarget() && target != null;
+		endermanmodel.beamAttacking = entity.hasActiveAttackTarget() && target != null || entity.isBeamingEnderberryBush();
 
 		super.render(entity, entityYaw, partialTicks, pose, buffer, packedLight);
-
-		if (entity.isAlive() && target != null)
+		if (entity.isAlive() && (target != null || entity.isBeamingEnderberryBush()))
 		{
 			float f = entity.getAttackAnimationScale(partialTicks);
 			float f1 = (float)(entity.level().getGameTime() % 24000L) + partialTicks;
@@ -80,7 +79,7 @@ public class NFFGirlsHmagEnderExecutorRenderer extends MobRenderer<HmagEnderExec
 			float f3 = entity.getEyeHeight();
 			pose.pushPose();
 			pose.translate(0.0D, (double)f3 + (double)entity.getBbHeight() * 0.05D, 0.0D);
-			Vec3 vec3 = ModClientUtils.getPosition(target, (double)target.getBbHeight() * 0.5D, partialTicks);
+			Vec3 vec3 = entity.getBeamEndPoint(partialTicks).orElseThrow();
 			Vec3 vec31 = ModClientUtils.getPosition(entity, (double)f3, partialTicks);
 			Vec3 vec32 = vec3.subtract(vec31);
 			float f4 = (float)(vec32.length() + 1.0D);
