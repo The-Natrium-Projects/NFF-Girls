@@ -35,6 +35,7 @@ import net.minecraft.world.phys.Vec3;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import net.sodiumzh.nautils.statics.NaUtilsEntityStatics;
+import net.sodiumzh.nautils.statics.NaUtilsParticleStatics;
 import net.sodiumzh.nff.girls.registry.NFFGirlsItems;
 import net.sodiumzh.nff.girls.registry.NFFGirlsTags;
 import net.sodiumzh.nff.services.NFFServices;
@@ -69,19 +70,6 @@ public class EnderberryBushBlock extends SweetBerryBushBlock {
             BlockState blockstate = pState.setValue(CAN_GROW_ENDERBERRY, true);
             pLevel.setBlock(pPos, blockstate, 2);
             pLevel.gameEvent(GameEvent.BLOCK_CHANGE, pPos, GameEvent.Context.of(blockstate));
-        }
-    }
-
-    @Override
-    public void entityInside(BlockState pState, Level pLevel, BlockPos pPos, Entity pEntity) {
-        if (pEntity instanceof LivingEntity living && !(pEntity instanceof EnderMan || pEntity.getType().is(NFFGirlsTags.NO_TELEPORT_IN_ENDERBERRY_BUSH))) {
-            if (!pLevel.isClientSide && pState.getValue(AGE) > 0 && (pEntity.xOld != pEntity.getX() || pEntity.zOld != pEntity.getZ())) {
-                double d0 = Math.abs(pEntity.getX() - pEntity.xOld);
-                double d1 = Math.abs(pEntity.getZ() - pEntity.zOld);
-                if (d0 >= (double)0.003F || d1 >= (double)0.003F) {
-                    NaUtilsEntityStatics.chorusLikeTeleport(living);
-                }
-            }
         }
     }
 

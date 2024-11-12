@@ -81,7 +81,7 @@ public class HmagEnderExecutorEntity extends NFFTamedEnderManPreset implements I
 	protected static final EntityDataAccessor<Integer> GROW_ENDERBERRY_REMAINED_BEAMING_TIME = SynchedEntityData.defineId(HmagEnderExecutorEntity.class, EntityDataSerializers.INT);
 	protected static final EntityDataAccessor<Integer> GROW_ENDERBERRY_REMAINED_COOLDOWN = SynchedEntityData.defineId(HmagEnderExecutorEntity.class, EntityDataSerializers.INT);
 	protected static final int GROW_ENDERBERRY_BEAMING_TIME = 4 * 20;
-	protected static final int GROW_ENDERBERRY_COOLDOWN = 10;//5 * 60 * 20;
+	protected static final int GROW_ENDERBERRY_COOLDOWN = 5 * 60 * 20;
 	protected static final double BEAM_ATTACK_MIN_DISTANCE = 1d;
 	protected static final double BEAM_ATTACK_MAX_DISTANCE = 24d;
 	protected static final double GROW_ENDERBERRY_MAX_DISTANCE = 8d;
