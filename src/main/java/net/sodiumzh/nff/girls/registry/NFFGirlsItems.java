@@ -104,7 +104,7 @@ public class NFFGirlsItems {
 		
 	/************************************/
 	/* Item Registering, with constants */ 
-	/************************************/	
+	/************************************/
 
 	// Crafting intermediates
 	public static final RegistryObject<Item> DEATH_CRYSTAL = register("death_crystal", () -> new Item(new Item.Properties().rarity(Rarity.UNCOMMON)));

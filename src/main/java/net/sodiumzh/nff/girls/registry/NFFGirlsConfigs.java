@@ -19,6 +19,7 @@ public class NFFGirlsConfigs
 	public static ForgeConfigSpec.BooleanValue GHASTS_NO_AMBIENT_SOUND;
 
 	// Combat
+	public static ForgeConfigSpec.BooleanValue ENABLE_FRIENDLY_DAMAGE;
 	public static ForgeConfigSpec.BooleanValue ENABLE_PROJECTILE_FRIENDLY_DAMAGE;
 	public static ForgeConfigSpec.DoubleValue MAX_HEALTH_BOOST_BY_LEVEL;
 	public static ForgeConfigSpec.DoubleValue MAX_ATK_BOOST_BY_LEVEL;
@@ -58,6 +59,8 @@ public class NFFGirlsConfigs
 		BUILDER.pop();
 		
 		BUILDER.push("combat");
+		ENABLE_FRIENDLY_DAMAGE = BUILDER.comment("If true, players and owning NFF-Girls mobs can damage each other.")
+			.define("enableFriendlyDamage", true);
 		ENABLE_PROJECTILE_FRIENDLY_DAMAGE = BUILDER.comment("If true, projectiles from friendly mobs in NFF-Girls mods will hurt allies.")
 				.define("enableProjectileFriendlyDamage", false);
 		MAX_HEALTH_BOOST_BY_LEVEL = BUILDER.comment("Max (max HP) value increase by level upgrade. Zero = no limit.")
@@ -111,6 +114,7 @@ public class NFFGirlsConfigs
 		
 		public static class Combat
 		{
+			public static boolean ENABLE_FRIENDLY_DAMAGE;
 			public static boolean ENABLE_PROJECTILE_FRIENDLY_DAMAGE;
 			public static double MAX_HEALTH_BOOST_BY_LEVEL;
 			public static double MAX_ATK_BOOST_BY_LEVEL;
@@ -145,6 +149,7 @@ public class NFFGirlsConfigs
 			Sound.ZOMBIES_NO_AMBIENT_SOUND = NFFGirlsConfigs.ZOMBIES_NO_AMBIENT_SOUND.get();
 			Sound.SKELETONS_NO_AMBIENT_SOUND = NFFGirlsConfigs.SKELETONS_NO_AMBIENT_SOUND.get();
 			Sound.GHASTS_NO_AMBIENT_SOUND = NFFGirlsConfigs.GHASTS_NO_AMBIENT_SOUND.get();
+			Combat.ENABLE_FRIENDLY_DAMAGE = NFFGirlsConfigs.ENABLE_FRIENDLY_DAMAGE.get();
 			Combat.ENABLE_PROJECTILE_FRIENDLY_DAMAGE = NFFGirlsConfigs.ENABLE_PROJECTILE_FRIENDLY_DAMAGE.get();
 			Combat.MAX_HEALTH_BOOST_BY_LEVEL = NFFGirlsConfigs.MAX_HEALTH_BOOST_BY_LEVEL.get();
 			Combat.MAX_ATK_BOOST_BY_LEVEL = NFFGirlsConfigs.MAX_ATK_BOOST_BY_LEVEL.get();
