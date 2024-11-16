@@ -1,3 +1,8 @@
 <NEWLINE>
-    test
 <NEWLINE>
+<NEWLINE>
+<NEWLINE>
+The Zombie Girl is a common mob which spawns occasionally in place of Zombies in the Overworld.
+Its behaviors are similar to Vanilla Zombies while the attributes are a bit higher.
+<NEWLINE>
+When a Zombie Girl is slain, it has a chance to dropsome Evil Crystal Fragments, a basic ingredient for most items in this mod.

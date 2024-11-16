@@ -1,3 +1,10 @@
 <NEWLINE>
-    占位符
 <NEWLINE>
+<NEWLINE>
+<NEWLINE>
+The Ghastly Seeker is a rare mob which only spawns in place of the Ghast in a small chance.
+<NEWLINE>
+The features of the Ghastly Seeker are similar to vanilla Ghasts, but it has much higher attributes. Besides,
+the damage from its own fireball cannot immediately kill it but only deals twice damage.
+<NEWLINE>
+As a Nether mob, it's immune to fire damage.

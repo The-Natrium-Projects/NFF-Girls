@@ -1,3 +1,9 @@
 <NEWLINE>
-    占位符
 <NEWLINE>
+<NEWLINE>
+<NEWLINE>
+The Dodomeki is a monster from the legends of the oriental islands. It spawns in the Taiga biomes above Y=64.
+Its melee attack gives Slowness I when the difficulty is normal or above. It burns under the sun, although it's
+not undead.
+<NEWLINE>
+When it's slain, it can drop some Randomberry. This food can give you a random effect for a short time, either positive or negative.

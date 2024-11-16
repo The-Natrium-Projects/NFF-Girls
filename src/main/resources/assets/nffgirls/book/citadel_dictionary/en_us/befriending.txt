@@ -1,0 +1,22 @@
+Usually, you must satisfy them to be friendly with a monster girl by giving them items.
+<NEWLINE>
+Most mobs requires you to right click with the items in hand to give. Sometimes the action of giving
+also requires additional conditions, such as effects or equipment. After giving, the "Friendly Progress"
+increases depending on the item types.
+<NEWLINE>
+Some types of mobs have totally different methods to get friendly with, described under the entries of specific mobs.
+<NEWLINE>
+Generally, there are cheap and expensive items to give. Cheap items can slightly boost the progress, while the
+expensive ones can significantly boost the progress, and sometimes even, if lucky enough, succeed immediately.
+<NEWLINE>
+Note that the giving action has a cool-down time. After giving successfully, the mob will generate glint (green stars) particles.
+If failed due to the cool-down, it will generate black smoke particles. Each time the progress increases by 20%, the mob
+will generate a heart particle.
+<NEWLINE>
+If other conditions are satisfied, but you've already been hostile to the mob, it will generate anger particles.
+<NEWLINE>
+Some hostile behaviors can interrupt the progress. Once interrupted, the progress will drop back to 0, and you have to
+start from the beginning. At this time the mob will also generate anger particles.
+<NEWLINE>
+Some mobs are more alert, and you need to put the present on the ground. They will pick them up like Piglins,
+hold the item for a few seconds, consume it and boost the progress.

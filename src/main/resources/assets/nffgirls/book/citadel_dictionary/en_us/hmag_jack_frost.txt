@@ -1,0 +1,90 @@
+<NEWLINE>
+<NEWLINE>
+<NEWLINE>
+<NEWLINE>
+    想要与冰霜女巫化敌为友，需要玩
+<NEWLINE>
+家将礼物放置在地上等待冰霜女巫捡
+<NEWLINE>
+起并收下，冰霜女巫收下物品需要5秒，
+<NEWLINE>
+捡起物品的冷却时间为15秒。
+<NEWLINE>
+    冰霜女巫喜爱的礼物及每种礼物增
+<NEWLINE>
+加的友好化进度如下:
+<NEWLINE>
+    蓝冰：每个增加0.03 ~ 0.06的友
+<NEWLINE>
+好化进度；
+<NEWLINE>
+    青金石：每个增加0.03 ~ 0.06的
+<NEWLINE>
+友好化进度。
+<NEWLINE>
+    绿宝石：每个增加0.04 ~ 0.08的
+<NEWLINE>
+友好化进度。
+<NEWLINE>
+    钻石：每个增加0.06 ~ 0.1的友
+<NEWLINE>
+好化进度。
+<NEWLINE>
+    治愈莓果/随机莓果/经验莓果：每
+<NEWLINE>
+个增加0.08 ~ 0.12的友好化进度；
+<NEWLINE>
+    金苹果/黄金热带鱼：每个增加0.1 
+<NEWLINE>
+~ 0.15的友好化进度。
+<NEWLINE>
+    冰霜炸弹：每个增加0.1 ~ 0.15的
+<NEWLINE>
+友好化进度。（同时安装暮色森林模
+<NEWLINE>
+组）
+<NEWLINE>
+    冰霜女巫友好化成功后，可以定制
+<NEWLINE>
+4个饰品栏。要想使冰霜女巫免疫炎
+<NEWLINE>
+热生物群系造成的伤害，至少需要装
+<NEWLINE>
+备1个抵抗护符。
+<NEWLINE>
+    冰霜女巫只能通过投掷雪球攻击。
+<NEWLINE>
+雪球的基础伤害为3，每1点攻击力
+<NEWLINE>
+提供1点额外伤害。当达到15、30、
+<NEWLINE>
+60级时，冰霜女巫每一次攻击将会投
+<NEWLINE>
+出更多雪球。
+<NEWLINE>
+    冰霜女巫可以利用以下物品进行治
+<NEWLINE>
+疗，每次使用治疗物品冷却时间为2
+<NEWLINE>
+秒。
+<NEWLINE>
+    雪球：每次治疗2生命值；
+<NEWLINE>
+    雪块：每次治疗5生命值；
+<NEWLINE>
+    南瓜派：每次治疗15生命值；
+<NEWLINE>
+    金苹果：恢复满生命值。
+<NEWLINE>
+    冰霜女巫的独特交易清单为：
+<NEWLINE>
+等级1：
+<NEWLINE>
+等级2：
+<NEWLINE>
+等级3：
+<NEWLINE>
+等级4：
+<NEWLINE>
+等级5：
+

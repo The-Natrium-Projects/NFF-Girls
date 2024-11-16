@@ -1,0 +1,30 @@
+<NEWLINE>
+<NEWLINE>
+<NEWLINE>
+<NEWLINE>
+The Dogu is an ancient automated golem warrior, spawning underground in the Jungle and Badland biomes.
+<NEWLINE>
+It spawns with Stong or Iron Sword, and doesn't have the sound of footsteps. Its attack has a strong knockback, and when
+difficulty is normal or above, gives Slowness II and Mining Fatigue II.
+<NEWLINE>
+The Dogu can breathe underwater, and is immune to falling and Cactus damage. It takes halved projectile, explosion,
+Powder Snow and falling blocks like the Anvil. Meanwhile, it takes double damage from Pickaxes.
+<NEWLINE>
+When a Dogu is slain, it may drop some Ancient Stones. This is a unique ingredient for Ancient Stone Blocks,
+Ancient suit, Ancient Shield and Nemesis Blade.
+<NEWLINE>
+The Ancient suit is stronger than the Diamond but a bit weaker than the Netherite suit.
+If you have 2 Ancient armors, you'll be immune to Slowness I, Mining Fatigue I and Weakness I.
+Wearing 3 Ancient armors gives immunity to the Lv. II of the effects above, and wearing 4 will
+make you immune to all level.
+<NEWLINE>
+The Ancient Shield can give the attacker Slowness I, Mining Fatigue I and Weakness I when blocking.
+Also, it can boost your knockback resistance.
+<NEWLINE>
+The Nemesis Blade is a legendary weapon. It is stronger when your experience level is low. When it hits the enemy,
+it will randomly give Slowness I, Mining Fatigue I or Weakness I for at most 10 seconds. However, if your XP level is too
+high, your movement speed will be halved when using this weapon.
+<NEWLINE>
+When the weapon's level is above 1, you can hold RMB to shoot a magical bullet, consuming an XP level. The magical bullet
+deals damage based on the weapon's level, and give the target Weakness II, Mining Fatigue II, slowness II and Wither II
+for at most 15 seconds.
