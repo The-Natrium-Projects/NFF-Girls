@@ -1,3 +1,15 @@
 <NEWLINE>
-    占位符
 <NEWLINE>
+<NEWLINE>
+<NEWLINE>
+The Cursed Doll is an ownerless magical creature. It spawns in the Forest biomes above Y=64.
+<NEWLINE>
+It holds a Wooden or Stone Axe as weapon. The attack has a strong knockback and can disable the shield.
+If the difficulty is normal or above, the attack deals Slowness I.
+<NEWLINE>
+It burns under the sun, and takes doubled fire damage. It falls slowly like the Chicken, and doesn't take
+falling damage. It can step onto 1.5 blocks above.
+<NEWLINE>
+The Cursed Doll doesn't have the sound of footstep. Be aware of it's "surprise".
+<NEWLINE>
+It has 2 different textures.

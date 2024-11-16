@@ -1,3 +1,10 @@
 <NEWLINE>
-    占位符
 <NEWLINE>
+<NEWLINE>
+<NEWLINE>
+The Creeper Girl is a common mob which spawns occasionally in place of the Creeper in the Overworld.
+Its behaviors are similar to the Vanilla Creeper while the attributes are a bit higher. In addition, it has the sound of footstep, allowing you to hear its approach.
+<NEWLINE>
+When a Creeper Girl is slain, it has a chance to drop some Evil Crystal Fragments, a basic ingredient for most items in this mod.
+<NEWLINE>
+It has 3 different textures.

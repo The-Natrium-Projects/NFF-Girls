@@ -1,0 +1,67 @@
+<NEWLINE>
+<NEWLINE>
+<NEWLINE>
+<NEWLINE>
+    想要与蜜蜂娘化敌为友，首先需要
+<NEWLINE>
+玩家布置一个让蜜蜂娘安心的场地，
+<NEWLINE>
+还需要玩家手持礼物右键蜜蜂娘赠予，
+<NEWLINE>
+礼物赠予的冷却时间为10秒。
+<NEWLINE>
+    在友好化全过程中，以蜜蜂娘为中
+<NEWLINE>
+心的9x9x9的空间中必须保持有至少
+<NEWLINE>
+8个蜂蜜块。一旦蜂蜜块少于8个，友
+<NEWLINE>
+好化进度会以每秒0.1的速度下降，
+<NEWLINE>
+同时产生大量烟雾粒子。如果玩家被
+<NEWLINE>
+蜜蜂娘击中并造成伤害，则会有60秒
+<NEWLINE>
+冷却，期间无法赠予礼物，但不会打
+<NEWLINE>
+断友好化过程。
+<NEWLINE>
+    蜜蜂娘喜爱的礼物及每种礼物增加
+<NEWLINE>
+的友好化进度如下:
+<NEWLINE>
+    蜂蜜瓶：每个增加0.04 ~ 0.08的
+<NEWLINE>
+友好化进度，赠予后返还一个玻璃瓶。
+<NEWLINE>
+    蜂蜜块：每个增加0.08 ~ 0.16的
+<NEWLINE>
+友好化进度。  
+<NEWLINE>
+    蜜蜂娘友好化成功后，可以定制主
+<NEWLINE>
+副手物品，并有两个饰品栏。
+<NEWLINE>
+    蜜蜂娘可以利用以下物品进行治疗，
+<NEWLINE>
+每次使用治疗物品冷却时间为2秒。
+<NEWLINE>
+    蜂蜜瓶：每次治疗5生命值；
+<NEWLINE>
+    蜜脾：每次治疗10生命值；
+<NEWLINE>
+    蜂蜜块：每次治疗15生命值；
+<NEWLINE>
+    神秘花瓣：恢复满生命值。
+<NEWLINE>
+    蜜蜂娘的独特交易清单为：
+<NEWLINE>
+等级1：
+<NEWLINE>
+等级2：
+<NEWLINE>
+等级3：
+<NEWLINE>
+等级4：
+<NEWLINE>
+等级5：

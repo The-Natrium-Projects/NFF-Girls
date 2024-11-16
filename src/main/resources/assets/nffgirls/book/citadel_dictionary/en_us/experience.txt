@@ -1,0 +1,9 @@
+Monster girls can boost the experience level by killing mobs. When a monster girl kills a mob, the experience will
+not drop as orbs, but directly be given to the monster girl. The XP amount requirement for level-up is same as players. 
+The experience can also repair the monster girls' equipment with Mending enchantment.
+<NEWLINE>
+Each experience level provides extra max HP by 1 and attack by 0.1. When it dies, a half of the experience will be lost.
+<NEWLINE>
+Note that the monster girls will not attack the unfriendly monster girls of the same type.
+<NEWLINE>
+When a monster girl dies, a Respawner will be generated and given to its owner, for respawning the monster girl.
