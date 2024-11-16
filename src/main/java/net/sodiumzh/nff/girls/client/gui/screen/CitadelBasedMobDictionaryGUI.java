@@ -42,7 +42,7 @@ public class CitadelBasedMobDictionaryGUI extends GuiBasicBook {
             stack.pushPose();
             stack.translate((double)k, (double)l, 0.0);
             stack.scale(2.75F, 2.75F, 2.75F);
-            this.itemRenderer.renderGuiItem(new ItemStack((ItemLike) NFFGirlsItems.TAB_ICON.get()), 25, 14);
+            //this.itemRenderer.renderGuiItem(new ItemStack((ItemLike) NFFGirlsItems.TAB_ICON.get()), 25, 14);
             this.itemRenderer.blitOffset = 0.0F;
             stack.popPose();
             RenderSystem.applyModelViewMatrix();
