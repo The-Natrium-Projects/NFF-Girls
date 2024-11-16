@@ -1,0 +1,18 @@
+<NEWLINE>
+<NEWLINE>
+<NEWLINE>
+<NEWLINE>
+The Fortress Keeper is a powerful golem made of Nether Bricks, and spawns in the Nether Fortress.
+<NEWLINE>
+It can perform both close and distant attack. When its enemy is close, it will perform melee attack and make a strong
+knockback. The melee attack can also give Slowness I when the difficulty is normal or above. When the enemy is far away,
+it can shoot projectiles which can cause fire and small explosions.
+<NEWLINE>
+The Fortress Keeper is immune to fire, and halves projectile, magic and Cactus damage.
+<NEWLINE>
+When a Fortress Keeper is slain, it can drop some Burning Cores. This is a unique ingredient for advanced items like
+Fortress Shield and Potion of Combustion. Entities with Combustion effect will be on fire during the whole affected time.
+It can also perform as a fuel.
+<NEWLINE>
+The Fortress Shield can cut your taken fire damage by 1/4, and has a chance of 1/3 to ignite the attacker for 8s.
+When holding a Fortress Shield, you're immune to Combustion effect, although the existing effect cannot be removed.

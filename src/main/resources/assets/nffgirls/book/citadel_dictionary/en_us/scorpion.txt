@@ -1,0 +1,21 @@
+<NEWLINE>
+<NEWLINE>
+<NEWLINE>
+<NEWLINE>
+    沙漠蝎是一种巨大的蝎型魔物，自
+<NEWLINE>
+然生成于主世界Y轴64层及以上的沙
+<NEWLINE>
+漠和恶地群系中。
+<NEWLINE>
+    沙漠蝎使用近战方式攻击敌人，游
+<NEWLINE>
+戏难度普通及以上时，其攻击命中会
+<NEWLINE>
+施加中毒Ⅰ效果。
+<NEWLINE>
+    沙漠蝎免疫中毒状态效果，但由于
+<NEWLINE>
+是节肢生物的一种，带有节肢杀手附
+<NEWLINE>
+魔的武器能对其造成更多伤害。

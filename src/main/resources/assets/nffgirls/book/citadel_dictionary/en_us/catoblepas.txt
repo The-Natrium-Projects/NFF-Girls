@@ -1,0 +1,10 @@
+<NEWLINE>
+<NEWLINE>
+<NEWLINE>
+<NEWLINE>
+The Catoblepas is a bull-like monster which spawns on the Plain and Savanna biomes above Y=64.
+<NEWLINE>
+Its attack has a strong knockback, and gives Blindness and Slowness II when the difficulty is normal or above.
+It's immune to Blindness effect.
+<NEWLINE>
+When it's slain, it can drop some Randomberry. This food can give you a random effect for a short time, either positive or negative.

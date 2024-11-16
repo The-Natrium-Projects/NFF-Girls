@@ -1,0 +1,13 @@
+<NEWLINE>
+<NEWLINE>
+<NEWLINE>
+<NEWLINE>
+The Ghost is a hostile spirit in the darkness, and is common in the Overworld. It floats in the air, approachs the player
+slowly, and rushes to the player to perform melee attack.
+<NEWLINE>
+Sometimes, the Ghost can spawn with a golden tool or weapon. It's undead and burns under the sun.
+<NEWLINE>
+It has 5 different textures.
+<NEWLINE>
+When a Ghost is slain, it can drop some Soul Powder, a useful ingredient for many items in this mod. It can also drop
+Glowstone Powder occasionally.

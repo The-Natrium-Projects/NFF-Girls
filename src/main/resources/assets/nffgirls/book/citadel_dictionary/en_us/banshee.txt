@@ -1,3 +1,11 @@
 <NEWLINE>
-    占位符
 <NEWLINE>
+<NEWLINE>
+<NEWLINE>
+The Banshee is a peculiar spirit which keeps a pose of buried face. It spawns in the Taiga and Mountain biomes above Y=64.
+<NEWLINE>
+It floats in the air and attacks by rushing to its prey. The attack gives Weakness and Hunger I if the difficulty is normal or above.
+<NEWLINE>
+It's an undead mob, and burns under the sun. It has 2 different textures.
+<NEWLINE>
+When a Banshee is slain, it can drop some Soul Powder, a useful ingredient for many items in this mod.

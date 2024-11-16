@@ -135,6 +135,7 @@
   "info.nffgirls.introduction_letter_invalid": "Not signed",
   "info.nffgirls.introduction_unavailable": "Required points: %2$d; current points: %1$d",
   "info.nffgirls.introduction_written": "%1$s signed on the Trade Introduction Letter.",
+
   "death.attack.necromancer_wither": "%1$s failed to bear the curse of necromancy.",
   
   "color.nffgirls.html.alice_blue": "Alice Blue",
@@ -279,5 +280,8 @@
   "color.nffgirls.html.white": "White",
   "color.nffgirls.html.white_smoke": "White Smoke",
   "color.nffgirls.html.yellow": "Yellow",
-  "color.nffgirls.html.yellow_green": "Yellow Green"
+  "color.nffgirls.html.yellow_green": "Yellow Green",
+
+  "info.nffgirls.book.tamable": "A Special Encounter?",
+  "death.attack.necromancer_wither": "%1$s failed to bear the curse of necromancy."
 }

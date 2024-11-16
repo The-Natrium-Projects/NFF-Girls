@@ -1,3 +1,25 @@
 <NEWLINE>
-    占位符
 <NEWLINE>
+<NEWLINE>
+<NEWLINE>
+The Ender Executor spawns occasionally in place of the Creeper in the Overworld. It's rare in the Overworld and the
+Nether, but common in the End.
+<NEWLINE>
+It's health and attack attributes are much higher than the Ender Man. It spawns with a Stone Sword, and other
+features are similar to the Ender Man.
+<NEWLINE>
+Besides melee attack, the Ender Executor can also perform beam attack like the Guardian. The beam has very long tracking
+distance, but can be stopped by solid blocks.
+<NEWLINE>
+Therefore, it's unadvisable to rashly provoke an Ender Executor.
+<NEWLINE>
+When it's slain, it has a chance to drop some Evil Crystal Fragments, a basic ingredient for most items in this mod.
+<NEWLINE>
+It can also drop some Ender Plasm. This unique ingredient can be used to make advanced items like Endless Pearl
+and the Potion of Ender Rage.
+<NEWLINE>
+The Endless Pearl allows you to infinitely throw Ender Pearls. Besides saving the inventory space, you can throw the
+pearls very far away when holding Shift button, which is very useful for jumping between the outer islands in the End.
+<NEWLINE>
+The Ender Rage effect makes a player or mob proactively attacked by Ender Men and Ender Executors. Higher level can
+increase the radius of provoking. Ender Men and Ender Executors are immune to this effect.

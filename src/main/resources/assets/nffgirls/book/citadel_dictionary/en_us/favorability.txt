@@ -1,0 +1,22 @@
+The favorability indicates the affinity between the player and monster girls. The value is between 0-100 and initially 50.
+<NEWLINE>
+You can slightly increase the favorability by doing things below:
+<NEWLINE>
+a) Sleeping beside your monster girls. It will boost favorability by 2 each time.
+<NEWLINE>
+b) Fight and defeat enemies with your monster girls.
+<NEWLINE>
+c) Heal your monster girls with items.
+<NEWLINE>
+Take care that activities below will GREATLY drop the favorability:
+<NEWLINE>
+a) Killing the monster girl by yourself will drop the favorability directly to 0!
+<NEWLINE>
+b) Attacking your monster girl. The favorability drop depends on the damage. A slight hit will not impact the favorability.
+<NEWLINE>
+c) Watching your monster girl dying in front you. It loses by 20.
+<NEWLINE>
+The monster girls' attack damage and trade price will be impacted by favorability. Besides, if the favorability is lower
+than 5, the monster girl will refuse to follow you or attack your target.
+<NEWLINE>
+For Love and Peace, be friendly to your monster girls!
