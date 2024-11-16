@@ -1,6 +1,7 @@
 package net.sodiumzh.nff.girls.eventlisteners;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.function.Predicate;
 
 import com.github.mechalopa.hmag.HMaG;
@@ -160,7 +161,7 @@ public class NFFGirlsEntityEventListeners
         		// Handle CUndeadAffinityHandler end //
 		    } 
 	        // Handle undead mobs end //
-	        
+
 	        // Befriendable mobs don't attack their befriended variation
 	        if (NFFTamingMapping.contains(mob) 
 	        		&& NFFTamingMapping.getConvertTo(mob) == target.getType()
@@ -175,7 +176,6 @@ public class NFFGirlsEntityEventListeners
 	        {
 				mob.setTarget(null);
 	        }
-	        
 	        // Handle Ghastly Seeker
 	        if (mob instanceof HmagGhastlySeekerEntity gs)
 	        {
@@ -215,7 +215,48 @@ public class NFFGirlsEntityEventListeners
 			});	        
 		}
 	}
-	
+
+	public static void onLivingChangeTarget(LivingChangeTargetEvent event)
+	{
+		LivingEntity target = event.getNewTarget();
+		if (event.getEntity() instanceof Mob mob) {
+			// Tamable mobs don't attack their tamed variation
+			if (NFFTamingMapping.contains(mob)
+				&& NFFTamingMapping.getConvertTo(mob) == target.getType()
+				&& INFFGirlTamed.isBM(target)) {
+				event.setCanceled(true);
+				return;
+			}
+			// Tamed mobs don't attack their wild variation
+			if (INFFGirlTamed.isBM(mob)
+				&& NFFTamingMapping.getTypeBefore(mob) == target.getType()) {
+				event.setCanceled(true);
+				return;
+			}
+			// When tamed mob is present, wild variation will not be hostile to player
+			if (hasTamedVariationAround(mob, target))
+			{
+				event.setCanceled(true);
+				return;
+			}
+		}
+	}
+
+	private static boolean hasTamedVariationAround(Mob attacker, LivingEntity target)
+	{
+		if (!(target instanceof Player p)) return false;
+		EntityType<? extends Mob> tamedType = NFFTamingMapping.getConvertTo(attacker);
+		if (tamedType == null) return false;
+		List<Entity> tamed = p.getLevel().getEntities(attacker, attacker.getBoundingBox().inflate(16d))
+			.stream().filter(e ->
+				e instanceof Mob mob
+				&& mob.getType().equals(tamedType)
+				&& INFFGirlTamed.isBMAnd(mob, m -> p.equals(m.getOwner())))
+			.filter(e -> attacker.hasLineOfSight(e))
+			.toList();
+		return !tamed.isEmpty();
+	}
+
 	@SubscribeEvent
 	public static void onBefriendedDie(NFFTamedDeathEvent event)
 	{
@@ -428,6 +469,23 @@ public class NFFGirlsEntityEventListeners
 					&& event.getSource().getEntity() instanceof INFFGirlsTamed bm)
 			{
 				mob.setLastHurtByPlayer(bm.getOwner());
+			}
+
+			/** Cancel friendly damage */
+			if (event.getSource() instanceof EntityDamageSource eds && !NFFGirlsConfigs.ValueCache.Combat.ENABLE_FRIENDLY_DAMAGE)
+			{
+				if (INFFGirlTamed.isBMAnd(eds.getEntity(), tamed ->
+					Optional.ofNullable(tamed.getOwnerInDimension()).map(owner -> owner == event.getEntity()).orElse(false)))
+				{
+					event.setCanceled(true);
+					return;
+				}
+				if (INFFGirlTamed.isBMAnd(event.getEntity(), tamed ->
+					Optional.ofNullable(tamed.getOwnerInDimension()).map(owner -> owner == eds.getEntity()).orElse(false)))
+				{
+					event.setCanceled(true);
+					return;
+				}
 			}
 
 			/** Cancel Ghastly Seeker friendly damage */

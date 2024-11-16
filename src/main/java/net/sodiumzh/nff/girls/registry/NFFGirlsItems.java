@@ -62,7 +62,7 @@ public class NFFGirlsItems {
 	public static final RegistryObject<Item> SOUL_CLOTH = regItemDefault("soul_cloth");
 	public static final RegistryObject<Item> ENDER_FRUIT_JAM = regItem("ender_fruit_jam", new Item.Properties().rarity(Rarity.RARE).craftRemainder(Items.GLASS_BOTTLE));
 	public static final RegistryObject<Item> EVIL_GEM = ITEMS.register("evil_gem", () -> new Item(new Item.Properties().tab(TAB)));
-	public static final RegistryObject<Item> EVIL_GEM_FRAGMENT = ITEMS.register("evil_gem_fragment", () -> new Item(new Item.Properties().tab(TAB)));
+	//public static final RegistryObject<Item> EVIL_GEM_FRAGMENT = ITEMS.register("evil_gem_fragment", () -> new Item(new Item.Properties().tab(TAB)));
 
 	// Foods
 	public static final RegistryObject<Item> SOUL_CAKE_SLICE = regItem("soul_cake_slice", new Item.Properties().food(NFFGirlsFoodProperties.SOUL_CAKE_SLICE).rarity(Rarity.UNCOMMON));
