@@ -1,8 +1,10 @@
-package net.sodiumzh.nff.girls.entity.tamingprocess.hmag;
+package net.sodiumzh.nff.girls.entity.tamingprocesses.hmag;
 
 import java.util.HashSet;
 
 import com.github.mechalopa.hmag.registry.ModItems;
+import com.github.mechalopa.hmag.util.ModTags;
+import com.github.mechalopa.hmag.world.entity.GlaryadEntity;
 
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.Mob;
@@ -16,19 +18,19 @@ import net.sodiumzh.nautils.statics.NaUtilsContainerStatics;
 import net.sodiumzh.nff.services.entity.taming.TamableHatredReason;
 import net.sodiumzh.nff.services.entity.taming.TamingProcessItemGivingProgress;
 
-public class HmagAlrauneTamingProcess extends TamingProcessItemGivingProgress
+public class HmagGlaryadTamingProcess extends TamingProcessItemGivingProgress
 {
 
 	@Override
 	protected double getProcValueToAdd(ItemStack item, Player player, Mob mob, double oldProc) {
 		if (item.is(Items.SPORE_BLOSSOM))
-			return NaUtilsMathStatics.rndRangedDouble(0.05, 0.1);
+			return NaUtilsMathStatics.rndRangedDouble(0.08, 0.16);
 		else if (item.is(ModItems.MYSTERIOUS_PETAL.get()))
-			return NaUtilsMathStatics.rndRangedDouble(0.1, 0.2);
+			return NaUtilsMathStatics.rndRangedDouble(0.15, 0.3);
 		else if (item.is(ModItems.CUREBERRY.get()) || item.is(ModItems.EXP_BERRY.get()) || item.is(ModItems.RANDOMBERRY.get()))
-			return NaUtilsMathStatics.rndRangedDouble(0.2, 0.3);
+			return NaUtilsMathStatics.rndRangedDouble(0.3, 0.5);
 		else if (item.getItem() != null && item.getItem() instanceof BlockItem blockitem && blockitem.getBlock() instanceof FlowerBlock)
-			return NaUtilsMathStatics.rndRangedDouble(0.03, 0.06);
+			return NaUtilsMathStatics.rndRangedDouble(0.06, 0.1);
 		else return 0;
 	}
 
@@ -49,7 +51,9 @@ public class HmagAlrauneTamingProcess extends TamingProcessItemGivingProgress
 	public boolean additionalConditions(Player player, Mob mob) {
 		return mob.hasEffect(MobEffects.REGENERATION) 
 				&& mob.getEffect(MobEffects.REGENERATION).getAmplifier() >= 2
-				&& mob.getEffect(MobEffects.REGENERATION).getDuration() > 10 * 20;
+				&& mob.getEffect(MobEffects.REGENERATION).getDuration() > 10 * 20
+				&& player.getOffhandItem().is(ModTags.ItemTags.GLARYAD_TEMPT_ITEMS)
+				&& !player.getUUID().equals(((GlaryadEntity)mob).getPersistentAngerTarget());
 	}
 
 	@Override

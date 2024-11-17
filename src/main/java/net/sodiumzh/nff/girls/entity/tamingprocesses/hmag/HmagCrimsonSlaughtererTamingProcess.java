@@ -1,4 +1,4 @@
-package net.sodiumzh.nff.girls.entity.tamingprocess.hmag;
+package net.sodiumzh.nff.girls.entity.tamingprocesses.hmag;
 
 import java.util.HashSet;
 import java.util.UUID;
