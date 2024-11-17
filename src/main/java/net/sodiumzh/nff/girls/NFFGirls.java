@@ -51,6 +51,7 @@ public class NFFGirls
         NFFGirlsRecipes.RECIPES.register(modEventBus);
         NFFGirlsParticleTypes.PARTICLE_TYPES.register(modEventBus);
         NFFGirlsPotions.POTIONS.register(modEventBus);
+        NFFGirlsTabs.CREATIVE_TABS.register(modEventBus);
 
         // NaUtils registries
         NFFGirlsHealingItems.HEALING_ITEMS.merge();
