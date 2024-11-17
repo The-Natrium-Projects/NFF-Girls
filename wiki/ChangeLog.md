@@ -1,5 +1,29 @@
 # Change Log
 
+### 0.0.27
+
+Added data pack support for mob healing items, taming items and trade list. For usage, see data pack reference on GitHub.
+
+Added Enderberry Bush. Now Enderberry is growable and needs tamed Ender Executor to help growing.
+
+Updated trade list. Now mobs below have trades: all Vanilla mob girls, Ender Executor, Kobold, Necrostalker (Necrotic Reaper).
+
+Added configs:
+
+​	-`enableFriendlyDamage`: If false, players and owned NFF-Girls mobs will not be able to damage each other.
+
+Fixed tamed Ender Executor not performing beam attack when difficulty is easy.
+
+Now tamed Ender Executor will not do random teleport unless hurt by water.
+
+
+
+ 
+
+### 0.0.26.1
+
+Fixed pickaxe unable to dig blocks caused by a broken tag.
+
 ### 0.x.26
 
 WARNING: This update has massive save data format changes. Back up before update!
