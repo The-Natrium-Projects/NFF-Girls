@@ -40,57 +40,57 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.sodiumzh.nff.girls.NFFGirls;
-import net.sodiumzh.nff.girls.client.gui.screen.NFFGirlsBowSecWeaponOneBaubleGUI;
-import net.sodiumzh.nff.girls.client.gui.screen.NFFGirlsEquipmentTwoBaublesGUI;
-import net.sodiumzh.nff.girls.client.gui.screen.NFFGirlsFourBaublesGUI;
-import net.sodiumzh.nff.girls.client.gui.screen.NFFGirlsHandItemsSixBaublesGUI;
-import net.sodiumzh.nff.girls.client.gui.screen.NFFGirlsHandItemsTwoBaublesGUI;
-import net.sodiumzh.nff.girls.client.gui.screen.NFFGirlsHmagBansheeGUI;
-import net.sodiumzh.nff.girls.client.gui.screen.NFFGirlsHmagCreeperGirlGUI;
-import net.sodiumzh.nff.girls.client.gui.screen.NFFGirlsHmagDodomekiGUI;
-import net.sodiumzh.nff.girls.client.gui.screen.NFFGirlsHmagDullahanGUI;
-import net.sodiumzh.nff.girls.client.gui.screen.NFFGirlsHmagEnderExecutorGUI;
-import net.sodiumzh.nff.girls.client.gui.screen.NFFGirlsHmagGhastlySeekerGUI;
+import net.sodiumzh.nff.girls.client.gui.screen.NFFGirlsBowSecWeaponOneBaubleGui;
+import net.sodiumzh.nff.girls.client.gui.screen.NFFGirlsEquipmentTwoBaublesGui;
+import net.sodiumzh.nff.girls.client.gui.screen.NFFGirlsFourBaublesGui;
+import net.sodiumzh.nff.girls.client.gui.screen.NFFGirlsHandItemsSixBaublesGui;
+import net.sodiumzh.nff.girls.client.gui.screen.NFFGirlsHandItemsTwoBaublesGui;
+import net.sodiumzh.nff.girls.client.gui.screen.NFFGirlsHmagBansheeGui;
+import net.sodiumzh.nff.girls.client.gui.screen.NFFGirlsHmagCreeperGirlGui;
+import net.sodiumzh.nff.girls.client.gui.screen.NFFGirlsHmagDodomekiGui;
+import net.sodiumzh.nff.girls.client.gui.screen.NFFGirlsHmagDullahan;
+import net.sodiumzh.nff.girls.client.gui.screen.NFFGirlsHmagEnderExecutorGui;
+import net.sodiumzh.nff.girls.client.gui.screen.NFFGirlsHmagGhastlySeekerGui;
 import net.sodiumzh.nff.girls.client.gui.screen.NFFGirlsHmagImpGui;
-import net.sodiumzh.nff.girls.client.gui.screen.NFFGirlsHmagJiangshiGUI;
-import net.sodiumzh.nff.girls.client.gui.screen.NFFGirlsHmagKoboldGUI;
-import net.sodiumzh.nff.girls.client.gui.screen.NFFGirlsHmagMeltyMonsterGUI;
-import net.sodiumzh.nff.girls.client.gui.screen.NFFGirlsHmagNecroticReaperGUI;
-import net.sodiumzh.nff.girls.client.gui.screen.NFFGirlsHmagNightwalkerGUI;
-import net.sodiumzh.nff.girls.client.gui.screen.NFFGirlsHmagRedcapGUI;
-import net.sodiumzh.nff.girls.client.gui.screen.NFFGirlsHmagSlimeGirlGUI;
-import net.sodiumzh.nff.girls.client.gui.screen.NFFGirlsSixBaublesGUI;
-import net.sodiumzh.nff.girls.client.gui.screen.NFFGirlsThreeBaublesGUI;
+import net.sodiumzh.nff.girls.client.gui.screen.NFFGirlsHmagJiangshiGui;
+import net.sodiumzh.nff.girls.client.gui.screen.NFFGirlsHmagKoboldGui;
+import net.sodiumzh.nff.girls.client.gui.screen.NFFGirlsHmagMeltyMonsterGui;
+import net.sodiumzh.nff.girls.client.gui.screen.NFFGirlsHmagNecroticReaperGui;
+import net.sodiumzh.nff.girls.client.gui.screen.NFFGirlsHmagNightwalkerGui;
+import net.sodiumzh.nff.girls.client.gui.screen.NFFGirlsHmagRedcapGui;
+import net.sodiumzh.nff.girls.client.gui.screen.NFFGirlsHmagSlimeGirlGui;
+import net.sodiumzh.nff.girls.client.gui.screen.NFFGirlsSixBaublesGui;
+import net.sodiumzh.nff.girls.client.gui.screen.NFFGirlsThreeBaublesGui;
 import net.sodiumzh.nff.girls.client.particle.MagicalGelBallParticle;
 import net.sodiumzh.nff.girls.client.renderer.NFFGirlsHmagCreeperGirlRenderer;
 import net.sodiumzh.nff.girls.client.renderer.NFFGirlsHmagEnderExecutorRenderer;
-import net.sodiumzh.nff.girls.inventory.NFFGirlsCreeperInventoryMenu;
-import net.sodiumzh.nff.girls.inventory.NFFGirlsEquipmentTwoBaublesInventoryMenu;
-import net.sodiumzh.nff.girls.inventory.NFFGirlsFourBaublesInventoryMenu;
 import net.sodiumzh.nff.girls.inventory.NFFGirlsHandItemsFourBaublesDefaultInventoryMenu;
 import net.sodiumzh.nff.girls.inventory.NFFGirlsHandItemsSixBaublesInventoryMenu;
 import net.sodiumzh.nff.girls.inventory.NFFGirlsHandItemsTwoBaublesInventoryMenu;
+import net.sodiumzh.nff.girls.inventory.NFFGirlsHmagImpInventoryMenu;
+import net.sodiumzh.nff.girls.inventory.NFFGirlsHmagJiangshiInventoryMenu;
+import net.sodiumzh.nff.girls.inventory.NFFGirlsHmagKoboldInventoryMenu;
+import net.sodiumzh.nff.girls.inventory.NFFGirlsHmagMeltyMonsterInventoryMenu;
+import net.sodiumzh.nff.girls.inventory.NFFGirlsNecroticReaperInventoryMenu;
+import net.sodiumzh.nff.girls.inventory.NFFGirlsNightwalkerInventoryMenu;
+import net.sodiumzh.nff.girls.inventory.NFFGirlsHmagRedcapInventoryMenu;
+import net.sodiumzh.nff.girls.inventory.NFFGirlsSixBaublesInventoryMenu;
+import net.sodiumzh.nff.girls.inventory.NFFGirlsSkeletonInventoryMenu;
+import net.sodiumzh.nff.girls.inventory.NFFGirlsHmagSlimeGirlInventoryMenu;
+import net.sodiumzh.nff.girls.inventory.NFFGirlsCreeperInventoryMenu;
+import net.sodiumzh.nff.girls.inventory.NFFGirlsEquipmentTwoBaublesInventoryMenu;
+import net.sodiumzh.nff.girls.inventory.NFFGirlsFourBaublesInventoryMenu;
+import net.sodiumzh.nff.girls.inventory.NFFGirlsGhastlySeekerInventoryMenu;
 import net.sodiumzh.nff.girls.inventory.NFFGirlsHmagBansheeInventoryMenu;
 import net.sodiumzh.nff.girls.inventory.NFFGirlsHmagDodomekiInventoryMenu;
 import net.sodiumzh.nff.girls.inventory.NFFGirlsHmagEnderExecutorInventoryMenu;
-import net.sodiumzh.nff.girls.inventory.NFFGirlsHmagGhastlySeekerInventoryMenu;
-import net.sodiumzh.nff.girls.inventory.NFFGirlsHmagImpInventoryMenu;
-import net.sodiumzh.nff.girls.inventory.NFFGirlsHmagJiangshiInventoryMenu;
-import net.sodiumzh.nff.girls.inventory.NFFGirlsHmagMeltyMonsterInventoryMenu;
-import net.sodiumzh.nff.girls.inventory.NFFGirlsHmagNecroticReaperInventoryMenu;
-import net.sodiumzh.nff.girls.inventory.NFFGirlsHmagNightwalkerInventoryMenu;
-import net.sodiumzh.nff.girls.inventory.NFFGirlsHmagRedcapInventoryMenu;
+import net.sodiumzh.nff.girls.inventory.NFFGirlsHmagThreeBaublesInventoryMenu;
 import net.sodiumzh.nff.girls.inventory.NFFGirlsHmagZombieGirlInventoryMenu;
-import net.sodiumzh.nff.girls.inventory.NFFGirlsKoboldInventoryMenu;
-import net.sodiumzh.nff.girls.inventory.NFFGirlsSixBaublesInventoryMenu;
-import net.sodiumzh.nff.girls.inventory.NFFGirlsSkeletonInventoryMenu;
-import net.sodiumzh.nff.girls.inventory.NFFGirlsSlimeGirlInventoryMenu;
-import net.sodiumzh.nff.girls.inventory.NFFGirlsThreeBaublesInventoryMenu;
 import net.sodiumzh.nff.girls.item.ReinforcedFishingRodItem;
 import net.sodiumzh.nff.girls.registry.NFFGirlsEntityTypes;
 import net.sodiumzh.nff.girls.registry.NFFGirlsItems;
 import net.sodiumzh.nff.girls.registry.NFFGirlsParticleTypes;
-import net.sodiumzh.nff.services.event.client.RegisterGUIScreenEvent;
+import net.sodiumzh.nff.services.event.client.NFFGuiScreenRegisterEvent;
 
 @Mod.EventBusSubscriber(modid = NFFGirls.MOD_ID, value = Dist.CLIENT, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class NFFGirlsClientSetupEventListeners 
@@ -141,7 +141,7 @@ public class NFFGirlsClientSetupEventListeners
 
     public static void onRegisterParticleProvider(RegisterParticleProvidersEvent event)
     {
-    	event.registerSpecial(NFFGirlsParticleTypes.MAGICAL_GEL_BALL.get(), new MagicalGelBallParticle.Provider());
+    	event.register(NFFGirlsParticleTypes.MAGICAL_GEL_BALL.get(), new MagicalGelBallParticle.Provider());
     }
     
     @SubscribeEvent
@@ -155,31 +155,31 @@ public class NFFGirlsClientSetupEventListeners
     }
     
     @SubscribeEvent
-    public static void registerGuiScreen(RegisterGUIScreenEvent event)
+    public static void registerGuiScreen(NFFGuiScreenRegisterEvent event)
     {
-		event.registerDefault(NFFGirlsCreeperInventoryMenu.class, NFFGirlsHmagCreeperGirlGUI::new);
-		event.registerDefault(NFFGirlsHmagEnderExecutorInventoryMenu.class, NFFGirlsHmagEnderExecutorGUI::new);
-		event.registerDefault(NFFGirlsEquipmentTwoBaublesInventoryMenu.class, NFFGirlsEquipmentTwoBaublesGUI::new);
-		event.registerDefault(NFFGirlsHmagGhastlySeekerInventoryMenu.class, NFFGirlsHmagGhastlySeekerGUI::new);
-		event.registerDefault(NFFGirlsHandItemsTwoBaublesInventoryMenu.class, NFFGirlsHandItemsTwoBaublesGUI::new);
-		event.registerDefault(NFFGirlsHmagNecroticReaperInventoryMenu.class, NFFGirlsHmagNecroticReaperGUI::new);
-		event.registerDefault(NFFGirlsSkeletonInventoryMenu.class, NFFGirlsBowSecWeaponOneBaubleGUI::new);
-		event.registerDefault(NFFGirlsHmagBansheeInventoryMenu.class, NFFGirlsHmagBansheeGUI::new);
-		event.registerDefault(NFFGirlsKoboldInventoryMenu.class, NFFGirlsHmagKoboldGUI::new);
+		event.registerDefault(NFFGirlsCreeperInventoryMenu.class, NFFGirlsHmagCreeperGirlGui::new);
+		event.registerDefault(NFFGirlsHmagEnderExecutorInventoryMenu.class, NFFGirlsHmagEnderExecutorGui::new);
+		event.registerDefault(NFFGirlsEquipmentTwoBaublesInventoryMenu.class, NFFGirlsEquipmentTwoBaublesGui::new);
+		event.registerDefault(NFFGirlsGhastlySeekerInventoryMenu.class, NFFGirlsHmagGhastlySeekerGui::new);
+		event.registerDefault(NFFGirlsHandItemsTwoBaublesInventoryMenu.class, NFFGirlsHandItemsTwoBaublesGui::new);
+		event.registerDefault(NFFGirlsNecroticReaperInventoryMenu.class, NFFGirlsHmagNecroticReaperGui::new);
+		event.registerDefault(NFFGirlsSkeletonInventoryMenu.class, NFFGirlsBowSecWeaponOneBaubleGui::new);
+		event.registerDefault(NFFGirlsHmagBansheeInventoryMenu.class, NFFGirlsHmagBansheeGui::new);
+		event.registerDefault(NFFGirlsHmagKoboldInventoryMenu.class, NFFGirlsHmagKoboldGui::new);
 		event.registerDefault(NFFGirlsHmagImpInventoryMenu.class, NFFGirlsHmagImpGui::new);
-		event.registerDefault(NFFGirlsFourBaublesInventoryMenu.class, NFFGirlsFourBaublesGUI::new);
-		event.registerDefault(NFFGirlsSlimeGirlInventoryMenu.class, NFFGirlsHmagSlimeGirlGUI::new);
-		event.registerDefault(NFFGirlsHandItemsFourBaublesDefaultInventoryMenu.class, NFFGirlsHmagDullahanGUI::new);
-		event.registerDefault(NFFGirlsHmagDodomekiInventoryMenu.class, NFFGirlsHmagDodomekiGUI::new);
-		event.registerDefault(NFFGirlsHmagJiangshiInventoryMenu.class, NFFGirlsHmagJiangshiGUI::new);
-		event.registerDefault(NFFGirlsThreeBaublesInventoryMenu.class, NFFGirlsThreeBaublesGUI::new);
-		event.registerDefault(NFFGirlsSixBaublesInventoryMenu.class, NFFGirlsSixBaublesGUI::new);
-		event.registerDefault(NFFGirlsHandItemsSixBaublesInventoryMenu.class, NFFGirlsHandItemsSixBaublesGUI::new);
-		event.registerDefault(NFFGirlsHmagRedcapInventoryMenu.class, NFFGirlsHmagRedcapGUI::new);
-		event.registerDefault(NFFGirlsHmagMeltyMonsterInventoryMenu.class, NFFGirlsHmagMeltyMonsterGUI::new);
-		event.registerDefault(NFFGirlsHmagNightwalkerInventoryMenu.class, NFFGirlsHmagNightwalkerGUI::new);
+		event.registerDefault(NFFGirlsFourBaublesInventoryMenu.class, NFFGirlsFourBaublesGui::new);
+		event.registerDefault(NFFGirlsHmagSlimeGirlInventoryMenu.class, NFFGirlsHmagSlimeGirlGui::new);
+		event.registerDefault(NFFGirlsHandItemsFourBaublesDefaultInventoryMenu.class, NFFGirlsHmagDullahan::new);
+		event.registerDefault(NFFGirlsHmagDodomekiInventoryMenu.class, NFFGirlsHmagDodomekiGui::new);
+		event.registerDefault(NFFGirlsHmagJiangshiInventoryMenu.class, NFFGirlsHmagJiangshiGui::new);
+		event.registerDefault(NFFGirlsHmagThreeBaublesInventoryMenu.class, NFFGirlsThreeBaublesGui::new);
+		event.registerDefault(NFFGirlsSixBaublesInventoryMenu.class, NFFGirlsSixBaublesGui::new);
+		event.registerDefault(NFFGirlsHandItemsSixBaublesInventoryMenu.class, NFFGirlsHandItemsSixBaublesGui::new);
+		event.registerDefault(NFFGirlsHmagRedcapInventoryMenu.class, NFFGirlsHmagRedcapGui::new);
+		event.registerDefault(NFFGirlsHmagMeltyMonsterInventoryMenu.class, NFFGirlsHmagMeltyMonsterGui::new);
+		event.registerDefault(NFFGirlsNightwalkerInventoryMenu.class, NFFGirlsHmagNightwalkerGui::new);
 		
-		event.registerDefault(NFFGirlsHmagZombieGirlInventoryMenu.class, NFFGirlsEquipmentTwoBaublesGUI::new);
+		event.registerDefault(NFFGirlsHmagZombieGirlInventoryMenu.class, NFFGirlsEquipmentTwoBaublesGui::new);
     }
 
 }

@@ -10,7 +10,6 @@ import com.mojang.logging.LogUtils;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.crafting.CraftingBookCategory;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.sodiumzh.nautils.math.HtmlColors;
 import net.sodiumzh.nautils.math.LinearColor;
@@ -22,11 +21,6 @@ import net.sodiumzh.nff.girls.registry.NFFGirlsRecipes;
 public class MagicalGelStainRecipe extends SimpleModificationRecipe
 {
 	protected static final HashMap<String, StainInfo> STAINS = new HashMap<>();
-
-	public MagicalGelStainRecipe(ResourceLocation id, CraftingBookCategory category)
-	{
-		super(id, category);
-	}
 	
 	protected static void putDyeColorStain(String itemKey, DyeColor color, Supplier<Double> strength)
 	{

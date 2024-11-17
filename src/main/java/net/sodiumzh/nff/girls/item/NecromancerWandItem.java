@@ -7,6 +7,7 @@ import javax.annotation.Nullable;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResultHolder;
+import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
@@ -48,7 +49,7 @@ public class NecromancerWandItem extends Item implements IWithDuration
 				bullet.hasNecromancerHat = true;
 			level.addFreshEntity(bullet);
 			consumeDuration(stack, 1);
-			player.hurt(player.level().damageSources().magic(), 2);
+			player.hurt(DamageSource.MAGIC, 2);
 			player.getCooldowns().addCooldown(NFFGirlsItems.NECROMANCER_WAND.get(), 50);
 			return InteractionResultHolder.success(stack);
 		}

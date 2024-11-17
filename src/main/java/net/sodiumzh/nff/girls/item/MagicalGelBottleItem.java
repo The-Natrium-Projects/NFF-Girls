@@ -202,7 +202,7 @@ public class MagicalGelBottleItem extends NaUtilsItem
 	@Override
 	public InteractionResult interactLivingEntity(Player player, LivingEntity living, InteractionHand usedHand)
 	{
-		if (!player.level().isClientSide)
+		if (!player.level.isClientSide)
 		{
 			if (this.getAmount(player.getItemInHand(usedHand)) <= 0)
 			{
@@ -264,7 +264,7 @@ public class MagicalGelBottleItem extends NaUtilsItem
 				ItemStack stack1 = player.getItemInHand(usedHand).copy();
 				player.getItemInHand(usedHand).shrink(1);
 				player.spawnAtLocation(stack1, 1f).setNoPickUpDelay();
-				return InteractionResult.sidedSuccess(living.level().isClientSide);
+				return InteractionResult.sidedSuccess(living.level.isClientSide);
 			}
 			else if (action == 2)
 			{
@@ -284,7 +284,7 @@ public class MagicalGelBottleItem extends NaUtilsItem
 						player.spawnAtLocation(stack1, 1f).setNoPickUpDelay();
 					}
 				}
-				return InteractionResult.sidedSuccess(living.level().isClientSide);
+				return InteractionResult.sidedSuccess(living.level.isClientSide);
 			}
 			
 		}
@@ -301,9 +301,9 @@ public class MagicalGelBottleItem extends NaUtilsItem
 			Vec3i rgb = getColor(stack).toRGB();
 			String rgbInfo = " (R" + Integer.toString(rgb.getX()) + ", G" + Integer.toString(rgb.getY()) + ", B" + Integer.toString(rgb.getZ()) +")";
 			list.add(NaUtilsInfoStatics.createTranslatable("item.nffgirls.magical_gel_bottle.color")
-					.append(HtmlColors.getTranslationKey(HtmlColors.getNearestHtmlColor(this.getColor(stack)))
+					.append(HtmlColors.getTranslationKey(HtmlColors.getNearestHtmlColor(this.getColor(stack))))
 					.append(NaUtilsInfoStatics.createText(rgbInfo))
-					.withStyle(Style.EMPTY.withColor(this.getColor(stack).toCode()))));
+					.withStyle(Style.EMPTY.withColor(this.getColor(stack).toCode())));
 		}
 		else
 		{

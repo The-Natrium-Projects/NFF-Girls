@@ -5,7 +5,7 @@ import com.google.common.base.Supplier;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.util.LazyLoadedValue;
-import net.minecraft.world.item.ArmorItem;
+import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.item.ArmorMaterial;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Ingredient;
@@ -17,16 +17,16 @@ public enum NFFGirlsArmorMaterials implements ArmorMaterial
 	NECROMANCER(NFFGirls.MOD_ID + ":necromancer", 15, new int[] { 1, 2, 3, 1 }, 15, SoundEvents.ARMOR_EQUIP_LEATHER, 0.0F, 0.0F, () -> Ingredient.of(Items.LEATHER)),
 	SUNHAT(NFFGirls.MOD_ID + ":sunhat", 5, new int[] { 0, 2, 3, 1 }, 15, SoundEvents.ARMOR_EQUIP_LEATHER, 0.0F, 0.0F, () -> Ingredient.of(Items.LEATHER));
 
-	protected static final int[] HEALTH_PER_SLOT = new int[]
+	private static final int[] HEALTH_PER_SLOT = new int[]
 	{ 13, 15, 16, 11 };
-	protected final String name;
-	protected final int durabilityMultiplier;
-	protected final int[] slotProtections;
-	protected final int enchantmentValue;
-	protected final SoundEvent sound;
-	protected final float toughness;
-	protected final float knockbackResistance;
-	protected final LazyLoadedValue<Ingredient> repairIngredient;
+	private final String name;
+	private final int durabilityMultiplier;
+	private final int[] slotProtections;
+	private final int enchantmentValue;
+	private final SoundEvent sound;
+	private final float toughness;
+	private final float knockbackResistance;
+	private final LazyLoadedValue<Ingredient> repairIngredient;
 
 	private NFFGirlsArmorMaterials(String pName, int pDurabilityMultiplier, int[] pSlotProtections, int pEnchantmentValue,
 			SoundEvent pSound, float pToughness, float pKnockbackResistance, Supplier<Ingredient> pRepairIngredient)
@@ -41,21 +41,14 @@ public enum NFFGirlsArmorMaterials implements ArmorMaterial
 		this.repairIngredient = new LazyLoadedValue<>(pRepairIngredient);
 	}
 
-	protected int getTypeIndex(ArmorItem.Type type)
-	{
-		return type == ArmorItem.Type.HELMET ? 0 : (
-				type == ArmorItem.Type.CHESTPLATE ? 1 : (
-				type == ArmorItem.Type.LEGGINGS ? 2 : 3));
-	}
-	
 	@Override
-	public int getDurabilityForType(ArmorItem.Type type) {
-		return HEALTH_PER_SLOT[getTypeIndex(type)] * this.durabilityMultiplier;
+	public int getDurabilityForSlot(EquipmentSlot pSlot) {
+		return HEALTH_PER_SLOT[pSlot.getIndex()] * this.durabilityMultiplier;
 	}
 
 	@Override
-	public int getDefenseForType(ArmorItem.Type type) {
-		return this.slotProtections[getTypeIndex(type)];
+	public int getDefenseForSlot(EquipmentSlot pSlot) {
+		return this.slotProtections[pSlot.getIndex()];
 	}
 
 	@Override

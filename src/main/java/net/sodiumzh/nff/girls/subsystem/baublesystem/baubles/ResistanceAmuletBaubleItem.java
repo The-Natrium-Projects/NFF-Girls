@@ -6,9 +6,9 @@ import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.sodiumzh.nff.girls.NFFGirls;
 import net.sodiumzh.nff.girls.registry.NFFGirlsConfigs;
 import net.sodiumzh.nff.girls.subsystem.baublesystem.NFFGirlsDedicatedBaubleItem;
-import net.sodiumzh.nff.services.subsystem.baublesystem.BaubleAttributeModifier;
-import net.sodiumzh.nff.services.subsystem.baublesystem.BaubleEquippingCondition;
-import net.sodiumzh.nff.services.subsystem.baublesystem.BaubleProcessingArgs;
+import net.sodiumzh.nff.services.subsystems.baublesystem.BaubleAttributeModifier;
+import net.sodiumzh.nff.services.subsystems.baublesystem.BaubleEquippingCondition;
+import net.sodiumzh.nff.services.subsystems.baublesystem.BaubleProcessingArgs;
 
 public class ResistanceAmuletBaubleItem extends NFFGirlsDedicatedBaubleItem
 {

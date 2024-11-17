@@ -70,7 +70,7 @@ public class ReinforcedFishingRodItem extends FishingRodItem
 				}
 				else 
 				{
-					throw new IllegalStateException("Entity type mismatch: ReinforcedFishingRodItem can only use ReinforcedFishingHookEntity as hook.");
+					throw new UnsupportedOperationException("Entity type mismatch: ReinforcedFishingRodItem can only use ReinforcedFishingHookEntity as hook.");
 				}
 			}
 			player.gameEvent(GameEvent.ITEM_INTERACT_FINISH);

@@ -9,7 +9,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ArmorItem;
 import net.minecraft.world.item.ArmorMaterial;
 import net.sodiumzh.nautils.statics.NaUtilsEntityStatics;
-import net.sodiumzh.nff.girls.block.SoulCarpetBlock;
+import net.sodiumzh.nff.girls.blocks.SoulCarpetBlock;
 import net.sodiumzh.nff.girls.entity.hmag.HmagNecroticReaperEntity;
 import net.sodiumzh.nff.girls.registry.NFFGirlsEffects;
 import net.sodiumzh.nff.girls.registry.NFFGirlsItems;
@@ -17,16 +17,9 @@ import net.sodiumzh.nff.girls.registry.NFFGirlsItems;
 public class NecromancerArmorItem extends ArmorItem
 {
 
-	public NecromancerArmorItem(ArmorMaterial pMaterial, ArmorItem.Type type, Properties pProperties)
+	public NecromancerArmorItem(ArmorMaterial pMaterial, EquipmentSlot pSlot, Properties pProperties)
 	{
-		super(pMaterial, type, pProperties);
-	}
-	
-	public NecromancerArmorItem(ArmorMaterial pMaterial, EquipmentSlot slot, Properties pProperties)
-	{
-		this(pMaterial, slot == EquipmentSlot.CHEST ? ArmorItem.Type.CHESTPLATE : 
-			(slot == EquipmentSlot.LEGS ? ArmorItem.Type.LEGGINGS : 
-			(slot == EquipmentSlot.FEET ? ArmorItem.Type.BOOTS : ArmorItem.Type.HELMET)), pProperties);
+		super(pMaterial, pSlot, pProperties);
 	}
 	
 	// Called only in LivingUpdateEvent listener

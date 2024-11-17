@@ -1,11 +1,13 @@
 package net.sodiumzh.nff.girls.entity.projectile;
 
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.projectile.Fireball;
+import net.minecraft.world.level.Explosion;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.EntityHitResult;
 import net.minecraft.world.phys.HitResult;
@@ -39,19 +41,20 @@ public class NFFGhastFireballEntity extends Fireball
 	@Override
 	protected void onHit(HitResult pResult) {
 		super.onHit(pResult);
-		if (!this.level().isClientSide)
+		if (!this.level.isClientSide)
 		{
 			boolean allowDestroy;
 			if (!breakBlocks)
 				allowDestroy = false;
 			else if (this.getOwner() != null && this.getOwner() instanceof Mob)
 			{
-				allowDestroy = net.minecraftforge.event.ForgeEventFactory.getMobGriefingEvent(this.level(),
+				allowDestroy = net.minecraftforge.event.ForgeEventFactory.getMobGriefingEvent(this.level,
 									this.getOwner());
 			}
 			else allowDestroy = true;
-			this.level().explode(this, this.getX(), this.getY(), this.getZ(), this.explosionPower, allowDestroy,
-					allowDestroy ? (alwaysDrop ? Level.ExplosionInteraction.TNT : Level.ExplosionInteraction.MOB) : Level.ExplosionInteraction.NONE);
+			
+			this.level.explode(this, this.getX(), this.getY(), this.getZ(), this.explosionPower, allowDestroy,
+					allowDestroy ? (alwaysDrop ? Explosion.BlockInteraction.BREAK : Explosion.BlockInteraction.DESTROY) : Explosion.BlockInteraction.NONE);
 			this.discard();
 		}
 
@@ -63,11 +66,12 @@ public class NFFGhastFireballEntity extends Fireball
 	@Override
 	protected void onHitEntity(EntityHitResult pResult) {
 		super.onHitEntity(pResult);
-		if (!this.level().isClientSide)
+		if (!this.level.isClientSide)
 		{
 			Entity entity = pResult.getEntity();
 			Entity entity1 = this.getOwner();
-			entity.hurt(level().damageSources().fireball(this, getOwner()), hitDamage);
+			
+			entity.hurt(DamageSource.fireball(this, entity1), hitDamage);
 			if (entity1 instanceof LivingEntity)
 			{
 				this.doEnchantDamageEffects((LivingEntity) entity1, entity);

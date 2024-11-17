@@ -18,7 +18,7 @@ import net.sodiumzh.nautils.item.NaUtilsItem;
 import net.sodiumzh.nautils.statics.NaUtilsInfoStatics;
 import net.sodiumzh.nautils.statics.NaUtilsMiscStatics;
 import net.sodiumzh.nautils.statics.NaUtilsNBTStatics;
-import net.sodiumzh.nff.girls.entity.INFFGirlsTamed;
+import net.sodiumzh.nff.girls.entity.INFFGirlTamed;
 import net.sodiumzh.nff.girls.registry.NFFGirlsCapabilities;
 import net.sodiumzh.nff.services.entity.taming.INFFTamed;
 
@@ -73,13 +73,13 @@ public class TradeIntroductionLetterItem extends NaUtilsItem
 	public InteractionResult interactLivingEntity(Player player, LivingEntity living, InteractionHand usedHand)
 	{
 		ItemStack stack = player.getItemInHand(usedHand);
-		if (INFFGirlsTamed.isBM(living) 
+		if (INFFGirlTamed.isBM(living) 
 				&& living.getCapability(NFFGirlsCapabilities.CAP_TRADE_HANDLER).isPresent()
-				&& INFFGirlsTamed.getBM(living).getOwnerUUID().equals(player.getUUID()))
+				&& INFFGirlTamed.getBM(living).getOwnerUUID().equals(player.getUUID()))
 		{
-			if (!player.level().isClientSide)
+			if (!player.level.isClientSide)
 			{
-				UUID targetId = INFFGirlsTamed.getBM(living).getIdentifier();
+				UUID targetId = INFFGirlTamed.getBM(living).getIdentifier();
 				if (this.isValid(stack) && this.getPlayerUUID(stack).equals(player.getUUID()))
 				{
 					if (this.getWriterId(stack).equals(targetId))
@@ -96,11 +96,11 @@ public class TradeIntroductionLetterItem extends NaUtilsItem
 				}
 				else if (!this.isValid(stack))
 				{
-					this.write(stack, INFFGirlsTamed.getBM(living));
+					this.write(stack, INFFGirlTamed.getBM(living));
 					NaUtilsMiscStatics.printToScreen(NaUtilsInfoStatics.createTranslatable("info.nffgirls.introduction_written", living.getName().getString()), player);
 				}
 				else return InteractionResult.PASS;
-				return InteractionResult.sidedSuccess(player.level().isClientSide);
+				return InteractionResult.sidedSuccess(player.level.isClientSide);
 			}
 		}
 		return InteractionResult.PASS;

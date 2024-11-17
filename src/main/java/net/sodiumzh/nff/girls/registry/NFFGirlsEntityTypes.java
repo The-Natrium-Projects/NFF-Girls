@@ -332,6 +332,7 @@ public class NFFGirlsEntityTypes {
 			.setTrackingRange(8)
 			.setUpdateInterval(3)
 			.setShouldReceiveVelocityUpdates(false));
+
 	
 	// ================================================================================================= //
 	@SubscribeEvent

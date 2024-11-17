@@ -1,9 +1,4 @@
 package net.sodiumzh.nff.girls.entity.tamingprocesses.hmag;
-<<<<<<< HEAD
-
-import java.util.HashSet;
-=======
->>>>>>> b2ab5b02 (Taming)
 
 import com.github.mechalopa.hmag.registry.ModItems;
 
@@ -17,8 +12,7 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 import net.sodiumzh.nautils.block.ColoredBlocks;
-import net.sodiumzh.nautils.statics.NaUtilsMathStatics;
-import net.sodiumzh.nautils.statics.NaUtilsContainerStatics;
+import net.sodiumzh.nautils.math.RndUtil;
 import net.sodiumzh.nff.girls.registry.NFFGirlsBlocks;
 import net.sodiumzh.nff.girls.registry.NFFGirlsTags;
 import net.sodiumzh.nff.services.entity.taming.INFFTamed;
@@ -31,17 +25,17 @@ public class HmagNightwalkerTamingProcess extends TamingProcessItemGivingProgres
 	@Override
 	protected double getProcValueToAdd(ItemStack itemstack, Player player, Mob mob, double oldProc) {
 		if (itemstack.is(Items.CLAY_BALL))
-			return NaUtilsMathStatics.rndRangedDouble(0.03, 0.06);
+			return RndUtil.rndRangedDouble(0.03, 0.06);
 		else if (itemstack.is(ModItems.ANCIENT_STONE.get()))
-			return NaUtilsMathStatics.rndRangedDouble(0.05, 0.10);
+			return RndUtil.rndRangedDouble(0.05, 0.10);
 		else if (itemstack.is(NFFGirlsTags.HMAG_BERRIES))
-			return NaUtilsMathStatics.rndRangedDouble(0.06, 0.14);
+			return RndUtil.rndRangedDouble(0.06, 0.14);
 		else return 0d;
 	}
 
 	@Override
 	public boolean additionalConditions(Player player, Mob mob) {
-		return mob.level().getBlockState(mob.blockPosition().below()).is(NFFGirlsTags.CAN_BEFRIEND_NIGHTWALKERS_ON);
+		return mob.level.getBlockState(mob.blockPosition().below()).is(NFFGirlsTags.CAN_BEFRIEND_NIGHTWALKERS_ON);
 	}
 
 	@Override
@@ -55,8 +49,8 @@ public class HmagNightwalkerTamingProcess extends TamingProcessItemGivingProgres
 	}
 
 	@Override
-	public HashSet<TamableHatredReason> getAddHatredReasons() {
-		return NaUtilsContainerStatics.setOf(TamableHatredReason.ATTACKED, TamableHatredReason.ATTACKING);
+	public TamableHatredReason[] getAddHatredReasons() {
+		return new TamableHatredReason[] {TamableHatredReason.ATTACKED, TamableHatredReason.ATTACKING};
 	}
 
 	@Override
@@ -76,12 +70,12 @@ public class HmagNightwalkerTamingProcess extends TamingProcessItemGivingProgres
 	@Override
 	public void afterItemGiven(Player player, Mob mob, ItemStack item) 
 	{
-		convertBlockOnGiven(mob.level(), mob.blockPosition().below());
-		convertBlockOnGiven(mob.level(), mob.blockPosition().below().east());
-		convertBlockOnGiven(mob.level(), mob.blockPosition().below().west());
-		convertBlockOnGiven(mob.level(), mob.blockPosition().below().south());
-		convertBlockOnGiven(mob.level(), mob.blockPosition().below().north());
-		convertBlockOnGiven(mob.level(), mob.blockPosition().below(2));
+		convertBlockOnGiven(mob.level, mob.blockPosition().below());
+		convertBlockOnGiven(mob.level, mob.blockPosition().below().east());
+		convertBlockOnGiven(mob.level, mob.blockPosition().below().west());
+		convertBlockOnGiven(mob.level, mob.blockPosition().below().south());
+		convertBlockOnGiven(mob.level, mob.blockPosition().below().north());
+		convertBlockOnGiven(mob.level, mob.blockPosition().below(2));
 	}
 	
 	@Override

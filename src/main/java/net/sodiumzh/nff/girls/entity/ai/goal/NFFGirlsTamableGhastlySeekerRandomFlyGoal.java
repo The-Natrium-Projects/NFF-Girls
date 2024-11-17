@@ -13,7 +13,6 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
-import net.sodiumzh.nautils.statics.NaUtilsMathStatics;
 import net.sodiumzh.nff.girls.eventlisteners.NFFGirlsEntityEventListeners;
 
 /**
@@ -62,7 +61,7 @@ public class NFFGirlsTamableGhastlySeekerRandomFlyGoal extends Goal
 	public void start()
 	{
 		// Don't move if no player nearby
-		if (!gs.level().dimension().equals(Level.NETHER) && !hasPlayerNearby())
+		if (!gs.level.dimension().equals(Level.NETHER) && !hasPlayerNearby())
 			return;
 		RandomSource random = this.gs.getRandom();
 		boolean flag = false;
@@ -106,8 +105,8 @@ public class NFFGirlsTamableGhastlySeekerRandomFlyGoal extends Goal
 			double d0 = this.gs.getX() + (random.nextFloat() * 2.0F - 1.0F) * 16.0F;
 			double d1 = this.gs.getY() + (random.nextFloat() * 2.0F - 1.0F) * 16.0F;
 			double d2 = this.gs.getZ() + (random.nextFloat() * 2.0F - 1.0F) * 16.0F;
-			BlockPos pos = NaUtilsMathStatics.getBlockPos(d0, d1, d2);
-			while (gs.level().getBlockState(pos.below()).isAir() && pos.getY() > gs.level().getMinBuildHeight())
+			BlockPos pos = new BlockPos(d0, d1, d2);
+			while (gs.level.getBlockState(pos.below()).isAir() && pos.getY() > gs.level.getMinBuildHeight())
 				pos = pos.below();
 			pos = pos.above(31);
 			Vec3 v = new Vec3(pos.getX(), pos.getY(), pos.getZ());
@@ -123,14 +122,14 @@ public class NFFGirlsTamableGhastlySeekerRandomFlyGoal extends Goal
 		// Search 64 x 64 area centered by the mob's xz
 		Vec3 pos = gs.position();
 		AABB bound = new AABB(pos.subtract(32, 32, 32), pos.add(32, 32, 32));
-		bound = new AABB(bound.minX, gs.level().getMinBuildHeight(), bound.minZ, bound.maxX, gs.level().getMaxBuildHeight(), bound.maxZ);	
+		bound = new AABB(bound.minX, gs.level.getMinBuildHeight(), bound.minZ, bound.maxX, gs.level.getMaxBuildHeight(), bound.maxZ);	
 		// The mob will not move to position that isn't any player in 64x64 area centered by it
-		return gs.level().getEntitiesOfClass(Player.class, bound).size() > 0;
+		return gs.level.getEntitiesOfClass(Player.class, bound).size() > 0;
 	}
 	
 	protected boolean isAllowedTargetPosPosition(Vec3 pos)
 	{
-		Level level = gs.level();
+		Level level = gs.level;
 		// No adjustment if in nether
 		if (level.dimension().equals(Level.NETHER))
 			return true;
@@ -139,7 +138,7 @@ public class NFFGirlsTamableGhastlySeekerRandomFlyGoal extends Goal
 			return false;
 		
 		/* Check if it's too high */
-		BlockPos blockpos = NaUtilsMathStatics.getBlockPos(pos.x, pos.y, pos.z);
+		BlockPos blockpos = new BlockPos(pos.x, pos.y, pos.z);
 		int height = 0;
 		while (level.getBlockState(blockpos.below()).isAir())
 		{

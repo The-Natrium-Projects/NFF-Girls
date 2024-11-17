@@ -9,7 +9,7 @@ import net.minecraft.world.entity.Mob;
 import net.minecraft.world.item.ItemStack;
 import net.sodiumzh.nautils.containers.MapPair;
 import net.sodiumzh.nautils.statics.NaUtilsContainerStatics;
-import net.sodiumzh.nff.services.subsystem.baublesystem.BaubleSystem;
+import net.sodiumzh.nff.services.subsystems.baublesystem.BaubleSystem;
 
 public class NFFGirlsBaubleStatics
 {

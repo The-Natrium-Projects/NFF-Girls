@@ -13,10 +13,10 @@ import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.sodiumzh.nautils.math.GuiPos;
 import net.sodiumzh.nff.services.entity.taming.INFFTamed;
 import net.sodiumzh.nff.services.inventory.NFFTamedInventoryMenu;
-import net.sodiumzh.nff.services.subsystem.baublesystem.BaubleSystem;
+import net.sodiumzh.nff.services.subsystems.baublesystem.BaubleSystem;
 
 /**
- * The inventory menu adapting NFFGirlsGUIPreset0
+ * The inventory menu adapting NFFGirlsGuiPreset0
  */
 public abstract class NFFGirlsInventoryMenuPreset0 extends NFFTamedInventoryMenu
 {
@@ -79,7 +79,7 @@ public abstract class NFFGirlsInventoryMenuPreset0 extends NFFTamedInventoryMenu
 			@Override
 			public boolean mayPlace(ItemStack stack) {
 				return (stack.getItem() instanceof ArmorItem)
-						&& ((ArmorItem) stack.getItem()).getEquipmentSlot() == ArmorType
+						&& ((ArmorItem) stack.getItem()).getSlot() == ArmorType
 						&& !EnchantmentHelper.hasBindingCurse(stack)
 						&& !this.hasItem()
 						&& (additionalCondition == null || additionalCondition.test(stack));

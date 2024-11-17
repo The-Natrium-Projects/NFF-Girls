@@ -10,7 +10,7 @@ import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
 import net.sodiumzh.nautils.statics.NaUtilsEntityStatics;
 import net.sodiumzh.nff.girls.NFFGirls;
 import net.sodiumzh.nff.girls.entity.hmag.HmagCrimsonSlaughtererEntity;
-import net.sodiumzh.nff.services.subsystem.baublesystem.BaubleSystem;
+import net.sodiumzh.nff.services.subsystems.baublesystem.BaubleSystem;
 @EventBusSubscriber(modid = NFFGirls.MOD_ID, bus = Mod.EventBusSubscriber.Bus.FORGE)
 public class NFFGirlsBaubleImplEventListeners
 {
@@ -21,7 +21,7 @@ public class NFFGirlsBaubleImplEventListeners
 		{
 			BaubleSystem.ifCapabilityPresent(mob, () -> 
 			{
-				int poisonLevel = NFFGirlsBaubleStatics.countBaubles(mob, new ResourceLocation(NFFGirls.MOD_ID, "poisonous_thorn"));
+				int poisonLevel = NFFGirlsBaubleStatics.countBaubles(mob, new ResourceLocation("nffgirls:poisonous_thorn"));
 				if (poisonLevel > 0)
 				{
 					if (poisonLevel > 0)

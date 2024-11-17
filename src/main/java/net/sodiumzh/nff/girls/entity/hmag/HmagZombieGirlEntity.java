@@ -21,8 +21,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
-import net.sodiumzh.nautils.entity.MobApplicableItemTable;
-import net.sodiumzh.nff.girls.entity.INFFGirlsTamedSunSensitiveMob;
+import net.sodiumzh.nff.girls.entity.INFFGirlTamedSunSensitiveMob;
 import net.sodiumzh.nff.girls.entity.ai.goal.NFFGirlsFollowOwnerGoal;
 import net.sodiumzh.nff.girls.entity.ai.goal.target.NFFGirlsNearestHostileToOwnerTargetGoal;
 import net.sodiumzh.nff.girls.entity.ai.goal.target.NFFGirlsNearestHostileToSelfTargetGoal;
@@ -35,23 +34,18 @@ import net.sodiumzh.nff.girls.registry.NFFGirlsHealingItems;
 import net.sodiumzh.nff.girls.registry.NFFGirlsItems;
 import net.sodiumzh.nff.girls.sound.NFFGirlsSoundPresets;
 import net.sodiumzh.nff.girls.util.NFFGirlsEntityStatics;
-<<<<<<< HEAD
-import net.sodiumzh.nff.services.entity.ai.goal.presets.*;
-import net.sodiumzh.nff.services.entity.ai.goal.presets.target.NFFHurtByTargetGoal;
-=======
 import net.sodiumzh.nff.services.entity.ai.goal.preset.NFFFleeSunGoal;
 import net.sodiumzh.nff.services.entity.ai.goal.preset.NFFRestrictSunGoal;
 import net.sodiumzh.nff.services.entity.ai.goal.preset.NFFWaterAvoidingRandomStrollGoal;
 import net.sodiumzh.nff.services.entity.ai.goal.preset.NFFZombieAttackGoal;
 import net.sodiumzh.nff.services.entity.ai.goal.preset.target.NFFHurtByTargetGoal;
 import net.sodiumzh.nautils.entity.MobApplicableItemTable;
->>>>>>> b2ab5b02 (Taming)
 import net.sodiumzh.nff.services.entity.taming.NFFTamedStatics;
 import net.sodiumzh.nff.services.inventory.NFFTamedInventoryMenu;
 import net.sodiumzh.nff.services.inventory.NFFTamedMobInventory;
 import net.sodiumzh.nff.services.inventory.NFFTamedMobInventoryWithEquipment;
 
-public class HmagZombieGirlEntity extends ZombieGirlEntity implements INFFGirlsTamedSunSensitiveMob {
+public class HmagZombieGirlEntity extends ZombieGirlEntity implements INFFGirlTamedSunSensitiveMob {
 
 	/* Initialization */
 
@@ -122,7 +116,7 @@ public class HmagZombieGirlEntity extends ZombieGirlEntity implements INFFGirlsT
 		if (!player.isShiftKeyDown())
 		{
 			if (player.getUUID().equals(getOwnerUUID())) {
-				if (!player.level().isClientSide() && hand == InteractionHand.MAIN_HAND) 
+				if (!player.level.isClientSide() && hand == InteractionHand.MAIN_HAND) 
 				{
 					if (NFFGirlsConfigs.ValueCache.Interaction.ALLOW_REVERSE_CONVERSION
 							&& player.getItemInHand(hand).is(Items.SPONGE) 
@@ -130,7 +124,7 @@ public class HmagZombieGirlEntity extends ZombieGirlEntity implements INFFGirlsT
 						player.getItemInHand(hand).shrink(1);
 						this.spawnAtLocation(new ItemStack(Items.WET_SPONGE, 1));
 						this.convertToHusk();
-						return InteractionResult.sidedSuccess(player.level().isClientSide);
+						return InteractionResult.sidedSuccess(player.level.isClientSide);
 					} 
 					else if (this.tryApplyHealingItems(player.getItemInHand(hand)) != InteractionResult.PASS) 
 					{}
@@ -141,7 +135,7 @@ public class HmagZombieGirlEntity extends ZombieGirlEntity implements INFFGirlsT
 					}
 					else return InteractionResult.PASS;
 				}
-				return InteractionResult.sidedSuccess(player.level().isClientSide);
+				return InteractionResult.sidedSuccess(player.level.isClientSide);
 			} 
 			return InteractionResult.PASS;
 		}
@@ -151,7 +145,7 @@ public class HmagZombieGirlEntity extends ZombieGirlEntity implements INFFGirlsT
 				if (hand == InteractionHand.MAIN_HAND && NFFGirlsEntityStatics.isOnEitherHand(player, NFFGirlsItems.COMMANDING_WAND.get()))
 				{
 					NFFTamedStatics.openBefriendedInventory(player, this);
-					return InteractionResult.sidedSuccess(player.level().isClientSide);
+					return InteractionResult.sidedSuccess(player.level.isClientSide);
 				}
 			}
 			return InteractionResult.PASS;
@@ -201,7 +195,7 @@ public class HmagZombieGirlEntity extends ZombieGirlEntity implements INFFGirlsT
 		this.convertToDrowned();
 		if (!this.isSilent())
 		{
-			this.level().levelEvent((Player) null, 1041, this.blockPosition(), 0);
+			this.level.levelEvent((Player) null, 1041, this.blockPosition(), 0);
 		}
 	}	
 	

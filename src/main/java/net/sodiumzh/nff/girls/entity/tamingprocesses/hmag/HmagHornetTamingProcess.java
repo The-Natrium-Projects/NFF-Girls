@@ -1,6 +1,5 @@
 package net.sodiumzh.nff.girls.entity.tamingprocesses.hmag;
 
-import java.util.HashSet;
 import java.util.stream.Stream;
 
 import net.minecraft.core.BlockPos;
@@ -12,7 +11,7 @@ import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.AABB;
-import net.sodiumzh.nautils.statics.NaUtilsMathStatics;
+import net.sodiumzh.nautils.math.RndUtil;
 import net.sodiumzh.nautils.statics.NaUtilsEntityStatics;
 import net.sodiumzh.nautils.statics.NaUtilsItemStatics;
 import net.sodiumzh.nff.services.entity.taming.TamableHatredReason;
@@ -27,9 +26,9 @@ public class HmagHornetTamingProcess extends TamingProcessItemGivingProgress
 	@Override
 	protected double getProcValueToAdd(ItemStack item, Player player, Mob mob, double lastProc) {
 		if (item.is(Items.HONEY_BOTTLE))
-			return NaUtilsMathStatics.rndRangedDouble(0.04d, 0.08d);
+			return RndUtil.rndRangedDouble(0.04d, 0.08d);
 		else if (item.is(Items.HONEY_BLOCK))
-			return NaUtilsMathStatics.rndRangedDouble(0.08d, 0.16d);
+			return RndUtil.rndRangedDouble(0.08d, 0.16d);
 		else return 0;
 	}
 
@@ -69,7 +68,7 @@ public class HmagHornetTamingProcess extends TamingProcessItemGivingProgress
 		BlockPos pos = mob.blockPosition();
 		// Search 9x9x9 area centered by mob
 		AABB searchArea = new AABB(pos.getX() - 4, pos.getY() - 4, pos.getZ() - 4, pos.getX() + 4, pos.getY() + 4, pos.getZ() + 4);
-		Stream<BlockState> blocks = mob.level().getBlockStates(searchArea);
+		Stream<BlockState> blocks = mob.level.getBlockStates(searchArea);
 		long count = blocks.filter(b -> b.is(Blocks.HONEY_BLOCK)).count();
 		return count >= 8;
 	}
@@ -101,12 +100,8 @@ public class HmagHornetTamingProcess extends TamingProcessItemGivingProgress
 	}
 
 	@Override
-	public HashSet<TamableHatredReason> getAddHatredReasons() {
-		HashSet<TamableHatredReason> set = new HashSet<TamableHatredReason>();
-		set.add(TamableHatredReason.ATTACKED);
-		set.add(TamableHatredReason.ATTACKING);
-		set.add(TamableHatredReason.HIT);
-		return set;
+	public TamableHatredReason[] getAddHatredReasons() {
+		return new TamableHatredReason[] {TamableHatredReason.ATTACKED, TamableHatredReason.ATTACKING, TamableHatredReason.HIT};
 	}
 	
 	@Override

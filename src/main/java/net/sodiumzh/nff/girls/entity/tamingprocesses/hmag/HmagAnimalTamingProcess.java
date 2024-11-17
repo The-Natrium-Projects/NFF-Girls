@@ -1,24 +1,12 @@
 package net.sodiumzh.nff.girls.entity.tamingprocesses.hmag;
-<<<<<<<< HEAD:src/main/java/net/sodiumzh/nff/girls/entity/tamingprocesses/hmag/HmagSnowCanineTamingProcess.java
-
-import java.util.Map;
-import java.util.function.Supplier;
-========
->>>>>>>> b2ab5b02 (Taming):src/main/java/net/sodiumzh/nff/girls/entity/tamingprocesses/hmag/HmagAnimalTamingProcess.java
 
 import net.minecraft.nbt.DoubleTag;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.item.ItemStack;
-<<<<<<<< HEAD:src/main/java/net/sodiumzh/nff/girls/entity/tamingprocesses/hmag/HmagSnowCanineTamingProcess.java
-import net.sodiumzh.nautils.containers.MapPair;
-import net.sodiumzh.nautils.statics.NaUtilsMathStatics;
-import net.sodiumzh.nautils.statics.NaUtilsContainerStatics;
-========
->>>>>>>> b2ab5b02 (Taming):src/main/java/net/sodiumzh/nff/girls/entity/tamingprocesses/hmag/HmagAnimalTamingProcess.java
 import net.sodiumzh.nautils.statics.NaUtilsEntityStatics;
-import net.sodiumzh.nff.services.entity.capability.CNFFTamable;
+import net.sodiumzh.nff.services.entity.taming.CNFFTamable;
 
 public class HmagAnimalTamingProcess extends NFFGirlsItemDroppingTamingProcess
 {
@@ -35,15 +23,15 @@ public class HmagAnimalTamingProcess extends NFFGirlsItemDroppingTamingProcess
 	@Override
 	public Map<String, Supplier<Double>> getDeltaProcMap() {
 		return NaUtilsContainerStatics.<String, Supplier<Double>>mapOf(
-				MapPair.of("minecraft:cooked_chicken", () -> NaUtilsMathStatics.rndRangedDouble(0.04, 0.06)),
-				MapPair.of("minecraft:cooked_rabbit", () -> NaUtilsMathStatics.rndRangedDouble(0.04, 0.06)),
-				MapPair.of("minecraft:cooked_mutton", () -> NaUtilsMathStatics.rndRangedDouble(0.04, 0.06)),
-				MapPair.of("minecraft:cooked_porkchop", () -> NaUtilsMathStatics.rndRangedDouble(0.05, 0.07)),
-				MapPair.of("minecraft:cooked_beef", () -> NaUtilsMathStatics.rndRangedDouble(0.05, 0.07)),
-				MapPair.of("hmag:golden_tropical_fish", () -> NaUtilsMathStatics.rndRangedDouble(0.07, 0.10)),
-				MapPair.of("hmag:cooked_ravager_meat", () -> NaUtilsMathStatics.rndRangedDouble(0.08, 0.12)),
-				MapPair.of("minecraft:golden_apple", () -> NaUtilsMathStatics.rndRangedDouble(0.12, 0.16)),
-				MapPair.of("minecraft:enchanted_golden_apple", () -> NaUtilsMathStatics.rndRangedDouble(0.40, 0.70)));
+				MapPair.of("minecraft:cooked_chicken", () -> RndUtil.rndRangedDouble(0.04, 0.06)),
+				MapPair.of("minecraft:cooked_rabbit", () -> RndUtil.rndRangedDouble(0.04, 0.06)),
+				MapPair.of("minecraft:cooked_mutton", () -> RndUtil.rndRangedDouble(0.04, 0.06)),
+				MapPair.of("minecraft:cooked_porkchop", () -> RndUtil.rndRangedDouble(0.05, 0.07)),
+				MapPair.of("minecraft:cooked_beef", () -> RndUtil.rndRangedDouble(0.05, 0.07)),
+				MapPair.of("hmag:golden_tropical_fish", () -> RndUtil.rndRangedDouble(0.07, 0.10)),
+				MapPair.of("hmag:cooked_ravager_meat", () -> RndUtil.rndRangedDouble(0.08, 0.12)),
+				MapPair.of("minecraft:golden_apple", () -> RndUtil.rndRangedDouble(0.12, 0.16)),
+				MapPair.of("minecraft:enchanted_golden_apple", () -> RndUtil.rndRangedDouble(0.40, 0.70)));
 	}
 */
 	@Override

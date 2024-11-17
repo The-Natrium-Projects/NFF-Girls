@@ -3,7 +3,7 @@ package net.sodiumzh.nff.girls.entity.ai.goal;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.ai.navigation.GroundPathNavigation;
-import net.sodiumzh.nff.services.entity.ai.goal.presets.NFFFollowOwnerGoal;
+import net.sodiumzh.nff.services.entity.ai.goal.preset.NFFFollowOwnerGoal;
 import net.sodiumzh.nff.services.entity.taming.INFFTamed;
 import net.sodiumzh.nff.services.entity.taming.INFFTamedAmphibious;
 
@@ -37,7 +37,7 @@ public class NFFGirlsSunAvoidingFollowOwnerGoal extends NFFFollowOwnerGoal {
 				}
 				if (getPathfinder().distanceToSqr(mob.getOwner()) >= 144.0D) {
 					// Do not teleport when player is under sun
-					if (!getPathfinder().level().isDay() 
+					if (!getPathfinder().level.isDay() 
 							|| !level.canSeeSky(mob.getOwner().blockPosition()) 
 							|| (!ignoreHelmet && !getPathfinder().getItemBySlot(EquipmentSlot.HEAD).isEmpty())
 							|| mob.getOwner().isInWater())

@@ -7,10 +7,10 @@ import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.sodiumzh.nff.girls.registry.NFFGirlsConfigs;
-import net.sodiumzh.nff.services.subsystem.baublesystem.BaubleAttributeModifier;
-import net.sodiumzh.nff.services.subsystem.baublesystem.BaubleBehavior;
-import net.sodiumzh.nff.services.subsystem.baublesystem.BaubleEquippingCondition;
-import net.sodiumzh.nff.services.subsystem.baublesystem.BaubleProcessingArgs;
+import net.sodiumzh.nff.services.subsystems.baublesystem.BaubleAttributeModifier;
+import net.sodiumzh.nff.services.subsystems.baublesystem.BaubleBehavior;
+import net.sodiumzh.nff.services.subsystems.baublesystem.BaubleEquippingCondition;
+import net.sodiumzh.nff.services.subsystems.baublesystem.BaubleProcessingArgs;
 
 public class InsomniaFruitBaubleBehavior extends BaubleBehavior
 {
@@ -45,9 +45,9 @@ public class InsomniaFruitBaubleBehavior extends BaubleBehavior
 	public BaubleAttributeModifier[] getNonDuplicatableModifiers(Mob mob) {
 		return new BaubleAttributeModifier[] {
 				new BaubleAttributeModifier(Attributes.ATTACK_DAMAGE, 8d * NFFGirlsConfigs.ValueCache.Baubles.BAUBLE_ATK_BOOSTING_SCALE,
-						 AttributeModifier.Operation.ADDITION).setAdditionalCondition(args -> args.user().level().isNight()),
+						 AttributeModifier.Operation.ADDITION).setAdditionalCondition(args -> args.user().getLevel().isNight()),
 				new BaubleAttributeModifier(Attributes.MAX_HEALTH, 60d * NFFGirlsConfigs.ValueCache.Baubles.BAUBLE_MAX_HP_BOOSTING_SCALE,
-						 AttributeModifier.Operation.ADDITION).setAdditionalCondition(args -> args.user().level().isNight())
+						 AttributeModifier.Operation.ADDITION).setAdditionalCondition(args -> args.user().getLevel().isNight())
 		};
 	}
 

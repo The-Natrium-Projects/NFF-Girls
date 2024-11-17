@@ -8,7 +8,7 @@ import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.sodiumzh.nff.girls.NFFGirls;
-import net.sodiumzh.nff.girls.entity.INFFGirlsTamed;
+import net.sodiumzh.nff.girls.entity.INFFGirlTamed;
 
 /**
  * Methods handling compatibility issues
@@ -26,7 +26,7 @@ public class CompatEventHandlers
 		// Fix TF Seeker Arrow targeting BM
 		// Now it's impossible to prevent the arrow from targeting BM w/o mixin, so now only damage can be removed
 		// TODO: fully fix this after TF inserts event
-		if (!event.getEntity().level().isClientSide && event.getEntity() instanceof INFFGirlsTamed bm)
+		if (!event.getEntity().level.isClientSide && event.getEntity() instanceof INFFGirlTamed bm)
 		{
 			if (event.getSource().getDirectEntity() != null
 					&& EntityType.getKey(event.getSource().getDirectEntity().getType())
@@ -69,7 +69,7 @@ public class CompatEventHandlers
 		return ForgeRegistries.ITEMS.getKey(player.getItemInHand(hand).getItem())
 				.equals(new ResourceLocation(FAA_MOD_ID, "quantum_catcher")) 
 				&& !entity.level.isClientSide
-				&& entity instanceof INFFGirlsTamed bm 
+				&& entity instanceof INFFGirlTamed bm 
 				&& bm.getOwner() == player;
 	}
 	

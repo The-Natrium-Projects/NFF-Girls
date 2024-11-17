@@ -1,30 +1,31 @@
 package net.sodiumzh.nff.girls.client.gui.screen;
 
-import net.minecraft.client.gui.GuiGraphics;
+import com.mojang.blaze3d.vertex.PoseStack;
+
 import net.minecraft.world.entity.player.Inventory;
 import net.sodiumzh.nautils.math.GuiPos;
 import net.sodiumzh.nff.services.entity.taming.INFFTamed;
 import net.sodiumzh.nff.services.inventory.NFFTamedInventoryMenu;
 
-public class NFFGirlsHmagJiangshiGUI extends NFFGirlsGUIPreset0 {
+public class NFFGirlsHmagJiangshiGui extends NFFGirlsGuiPreset0 {
 
-	public NFFGirlsHmagJiangshiGUI(NFFTamedInventoryMenu pMenu, Inventory pPlayerInventory,
+	public NFFGirlsHmagJiangshiGui(NFFTamedInventoryMenu pMenu, Inventory pPlayerInventory,
 			INFFTamed mob) {
 		super(pMenu, pPlayerInventory, mob);
 	}
 
 	@Override
-	protected void renderBg(GuiGraphics graphics, float pPartialTick, int pMouseX, int pMouseY) {			
-		super.renderBg(graphics, pPartialTick, pMouseX, pMouseY);
-		this.addMainScreen(graphics);
-		this.addBaubleSlotBg(graphics, 0, leftRowPos().addY(10));
-		this.addBaubleSlotBg(graphics, 1, leftRowPos().slotBelow(1).addY(20));
-		this.addBaubleSlotBg(graphics, 2, rightRowPos().addY(10));
-		this.addBaubleSlotBg(graphics, 3, rightRowPos().slotBelow().addY(20));
-		this.addMobRenderBox(graphics, MobRenderBoxStyle.DARK);
-		this.addInfoBox(graphics);
-		this.addAttributeInfo(graphics, infoPos());
-		this.renderMob(graphics);
+	protected void renderBg(PoseStack pPoseStack, float pPartialTick, int pMouseX, int pMouseY) {			
+		super.renderBg(pPoseStack, pPartialTick, pMouseX, pMouseY);
+		this.addMainScreen(pPoseStack);
+		this.addBaubleSlotBg(pPoseStack, 0, leftRowPos().addY(10));
+		this.addBaubleSlotBg(pPoseStack, 1, leftRowPos().slotBelow(1).addY(20));
+		this.addBaubleSlotBg(pPoseStack, 2, rightRowPos().addY(10));
+		this.addBaubleSlotBg(pPoseStack, 3, rightRowPos().slotBelow().addY(20));
+		this.addMobRenderBox(pPoseStack, MobRenderBoxStyle.DARK);
+		this.addInfoBox(pPoseStack);
+		this.addAttributeInfo(pPoseStack, infoPos());
+		this.renderMob();
 	}
 	
 	@Override

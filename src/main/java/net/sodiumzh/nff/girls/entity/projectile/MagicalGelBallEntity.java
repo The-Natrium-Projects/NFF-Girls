@@ -9,6 +9,7 @@ import com.github.mechalopa.hmag.world.entity.SlimeGirlEntity;
 import net.minecraft.core.particles.ItemParticleOption;
 import net.minecraft.core.particles.ParticleOptions;
 import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.EntityType;
@@ -21,7 +22,7 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.EntityHitResult;
 import net.minecraft.world.phys.HitResult;
 import net.sodiumzh.nautils.math.LinearColor;
-import net.sodiumzh.nautils.statics.NaUtilsMathStatics;
+import net.sodiumzh.nautils.math.RndUtil;
 import net.sodiumzh.nautils.statics.NaUtilsEntityStatics;
 import net.sodiumzh.nff.girls.entity.hmag.HmagSlimeGirlEntity;
 import net.sodiumzh.nff.girls.item.MagicalGelColorUtils;
@@ -72,7 +73,7 @@ public class MagicalGelBallEntity extends ThrowableItemProjectile
 
 			for (int i = 0; i < 8; ++i)
 			{
-				this.level().addParticle(particleoptions, this.getX(), this.getY(), this.getZ(), 0.0D, 0.0D, 0.0D);
+				this.level.addParticle(particleoptions, this.getX(), this.getY(), this.getZ(), 0.0D, 0.0D, 0.0D);
 			}
 		}
 
@@ -81,20 +82,20 @@ public class MagicalGelBallEntity extends ThrowableItemProjectile
 	@Override
 	protected void onHitEntity(EntityHitResult result) {
 		super.onHitEntity(result);
-		if (result.getEntity() instanceof LivingEntity living && !living.level().isClientSide)
+		if (result.getEntity() instanceof LivingEntity living && !living.level.isClientSide)
 		{
 			// Generate a tiny magical slime when hit a large vanilla slime or a slime girl
 			if (((living.getType() == EntityType.SLIME && ((Slime)living).getSize() >= 3)
 					|| living instanceof SlimeGirlEntity)
 					&& living.getRandom().nextDouble() < 0.25d)
 			{
-	            MagicalSlimeEntity slime = ModEntityTypes.MAGICAL_SLIME.get().create(this.level());
+	            MagicalSlimeEntity slime = ModEntityTypes.MAGICAL_SLIME.get().create(this.level);
 	            slime.setSize(1, true);
 	            
 	            // For vanilla slime, the color is random
 	            if (living.getType() == EntityType.SLIME)
 	            {
-	            	slime.setVariant(SlimeGirlEntity.ColorVariant.byId(rnd.nextInt(0, SlimeGirlEntity.ColorVariant.values().length)));
+	            	slime.setVariant(-1);
 	            }
 	            // For slime girl, the color is the complementary
 	            else if (living instanceof SlimeGirlEntity sg)
@@ -109,15 +110,15 @@ public class MagicalGelBallEntity extends ThrowableItemProjectile
 	            		sgColorCompl = MagicalGelColorUtils.getSlimeColor(sg).getComplementary();
 	            	}
 	            	SlimeGirlEntity.ColorVariant v = MagicalGelColorUtils.closestVariant(sgColorCompl);
-	            	slime.setVariant(v);
+	            	slime.setVariant(v.getId());
 	            }
-	            slime.moveTo(living.getX() + NaUtilsMathStatics.rndRangedDouble(-0.5, 0.5), living.getY() + 0.5D, living.getZ() + NaUtilsMathStatics.rndRangedDouble(-0.5, 0.5), this.random.nextFloat() * 360.0F, 0.0F);
-	            this.level().addFreshEntity(slime);
+	            slime.moveTo(living.getX() + RndUtil.rndRangedDouble(-0.5, 0.5), living.getY() + 0.5D, living.getZ() + RndUtil.rndRangedDouble(-0.5, 0.5), this.random.nextFloat() * 360.0F, 0.0F);
+	            this.level.addFreshEntity(slime);
 			}
 			// For other livings (except slime-derived mobs), make a knockback and give 30s slowness II 
 			else if (!(living instanceof Slime) && !(living instanceof SlimeGirlEntity) && !living.getType().is(NFFGirlsTags.IGNORES_MAGICAL_GEL_SLOWNESS))
 			{
-				result.getEntity().hurt(level().damageSources().thrown(this.getOwner(), this), 0);
+				result.getEntity().hurt(DamageSource.thrown(this, this.getOwner()), 0);
 				NaUtilsEntityStatics.addEffectSafe(living, new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 30 * 20, 1));
 			}
 		}
@@ -127,9 +128,9 @@ public class MagicalGelBallEntity extends ThrowableItemProjectile
 	@Override
 	protected void onHit(HitResult pResult) {
 		super.onHit(pResult);
-		if (!this.level().isClientSide)
+		if (!this.level.isClientSide)
 		{
-			this.level().broadcastEntityEvent(this, (byte) 3);
+			this.level.broadcastEntityEvent(this, (byte) 3);
 			this.discard();
 		}
 	}

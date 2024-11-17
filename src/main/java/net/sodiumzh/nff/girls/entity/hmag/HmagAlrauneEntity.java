@@ -22,30 +22,30 @@ import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.sodiumzh.nff.girls.NFFGirls;
-import net.sodiumzh.nff.girls.entity.INFFGirlsTamed;
+import net.sodiumzh.nff.girls.entity.INFFGirlTamed;
 import net.sodiumzh.nff.girls.entity.ai.goal.NFFGirlsFollowOwnerGoal;
 import net.sodiumzh.nff.girls.entity.ai.goal.target.NFFGirlsNearestHostileToOwnerTargetGoal;
 import net.sodiumzh.nff.girls.entity.ai.goal.target.NFFGirlsNearestHostileToSelfTargetGoal;
 import net.sodiumzh.nff.girls.entity.projectile.NFFHmagAlrauneSeedEntity;
-import net.sodiumzh.nff.girls.inventory.NFFGirlsThreeBaublesInventoryMenu;
+import net.sodiumzh.nff.girls.inventory.NFFGirlsHmagThreeBaublesInventoryMenu;
 import net.sodiumzh.nff.girls.registry.NFFGirlsHealingItems;
 import net.sodiumzh.nff.girls.registry.NFFGirlsItems;
 import net.sodiumzh.nff.girls.sound.NFFGirlsSoundPresets;
 import net.sodiumzh.nff.girls.util.NFFGirlsEntityStatics;
-import net.sodiumzh.nff.services.entity.ai.goal.presets.NFFMeleeAttackGoal;
-import net.sodiumzh.nff.services.entity.ai.goal.presets.NFFRangedAttackGoal;
-import net.sodiumzh.nff.services.entity.ai.goal.presets.NFFShootProjectileGoal;
-import net.sodiumzh.nff.services.entity.ai.goal.presets.NFFWaterAvoidingRandomStrollGoal;
-import net.sodiumzh.nff.services.entity.ai.goal.presets.target.NFFHurtByTargetGoal;
-import net.sodiumzh.nff.services.entity.ai.goal.presets.target.NFFOwnerHurtByTargetGoal;
-import net.sodiumzh.nff.services.entity.ai.goal.presets.target.NFFOwnerHurtTargetGoal;
+import net.sodiumzh.nff.services.entity.ai.goal.preset.NFFMeleeAttackGoal;
+import net.sodiumzh.nff.services.entity.ai.goal.preset.NFFRangedAttackGoal;
+import net.sodiumzh.nff.services.entity.ai.goal.preset.NFFShootProjectileGoal;
+import net.sodiumzh.nff.services.entity.ai.goal.preset.NFFWaterAvoidingRandomStrollGoal;
+import net.sodiumzh.nff.services.entity.ai.goal.preset.target.NFFHurtByTargetGoal;
+import net.sodiumzh.nff.services.entity.ai.goal.preset.target.NFFOwnerHurtByTargetGoal;
+import net.sodiumzh.nff.services.entity.ai.goal.preset.target.NFFOwnerHurtTargetGoal;
 import net.sodiumzh.nautils.entity.MobApplicableItemTable;
 import net.sodiumzh.nff.services.entity.taming.INFFTamed;
 import net.sodiumzh.nff.services.entity.taming.NFFTamedStatics;
 import net.sodiumzh.nff.services.inventory.NFFTamedInventoryMenu;
 import net.sodiumzh.nff.services.inventory.NFFTamedMobInventory;
 
-public class HmagAlrauneEntity extends AlrauneEntity implements INFFGirlsTamed {
+public class HmagAlrauneEntity extends AlrauneEntity implements INFFGirlTamed {
 
 	/* Initialization */
 
@@ -81,7 +81,7 @@ public class HmagAlrauneEntity extends AlrauneEntity implements INFFGirlsTamed {
 	public void aiStep()
 	{
 		super.aiStep();
-		if (!this.level().isClientSide && meleeAttackGoal != null)
+		if (!this.level.isClientSide && meleeAttackGoal != null)
 		{
 			if (this.getTarget() != null && this.hasLineOfSight(this.getTarget()) && this.distanceToSqr(this.getTarget()) >= 9d)
 				meleeAttackGoal.block();
@@ -94,7 +94,7 @@ public class HmagAlrauneEntity extends AlrauneEntity implements INFFGirlsTamed {
 	@Override
 	public void performRangedAttack(LivingEntity target, float distanceFactor)
 	{
-		this.shootSeed(target, () -> new NFFHmagAlrauneSeedEntity.PoisonSeed(level(), this), distanceFactor);
+		this.shootSeed(target, () -> new NFFHmagAlrauneSeedEntity.PoisonSeed(level, this), distanceFactor);
 	}
 	
 	public void shootSeed(LivingEntity target, Supplier<? extends NFFHmagAlrauneSeedEntity> shotSupplier, float distanceFactor)
@@ -111,7 +111,7 @@ public class HmagAlrauneEntity extends AlrauneEntity implements INFFGirlsTamed {
 			double d4 = Math.sqrt(d1 * d1 + d3 * d3) * 0.15D;
 			shot.shoot(d1, d2 + d4, d3, 1.5F, 10.0F);
 			shot.setDamage(4.0F);
-			this.level().addFreshEntity(shot);
+			this.level.addFreshEntity(shot);
 		}
 
 		this.playSound(SoundEvents.LLAMA_SPIT, 1.0F, 1.0F / (this.getRandom().nextFloat() * 0.4F + 0.8F));
@@ -135,7 +135,7 @@ public class HmagAlrauneEntity extends AlrauneEntity implements INFFGirlsTamed {
 			// For normal interaction
 			if (!player.isShiftKeyDown())
 			{
-				if (!player.level().isClientSide())
+				if (!player.level.isClientSide()) 
 				{
 					/* Put checks before healing item check */
 					/* if (....)
@@ -143,7 +143,7 @@ public class HmagAlrauneEntity extends AlrauneEntity implements INFFGirlsTamed {
 					 	....
 					 }
 					else */if (this.tryApplyHealingItems(player.getItemInHand(hand)) != InteractionResult.PASS)
-						return InteractionResult.sidedSuccess(player.level().isClientSide);
+						return InteractionResult.sidedSuccess(player.level.isClientSide);
 					// The function above returns PASS when the items are not correct. So when not PASS it should stop here
 					else if (hand == InteractionHand.MAIN_HAND
 							&& NFFGirlsEntityStatics.isOnEitherHand(player, NFFGirlsItems.COMMANDING_WAND.get()))
@@ -154,7 +154,7 @@ public class HmagAlrauneEntity extends AlrauneEntity implements INFFGirlsTamed {
 					else return InteractionResult.PASS;
 				}
 				// Interacted
-				return InteractionResult.sidedSuccess(player.level().isClientSide);
+				return InteractionResult.sidedSuccess(player.level.isClientSide);
 			}
 			// For interaction with shift key down
 			else
@@ -163,7 +163,7 @@ public class HmagAlrauneEntity extends AlrauneEntity implements INFFGirlsTamed {
 				if (hand == InteractionHand.MAIN_HAND && NFFGirlsEntityStatics.isOnEitherHand(player, NFFGirlsItems.COMMANDING_WAND.get()))
 				{
 					NFFTamedStatics.openBefriendedInventory(player, this);
-					return InteractionResult.sidedSuccess(player.level().isClientSide);
+					return InteractionResult.sidedSuccess(player.level.isClientSide);
 				}
 			}
 		} 
@@ -180,7 +180,7 @@ public class HmagAlrauneEntity extends AlrauneEntity implements INFFGirlsTamed {
 
 	@Override
 	public void updateFromInventory() {
-		if (!this.level().isClientSide) {
+		if (!this.level.isClientSide) {
 			// Sync inventory with mob equipments. If it's not NFFTamedMobInventoryWithEquipment, remove it
 			//additionalInventory.setMobEquipment(this);
 		}
@@ -189,7 +189,7 @@ public class HmagAlrauneEntity extends AlrauneEntity implements INFFGirlsTamed {
 	@Override
 	public void setInventoryFromMob()
 	{
-		if (!this.level().isClientSide) {
+		if (!this.level.isClientSide) {
 			// Sync inventory with mob equipments. If it's not NFFTamedMobInventoryWithEquipment, remove it
 			//additionalInventory.getFromMob(this);
 		}
@@ -198,7 +198,7 @@ public class HmagAlrauneEntity extends AlrauneEntity implements INFFGirlsTamed {
 
 	@Override
 	public NFFTamedInventoryMenu makeMenu(int containerId, Inventory playerInventory, Container container) {
-		return new NFFGirlsThreeBaublesInventoryMenu(containerId, playerInventory, container, this);
+		return new NFFGirlsHmagThreeBaublesInventoryMenu(containerId, playerInventory, container, this);
 		// You can keep it null, but in this case never call openBefriendedInventory() or it will crash.
 	}
 
@@ -294,13 +294,13 @@ public class HmagAlrauneEntity extends AlrauneEntity implements INFFGirlsTamed {
 		@Override
 		protected void performShooting(LivingEntity target, float velocity) 
 		{
-			((HmagAlrauneEntity)mob).shootSeed(target, () -> new NFFHmagAlrauneSeedEntity.HealingSeed(mob.asMob().level(), mob), velocity);
+			((HmagAlrauneEntity)mob).shootSeed(target, () -> new NFFHmagAlrauneSeedEntity.HealingSeed(mob.asMob().level, mob), velocity);
 		}
 
 		@Override
 		protected LivingEntity updateTarget() {
 			List<LivingEntity> visible = 
-					mob.asMob().level().getEntitiesOfClass(LivingEntity.class, mob.asMob().getBoundingBox().inflate(8d))
+					mob.asMob().level.getEntitiesOfClass(LivingEntity.class, mob.asMob().getBoundingBox().inflate(8d))
 					.stream().filter((LivingEntity living) -> mob.asMob().hasLineOfSight(living)).toList();
 					
 			List<LivingEntity> owner = visible.stream().filter((LivingEntity living) -> living.getUUID().equals(mob.getOwnerUUID())).toList();			

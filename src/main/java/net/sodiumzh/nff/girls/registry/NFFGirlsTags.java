@@ -50,12 +50,12 @@ public class NFFGirlsTags
 	/*
 	protected static TagKey<Block> blockTag(String name)
 	{
-		return TagKey.create(Registries.BLOCK, new ResourceLocation(NFFGirls.MOD_ID, name));
+		return TagKey.create(Registry.BLOCK_REGISTRY, new ResourceLocation(NFFGirls.MOD_ID, name));
 	}
 	
 	protected static TagKey<Item> itemTag(String name)
 	{
-		return TagKey.create(Registries.ITEM, new ResourceLocation(NFFGirls.MOD_ID, name));
+		return TagKey.create(Registry.ITEM_REGISTRY, new ResourceLocation(NFFGirls.MOD_ID, name));
 	}
 	
 	protected static TagKey<EntityType<?>> entityTag(String name)

@@ -5,13 +5,13 @@ import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.MobType;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.sodiumzh.nff.girls.NFFGirls;
-import net.sodiumzh.nff.girls.entity.INFFGirlsTamedSunSensitiveMob;
+import net.sodiumzh.nff.girls.entity.INFFGirlTamedSunSensitiveMob;
 import net.sodiumzh.nff.girls.registry.NFFGirlsConfigs;
 import net.sodiumzh.nff.girls.registry.NFFGirlsTags;
 import net.sodiumzh.nff.girls.subsystem.baublesystem.NFFGirlsDedicatedBaubleItem;
-import net.sodiumzh.nff.services.subsystem.baublesystem.BaubleAttributeModifier;
-import net.sodiumzh.nff.services.subsystem.baublesystem.BaubleEquippingCondition;
-import net.sodiumzh.nff.services.subsystem.baublesystem.BaubleProcessingArgs;
+import net.sodiumzh.nff.services.subsystems.baublesystem.BaubleAttributeModifier;
+import net.sodiumzh.nff.services.subsystems.baublesystem.BaubleEquippingCondition;
+import net.sodiumzh.nff.services.subsystems.baublesystem.BaubleProcessingArgs;
 
 public class SoulAmuletBaubleItem extends NFFGirlsDedicatedBaubleItem
 {
@@ -59,7 +59,7 @@ public class SoulAmuletBaubleItem extends NFFGirlsDedicatedBaubleItem
 	@Override
 	public BaubleEquippingCondition getEquippingCondition() {
 		return BaubleEquippingCondition.of(args -> (
-				args.user() instanceof INFFGirlsTamedSunSensitiveMob || args.user().getMobType().equals(MobType.UNDEAD)
+				args.user() instanceof INFFGirlTamedSunSensitiveMob || args.user().getMobType().equals(MobType.UNDEAD)
 				|| args.user().getType().is(NFFGirlsTags.CAN_EQUIP_SOUL_AMULET)));
 	}
 

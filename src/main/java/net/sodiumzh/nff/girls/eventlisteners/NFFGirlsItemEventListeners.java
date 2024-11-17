@@ -14,7 +14,7 @@ import net.minecraftforge.fml.common.Mod;
 import net.sodiumzh.nautils.mixin.events.entity.ItemEntityHurtEvent;
 import net.sodiumzh.nautils.statics.NaUtilsNBTStatics;
 import net.sodiumzh.nff.girls.NFFGirls;
-import net.sodiumzh.nff.girls.entity.INFFGirlsTamed;
+import net.sodiumzh.nff.girls.entity.INFFGirlTamed;
 import net.sodiumzh.nff.girls.item.IWithDuration;
 import net.sodiumzh.nff.girls.registry.NFFGirlsItems;
 import net.sodiumzh.nff.services.eventlisteners.ServerEntityTickEvent;
@@ -22,6 +22,7 @@ import net.sodiumzh.nff.services.item.NFFMobRespawnerInstance;
 import net.sodiumzh.nff.services.item.NFFMobRespawnerItem;
 import net.sodiumzh.nff.services.item.event.NFFMobRespawnerConstructEvent;
 import net.sodiumzh.nff.services.item.event.NFFMobRespawnerStartRespawnEvent;
+
 
 @Mod.EventBusSubscriber(modid = NFFGirls.MOD_ID, bus = Mod.EventBusSubscriber.Bus.FORGE)
 public class NFFGirlsItemEventListeners
@@ -56,10 +57,11 @@ public class NFFGirlsItemEventListeners
 		{
 			NFFMobRespawnerInstance ins = NFFMobRespawnerInstance.create(event.getItem().getItem());
 				// If the mob isn't a nffgirls befriended mob, it should not have this uuid
-			if (!ins.getOwnerUUID().equals(event.getEntity().getUUID()))
-			{
-				event.setCanceled(true);
-			}
+				if (ins.getMobNbt().hasUUID("nffgirls:befriended_owner")
+					 && !ins.getMobNbt().getUUID("nffgirls:befriended_owner").equals(event.getEntity().getUUID()))
+				{
+					event.setCanceled(true);
+				}
 		}
 		// Clear already picked mobs when player picking up
 		if (event.getItem().getItem().getTag() != null && event.getItem().getItem().getTag().contains("already_picked_befriendable_mobs"))
@@ -71,13 +73,14 @@ public class NFFGirlsItemEventListeners
 	@SubscribeEvent
 	public static void onMobRespawnerStartRespawn(NFFMobRespawnerStartRespawnEvent event)
 	{
-		if (!event.getRespawner().getOwnerUUID().equals(event.getPlayer().getUUID()))
+		if (event.getRespawner().getMobNbt().hasUUID("nffgirls:befriended_owner") 
+				&& !event.getRespawner().getMobNbt().getUUID("nffgirls:befriended_owner").equals(event.getPlayer().getUUID()))
 		{
 			event.setCanceled(true);
 		}
 	}
 
-	/** @deprecated Use {@link INFFGirlsTamed#getSharpnessModifierUUID} instead */
+	/** @deprecated Use {@link INFFGirlTamed#getSharpnessModifierUUID} instead */
 	@Deprecated
 	protected static final UUID SHARPNESS_MODIFIER_UUID = UUID.fromString("9c12b503-63c0-43e6-bd30-d7aae9818c99");
 	
@@ -154,7 +157,7 @@ public class NFFGirlsItemEventListeners
 	@SubscribeEvent
 	public static void onItemEntityHurt(ItemEntityHurtEvent event)
 	{
-		if (event.damageSource.getEntity() != null && event.damageSource.getEntity() instanceof INFFGirlsTamed)
+		if (event.damageSource.getEntity() != null && event.damageSource.getEntity() instanceof INFFGirlTamed)
 			event.setCanceled(true);
 	}
 }

@@ -5,7 +5,6 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.mojang.logging.LogUtils;
 import net.minecraft.core.Registry;
-import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.entity.Mob;
@@ -13,7 +12,6 @@ import net.sodiumzh.nautils.entity.MobApplicableItemTable;
 import net.sodiumzh.nautils.math.RandomSelection;
 import net.sodiumzh.nautils.math.RangedRandomDouble;
 import net.sodiumzh.nautils.registries.NaUtilsFunctions;
-import net.sodiumzh.nautils.statics.NaUtilsTagStatics;
 
 import java.util.function.Function;
 import java.util.function.Supplier;
@@ -59,10 +57,11 @@ public class NFFGirlsDataReaders {
                                 item != null ? item : tag != null ? tag : predicate));
                         continue;
                     }
+
                     if (item != null)
                         builder.add(new ResourceLocation(item), getter);
                     else if (tag != null)
-                        builder.add(TagKey.create(Registries.ITEM, new ResourceLocation(tag)), getter);
+                        builder.add(TagKey.create(Registry.ITEM_REGISTRY, new ResourceLocation(tag)), getter);
                     else if (predicate != null)
                         builder.add(stack -> NaUtilsFunctions.invoke(new ResourceLocation(predicate), stack)
                                 .castTo(Boolean.class).booleanValue(), getter);

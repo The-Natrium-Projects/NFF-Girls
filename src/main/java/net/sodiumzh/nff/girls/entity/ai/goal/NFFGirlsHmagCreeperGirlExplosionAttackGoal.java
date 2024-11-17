@@ -2,7 +2,7 @@ package net.sodiumzh.nff.girls.entity.ai.goal;
 
 import net.minecraft.world.entity.LivingEntity;
 import net.sodiumzh.nff.girls.entity.hmag.HmagCreeperGirlEntity;
-import net.sodiumzh.nff.services.entity.ai.goal.presets.NFFMeleeAttackGoal;
+import net.sodiumzh.nff.services.entity.ai.goal.preset.NFFMeleeAttackGoal;
 import net.sodiumzh.nff.services.entity.taming.INFFTamed;
 
 public class NFFGirlsHmagCreeperGirlExplosionAttackGoal extends NFFMeleeAttackGoal

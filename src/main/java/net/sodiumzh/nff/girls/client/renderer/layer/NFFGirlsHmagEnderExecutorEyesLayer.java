@@ -32,8 +32,8 @@ public class NFFGirlsHmagEnderExecutorEyesLayer<T extends HmagEnderExecutorEntit
 	}
 
 	@Override
-	public void render(PoseStack pose, MultiBufferSource buffer, int packedLight, T livingEntity, float limbSwing, float limbSwingAmount, float partialTicks, float ageInTicks, float netHeadYaw, float headPitch) {
+	public void render(PoseStack poseStack, MultiBufferSource buffer, int packedLight, T livingEntity, float limbSwing, float limbSwingAmount, float partialTicks, float ageInTicks, float netHeadYaw, float headPitch) {
 		VertexConsumer vertexconsumer = buffer.getBuffer(this.renderType(((M)this.getParentModel()).beamAttacking && livingEntity.tickCount % 2 == 0));
-		((M)this.getParentModel()).renderToBuffer(pose, vertexconsumer, 15728640, OverlayTexture.NO_OVERLAY, 1.0F, 1.0F, 1.0F, 1.0F);
+		((M)this.getParentModel()).renderToBuffer(poseStack, vertexconsumer, 15728640, OverlayTexture.NO_OVERLAY, 1.0F, 1.0F, 1.0F, 1.0F);
 		}
 }

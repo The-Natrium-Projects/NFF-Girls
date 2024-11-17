@@ -25,10 +25,9 @@ import net.minecraft.world.entity.projectile.ThrownTrident;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
-import net.sodiumzh.nff.girls.entity.INFFGirlsTamedSunSensitiveMob;
+import net.sodiumzh.nff.girls.entity.INFFGirlTamedSunSensitiveMob;
 import net.sodiumzh.nff.girls.entity.ai.goal.NFFGirlsFollowOwnerGoal;
 import net.sodiumzh.nff.girls.entity.ai.goal.NFFGirlsHmagDrownedTridentAttackGoal;
-import net.sodiumzh.nff.girls.entity.ai.goal.NFFGirlsTridentAttackGoal;
 import net.sodiumzh.nff.girls.entity.ai.goal.target.NFFGirlsNearestHostileToOwnerTargetGoal;
 import net.sodiumzh.nff.girls.entity.ai.goal.target.NFFGirlsNearestHostileToSelfTargetGoal;
 import net.sodiumzh.nff.girls.entity.ai.goal.target.NFFGirlsOwnerHurtByTargetGoal;
@@ -40,15 +39,6 @@ import net.sodiumzh.nff.girls.registry.NFFGirlsHealingItems;
 import net.sodiumzh.nff.girls.registry.NFFGirlsItems;
 import net.sodiumzh.nff.girls.sound.NFFGirlsSoundPresets;
 import net.sodiumzh.nff.girls.util.NFFGirlsEntityStatics;
-<<<<<<< HEAD
-import net.sodiumzh.nff.services.entity.ai.goal.presets.NFFAmphibiousGoals;
-import net.sodiumzh.nff.services.entity.ai.goal.presets.NFFFleeSunGoal;
-import net.sodiumzh.nff.services.entity.ai.goal.presets.NFFRandomStrollGoal;
-import net.sodiumzh.nff.services.entity.ai.goal.presets.NFFRandomSwimGoal;
-import net.sodiumzh.nff.services.entity.ai.goal.presets.NFFRestrictSunGoal;
-import net.sodiumzh.nff.services.entity.ai.goal.presets.NFFZombieAttackGoal;
-import net.sodiumzh.nff.services.entity.ai.goal.presets.target.NFFHurtByTargetGoal;
-=======
 import net.sodiumzh.nff.services.entity.ai.goal.preset.NFFAmphibiousGoals;
 import net.sodiumzh.nff.services.entity.ai.goal.preset.NFFFleeSunGoal;
 import net.sodiumzh.nff.services.entity.ai.goal.preset.NFFRandomStrollGoal;
@@ -56,7 +46,6 @@ import net.sodiumzh.nff.services.entity.ai.goal.preset.NFFRandomSwimGoal;
 import net.sodiumzh.nff.services.entity.ai.goal.preset.NFFRestrictSunGoal;
 import net.sodiumzh.nff.services.entity.ai.goal.preset.NFFZombieAttackGoal;
 import net.sodiumzh.nff.services.entity.ai.goal.preset.target.NFFHurtByTargetGoal;
->>>>>>> b2ab5b02 (Taming)
 import net.sodiumzh.nautils.entity.MobApplicableItemTable;
 import net.sodiumzh.nff.services.entity.taming.INFFTamedAmphibious;
 import net.sodiumzh.nff.services.entity.taming.NFFTamedStatics;
@@ -64,7 +53,7 @@ import net.sodiumzh.nff.services.inventory.NFFTamedInventoryMenu;
 import net.sodiumzh.nff.services.inventory.NFFTamedMobInventory;
 import net.sodiumzh.nff.services.inventory.NFFTamedMobInventoryWithEquipment;
 
-public class HmagDrownedGirlEntity extends DrownedGirlEntity implements INFFGirlsTamedSunSensitiveMob, INFFTamedAmphibious
+public class HmagDrownedGirlEntity extends DrownedGirlEntity implements INFFGirlTamedSunSensitiveMob, INFFTamedAmphibious
 {
 
 	/* Initialization */
@@ -85,12 +74,12 @@ public class HmagDrownedGirlEntity extends DrownedGirlEntity implements INFFGirl
 		goalSelector.addGoal(1, new NFFAmphibiousGoals.GoToWaterGoal(this, 1.0D));
 		goalSelector.addGoal(1, new NFFRestrictSunGoal(this));
 		goalSelector.addGoal(2, new NFFFleeSunGoal(this, 1));
-		goalSelector.addGoal(3, new NFFGirlsTridentAttackGoal(this, 1.0D, 40, 10.0F));
+		goalSelector.addGoal(3, new NFFGirlsHmagDrownedTridentAttackGoal(this, 1.0D, 40, 10.0F));
 		goalSelector.addGoal(3, new NFFZombieAttackGoal(this, 1.0D, false));
 		goalSelector.addGoal(4, new NFFGirlsFollowOwnerGoal(this, 1.0d, 5.0f, 2.0f, false).amphibious()
 				.avoidSunCondition(NFFGirlsEntityStatics::isSunSensitive));
 		goalSelector.addGoal(5, new NFFAmphibiousGoals.GoToBeachGoal(this, 1.0D));
-		goalSelector.addGoal(6, new NFFAmphibiousGoals.SwimUpGoal(this, 1.0D, this.level().getSeaLevel()));
+		goalSelector.addGoal(6, new NFFAmphibiousGoals.SwimUpGoal(this, 1.0D, this.level.getSeaLevel()));
 		goalSelector.addGoal(7, new NFFRandomStrollGoal(this, 1.0d));
 		goalSelector.addGoal(7, new NFFRandomSwimGoal(this, 1.0d, 120));
 		goalSelector.addGoal(8, new LookAtPlayerGoal(this, Player.class, 8.0F));
@@ -117,7 +106,7 @@ public class HmagDrownedGirlEntity extends DrownedGirlEntity implements INFFGirl
 
 	@Override
 	public void performRangedAttack(LivingEntity pTarget, float pDistanceFactor) {
-		ThrownTrident throwntrident = new ThrownTrident(this.level(), this, new ItemStack(Items.TRIDENT));
+		ThrownTrident throwntrident = new ThrownTrident(this.level, this, new ItemStack(Items.TRIDENT));
 		double d0 = pTarget.getX() - this.getX();
 		double d1 = pTarget.getY(0.3333333333333333D) - throwntrident.getY();
 		double d2 = pTarget.getZ() - this.getZ();
@@ -125,7 +114,7 @@ public class HmagDrownedGirlEntity extends DrownedGirlEntity implements INFFGirl
 		throwntrident.shoot(d0, d1 + d3 * 0.2F, d2, 1.6F, 2.0F);	// Inaccuracy is fixed at hard mode (i.e. 2.0)
 		this.playSound(SoundEvents.DROWNED_SHOOT, 1.0F, 1.0F / (this.getRandom().nextFloat() * 0.4F + 0.8F));
 		this.swing(InteractionHand.MAIN_HAND);
-		this.level().addFreshEntity(throwntrident);
+		this.level.addFreshEntity(throwntrident);
 	}
 	
 	/* Interaction */
@@ -142,7 +131,7 @@ public class HmagDrownedGirlEntity extends DrownedGirlEntity implements INFFGirl
 		if (!player.isShiftKeyDown())
 		{
 			if (player.getUUID().equals(getOwnerUUID())) {
-				if (!player.level().isClientSide() && hand == InteractionHand.MAIN_HAND) 
+				if (!player.level.isClientSide() && hand == InteractionHand.MAIN_HAND) 
 				{
 					// If this zombie is converted from a husk,
 					// it can be converted back by using a sponge to it
@@ -156,7 +145,7 @@ public class HmagDrownedGirlEntity extends DrownedGirlEntity implements INFFGirl
 					} 
 					else if (this.tryApplyHealingItems(player.getItemInHand(hand)) != InteractionResult.PASS)
 					{
-						return InteractionResult.sidedSuccess(player.level().isClientSide);
+						return InteractionResult.sidedSuccess(player.level.isClientSide);
 					}
 					else if (hand == InteractionHand.MAIN_HAND
 							&& NFFGirlsEntityStatics.isOnEitherHand(player, NFFGirlsItems.COMMANDING_WAND.get()))
@@ -165,7 +154,7 @@ public class HmagDrownedGirlEntity extends DrownedGirlEntity implements INFFGirl
 					}	
 					else return InteractionResult.PASS;
 				}
-				return InteractionResult.sidedSuccess(player.level().isClientSide);
+				return InteractionResult.sidedSuccess(player.level.isClientSide);
 			} 
 			return InteractionResult.PASS;
 		}
@@ -175,7 +164,7 @@ public class HmagDrownedGirlEntity extends DrownedGirlEntity implements INFFGirl
 				if (hand == InteractionHand.MAIN_HAND && NFFGirlsEntityStatics.isOnEitherHand(player, NFFGirlsItems.COMMANDING_WAND.get()))
 				{
 					NFFTamedStatics.openBefriendedInventory(player, this);
-					return InteractionResult.sidedSuccess(player.level().isClientSide);
+					return InteractionResult.sidedSuccess(player.level.isClientSide);
 				}
 			}
 			return InteractionResult.PASS;
@@ -230,8 +219,8 @@ public class HmagDrownedGirlEntity extends DrownedGirlEntity implements INFFGirl
 /*	@Override
 	public void setupSunImmunityRules() {
 		this.getSunImmunity().putOptional("sunhat", mob -> mob.getMob().getItemBySlot(EquipmentSlot.HEAD).is(NFFGirlsItems.SUNHAT.get()));
-		this.getSunImmunity().putOptional("soul_amulet", mob -> ((INFFGirlsTamed)mob).hasDwmgBauble("soul_amulet"));
-		this.getSunImmunity().putOptional("resis_amulet", mob -> ((INFFGirlsTamed)mob).hasDwmgBauble("resistance_amulet"));
+		this.getSunImmunity().putOptional("soul_amulet", mob -> ((INFFGirlTamed)mob).hasDwmgBauble("soul_amulet"));
+		this.getSunImmunity().putOptional("resis_amulet", mob -> ((INFFGirlTamed)mob).hasDwmgBauble("resistance_amulet"));
 	}*/
 
 	@Override

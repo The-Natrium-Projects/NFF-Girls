@@ -1,7 +1,6 @@
 package net.sodiumzh.nff.girls.entity.tamingprocesses.hmag;
 
 import java.util.Collection;
-import java.util.HashSet;
 
 import com.github.mechalopa.hmag.registry.ModItems;
 import com.github.mechalopa.hmag.world.entity.CreeperGirlEntity;
@@ -12,11 +11,11 @@ import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
-import net.minecraft.world.level.Level;
+import net.minecraft.world.level.Explosion;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import org.apache.commons.lang3.mutable.MutableObject;
-import net.sodiumzh.nautils.statics.NaUtilsMathStatics;
+import net.sodiumzh.nautils.math.RndUtil;
 import net.sodiumzh.nautils.statics.NaUtilsEntityStatics;
 import net.sodiumzh.nff.girls.NFFGirls;
 import net.sodiumzh.nff.services.entity.taming.INFFTamed;
@@ -65,7 +64,7 @@ public class HmagCreeperGirlTamingProcess extends TamingProcessItemGivingProgres
 					cg.setSwellDir(-1);
 				}
 				
-				Player player = mob.level().getPlayerByUUID(l.getNbt().getUUID("final_explosion_player"));
+				Player player = mob.level.getPlayerByUUID(l.getNbt().getUUID("final_explosion_player"));
 				// Fix reloading crash after quit after player die 
 				if (player == null)
 					return;
@@ -128,7 +127,7 @@ public class HmagCreeperGirlTamingProcess extends TamingProcessItemGivingProgres
 					/*if (!isQuiet)
 						for (int i = 0; i < 5; ++i)
 							NaUtilsEntityStatics.sendAngryParticlesToLivingDefault(mob);*/
-					//NaUtilsDebugStatics.debugPrintToScreen("Creeper Girl befriending failed.", player);
+					//Debug.printToScreen("Creeper Girl befriending failed.", player);
 			}	
 		});
 	}
@@ -136,9 +135,9 @@ public class HmagCreeperGirlTamingProcess extends TamingProcessItemGivingProgres
 	protected void doFinalExplosion(CreeperGirlEntity mob, Player player)
 	{
 		mob.invulnerableTime += 2;
-		Level.ExplosionInteraction interaction = net.minecraftforge.event.ForgeEventFactory.getMobGriefingEvent(mob.level(), mob)
-				? Level.ExplosionInteraction.MOB : Level.ExplosionInteraction.NONE;
-		mob.level().explode(mob, mob.getX(), mob.getY(), mob.getZ(), 12.0f, interaction);
+		Explosion.BlockInteraction explosion$blockinteraction = net.minecraftforge.event.ForgeEventFactory.getMobGriefingEvent(mob.level, mob)
+				? Explosion.BlockInteraction.DESTROY : Explosion.BlockInteraction.NONE;
+		mob.level.explode(mob, mob.getX(), mob.getY(), mob.getZ(), 12.0f, explosion$blockinteraction);
 		spawnLingeringCloud(mob);
 	}
 	/*
@@ -177,7 +176,7 @@ public class HmagCreeperGirlTamingProcess extends TamingProcessItemGivingProgres
 		Collection<MobEffectInstance> collection = mob.getActiveEffects();
 		if (!collection.isEmpty())
 		{
-			AreaEffectCloud areaeffectcloud = new AreaEffectCloud(mob.level(), mob.getX(), mob.getY(), mob.getZ());
+			AreaEffectCloud areaeffectcloud = new AreaEffectCloud(mob.level, mob.getX(), mob.getY(), mob.getZ());
 			areaeffectcloud.setRadius(10F);	// 4x creeper explosion here
 			areaeffectcloud.setRadiusOnUse(-0.5F);
 			areaeffectcloud.setWaitTime(10);
@@ -189,7 +188,7 @@ public class HmagCreeperGirlTamingProcess extends TamingProcessItemGivingProgres
 				areaeffectcloud.addEffect(new MobEffectInstance(mobeffectinstance));
 			}
 
-			mob.level().addFreshEntity(areaeffectcloud);
+			mob.level.addFreshEntity(areaeffectcloud);
 		}
 
 	}
@@ -201,9 +200,9 @@ public class HmagCreeperGirlTamingProcess extends TamingProcessItemGivingProgres
 		if (item.is(ModItems.LIGHTNING_PARTICLE.get()))
 			return rnd < 0.1 ? 0.50 : (rnd < 0.4 ? 0.25 : 0.125);
 		if (item.is(Items.GUNPOWDER))
-			return NaUtilsMathStatics.rndRangedDouble(0.015, 0.03);
+			return RndUtil.rndRangedDouble(0.015, 0.03);
 		else if (item.is(Items.TNT))
-			return NaUtilsMathStatics.rndRangedDouble(0.03, 0.06);
+			return RndUtil.rndRangedDouble(0.03, 0.06);
 		else return 0;
 	}*/
 
@@ -242,10 +241,8 @@ public class HmagCreeperGirlTamingProcess extends TamingProcessItemGivingProgres
 	}
 	
 	@Override
-	public HashSet<TamableHatredReason> getAddHatredReasons() {
-		HashSet<TamableHatredReason> set = new HashSet<TamableHatredReason>();
-		set.add(TamableHatredReason.ATTACKED);
-		return set;
+	public TamableHatredReason[] getAddHatredReasons() {
+		return new TamableHatredReason[] {TamableHatredReason.ATTACKED};
 	}
 	
 	@SubscribeEvent

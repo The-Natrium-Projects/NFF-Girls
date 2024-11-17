@@ -1,7 +1,6 @@
 package net.sodiumzh.nff.girls.entity.tamingprocesses.hmag;
 
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -22,17 +21,9 @@ import net.sodiumzh.nautils.statics.NaUtilsDebugStatics;
 import net.sodiumzh.nautils.statics.NaUtilsEntityStatics;
 import net.sodiumzh.nautils.statics.NaUtilsItemStatics;
 import net.sodiumzh.nautils.statics.NaUtilsNBTStatics;
-<<<<<<< HEAD
-import net.sodiumzh.nff.services.entity.capability.CNFFTamable;
-import net.sodiumzh.nff.services.entity.taming.NFFTamingProcess;
-import net.sodiumzh.nff.services.entity.taming.TamableHatredReason;
-import net.sodiumzh.nff.services.entity.taming.TamableInteractArguments;
-import net.sodiumzh.nff.services.entity.taming.TamableInteractionResult;
-=======
 import net.sodiumzh.nff.services.entity.taming.*;
 
 import javax.annotation.Nullable;
->>>>>>> b2ab5b02 (Taming)
 
 public abstract class NFFGirlsItemDroppingTamingProcess extends NFFTamingProcess
 {
@@ -69,10 +60,8 @@ public abstract class NFFGirlsItemDroppingTamingProcess extends NFFTamingProcess
 	}
 
 	@Override
-	public HashSet<TamableHatredReason> getAddHatredReasons() {
-		HashSet<TamableHatredReason> reasons = new HashSet<TamableHatredReason>();
-		reasons.add(TamableHatredReason.ATTACKED);
-		return reasons;
+	public TamableHatredReason[] getAddHatredReasons() {
+		return new TamableHatredReason[] {TamableHatredReason.ATTACKED};
 	}
 	
 	/**
@@ -107,10 +96,10 @@ public abstract class NFFGirlsItemDroppingTamingProcess extends NFFTamingProcess
 		if (!isItemAcceptableInternal(itemEntity.getItem(), mob))
 			return false;
 		// If item not thrown by player, pass
-		if (itemEntity.getOwner() == null || mob.level().getPlayerByUUID(itemEntity.getOwner().getUUID()) == null)
+		if (itemEntity.getThrower() == null || mob.level.getPlayerByUUID(itemEntity.getThrower()) == null)
 			return false;
 		// If in hatred, pass
-		if (CNFFTamable.getCap(mob) != null && CNFFTamable.getCap(mob).getHatred().contains(itemEntity.getOwner().getUUID()))
+		if (CNFFTamable.getCap(mob) != null && CNFFTamable.getCap(mob).getHatred().contains(itemEntity.getThrower()))
 			return false;
 		// If the item is still in picking cooldown for the mob, pass
 		if (itemEntity.getItem().getOrCreateTagElement("already_picked_befriendable_mobs").contains(mob.getStringUUID(), NaUtilsNBTStatics.TAG_INT_ID)
@@ -146,7 +135,7 @@ public abstract class NFFGirlsItemDroppingTamingProcess extends NFFTamingProcess
 			// Pick one and label picked
 			ItemStack stack = itemEntity.getItem().copy();
 			stack.setCount(1);
-			stack.getOrCreateTag().putUUID("befriendable_picked_from_player", itemEntity.getOwner().getUUID());
+			stack.getOrCreateTag().putUUID("befriendable_picked_from_player", itemEntity.getThrower());
 			mob.setItemInHand(InteractionHand.OFF_HAND, stack);
 			// If only one, remove item entity
 			if (itemEntity.getItem().getCount() <= 1)
@@ -195,7 +184,7 @@ public abstract class NFFGirlsItemDroppingTamingProcess extends NFFTamingProcess
 				&& mob.getItemInHand(InteractionHand.OFF_HAND).getTag().contains("befriendable_picked_from_player", NaUtilsNBTStatics.TAG_INT_ARRAY_ID)
 				&& !CNFFTamable.getCap(mob).hasTimer("hold_item_time"))
 		{
-			Player player = mob.level().getPlayerByUUID(mob.getItemInHand(InteractionHand.OFF_HAND).getTag().getUUID("befriendable_picked_from_player"));
+			Player player = mob.level.getPlayerByUUID(mob.getItemInHand(InteractionHand.OFF_HAND).getTag().getUUID("befriendable_picked_from_player"));
 			if (player != null && mob.hasLineOfSight(player))
 			{
 				String strUUID = player.getStringUUID();
@@ -235,7 +224,7 @@ public abstract class NFFGirlsItemDroppingTamingProcess extends NFFTamingProcess
 			Predicate<ItemEntity> pickCondition = (ItemEntity ie) -> ie.getBoundingBox().intersects(mob.getBoundingBox()) 
 					|| (Math.abs(ie.getBlockX() - mob.getBlockX()) <= 1 && Math.abs(ie.getBlockZ() - mob.getBlockZ()) <= 1 && ie.getBlockY() == mob.getBlockY());
 			List<ItemEntity> overlappingItems = 
-					mob.level().getEntitiesOfClass(ItemEntity.class, mob.getBoundingBox().minmax(NaUtilsEntityStatics.getNeighboringArea(mob, 2.0d)))
+					mob.level.getEntitiesOfClass(ItemEntity.class, mob.getBoundingBox().minmax(NaUtilsEntityStatics.getNeighboringArea(mob, 2.0d)))
 						.stream().filter(pickCondition)
 						.toList();
 			if (overlappingItems.size() > 0)

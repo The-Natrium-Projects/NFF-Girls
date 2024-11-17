@@ -3,18 +3,12 @@ package net.sodiumzh.nff.girls.recipe;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
-import net.minecraft.world.item.crafting.CraftingBookCategory;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.sodiumzh.nff.girls.registry.NFFGirlsItems;
 import net.sodiumzh.nff.girls.registry.NFFGirlsRecipes;
 
 public class MagicalGelEnchantRecipe extends SimpleModificationRecipe
 {
-	
-	public MagicalGelEnchantRecipe(ResourceLocation id, CraftingBookCategory category)
-	{
-		super(id, category);
-	}
 
 	public MagicalGelEnchantRecipe(ResourceLocation pId)
 	{

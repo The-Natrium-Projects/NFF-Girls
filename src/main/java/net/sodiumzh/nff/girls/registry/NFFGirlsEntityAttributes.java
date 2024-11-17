@@ -288,7 +288,7 @@ public class NFFGirlsEntityAttributes
 		.add(Attributes.MOVEMENT_SPEED, 0.18D)
 		.add(Attributes.ATTACK_DAMAGE, 0d),
 		NFFGirlsEntityTypes.HMAG_MELTY_MONSTER.get());
-	
+
 	public static final Supplier<AttributeSupplier.Builder> HMAG_NIGHTWALKER_ATTRIBUTES = register(() ->
 		VANILLA_MONSTER_COMMON_ATTRIBUTES.get()
 		.add(Attributes.MAX_HEALTH, 40.0D)
@@ -297,7 +297,7 @@ public class NFFGirlsEntityAttributes
 		.add(Attributes.KNOCKBACK_RESISTANCE, 0.5D)
 		.add(ForgeMod.STEP_HEIGHT_ADDITION.get(), 1.0D),
 		NFFGirlsEntityTypes.HMAG_NIGHTWALKER.get());
-
+	
 	/*	
 	public static final Supplier<AttributeSupplier.Builder> HMAG__ATTRIBUTES = register(() ->
 	*/	

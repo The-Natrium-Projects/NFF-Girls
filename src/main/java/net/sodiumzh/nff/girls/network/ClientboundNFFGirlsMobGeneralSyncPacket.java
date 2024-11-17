@@ -4,7 +4,7 @@ import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.protocol.Packet;
 import net.minecraft.network.protocol.game.ClientGamePacketListener;
 import net.sodiumzh.nautils.statics.NaUtilsMiscStatics;
-import net.sodiumzh.nff.girls.entity.INFFGirlsTamed;
+import net.sodiumzh.nff.girls.entity.INFFGirlTamed;
 import net.sodiumzh.nff.girls.entity.capability.CNFFGirlsFavorabilityHandler;
 import net.sodiumzh.nff.girls.entity.capability.CNFFGirlsLevelHandler;
 import net.sodiumzh.nff.girls.registry.NFFGirlsCapabilities;
@@ -17,7 +17,7 @@ public class ClientboundNFFGirlsMobGeneralSyncPacket implements Packet<ClientGam
 	public final float maxFavorability;
 	public final long xp;
 	
-	public ClientboundNFFGirlsMobGeneralSyncPacket(INFFGirlsTamed mob)
+	public ClientboundNFFGirlsMobGeneralSyncPacket(INFFGirlTamed mob)
 	{
 		this.entityId = mob.asMob().getId();
 		this.tradingPlayerId = NaUtilsMiscStatics.getValueFromCapability(mob.asMob(), NFFGirlsCapabilities.CAP_TRADE_HANDLER, 

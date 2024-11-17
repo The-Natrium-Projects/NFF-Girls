@@ -1,6 +1,5 @@
 package net.sodiumzh.nff.girls.entity.tamingprocesses.hmag;
 
-import java.util.HashSet;
 import java.util.UUID;
 
 import com.github.mechalopa.hmag.world.entity.CrimsonSlaughtererEntity;
@@ -15,7 +14,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.Blocks;
 import net.sodiumzh.nautils.math.RandomSelection;
-import net.sodiumzh.nautils.statics.NaUtilsMathStatics;
+import net.sodiumzh.nautils.math.RndUtil;
 import net.sodiumzh.nautils.statics.NaUtilsEntityStatics;
 import net.sodiumzh.nautils.statics.NaUtilsTagStatics;
 import net.sodiumzh.nff.girls.registry.NFFGirlsTags;
@@ -31,21 +30,21 @@ public class HmagCrimsonSlaughtererTamingProcess extends TamingProcessItemGiving
 	/*@Override
 	protected double getProcValueToAdd(ItemStack item, Player player, Mob mob, double oldProc) {
 		if (item.is(Items.CRIMSON_ROOTS))
-			return NaUtilsMathStatics.rndRangedDouble(0.02d, 0.04d);
+			return RndUtil.rndRangedDouble(0.02d, 0.04d);
 		else if (item.is(Items.WEEPING_VINES))
-			return NaUtilsMathStatics.rndRangedDouble(0.02d, 0.04d);
+			return RndUtil.rndRangedDouble(0.02d, 0.04d);
 		else if (item.is(Items.NETHER_WART))
-			return NaUtilsMathStatics.rndRangedDouble(0.03d, 0.06d);
+			return RndUtil.rndRangedDouble(0.03d, 0.06d);
 		else if (item.is(Items.CRIMSON_FUNGUS))
-			return NaUtilsMathStatics.rndRangedDouble(0.03d, 0.06d);
+			return RndUtil.rndRangedDouble(0.03d, 0.06d);
 		else if (item.is(Items.SHROOMLIGHT))
-			return NaUtilsMathStatics.rndRangedDouble(0.04d, 0.08d);
+			return RndUtil.rndRangedDouble(0.04d, 0.08d);
 		else if (item.is(Items.GILDED_BLACKSTONE))
-			return NaUtilsMathStatics.rndRangedDouble(0.04d, 0.08d);
+			return RndUtil.rndRangedDouble(0.04d, 0.08d);
 		else if (item.is(Items.GOLDEN_APPLE))
-			return NaUtilsMathStatics.rndRangedDouble(0.08d, 0.16d);
+			return RndUtil.rndRangedDouble(0.08d, 0.16d);
 		else if (NaUtilsTagStatics.hasTag(item, "forge:ingots/netherite") || item.is(Items.NETHERITE_INGOT))
-			return NaUtilsMathStatics.rndRangedDouble(0.16d, 0.32d);
+			return RndUtil.rndRangedDouble(0.16d, 0.32d);
 		else if (item.is(Items.NETHER_STAR))
 			return RandomSelection.createDouble(0.50d).add(1.01d, 0.20d).getDouble();
 		else return 0;
@@ -90,10 +89,8 @@ public class HmagCrimsonSlaughtererTamingProcess extends TamingProcessItemGiving
 	}
 	
 	@Override
-	public HashSet<TamableHatredReason> getAddHatredReasons() {
-		HashSet<TamableHatredReason> set = new HashSet<TamableHatredReason>();
-		set.add(TamableHatredReason.ATTACKED);
-		return set;
+	public TamableHatredReason[] getAddHatredReasons() {
+		return new TamableHatredReason[] {TamableHatredReason.ATTACKED};
 	}
 
 	@Override
@@ -129,12 +126,12 @@ public class HmagCrimsonSlaughtererTamingProcess extends TamingProcessItemGiving
 	
 	public boolean isOnWarpedBlock(Mob mob)
 	{
-		return mob.level().getBlockState(mob.blockPosition().below()).is(NFFGirlsTags.AFFECTS_CRIMSON_SLAUGHTERER);
+		return mob.level.getBlockState(mob.blockPosition().below()).is(NFFGirlsTags.AFFECTS_CRIMSON_SLAUGHTERER);
 	}
 	
 	public boolean satisfiesShroomlightCondition(Mob mob)
 	{
-		return mob.level().getBlockStates(NaUtilsEntityStatics.getNeighboringArea(mob, 6, 3)).filter(bs -> bs.is(Blocks.SHROOMLIGHT))
+		return mob.level.getBlockStates(NaUtilsEntityStatics.getNeighboringArea(mob, 6, 3)).filter(bs -> bs.is(Blocks.SHROOMLIGHT))
 				.toList().size() >= 16;
 	}
 

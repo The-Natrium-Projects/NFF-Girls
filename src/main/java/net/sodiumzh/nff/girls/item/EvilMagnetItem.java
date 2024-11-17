@@ -64,7 +64,7 @@ public class EvilMagnetItem extends Item implements IWithDuration
 				{
 					if (consumeDuration(context.getItemInHand(), 1))
 					{
-						ie.moveTo(blockpos.getX() + 0.5 + NaUtilsMathStatics.rndRangedDouble(-0.2,  0.2), blockpos.getY()+ 1.5, blockpos.getZ() + 0.5 + NaUtilsMathStatics.rndRangedDouble(-0.2,  0.2));
+						ie.moveTo(blockpos.getX() + 0.5 + RndUtil.rndRangedDouble(-0.2,  0.2), blockpos.getY()+ 1.5, blockpos.getZ() + 0.5 + RndUtil.rndRangedDouble(-0.2,  0.2));
 					}
 					else break;
 				}
@@ -77,14 +77,14 @@ public class EvilMagnetItem extends Item implements IWithDuration
 	
 	public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand pUsedHand)
 	{
-		if (!player.level().isClientSide)
+		if (!player.level.isClientSide)
 		{
 			player.getItemInHand(pUsedHand).shrink(1);
 			NaUtilsItemStatics.giveOrDrop(player, new ItemStack(Items.NETHERITE_INGOT, 1));
 			NaUtilsItemStatics.giveOrDrop(player, new ItemStack(ModItems.EVIL_CRYSTAL.get(), 4));
 			NaUtilsItemStatics.giveOrDrop(player, new ItemStack(Items.IRON_INGOT, 2));
 		}
-		return InteractionResultHolder.sidedSuccess(player.getItemInHand(pUsedHand), player.level().isClientSide);
+		return InteractionResultHolder.sidedSuccess(player.getItemInHand(pUsedHand), player.level.isClientSide);
 	}
 	
 	// ======== IWithDuration interface

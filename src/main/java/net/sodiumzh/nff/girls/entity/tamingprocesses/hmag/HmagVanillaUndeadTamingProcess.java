@@ -1,19 +1,7 @@
 package net.sodiumzh.nff.girls.entity.tamingprocesses.hmag;
-<<<<<<<< HEAD:src/main/java/net/sodiumzh/nff/girls/entity/tamingprocesses/hmag/HmagZombieGirlTamingProcess.java
-
-import java.util.HashSet;
-
-import com.github.mechalopa.hmag.registry.ModItems;
 
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.ItemStack;
-import net.sodiumzh.nautils.statics.NaUtilsMathStatics;
-========
-
-import net.minecraft.world.entity.Mob;
-import net.minecraft.world.entity.player.Player;
->>>>>>>> b2ab5b02 (Taming):src/main/java/net/sodiumzh/nff/girls/entity/tamingprocesses/hmag/HmagVanillaUndeadTamingProcess.java
 import net.sodiumzh.nff.girls.registry.NFFGirlsEffects;
 import net.sodiumzh.nff.services.entity.taming.TamableHatredReason;
 import net.sodiumzh.nff.services.entity.taming.TamingProcessItemGivingProgress;
@@ -27,9 +15,9 @@ public class HmagVanillaUndeadTamingProcess extends TamingProcessItemGivingProgr
 		if (item.is(NFFGirlsItems.SOUL_CAKE_SLICE.get()))
 			return rnd < 0.05 ? 1.0d : (rnd < 0.2d ? 0.666667d : 0.333334d);
 		else if (item.is(ModItems.SOUL_POWDER.get()))
-			return NaUtilsMathStatics.rndRangedDouble(0.02, 0.04);
+			return RndUtil.rndRangedDouble(0.02, 0.04);
 		else if (item.is(ModItems.SOUL_APPLE.get()))
-			return NaUtilsMathStatics.rndRangedDouble(0.04, 0.08);
+			return RndUtil.rndRangedDouble(0.04, 0.08);
 		else return 0;
 	}
 
@@ -70,12 +58,8 @@ public class HmagVanillaUndeadTamingProcess extends TamingProcessItemGivingProgr
 	}
 
 	@Override
-	public HashSet<TamableHatredReason> getAddHatredReasons() {
-		HashSet<TamableHatredReason> set = new HashSet<TamableHatredReason>();
-		set.add(TamableHatredReason.ATTACKED);
-		set.add(TamableHatredReason.ATTACKING);
-		set.add(TamableHatredReason.HIT);
-		return set;
+	public TamableHatredReason[] getAddHatredReasons() {
+		return new TamableHatredReason[] {TamableHatredReason.ATTACKED, TamableHatredReason.ATTACKING, TamableHatredReason.HIT};
 	}
 	
 	@Override

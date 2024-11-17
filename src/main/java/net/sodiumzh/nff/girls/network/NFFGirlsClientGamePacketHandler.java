@@ -7,7 +7,7 @@ import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
-import net.sodiumzh.nff.girls.entity.INFFGirlsTamed;
+import net.sodiumzh.nff.girls.entity.INFFGirlTamed;
 import net.sodiumzh.nff.girls.entity.capability.CNFFGirlsFavorabilityHandler;
 import net.sodiumzh.nff.girls.entity.capability.CNFFGirlsLevelHandler;
 import net.sodiumzh.nff.girls.entity.vanillatrade.ClientboundNFFGirlsTradeSyncPacket;
@@ -56,7 +56,7 @@ public class NFFGirlsClientGamePacketHandler
 	{
 		Minecraft mc = Minecraft.getInstance();
 		PacketUtils.ensureRunningOnSameThread(packet, listener, mc);
-		INFFGirlsTamed bm = INFFGirlsTamed.getBM(mc.level.getEntity(packet.entityId));
+		INFFGirlTamed bm = INFFGirlTamed.getBM(mc.level.getEntity(packet.entityId));
 		bm.asMob().getCapability(NFFGirlsCapabilities.CAP_TRADE_HANDLER).ifPresent(cap -> 
 		{
 			cap.setTradingPlayer(packet.tradingPlayerId == -1 ? null : (Player) mc.level.getEntity(packet.tradingPlayerId));

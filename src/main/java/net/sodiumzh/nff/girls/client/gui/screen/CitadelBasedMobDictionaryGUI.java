@@ -4,7 +4,6 @@ import com.github.alexthe666.citadel.client.gui.GuiBasicBook;
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
@@ -34,7 +33,7 @@ public class CitadelBasedMobDictionaryGUI extends GuiBasicBook {
         super(bookStack, title);
     }
 
-    public void render(GuiGraphics matrixStack, int x, int y, float partialTicks) {
+    public void render(PoseStack matrixStack, int x, int y, float partialTicks) {
         if (this.currentPageJSON.equals(this.getRootPage()) && this.currentPageCounter == 0) {
             int k = (this.width - this.xSize) / 2;
             int l = (this.height - this.ySize + 128) / 2;
@@ -44,7 +43,7 @@ public class CitadelBasedMobDictionaryGUI extends GuiBasicBook {
             stack.translate((double)k, (double)l, 0.0);
             stack.scale(2.75F, 2.75F, 2.75F);
             //this.itemRenderer.renderGuiItem(new ItemStack((ItemLike) NFFGirlsItems.TAB_ICON.get()), 25, 14);
-            //this.itemRenderer.blitOffset = 0.0F;
+            this.itemRenderer.blitOffset = 0.0F;
             stack.popPose();
             RenderSystem.applyModelViewMatrix();
         }

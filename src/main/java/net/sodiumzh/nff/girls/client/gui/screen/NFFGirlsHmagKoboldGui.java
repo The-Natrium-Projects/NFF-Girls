@@ -5,10 +5,10 @@ import net.sodiumzh.nautils.math.GuiPos;
 import net.sodiumzh.nff.services.entity.taming.INFFTamed;
 import net.sodiumzh.nff.services.inventory.NFFTamedInventoryMenu;
 
-public class NFFGirlsHmagKoboldGUI extends NFFGirlsHandItemsTwoBaublesGUI
+public class NFFGirlsHmagKoboldGui extends NFFGirlsHandItemsTwoBaublesGui
 {
 	
-	public NFFGirlsHmagKoboldGUI(NFFTamedInventoryMenu pMenu, Inventory pPlayerInventory, INFFTamed mob)
+	public NFFGirlsHmagKoboldGui(NFFTamedInventoryMenu pMenu, Inventory pPlayerInventory, INFFTamed mob)
 	{
 		super(pMenu, pPlayerInventory, mob);
 	}

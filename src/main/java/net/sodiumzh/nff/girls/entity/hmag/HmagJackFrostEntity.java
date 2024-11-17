@@ -31,7 +31,7 @@ import net.sodiumzh.nautils.function.MutablePredicate;
 import net.sodiumzh.nautils.statics.NaUtilsMathStatics;
 import net.sodiumzh.nautils.math.RndUtil;
 import net.sodiumzh.nff.girls.NFFGirls;
-import net.sodiumzh.nff.girls.entity.INFFGirlsTamed;
+import net.sodiumzh.nff.girls.entity.INFFGirlTamed;
 import net.sodiumzh.nff.girls.entity.ai.goal.NFFGirlsFollowOwnerGoal;
 import net.sodiumzh.nff.girls.entity.ai.goal.NFFGirlsRangedAttackGoal;
 import net.sodiumzh.nff.girls.entity.ai.goal.target.NFFGirlsNearestHostileToOwnerTargetGoal;
@@ -42,17 +42,10 @@ import net.sodiumzh.nff.girls.registry.NFFGirlsItems;
 import net.sodiumzh.nff.girls.sound.NFFGirlsSoundPresets;
 import net.sodiumzh.nff.girls.subsystem.baublesystem.NFFGirlsBaubleStatics;
 import net.sodiumzh.nff.girls.util.NFFGirlsEntityStatics;
-<<<<<<< HEAD
-import net.sodiumzh.nff.services.entity.ai.goal.presets.NFFWaterAvoidingRandomStrollGoal;
-import net.sodiumzh.nff.services.entity.ai.goal.presets.target.NFFHurtByTargetGoal;
-import net.sodiumzh.nff.services.entity.ai.goal.presets.target.NFFOwnerHurtByTargetGoal;
-import net.sodiumzh.nff.services.entity.ai.goal.presets.target.NFFOwnerHurtTargetGoal;
-=======
 import net.sodiumzh.nff.services.entity.ai.goal.preset.NFFWaterAvoidingRandomStrollGoal;
 import net.sodiumzh.nff.services.entity.ai.goal.preset.target.NFFHurtByTargetGoal;
 import net.sodiumzh.nff.services.entity.ai.goal.preset.target.NFFOwnerHurtByTargetGoal;
 import net.sodiumzh.nff.services.entity.ai.goal.preset.target.NFFOwnerHurtTargetGoal;
->>>>>>> b2ab5b02 (Taming)
 import net.sodiumzh.nautils.entity.MobApplicableItemTable;
 import net.sodiumzh.nff.services.entity.capability.wrapper.ILivingDelayedActions;
 import net.sodiumzh.nff.services.entity.taming.INFFTamed;
@@ -60,7 +53,7 @@ import net.sodiumzh.nff.services.entity.taming.NFFTamedStatics;
 import net.sodiumzh.nff.services.inventory.NFFTamedInventoryMenu;
 import net.sodiumzh.nff.services.inventory.NFFTamedMobInventory;
 
-public class HmagJackFrostEntity extends JackFrostEntity implements INFFGirlsTamed, ILivingDelayedActions {
+public class HmagJackFrostEntity extends JackFrostEntity implements INFFGirlTamed, ILivingDelayedActions {
 
 	@Override
 	public void onInit(UUID playerUUID, Mob from)
@@ -99,7 +92,7 @@ public class HmagJackFrostEntity extends JackFrostEntity implements INFFGirlsTam
 	
 	protected HardSnowballEntity getNewSnowball()
 	{
-		return new BefriendedJackFrostSnowball(this.level(). this);
+		return new BefriendedJackFrostSnowball(this.level, this);
 	}
 	
 	protected int getThrowLevel()
@@ -180,7 +173,7 @@ public class HmagJackFrostEntity extends JackFrostEntity implements INFFGirlsTam
 		double yOffset = Math.sqrt(deltaX * deltaX + deltaZ * deltaZ) * 0.05D;
 		snowball.shoot(deltaX, deltaY + yOffset, deltaZ, getShootSpeed(), getShootInaccuracy());
 		snowball.setDamage(getShootDamage());
-		this.level().addFreshEntity(snowball);
+		this.level.addFreshEntity(snowball);
 	}
 	
 	public void throwSnowball(Vec3 direction)
@@ -190,7 +183,7 @@ public class HmagJackFrostEntity extends JackFrostEntity implements INFFGirlsTam
 		HardSnowballEntity snowball = getNewSnowball();
 		snowball.shoot(n.x, n.y, n.z, getShootSpeed(), getShootInaccuracy());
 		snowball.setDamage(getShootDamage());
-		this.level().addFreshEntity(snowball);
+		this.level.addFreshEntity(snowball);
 	}
 	
 	public void playThrowingSound()
@@ -225,7 +218,7 @@ public class HmagJackFrostEntity extends JackFrostEntity implements INFFGirlsTam
 			// For normal interaction
 			if (!player.isShiftKeyDown())
 			{
-				if (!player.level().isClientSide()) 
+				if (!player.level.isClientSide()) 
 				{
 					/* Put checks before healing item check */
 					/* if (....)
@@ -233,7 +226,7 @@ public class HmagJackFrostEntity extends JackFrostEntity implements INFFGirlsTam
 					 	....
 					 }
 					else */if (this.tryApplyHealingItems(player.getItemInHand(hand)) != InteractionResult.PASS)
-						return InteractionResult.sidedSuccess(player.level().isClientSide);
+						return InteractionResult.sidedSuccess(player.level.isClientSide);
 					// The function above returns PASS when the items are not correct. So when not PASS it should stop here
 					else if (hand == InteractionHand.MAIN_HAND
 							&& NFFGirlsEntityStatics.isOnEitherHand(player, NFFGirlsItems.COMMANDING_WAND.get()))
@@ -244,7 +237,7 @@ public class HmagJackFrostEntity extends JackFrostEntity implements INFFGirlsTam
 					else return InteractionResult.PASS;
 				}
 				// Interacted
-				return InteractionResult.sidedSuccess(player.level().isClientSide);
+				return InteractionResult.sidedSuccess(player.level.isClientSide);
 			}
 			// For interaction with shift key down
 			else
@@ -253,7 +246,7 @@ public class HmagJackFrostEntity extends JackFrostEntity implements INFFGirlsTam
 				if (hand == InteractionHand.MAIN_HAND && NFFGirlsEntityStatics.isOnEitherHand(player, NFFGirlsItems.COMMANDING_WAND.get()))
 				{
 					NFFTamedStatics.openBefriendedInventory(player, this);
-					return InteractionResult.sidedSuccess(player.level().isClientSide);
+					return InteractionResult.sidedSuccess(player.level.isClientSide);
 				}
 			}
 		} 

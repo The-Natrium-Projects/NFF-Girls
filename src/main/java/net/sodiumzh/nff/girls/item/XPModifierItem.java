@@ -46,7 +46,7 @@ public class XPModifierItem extends Item
     	if (target.getCapability(NFFGirlsCapabilities.CAP_LEVEL_HANDLER).isPresent())
     	{
     		target.getCapability(NFFGirlsCapabilities.CAP_LEVEL_HANDLER).ifPresent(cap -> {
-    			if (!player.level().isClientSide)
+    			if (!player.level.isClientSide)
 	    		{
 	    			if (!player.isShiftKeyDown())
 	    			{
@@ -64,7 +64,7 @@ public class XPModifierItem extends Item
 	    			}
     			}
     		});
-    		return InteractionResult.sidedSuccess(player.level().isClientSide);
+    		return InteractionResult.sidedSuccess(player.level.isClientSide);
     	}
     	return InteractionResult.PASS;
     }

@@ -2,23 +2,29 @@ package net.sodiumzh.nff.girls.mixins;
 
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
+import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 import com.github.mechalopa.hmag.world.entity.JackFrostEntity;
-import com.llamalad7.mixinextras.injector.WrapWithCondition;
 
-import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.level.Level;
 import net.minecraftforge.common.MinecraftForge;
 import net.sodiumzh.nautils.mixin.NaUtilsMixin;
-import net.sodiumzh.nff.girls.eventlisteners.NFFGirlsHooks;
+import net.sodiumzh.nff.girls.event.NFFGirlsHooks;
 
 @Mixin(JackFrostEntity.class)
 public class NFFGirlsJackFrostEntityMixin implements NaUtilsMixin<JackFrostEntity>
 {
-	@WrapWithCondition(method = "aiStep()V", at = @At(value = "INVOKE", 
-			target = "com/github/mechalopa/hmag/world/entity/JackFrostEntity.hurt(Lnet/minecraft/world/damagesource/DamageSource;F)Z"),
-			expect = -1)
-	private boolean canTakeMeltingBiomeDamage(JackFrostEntity caller, DamageSource dmgSource, float value)
+	@Inject(method = "isMeltingBiome(Lnet/minecraft/world/entity/Entity;Lnet/minecraft/world/level/Level;)Z", at = @At("HEAD"), cancellable = true, remap = false, expect = -1)
+	private static void isMeltingBiome(Entity e, Level level, CallbackInfoReturnable<Boolean> cir)
 	{
-		return !MinecraftForge.EVENT_BUS.post(new NFFGirlsHooks.JackFrostCheckMeltingBiomeEvent(caller));
+		if (e instanceof JackFrostEntity jf)
+		{
+			if (MinecraftForge.EVENT_BUS.post(new NFFGirlsHooks.JackFrostCheckMeltingBiomeEvent(jf)))
+			{
+				cir.setReturnValue(false);
+			}
+		}
 	}
 }
