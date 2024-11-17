@@ -13,7 +13,7 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.sodiumzh.nautils.statics.NaUtilsEntityStatics;
 import net.sodiumzh.nautils.statics.NaUtilsReflectionStatics;
-import net.sodiumzh.nff.girls.entity.INFFGirlTamed;
+import net.sodiumzh.nff.girls.entity.INFFGirlsTamed;
 import net.sodiumzh.nff.services.entity.ai.NFFTamedMobAIState;
 import net.sodiumzh.nff.services.entity.taming.INFFTamed;
 import net.sodiumzh.nff.services.entity.taming.INFFTamedSunSensitiveMob;
@@ -106,7 +106,7 @@ public class NFFGirlsEntityStatics
 	 * <p> Only on server. On client always false.
 	 */
 	@Deprecated
-	public static boolean isAlly(INFFGirlTamed allyTo, LivingEntity test)
+	public static boolean isAlly(INFFGirlsTamed allyTo, LivingEntity test)
 	{
 		return NFFTamedStatics.isLivingAlliedToBM(allyTo, test);
 	}

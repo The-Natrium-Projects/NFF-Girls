@@ -7,7 +7,7 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.LogicalSide;
 import net.minecraftforge.fml.common.Mod;
 import net.sodiumzh.nff.girls.NFFGirls;
-import net.sodiumzh.nff.services.client.gui.screen.NFFTamedGui;
+import net.sodiumzh.nff.services.client.gui.screen.NFFTamedGUI;
 
 @Mod.EventBusSubscriber(modid = NFFGirls.MOD_ID, value = Dist.CLIENT, bus = Mod.EventBusSubscriber.Bus.FORGE)
 public class NFFGirlsClientEventListeners
@@ -20,7 +20,7 @@ public class NFFGirlsClientEventListeners
 		{
 			@SuppressWarnings("resource")
 			Minecraft mc = Minecraft.getInstance();
-			if (mc.screen != null && mc.screen instanceof NFFTamedGui bgs)
+			if (mc.screen != null && mc.screen instanceof NFFTamedGUI bgs)
 			{
 				if (bgs.mob.asMob().isAlive() 
 						&& bgs.mob.asMob().isAddedToWorld() 

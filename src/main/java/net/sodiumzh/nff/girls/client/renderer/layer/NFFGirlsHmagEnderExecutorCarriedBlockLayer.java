@@ -1,7 +1,7 @@
 package net.sodiumzh.nff.girls.client.renderer.layer;
 
 import com.mojang.blaze3d.vertex.PoseStack;
-import com.mojang.math.Vector3f;
+import com.mojang.math.Axis;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.MultiBufferSource;
@@ -28,24 +28,24 @@ public class NFFGirlsHmagEnderExecutorCarriedBlockLayer extends RenderLayer<Hmag
 
 	@SuppressWarnings("resource")
 	@Override
-	public void render(PoseStack poseStack, MultiBufferSource buffer, int packedLight, HmagEnderExecutorEntity entity, float limbSwing, float limbSwingAmount, float partialTicks, float ageInTicks, float netHeadYaw, float headPitch)
+	public void render(PoseStack pose, MultiBufferSource buffer, int packedLight, HmagEnderExecutorEntity entity, float limbSwing, float limbSwingAmount, float partialTicks, float ageInTicks, float netHeadYaw, float headPitch)
 	{
 		BlockState blockstate = entity.getCarriedBlock();
 
 		if (blockstate != null)
 		{
-			poseStack.pushPose();
-			this.getParentModel().translateToHand(entity.getMainArm() == HumanoidArm.RIGHT ? HumanoidArm.LEFT : HumanoidArm.RIGHT, poseStack);
-			poseStack.translate(0.0D, 0.875D, -0.05D);
+			pose.pushPose();
+			this.getParentModel().translateToHand(entity.getMainArm() == HumanoidArm.RIGHT ? HumanoidArm.LEFT : HumanoidArm.RIGHT, pose);
+			pose.translate(0.0D, 0.875D, -0.05D);
 			float f = (float)entity.tickCount + partialTicks;
-			poseStack.mulPose(Vector3f.XP.rotationDegrees(Mth.cos(f * 0.33F + 0.2F) * 6.0F));
-			poseStack.mulPose(Vector3f.YP.rotationDegrees((f * 6.0F + 15.0F) % 360.0F));
-			poseStack.translate(0.1875D, 0.1875D, 0.1875D);
+			pose.mulPose(Axis.XP.rotationDegrees(Mth.cos(f * 0.33F + 0.2F) * 6.0F));
+			pose.mulPose(Axis.YP.rotationDegrees((f * 6.0F + 15.0F) % 360.0F));
+			pose.translate(0.1875D, 0.1875D, 0.1875D);
 			float f1 = 0.375F;
-			poseStack.scale(-f1, -f1, f1);
-			poseStack.mulPose(Vector3f.YP.rotationDegrees(90.0F));
-			Minecraft.getInstance().getBlockRenderer().renderSingleBlock(blockstate, poseStack, buffer, packedLight, OverlayTexture.NO_OVERLAY, ModelData.EMPTY, (RenderType)null);
-			poseStack.popPose();
+			pose.scale(-f1, -f1, f1);
+			pose.mulPose(Axis.YP.rotationDegrees(90.0F));
+			Minecraft.getInstance().getBlockRenderer().renderSingleBlock(blockstate, pose, buffer, packedLight, OverlayTexture.NO_OVERLAY, ModelData.EMPTY, (RenderType)null);
+			pose.popPose();
 		}
 	}
 }

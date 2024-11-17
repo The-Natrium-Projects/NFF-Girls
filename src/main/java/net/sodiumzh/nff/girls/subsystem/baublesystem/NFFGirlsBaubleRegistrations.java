@@ -41,16 +41,16 @@ import net.sodiumzh.nff.girls.subsystem.baublesystem.baubles.EnderManHandBlockBa
 import net.sodiumzh.nff.girls.subsystem.baublesystem.baubles.InsomniaFruitBaubleBehavior;
 import net.sodiumzh.nff.girls.subsystem.baublesystem.baubles.NecroticReaperHandHoeBaubleBehavior;
 import net.sodiumzh.nff.services.entity.taming.INFFTamed;
-import net.sodiumzh.nff.services.subsystems.baublesystem.BaubleEquippingCondition;
-import net.sodiumzh.nff.services.subsystems.baublesystem.RegisterBaubleEquippableMobsEvent;
-import net.sodiumzh.nff.services.subsystems.baublesystem.RegisterBaublesEvent;
+import net.sodiumzh.nff.services.subsystem.baublesystem.BaubleEquippingCondition;
+import net.sodiumzh.nff.services.subsystem.baublesystem.RegisterBaubleEquippableMobsEvent;
+import net.sodiumzh.nff.services.subsystem.baublesystem.RegisterBaublesEvent;
 
 @EventBusSubscriber(modid = NFFGirls.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class NFFGirlsBaubleRegistrations
 {
 	
 	@SubscribeEvent
-	public static void nffGirlsBaubleAdditionalRegistration(NFFGirlsBaubleAdditionalRegistry.RegisterEvent event)
+	public static void baubleAdditionalRegistration(NFFGirlsBaubleAdditionalRegistry.RegisterEvent event)
 	{
 		event.register(NFFGirlsItems.SOUL_AMULET.get());
 		event.register(NFFGirlsItems.SOUL_AMULET_II.get());
@@ -122,7 +122,7 @@ public class NFFGirlsBaubleRegistrations
 		event.register(NFFGirlsItems.SOUL_AMULET_II.get());
 		event.register(NFFGirlsItems.SOUL_AMULET_III.get());
 		event.register(NFFGirlsItems.SOUL_AMULET_IV.get());
-		event.register(new InsomniaFruitBaubleBehavior(new ResourceLocation("nffgirls:insomnia_fruit"), BaubleEquippingCondition.always()));
+		event.register(new InsomniaFruitBaubleBehavior(new ResourceLocation(NFFGirls.MOD_ID, "insomnia_fruit"), BaubleEquippingCondition.always()));
 		event.register(NFFGirlsItems.RESISTANCE_AMULET.get());
 		event.register(NFFGirlsItems.RESISTANCE_AMULET_II.get());
 		event.register(NFFGirlsItems.COURAGE_AMULET.get());
@@ -132,13 +132,13 @@ public class NFFGirlsBaubleRegistrations
 		event.register(NFFGirlsItems.LIFE_JADE_II.get());
 		event.register(NFFGirlsItems.AQUA_JADE.get());
 		event.register(NFFGirlsItems.POISONOUS_THORN.get());
-		event.register(new NecroticReaperHandHoeBaubleBehavior(new ResourceLocation("nffgirls:necrotic_reaper_hoe")));
-		event.register(new EnderManHandBlockBaubleBehavior(new ResourceLocation("nffgirls:enderman_hand_block")));
+		event.register(new NecroticReaperHandHoeBaubleBehavior(new ResourceLocation(NFFGirls.MOD_ID, "necrotic_reaper_hoe")));
+		event.register(new EnderManHandBlockBaubleBehavior(new ResourceLocation(NFFGirls.MOD_ID, "enderman_hand_block")));
 	}
 	/*
 	public static void modifyBaubleEquippable(ModifyBaubleEquippableMobsEvent event)
 	{
-		event.addSpecialSlotAccepted(HmagNecroticReaperEntity.class, "main_hand", "nffgirls:necrotic_reaper_hoe");
+		event.addSpecialSlotAccepted(HmagNecroticReaperEntity.class, "main_hand", "dwmg:necrotic_reaper_hoe");
 	}*/
 	
 	// ========= Utils ==============

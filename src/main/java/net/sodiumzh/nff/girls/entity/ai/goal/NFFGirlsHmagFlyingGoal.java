@@ -11,14 +11,14 @@ import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.ai.goal.Goal;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.phys.Vec3;
-import net.sodiumzh.nautils.statics.NaUtilsMathStatics;
 import net.sodiumzh.nautils.statics.NaUtilsLevelStatics;
+import net.sodiumzh.nautils.statics.NaUtilsMathStatics;
 import net.sodiumzh.nff.girls.entity.capability.CNFFGirlsFavorabilityHandler;
 import net.sodiumzh.nff.services.entity.ai.NFFTamedMobAIState;
 import net.sodiumzh.nff.services.entity.ai.goal.NFFGoal;
 import net.sodiumzh.nff.services.entity.ai.goal.NFFMoveGoal;
 import net.sodiumzh.nff.services.entity.ai.goal.NFFTargetGoal;
-import net.sodiumzh.nff.services.entity.ai.goal.preset.INFFFollowOwner;
+import net.sodiumzh.nff.services.entity.ai.goal.presets.INFFFollowOwner;
 import net.sodiumzh.nff.services.entity.taming.INFFTamed;
 
 /* Ported from HMaG-AbstractFlyingMonsterEntity (Mechalopa)
@@ -300,7 +300,7 @@ public interface NFFGirlsHmagFlyingGoal
 				if (shouldAvoidSun.test(mob) && NaUtilsLevelStatics.isUnderSun(blockpos1, mob.asMob()))
 					continue;
 				
-				if (flyingentity.level.isEmptyBlock(blockpos1))
+				if (flyingentity.level().isEmptyBlock(blockpos1))
 				{
 					flyingentity.getMoveControl().setWantedPosition(blockpos1.getX() + 0.5D, blockpos1.getY() + 0.5D, blockpos1.getZ() + 0.5D, this.moveSpeed);
 

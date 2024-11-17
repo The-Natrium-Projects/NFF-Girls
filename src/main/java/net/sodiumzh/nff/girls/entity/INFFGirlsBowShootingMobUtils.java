@@ -38,13 +38,13 @@ public interface INFFGirlsBowShootingMobUtils
 	public default AbstractArrow createArrowEntity(ItemStack usingArrow)
 	{
 		Mob mob = (Mob)this;
-		if (mob.getLevel().isClientSide)
+		if (mob.level().isClientSide)
 			return null;
 		if (getBowType() == null)
 			return null;
 		
         ArrowItem arrowItem = (ArrowItem) (getEquippingBow().is(NFFGirlsTags.USES_VANILLA_ARROWS) ? Items.ARROW : usingArrow.getItem());
-        AbstractArrow arrowEntity = arrowItem.createArrow(mob.getLevel(), usingArrow, mob);	// TippedArrow is involved here
+        AbstractArrow arrowEntity = arrowItem.createArrow(mob.level(), usingArrow, mob);	// TippedArrow is involved here
         
         if (!getEquippingBow().is(NFFGirlsTags.USES_VANILLA_ARROWS))
         {

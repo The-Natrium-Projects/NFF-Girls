@@ -11,7 +11,7 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.common.MinecraftForge;
 import net.sodiumzh.nautils.mixin.NaUtilsMixin;
-import net.sodiumzh.nff.girls.event.NFFGirlsHooks;
+import net.sodiumzh.nff.girls.eventlisteners.NFFGirlsHooks;
 
 @Mixin(MeltyMonsterEntity.class)
 public class NFFGirlsMeltyMonsterEntityMixin implements NaUtilsMixin<MeltyMonsterEntity>

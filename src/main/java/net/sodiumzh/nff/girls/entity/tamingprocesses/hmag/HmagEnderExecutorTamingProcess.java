@@ -1,4 +1,9 @@
 package net.sodiumzh.nff.girls.entity.tamingprocesses.hmag;
+<<<<<<< HEAD
+
+import java.util.HashSet;
+=======
+>>>>>>> b2ab5b02 (Taming)
 
 import com.github.mechalopa.hmag.registry.ModItems;
 import com.github.mechalopa.hmag.world.entity.EnderExecutorEntity;
@@ -10,11 +15,11 @@ import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
-import net.sodiumzh.nautils.math.RndUtil;
+import net.sodiumzh.nautils.statics.NaUtilsMathStatics;
 import net.sodiumzh.nautils.statics.NaUtilsEntityStatics;
 import net.sodiumzh.nautils.statics.NaUtilsNBTStatics;
 import net.sodiumzh.nff.girls.registry.NFFGirlsItems;
-import net.sodiumzh.nff.services.entity.taming.CNFFTamable;
+import net.sodiumzh.nff.services.entity.capability.CNFFTamable;
 import net.sodiumzh.nff.services.entity.taming.INFFTamed;
 import net.sodiumzh.nff.services.entity.taming.TamableHatredReason;
 import net.sodiumzh.nff.services.entity.taming.TamableInteractArguments;
@@ -50,9 +55,9 @@ public class HmagEnderExecutorTamingProcess extends TamingProcessItemGivingProgr
 	/*@Override
 	protected double getProcValueToAdd(ItemStack item, Player player, Mob mob, double lastProc) {
 		if (item.is(Items.ENDER_EYE))
-			return RndUtil.rndRangedDouble(0.005d, 0.01d);
+			return NaUtilsMathStatics.rndRangedDouble(0.005d, 0.01d);
 		else if (item.is(ModItems.ENDER_PLASM.get()))
-			return RndUtil.rndRangedDouble(0.01d, 0.015d);
+			return NaUtilsMathStatics.rndRangedDouble(0.01d, 0.015d);
 		else if (item.is(NFFGirlsItems.ENDER_PIE.get()))
 		{
 			double rnd = this.rnd.nextDouble();
@@ -100,7 +105,7 @@ public class HmagEnderExecutorTamingProcess extends TamingProcessItemGivingProgr
 				* */
 				if (!l.getNbt().contains("player_uuid_on_befriending", 11))
 				{
-					for (Player player: mob.level.players()) 
+					for (Player player: mob.level().players()) 
 					{
 						if (mob.distanceToSqr(player) <= 256.0d)
 						{
@@ -120,7 +125,7 @@ public class HmagEnderExecutorTamingProcess extends TamingProcessItemGivingProgr
 				 */
 				if (l.getNbt().contains("player_uuid_on_befriending", 11))
 				{
-					Player player = ee.level.getPlayerByUUID(l.getNbt().getUUID("player_uuid_on_befriending"));
+					Player player = ee.level().getPlayerByUUID(l.getNbt().getUUID("player_uuid_on_befriending"));
 					/**  When player is present in the same level */
 					if (player != null)
 					{
@@ -208,8 +213,10 @@ public class HmagEnderExecutorTamingProcess extends TamingProcessItemGivingProgr
 	}
 	
 	@Override
-	public TamableHatredReason[] getAddHatredReasons() {
-		return new TamableHatredReason[] {TamableHatredReason.ATTACKED};
+	public HashSet<TamableHatredReason> getAddHatredReasons() {
+		HashSet<TamableHatredReason> set = new HashSet<TamableHatredReason>();
+		set.add(TamableHatredReason.ATTACKED);
+		return set;
 	}
 
 	@Override

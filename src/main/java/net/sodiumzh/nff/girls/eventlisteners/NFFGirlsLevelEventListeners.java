@@ -11,7 +11,7 @@ import net.minecraftforge.event.level.SleepFinishedTimeEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.sodiumzh.nff.girls.NFFGirls;
-import net.sodiumzh.nff.girls.entity.INFFGirlTamed;
+import net.sodiumzh.nff.girls.entity.INFFGirlsTamed;
 
 @Mod.EventBusSubscriber(modid = NFFGirls.MOD_ID, bus = Mod.EventBusSubscriber.Bus.FORGE)
 public class NFFGirlsLevelEventListeners
@@ -28,10 +28,10 @@ public class NFFGirlsLevelEventListeners
 				List<Entity> entities = level.getEntities(player, bound);
 				for (Entity entity: entities)
 				{
-					if (INFFGirlTamed.isBMAnd(entity, bm -> bm.getOwnerUUID().equals(player.getUUID()))
+					if (INFFGirlsTamed.isBMAnd(entity, bm -> bm.getOwnerUUID().equals(player.getUUID()))
 							&& entity.distanceToSqr(player) < 64f)
 					{
-						INFFGirlTamed.getBM(entity).getFavorabilityHandler().addFavorability(2f);
+						INFFGirlsTamed.getBM(entity).getFavorabilityHandler().addFavorability(2f);
 					}
 				}
 			}

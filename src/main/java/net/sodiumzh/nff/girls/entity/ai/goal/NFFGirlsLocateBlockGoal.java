@@ -9,11 +9,12 @@ import java.util.Random;
 
 import javax.annotation.Nullable;
 
+import org.apache.commons.lang3.mutable.MutableObject;
+
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.entity.ai.goal.Goal;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.phys.AABB;
-import org.apache.commons.lang3.mutable.MutableObject;
 import net.sodiumzh.nautils.statics.NaUtilsEntityStatics;
 import net.sodiumzh.nautils.statics.NaUtilsParticleStatics;
 import net.sodiumzh.nff.services.entity.ai.goal.NFFGoal;
@@ -72,13 +73,13 @@ public class NFFGirlsLocateBlockGoal extends NFFGoal
 			return false;
 		// Existance check
 		AABB range = NaUtilsEntityStatics.getNeighboringArea(mob.asMob(), searchRange);
-		MutableObject<ArrayList<BlockPos>> acceptedPosWrapper = new MutableObject<>(new ArrayList<BlockPos>(50));
+		MutableObject<ArrayList<BlockPos>> acceptedPosWrapper = new MutableObject<>(new ArrayList<BlockPos>(50));		
 		BlockPos.betweenClosedStream(range).forEach((BlockPos pos) -> {
-			if (loc.getLocatingBlocks().contains(mob.asMob().level.getBlockState(pos).getBlock()))
+			if (loc.getLocatingBlocks().contains(mob.asMob().level().getBlockState(pos).getBlock()))
 				acceptedPosWrapper.getValue().add(new BlockPos(pos.getX(), pos.getY(), pos.getZ()));
 			});
 		List<BlockPos> acceptedPos = acceptedPosWrapper.getValue().stream()
-			.filter((BlockPos bp) -> blocks.contains(mob.asMob().level.getBlockState(bp).getBlock()))
+			.filter((BlockPos bp) -> blocks.contains(mob.asMob().level().getBlockState(bp).getBlock()))
 			.filter((BlockPos bp) -> !sphericalSearchRange || bp.distSqr(mob.asMob().blockPosition()) <= (searchRange * searchRange))
 			.sorted(Comparator.comparingDouble((BlockPos bp) -> bp.distSqr(mob.asMob().blockPosition())))
 			.toList();
@@ -110,7 +111,7 @@ public class NFFGirlsLocateBlockGoal extends NFFGoal
 	@Override
 	public void onTick()
 	{
-		if (targetPos != null && loc.getLocatingBlocks().contains(mob.asMob().level.getBlockState(targetPos).getBlock()))
+		if (targetPos != null && loc.getLocatingBlocks().contains(mob.asMob().level().getBlockState(targetPos).getBlock()))
 		{
 			mob.asMob().getNavigation().moveTo(targetPos.getX(), targetPos.getY(), targetPos.getZ(), 1);
 			mob.asMob().getMoveControl().setWantedPosition(targetPos.getX(), targetPos.getY(), targetPos.getZ(), 1);

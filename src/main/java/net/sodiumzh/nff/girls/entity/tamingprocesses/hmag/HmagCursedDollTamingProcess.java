@@ -2,6 +2,7 @@ package net.sodiumzh.nff.girls.entity.tamingprocesses.hmag;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 
 import org.apache.commons.lang3.mutable.MutableObject;
 
@@ -17,7 +18,7 @@ import net.sodiumzh.nautils.containers.MapPair;
 import net.sodiumzh.nautils.entity.RepeatableAttributeModifier;
 import net.sodiumzh.nautils.statics.NaUtilsContainerStatics;
 import net.sodiumzh.nautils.statics.NaUtilsParticleStatics;
-import net.sodiumzh.nff.services.entity.taming.CNFFTamable;
+import net.sodiumzh.nff.services.entity.capability.CNFFTamable;
 import net.sodiumzh.nff.services.entity.taming.NFFTamingProcess;
 import net.sodiumzh.nff.services.entity.taming.TamableHatredReason;
 import net.sodiumzh.nff.services.entity.taming.TamableInteractArguments;
@@ -111,7 +112,7 @@ public class HmagCursedDollTamingProcess extends NFFTamingProcess
 						NaUtilsParticleStatics.sendHeartParticlesToEntityDefault(mob);
 						ATK_MOD.clear(player, Attributes.ATTACK_DAMAGE);
 						result.setHandled();
-						result.nFFTamed = doTaming(player, mob);
+						result.nFFTamed = this.doTaming(player, mob);
 						return result;
 					}
 					else
@@ -160,8 +161,8 @@ public class HmagCursedDollTamingProcess extends NFFTamingProcess
 	}
 
 	@Override
-	public TamableHatredReason[] getAddHatredReasons() {
-		return new TamableHatredReason[] {TamableHatredReason.ATTACKED};
+	public HashSet<TamableHatredReason> getAddHatredReasons() {
+		return NaUtilsContainerStatics.setOf(TamableHatredReason.ATTACKED);
 	}
 
 	@Override

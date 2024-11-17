@@ -1,6 +1,10 @@
 package net.sodiumzh.nff.girls.entity.tamingprocesses.hmag;
 
+<<<<<<< HEAD
+import java.util.HashSet;
+=======
 import java.util.Objects;
+>>>>>>> b2ab5b02 (Taming)
 import java.util.UUID;
 
 import javax.annotation.Nullable;
@@ -22,14 +26,15 @@ import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.phys.Vec3;
 import net.sodiumzh.nautils.entity.AttributeModifierSwitch;
+import net.sodiumzh.nautils.statics.NaUtilsContainerStatics;
 import net.sodiumzh.nautils.statics.NaUtilsEntityStatics;
 import net.sodiumzh.nautils.statics.NaUtilsNBTStatics;
-import net.sodiumzh.nff.girls.befriendmobs.entity.ai.goal.FreezeGoal;
 import net.sodiumzh.nff.girls.entity.ai.goal.NFFGirlsTamableJiangshiMutableLeapGoal;
 import net.sodiumzh.nff.girls.item.TaoistTalismanItem;
 import net.sodiumzh.nff.girls.registry.NFFGirlsItems;
 import net.sodiumzh.nff.girls.util.NFFGirlsEntityStatics;
-import net.sodiumzh.nff.services.entity.taming.CNFFTamable;
+import net.sodiumzh.nff.services.entity.ai.goal.presets.FreezeGoal;
+import net.sodiumzh.nff.services.entity.capability.CNFFTamable;
 import net.sodiumzh.nff.services.entity.taming.NFFTamingMapping;
 import net.sodiumzh.nff.services.entity.taming.NFFTamingProcess;
 import net.sodiumzh.nff.services.entity.taming.TamableHatredReason;
@@ -94,8 +99,8 @@ public class HmagJiangshiTamingProcess extends NFFTamingProcess
 	}
 
 	@Override
-	public TamableHatredReason[] getAddHatredReasons() {
-		return new TamableHatredReason[] {};
+	public HashSet<TamableHatredReason> getAddHatredReasons() {
+		return NaUtilsContainerStatics.setOf();
 	}
 
 	@Override
@@ -173,7 +178,7 @@ public class HmagJiangshiTamingProcess extends NFFTamingProcess
 				thunderEffect(mob);
 			}
 			updateModifiers(mob);
-			mob.level.playSound(null, mob, SoundEvents.GENERIC_EXPLODE, SoundSource.BLOCKS, 2f, 0.7f);
+			mob.level().playSound(null, mob, SoundEvents.GENERIC_EXPLODE, SoundSource.BLOCKS, 2f, 0.7f);
 		}
 		else
 		{
@@ -254,7 +259,7 @@ public class HmagJiangshiTamingProcess extends NFFTamingProcess
 	public int getAngerPhase(Mob mob)
 	{
 		int res = 0;
-		for (Player player: mob.level.players())
+		for (Player player: mob.level().players())
 		{
 			if (isInProcess(player, mob) && getProgressLevel(mob, player) > res)
 				res = getProgressLevel(mob, player);
@@ -287,10 +292,10 @@ public class HmagJiangshiTamingProcess extends NFFTamingProcess
 	
 	public void thunderEffect(Mob mob)
 	{
-		LightningBolt lb = EntityType.LIGHTNING_BOLT.create(mob.level);
+		LightningBolt lb = EntityType.LIGHTNING_BOLT.create(mob.level());
 		lb.moveTo(Vec3.atBottomCenterOf(mob.blockPosition()));
 		lb.setDamage(0);
-		mob.level.addFreshEntity(lb);
+		mob.level().addFreshEntity(lb);
 		mob.addEffect(new MobEffectInstance(MobEffects.FIRE_RESISTANCE, 30 * 20));
 		CNFFTamable.getCap(mob).setTimer("clear_fire", 10 * 20);
 	}

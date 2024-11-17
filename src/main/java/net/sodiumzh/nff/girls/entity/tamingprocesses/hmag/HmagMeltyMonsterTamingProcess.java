@@ -1,4 +1,9 @@
 package net.sodiumzh.nff.girls.entity.tamingprocesses.hmag;
+<<<<<<< HEAD
+
+import java.util.HashSet;
+=======
+>>>>>>> b2ab5b02 (Taming)
 
 import com.github.mechalopa.hmag.registry.ModEffects;
 import com.github.mechalopa.hmag.registry.ModItems;
@@ -10,7 +15,8 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.sodiumzh.nautils.math.RandomSelection;
-import net.sodiumzh.nautils.math.RndUtil;
+import net.sodiumzh.nautils.statics.NaUtilsMathStatics;
+import net.sodiumzh.nautils.statics.NaUtilsContainerStatics;
 import net.sodiumzh.nautils.statics.NaUtilsEntityStatics;
 import net.sodiumzh.nff.services.entity.taming.TamableHatredReason;
 import net.sodiumzh.nff.services.entity.taming.TamingProcessItemGivingProgress;
@@ -21,13 +27,13 @@ public class HmagMeltyMonsterTamingProcess extends TamingProcessItemGivingProgre
 	@Override
 	protected double getProcValueToAdd(ItemStack item, Player player, Mob mob, double oldProc) {
 		if (item.is(Items.BLAZE_POWDER))
-			return RndUtil.rndRangedDouble(0.02, 0.04);
+			return NaUtilsMathStatics.rndRangedDouble(0.02, 0.04);
 		else if (item.is(Items.BLAZE_ROD))
-			return RndUtil.rndRangedDouble(0.03, 0.06);
+			return NaUtilsMathStatics.rndRangedDouble(0.03, 0.06);
 		else if (item.is(ModItems.BURNING_CORE.get()))
-			return RndUtil.rndRangedDouble(0.03, 0.06);
+			return NaUtilsMathStatics.rndRangedDouble(0.03, 0.16);
 		else if (item.is(ModItems.BURNING_CORE_BLOCK.get()))
-			return RndUtil.rndRangedDouble(0.12, 0.24);
+			return NaUtilsMathStatics.rndRangedDouble(0.12, 0.24);
 		else if (item.is(Items.NETHER_STAR))
 			return RandomSelection.createDouble(0.5d).add(1.01d, 0.3d).getDouble();
 		else return 0;
@@ -57,8 +63,8 @@ public class HmagMeltyMonsterTamingProcess extends TamingProcessItemGivingProgre
 	}
 	
 	@Override
-	public TamableHatredReason[] getAddHatredReasons() {
-		return new TamableHatredReason[] {TamableHatredReason.ATTACKED};
+	public HashSet<TamableHatredReason> getAddHatredReasons() {
+		return NaUtilsContainerStatics.setOf(TamableHatredReason.ATTACKED);
 	}
 
 }

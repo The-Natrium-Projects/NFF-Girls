@@ -4,9 +4,9 @@ import net.minecraft.resources.ResourceLocation;
 import net.sodiumzh.nff.girls.NFFGirls;
 import net.sodiumzh.nff.girls.registry.NFFGirlsTags;
 import net.sodiumzh.nff.girls.subsystem.baublesystem.NFFGirlsDedicatedBaubleItem;
-import net.sodiumzh.nff.services.subsystems.baublesystem.BaubleAttributeModifier;
-import net.sodiumzh.nff.services.subsystems.baublesystem.BaubleEquippingCondition;
-import net.sodiumzh.nff.services.subsystems.baublesystem.BaubleProcessingArgs;
+import net.sodiumzh.nff.services.subsystem.baublesystem.BaubleAttributeModifier;
+import net.sodiumzh.nff.services.subsystem.baublesystem.BaubleEquippingCondition;
+import net.sodiumzh.nff.services.subsystem.baublesystem.BaubleProcessingArgs;
 
 public class PoisonousThornBaubleItem extends NFFGirlsDedicatedBaubleItem
 {

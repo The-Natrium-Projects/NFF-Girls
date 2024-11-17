@@ -2,16 +2,17 @@ package net.sodiumzh.nff.girls.client.renderer;
 
 import java.util.Random;
 
+import org.joml.Matrix3f;
+import org.joml.Matrix4f;
+
 import com.github.mechalopa.hmag.HMaG;
 import com.github.mechalopa.hmag.client.ModModelLayers;
 import com.github.mechalopa.hmag.client.renderer.layers.ItemInHandLayer2;
 import com.github.mechalopa.hmag.client.util.ModClientUtils;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
-import com.mojang.math.Matrix3f;
-import com.mojang.math.Matrix4f;
-import com.mojang.math.Vector3f;
- 
+import com.mojang.math.Axis;
+
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.culling.Frustum;
@@ -60,7 +61,7 @@ public class NFFGirlsHmagEnderExecutorRenderer extends MobRenderer<HmagEnderExec
 	}
 
 	@Override
-	public void render(HmagEnderExecutorEntity entity, float entityYaw, float partialTicks, PoseStack poseStack, MultiBufferSource buffer, int packedLight)
+	public void render(HmagEnderExecutorEntity entity, float entityYaw, float partialTicks, PoseStack pose, MultiBufferSource buffer, int packedLight)
 	{
 		BlockState blockstate = entity.getCarriedBlock();
 		NFFGirlsHmagEnderExecutorModel<HmagEnderExecutorEntity> endermanmodel = this.getModel();
@@ -69,15 +70,15 @@ public class NFFGirlsHmagEnderExecutorRenderer extends MobRenderer<HmagEnderExec
 		LivingEntity target = entity.getActiveAttackTarget();
 		endermanmodel.beamAttacking = entity.hasActiveAttackTarget() && target != null || entity.isBeamingEnderberryBush();
 
-		super.render(entity, entityYaw, partialTicks, poseStack, buffer, packedLight);
+		super.render(entity, entityYaw, partialTicks, pose, buffer, packedLight);
 		if (entity.isAlive() && (target != null || entity.isBeamingEnderberryBush()))
 		{
 			float f = entity.getAttackAnimationScale(partialTicks);
-			float f1 = (float)(entity.level.getGameTime() % 24000L) + partialTicks;
+			float f1 = (float)(entity.level().getGameTime() % 24000L) + partialTicks;
 			float f2 = f1 * 0.5F % 1.0F;
 			float f3 = entity.getEyeHeight();
-			poseStack.pushPose();
-			poseStack.translate(0.0D, (double)f3 + (double)entity.getBbHeight() * 0.05D, 0.0D);
+			pose.pushPose();
+			pose.translate(0.0D, (double)f3 + (double)entity.getBbHeight() * 0.05D, 0.0D);
 			Vec3 vec3 = entity.getBeamEndPoint(partialTicks).orElseThrow();
 			Vec3 vec31 = ModClientUtils.getPosition(entity, (double)f3, partialTicks);
 			Vec3 vec32 = vec3.subtract(vec31);
@@ -85,8 +86,8 @@ public class NFFGirlsHmagEnderExecutorRenderer extends MobRenderer<HmagEnderExec
 			vec32 = vec32.normalize();
 			float f5 = (float)Math.acos(vec32.y);
 			float f6 = (float)Math.atan2(vec32.z, vec32.x);
-			poseStack.mulPose(Vector3f.YP.rotationDegrees((((float)Math.PI / 2.0F) - f6) * (180.0F / (float)Math.PI)));
-			poseStack.mulPose(Vector3f.XP.rotationDegrees(f5 * (180.0F / (float)Math.PI)));
+			pose.mulPose(Axis.YP.rotationDegrees((((float)Math.PI / 2.0F) - f6) * (180.0F / (float)Math.PI)));
+			pose.mulPose(Axis.XP.rotationDegrees(f5 * (180.0F / (float)Math.PI)));
 			float f7 = 0.0F;
 			float f8 = f * f;
 			int i = 200 + (int)(f8 * 4.0F);
@@ -107,7 +108,7 @@ public class NFFGirlsHmagEnderExecutorRenderer extends MobRenderer<HmagEnderExec
 			float f29 = -1.0F + f2;
 			float f30 = f4 * 2.5F + f29;
 			VertexConsumer vertexconsumer = buffer.getBuffer(BEAM_RENDER_TYPE);
-			PoseStack.Pose posestack$pose = poseStack.last();
+			PoseStack.Pose posestack$pose = pose.last();
 			Matrix4f matrix4f = posestack$pose.pose();
 			Matrix3f matrix3f = posestack$pose.normal();
 			ModClientUtils.drawVertex(vertexconsumer, matrix4f, matrix3f, f19, f4, f20, i, j, k, 0.5F, f30);
@@ -119,7 +120,7 @@ public class NFFGirlsHmagEnderExecutorRenderer extends MobRenderer<HmagEnderExec
 			ModClientUtils.drawVertex(vertexconsumer, matrix4f, matrix3f, f13, f4, f14, i, j, k, 1.0F, f31 + 0.5F);
 			ModClientUtils.drawVertex(vertexconsumer, matrix4f, matrix3f, f17, f4, f18, i, j, k, 1.0F, f31);
 			ModClientUtils.drawVertex(vertexconsumer, matrix4f, matrix3f, f15, f4, f16, i, j, k, 0.5F, f31);
-			poseStack.popPose();
+			pose.popPose();
 		}
 	}
 

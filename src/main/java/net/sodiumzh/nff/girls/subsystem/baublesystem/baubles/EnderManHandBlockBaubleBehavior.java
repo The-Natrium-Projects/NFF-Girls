@@ -3,10 +3,10 @@ package net.sodiumzh.nff.girls.subsystem.baublesystem.baubles;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.item.BlockItem;
-import net.sodiumzh.nff.services.subsystems.baublesystem.BaubleAttributeModifier;
-import net.sodiumzh.nff.services.subsystems.baublesystem.BaubleBehavior;
-import net.sodiumzh.nff.services.subsystems.baublesystem.BaubleEquippingCondition;
-import net.sodiumzh.nff.services.subsystems.baublesystem.BaubleProcessingArgs;
+import net.sodiumzh.nff.services.subsystem.baublesystem.BaubleAttributeModifier;
+import net.sodiumzh.nff.services.subsystem.baublesystem.BaubleBehavior;
+import net.sodiumzh.nff.services.subsystem.baublesystem.BaubleEquippingCondition;
+import net.sodiumzh.nff.services.subsystem.baublesystem.BaubleProcessingArgs;
 
 public class EnderManHandBlockBaubleBehavior extends BaubleBehavior
 {

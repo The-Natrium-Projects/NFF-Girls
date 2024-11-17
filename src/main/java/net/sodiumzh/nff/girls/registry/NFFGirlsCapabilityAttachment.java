@@ -10,10 +10,10 @@ import net.minecraftforge.event.AttachCapabilitiesEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.sodiumzh.nff.girls.NFFGirls;
-import net.sodiumzh.nff.girls.entity.INFFGirlTamed;
+import net.sodiumzh.nff.girls.entity.INFFGirlsTamed;
 import net.sodiumzh.nff.girls.entity.capability.CNFFGirlsFavorabilityHandler;
 import net.sodiumzh.nff.girls.entity.capability.CNFFGirlsLevelHandler;
-import net.sodiumzh.nff.girls.entity.capability.CUndeadMobProvider;
+import net.sodiumzh.nff.girls.entity.capability.CUndeadAffinityHandlerProvider;
 import net.sodiumzh.nff.girls.entity.vanillatrade.CNFFGirlsTradeHandler;
 import net.sodiumzh.nff.services.entity.capability.CAttributeMonitor;
 import net.sodiumzh.nff.services.entity.taming.INFFTamed;
@@ -47,10 +47,10 @@ public class NFFGirlsCapabilityAttachment {
 					&& !(living instanceof INFFTamed)  // Befriended mobs aren't affected by Death Affinity
 					&& !living.getType().is(NFFGirlsTags.IGNORES_UNDEAD_AFFINITY))	
 			{
-				event.addCapability(new ResourceLocation(NFFGirls.MOD_ID, KEY_UNDEAD_AFFINITY_HANDLER), new CUndeadMobProvider());
+				event.addCapability(new ResourceLocation(NFFGirls.MOD_ID, KEY_UNDEAD_AFFINITY_HANDLER), new CUndeadAffinityHandlerProvider());
 			}
-			INFFGirlTamed bm;
-			if ((bm = INFFGirlTamed.getBM(living)) != null)
+			INFFGirlsTamed bm;
+			if ((bm = INFFGirlsTamed.getBM(living)) != null)
 			{
 				event.addCapability(new ResourceLocation(NFFGirls.MOD_ID, KEY_FAVORABILITY), new CNFFGirlsFavorabilityHandler.Prvd(bm.asMob()));
 				event.addCapability(new ResourceLocation(NFFGirls.MOD_ID, KEY_XP_LEVEL), new CNFFGirlsLevelHandler.Prvd(bm.asMob()));
@@ -63,7 +63,7 @@ public class NFFGirlsCapabilityAttachment {
 	@SubscribeEvent
 	public static void setupAttributeMonitor(CAttributeMonitor.SetupEvent event)
 	{
-		if (INFFGirlTamed.isBM(event.living))
+		if (INFFGirlsTamed.isBM(event.living))
 		{
 			event.monitor.listen(Attributes.MAX_HEALTH);
 		}

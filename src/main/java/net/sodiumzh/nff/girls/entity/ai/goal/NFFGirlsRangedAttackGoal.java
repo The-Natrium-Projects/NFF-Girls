@@ -1,7 +1,7 @@
 package net.sodiumzh.nff.girls.entity.ai.goal;
 
 import net.sodiumzh.nff.services.entity.ai.NFFTamedMobAIState;
-import net.sodiumzh.nff.services.entity.ai.goal.preset.NFFRangedAttackGoal;
+import net.sodiumzh.nff.services.entity.ai.goal.presets.NFFRangedAttackGoal;
 import net.sodiumzh.nff.services.entity.taming.INFFTamed;
 
 public class NFFGirlsRangedAttackGoal extends NFFRangedAttackGoal

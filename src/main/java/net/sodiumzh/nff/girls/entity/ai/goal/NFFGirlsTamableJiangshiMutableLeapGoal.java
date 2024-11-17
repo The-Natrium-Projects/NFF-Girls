@@ -6,6 +6,9 @@ import com.github.mechalopa.hmag.world.entity.ai.goal.LeapAtTargetGoal2;
 
 import net.minecraft.world.entity.Mob;
 
+/**
+ * TODO Why did I name it "mutable"?
+ */
 public class NFFGirlsTamableJiangshiMutableLeapGoal extends LeapAtTargetGoal2
 {
 	protected final JiangshiEntity mob;

@@ -1,5 +1,7 @@
 package net.sodiumzh.nff.girls.entity.tamingprocesses.hmag;
 
+import java.util.HashSet;
+
 import javax.annotation.Nullable;
 
 import net.minecraft.core.BlockPos;
@@ -11,7 +13,7 @@ import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.phys.AABB;
 import net.sodiumzh.nautils.statics.NaUtilsEntityStatics;
 import net.sodiumzh.nautils.statics.NaUtilsNBTStatics;
-import net.sodiumzh.nff.services.entity.taming.CNFFTamable;
+import net.sodiumzh.nff.services.entity.capability.CNFFTamable;
 import net.sodiumzh.nff.services.entity.taming.TamableHatredReason;
 
 public class HmagBansheeTamingProcess extends HmagVanillaUndeadTamingProcess
@@ -23,8 +25,12 @@ public class HmagBansheeTamingProcess extends HmagVanillaUndeadTamingProcess
 	}
 	
 	@Override
-	public TamableHatredReason[] getAddHatredReasons() {
-		return new TamableHatredReason[] {TamableHatredReason.ATTACKED, TamableHatredReason.ATTACKING, TamableHatredReason.HIT};
+	public HashSet<TamableHatredReason> getAddHatredReasons() {
+		HashSet<TamableHatredReason> set = new HashSet<TamableHatredReason>();
+		set.add(TamableHatredReason.ATTACKED);
+		set.add(TamableHatredReason.ATTACKING);
+		set.add(TamableHatredReason.HIT);
+		return set;
 	}
 		
 	@Override
@@ -83,7 +89,7 @@ public class HmagBansheeTamingProcess extends HmagVanillaUndeadTamingProcess
 	{
 		BlockPos pos = mob.blockPosition();
 		AABB area = new AABB(pos.offset(-7, -7, -7), pos.offset(7, 7, 7));
-		return mob.level.getBlockStates(area).filter((b) -> b.is(Blocks.WITHER_ROSE)).count() >= 8;
+		return mob.level().getBlockStates(area).filter((b) -> b.is(Blocks.WITHER_ROSE)).count() >= 8;
 	}
 	
 	@Override
@@ -97,7 +103,7 @@ public class HmagBansheeTamingProcess extends HmagVanillaUndeadTamingProcess
 	{
 		CNFFTamable cap = CNFFTamable.getCap(mob);
 		if (cap.getNbt().contains("last_item_giver", NaUtilsNBTStatics.TAG_INT_ARRAY_ID))
-			return mob.level.getPlayerByUUID(cap.getNbt().getUUID("last_item_giver"));
+			return mob.level().getPlayerByUUID(cap.getNbt().getUUID("last_item_giver"));
 		else return null;
 	}
 		

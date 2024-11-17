@@ -1,5 +1,6 @@
 package net.sodiumzh.nff.girls.entity.tamingprocesses.hmag;
 
+import java.util.HashSet;
 import java.util.UUID;
 
 import com.github.mechalopa.hmag.world.entity.NecroticReaperEntity;
@@ -12,9 +13,9 @@ import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.player.Player;
 import net.sodiumzh.nautils.statics.NaUtilsEntityStatics;
 import net.sodiumzh.nautils.statics.NaUtilsNBTStatics;
-import net.sodiumzh.nff.girls.blocks.SoulCarpetBlock;
+import net.sodiumzh.nff.girls.block.SoulCarpetBlock;
 import net.sodiumzh.nff.girls.registry.NFFGirlsItems;
-import net.sodiumzh.nff.services.entity.taming.CNFFTamable;
+import net.sodiumzh.nff.services.entity.capability.CNFFTamable;
 import net.sodiumzh.nff.services.entity.taming.NFFTamingProcess;
 import net.sodiumzh.nff.services.entity.taming.TamableHatredReason;
 import net.sodiumzh.nff.services.entity.taming.TamableInteractArguments;
@@ -117,8 +118,10 @@ public class HmagNecroticReaperTamingProcess extends NFFTamingProcess
 	}
 
 	@Override
-	public TamableHatredReason[] getAddHatredReasons() {
-		return new TamableHatredReason[] {TamableHatredReason.ATTACKED};
+	public HashSet<TamableHatredReason> getAddHatredReasons() {
+		HashSet<TamableHatredReason> set = new HashSet<TamableHatredReason>();
+		set.add(TamableHatredReason.ATTACKED);
+		return set;
 	}
 
 	/**
@@ -167,7 +170,7 @@ public class HmagNecroticReaperTamingProcess extends NFFTamingProcess
 			// At this time nobody is in process, so there shouldn't be a valid uuid
 			if (cap.getNbt().contains("ongoing_player_uuid", NaUtilsNBTStatics.TAG_INT_ARRAY_ID)
 					&& cap.getNbt().getUUID("ongoing_player_uuid") != null
-					&& mob.level.getPlayerByUUID(cap.getNbt().getUUID("ongoing_player_uuid")) != null)
+					&& mob.level().getPlayerByUUID(cap.getNbt().getUUID("ongoing_player_uuid")) != null)
 			{
 				throw new IllegalStateException("Player detected but hit count is 0. Player UUID information should be removed when hit count is cleared.");
 			}
@@ -206,9 +209,9 @@ public class HmagNecroticReaperTamingProcess extends NFFTamingProcess
 		if (	// Is in player process
 			cap.getNbt().contains("ongoing_player_uuid", NaUtilsNBTStatics.TAG_INT_ARRAY_ID)
 			&& cap.getNbt().getUUID("ongoing_player_uuid") != null
-			&& mob.level.getPlayerByUUID(cap.getNbt().getUUID("ongoing_player_uuid")) != null)
+			&& mob.level().getPlayerByUUID(cap.getNbt().getUUID("ongoing_player_uuid")) != null)
 		{
-			Player player = mob.level.getPlayerByUUID(cap.getNbt().getUUID("ongoing_player_uuid"));
+			Player player = mob.level().getPlayerByUUID(cap.getNbt().getUUID("ongoing_player_uuid"));
 			/*mob.getCapability(NFFGirlsCapabilities.CAP_UNDEAD_AFFINITY_HANDLER).ifPresent((capUM) ->
 			{
 				capUM.addHatred(player, 300 * 20);	// This blocks the effect of undead affinity

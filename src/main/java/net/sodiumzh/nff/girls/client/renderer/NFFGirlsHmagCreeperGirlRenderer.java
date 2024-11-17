@@ -32,12 +32,12 @@ public class NFFGirlsHmagCreeperGirlRenderer extends AbstractGirlRenderer<HmagCr
 	public NFFGirlsHmagCreeperGirlRenderer(EntityRendererProvider.Context context, NFFGirlsHmagCreeperGirlModel<HmagCreeperGirlEntity> model, AbstractGirlModel<HmagCreeperGirlEntity> model1, AbstractGirlModel<HmagCreeperGirlEntity> model2)
 	{
 		super(context, model, 0.5F);
-		this.addLayer(new HumanoidArmorLayer<>(this, model1, model2));
+		this.addLayer(new HumanoidArmorLayer<>(this, model1, model2, context.getModelManager()));
 		this.addLayer(new NFFGirlsHmagCreeperGirlPowerLayer(this, context.getModelSet()));
 	}
 
 	@Override
-	protected void scale(HmagCreeperGirlEntity entity, PoseStack poseStack, float partialTickTime)
+	protected void scale(HmagCreeperGirlEntity entity, PoseStack pose, float partialTickTime)
 	{
 		float f = entity.getSwelling(partialTickTime);
 		float f1 = 1.0F + Mth.sin(f * 100.0F) * f * 0.01F;
@@ -46,7 +46,7 @@ public class NFFGirlsHmagCreeperGirlRenderer extends AbstractGirlRenderer<HmagCr
 		f = f * f;
 		float f2 = (1.0F + f * 0.4F) * f1;
 		float f3 = (1.0F + f * 0.1F) / f1;
-		poseStack.scale(f2, f3, f2);
+		pose.scale(f2, f3, f2);
 	}
 
 	@Override

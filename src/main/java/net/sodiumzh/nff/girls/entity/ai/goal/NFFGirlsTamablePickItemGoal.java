@@ -13,7 +13,7 @@ import net.minecraft.world.entity.ai.goal.Goal;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.sodiumzh.nautils.statics.NaUtilsEntityStatics;
 import net.sodiumzh.nff.girls.entity.tamingprocesses.hmag.NFFGirlsItemDroppingTamingProcess;
-import net.sodiumzh.nff.services.entity.taming.CNFFTamable;
+import net.sodiumzh.nff.services.entity.capability.CNFFTamable;
 import net.sodiumzh.nff.services.entity.taming.NFFTamingMapping;
 import net.sodiumzh.nff.services.registry.NFFCapRegistry;
 
@@ -68,7 +68,7 @@ public class NFFGirlsTamablePickItemGoal extends Goal
 	protected List<ItemEntity> getAcceptableItems()
 	{
 		List<ItemEntity> list = new ArrayList<ItemEntity>();
-		mob.level.getEntities(mob, NaUtilsEntityStatics.getNeighboringArea(mob, 8, 2, 8))
+		mob.level().getEntities(mob, NaUtilsEntityStatics.getNeighboringArea(mob, 8, 2, 8))
 		.stream().filter((Entity e) -> {
 			if (e instanceof ItemEntity ie)
 			{

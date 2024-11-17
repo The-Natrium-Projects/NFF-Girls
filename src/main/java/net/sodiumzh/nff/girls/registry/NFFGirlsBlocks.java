@@ -7,13 +7,13 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.SweetBerryBushBlock;
 import net.minecraft.world.level.block.state.BlockBehaviour;
-import net.minecraft.world.level.material.Material;
-import net.minecraft.world.level.material.MaterialColor;
+import net.minecraft.world.level.material.MapColor;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
+import net.sodiumzh.nautils.block.BlockMaterial;
 import net.sodiumzh.nff.girls.NFFGirls;
 import net.sodiumzh.nff.girls.blocks.EnderberryBushBlock;
 import net.sodiumzh.nff.girls.blocks.SoulCakeBlock;
@@ -33,34 +33,28 @@ public class NFFGirlsBlocks {
 	// Register block items. Must be called after the corresponding block is registered!!
 	public static RegistryObject<BlockItem> regBlockItem(String name, RegistryObject<Block> block, Item.Properties properties)
 	{
-		return NFFGirlsItems.ITEMS.register(name, () -> new BlockItem(block.get(), properties.tab(NFFGirlsItems.TAB)));
+		return NFFGirlsItems.ITEMS.register(name, () -> new BlockItem(block.get(), properties));
 	}
 	
 	
 	/* Blocks */
 	
 	public static final RegistryObject<Block> SOUL_CARPET = NFFGirlsBlocks.BLOCKS.register("soul_carpet", () -> 
-		new SoulCarpetBlock(BlockBehaviour.Properties.of
-				(Material.WOOL, MaterialColor.COLOR_PURPLE)
+		new SoulCarpetBlock(BlockMaterial.WOOL.properties(MapColor.COLOR_PURPLE)
 				.strength(0.1f)
 				.sound(SoundType.WOOL)));
 	public static final RegistryObject<Block> SOUL_CAKE = NFFGirlsBlocks.BLOCKS.register("soul_cake", () -> 
-		new SoulCakeBlock(BlockBehaviour.Properties.of
-				(Material.CAKE)
+		new SoulCakeBlock(BlockMaterial.CAKE.properties()
 				.strength(0.5F)
 				.sound(SoundType.WOOL)));
 	public static final RegistryObject<Block> LUMINOUS_TERRACOTTA = NFFGirlsBlocks.BLOCKS.register("luminous_terracotta", () -> 
-		new Block(BlockBehaviour.Properties.of
-				(Material.STONE, 
-				MaterialColor.TERRACOTTA_WHITE)
+		new Block(BlockMaterial.STONE.properties(MapColor.TERRACOTTA_WHITE)
 				.requiresCorrectToolForDrops()
 				.strength(1.25F, 4.2F)
 				.lightLevel(bs -> 7)));
 	
 	public static final RegistryObject<Block> ENHANCED_LUMINOUS_TERRACOTTA = NFFGirlsBlocks.BLOCKS.register("enhanced_luminous_terracotta", () -> 
-		new Block(BlockBehaviour.Properties.of
-				(Material.STONE, 
-				MaterialColor.TERRACOTTA_WHITE)
+		new Block(BlockMaterial.STONE.properties(MapColor.TERRACOTTA_WHITE)
 				.requiresCorrectToolForDrops()
 				.strength(1.25F, 4.2F)
 				.lightLevel(bs -> 15)));

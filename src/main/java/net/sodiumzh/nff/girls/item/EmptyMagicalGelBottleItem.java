@@ -25,7 +25,7 @@ public class EmptyMagicalGelBottleItem extends Item
 	@Override
 	public InteractionResult interactLivingEntity(ItemStack stack, Player player, LivingEntity living, InteractionHand usedHand)
 	{
-		if (!player.level.isClientSide)
+		if (!player.level().isClientSide)
 		{
 			Optional<LinearColor> color = Optional.empty();
 			// Blend magical slime
@@ -58,7 +58,7 @@ public class EmptyMagicalGelBottleItem extends Item
 				stack.shrink(1);
 				ItemStack stack1 = MagicalGelBottleItem.create(NFFGirlsItems.MAGICAL_GEL_BOTTLE.get(), color.get());
 				player.spawnAtLocation(stack1).setNoPickUpDelay();
-				return InteractionResult.sidedSuccess(player.level.isClientSide);
+				return InteractionResult.sidedSuccess(player.level().isClientSide);
 			}
 		}
 		return InteractionResult.PASS;

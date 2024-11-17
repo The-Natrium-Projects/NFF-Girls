@@ -1,9 +1,11 @@
 package net.sodiumzh.nff.girls.entity.ai.goal;
 
 import net.minecraft.world.entity.EquipmentSlot;
-import net.sodiumzh.nff.services.entity.ai.goal.preset.NFFFleeSunGoal;
+import net.sodiumzh.nff.services.entity.ai.goal.presets.NFFFleeSunGoal;
 import net.sodiumzh.nff.services.entity.taming.INFFTamed;
 
+
+// TODO Why did I make this? It appears to make the mob flee sun when owner is sleeping? Maybe should merge into` NFFFleeSunGoal?
 public class NFFGirlsAvoidSunOnSleepGoal extends NFFFleeSunGoal
 {
 

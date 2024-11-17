@@ -20,12 +20,12 @@ public class MagicalGelColorUtils
 	
 	public static LinearColor getSlimeColor(MagicalSlimeEntity slime)
 	{
-		return getSlimeColor(SlimeGirlEntity.ColorVariant.byId(slime.getVariant()));
+		return getSlimeColor(SlimeGirlEntity.ColorVariant.byId(slime.getVariant().getId()));
 	}
 	
 	public static LinearColor getSlimeColor(SlimeGirlEntity slime)
 	{
-		return getSlimeColor(SlimeGirlEntity.ColorVariant.byId(slime.getVariant()));
+		return getSlimeColor(SlimeGirlEntity.ColorVariant.byId(slime.getVariant().getId()));
 	}
 	
 	public static SlimeGirlEntity.ColorVariant randomColorVariant()

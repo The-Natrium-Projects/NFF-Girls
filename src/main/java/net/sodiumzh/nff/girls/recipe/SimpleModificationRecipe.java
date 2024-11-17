@@ -5,9 +5,11 @@ import java.util.Optional;
 import com.mojang.logging.LogUtils;
 
 import net.minecraft.core.NonNullList;
+import net.minecraft.core.RegistryAccess;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.inventory.CraftingContainer;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.crafting.CraftingBookCategory;
 import net.minecraft.world.item.crafting.CustomRecipe;
 import net.minecraft.world.level.Level;
 
@@ -19,11 +21,16 @@ import net.minecraft.world.level.Level;
 public abstract class SimpleModificationRecipe extends CustomRecipe
 {
 
-	public SimpleModificationRecipe(ResourceLocation pId)
+	public SimpleModificationRecipe(ResourceLocation id, CraftingBookCategory category)
 	{
-		super(pId);
+		super(id, category);
 	}
 
+	public SimpleModificationRecipe(ResourceLocation id)
+	{
+		this(id, CraftingBookCategory.MISC);
+	}
+	
 	/**
 	 * Get if an item stack can be the modification subject.
 	 */
@@ -89,7 +96,7 @@ public abstract class SimpleModificationRecipe extends CustomRecipe
 	}
 	
 	@Override
-	public ItemStack assemble(CraftingContainer container) {
+	public ItemStack assemble(CraftingContainer container, RegistryAccess pRegistryAccess) {
 		Optional<SubjectAndModifier> ingredients = getIngredients(container);
 		if (ingredients.isEmpty())
 			return ItemStack.EMPTY;

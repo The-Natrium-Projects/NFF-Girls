@@ -24,7 +24,7 @@ import net.minecraft.world.entity.projectile.Arrow;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
 import net.sodiumzh.nff.girls.NFFGirls;
-import net.sodiumzh.nff.girls.entity.INFFGirlTamedSunSensitiveMob;
+import net.sodiumzh.nff.girls.entity.INFFGirlsTamedSunSensitiveMob;
 import net.sodiumzh.nff.girls.entity.INFFGirlsBowShootingMob;
 import net.sodiumzh.nff.girls.entity.ai.goal.NFFGirlsFollowOwnerGoal;
 import net.sodiumzh.nff.girls.entity.ai.goal.NFFGirlsSkeletonMeleeAttackGoal;
@@ -40,17 +40,24 @@ import net.sodiumzh.nff.girls.registry.NFFGirlsHealingItems;
 import net.sodiumzh.nff.girls.registry.NFFGirlsItems;
 import net.sodiumzh.nff.girls.sound.NFFGirlsSoundPresets;
 import net.sodiumzh.nff.girls.util.NFFGirlsEntityStatics;
+<<<<<<< HEAD
+import net.sodiumzh.nff.services.entity.ai.goal.presets.NFFFleeSunGoal;
+import net.sodiumzh.nff.services.entity.ai.goal.presets.NFFRestrictSunGoal;
+import net.sodiumzh.nff.services.entity.ai.goal.presets.NFFWaterAvoidingRandomStrollGoal;
+import net.sodiumzh.nff.services.entity.ai.goal.presets.target.NFFHurtByTargetGoal;
+=======
 import net.sodiumzh.nff.services.entity.ai.goal.preset.NFFFleeSunGoal;
 import net.sodiumzh.nff.services.entity.ai.goal.preset.NFFRestrictSunGoal;
 import net.sodiumzh.nff.services.entity.ai.goal.preset.NFFWaterAvoidingRandomStrollGoal;
 import net.sodiumzh.nff.services.entity.ai.goal.preset.target.NFFHurtByTargetGoal;
+>>>>>>> b2ab5b02 (Taming)
 import net.sodiumzh.nautils.entity.MobApplicableItemTable;
 import net.sodiumzh.nff.services.entity.taming.NFFTamedStatics;
 import net.sodiumzh.nff.services.inventory.NFFTamedInventoryMenu;
 import net.sodiumzh.nff.services.inventory.NFFTamedMobInventory;
 import net.sodiumzh.nff.services.inventory.NFFTamedMobInventoryWithEquipment;
 
-public class HmagStrayGirlEntity extends StrayGirlEntity implements INFFGirlTamedSunSensitiveMob, INFFGirlsBowShootingMob
+public class HmagStrayGirlEntity extends StrayGirlEntity implements INFFGirlsTamedSunSensitiveMob, INFFGirlsBowShootingMob
 {
 
 	
@@ -97,7 +104,7 @@ public class HmagStrayGirlEntity extends StrayGirlEntity implements INFFGirlTame
 	public void aiStep() {
 		super.aiStep();
 		/* Handle combat AI */
-		if (!this.level.isClientSide)
+		if (!this.level().isClientSide)
 		{
 			if (justShot)
 			{
@@ -132,16 +139,16 @@ public class HmagStrayGirlEntity extends StrayGirlEntity implements INFFGirlTame
 		if (!player.isShiftKeyDown())
 		{
 			if (player.getUUID().equals(getOwnerUUID())) {
-				if (!player.level.isClientSide() && hand == InteractionHand.MAIN_HAND) 
+				if (!player.level().isClientSide() && hand == InteractionHand.MAIN_HAND) 
 				{
 					if (NFFGirlsConfigs.ValueCache.Interaction.ALLOW_REVERSE_CONVERSION
 							&& player.getItemInHand(hand).is(Items.FLINT_AND_STEEL)
 							&& (isFromSkeleton || NFFGirlsConfigs.ValueCache.Interaction.ALL_STRAY_GIRLS_CAN_CONVERT_TO_SKELETONS))
 					{
 						// Use flint&steel
-						this.level.playSound(player, this.getX(), this.getY(), this.getZ(), SoundEvents.FLINTANDSTEEL_USE,
+						this.level().playSound(player, this.getX(), this.getY(), this.getZ(), SoundEvents.FLINTANDSTEEL_USE,
 								this.getSoundSource(), 1.0F, this.random.nextFloat() * 0.4F + 0.8F);
-						if (!this.level.isClientSide)
+						if (!this.level().isClientSide)
 						{
 							player.getItemInHand(hand).hurtAndBreak(1, player, (p) ->
 							{
@@ -150,7 +157,7 @@ public class HmagStrayGirlEntity extends StrayGirlEntity implements INFFGirlTame
 						}
 						// and convert
 						this.convertToSkeleton();
-						return InteractionResult.sidedSuccess(player.level.isClientSide);
+						return InteractionResult.sidedSuccess(player.level().isClientSide);
 					} 
 					else if (this.tryApplyHealingItems(player.getItemInHand(hand)) != InteractionResult.PASS)
 					{}
@@ -161,7 +168,7 @@ public class HmagStrayGirlEntity extends StrayGirlEntity implements INFFGirlTame
 					}
 					else return InteractionResult.PASS;
 				}
-				return InteractionResult.sidedSuccess(player.level.isClientSide);
+				return InteractionResult.sidedSuccess(player.level().isClientSide);
 			}
 			return InteractionResult.PASS;
 		}
@@ -171,7 +178,7 @@ public class HmagStrayGirlEntity extends StrayGirlEntity implements INFFGirlTame
 				if (hand == InteractionHand.MAIN_HAND && NFFGirlsEntityStatics.isOnEitherHand(player, NFFGirlsItems.COMMANDING_WAND.get()))
 				{
 					NFFTamedStatics.openBefriendedInventory(player, this);
-					return InteractionResult.sidedSuccess(player.level.isClientSide);
+					return InteractionResult.sidedSuccess(player.level().isClientSide);
 				}
 			}
 			return InteractionResult.PASS;
@@ -232,8 +239,8 @@ public class HmagStrayGirlEntity extends StrayGirlEntity implements INFFGirlTame
 			else return false;
 		});
 		this.getSunImmunity().putOptional("sunhat", mob -> mob.getMob().getItemBySlot(EquipmentSlot.HEAD).is(NFFGirlsItems.SUNHAT.get()));
-		this.getSunImmunity().putOptional("soul_amulet", mob -> ((INFFGirlTamed)mob).hasDwmgBauble("soul_amulet"));
-		this.getSunImmunity().putOptional("resis_amulet", mob -> ((INFFGirlTamed)mob).hasDwmgBauble("resistance_amulet"));
+		this.getSunImmunity().putOptional("soul_amulet", mob -> ((INFFGirlsTamed)mob).hasDwmgBauble("soul_amulet"));
+		this.getSunImmunity().putOptional("resis_amulet", mob -> ((INFFGirlsTamed)mob).hasDwmgBauble("resistance_amulet"));
 	}*/
 	
 	/* IBaubleEquipable interface */

@@ -1,5 +1,6 @@
 package net.sodiumzh.nff.girls.entity.tamingprocesses.hmag;
 
+import java.util.HashSet;
 import java.util.Random;
 
 import com.github.mechalopa.hmag.registry.ModEntityTypes;
@@ -12,7 +13,7 @@ import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.sodiumzh.nautils.math.LinearColor;
-import net.sodiumzh.nautils.math.RndUtil;
+import net.sodiumzh.nautils.statics.NaUtilsMathStatics;
 import net.sodiumzh.nautils.statics.NaUtilsEntityStatics;
 import net.sodiumzh.nff.girls.item.MagicalGelColorUtils;
 import net.sodiumzh.nff.girls.registry.NFFGirlsItems;
@@ -42,8 +43,11 @@ public class HmagSlimeGirlTamingProcess extends TamingProcessItemGivingProgress
 	}
 	
 	@Override
-	public TamableHatredReason[] getAddHatredReasons() {
-		return new TamableHatredReason[] {TamableHatredReason.ATTACKED, TamableHatredReason.HIT};
+	public HashSet<TamableHatredReason> getAddHatredReasons() {
+		HashSet<TamableHatredReason> set = new HashSet<TamableHatredReason>();
+		set.add(TamableHatredReason.ATTACKED);
+		set.add(TamableHatredReason.HIT);
+		return set;
 	}
 		
 	@Override
@@ -68,7 +72,7 @@ public class HmagSlimeGirlTamingProcess extends TamingProcessItemGivingProgress
 		}
 		else if (item.is(NFFGirlsItems.MAGICAL_GEL_BALL.get()))
 		{
-			return RndUtil.rndRangedDouble(0.02, 0.05);
+			return NaUtilsMathStatics.rndRangedDouble(0.02, 0.05);
 		}
 			
 		else return 0;
@@ -138,13 +142,13 @@ public class HmagSlimeGirlTamingProcess extends TamingProcessItemGivingProgress
 		{
 			if (mob.getType() == ModEntityTypes.SLIME_GIRL.get() && mob instanceof SlimeGirlEntity sg && rnd.nextDouble() < 0.25d)
             {
-	            MagicalSlimeEntity slime = ModEntityTypes.MAGICAL_SLIME.get().create(mob.level);
+	            MagicalSlimeEntity slime = ModEntityTypes.MAGICAL_SLIME.get().create(mob.level());
 	            slime.setSize(1, true);
             	LinearColor sgColorCompl = MagicalGelColorUtils.getSlimeColor(sg).getComplementary();
             	SlimeGirlEntity.ColorVariant v = MagicalGelColorUtils.closestVariant(sgColorCompl);
-            	slime.setVariant(v.getId());
-            	slime.moveTo(mob.getX() + RndUtil.rndRangedDouble(-0.5, 0.5), mob.getY() + 0.5D, mob.getZ() + RndUtil.rndRangedDouble(-0.5, 0.5), rnd.nextFloat() * 360.0F, 0.0F);
-            	mob.level.addFreshEntity(slime);
+            	slime.setVariant(v);
+            	slime.moveTo(mob.getX() + NaUtilsMathStatics.rndRangedDouble(-0.5, 0.5), mob.getY() + 0.5D, mob.getZ() + NaUtilsMathStatics.rndRangedDouble(-0.5, 0.5), rnd.nextFloat() * 360.0F, 0.0F);
+            	mob.level().addFreshEntity(slime);
             }
 			NaUtilsEntityStatics.sendGlintParticlesToLivingDefault(mob);
 		}
