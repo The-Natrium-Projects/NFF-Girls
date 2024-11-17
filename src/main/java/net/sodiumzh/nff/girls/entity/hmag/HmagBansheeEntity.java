@@ -41,7 +41,7 @@ import net.minecraft.world.level.block.FlowerBlock;
 import net.minecraft.world.phys.AABB;
 import net.sodiumzh.nautils.statics.NaUtilsEntityStatics;
 import net.sodiumzh.nff.girls.NFFGirls;
-import net.sodiumzh.nff.girls.entity.INFFGirlTamedSunSensitiveMob;
+import net.sodiumzh.nff.girls.entity.INFFGirlsTamedSunSensitiveMob;
 import net.sodiumzh.nff.girls.entity.ai.goal.NFFGirlsFlyingFollowOwnerGoal;
 import net.sodiumzh.nff.girls.entity.ai.goal.NFFGirlsHmagFlyingGoal;
 import net.sodiumzh.nff.girls.entity.ai.goal.target.NFFGirlsNearestHostileToOwnerTargetGoal;
@@ -51,19 +51,19 @@ import net.sodiumzh.nff.girls.registry.NFFGirlsHealingItems;
 import net.sodiumzh.nff.girls.registry.NFFGirlsItems;
 import net.sodiumzh.nff.girls.sound.NFFGirlsSoundPresets;
 import net.sodiumzh.nff.girls.util.NFFGirlsEntityStatics;
-import net.sodiumzh.nff.services.entity.ai.goal.preset.NFFFlyingLandGoal;
-import net.sodiumzh.nff.services.entity.ai.goal.preset.NFFFlyingRandomMoveGoal;
-import net.sodiumzh.nff.services.entity.ai.goal.preset.target.NFFHurtByTargetGoal;
-import net.sodiumzh.nff.services.entity.ai.goal.preset.target.NFFOwnerHurtByTargetGoal;
-import net.sodiumzh.nff.services.entity.ai.goal.preset.target.NFFOwnerHurtTargetGoal;
-import net.sodiumzh.nautils.entity.ItemApplyingToMobTable;
+import net.sodiumzh.nff.services.entity.ai.goal.presets.NFFFlyingLandGoal;
+import net.sodiumzh.nff.services.entity.ai.goal.presets.NFFFlyingRandomMoveGoal;
+import net.sodiumzh.nff.services.entity.ai.goal.presets.target.NFFHurtByTargetGoal;
+import net.sodiumzh.nff.services.entity.ai.goal.presets.target.NFFOwnerHurtByTargetGoal;
+import net.sodiumzh.nff.services.entity.ai.goal.presets.target.NFFOwnerHurtTargetGoal;
+import net.sodiumzh.nautils.entity.MobApplicableItemTable;
 import net.sodiumzh.nff.services.entity.taming.INFFTamed;
 import net.sodiumzh.nff.services.entity.taming.NFFTamedStatics;
 import net.sodiumzh.nff.services.inventory.NFFTamedInventoryMenu;
 import net.sodiumzh.nff.services.inventory.NFFTamedMobInventory;
 import net.sodiumzh.nff.services.inventory.NFFTamedMobInventoryWithHandItems;
 
-public class HmagBansheeEntity extends BansheeEntity implements INFFGirlTamedSunSensitiveMob
+public class HmagBansheeEntity extends BansheeEntity implements INFFGirlsTamedSunSensitiveMob
 {
 	
 	/* Initialization */
@@ -117,7 +117,7 @@ public class HmagBansheeEntity extends BansheeEntity implements INFFGirlTamedSun
 	// Map items that can heal the mob and healing values here.
 	// Leave it empty if you don't need healing features.
 	@Override
-	public ItemApplyingToMobTable getHealingItems() {
+	public MobApplicableItemTable getHealingItems() {
 		return NFFGirlsHealingItems.UNDEAD.get();
 	}
 
@@ -128,13 +128,13 @@ public class HmagBansheeEntity extends BansheeEntity implements INFFGirlTamedSun
 			// For normal interaction
 			if (!player.isShiftKeyDown())
 			{
-				if (!player.level.isClientSide())
+				if (!player.level().isClientSide())
 				{
 					/* Put checks before healing item check */
 					/*
 					 * if (....) { .... } else
 					 */if (this.tryApplyHealingItems(player.getItemInHand(hand)) != InteractionResult.PASS)
-						return InteractionResult.sidedSuccess(player.level.isClientSide);
+						return InteractionResult.sidedSuccess(player.level().isClientSide);
 					// The function above returns PASS when the items are not correct. So when not
 					// PASS it should stop here
 					else if (hand == InteractionHand.MAIN_HAND
@@ -148,7 +148,7 @@ public class HmagBansheeEntity extends BansheeEntity implements INFFGirlTamedSun
 						return InteractionResult.PASS;
 				}
 				// Interacted
-				return InteractionResult.sidedSuccess(player.level.isClientSide);
+				return InteractionResult.sidedSuccess(player.level().isClientSide);
 			}
 			// For interaction with shift key down
 			else
@@ -158,7 +158,7 @@ public class HmagBansheeEntity extends BansheeEntity implements INFFGirlTamedSun
 						&& NFFGirlsEntityStatics.isOnEitherHand(player, NFFGirlsItems.COMMANDING_WAND.get()))
 				{
 					NFFTamedStatics.openBefriendedInventory(player, this);
-					return InteractionResult.sidedSuccess(player.level.isClientSide);
+					return InteractionResult.sidedSuccess(player.level().isClientSide);
 				}
 			}
 		}
@@ -185,12 +185,12 @@ public class HmagBansheeEntity extends BansheeEntity implements INFFGirlTamedSun
 	}
 
 	protected void applyEnemyEffect(LivingEntity target) {
-		if (!this.level.isClientSide)
+		if (!this.level().isClientSide)
 		{
 			FlowerBlock flower = getFlowerOnOffhand();
 			if (flower == null)
 				return;
-			MobEffect effect = flower.getSuspiciousStewEffect();
+			MobEffect effect = flower.getSuspiciousEffect();
 			int duration = flower.getEffectDuration();
 
 			// Reverse for undead mob to apply the expected effect
@@ -208,7 +208,7 @@ public class HmagBansheeEntity extends BansheeEntity implements INFFGirlTamedSun
 	}
 
 	protected void applyAllyEffect() {
-		if (!this.level.isClientSide)
+		if (!this.level().isClientSide)
 		{
 			// Add effect each 15s
 			if (this.tickCount % 300 != addEffectTimePoint)
@@ -218,12 +218,12 @@ public class HmagBansheeEntity extends BansheeEntity implements INFFGirlTamedSun
 				return;
 
 			// Block harmful effect first
-			if (flower.getSuspiciousStewEffect().getCategory() == MobEffectCategory.HARMFUL
-					&& flower.getSuspiciousStewEffect() != MobEffects.HARM)
+			if (flower.getSuspiciousEffect().getCategory() == MobEffectCategory.HARMFUL
+					&& flower.getSuspiciousEffect() != MobEffects.HARM)
 				return;
 
 			// Applie on owner and owner's other befriended mobs/tamed animals
-			List<Entity> entities = this.level.getEntities(this,
+			List<Entity> entities = this.level().getEntities(this,
 					new AABB(this.position().add(-8, -8, -8), this.position().add(8, 8, 8)));
 			entities = entities.stream().filter(e ->
 			{
@@ -239,7 +239,7 @@ public class HmagBansheeEntity extends BansheeEntity implements INFFGirlTamedSun
 
 			for (Entity entity : entities)
 			{
-				MobEffect effect = flower.getSuspiciousStewEffect();
+				MobEffect effect = flower.getSuspiciousEffect();
 				int duration = flower.getEffectDuration();
 				// Reverse for undead mob to apply the expected effect
 				if (entity instanceof Mob mob && mob.getMobType() == MobType.UNDEAD)
@@ -256,8 +256,8 @@ public class HmagBansheeEntity extends BansheeEntity implements INFFGirlTamedSun
 	}
 
 	public void removeDefaultEffects(LivingEntity target) {
-		int time = this.level.getDifficulty() == Difficulty.NORMAL ? 7 * 20
-				: (this.level.getDifficulty() == Difficulty.HARD ? 15 * 20 : 0);
+		int time = this.level().getDifficulty() == Difficulty.NORMAL ? 7 * 20
+				: (this.level().getDifficulty() == Difficulty.HARD ? 15 * 20 : 0);
 		if (target.getEffect(MobEffects.HUNGER) == null || target.getEffect(MobEffects.HUNGER).getDuration() <= time
 				&& target.getEffect(MobEffects.HUNGER).getAmplifier() == 0)
 			target.removeEffect(MobEffects.HUNGER);
@@ -283,7 +283,7 @@ public class HmagBansheeEntity extends BansheeEntity implements INFFGirlTamedSun
 	@Override
 	public void aiStep() {
 		super.aiStep();
-		if (!this.level.isClientSide)
+		if (!this.level().isClientSide)
 		{
 			applyAllyEffect();
 
@@ -329,8 +329,8 @@ public class HmagBansheeEntity extends BansheeEntity implements INFFGirlTamedSun
 */
 	/*@Override
 	public void setupSunImmunityRules() {
-		this.getSunImmunity().putOptional("soul_amulet", mob -> ((INFFGirlTamed)mob).hasDwmgBauble("soul_amulet"));
-		this.getSunImmunity().putOptional("resis_amulet", mob -> ((INFFGirlTamed)mob).hasDwmgBauble("resistance_amulet"));
+		this.getSunImmunity().putOptional("soul_amulet", mob -> ((INFFGirlsTamed)mob).hasDwmgBauble("soul_amulet"));
+		this.getSunImmunity().putOptional("resis_amulet", mob -> ((INFFGirlsTamed)mob).hasDwmgBauble("resistance_amulet"));
 	}*/
 
 	/* Save and Load */

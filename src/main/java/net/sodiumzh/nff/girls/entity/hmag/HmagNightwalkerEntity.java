@@ -32,27 +32,27 @@ import net.minecraftforge.network.PlayMessages;
 import net.sodiumzh.nautils.block.ColoredBlocks;
 import net.sodiumzh.nautils.entity.RepeatableAttributeModifier;
 import net.sodiumzh.nff.girls.NFFGirls;
-import net.sodiumzh.nff.girls.entity.INFFGirlTamed;
+import net.sodiumzh.nff.girls.entity.INFFGirlsTamed;
 import net.sodiumzh.nff.girls.entity.ai.goal.NFFGirlsFollowOwnerGoal;
 import net.sodiumzh.nff.girls.entity.ai.goal.NFFGirlsRangedAttackGoal;
 import net.sodiumzh.nff.girls.entity.ai.goal.target.NFFGirlsNearestHostileToOwnerTargetGoal;
 import net.sodiumzh.nff.girls.entity.ai.goal.target.NFFGirlsNearestHostileToSelfTargetGoal;
-import net.sodiumzh.nff.girls.inventory.NFFGirlsNightwalkerInventoryMenu;
+import net.sodiumzh.nff.girls.inventory.NFFGirlsHmagNightwalkerInventoryMenu;
 import net.sodiumzh.nff.girls.registry.NFFGirlsBlocks;
 import net.sodiumzh.nff.girls.registry.NFFGirlsConfigs;
 import net.sodiumzh.nff.girls.registry.NFFGirlsHealingItems;
 import net.sodiumzh.nff.girls.registry.NFFGirlsItems;
 import net.sodiumzh.nff.girls.sound.NFFGirlsSoundPresets;
 import net.sodiumzh.nff.girls.util.NFFGirlsEntityStatics;
-import net.sodiumzh.nff.services.entity.ai.goal.preset.NFFWaterAvoidingRandomStrollGoal;
-import net.sodiumzh.nff.services.entity.ai.goal.preset.target.NFFHurtByTargetGoal;
-import net.sodiumzh.nff.services.entity.ai.goal.preset.target.NFFOwnerHurtByTargetGoal;
-import net.sodiumzh.nff.services.entity.ai.goal.preset.target.NFFOwnerHurtTargetGoal;
-import net.sodiumzh.nautils.entity.ItemApplyingToMobTable;
+import net.sodiumzh.nff.services.entity.ai.goal.presets.NFFWaterAvoidingRandomStrollGoal;
+import net.sodiumzh.nff.services.entity.ai.goal.presets.target.NFFHurtByTargetGoal;
+import net.sodiumzh.nff.services.entity.ai.goal.presets.target.NFFOwnerHurtByTargetGoal;
+import net.sodiumzh.nff.services.entity.ai.goal.presets.target.NFFOwnerHurtTargetGoal;
+import net.sodiumzh.nautils.entity.MobApplicableItemTable;
 import net.sodiumzh.nff.services.entity.taming.NFFTamedStatics;
 import net.sodiumzh.nff.services.inventory.NFFTamedInventoryMenu;
 import net.sodiumzh.nff.services.inventory.NFFTamedMobInventory;
-public class HmagNightwalkerEntity extends NightwalkerEntity implements INFFGirlTamed {
+public class HmagNightwalkerEntity extends NightwalkerEntity implements INFFGirlsTamed {
 
 
 	private static final RepeatableAttributeModifier ARMOR_MODIFIER = new RepeatableAttributeModifier(0.1d, AttributeModifier.Operation.ADDITION, 300);
@@ -99,11 +99,11 @@ public class HmagNightwalkerEntity extends NightwalkerEntity implements INFFGirl
 		double d3 = target.getZ() - this.getZ();
 		double d4 = Math.sqrt(d1 * d1 + d3 * d3) * 0.04D;
 		BefriendedNightwalkerMagicBallEntity bullet = 
-				new BefriendedNightwalkerMagicBallEntity(this.level, this, d1 + this.getRandom().nextGaussian() * d4, d2, d3 + this.getRandom().nextGaussian() * d4);
+				new BefriendedNightwalkerMagicBallEntity(this.level(), this, d1 + this.getRandom().nextGaussian() * d4, d2, d3 + this.getRandom().nextGaussian() * d4);
 		bullet.setPos(bullet.getX(), this.getY(0.4D) + 0.25D, bullet.getZ());
 		bullet.setDamage(4.0F + (float)(this.getAttributeValue(Attributes.ATTACK_DAMAGE)));
 		bullet.setEffectLevel((byte)1);
-		bullet.setVariant(3);
+		bullet.setVariant(MagicBulletEntity.Variant.byId(3));
 		if (this.getAdditionalInventory().getItem(4).is(ModItems.ANCIENT_STONE.get()))
 		{
 			bullet.setTransformsBlocks();
@@ -115,7 +115,7 @@ public class HmagNightwalkerEntity extends NightwalkerEntity implements INFFGirl
 			this.getAdditionalInventory().getItem(4).shrink(1);
 			bullet.setDamage(bullet.getDamage() * 1.2f);
 		}
-		this.level.addFreshEntity(bullet);
+		this.level().addFreshEntity(bullet);
 		this.playSound(SoundEvents.SHULKER_SHOOT, 2.0F, (this.getRandom().nextFloat() - this.getRandom().nextFloat()) * 0.2F + 1.0F);	
 	}
 	
@@ -133,7 +133,7 @@ public class HmagNightwalkerEntity extends NightwalkerEntity implements INFFGirl
 	// Map items that can heal the mob and healing values here.
 	// Leave it empty if you don't need healing features.
 	@Override
-	public ItemApplyingToMobTable getHealingItems()
+	public MobApplicableItemTable getHealingItems()
 	{
 		return NFFGirlsHealingItems.CLAY_DOLL.get();
 	}
@@ -145,7 +145,7 @@ public class HmagNightwalkerEntity extends NightwalkerEntity implements INFFGirl
 			// For normal interaction
 			if (!player.isShiftKeyDown())
 			{
-				if (!player.level.isClientSide()) 
+				if (!player.level().isClientSide()) 
 				{
 					/* Put checks before healing item check */
 					/* if (....)
@@ -153,7 +153,7 @@ public class HmagNightwalkerEntity extends NightwalkerEntity implements INFFGirl
 					 	....
 					 }
 					else */if (this.tryApplyHealingItems(player.getItemInHand(hand)) != InteractionResult.PASS)
-						return InteractionResult.sidedSuccess(player.level.isClientSide);
+						return InteractionResult.sidedSuccess(player.level().isClientSide);
 					// The function above returns PASS when the items are not correct. So when not PASS it should stop here
 					else if (hand == InteractionHand.MAIN_HAND
 							&& NFFGirlsEntityStatics.isOnEitherHand(player, NFFGirlsItems.COMMANDING_WAND.get()))
@@ -164,7 +164,7 @@ public class HmagNightwalkerEntity extends NightwalkerEntity implements INFFGirl
 					else return InteractionResult.PASS;
 				}
 				// Interacted
-				return InteractionResult.sidedSuccess(player.level.isClientSide);
+				return InteractionResult.sidedSuccess(player.level().isClientSide);
 			}
 			// For interaction with shift key down
 			else
@@ -173,7 +173,7 @@ public class HmagNightwalkerEntity extends NightwalkerEntity implements INFFGirl
 				if (hand == InteractionHand.MAIN_HAND && NFFGirlsEntityStatics.isOnEitherHand(player, NFFGirlsItems.COMMANDING_WAND.get()))
 				{
 					NFFTamedStatics.openBefriendedInventory(player, this);
-					return InteractionResult.sidedSuccess(player.level.isClientSide);
+					return InteractionResult.sidedSuccess(player.level().isClientSide);
 				}
 			}
 		} 
@@ -190,7 +190,7 @@ public class HmagNightwalkerEntity extends NightwalkerEntity implements INFFGirl
 	
 	@Override
 	public NFFTamedInventoryMenu makeMenu(int containerId, Inventory playerInventory, Container container) {
-		return new NFFGirlsNightwalkerInventoryMenu(containerId, playerInventory, container, this);
+		return new NFFGirlsHmagNightwalkerInventoryMenu(containerId, playerInventory, container, this);
 	}
 
 	/* Save and Load */
@@ -305,24 +305,24 @@ public class HmagNightwalkerEntity extends NightwalkerEntity implements INFFGirl
 		public void onHitBlock(BlockHitResult result)
 		{
 			super.onHitBlock(result);
-			if (!this.level.isClientSide)
+			if (!this.level().isClientSide)
 			{
 				if (this.shouldTransformBlocks
-						&& this.level.getBlockState(result.getBlockPos()).getBlock() != null
+						&& this.level().getBlockState(result.getBlockPos()).getBlock() != null
 						&& (
-							this.level.getBlockState(result.getBlockPos()).is(NFFGirlsBlocks.LUMINOUS_TERRACOTTA.get())
-							|| ColoredBlocks.GLAZED_TERRACOTTA_BLOCKS.contains(this.level.getBlockState(result.getBlockPos()).getBlock())
-							|| this.level.getBlockState(result.getBlockPos()).is(NFFGirlsBlocks.ENHANCED_LUMINOUS_TERRACOTTA.get())
+							this.level().getBlockState(result.getBlockPos()).is(NFFGirlsBlocks.LUMINOUS_TERRACOTTA.get())
+							|| ColoredBlocks.GLAZED_TERRACOTTA_BLOCKS.contains(this.level().getBlockState(result.getBlockPos()).getBlock())
+							|| this.level().getBlockState(result.getBlockPos()).is(NFFGirlsBlocks.ENHANCED_LUMINOUS_TERRACOTTA.get())
 							)
 						)
 				{
-					transformBlocks(this.level, result.getBlockPos());
-					transformBlocks(this.level, result.getBlockPos().above());
-					transformBlocks(this.level, result.getBlockPos().below());
-					transformBlocks(this.level, result.getBlockPos().east());
-					transformBlocks(this.level, result.getBlockPos().west());
-					transformBlocks(this.level, result.getBlockPos().south());
-					transformBlocks(this.level, result.getBlockPos().north());
+					transformBlocks(this.level(). result.getBlockPos());
+					transformBlocks(this.level(). result.getBlockPos().above());
+					transformBlocks(this.level(). result.getBlockPos().below());
+					transformBlocks(this.level(). result.getBlockPos().east());
+					transformBlocks(this.level(). result.getBlockPos().west());
+					transformBlocks(this.level(). result.getBlockPos().south());
+					transformBlocks(this.level(). result.getBlockPos().north());
 				}
 			}
 		}
@@ -330,7 +330,7 @@ public class HmagNightwalkerEntity extends NightwalkerEntity implements INFFGirl
 		@Override
 		public void onHitEntity(EntityHitResult result)
 		{
-			if (!this.level.isClientSide 
+			if (!this.level().isClientSide 
 					&& result.getEntity() instanceof LivingEntity living 
 					&& NFFGirlsEntityStatics.isAlly(getOwner(), living) 
 					&& !NFFGirlsConfigs.ValueCache.Combat.ENABLE_PROJECTILE_FRIENDLY_DAMAGE)

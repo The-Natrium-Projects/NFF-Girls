@@ -27,7 +27,8 @@ import net.sodiumzh.nautils.annotation.DontCallManually;
 import net.sodiumzh.nautils.math.LinearColor;
 import net.sodiumzh.nautils.registries.NaUtilsEntityDataSerializers;
 import net.sodiumzh.nff.girls.NFFGirls;
-import net.sodiumzh.nff.girls.entity.INFFGirlTamed;
+import net.sodiumzh.nff.girls.entity.INFFGirlsTamed;
+import net.sodiumzh.nff.girls.entity.INFFGirlsTamed;
 import net.sodiumzh.nff.girls.entity.ai.goal.target.NFFGirlsNearestHostileToOwnerTargetGoal;
 import net.sodiumzh.nff.girls.entity.ai.goal.target.NFFGirlsNearestHostileToSelfTargetGoal;
 import net.sodiumzh.nff.girls.entity.ai.goal.target.NFFGirlsOwnerHurtByTargetGoal;
@@ -38,18 +39,18 @@ import net.sodiumzh.nff.girls.registry.NFFGirlsHealingItems;
 import net.sodiumzh.nff.girls.registry.NFFGirlsItems;
 import net.sodiumzh.nff.girls.sound.NFFGirlsSoundPresets;
 import net.sodiumzh.nff.girls.util.NFFGirlsEntityStatics;
-import net.sodiumzh.nff.services.entity.ai.goal.preset.NFFFollowOwnerGoal;
-import net.sodiumzh.nff.services.entity.ai.goal.preset.NFFLeapAtOwnerGoal;
-import net.sodiumzh.nff.services.entity.ai.goal.preset.NFFLeapAtTargetGoal;
-import net.sodiumzh.nff.services.entity.ai.goal.preset.NFFMeleeAttackGoal;
-import net.sodiumzh.nff.services.entity.ai.goal.preset.NFFWaterAvoidingRandomStrollGoal;
-import net.sodiumzh.nff.services.entity.ai.goal.preset.target.NFFHurtByTargetGoal;
-import net.sodiumzh.nautils.entity.ItemApplyingToMobTable;
+import net.sodiumzh.nff.services.entity.ai.goal.presets.NFFFollowOwnerGoal;
+import net.sodiumzh.nff.services.entity.ai.goal.presets.NFFLeapAtOwnerGoal;
+import net.sodiumzh.nff.services.entity.ai.goal.presets.NFFLeapAtTargetGoal;
+import net.sodiumzh.nff.services.entity.ai.goal.presets.NFFMeleeAttackGoal;
+import net.sodiumzh.nff.services.entity.ai.goal.presets.NFFWaterAvoidingRandomStrollGoal;
+import net.sodiumzh.nff.services.entity.ai.goal.presets.target.NFFHurtByTargetGoal;
+import net.sodiumzh.nautils.entity.MobApplicableItemTable;
 import net.sodiumzh.nff.services.entity.taming.NFFTamedStatics;
 import net.sodiumzh.nff.services.inventory.NFFTamedInventoryMenu;
 import net.sodiumzh.nff.services.inventory.NFFTamedMobInventory;
 
-public class HmagSlimeGirlEntity extends SlimeGirlEntity implements INFFGirlTamed {
+public class HmagSlimeGirlEntity extends SlimeGirlEntity implements INFFGirlsTamed {
 
 	/* Data sync */
 
@@ -105,7 +106,7 @@ public class HmagSlimeGirlEntity extends SlimeGirlEntity implements INFFGirlTame
 	// Map items that can heal the mob and healing values here.
 	// Leave it empty if you don't need healing features.
 	@Override
-	public ItemApplyingToMobTable getHealingItems()
+	public MobApplicableItemTable getHealingItems()
 	{
 		return NFFGirlsHealingItems.SLIME.get();
 	}
@@ -117,7 +118,7 @@ public class HmagSlimeGirlEntity extends SlimeGirlEntity implements INFFGirlTame
 			// For normal interaction
 			if (!player.isShiftKeyDown())
 			{
-				if (!player.level.isClientSide()) 
+				if (!player.level().isClientSide()) 
 				{
 					/* Put checks before healing item check */
 					/* if (....)
@@ -125,7 +126,7 @@ public class HmagSlimeGirlEntity extends SlimeGirlEntity implements INFFGirlTame
 					 	....
 					 }
 					else */if (this.tryApplyHealingItems(player.getItemInHand(hand)) != InteractionResult.PASS)
-						return InteractionResult.sidedSuccess(player.level.isClientSide);
+						return InteractionResult.sidedSuccess(player.level().isClientSide);
 					// The function above returns PASS when the items are not correct. So when not PASS it should stop here
 					else if (hand == InteractionHand.MAIN_HAND
 							&& NFFGirlsEntityStatics.isOnEitherHand(player, NFFGirlsItems.COMMANDING_WAND.get()))
@@ -136,7 +137,7 @@ public class HmagSlimeGirlEntity extends SlimeGirlEntity implements INFFGirlTame
 					else return InteractionResult.PASS;
 				}
 				// Interacted
-				return InteractionResult.sidedSuccess(player.level.isClientSide);
+				return InteractionResult.sidedSuccess(player.level().isClientSide);
 			}
 			// For interaction with shift key down
 			else
@@ -145,7 +146,7 @@ public class HmagSlimeGirlEntity extends SlimeGirlEntity implements INFFGirlTame
 				if (hand == InteractionHand.MAIN_HAND && NFFGirlsEntityStatics.isOnEitherHand(player, NFFGirlsItems.COMMANDING_WAND.get()))
 				{
 					NFFTamedStatics.openBefriendedInventory(player, this);
-					return InteractionResult.sidedSuccess(player.level.isClientSide);
+					return InteractionResult.sidedSuccess(player.level().isClientSide);
 				}
 			}
 		} 

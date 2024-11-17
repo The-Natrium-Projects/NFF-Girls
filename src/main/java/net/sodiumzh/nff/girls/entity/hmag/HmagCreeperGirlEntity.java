@@ -35,10 +35,9 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
-import net.sodiumzh.nff.girls.entity.INFFGirlTamed;
+import net.sodiumzh.nff.girls.entity.INFFGirlsTamed;
 import net.sodiumzh.nff.girls.entity.ai.goal.NFFGirlsHmagCreeperGirlExplosionAttackGoal;
 import net.sodiumzh.nff.girls.entity.ai.goal.NFFGirlsHmagCreeperGirlMeleeAttackGoal;
-import net.sodiumzh.nff.girls.entity.ai.goal.NFFTamedCreeperFollowOwnerGoal;
 import net.sodiumzh.nff.girls.entity.ai.goal.target.NFFGirlsOwnerHurtByTargetGoal;
 import net.sodiumzh.nff.girls.entity.ai.goal.target.NFFGirlsOwnerHurtTargetGoal;
 import net.sodiumzh.nff.girls.inventory.NFFGirlsCreeperInventoryMenu;
@@ -46,10 +45,10 @@ import net.sodiumzh.nff.girls.registry.NFFGirlsHealingItems;
 import net.sodiumzh.nff.girls.registry.NFFGirlsItems;
 import net.sodiumzh.nff.girls.sound.NFFGirlsSoundPresets;
 import net.sodiumzh.nff.girls.util.NFFGirlsEntityStatics;
-import net.sodiumzh.nff.services.entity.ai.goal.preset.NFFBlockActionGoal;
-import net.sodiumzh.nff.services.entity.ai.goal.preset.NFFWaterAvoidingRandomStrollGoal;
-import net.sodiumzh.nff.services.entity.ai.goal.preset.target.NFFHurtByTargetGoal;
-import net.sodiumzh.nautils.entity.ItemApplyingToMobTable;
+import net.sodiumzh.nff.services.entity.ai.goal.presets.NFFBlockActionGoal;
+import net.sodiumzh.nff.services.entity.ai.goal.presets.NFFWaterAvoidingRandomStrollGoal;
+import net.sodiumzh.nff.services.entity.ai.goal.presets.target.NFFHurtByTargetGoal;
+import net.sodiumzh.nautils.entity.MobApplicableItemTable;
 import net.sodiumzh.nff.services.entity.taming.NFFTamedStatics;
 import net.sodiumzh.nff.services.entity.taming.presets.NFFTamedCreeperPreset;
 import net.sodiumzh.nff.services.inventory.NFFTamedInventoryMenu;
@@ -57,7 +56,7 @@ import net.sodiumzh.nff.services.inventory.NFFTamedMobInventory;
 import net.sodiumzh.nff.services.inventory.NFFTamedMobInventoryWithEquipment;
 
 // Rewritten from HMaG CreeperGirlEntity
-public class HmagCreeperGirlEntity extends NFFTamedCreeperPreset implements INFFGirlTamed
+public class HmagCreeperGirlEntity extends NFFTamedCreeperPreset implements INFFGirlsTamed
 {
 
 	protected static final EntityDataAccessor<Integer> DATA_VARIANT_ID = 
@@ -108,7 +107,7 @@ public class HmagCreeperGirlEntity extends NFFTamedCreeperPreset implements INFF
 	{
 		super.init(playerUUID, from);
 		if (from != null && from instanceof CreeperGirlEntity c)
-			this.setVariant(c.getVariant());
+			this.setVariant(c.getVariant().getId());
 		else if (from != null)
 			this.setVariant(this.getRandom().nextInt(3));
 	}
@@ -152,7 +151,7 @@ public class HmagCreeperGirlEntity extends NFFTamedCreeperPreset implements INFF
 	@Override
 	public void aiStep()
 	{
-		if (!level.isClientSide)
+		if (!level().isClientSide)
 		{
 			// Update explosion radius by ammo type
 			if (this.getAdditionalInventory().getItem(6).is(Items.GUNPOWDER))
@@ -185,7 +184,7 @@ public class HmagCreeperGirlEntity extends NFFTamedCreeperPreset implements INFF
 	public void tick()
 	{
 		super.tick();
-		if (!level.isClientSide)
+		if (!level().isClientSide)
 		{
 			if (this.getSwell() == 0)
 				isPlayerIgnited = false;
@@ -195,7 +194,7 @@ public class HmagCreeperGirlEntity extends NFFTamedCreeperPreset implements INFF
 	/* Interaction */
 	
 	@Override
-	public ItemApplyingToMobTable getHealingItems()
+	public MobApplicableItemTable getHealingItems()
 	{
 		return NFFGirlsHealingItems.CREEPER.get();
 	}
@@ -207,7 +206,7 @@ public class HmagCreeperGirlEntity extends NFFTamedCreeperPreset implements INFF
 		{
 			if (player.getUUID().equals(getOwnerUUID()))
 			{
-				if (!this.level.isClientSide && hand == InteractionHand.MAIN_HAND)
+				if (!this.level().isClientSide && hand == InteractionHand.MAIN_HAND)
 				{
 					if (player.getItemInHand(hand).is(Items.FLINT_AND_STEEL)
 							&& this.canIgnite
@@ -217,10 +216,10 @@ public class HmagCreeperGirlEntity extends NFFTamedCreeperPreset implements INFF
 		
 						this.playerIgniteDefault(player, hand);
 						isPlayerIgnited = true;
-						return InteractionResult.sidedSuccess(player.level.isClientSide);
+						return InteractionResult.sidedSuccess(player.level().isClientSide);
 					} 
 					else if (this.tryApplyHealingItems(player.getItemInHand(hand)) != InteractionResult.PASS)
-						return InteractionResult.sidedSuccess(player.level.isClientSide);
+						return InteractionResult.sidedSuccess(player.level().isClientSide);
 					else if (hand == InteractionHand.MAIN_HAND
 							&& NFFGirlsEntityStatics.isOnEitherHand(player, NFFGirlsItems.COMMANDING_WAND.get()))
 					{
@@ -228,7 +227,7 @@ public class HmagCreeperGirlEntity extends NFFTamedCreeperPreset implements INFF
 					}	
 					else return InteractionResult.PASS;
 				}
-				return InteractionResult.sidedSuccess(player.level.isClientSide);
+				return InteractionResult.sidedSuccess(player.level().isClientSide);
 			}
 			return InteractionResult.PASS;
 		}
@@ -240,19 +239,19 @@ public class HmagCreeperGirlEntity extends NFFTamedCreeperPreset implements INFF
 				{
 					this.setPowered(true);
 					player.getItemInHand(hand).shrink(1);
-					return InteractionResult.sidedSuccess(player.level.isClientSide);
+					return InteractionResult.sidedSuccess(player.level().isClientSide);
 				}
 				// Unpower with empty hand )and get a lightning particle
 				else if (player.getItemInHand(hand).isEmpty() && this.isPowered() && hand.equals(InteractionHand.MAIN_HAND))
 				{
 					this.setPowered(false);
 					this.spawnAtLocation(new ItemStack(ModItems.LIGHTNING_PARTICLE.get(), 1));
-					return InteractionResult.sidedSuccess(player.level.isClientSide);
+					return InteractionResult.sidedSuccess(player.level().isClientSide);
 				} 
 				else if (hand == InteractionHand.MAIN_HAND && NFFGirlsEntityStatics.isOnEitherHand(player, NFFGirlsItems.COMMANDING_WAND.get()))
 				{
 					NFFTamedStatics.openBefriendedInventory(player, this);
-					return InteractionResult.sidedSuccess(player.level.isClientSide);
+					return InteractionResult.sidedSuccess(player.level().isClientSide);
 				}
 			}
 			return InteractionResult.PASS;
@@ -277,7 +276,7 @@ public class HmagCreeperGirlEntity extends NFFTamedCreeperPreset implements INFF
 	@Override
 	protected void explodeCreeper()
 	{
-		if (!level.isClientSide)
+		if (!level().isClientSide)
 		{
 			if (!hasEnoughAmmoToExplode())
 			{

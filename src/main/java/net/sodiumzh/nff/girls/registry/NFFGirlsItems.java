@@ -10,6 +10,8 @@ import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.EquipmentSlot;
+import net.minecraft.world.entity.Mob;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.*;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.ModList;
@@ -238,8 +240,8 @@ public class NFFGirlsItems {
 	public static final RegistryObject<TransferringTagItem> TRANSFERRING_TAG = register("transferring_tag", () -> new TransferringTagItem(new Item.Properties()));
 	public static final RegistryObject<EmptyMagicalGelBottleItem> EMPTY_MAGICAL_GEL_BOTTLE = register("empty_magical_gel_bottle", () -> new EmptyMagicalGelBottleItem(new Item.Properties()));
 	public static final RegistryObject<MagicalGelBallItem> MAGICAL_GEL_BALL = register("magical_gel_ball", () -> new MagicalGelBallItem(new Item.Properties()));
-	public static final RegistryObject<MagicalGelBottleItem> MAGICAL_GEL_BOTTLE = registerNoTab("magical_gel_bottle", () -> new MagicalGelBottleItem(new Item.Properties()
-		.redirectDefaultInstance(EMPTY_MAGICAL_GEL_BOTTLE).setGiveCommandUsesDefaultInstance().cast()));
+	public static final RegistryObject<MagicalGelBottleItem> MAGICAL_GEL_BOTTLE = registerNoTab("magical_gel_bottle", () -> new MagicalGelBottleItem(new Item.Properties())
+		.redirectDefaultInstance(EMPTY_MAGICAL_GEL_BOTTLE).setGiveCommandUsesDefaultInstance().cast());
 	public static final RegistryObject<TaoistTalismanItem> TAOIST_TALISMAN = register("taoist_talisman", () -> new TaoistTalismanItem(new Item.Properties()));
 	public static final RegistryObject<TradeIntroductionLetterItem> TRADE_INTRODUCTION_LETTER = register("trade_introduction_letter",
 			() -> new TradeIntroductionLetterItem(new Item.Properties().stacksTo(1).rarity(Rarity.UNCOMMON)));
@@ -249,8 +251,8 @@ public class NFFGirlsItems {
 		.setRetainBefriendedMobInventory(false).noDefaultInstance(false).cast());
 	public static final RegistryObject<NFFMobRespawnerItem> MOB_STORAGE_POD = registerNoTab("mob_storage_pod", () -> new NFFGirlsRespawnerItem(new Item.Properties())
 		.redirectDefaultInstance(new ResourceLocation(NFFGirls.MOD_ID, "empty_mob_storage_pod")).cast());
-	public static final RegistryObject<MobCatcherItem> EMPTY_MOB_STORAGE_POD = register("empty_mob_storage_pod", () -> new MobCatcherItem(new Item.Properties(), MOB_STORAGE_POD.get()
-		.canCatchCondition(((m, p) -> (m instanceof INFFGirlsTamed bm && bm.getOwnerUUID().equals(p.getUUID())))));
+	public static final RegistryObject<MobCatcherItem> EMPTY_MOB_STORAGE_POD = register("empty_mob_storage_pod", () -> new MobCatcherItem(new Item.Properties(), MOB_STORAGE_POD.get())
+		.canCatchCondition((m, p) -> (m instanceof INFFGirlsTamed bm && bm.getOwnerUUID().equals(p.getUUID()))));
 
 	// Technical
 	public static final RegistryObject<Item> TAB_ICON = registerDefaultNoTab("tab_icon");
@@ -267,7 +269,7 @@ public class NFFGirlsItems {
 	// Other mod depending
 
 	public static final Optional<RegistryObject<Item>> CITADEL_MOB_DICT = registerDepending("mob_dictionary_citadel", "citadel",
-			() -> new CitadelBasedMobDictionaryItem(new Item.Properties().stacksTo(1).tab(TAB)));
+			() -> new CitadelBasedMobDictionaryItem(new Item.Properties().stacksTo(1)));
 
 	/*static
 	{

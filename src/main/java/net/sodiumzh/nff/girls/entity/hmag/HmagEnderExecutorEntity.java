@@ -40,7 +40,7 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 import net.sodiumzh.nff.girls.NFFGirls;
 import net.sodiumzh.nff.girls.blocks.EnderberryBushBlock;
 import net.sodiumzh.nff.girls.entity.ICarriesBlock;
-import net.sodiumzh.nff.girls.entity.INFFGirlTamed;
+import net.sodiumzh.nff.girls.entity.INFFGirlsTamed;
 import net.sodiumzh.nff.girls.entity.ai.goal.NFFGirlsFollowOwnerGoal;
 import net.sodiumzh.nff.girls.entity.ai.goal.target.NFFGirlsNearestHostileToOwnerTargetGoal;
 import net.sodiumzh.nff.girls.entity.ai.goal.target.NFFGirlsNearestHostileToSelfTargetGoal;
@@ -54,10 +54,10 @@ import net.sodiumzh.nff.girls.registry.NFFGirlsItems;
 import net.sodiumzh.nff.girls.sound.NFFGirlsSoundPresets;
 import net.sodiumzh.nff.girls.util.NFFGirlsEntityStatics;
 import net.sodiumzh.nff.services.entity.ai.NFFTamedMobAIState;
-import net.sodiumzh.nff.services.entity.ai.goal.preset.NFFWaterAvoidingRandomStrollGoal;
-import net.sodiumzh.nff.services.entity.ai.goal.preset.target.NFFHurtByTargetGoal;
-import net.sodiumzh.nff.services.entity.ai.goal.preset.target.NFFNearestAttackableTargetGoal;
-import net.sodiumzh.nautils.entity.ItemApplyingToMobTable;
+import net.sodiumzh.nff.services.entity.ai.goal.presets.NFFWaterAvoidingRandomStrollGoal;
+import net.sodiumzh.nff.services.entity.ai.goal.presets.target.NFFHurtByTargetGoal;
+import net.sodiumzh.nff.services.entity.ai.goal.presets.target.NFFNearestAttackableTargetGoal;
+import net.sodiumzh.nautils.entity.MobApplicableItemTable;
 import net.sodiumzh.nff.services.entity.taming.NFFTamedStatics;
 import net.sodiumzh.nff.services.entity.taming.presets.NFFTamedEnderManPreset;
 import net.sodiumzh.nff.services.inventory.NFFTamedInventoryMenu;
@@ -69,7 +69,7 @@ import java.util.function.Predicate;
 import java.util.stream.Stream;
 
 // Adjusted from EnderExcutor in HMaG
-public class HmagEnderExecutorEntity extends NFFTamedEnderManPreset implements IBeamAttackMob, INFFGirlTamed, ICarriesBlock
+public class HmagEnderExecutorEntity extends NFFTamedEnderManPreset implements IBeamAttackMob, INFFGirlsTamed, ICarriesBlock
 {
 
 	// This value is by default -20, and increases every tick if it should do beam attack.
@@ -132,7 +132,7 @@ public class HmagEnderExecutorEntity extends NFFTamedEnderManPreset implements I
 	// Interaction
 	
 	@Override
-	public ItemApplyingToMobTable getHealingItems()
+	public MobApplicableItemTable getHealingItems()
 	{
 		return NFFGirlsHealingItems.ENDERMAN.get();
 	}
@@ -143,7 +143,7 @@ public class HmagEnderExecutorEntity extends NFFTamedEnderManPreset implements I
 		if (!player.isShiftKeyDown())
 		{
 			if (player.getUUID().equals(getOwnerUUID())) {
-				if (!player.level.isClientSide() && hand == InteractionHand.MAIN_HAND) 
+				if (!player.level().isClientSide() && hand == InteractionHand.MAIN_HAND) 
 				{
 					if (this.tryApplyHealingItems(player.getItemInHand(hand)) != InteractionResult.PASS)
 					{}
@@ -153,7 +153,7 @@ public class HmagEnderExecutorEntity extends NFFTamedEnderManPreset implements I
 					}	
 					else return InteractionResult.PASS;
 				}
-				return InteractionResult.sidedSuccess(player.level.isClientSide);
+				return InteractionResult.sidedSuccess(player.level().isClientSide);
 			}
 			return InteractionResult.PASS;
 		}
@@ -163,7 +163,7 @@ public class HmagEnderExecutorEntity extends NFFTamedEnderManPreset implements I
 				if (hand == InteractionHand.MAIN_HAND && NFFGirlsEntityStatics.isOnEitherHand(player, NFFGirlsItems.COMMANDING_WAND.get()))
 				{
 					NFFTamedStatics.openBefriendedInventory(player, this);
-					return InteractionResult.sidedSuccess(player.level.isClientSide);
+					return InteractionResult.sidedSuccess(player.level().isClientSide);
 				}
 			}
 			/* Other actions... */
@@ -289,7 +289,7 @@ public class HmagEnderExecutorEntity extends NFFTamedEnderManPreset implements I
 	@Override
 	public void aiStep()
 	{
-		if (!this.level.isClientSide)
+		if (!this.level().isClientSide)
 		{
 			if (this.isAlive() && !this.isNoAi()) {
 				this.tickHandleBeamAttack();
@@ -369,7 +369,7 @@ public class HmagEnderExecutorEntity extends NFFTamedEnderManPreset implements I
 	{
 		if (!this.isSilent())
 		{
-			this.level.playSound((Player)null, target.getX(), target.getY(), target.getZ(), SoundEvents.ENCHANTMENT_TABLE_USE, this.getSoundSource(), 1.0F, this.random.nextFloat() * 0.2F + 0.9F);
+			this.level().playSound((Player)null, target.getX(), target.getY(), target.getZ(), SoundEvents.ENCHANTMENT_TABLE_USE, this.getSoundSource(), 1.0F, this.random.nextFloat() * 0.2F + 0.9F);
 		}
 		return target.hurt(DamageSource.indirectMagic(this, this), damage);
 	}
@@ -394,7 +394,7 @@ public class HmagEnderExecutorEntity extends NFFTamedEnderManPreset implements I
 		{
 			return null;
 		}
-		else if (this.level.isClientSide)
+		else if (this.level().isClientSide)
 		{
 			if (this.targetedEntity != null)
 			{
@@ -402,7 +402,7 @@ public class HmagEnderExecutorEntity extends NFFTamedEnderManPreset implements I
 			}
 			else
 			{
-				Entity entity = this.level.getEntity(this.entityData.get(ATTACK_TARGET));
+				Entity entity = this.level().getEntity(this.entityData.get(ATTACK_TARGET));
 
 				if (entity instanceof LivingEntity)
 				{
@@ -434,7 +434,7 @@ public class HmagEnderExecutorEntity extends NFFTamedEnderManPreset implements I
 			for (int i = 0; i < tryTimes; ++i)
 			{
 				if (this.teleportTowards(this.getOwner())
-					&& !this.level.canSeeSky(this.blockPosition()))
+					&& !this.level().canSeeSky(this.blockPosition()))
 					return true;
 			}
 		}
@@ -507,7 +507,7 @@ public class HmagEnderExecutorEntity extends NFFTamedEnderManPreset implements I
 		if (vec31.distanceTo(vec3) > GROW_ENDERBERRY_MAX_DISTANCE * GROW_ENDERBERRY_MAX_DISTANCE) {
 			return false;
 		} else {
-			return this.level.clip(new ClipContext(vec3, vec31, ClipContext.Block.COLLIDER, ClipContext.Fluid.NONE, this)).getType() == HitResult.Type.MISS;
+			return this.level().clip(new ClipContext(vec3, vec31, ClipContext.Block.COLLIDER, ClipContext.Fluid.NONE, this)).getType() == HitResult.Type.MISS;
 		}
 	}
 
@@ -534,7 +534,7 @@ public class HmagEnderExecutorEntity extends NFFTamedEnderManPreset implements I
 	}
 
 	private boolean startBeamingEnderberry(BlockPos pos) {
-		if (!this.level.getBlockState(pos).is(NFFGirlsBlocks.ENDERBERRY_BUSH.get())) return false;
+		if (!this.level().getBlockState(pos).is(NFFGirlsBlocks.ENDERBERRY_BUSH.get())) return false;
 		this.getEntityData().set(GROW_ENDERBERRY_POS, Optional.of(pos));
 		this.getEntityData().set(GROW_ENDERBERRY_REMAINED_BEAMING_TIME, GROW_ENDERBERRY_BEAMING_TIME);
 		return true;
@@ -600,7 +600,7 @@ public class HmagEnderExecutorEntity extends NFFTamedEnderManPreset implements I
 	}
 
 	protected void tickUpdateClientBeamAttackTime() {
-		if (!this.level.isClientSide) throw new RuntimeException();
+		if (!this.level().isClientSide) throw new RuntimeException();
 		if (this.isAlive() && this.hasActiveAttackTarget())
 		{
 			if (this.clientAttackTime < this.getAttackDuration())

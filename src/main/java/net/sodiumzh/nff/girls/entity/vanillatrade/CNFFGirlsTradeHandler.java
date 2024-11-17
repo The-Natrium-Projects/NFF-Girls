@@ -161,7 +161,7 @@ public interface CNFFGirlsTradeHandler extends CVanillaMerchant
 		{
 			// Don't allow to regenerate at the introduction letter entry
 			if (index < 0 || index >= this.getOffersRaw().size() - 1) throw new IllegalArgumentException();
-			Set<VanillaTradeListing> available = NFFGirlsTrades.TRADES.getListings(INFFGirlTamed.getBM(this.getMob()).getData().getInitialEntityType())
+			Set<VanillaTradeListing> available = NFFGirlsTrades.TRADES.getListings(INFFGirlsTamed.getBM(this.getMob()).getData().getInitialEntityType())
 				.forLevel(this.getMeta(index).requiredMerchantLevel);
 			if (available.size() == 0) return;
 

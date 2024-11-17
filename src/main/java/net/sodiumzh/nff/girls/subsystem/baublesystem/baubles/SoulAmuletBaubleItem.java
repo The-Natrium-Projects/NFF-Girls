@@ -59,7 +59,7 @@ public class SoulAmuletBaubleItem extends NFFGirlsDedicatedBaubleItem
 	@Override
 	public BaubleEquippingCondition getEquippingCondition() {
 		return BaubleEquippingCondition.of(args -> (
-				args.user() instanceof INFFGirlTamedSunSensitiveMob || args.user().getMobType().equals(MobType.UNDEAD)
+				args.user() instanceof INFFGirlsTamedSunSensitiveMob || args.user().getMobType().equals(MobType.UNDEAD)
 				|| args.user().getType().is(NFFGirlsTags.CAN_EQUIP_SOUL_AMULET)));
 	}
 

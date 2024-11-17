@@ -193,6 +193,7 @@ dependencies {
     
     implementation fg.deobf("curse.maven:hmag-537613:5391571")
 	implementation fg.deobf("curse.maven:tf-227639:4755494")
+    implementation fg.deobf("curse.maven:citadel-331936:5633260")
 	//implementation fg.deobf("curse.maven:gog4-228948:4683680")
 
     // For more info:

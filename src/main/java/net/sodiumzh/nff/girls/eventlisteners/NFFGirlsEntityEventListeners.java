@@ -98,8 +98,6 @@ import net.sodiumzh.nff.girls.entity.ai.goal.NFFGirlsTamableGhastlySeekerRandomF
 import net.sodiumzh.nff.girls.entity.ai.goal.NFFGirlsTamableJiangshiMutableLeapGoal;
 import net.sodiumzh.nff.girls.entity.ai.goal.NFFGirlsTamablePickItemGoal;
 import net.sodiumzh.nff.girls.entity.ai.goal.NFFGirlsTamableWatchHandItemGoal;
-import net.sodiumzh.nff.girls.entity.tamingprocesses.hmag.HmagJiangshiTamingProcess;
-import net.sodiumzh.nff.girls.entity.tamingprocesses.hmag.NFFGirlsItemDroppingTamingProcess;
 import net.sodiumzh.nff.girls.entity.hmag.HmagCreeperGirlEntity;
 import net.sodiumzh.nff.girls.entity.hmag.HmagDrownedGirlEntity;
 import net.sodiumzh.nff.girls.entity.hmag.HmagGhastlySeekerEntity;
@@ -230,12 +228,12 @@ public class NFFGirlsEntityEventListeners
 			// Tamable mobs don't attack their tamed variation
 			if (NFFTamingMapping.contains(mob)
 				&& NFFTamingMapping.getConvertTo(mob) == target.getType()
-				&& INFFGirlTamed.isBM(target)) {
+				&& INFFGirlsTamed.isBM(target)) {
 				event.setCanceled(true);
 				return;
 			}
 			// Tamed mobs don't attack their wild variation
-			if (INFFGirlTamed.isBM(mob)
+			if (INFFGirlsTamed.isBM(mob)
 				&& NFFTamingMapping.getTypeBefore(mob) == target.getType()) {
 				event.setCanceled(true);
 				return;
@@ -254,11 +252,11 @@ public class NFFGirlsEntityEventListeners
 		if (!(target instanceof Player p)) return false;
 		EntityType<? extends Mob> tamedType = NFFTamingMapping.getConvertTo(attacker);
 		if (tamedType == null) return false;
-		List<Entity> tamed = p.getLevel().getEntities(attacker, attacker.getBoundingBox().inflate(16d))
+		List<Entity> tamed = p.level().getEntities(attacker, attacker.getBoundingBox().inflate(16d))
 			.stream().filter(e ->
 				e instanceof Mob mob
 				&& mob.getType().equals(tamedType)
-				&& INFFGirlTamed.isBMAnd(mob, m -> p.equals(m.getOwner())))
+				&& INFFGirlsTamed.isBMAnd(mob, m -> p.equals(m.getOwner())))
 			.filter(e -> attacker.hasLineOfSight(e))
 			.toList();
 		return !tamed.isEmpty();
@@ -479,16 +477,16 @@ public class NFFGirlsEntityEventListeners
 			}
 
 			/** Cancel friendly damage */
-			if (event.getSource() instanceof EntityDamageSource eds && !NFFGirlsConfigs.ValueCache.Combat.ENABLE_FRIENDLY_DAMAGE)
+			if (event.getSource().getEntity() != null && !NFFGirlsConfigs.ValueCache.Combat.ENABLE_FRIENDLY_DAMAGE)
 			{
-				if (INFFGirlTamed.isBMAnd(eds.getEntity(), tamed ->
+				if (INFFGirlsTamed.isBMAnd(event.getSource().getEntity(), tamed ->
 					Optional.ofNullable(tamed.getOwnerInDimension()).map(owner -> owner == event.getEntity()).orElse(false)))
 				{
 					event.setCanceled(true);
 					return;
 				}
-				if (INFFGirlTamed.isBMAnd(event.getEntity(), tamed ->
-					Optional.ofNullable(tamed.getOwnerInDimension()).map(owner -> owner == eds.getEntity()).orElse(false)))
+				if (INFFGirlsTamed.isBMAnd(event.getEntity(), tamed ->
+					Optional.ofNullable(tamed.getOwnerInDimension()).map(owner -> owner == event.getSource().getEntity()).orElse(false)))
 				{
 					event.setCanceled(true);
 					return;

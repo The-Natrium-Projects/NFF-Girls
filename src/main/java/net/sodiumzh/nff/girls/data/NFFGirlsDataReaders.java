@@ -4,18 +4,20 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import net.minecraft.core.Registry;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.entity.Mob;
-import net.sodiumzh.nautils.entity.ItemApplyingToMobTable;
+import net.sodiumzh.nautils.entity.MobApplicableItemTable;
 import net.sodiumzh.nautils.math.RangedRandomDouble;
 import net.sodiumzh.nautils.registries.NaUtilsFunctions;
+import net.sodiumzh.nautils.statics.NaUtilsTagStatics;
 
 import java.util.function.Function;
 
 public class NFFGirlsDataReaders {
 
-    public static void readItemApplyingToMobTable(JsonElement json, ItemApplyingToMobTable.Builder builder)
+    public static void readMobApplicableItemTable(JsonElement json, MobApplicableItemTable.Builder builder)
     {
         try {
             for (JsonElement element: json.getAsJsonArray())
@@ -44,7 +46,7 @@ public class NFFGirlsDataReaders {
                     else throw new IllegalStateException("Missing amount or getter");
 
                     if (item != null) builder.add(new ResourceLocation(item), getter);
-                    else builder.add(TagKey.create(Registry.ITEM_REGISTRY, new ResourceLocation(tag)), getter);
+                    else builder.add(TagKey.create(Registries.ITEM, new ResourceLocation(tag)), getter);
                 }
                 catch (RuntimeException e) {
                     e.printStackTrace();
