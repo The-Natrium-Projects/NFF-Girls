@@ -2,10 +2,10 @@
 <NEWLINE>
 <NEWLINE>
 <NEWLINE>
-The Dullahan patrols in the night. It spawns in the Dark Forest and Mountain biomes above Y=64.
-It holds a Stone Sword as weapon, and the attack gives Weakness I when difficulty is normal or above.
+The Dullahan is a scary creature with a headless appearance, found in the Dark Forest and Mountain biomes above Y=64.
+It holds a Stone Sword as weapon, and the attack can gives Weakness I.
 <NEWLINE>
-As a powerful fighter, it can halve the magic damage it takes. It burns under the sun, although not being undead.
+As a powerful fighter, it's resistant to magic. It burns under the sun, although not undead.
 <NEWLINE>
 When a Dullahan is slain, it can drop some Soul Powder, a basic ingredient for many items in this mod. It also has
 a chance to drop Randomberry. This food can give you a random effect for a short time, either positive or negative.

@@ -2,20 +2,8 @@
 <NEWLINE>
 <NEWLINE>
 <NEWLINE>
-    魔法史莱姆使史莱姆的一个亚种，仅当
+The Magical Slime is a variation of the Slime. When a Slime Girl is slain, some Magical Slimes of the smallest size are
+generated. The smallest Magical Slime can still deal damage.
+It's resistant to falling and magic damage.
 <NEWLINE>
-史莱姆娘被杀死时才会生成最小尺寸的魔
-<NEWLINE>
-法史莱姆。但即使体型最小，魔法史莱姆
-<NEWLINE>
-也具有攻击力。
-<NEWLINE>
-    魔法史莱姆受到的摔落伤害和魔法伤害
-<NEWLINE>
-减半。
-<NEWLINE>
-    魔法史莱姆有32种不同的颜色材质，与
-<NEWLINE>
-史莱姆娘相同。
-<NEWLINE>
-    击杀魔法史莱姆会掉落黏液球。
+It has 32 different colors like the Slime Girl, and drops Slime Balls when slain.
