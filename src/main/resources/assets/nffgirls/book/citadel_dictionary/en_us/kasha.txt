@@ -2,40 +2,13 @@
 <NEWLINE>
 <NEWLINE>
 <NEWLINE>
-    焰猫妖是外形类似猫的生物，但实际上
+The Kasha is a cat-like monster found in the Nether Wastes, Soul Sand Valley and Basalt Delta biomes. It stalks to its
+prey silently and rush suddenly to attack. Its attack has a strong knockback and, if the difficulty is normal or above,
+ignite the enemy.
 <NEWLINE>
-是民俗文化中的一种妖怪，自然生成于下界
+When spawn on Soul Sand or Soul Soil, it will become a variation of soul fire, and slightly stronger than normal ones.
 <NEWLINE>
-荒地、灵魂沙峡谷和玄武岩三角洲群系中。
+The Kasha is immune to fire, but takes damage in water or rain. It's also immune to falling damage and can jump onto
+2 blocks above. It's hostile to the Chicken and baby Hoglin.
 <NEWLINE>
-    焰猫妖会像野猫一样偷偷靠近攻击目标
-<NEWLINE>
-一定距离，然后立刻冲刺并发起攻击。焰
-<NEWLINE>
-猫妖攻击会施加强力击退效果。游戏难度
-<NEWLINE>
-普通及以上时，其攻击命中会施加点燃效
-<NEWLINE>
-果。
-<NEWLINE>
-    当在灵魂沙或灵魂土上生成时，焰猫妖
-<NEWLINE>
-会变成附带灵魂火焰的变体，同时其攻击
-<NEWLINE>
-力会略微提高。
-<NEWLINE>
-    焰猫妖免疫火焰伤害，但在水中或淋雨
-<NEWLINE>
-会持续失去生命值。焰猫妖不会受到摔落
-<NEWLINE>
-伤害，且可以爬过2格高的方块。
-<NEWLINE>
-    焰猫妖会主动攻击鸡和幼年疣猪兽。
-<NEWLINE>
-    击杀焰猫妖有几率掉落灵魂粉尘，这是
-<NEWLINE>
-用于合成大部分模组物品的基础材料。同
-<NEWLINE>
-时也有几率掉落柠檬，是其珍藏的、在下
-<NEWLINE>
-界极为少见的水果。
+When a Kasha is slain, it can drop some Soul Powder, a useful ingredient for many items in this mod.

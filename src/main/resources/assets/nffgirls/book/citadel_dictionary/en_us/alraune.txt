@@ -2,15 +2,15 @@
 <NEWLINE>
 <NEWLINE>
 <NEWLINE>
-The Alraune is a spirit of nature and plants. They spawn in the Jungle biomes above Y=64.
+The Alraune is a spirit of nature and plants, found in the Jungle biomes above Y=64.
 <NEWLINE>
 It can perform 2 types of attack depending on the distance to its enemies. When the enemy is close, it performs melee attack,
-giving Poison II, Weakness III and Slowness III when the difficulty is normal or above. If the enemy is far away,
-it can shoot poisonous seeds and give Poison I, Weakness I and Slowness I.
+giving Poison II, Weakness III and Slowness III. If the enemy is far away, it can shoot poisonous seeds and give Poison I,
+Weakness I and Slowness I.
 <NEWLINE>
 It is immune to Poison and Nausea effects.
 <NEWLINE>
-It loves moisture. When it's in water or rain, it will gain Regeneration III. Oppositely, it's fire damage will be doubled.
+It loves moisture. When it's in water or rain, it will gain Regeneration III. Oppositely, it's weak to fire damage.
 <NEWLINE>
 When an Alraune is slain, it has a chance to drop Mysterious Petals. The unique ingredient is useful to make advanced items like Enchanted Golden Apples.
 It can also drop some Cureberry which can recover some health when eaten.

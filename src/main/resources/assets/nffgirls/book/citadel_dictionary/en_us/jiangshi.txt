@@ -2,46 +2,16 @@
 <NEWLINE>
 <NEWLINE>
 <NEWLINE>
-    跳尸是颇具东方风格的魔物，自然
+The Jiangshi is an undead creature from the eastern continent, found in the Bamboo Jungle biomes above Y=64. It hops
+toward the enemies and performs melee attack. Its attack has a strong knockback and, when the difficulty is normal or
+above, gives Poison I.
 <NEWLINE>
-生成于主世界Y轴64层及以上的竹林
+When a Jiangshi is damaged, its movement speed will be boosted, and return to normal gradually. If on fire or hit by
+the thunder, the speed will immediately return to normal.
 <NEWLINE>
-群系中。
+It's resistant to projectiles. As an undead mob, it burns under the sun.
 <NEWLINE>
-    跳尸会跳跃移动并尝试近战攻击目
+If a Jiangshi is slain, it can drop some Sharp Fangs. This is a unique ingredient for making some items like Reinforcing
+Chain, and also as the arrow head. It can also drop some Soul Powder, a useful ingredient for many items in this mod.
 <NEWLINE>
-标。跳尸攻击施加较强力击退效果，
-<NEWLINE>
-游戏难度普通及以上时，攻击命中会
-<NEWLINE>
-施加中毒Ⅰ效果。
-<NEWLINE>
-    当跳尸受到伤害时，她的移动速度
-<NEWLINE>
-会逐渐提升，并且随着时间流逝逐渐
-<NEWLINE>
-回到原本的移动速度。当被点燃或者
-<NEWLINE>
-被闪电击中，跳尸的速度会迅速降低
-<NEWLINE>
-会原先水平。
-<NEWLINE>
-    跳尸受到箭矢等弹射物伤害减半。
-<NEWLINE>
-    跳尸属于亡灵生物的一种，在阳
-<NEWLINE>
-光下会燃烧。
-<NEWLINE>
-    跳尸有 2 种不同的皮肤材质。
-<NEWLINE>
-    击倒跳尸有几率会掉落尖牙，这
-<NEWLINE>
-是一种独特素材，用于合成强化锁
-<NEWLINE>
-链等特殊物品，也可以作为箭矢的
-<NEWLINE>
-头部使用。此外还有几率获得灵魂
-<NEWLINE>
-粉尘，这是用于合成大部分模组物
-<NEWLINE>
-品的基础材料。
+It has 2 different textures.

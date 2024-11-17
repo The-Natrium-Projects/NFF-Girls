@@ -2,10 +2,9 @@
 <NEWLINE>
 <NEWLINE>
 <NEWLINE>
-The Giant Mummy is an ancient undead monster, spawning in the Desert biomes and the Desert Pyramids.
+The Giant Mummy is an ancient undead monster, found in the Desert biomes and the Desert Pyramids.
 <NEWLINE>
-When attacking, the Giant Mummy can break some blocks nearby. Its attack gives Slowness I and Hunger I when the difficulty
-is normal or above. It takes halved damage from projectiles.
+When attacking, the Giant Mummy can break some blocks nearby, and give Slowness I and Hunger. It's resistant to projectiles.
 <NEWLINE>
 As an undead mob, the Giant Mummy burns under the sun.
 <NEWLINE>

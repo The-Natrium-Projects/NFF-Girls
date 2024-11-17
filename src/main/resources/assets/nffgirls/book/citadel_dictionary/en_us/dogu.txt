@@ -2,13 +2,13 @@
 <NEWLINE>
 <NEWLINE>
 <NEWLINE>
-The Dogu is an ancient automated golem warrior, spawning underground in the Jungle and Badland biomes.
+The Dogu is an ancient automated golem warrior, found underground in the Jungle and Badland biomes.
 <NEWLINE>
-It spawns with Stong or Iron Sword, and doesn't have the sound of footsteps. Its attack has a strong knockback, and when
-difficulty is normal or above, gives Slowness II and Mining Fatigue II.
+It spawns with Stong or Iron Sword, and doesn't have the sound of footsteps. Its attack has a strong knockback, and gives
+Slowness II and Mining Fatigue II.
 <NEWLINE>
-The Dogu can breathe underwater, and is immune to falling and Cactus damage. It takes halved projectile, explosion,
-Powder Snow and falling blocks like the Anvil. Meanwhile, it takes double damage from Pickaxes.
+The Dogu can breathe underwater, and is immune to falling and Cactus damage. It's resistant to projectile, explosion,
+Powder Snow and falling blocks like the Anvil, but weak to the Pickaxe.
 <NEWLINE>
 When a Dogu is slain, it may drop some Ancient Stones. This is a unique ingredient for Ancient Stone Blocks,
 Ancient suit, Ancient Shield and Nemesis Blade.

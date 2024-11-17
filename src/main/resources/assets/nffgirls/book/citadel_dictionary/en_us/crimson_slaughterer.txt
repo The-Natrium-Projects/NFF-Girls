@@ -5,11 +5,11 @@
 The Crimson Slaughterer is a dangerous creature in the Crimson Forest, stalking silently for its prey.
 <NEWLINE>
 It has higher attributes than most other mobs in this mod, and can step onto 3 blocks above, making it
-dangerous to fight closely against it. When the difficulty is normal or above, its attack can cause
-Hunger II, Slowness I and Mining Fatigue I. It is arthropod, and weapons with Bane of Arthropod enchantment can deal it more damage.
+dangerous to fight closely against it. Its attack can cause Hunger II, Slowness I and Mining Fatigue I.
+It is arthropod, and weapons with Bane of Arthropod enchantment can deal it more damage.
 <NEWLINE>
 The Crimson Slaughterer is highly adaptive for extreme conditions. It's immune to fire and falling damage,
-and Poison and Hunger effects. Also, it can halve the damage from projectiles, suffocation and Cactus.
+and Poison and Hunger effects. Also, it's resistant to projectiles, suffocation and Cactus.
 <NEWLINE>
 When it's slain, it has a chance to drop some Crimson Cuticula. This is a rare unique ingredient for Crimson Bow,
 Nemesis Blade and some other items. It can also be used to make the Potion of Voracity which gives you Strength III

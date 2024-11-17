@@ -2,40 +2,14 @@
 <NEWLINE>
 <NEWLINE>
 <NEWLINE>
-    巫妖深居于阴暗的地下世界，自然
+The Lich is a powerful undead wizard living deep underground, found in the dark areas under Y=0.
 <NEWLINE>
-生成于主世界Y轴0层之下的黑暗区域。
+It attacks by shooting magical bullets and can give Slowness I. When the enemy is close nearby, it also summons Vexes
+for help. Therefore, it's unadvisable to rashly approach the Lich if your equipment isn't strong enough.
 <NEWLINE>
-    巫妖会使用魔法子弹进行远程攻击，
+The Lich is resistant to fire, magic and Powder Snow damage. It's undead, but can swim in water.
 <NEWLINE>
-在游戏难度普通及以上时，攻击命中
+When a Lich is slain, it drops some Lich Cloth. This is an important ingredient for making many advanced items like the
+Cloth of Purification, and Potions of Healing and Harming III.
 <NEWLINE>
-会施加缓慢Ⅰ效果。
-<NEWLINE>
-    此外，巫妖还会召唤恼鬼辅助其战
-<NEWLINE>
-斗。
-<NEWLINE>
-    巫妖受到的火焰、魔法和细雪冻结
-<NEWLINE>
-造成的伤害减半。
-<NEWLINE>
-    巫妖属于亡灵生物，但和一般亡灵
-<NEWLINE>
-生物不同的是，巫妖在水中不会浮在
-<NEWLINE>
-水面而是会下沉。
-<NEWLINE>
-    击杀巫妖有几率掉落巫妖的碎布，
-<NEWLINE>
-这是一种独特素材，用来合成纯净织
-<NEWLINE>
-布等一系列高级道具。巫妖碎布还能
-<NEWLINE>
-作为酿造材料，制作瞬间治疗Ⅲ和瞬
-<NEWLINE>
-间伤害Ⅲ药水。
-<NEWLINE>
-    同时，击杀巫妖可能会掉落经验莓
-<NEWLINE>
-果，食用后会少量增加玩家的经验值。
+The Cloth of Purification is a magical item which can remove the curse enchantments on the Smithing Table.
