@@ -4,13 +4,12 @@
 <NEWLINE>
 <NEWLINE>
 The Dyssomnia is the leader of Phantoms. It's stronger than the Phantom, larger and more fierce.
-It spawns in open biomes like the Plain, and the spawn chance depends on the phase of the moon.
+It can be found in open biomes like the Plain, and the spawn chance depends on the phase of the moon.
 It's most likely to spawn under the full moon, and doesn't spawn at all under the new moon.
 <NEWLINE>
-The Dyssomnia attacks by shooting magical bullets. The bullets give Blindness when the difficulty
-is normal or above. Also, it can summon Phantoms during the combat.
+The Dyssomnia attacks by shooting magical bullets and gives Blindness. Also, it can summon Phantoms during the combat.
 <NEWLINE>
-The Dyssomnia is immune to Blindness. As an undead mob, it doesn't burn under sun, but flies right
+The Dyssomnia is immune to Blindness. Although undead, it doesn't burn under sun, but flies right
 upward and disappears.
 <NEWLINE>
 When a Dyssomnia is slain, it can drop some Dyssomnia Skin. This is a rare unique ingredient for

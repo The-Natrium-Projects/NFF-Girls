@@ -2,28 +2,12 @@
 <NEWLINE>
 <NEWLINE>
 <NEWLINE>
-    岩浆娘是火元素的精灵，自然生成于
+The Melty Monster is a spirit of the fire element, found in the lava in the Overworld and Nether.
 <NEWLINE>
-主世界和下界的熔岩中。
+It attacks by shooting Fire Charges like the Blaze. When a Melty Monster steps onto a solid block, it will ignite the block.    岩浆娘攻击方式类似烈焰人，会连续
 <NEWLINE>
-    岩浆娘攻击方式类似烈焰人，会连续
+The Melty Monster is immune to fire, and takes damage in water. It escapes from the Strider and is neutral to players
+riding a Strider.
 <NEWLINE>
-发射火焰弹进行攻击。当岩浆娘离开熔
-<NEWLINE>
-岩站上固体方块时，会使所站立的固体
-<NEWLINE>
-方块着火。
-<NEWLINE>
-    岩浆娘免疫火焰伤害，但在水中会受
-<NEWLINE>
-到持续伤害。
-<NEWLINE>
-    岩浆娘会主动逃离炽足兽，且对骑乘
-<NEWLINE>
-炽足兽的玩家保持中立。
-<NEWLINE>
-    击倒岩浆娘除了能获取到岩浆膏等素
-<NEWLINE>
-材以外，还有概率获得邪恶水晶碎片，
-<NEWLINE>
-这是合成模组中大部分物品的基础材料。
+When a Melty Monster is slain, it drops some Magma Cream, and also possibly Evil Crystal Fragments. This is a basic
+ingredient for most items in this mod.
