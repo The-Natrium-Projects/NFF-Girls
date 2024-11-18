@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shapeless",
+
+  "ingredients":[
+    {
+      "item": "minecraft:book"
+    },
+    {
+      "item": "hmag:evil_crystal_fragment"
+    }
+  ],
+
+  "result":{
+    "item": "nffgirls:mob_dictionary_citadel",
+    "count": 1
+  }
+}
