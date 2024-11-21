@@ -19,7 +19,7 @@ public class NFFGirlsTamingProcesses {
     public static final NaUtilsRegistry.Accessor<NFFTamingProcess> HMAG_CREEPER_GIRL = TAMING_PROCESSES.register(
             "hmag_creeper_girl",  () -> new HmagCreeperGirlTamingProcess().setItemGivingTableOverride(NFFGirlsTamingItems.CREEPER::get));
     public static final NaUtilsRegistry.Accessor<NFFTamingProcess> HMAG_CRIMSON_SLAUGHTERER = TAMING_PROCESSES.register(
-            "hmag_crimson_slaughterer",  () -> new HmagCreeperGirlTamingProcess().setItemGivingTableOverride(NFFGirlsTamingItems.CRIMSON::get));
+            "hmag_crimson_slaughterer",  () -> new HmagCrimsonSlaughtererTamingProcess().setItemGivingTableOverride(NFFGirlsTamingItems.CRIMSON::get));
     public static final NaUtilsRegistry.Accessor<NFFTamingProcess> HMAG_CURSED_DOLL = TAMING_PROCESSES.register(
             "hmag_cursed_doll",  () -> new HmagCursedDollTamingProcess());
     public static final NaUtilsRegistry.Accessor<NFFTamingProcess> HMAG_ENDER_EXECUTOR = TAMING_PROCESSES.register(
