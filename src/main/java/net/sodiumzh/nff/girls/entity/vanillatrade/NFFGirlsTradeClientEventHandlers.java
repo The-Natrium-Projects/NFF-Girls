@@ -3,6 +3,7 @@ package net.sodiumzh.nff.girls.entity.vanillatrade;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
+import net.sodiumzh.nautils.mixin.events.client.entity.MerchantOfferUnavailableInfoEvent;
 import net.sodiumzh.nautils.statics.NaUtilsInfoStatics;
 import net.sodiumzh.nff.girls.NFFGirls;
 import net.sodiumzh.nff.girls.eventlisteners.NFFGirlsHooks;
@@ -12,9 +13,9 @@ import net.sodiumzh.nff.girls.registry.NFFGirlsItems;
 public class NFFGirlsTradeClientEventHandlers
 {
 	@SubscribeEvent
-	public static void onMerchantOfferUnavailableInfo(NFFGirlsHooks.MerchantOfferUnavaliableInfoEvent event)
+	public static void onMerchantOfferUnavailableInfo(MerchantOfferUnavailableInfoEvent event)
 	{
-		var tradingMob = event.searchOngoingDwmgTrader(16d);
+		var tradingMob = CNFFGirlsTradeHandler.searchOngoingTrader(event.player, 16d);
 		if (tradingMob != null)
 		{
 			if (tradingMob.isValidOffers() && tradingMob.getMeta().size() > event.activeOfferIndex)

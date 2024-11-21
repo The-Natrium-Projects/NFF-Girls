@@ -12,11 +12,15 @@ import net.minecraft.nbt.ListTag;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.npc.VillagerTrades.ItemListing;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.trading.MerchantOffer;
 import net.minecraft.world.item.trading.MerchantOffers;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.network.PacketDistributor;
 import net.minecraftforge.registries.ForgeRegistries;
@@ -25,9 +29,11 @@ import net.sodiumzh.nautils.entity.vanillatrade.CVanillaMerchant;
 import net.sodiumzh.nautils.entity.vanillatrade.VanillaMerchant;
 import net.sodiumzh.nautils.entity.vanillatrade.VanillaTradeListing;
 import net.sodiumzh.nautils.statics.NaUtilsContainerStatics;
+import net.sodiumzh.nautils.statics.NaUtilsMiscStatics;
 import net.sodiumzh.nautils.statics.NaUtilsNBTStatics;
 import net.sodiumzh.nff.girls.entity.INFFGirlsTamed;
 import net.sodiumzh.nff.girls.network.NFFGirlsChannels;
+import net.sodiumzh.nff.girls.registry.NFFGirlsCapabilities;
 import net.sodiumzh.nff.girls.registry.NFFGirlsItems;
 import net.sodiumzh.nff.girls.registry.NFFGirlsTrades;
 
@@ -469,5 +475,18 @@ public interface CNFFGirlsTradeHandler extends CVanillaMerchant
 		}
 		
 	}
-	
+
+	/**
+	 * Search for merchant using {@code CNFFGirlsTradeHandler} that's trading with the player around the mob.
+	 * If not found (not existing or not using {@code CNFFGirlsTradeHandler} e.g. vanilla villager), returns null.
+	 */
+	@OnlyIn(Dist.CLIENT)
+	@Nullable
+	public static CNFFGirlsTradeHandler searchOngoingTrader(Player player, double range)
+	{
+		List<Entity> list = player.level().getEntities(player, player.getBoundingBox().inflate(range)).stream().filter(entity ->
+			NaUtilsMiscStatics.getValueFromCapability(entity, NFFGirlsCapabilities.CAP_TRADE_HANDLER, CNFFGirlsTradeHandler::getTradingPlayer) == player
+		).toList();
+		return list.isEmpty() ? null : NaUtilsMiscStatics.getValueFromCapability(list.get(0), NFFGirlsCapabilities.CAP_TRADE_HANDLER, cap -> cap);
+	}
 }
