@@ -1,5 +1,5 @@
 {
-  "type": "minecraft:smithing",
+  "type": "minecraft:smithing_transform",
   "base": {
     "item": "nffgirls:soul_amulet_ii"
   },
@@ -9,7 +9,7 @@
   "result": {
     "item": "nffgirls:soul_amulet_iii"
   },
-    "template": {
+  "template": {
     "item": "hmag:evil_crystal_upgrade_smithing_template"
   }
 }
