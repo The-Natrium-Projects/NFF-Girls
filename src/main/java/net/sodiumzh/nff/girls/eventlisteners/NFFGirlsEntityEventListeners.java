@@ -60,10 +60,7 @@ import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.phys.AABB;
-import net.minecraft.world.phys.BlockHitResult;
-import net.minecraft.world.phys.HitResult;
-import net.minecraft.world.phys.Vec3;
+import net.minecraft.world.phys.*;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.EntityJoinLevelEvent;
 import net.minecraftforge.event.entity.EntityMobGriefingEvent;
@@ -78,19 +75,13 @@ import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.LogicalSide;
 import net.minecraftforge.fml.common.Mod;
+import net.sodiumzh.nautils.statics.*;
 import org.apache.commons.lang3.mutable.MutableObject;
 import net.sodiumzh.nautils.block.ColoredBlocks;
 import net.sodiumzh.nautils.mixin.events.entity.ItemEntityHurtEvent;
 import net.sodiumzh.nautils.mixin.events.entity.LivingEntitySweepHurtEvent;
 import net.sodiumzh.nautils.mixin.events.entity.MobPickUpItemEvent;
 import net.sodiumzh.nautils.mixin.events.entity.ThrownTridentSetBaseDamageEvent;
-import net.sodiumzh.nautils.statics.NaUtilsAIStatics;
-import net.sodiumzh.nautils.statics.NaUtilsEntityStatics;
-import net.sodiumzh.nautils.statics.NaUtilsInfoStatics;
-import net.sodiumzh.nautils.statics.NaUtilsMiscStatics;
-import net.sodiumzh.nautils.statics.NaUtilsNBTStatics;
-import net.sodiumzh.nautils.statics.NaUtilsParticleStatics;
-import net.sodiumzh.nautils.statics.NaUtilsReflectionStatics;
 import net.sodiumzh.nff.girls.NFFGirls;
 import net.sodiumzh.nff.girls.effects.NecromancerWitherEffect;
 import net.sodiumzh.nff.girls.entity.INFFGirlsTamed;
@@ -1230,20 +1221,29 @@ public class NFFGirlsEntityEventListeners
 			if (event.getProjectile() instanceof MagicBulletEntity mb 
 					&& mb.getOwner() != null 
 					&& mb.getOwner() instanceof NightwalkerEntity ne
-					&& mb.getOwner().getClass() == NightwalkerEntity.class
-					&& event.getRayTraceResult().getType() == HitResult.Type.BLOCK
-					&& event.getRayTraceResult() instanceof BlockHitResult bhr)
+					&& mb.getOwner().getClass() == NightwalkerEntity.class)
 			{
-				if (nightwalkerTerracottaUpgrade(event.getProjectile().level(), bhr.getBlockPos()))
+				if (event.getRayTraceResult().getType() == HitResult.Type.BLOCK
+					&& event.getRayTraceResult() instanceof BlockHitResult bhr) {
+					NaUtilsMathStatics.withinManhattanDistance(bhr.getBlockPos(), 2).forEach(
+						pos -> {
+							nightwalkerTerracottaUpgrade(event.getProjectile().level, pos);
+						}
+					);
+					NaUtilsEntityStatics.sendParticlesToEntity(mb, ParticleTypes.EXPLOSION, 0, 0, 1, 0);
+					mb.level.playSound(null, mb, SoundEvents.GENERIC_EXPLODE, mb.getSoundSource(), 2.0f, 0.7f);
+				}
+				else if (event.getRayTraceResult().getType() == HitResult.Type.ENTITY
+					&& event.getRayTraceResult() instanceof EntityHitResult ehr)
 				{
-					nightwalkerTerracottaUpgrade(event.getProjectile().level(), bhr.getBlockPos().above());
-					nightwalkerTerracottaUpgrade(event.getProjectile().level(), bhr.getBlockPos().below());
-					nightwalkerTerracottaUpgrade(event.getProjectile().level(), bhr.getBlockPos().east());
-					nightwalkerTerracottaUpgrade(event.getProjectile().level(), bhr.getBlockPos().west());
-					nightwalkerTerracottaUpgrade(event.getProjectile().level(), bhr.getBlockPos().north());
-					nightwalkerTerracottaUpgrade(event.getProjectile().level(), bhr.getBlockPos().south());
-					NaUtilsEntityStatics.sendParticlesToEntity(ne, ParticleTypes.EXPLOSION, 0, 0, 1, 0);
-					mb.level().playSound(null, ne, SoundEvents.GENERIC_EXPLODE, ne.getSoundSource(), 2.0f, 0.7f);
+					BlockPos hitPos = ehr.getEntity().getOnPos();
+					NaUtilsMathStatics.withinManhattanDistance(hitPos, 2).forEach(
+						pos -> {
+							nightwalkerTerracottaUpgrade(event.getProjectile().level, pos);
+						}
+					);
+					NaUtilsEntityStatics.sendParticlesToEntity(mb, ParticleTypes.EXPLOSION, 0, 0, 1, 0);
+					mb.level.playSound(null, mb, SoundEvents.GENERIC_EXPLODE, mb.getSoundSource(), 2.0f, 0.7f);
 				}
 			}
 		}
