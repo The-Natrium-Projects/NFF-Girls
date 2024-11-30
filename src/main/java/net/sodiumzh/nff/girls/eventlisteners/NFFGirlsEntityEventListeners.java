@@ -1196,20 +1196,29 @@ public class NFFGirlsEntityEventListeners
 			if (event.getProjectile() instanceof MagicBulletEntity mb 
 					&& mb.getOwner() != null 
 					&& mb.getOwner() instanceof NightwalkerEntity ne
-					&& mb.getOwner().getClass() == NightwalkerEntity.class
-					&& event.getRayTraceResult().getType() == HitResult.Type.BLOCK
-					&& event.getRayTraceResult() instanceof BlockHitResult bhr)
+					&& mb.getOwner().getClass() == NightwalkerEntity.class)
 			{
-				if (nightwalkerTerracottaUpgrade(event.getProjectile().level, bhr.getBlockPos()))
+				if (event.getRayTraceResult().getType() == HitResult.Type.BLOCK
+					&& event.getRayTraceResult() instanceof BlockHitResult bhr) {
+					NaUtilsMathStatics.withinManhattanDistance(bhr.getBlockPos(), 2).forEach(
+						pos -> {
+							nightwalkerTerracottaUpgrade(event.getProjectile().level, pos);
+						}
+					);
+					NaUtilsEntityStatics.sendParticlesToEntity(mb, ParticleTypes.EXPLOSION, 0, 0, 1, 0);
+					mb.level.playSound(null, mb, SoundEvents.GENERIC_EXPLODE, mb.getSoundSource(), 2.0f, 0.7f);
+				}
+				else if (event.getRayTraceResult().getType() == HitResult.Type.ENTITY
+					&& event.getRayTraceResult() instanceof EntityHitResult ehr)
 				{
-					nightwalkerTerracottaUpgrade(event.getProjectile().level, bhr.getBlockPos().above());
-					nightwalkerTerracottaUpgrade(event.getProjectile().level, bhr.getBlockPos().below());
-					nightwalkerTerracottaUpgrade(event.getProjectile().level, bhr.getBlockPos().east());
-					nightwalkerTerracottaUpgrade(event.getProjectile().level, bhr.getBlockPos().west());
-					nightwalkerTerracottaUpgrade(event.getProjectile().level, bhr.getBlockPos().north());
-					nightwalkerTerracottaUpgrade(event.getProjectile().level, bhr.getBlockPos().south());
-					NaUtilsEntityStatics.sendParticlesToEntity(ne, ParticleTypes.EXPLOSION, 0, 0, 1, 0);
-					mb.level.playSound(null, ne, SoundEvents.GENERIC_EXPLODE, ne.getSoundSource(), 2.0f, 0.7f);
+					BlockPos hitPos = ehr.getEntity().getOnPos();
+					NaUtilsMathStatics.withinManhattanDistance(hitPos, 2).forEach(
+						pos -> {
+							nightwalkerTerracottaUpgrade(event.getProjectile().level, pos);
+						}
+					);
+					NaUtilsEntityStatics.sendParticlesToEntity(mb, ParticleTypes.EXPLOSION, 0, 0, 1, 0);
+					mb.level.playSound(null, mb, SoundEvents.GENERIC_EXPLODE, mb.getSoundSource(), 2.0f, 0.7f);
 				}
 			}
 		}
