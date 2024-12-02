@@ -2,120 +2,22 @@
 <NEWLINE>
 <NEWLINE>
 <NEWLINE>
-    想要与狗头人化敌为友，需要玩家
+To get friendly with an Imp, you must drop the item on the ground. It will pick the item up, watch it for a few seconds
+like the Piglin, and consume the item.
 <NEWLINE>
-将礼物放置在地上等待狗头人捡起并
+The Kobold loves metals, gems and pickaxes. When the progress reaches 70%, it will become neutral.
 <NEWLINE>
-收下，狗头人收下物品需要5秒，捡起
+After getting friendly, you can set its hand items, and it has 2 Bauble slots.
 <NEWLINE>
-物品的冷却时间为15秒。
+Its main hand accepts only pickaxes. If the pickaxe has a Fortune enchantment, killing mobs will drop more items as if
+it had a Looting enchantment.
 <NEWLINE>
-    狗头人喜爱的礼物及每种礼物增加
+If it's holding a mineral nugget on the off-hand, it will help locate ores nearby. When finding an ore, it will consume
+a nugget, try walking to the ore and generate a lot of green star particles. Now it supports Coal, Copper, Iron, Gold,
+Lapis Lazuli, Emerald and Redstone. For Coal, Lapis and Redstone, it needs the mineral itself instead of the nugget. It
+locates ores only when in the Follow mode.
 <NEWLINE>
-的友好化进度如下:
+The Kobold can be healed with the Apple, Cookie, Pumpkin Pie, Lemon and Lemon Pie. A Golden Apple can fully recover its health.
 <NEWLINE>
-    铁锭：每个增加0.02 ~ 0.04的友
 <NEWLINE>
-好化进度；
-<NEWLINE>
-    金锭：每个增加0.03 ~ 0.05的友
-<NEWLINE>
-好化进度。
-<NEWLINE>
-    绿宝石：每个增加0.02 ~ 0.04的
-<NEWLINE>
-友好化进度；
-<NEWLINE>
-    钻石：每个增加0.05 ~ 0.1的友
-<NEWLINE>
-好化进度。
-<NEWLINE>
-    下界合金碎片：每个增加0.15 ~ 
-<NEWLINE>
-0.25的友好化进度；
-<NEWLINE>
-    下界合金锭：每个增加0.3 ~ 0.5
-<NEWLINE>
-的友好化进度。
-<NEWLINE>
-    铁镐：每个增加0.05 ~ 0.07的友
-<NEWLINE>
-好化进度；
-<NEWLINE>
-    金镐：每个增加0.07 ~ 0.1的友
-<NEWLINE>
-好化进度。
-<NEWLINE>
-    钻石镐：每个增加0.12 ~ 0.18的
-<NEWLINE>
-友好化进度；
-<NEWLINE>
-    下界合金镐：每个增加0.5 ~ 1的
-<NEWLINE>
-友好化进度。
-<NEWLINE>
-    任何作为礼物的镐在友好化成功后
-<NEWLINE>
-不能回收。当友好化进度超过0.7时，
-<NEWLINE>
-狗头人将变为中立。
-<NEWLINE>
-    狗头人友好化成功后，可以定制主
-<NEWLINE>
-手工具和副手矿粒，并有两个饰品栏。
-<NEWLINE>
-    狗头人主手只能持有镐类工具。如
-<NEWLINE>
-果镐上带有时运附魔，狗头人在击杀
-<NEWLINE>
-生物时会掉落更多战利品，类似抢夺
-<NEWLINE>
-附魔。
-<NEWLINE>
-    狗头人的副手如果拿着矿物粒，则
-<NEWLINE>
-会帮助定位周围的相应矿石，即使无
-<NEWLINE>
-法看到。当其找到矿石时，会消耗一
-<NEWLINE>
-个矿物粒，尝试走向矿石并产生大量
-<NEWLINE>
-绿星粒子。目前支持的矿物：铜、铁、
-<NEWLINE>
-金、绿宝石、钻石、煤、青金石和红
-<NEWLINE>
-石。对于煤、青金石和红石，副手需
-<NEWLINE>
-要放矿物本身而非矿粒。狗头人只有
-<NEWLINE>
-在跟随模式才会尝试定位矿石，每次
-<NEWLINE>
-定位冷却时间为5秒。
-<NEWLINE>
-    狗头人可以利用以下物品进行治疗，
-<NEWLINE>
-每次使用治疗物品冷却时间为2秒。
-<NEWLINE>
-    苹果：每次治疗5生命值；
-<NEWLINE>
-    曲奇：每次治疗5生命值；
-<NEWLINE>
-    南瓜派：每次治疗15生命值；
-<NEWLINE>
-    柠檬：每次治疗10生命值；
-<NEWLINE>
-    柠檬派：每次治疗20生命值；
-<NEWLINE>
-    金苹果：恢复满生命值。
-<NEWLINE>
-    狗头人的独特交易清单为：
-<NEWLINE>
-等级1：
-<NEWLINE>
-等级2：
-<NEWLINE>
-等级3：
-<NEWLINE>
-等级4：
-<NEWLINE>
-等级5：
+(*Note: take care using ore locating feature. Now block locating has issues which can cause a waste of metal nuggets.)

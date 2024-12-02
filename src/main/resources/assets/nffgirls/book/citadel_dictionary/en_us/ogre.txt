@@ -2,42 +2,11 @@
 <NEWLINE>
 <NEWLINE>
 <NEWLINE>
-    食人魔栖息在深黑的洞中中，自然
+The Ogre is a strong monster living in the cave, found below Y=0 in the Overworld.
 <NEWLINE>
-生成于主世界Y轴0层之下。
+As a powerful creature, it can break blocks when attacking, causing a strong knockback and Slowness IV effect.
+It's highly resistant to suffocation and Cactus, and also resistant to projectiles, explosions, fire, falling,
+Powder Slow and falling blocks.
 <NEWLINE>
-    食人魔时一种极度危险的生物，在
-<NEWLINE>
-锁定目标并攻击时会破坏周围的方块。
-<NEWLINE>
-同时它的攻击具有较强的击退效果，
-<NEWLINE>
-在游戏难度普通及以上时，攻击命中
-<NEWLINE>
-会施加缓慢Ⅳ效果。
-<NEWLINE>
-    食人魔强壮的身材和坚硬的表皮使
-<NEWLINE>
-它只会受到25%的窒息伤害和仙人掌
-<NEWLINE>
-等方块的荆棘伤害，同时受到的弓箭
-<NEWLINE>
-等弹射物、爆炸、燃烧、摔落、细雪
-<NEWLINE>
-冻结伤害和铁砧等坠落物块的伤害减
-<NEWLINE>
-半。
-<NEWLINE>
-    击倒食人魔有几率会掉落食人魔之
-<NEWLINE>
-角，这是一种稀有的独特素材，可以
-<NEWLINE>
-制作强化锁链等物品，也可以作为酿
-<NEWLINE>
-造素材制作食人魔的力量药水，饮用
-<NEWLINE>
-后给予玩家长时间的力量Ⅱ和急迫Ⅰ
-<NEWLINE>
-效果，但也会给予玩家长时间的缓慢
-<NEWLINE>
-Ⅱ效果作为副作用。
+When an Ogre is slain, it has a chance to drop some Ogre Horns. This unique item is the ingredient of the Potion of Ogre's
+Strength, a potion giving Strength II and Haste I as well as Slowness II effects.

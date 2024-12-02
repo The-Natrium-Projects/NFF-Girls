@@ -1,7 +1,7 @@
 {
   "parent": "",
   "text": "root.txt",
-  "title": "HMaG - Mob Dictionary",
+  "title": "dict.nffgirls.title",
   "entity_buttons": [
     {
       "entity": "hmag:zombie_girl",
@@ -535,7 +535,7 @@
   "linked_page_buttons": [
     {
       "linked_page": "nffgirls_dictionary.json",
-      "text": "info.nffgirls.book.tamable",
+      "text": "dict.nffgirls.button_friendable",
       "x": 90,
       "y": 160,
       "page": 0,

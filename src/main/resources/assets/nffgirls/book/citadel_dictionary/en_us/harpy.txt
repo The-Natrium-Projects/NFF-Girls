@@ -3,7 +3,7 @@
 <NEWLINE>
 <NEWLINE>
 The Harpy is a common creature found in the Plain, Savanna and Desert biomes above Y=64. Its attack has a strong
-knockback. It falls slowly like the Chicken and is immune to falling damage. It can jump onto 1.5 blocks above.
+knockback. It falls slowly like the Chicken and is immune to falling damage. It can step onto 1.5 blocks above.
 <NEWLINE>
 The Harpy has 6 different common colors depending on the biomes. Besides, there's another hidden color that can
 be found anywhere but incredibly rarely.

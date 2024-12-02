@@ -2,110 +2,22 @@
 <NEWLINE>
 <NEWLINE>
 <NEWLINE>
-    想要与小恶魔化敌为友，需要玩家
+To get friendly with an Imp, you must drop the item on the ground. It will pick the item up, watch it for a few seconds
+like the Piglin, and consume the item.
 <NEWLINE>
-将礼物放置在地上等待小恶魔捡起并
+The Imp's favorite items are the Nether Star and Golden Apple, and also receives the Golden Tropical Fish, Gilded Blackstone,
+Lemon, Crimson Fungus, Warped Fungus and Apple. When the progress reaches 70%, it will become neutral.
 <NEWLINE>
-收下，小恶魔收下物品需要10秒，捡
+After being friendly, you can put item on its main hand, and it has 2 Bauble slots.
 <NEWLINE>
-起物品的冷却时间为15秒。
+If it has a Netherite Fork on the main hand and a Tiny Netherite Scrap on the off-hand (metal nugget icon), it can locate
+the Ancient Debris nearby. If it locates an Ancient Debris, it will consume a Netherite Scrap, try to walk toward the block
+and generate a lot of green star particles. It locates the Debris only in the Follow mode.
 <NEWLINE>
-    小恶魔喜爱的礼物及每种礼物增加
+The Netherite Fork can be obtained by upgrading the Golden Fork with a Netherite Ingot. If you have problems getting a
+Golden Fork, you can also make it on the Crafting Table, but it's really expensive.
 <NEWLINE>
-的友好化进度如下:
+The Imp can be healed with the Apple, Cookie, Pumpkin Pie, Lemon and Lemon Pie. A Golden Apple can fully recover its health.
 <NEWLINE>
-    苹果：每个增加0.02 ~ 0.04的友
 <NEWLINE>
-好化进度；
-<NEWLINE>
-    诡异菌：每个增加0.03 ~ 0.05的友
-<NEWLINE>
-好化进度。
-<NEWLINE>
-    绯红菌：每个增加0.03 ~ 0.05的友
-<NEWLINE>
-好化进度。
-<NEWLINE>
-    金苹果：每个增加0.12 ~ 0.24的
-<NEWLINE>
-友好化进度；
-<NEWLINE>
-    柠檬：每个增加0.03 ~ 0.05的友
-<NEWLINE>
-好化进度。 
-<NEWLINE>
-    黄金热带鱼：每个增加0.08~0.16
-<NEWLINE>
-的友好化进度。
-<NEWLINE>
-    镶金黑石：每个增加0.04 ~ 0.07
-<NEWLINE>
-的友好化进度；
-<NEWLINE>
-    附魔金苹果：每个增加0.5 ~ 1的
-<NEWLINE>
-友好化进度；
-<NEWLINE>
-    下界之星：每个有80%概率增加
-<NEWLINE>
-0.5友好化进度，有20%概率增加1
-<NEWLINE>
-友好化进度。
-<NEWLINE>
-    当友好化进度超过0.7时，小恶魔
-<NEWLINE>
-将变为中立。
-<NEWLINE>
-    小恶魔友好化成功后，可以定制主
-<NEWLINE>
-手武器和副手矿粒，并有两个饰品栏。
-<NEWLINE>
-    小恶魔的主手持有下界合金叉且副
-<NEWLINE>
-手如果持有下界合金碎片粒，则会帮
-<NEWLINE>
-助定位周围的远古残骸，即使无法看
-<NEWLINE>
-到。当其找到矿石时，会消耗一个下
-<NEWLINE>
-界合金碎片粒，尝试走向远古残骸并
-<NEWLINE>
-产生大量绿星粒子。小恶魔只有在跟
-<NEWLINE>
-随模式才会尝试定位远古残骸，每次
-<NEWLINE>
-定位冷却时间为10秒。
-<NEWLINE>
-    下界合金叉有两种合成方式，一种
-<NEWLINE>
-是工作台合成，一种是锻造台用金叉
-<NEWLINE>
-和下界合金锭合成。
-<NEWLINE>
-    小恶魔可以利用以下物品进行治疗，
-<NEWLINE>
-每次使用治疗物品冷却时间为2秒。
-<NEWLINE>
-    苹果：每次治疗5生命值；
-<NEWLINE>
-    曲奇：每次治疗5生命值；
-<NEWLINE>
-    南瓜派：每次治疗15生命值；
-<NEWLINE>
-    柠檬：每次治疗10生命值；
-<NEWLINE>
-    柠檬派：每次治疗20生命值；
-<NEWLINE>
-    金苹果：恢复满生命值。
-<NEWLINE>
-    小恶魔的独特交易清单为：
-<NEWLINE>
-等级1：
-<NEWLINE>
-等级2：
-<NEWLINE>
-等级3：
-<NEWLINE>
-等级4：
-<NEWLINE>
-等级5：
+(*Note: take care using Ancient Debris locating feature. Now block locating has issues which can cause a waste of metal nuggets.)

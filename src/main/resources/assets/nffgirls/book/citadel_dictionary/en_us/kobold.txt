@@ -2,7 +2,7 @@
 <NEWLINE>
 <NEWLINE>
 <NEWLINE>
-The Kobold is an outstanding miner underground, found in the dark places under Y=32. It spawns with a Stone Pickaxe.
+The Kobold is an underground miner creature, found in the dark places under Y=32. It spawns with a Stone Pickaxe.
 Its attack gives Mining Fatigue I when the difficulty is normal or above.
 <NEWLINE>
 When it's slain, it has a chance to drop the Kobold Leather, a unique ingredient for making some items in this mod,
