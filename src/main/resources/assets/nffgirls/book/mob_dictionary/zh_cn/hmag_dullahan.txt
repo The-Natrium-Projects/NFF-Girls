@@ -48,25 +48,7 @@
 <NEWLINE>
 装备灵魂护符。
 <NEWLINE>
-    无头骑士娘可以利用以下物品进行
+    无头骑士娘可以用灵魂粉尘
 <NEWLINE>
-治疗，每次使用治疗物品的冷却时间
-<NEWLINE>
-为2秒。
-<NEWLINE>
-    灵魂粉尘：每次治疗5生命值；
-<NEWLINE>
-    灵魂之果：每次治疗15生命值。
-<NEWLINE>
-    无头骑士娘的独特交易清单为：
-<NEWLINE>
-等级1：
-<NEWLINE>
-等级2：
-<NEWLINE>
-等级3：
-<NEWLINE>
-等级4：
-<NEWLINE>
-等级5：
+和灵魂之果治疗。
 
