@@ -2,9 +2,11 @@
 
 ### 0.0.27
 
+Added mob dictionary (Requires Citadel as dependency). Special thanks to Koishi for his significant help in making the dictionary!
+
 Added data pack support for mob healing items, taming items and trade list. For usage, see data pack reference on GitHub.
 
-Added Enderberry Bush. Now Enderberry is growable and needs tamed Ender Executor to help growing.
+Added Enderberry Bush. Now Enderberry is growable and needs friendly Ender Executor to help growing.
 
 Updated trade list. Now mobs below have trades: all Vanilla mob girls, Ender Executor, Kobold, Necrostalker (Necrotic Reaper).
 
@@ -12,9 +14,19 @@ Added configs:
 
 ​	-`enableFriendlyDamage`: If false, players and owned NFF-Girls mobs will not be able to damage each other.
 
-Fixed tamed Ender Executor not performing beam attack when difficulty is easy.
+Now friendly Ender Executor will not do random teleport unless hurt by water.
 
-Now tamed Ender Executor will not do random teleport unless hurt by water.
+Now Nightwalker's magic ball can convert blocks in larger area.
+
+Now friendly Nightwalker's magic ball can always convert blocks, and will convert blocks of larger range when using the Ancient Stone.
+
+Fixed friendly Ender Executor not performing beam attack in the easy mode.
+
+Fixed `/give` command giving invalid Respawners or Magical Slime Bottles which may cause data break.
+
+Fixed Nightwalkers only converting Pink Glazed Terracotta.
+
+
 
 
 
