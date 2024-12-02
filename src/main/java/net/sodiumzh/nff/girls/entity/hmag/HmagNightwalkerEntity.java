@@ -8,6 +8,7 @@ import com.github.mechalopa.hmag.world.entity.NightwalkerEntity;
 import com.github.mechalopa.hmag.world.entity.projectile.MagicBulletEntity;
 
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
@@ -31,6 +32,8 @@ import net.minecraft.world.phys.EntityHitResult;
 import net.minecraftforge.network.PlayMessages;
 import net.sodiumzh.nautils.block.ColoredBlocks;
 import net.sodiumzh.nautils.entity.RepeatableAttributeModifier;
+import net.sodiumzh.nautils.statics.NaUtilsEntityStatics;
+import net.sodiumzh.nautils.statics.NaUtilsMathStatics;
 import net.sodiumzh.nff.girls.NFFGirls;
 import net.sodiumzh.nff.girls.entity.INFFGirlTamed;
 import net.sodiumzh.nff.girls.entity.ai.goal.NFFGirlsFollowOwnerGoal;
@@ -106,7 +109,7 @@ public class HmagNightwalkerEntity extends NightwalkerEntity implements INFFGirl
 		bullet.setVariant(3);
 		if (this.getAdditionalInventory().getItem(4).is(ModItems.ANCIENT_STONE.get()))
 		{
-			bullet.setTransformsBlocks();
+			bullet.setExpandsTransformingRange();
 			this.getAdditionalInventory().getItem(4).shrink(1);
 			bullet.setDamage(bullet.getDamage() * 1.5f);
 		}
@@ -256,7 +259,7 @@ public class HmagNightwalkerEntity extends NightwalkerEntity implements INFFGirl
 	protected static class BefriendedNightwalkerMagicBallEntity extends MagicBulletEntity
 	{
 		
-		protected boolean shouldTransformBlocks = false;
+		protected boolean shouldExpandTransformingRange = false;
 		
 		public BefriendedNightwalkerMagicBallEntity(EntityType<? extends MagicBulletEntity> type, Level level)
 		{
@@ -284,21 +287,21 @@ public class HmagNightwalkerEntity extends NightwalkerEntity implements INFFGirl
 			return (HmagNightwalkerEntity)(super.getOwner());
 		}
 		
-		public void setTransformsBlocks()
+		public void setExpandsTransformingRange()
 		{
-			shouldTransformBlocks = true;
+			shouldExpandTransformingRange = true;
 		}
 		
 		@Override
 		public void addAdditionalSaveData(CompoundTag nbt) {
 			super.addAdditionalSaveData(nbt);
-			nbt.putBoolean("transforms_blocks", shouldTransformBlocks);
+			nbt.putBoolean("transforms_blocks", shouldExpandTransformingRange);
 		}
 
 		@Override
 		public void readAdditionalSaveData(CompoundTag nbt) {
 			super.readAdditionalSaveData(nbt);
-			this.shouldTransformBlocks = nbt.getBoolean("transforms_blocks");
+			this.shouldExpandTransformingRange = nbt.getBoolean("transforms_blocks");
 		}
 		
 		@Override
@@ -307,22 +310,11 @@ public class HmagNightwalkerEntity extends NightwalkerEntity implements INFFGirl
 			super.onHitBlock(result);
 			if (!this.level.isClientSide)
 			{
-				if (this.shouldTransformBlocks
-						&& this.level.getBlockState(result.getBlockPos()).getBlock() != null
-						&& (
-							this.level.getBlockState(result.getBlockPos()).is(NFFGirlsBlocks.LUMINOUS_TERRACOTTA.get())
-							|| ColoredBlocks.GLAZED_TERRACOTTA_BLOCKS.contains(this.level.getBlockState(result.getBlockPos()).getBlock())
-							|| this.level.getBlockState(result.getBlockPos()).is(NFFGirlsBlocks.ENHANCED_LUMINOUS_TERRACOTTA.get())
-							)
-						)
+				if (!NaUtilsMathStatics.withinManhattanDistance(result.getBlockPos(), this.shouldExpandTransformingRange ? 3 : 2)
+					.map(pos -> transformBlocks(this.level, pos)).filter(Boolean::booleanValue).toList().isEmpty())
 				{
-					transformBlocks(this.level, result.getBlockPos());
-					transformBlocks(this.level, result.getBlockPos().above());
-					transformBlocks(this.level, result.getBlockPos().below());
-					transformBlocks(this.level, result.getBlockPos().east());
-					transformBlocks(this.level, result.getBlockPos().west());
-					transformBlocks(this.level, result.getBlockPos().south());
-					transformBlocks(this.level, result.getBlockPos().north());
+					NaUtilsEntityStatics.sendParticlesToEntity(this, ParticleTypes.EXPLOSION, 0, 0, 1, 0);
+					this.level.playSound(null, this, SoundEvents.GENERIC_EXPLODE, this.getSoundSource(), 2.0f, 0.7f);
 				}
 			}
 		}
@@ -330,27 +322,43 @@ public class HmagNightwalkerEntity extends NightwalkerEntity implements INFFGirl
 		@Override
 		public void onHitEntity(EntityHitResult result)
 		{
+			boolean shouldDealDamage = true;
 			if (!this.level.isClientSide 
 					&& result.getEntity() instanceof LivingEntity living 
 					&& NFFGirlsEntityStatics.isAlly(getOwner(), living) 
 					&& !NFFGirlsConfigs.ValueCache.Combat.ENABLE_PROJECTILE_FRIENDLY_DAMAGE)
 			{
-				return;
+				shouldDealDamage = false;
 			}
-			super.onHitEntity(result);
+			if (shouldDealDamage)
+				super.onHitEntity(result);
+			if (!NaUtilsMathStatics.withinManhattanDistance(result.getEntity().getOnPos(), this.shouldExpandTransformingRange ? 3 : 2)
+				.map(pos -> transformBlocks(this.level, pos)).filter(Boolean::booleanValue).toList().isEmpty())
+			{
+				NaUtilsEntityStatics.sendParticlesToEntity(this, ParticleTypes.EXPLOSION, 0, 0, 1, 0);
+				this.level.playSound(null, this, SoundEvents.GENERIC_EXPLODE, this.getSoundSource(), 2.0f, 0.7f);
+			}
+
 		}
 		
 		
-		protected static void transformBlocks(Level level, BlockPos pos)
+		protected static boolean transformBlocks(Level level, BlockPos pos)
 		{
 			BlockState blockstate = level.getBlockState(pos);
-			if (blockstate.getBlock() == null) return;
-			if (blockstate.is(NFFGirlsBlocks.LUMINOUS_TERRACOTTA.get()))
+			if (blockstate.getBlock() == null) return false;
+			if (blockstate.is(NFFGirlsBlocks.LUMINOUS_TERRACOTTA.get())) {
 				level.setBlock(pos, NFFGirlsBlocks.ENHANCED_LUMINOUS_TERRACOTTA.get().defaultBlockState(), 1 | 2);
-			else if (ColoredBlocks.GLAZED_TERRACOTTA_BLOCKS.contains(blockstate.getBlock()))
+				return true;
+			}
+			else if (ColoredBlocks.GLAZED_TERRACOTTA_BLOCKS.contains(blockstate.getBlock())) {
 				level.setBlock(pos, NFFGirlsBlocks.LUMINOUS_TERRACOTTA.get().defaultBlockState(), 1 | 2);
+				return true;
+			}
+			else return false;
 		}
-		
+
+
+
 	}
 
 }
