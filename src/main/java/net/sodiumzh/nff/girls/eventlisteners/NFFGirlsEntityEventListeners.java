@@ -1223,25 +1223,22 @@ public class NFFGirlsEntityEventListeners
 					&& mb.getOwner() instanceof NightwalkerEntity ne
 					&& mb.getOwner().getClass() == NightwalkerEntity.class)
 			{
+				boolean didConvert = false;
 				if (event.getRayTraceResult().getType() == HitResult.Type.BLOCK
 					&& event.getRayTraceResult() instanceof BlockHitResult bhr) {
-					NaUtilsMathStatics.withinManhattanDistance(bhr.getBlockPos(), 2).forEach(
-						pos -> {
-							nightwalkerTerracottaUpgrade(event.getProjectile().level, pos);
-						}
-					);
-					NaUtilsEntityStatics.sendParticlesToEntity(mb, ParticleTypes.EXPLOSION, 0, 0, 1, 0);
-					mb.level.playSound(null, mb, SoundEvents.GENERIC_EXPLODE, mb.getSoundSource(), 2.0f, 0.7f);
+					didConvert = NaUtilsMathStatics.withinManhattanDistance(bhr.getBlockPos(), 2)
+						.map(pos -> Boolean.valueOf(nightwalkerTerracottaUpgrade(event.getProjectile().level, pos)))
+						.filter(Boolean::booleanValue).toList().isEmpty();
 				}
 				else if (event.getRayTraceResult().getType() == HitResult.Type.ENTITY
 					&& event.getRayTraceResult() instanceof EntityHitResult ehr)
 				{
-					BlockPos hitPos = ehr.getEntity().getOnPos();
-					NaUtilsMathStatics.withinManhattanDistance(hitPos, 2).forEach(
-						pos -> {
-							nightwalkerTerracottaUpgrade(event.getProjectile().level, pos);
-						}
-					);
+					didConvert = NaUtilsMathStatics.withinManhattanDistance(ehr.getEntity().getOnPos(), 2)
+						.map(pos -> nightwalkerTerracottaUpgrade(event.getProjectile().level, pos))
+						.filter(Boolean::booleanValue).toList().isEmpty();
+				}
+				if (didConvert)
+				{
 					NaUtilsEntityStatics.sendParticlesToEntity(mb, ParticleTypes.EXPLOSION, 0, 0, 1, 0);
 					mb.level.playSound(null, mb, SoundEvents.GENERIC_EXPLODE, mb.getSoundSource(), 2.0f, 0.7f);
 				}

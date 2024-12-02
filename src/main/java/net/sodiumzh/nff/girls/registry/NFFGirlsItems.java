@@ -4,6 +4,7 @@ import java.util.HashSet;
 import java.util.Optional;
 import java.util.function.Supplier;
 
+import com.github.mechalopa.hmag.registry.ModItems;
 import com.github.mechalopa.hmag.world.item.ModSwordItem;
 
 import net.minecraft.ChatFormatting;
@@ -13,12 +14,16 @@ import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.*;
+import net.minecraftforge.event.entity.player.ItemTooltipEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
+import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.ModList;
+import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 import net.sodiumzh.nautils.item.NaUtilsItem;
+import net.sodiumzh.nautils.statics.NaUtilsCompatStatics;
 import net.sodiumzh.nautils.statics.NaUtilsInfoStatics;
 import net.sodiumzh.nff.girls.NFFGirls;
 import net.sodiumzh.nff.girls.entity.INFFGirlsTamed;
@@ -48,7 +53,6 @@ import net.sodiumzh.nff.girls.subsystem.baublesystem.baubles.ResistanceAmuletBau
 import net.sodiumzh.nff.girls.subsystem.baublesystem.baubles.SoulAmuletBaubleItem;
 import net.sodiumzh.nff.services.item.MobCatcherItem;
 import net.sodiumzh.nff.services.item.NFFMobRespawnerItem;
-import org.apache.logging.log4j.core.tools.picocli.CommandLine;
 
 public class NFFGirlsItems {
 	
@@ -124,27 +128,21 @@ public class NFFGirlsItems {
 
 	// Baubles
 	// Desc utils
-	private static Supplier<MutableComponent> baubleHPRecovery(double rawValue) { 
+	public static Supplier<MutableComponent> baubleHPRecovery(double rawValue) {
 		return () -> NaUtilsInfoStatics.createTranslatable("info.nffgirls.bauble.healing_per_second", 
 				String.format("%.2f", NFFGirlsConfigs.ValueCache.Baubles.BAUBLE_HEALTH_RECOVERY_SCALE * rawValue)).withStyle(ChatFormatting.GRAY); 
 	}
-	private static Supplier<MutableComponent> baubleHPMax(double rawValue) { 
+	public static Supplier<MutableComponent> baubleHPMax(double rawValue) {
 		return () -> NaUtilsInfoStatics.createTranslatable("info.nffgirls.bauble.hpmax", 
 			String.format("+%.1f", NFFGirlsConfigs.ValueCache.Baubles.BAUBLE_MAX_HP_BOOSTING_SCALE * rawValue)).withStyle(ChatFormatting.GRAY); 
 	}
-	private static Supplier<MutableComponent> baubleAtk(double rawValue) { 
+	public static Supplier<MutableComponent> baubleAtk(double rawValue) {
 		return () -> NaUtilsInfoStatics.createTranslatable("info.nffgirls.bauble.atk", 
 				String.format("+%.1f", NFFGirlsConfigs.ValueCache.Baubles.BAUBLE_ATK_BOOSTING_SCALE * rawValue)).withStyle(ChatFormatting.GRAY); 
 	}
-	private static Supplier<MutableComponent> baubleArmor(double rawValue) { 
+	public static Supplier<MutableComponent> baubleArmor(double rawValue) {
 		return () -> NaUtilsInfoStatics.createTranslatable("info.nffgirls.bauble.armor", 
 				String.format("+%.1f", NFFGirlsConfigs.ValueCache.Baubles.BAUBLE_ARMOR_BOOSTING_SCALE * rawValue)).withStyle(ChatFormatting.GRAY); 
-	}
-
-	// Other-mod-depending items
-	private static Optional<RegistryObject<Item>> registerDepending(String key, String dependentID, Supplier<? extends Item> itemSupplier)
-	{
-		return Optional.ofNullable(ModList.get().isLoaded(dependentID) ? ITEMS.register(key, itemSupplier) : null);
 	}
 
 	// Registry
@@ -270,6 +268,7 @@ public class NFFGirlsItems {
 
 	public static final Optional<RegistryObject<Item>> CITADEL_MOB_DICT = registerDepending("mob_dictionary_citadel", "citadel",
 			() -> new CitadelBasedMobDictionaryItem(new Item.Properties().stacksTo(1)));
+
 
 	/*static
 	{
