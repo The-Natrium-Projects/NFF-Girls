@@ -52,6 +52,7 @@
   "item.nffgirls.befriending_progress_probe": "Befriending Progress Probe (Debug)",
   "item.nffgirls.exp_modifier": "EXP Modifier (Debug)",
   "item.nffgirls.favorability_modifier": "Favorability Modifier (Debug)",
+  "item.nffgirls.mob_dictionary": "HMaG Mob Dictionary - By NFF: Girls",
     
   "block.nffgirls.soul_cake" : "Soul Cake",
   "block.nffgirls.soul_carpet" : "Soul Carpet",
@@ -62,8 +63,8 @@
   "effect.nffgirls.undead_affinity": "Undead Affinity",
   "effect.nffgirls.ender_protection": "Protection of the End",
   "effect.nffgirls.necromancer_wither": "Curse of Necromancy",
-  
-  "item_group.nffgirls_tab" : "Days with Monster Girls",
+
+  "itemGroup.nffgirls_tab" : "NFF: Girls",
   
   "entity.nffgirls.hmag_zombie_girl" : "Zombie Girl",
   "entity.nffgirls.hmag_skeleton_girl" : "Skeleton Girl",
