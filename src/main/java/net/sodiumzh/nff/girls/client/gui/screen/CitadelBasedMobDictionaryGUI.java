@@ -16,9 +16,9 @@ import net.sodiumzh.nff.girls.registry.NFFGirlsItems;
 
 @OnlyIn(Dist.CLIENT)
 public class CitadelBasedMobDictionaryGUI extends GuiBasicBook {
-    private static final ResourceLocation ROOT = new ResourceLocation("nffgirls:book/citadel_dictionary/root.json");
-    private static final String TITLE_TRANSLATION_KEY = "info.nffgirls.citadel_dictionary_title";
-    private static final String TEXT_FILE_DIR = "nffgirls:book/citadel_dictionary/";
+    private static final ResourceLocation ROOT = new ResourceLocation("nffgirls:book/mob_dictionary/root.json");
+    private static final String TITLE_TRANSLATION_KEY = "dict.nffgirls.title";
+    private static final String TEXT_FILE_DIR = "nffgirls:book/mob_dictionary/";
 
     public CitadelBasedMobDictionaryGUI(ItemStack bookStack) {
         super(bookStack, Component.translatable(TITLE_TRANSLATION_KEY));
