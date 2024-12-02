@@ -88,6 +88,7 @@
   "entity.nffgirls.hmag_redcap": "红帽地精",
   "entity.nffgirls.hmag_jack_frost": "冰霜女巫",
   "entity.nffgirls.hmag_melty_monster": "岩浆娘",
+  "entity.nffgirls.hmag_nightwalker": "夜行者",
   
   "info.nffgirls.necrotic_reaper_not_controllable": "你需要拥有死灵巫师的帽子或死灵巫师之杖以指挥死灵收割者。",
   "info.nffgirls.necrotic_reaper_not_controllable_inventory": "你需要拥有死灵巫师的帽子或死灵巫师之杖以打开死灵收割者的道具栏。",
@@ -112,13 +113,15 @@
   "info.nffgirls.bauble.armor": "护甲 %1$s",
   "info.nffgirls.bauble.speed": "移动速度 %1$s",
   "info.nffgirls.bauble.healing_per_second": "每秒回复 %1$s 生命",
-    "info.nffgirls.bauble.in_water": "在水中时：",
+  "info.nffgirls.bauble.in_water": "在水中时：",
   "info.nffgirls.bauble.sun_immune": "不会在太阳下着火",
   "info.nffgirls.bauble.proactive_attack": "主动攻击敌对生物",
   "info.nffgirls.bauble.soul_amulet": "亡灵生物可装备",
   "info.nffgirls.bauble.aqua_jade": "溺尸娘可装备",
   "info.nffgirls.bauble.poisonous_thorn": "节肢生物可装备",
   "info.nffgirls.bauble.poisonous_thorn_1": "攻击付与中毒效果强化",
+  "info.nffgirls.bauble.existing_item": "也可用作生物饰品",
+  "info.nffgirls.bauble.at_night": "在晚上时：",
   "info.nffgirls.open_trade": "交易",
   "info.nffgirls.trade_level_not_satisfied": "这个交易需求等级%1$d。",
   "info.nffgirls.trade_out_of_stock": "这个交易暂时缺货。",
@@ -131,5 +134,17 @@
   "info.nffgirls.introduction_unavailable": "需求点数：%2$d；当前点数：%1$d",
   "info.nffgirls.introduction_written": "%1$s签署了交易介绍信。",
   "info.nffgirls.book.tamable": "一场特殊的邂逅？",
-  "death.attack.necromancer_wither": "%1$s没能承受住死灵巫术的诅咒"
+  "death.attack.necromancer_wither": "%1$s没能承受住死灵巫术的诅咒",
+
+  "dict.nffgirls.title": "HMaG - 生物图鉴",
+  "dict.nffgirls.button_friendable": "一场特殊的邂逅？",
+  "dict.nffgirls.button_interaction" : "互动",
+  "dict.nffgirls.button_favorability" : "好感度",
+  "dict.nffgirls.button_friending" : "化敌为友",
+  "dict.nffgirls.button_xp": "经验值等级",
+  "dict.nffgirls.title_friendable": "怪物娘的互动方法",
+  "dict.nffgirls.title_friending" : "化敌为友",
+  "dict.nffgirls.title_favorability" : "好感度",
+  "dict.nffgirls.title_xp": "经验值等级",
+  "dict.nffgirls.title_interaction" : "互动"
 }

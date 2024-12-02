@@ -1,6 +1,6 @@
 Usually, you must satisfy them to be friendly with a monster girl by giving them items.
 <NEWLINE>
-Most mobs requires you to right click with the items in hand to give. Sometimes the action of giving
+Most mobs requires you to right-click with the items in hand to give. Sometimes the action of giving
 also requires additional conditions, such as effects or equipment. After giving, the "Friendly Progress"
 increases depending on the item types.
 <NEWLINE>

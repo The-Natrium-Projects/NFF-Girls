@@ -4,7 +4,7 @@
 <NEWLINE>
 The Melty Monster is a spirit of the fire element, found in the lava in the Overworld and Nether.
 <NEWLINE>
-It attacks by shooting Fire Charges like the Blaze. When a Melty Monster steps onto a solid block, it will ignite the block.    岩浆娘攻击方式类似烈焰人，会连续
+It attacks by shooting Fire Charges like the Blaze. When a Melty Monster steps onto a solid block, it will ignite the block.
 <NEWLINE>
 The Melty Monster is immune to fire, and takes damage in water. It escapes from the Strider and is neutral to players
 riding a Strider.

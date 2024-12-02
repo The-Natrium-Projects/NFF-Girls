@@ -2,98 +2,24 @@
 <NEWLINE>
 <NEWLINE>
 <NEWLINE>
-    想要与跳尸化敌为友，需要玩家作
+To get friendly with a Jiangshi, you must "tame" it in a style of the Taoist.
 <NEWLINE>
-为优秀的道士“降服”她，当跳尸认
+First you need to prepare some Taoist Talismans. Use a talisman on a Jiangshi will freeze its actions for 10s. When frozen,
+it will obtain 20 extra armor value. Then you need to attack it with a Peach-Wood Sword when it's frozen. After attacking,
+it will be immediately unfrozen and the talisman has a chance to be recovered. You need overall 6 hits to finish the process.
 <NEWLINE>
-可玩家的道术水准，友好化便会成功。
+Each time you hit the Jiangshi, it will become stronger and release more smoke particles. After 3 hits, it will be hit by
+a thunderbolt, and it's knock-back will become really strong. After 6 hits, another thunderbolt will strike, and it's finally
+tamed.
 <NEWLINE>
-    玩家首先要准备足够多的道符，手
+Besides taming the Jiangshi, the Peach-Wood Sword is also a powerful weapon against the undead mobs. When hit an undead mob,
+it will deal damage with an amount 50% of the mob's maximum health, bypassing vanilla damage reducing mechanics. The extra
+damage will consume extra durability, and note that its durability is only equal to the Wooden Sword.
 <NEWLINE>
-持道符右键跳尸可以将她定身。道符
+Specially, the hostile Jiangshi will not take the extra damage but get Weakness II effect. The friendly Jiangshi will
+take this damage.
 <NEWLINE>
-可以定身跳尸10秒时间。使用后，跳
+After getting friendly, the Jiangshi has 4 Bauble slots. When it's thunder-struck, it will not take damage but get powerful
+effects, including Strength III, Damage Absorption III and Fire Resistance for 1 minute, and get 20 experience.
 <NEWLINE>
-尸会停止行动并获得20点额外护甲。
-<NEWLINE>
-10秒后，道符有2/3的概率掉落，可
-<NEWLINE>
-以被回收。用桃木剑攻击会立即解除
-<NEWLINE>
-定身并且增加友好化进度，此时也可
-<NEWLINE>
-能回收道符。
-<NEWLINE>
-    当跳尸被定身时，用桃木剑攻击跳
-<NEWLINE>
-尸可以增加友好化进度。
-<NEWLINE>
-    桃木剑是一种对亡灵生物尤其有效
-<NEWLINE>
-的武器。桃木剑不能横扫攻击，当攻
- <NEWLINE>
-击亡灵生物时（除了未友好化的跳尸），
-<NEWLINE>
-将会强制扣除生物的一半生命值，并
-<NEWLINE>
-且无视一切原版减伤机制。额外伤害
-<NEWLINE>
-将会产生等量的额外的耐久消耗。因
-<NEWLINE>
-此额外伤害不会超过桃木剑的总耐久
-<NEWLINE>
-度。需要注意的是，桃木剑总耐久度
-<NEWLINE>
-与木剑相同。
-<NEWLINE>
-    当玩家使用桃木剑攻击未友好化的
-<NEWLINE>
-跳尸时，如果跳尸已经被定身，则增
-<NEWLINE>
-加进度并且解除定身，否则附加20秒
-<NEWLINE>
-虚弱Ⅱ效果。每击中一次，跳尸会释
-<NEWLINE>
-放出更多烟雾粒子并且变得更强，同
-<NEWLINE>
-时会立即解除定身。击中3次后，会
-<NEWLINE>
-产生一个雷击，跳尸的强度会进一步
-<NEWLINE>
-增加，并且击退距离变得非常远。一
-<NEWLINE>
-共击中6次后，会再次产生一个雷击
-<NEWLINE>
-并且友好化过程完成。
-<NEWLINE>
-    跳尸友好化成功后，可以定制4个
-<NEWLINE>
-饰品栏。
-<NEWLINE>
-    当友好化的跳尸被雷击中时，她不
-<NEWLINE>
-会受到伤害，并且会得到强力效果，
-<NEWLINE>
-包括力量Ⅲ、伤害吸收Ⅲ和抗火各1
-<NEWLINE>
-分钟，同时获得20点经验。
-<NEWLINE>
-    跳尸可以利用以下物品进行治疗，
-<NEWLINE>
-每次使用治疗物品冷却时间为2秒。
-<NEWLINE>
-    灵魂粉尘：每次治疗5生命值；
-<NEWLINE>
-    灵魂之果：每次治疗15生命值。
-<NEWLINE>
-    跳尸的独特交易清单为：
-<NEWLINE>
-等级1：
-<NEWLINE>
-等级2：
-<NEWLINE>
-等级3：
-<NEWLINE>
-等级4：
-<NEWLINE>
-等级5：
+Like most undead mobs, it can be healed with the Soul Powder and Soul Apple.

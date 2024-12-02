@@ -124,6 +124,8 @@
   "info.nffgirls.bauble.aqua_jade": "For Drowned Girls only",
   "info.nffgirls.bauble.poisonous_thorn": "For arthropod mobs only",
   "info.nffgirls.bauble.poisonous_thorn_1": "Adding & enhancing Poison effect on attacking",
+  "info.nffgirls.bauble.existing_item": "Also applicable as a mob bauble",
+  "info.nffgirls.bauble.at_night": "When at night:",
   "info.nffgirls.open_trade": "Trade",
   "info.nffgirls.trade_level_not_satisfied": "This offer requires Level %1$d.",
   "info.nffgirls.trade_out_of_stock": "This offer is out-of-stock.",
@@ -283,5 +285,17 @@
   "color.nffgirls.html.yellow_green": "Yellow Green",
 
   "info.nffgirls.book.tamable": "A Special Encounter?",
-  "death.attack.necromancer_wither": "%1$s failed to bear the curse of necromancy."
+  "death.attack.necromancer_wither": "%1$s failed to bear the curse of necromancy.",
+
+  "dict.nffgirls.title": "HMaG - Mob Dictionary",
+  "dict.nffgirls.button_friendable": "A Special Encounter?",
+  "dict.nffgirls.button_interaction" : "Interaction",
+  "dict.nffgirls.button_favorability" : "Favorability",
+  "dict.nffgirls.button_friending" : "Getting Friendly",
+  "dict.nffgirls.button_xp": "Experience",
+  "dict.nffgirls.title_friendable": "Interactions",
+  "dict.nffgirls.title_friending" : "Getting Friendly",
+  "dict.nffgirls.title_favorability" : "Favorability",
+  "dict.nffgirls.title_xp": "Experience",
+  "dict.nffgirls.title_interaction" : "Interaction"
 }

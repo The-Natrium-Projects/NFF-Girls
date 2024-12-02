@@ -2,24 +2,8 @@
 <NEWLINE>
 <NEWLINE>
 <NEWLINE>
-    食人鱼是一种会主动攻击的鱼类敌对
+The Savagefang is a fierce and hostile fish found in the Swamp and Jungle biomes. They attack their prey in groups, and
+are hostile to players, animals, Villagers and even other hostile mobs. When the target is on the land, they can
+also jump out of the water to attack.
 <NEWLINE>
-生物，自然生成在主世界沼泽和丛林群
-<NEWLINE>
-系的水域中，且只在未被不透明方块遮
-<NEWLINE>
-盖的暗处生成。
-<NEWLINE>
-    食人鱼往往成群活动，且会主动攻击
-<NEWLINE>
-附近的动物、村民甚至在水中的其他敌
-<NEWLINE>
-对生物。当攻击目标在陆地上时，只要
-<NEWLINE>
-目标靠近水，食人鱼也会跳出水面发起
-<NEWLINE>
-攻击。
-<NEWLINE>
-    击杀食人鱼有几率掉落生食人鱼肉，
-<NEWLINE>
-可以烹饪为熟食人鱼肉。
+The Savagefang can drop Raw Savagefang Meat as a cookable food.

@@ -2,22 +2,8 @@
 <NEWLINE>
 <NEWLINE>
 <NEWLINE>
-    当下界自然生成凋灵骷髅时，凋灵骷髅
+The Wither Skeleton Girl spawns occasionally in place of the Wither Skeleton in the Nether. Its behaviors are similar to
+the vanilla Wither Skeleton while the attributes are higher. Rarely it can spawn with a Bow instead of a Stone Sword,
+and the arrows can ignite the target on hit.
 <NEWLINE>
-娘有一定概率替换凋灵骷髅生成，这让凋
-<NEWLINE>
-灵骷髅娘常见于下界要塞中。
-<NEWLINE>
-    除了属性高于凋灵骷髅外，凋灵骷髅娘
-<NEWLINE>
-的机制和特性与原版凋灵骷髅一致。而略
-<NEWLINE>
-有不同的是凋灵骷髅娘自然生成时有概率
-<NEWLINE>
-携带弓而非石剑。
-<NEWLINE>
-    击倒凋灵骷髅娘有概率获得邪恶水晶
-<NEWLINE>
-碎片，这是合成模组中大部分物品的基
-<NEWLINE>
-础材料。
+When a Wither Skeleton Girl is slain, it has a chance to drop some Evil Crystal Fragments, a basic ingredient for most items in this mod.

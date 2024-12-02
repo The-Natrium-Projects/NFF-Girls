@@ -2,7 +2,7 @@
 <NEWLINE>
 <NEWLINE>
 <NEWLINE>
-The Magical Slime is a variation of the Slime. When a Slime Girl is slain, some Magical Slimes of the smallest size are
+The Magical Slime is a variant of the Slime. When a Slime Girl is slain, some Magical Slimes of the smallest size are
 generated. The smallest Magical Slime can still deal damage.
 It's resistant to falling and magic damage.
 <NEWLINE>

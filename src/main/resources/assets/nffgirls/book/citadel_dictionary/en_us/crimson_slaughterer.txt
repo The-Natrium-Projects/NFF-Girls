@@ -2,7 +2,7 @@
 <NEWLINE>
 <NEWLINE>
 <NEWLINE>
-The Crimson Slaughterer is a dangerous creature in the Crimson Forest, stalking silently for its prey.
+The Crimson Slaughterer is a dangerous creature found rarely in the Crimson Forest.
 <NEWLINE>
 It has higher attributes than most other mobs in this mod, and can step onto 3 blocks above, making it
 dangerous to fight closely against it. Its attack can cause Hunger II, Slowness I and Mining Fatigue I.
@@ -19,8 +19,8 @@ The Crimson Bow is a bit powerful than vanilla Bow. Its power further increases 
 <NEWLINE>
 The Nemesis Blade is a legendary weapon. It is stronger when your experience level is low. When it hits the enemy,
 it will randomly give Slowness I, Mining Fatigue I or Weakness I for at most 10 seconds. However, if your XP level is too
-high, your movement speed will be halved when using this weapon.
+high, your movement speed will get slow when using this weapon.
 <NEWLINE>
-When the weapon's level is above 1, you can hold RMB to shoot a magical bullet, consuming an XP level. The magical bullet
+When the weapon's level is above 1, you can hold the right mouse button to shoot a magical bullet, consuming an XP level. The magical bullet
 deals damage based on the weapon's level, and give the target Weakness II, Mining Fatigue II, slowness II and Wither II
 for at most 15 seconds.

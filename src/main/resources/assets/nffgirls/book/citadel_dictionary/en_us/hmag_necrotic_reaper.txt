@@ -2,176 +2,35 @@
 <NEWLINE>
 <NEWLINE>
 <NEWLINE>
-    要想与死灵潜行者化敌为友，首先
-<NEWLINE>
-要让她承认你作为死灵巫师的资质。
-<NEWLINE>
-玩家必须佩戴死灵巫师的帽子，并拥
-<NEWLINE>
-有死灵巫师之杖。
-<NEWLINE>
-    玩家穿戴死灵巫师的帽子时将会获
-<NEWLINE>
-得力量Ⅱ、急迫Ⅱ、亡灵亲和以及死
-<NEWLINE>
-灵诅咒效果。死灵诅咒效果每4秒造
-<NEWLINE>
-成1点伤害，无视护甲和附魔。如果
-<NEWLINE>
-玩家站在灵魂地毯上，将不会获得死
-<NEWLINE>
-灵诅咒效果。
-<NEWLINE>
-    玩家右键可以使用死灵巫师之杖，
-<NEWLINE>
-使用时发射一个魔法球，在击中方块
-<NEWLINE>
-或实体时会爆炸并付与1.5格距离内
-<NEWLINE>
-的所有生物凋零Ⅲ效果10秒。如果
-<NEWLINE>
-玩家佩戴死灵巫师的帽子，则付与
-<NEWLINE>
-凋零Ⅳ效果。如果魔法球直接击中生
-<NEWLINE>
-物，凋零效果等级会再增加1。每次
-<NEWLINE>
-使用死灵巫师之杖时，玩家会受到2
-<NEWLINE>
-点伤害。
-<NEWLINE>
-    死灵巫师之杖有64点耐久，不支
-<NEWLINE>
-持附魔，在耐久剩余0时无法使用，
-<NEWLINE>
-不会损坏，可在铁砧上用亡灵晶石
-<NEWLINE>
-粉修复，每一个回复32点耐久。
-<NEWLINE>
-    友好化过程中，当死灵潜行者站
-<NEWLINE>
-在灵魂地毯上时，玩家需要用死灵
-<NEWLINE>
-巫师之杖的魔法球射击死灵潜行者，
-<NEWLINE>
-一共需要命中6次。一旦命中，死
-<NEWLINE>
-灵潜行者将会对玩家保持敌对。每
-<NEWLINE>
-命中一次，死灵潜行者的攻击力会
-<NEWLINE>
-提高5，同时散发更多的烟雾粒子。
-<NEWLINE>
-    如果死灵潜行者无法攻击到玩家
-<NEWLINE>
-10秒（攻击被盾牌抵挡也算作攻击
-<NEWLINE>
-到），累计命中数会下降1。
-<NEWLINE>
-    如果友好化过程中玩家远离死灵
-<NEWLINE>
-潜行者32格以外，友好化过程将被
-<NEWLINE>
-中断。
-<NEWLINE>
-    死灵潜行者友好化成功后，要与
-<NEWLINE>
-她与玩家协同作战，玩家必须佩戴
-<NEWLINE>
-死灵巫师的帽子，或在主副手之一
-<NEWLINE>
-持有死灵巫师之杖，否则她将不会
-<NEWLINE>
-攻击玩家的目标。如果死灵潜行者
-<NEWLINE>
-好感度高于90，则不需要以上条件。
-<NEWLINE>
-    要切换死灵潜行者AI或打开GUI，
-<NEWLINE>
-玩家需要使用死灵巫师之杖，用法
-<NEWLINE>
-同指挥杖。
-<NEWLINE>
-    死灵潜行者可以定制双手武器，
-<NEWLINE>
-且双手只接受锄作为武器。非锄类
-<NEWLINE>
-道具也可以放上去，但不起任何效
-<NEWLINE>
-果。同时，死灵潜行者有4个饰品
-<NEWLINE>
-栏位。
-<NEWLINE>
-    死灵潜行者的攻击力随所持锄的
-<NEWLINE>
-等级上升而大幅度上升，双手锄类
-<NEWLINE>
-武器叠加计算。效率附魔会提高锄
-<NEWLINE>
-的攻击力，每级10%。
-<NEWLINE>
-    各种锄的攻击力为：木/金质1点，
-<NEWLINE>
-石质2点，铁质3点，钻石质5点，
-<NEWLINE>
-下界合金8点。效率附魔乘算到该值
-<NEWLINE>
-中，每级效率附魔增加10%伤害。
-<NEWLINE>
-比下界合金更高级的锄攻击力依次
-<NEWLINE>
-为：13点，21点，34点（最大）。
-<NEWLINE>
-    如果锄上带有时运附魔，死灵潜
-<NEWLINE>
-行者在击杀生物时会掉落更多战利
-<NEWLINE>
-品，类似抢夺附魔。
-<NEWLINE>
-    当被玩家的死灵巫师之杖发射的
-<NEWLINE>
-魔法球击中，玩家的死灵潜行者会
-<NEWLINE>
-恢复2点生命（爆炸溅射）或4点生
-<NEWLINE>
-命（直接击中）。如果拥有者佩戴
-<NEWLINE>
-死灵巫师的帽子，则会恢复3点生
-<NEWLINE>
-命（爆炸溅射）或6点生命（直接
-<NEWLINE>
-击中），并获得力量Ⅱ效果10秒
-<NEWLINE>
-（爆炸溅射）或15秒（直接击中）。
-<NEWLINE>
-    如果玩家佩戴死灵巫师的帽子，
-<NEWLINE>
-他的的死灵潜行者在周围（8格以
-<NEWLINE>
-内）会付与玩家再生效果，等级
-<NEWLINE>
-取决于周围的总数量，最高等级
-<NEWLINE>
-为Ⅲ。
-<NEWLINE>
-    死灵潜行者可以利用以下物品进行
-<NEWLINE>
-治疗，每次使用治疗物品的冷却时间
-<NEWLINE>
-为2秒。
-<NEWLINE>
-    灵魂粉尘：每次治疗5生命值；
-<NEWLINE>
-    灵魂之果：每次治疗15生命值。
-<NEWLINE>
-    死灵潜行者的独特交易清单为：
-<NEWLINE>
-等级1：
-<NEWLINE>
-等级2：
-<NEWLINE>
-等级3：
-<NEWLINE>
-等级4：
-<NEWLINE>
-等级5：
+To get friendly with a Necrostalker, you need to satisfy it with the Necromancy. You need to be both wearing a
+Necromancer's Hat and holding a Necromancer's Wand.
+<NEWLINE>
+Right-click with a Necromancer's Wand to shoot a magic ball. During the friending process, you must first make it stand
+onto the Soul Carpet somehow, and attack it with the magic ball. You need 6 hits overall. After each hit, it will get much stronger,
+and generates more smoke particles. This means it will be deadly if you're attacked by the Necrostalker after your several
+magic ball hits.
+<NEWLINE>
+Note that hiding yourself behind blocks or escaping non-stop are not options. It's hit count will drop once it cannot
+reach you for 10s. Shield-block the attack instead. If you're too far from the mob (>32 blocks away), the process will
+be interrupted, and you'll have to restart from the beginning.
+<NEWLINE>
+After getting friendly, you still need either wearing a Necromancer's Hat or holding a Necromancer's Wand to make it
+follow your commands. Otherwise, it won't follow you or attack your target, unless the favorability is above 90. To switch
+its AI or open its GUI, you also need a Necromancer's Wand instead of a Commanding Wand.
+<NEWLINE>
+The Necrostalker's hand items can be customized, and only receive hoes as weapon. You can also put other items onto the
+off-hand but without any effects. Its attack damage will be boosted depending on the quality of the hoes. If the main hand hoe
+has a Fortune enchantment, killing mobs will drop more items as if it had a Looting enchantment. Also, it has 4 Bauble slots.
+<NEWLINE>
+Like most undead mobs, the Necrostalker can be healed with the Soul Powder and Soul Apple.
+<NEWLINE>
+The Necromancer's Hat's defense are the same as the Leather Hat, but also gives you Strength II and Haste II effects,
+as well as the Curse of Necromancy. The curse effect will slowly damage you, and the damage bypasses vanilla damage reducing
+mechanics. Standing on the Soul Carpet will prevent you from getting cursed. If your Necrostalkers are nearby when you're
+wearing the hat, they will give you the Regeneration effect, and the effect level depends on the amount of Necrostalkers
+(III at most).
+<NEWLINE>
+The magic ball from the Necromancer's Wand can also damage mobs. When a magic ball hits a block
+or mob, it will burst and give Wither effect to mobs nearby. The Wither effect will be even stronger if the mob is directly
+hit by the magic ball. Your own Necrostalker will not take Wither but get healed and Strength effect. The Necromancer's Wand
+can be repaired on the Anvil with Death Crystal Powder.

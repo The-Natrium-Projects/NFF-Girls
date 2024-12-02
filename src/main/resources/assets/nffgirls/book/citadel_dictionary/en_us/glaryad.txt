@@ -12,5 +12,5 @@ You can hold a Mysterious Petal on your hand to attract the Glayrad. It will fol
 if attacked.
 <NEWLINE>
 When a Glayrad is slain, it drops special items from the Lush Cave, like Flowering Azalea and Moss block. It also has
-a chance to drop some Mysterious Petals, a unique ingredient useful to make advanced items like Enchanted Golden
-Apples.
+a chance to drop some Mysterious Petals, a unique ingredient useful to make advanced items like the Enchanted Golden
+Apple.

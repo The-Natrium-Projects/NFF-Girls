@@ -2,9 +2,8 @@
 <NEWLINE>
 <NEWLINE>
 <NEWLINE>
-The Jiangshi is an undead creature from the eastern continent, found in the Bamboo Jungle biomes above Y=64. It hops
-toward the enemies and performs melee attack. Its attack has a strong knockback and, when the difficulty is normal or
-above, gives Poison I.
+The Jiangshi is an undead creature from the eastern continent, found in the Bamboo Jungle biome above Y=64. It hops
+toward the enemies and performs melee attack. Its attack has a strong knockback and gives Poison I.
 <NEWLINE>
 When a Jiangshi is damaged, its movement speed will be boosted, and return to normal gradually. If on fire or hit by
 the thunder, the speed will immediately return to normal.

@@ -1,12 +1,7 @@
-    HMaG在主世界、下界与末地中添加了
+HMaG added a lot of creatures in the Overworld, Nether and End. This dictionary is
+a reference for helping you understand about the mobs.
 <NEWLINE>
-大量的奇幻生物。
-<NEWLINE>
-    本指南作为记录这些生物习性的参考书，
-<NEWLINE>
-将会帮助你了解它们的特性。
-<NEWLINE>
-    或者是……？
+Or...?
 <NEWLINE>
 <NEWLINE>
 <NEWLINE>
@@ -19,4 +14,6 @@
 <NEWLINE>
 <NEWLINE>
 <NEWLINE>
-.
+<NEWLINE>
+<NEWLINE>
+<NEWLINE>
