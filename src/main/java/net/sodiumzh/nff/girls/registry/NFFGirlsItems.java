@@ -3,6 +3,7 @@ package net.sodiumzh.nff.girls.registry;
 import java.util.Optional;
 import java.util.function.Supplier;
 
+import com.github.mechalopa.hmag.registry.ModItems;
 import com.github.mechalopa.hmag.world.item.ModSwordItem;
 
 import net.minecraft.ChatFormatting;
@@ -10,12 +11,16 @@ import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.item.*;
+import net.minecraftforge.event.entity.player.ItemTooltipEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
+import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.ModList;
+import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 import net.sodiumzh.nautils.item.NaUtilsItem;
+import net.sodiumzh.nautils.statics.NaUtilsCompatStatics;
 import net.sodiumzh.nautils.statics.NaUtilsInfoStatics;
 import net.sodiumzh.nff.girls.NFFGirls;
 import net.sodiumzh.nff.girls.NFFGirlsTab;
@@ -72,19 +77,19 @@ public class NFFGirlsItems {
 	
 	// Baubles
 	// Desc utils
-	private static Supplier<MutableComponent> baubleHPRecovery(double rawValue) { 
+	public static Supplier<MutableComponent> baubleHPRecovery(double rawValue) {
 		return () -> NaUtilsInfoStatics.createTranslatable("info.nffgirls.bauble.healing_per_second", 
 				String.format("%.2f", NFFGirlsConfigs.ValueCache.Baubles.BAUBLE_HEALTH_RECOVERY_SCALE * rawValue)).withStyle(ChatFormatting.GRAY); 
 	}
-	private static Supplier<MutableComponent> baubleHPMax(double rawValue) { 
+	public static Supplier<MutableComponent> baubleHPMax(double rawValue) {
 		return () -> NaUtilsInfoStatics.createTranslatable("info.nffgirls.bauble.hpmax", 
 			String.format("+%.1f", NFFGirlsConfigs.ValueCache.Baubles.BAUBLE_MAX_HP_BOOSTING_SCALE * rawValue)).withStyle(ChatFormatting.GRAY); 
 	}
-	private static Supplier<MutableComponent> baubleAtk(double rawValue) { 
+	public static Supplier<MutableComponent> baubleAtk(double rawValue) {
 		return () -> NaUtilsInfoStatics.createTranslatable("info.nffgirls.bauble.atk", 
 				String.format("+%.1f", NFFGirlsConfigs.ValueCache.Baubles.BAUBLE_ATK_BOOSTING_SCALE * rawValue)).withStyle(ChatFormatting.GRAY); 
 	}
-	private static Supplier<MutableComponent> baubleArmor(double rawValue) { 
+	public static Supplier<MutableComponent> baubleArmor(double rawValue) {
 		return () -> NaUtilsInfoStatics.createTranslatable("info.nffgirls.bauble.armor", 
 				String.format("+%.1f", NFFGirlsConfigs.ValueCache.Baubles.BAUBLE_ARMOR_BOOSTING_SCALE * rawValue)).withStyle(ChatFormatting.GRAY); 
 	}
@@ -92,7 +97,6 @@ public class NFFGirlsItems {
 	// Other-mod-depending items
 	private static Optional<RegistryObject<Item>> registerDepending(String key, String dependentID, Supplier<? extends Item> itemSupplier)
 	{
-		return Optional.ofNullable(ModList.get().isLoaded(dependentID) ? ITEMS.register(key, itemSupplier) : null);
 		return Optional.ofNullable(ModList.get().isLoaded(dependentID) ? ITEMS.register(key, itemSupplier) : null);
 	}
 
@@ -214,8 +218,22 @@ public class NFFGirlsItems {
 			ITEMS.register("exp_modifier", () -> new XPModifierItem(new Item.Properties().rarity(Rarity.EPIC)));
 	
 	/* Item register end */
-	
-	public static void register(IEventBus eventBus){
-	    ITEMS.register(eventBus);
+
+	// Other mod depending
+
+	public static final Optional<RegistryObject<Item>> MOB_DICTIONARY = NaUtilsCompatStatics.registerModDependent(
+		ITEMS, "mob_dictionary", "citadel",
+			() -> new CitadelBasedMobDictionaryItem(new Item.Properties().stacksTo(1).tab(TAB)));
+
+	/*static
+	{
+		CITADEL_MOB_DICT = Optional.ofNullable(ModList.get().isLoaded("citadel") ?
+				ITEMS.register("mob_dictionary_citadel", () -> new CitadelBasedMobDictionaryItem(new Item.Properties().stacksTo(1).tab(TAB))) : null);
+	}*/
+
+
+	public static void register(IEventBus eventBus) {
+		ITEMS.register(eventBus);
 	}
+
 }
