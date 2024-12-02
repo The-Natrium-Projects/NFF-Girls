@@ -1,7 +1,14 @@
 {
   "replace" : false,
   "values" : [ 
-		"minecraft:warped_nylium",
-		"minecraft:warped_wart_block"
+	  "minecraft:warped_nylium",
+	  "minecraft:warped_wart_block",
+	  "minecraft:warped_planks",
+	  "minecraft:warped_stem",
+	  "minecraft:stripped_warped_stem",
+	  "minecraft:stripped_warped_hyphae",
+	  "minecraft:warped_hyphae",
+	  "minecraft:warped_slab",
+	  "minecraft:warped_stairs"
 	 ]
 }

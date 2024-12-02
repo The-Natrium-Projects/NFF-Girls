@@ -1,10 +1,18 @@
 [
   {
+    "item_predicate": "nffgirls:is_flower_item_stack",
+    "amount": [0.03, 0.06]
+  },
+  {
     "item": "minecraft:honey_bottle",
     "amount": [0.04, 0.08]
   },
   {
     "item": "minecraft:honey_block",
     "amount": [0.08, 0.16]
+  },
+  {
+    "item": "hmag:mysterious_petal",
+    "amount": [0.16, 0.24]
   }
 ]
