@@ -3,9 +3,9 @@
 	
 	"pattern": 
 	[ 
-	"GCG",
-	"CTC",
-	"GCG"	
+	"GTG",
+	"TCT",
+	"GTG"
 	],
 	
 	"key":{ 
@@ -26,6 +26,6 @@
 	
 	"result":{ 
 		"item": "nffgirls:luminous_terracotta",
-		"count": 1
+		"count": 4
 	}
 }
