@@ -2,26 +2,9 @@
 <NEWLINE>
 <NEWLINE>
 <NEWLINE>
-    红帽地精是一种小巧的魔物，自然生
+The redcap is a woodcutter creature found in the Dark Forest biomes above Y=64. It holds an axe as equipment, and
+sometimes also wears Iron or Chainmail Boots. The Axe attack can disable the shield.
 <NEWLINE>
-成于主世界Y轴64层及以上的黑森林群
-<NEWLINE>
-系中。
-<NEWLINE>
-    红帽地精自然生成时携带石斧或铁斧，
-<NEWLINE>
-小部分红帽地精会手持骨头。同时，部
-<NEWLINE>
-分红帽地精自然生成时会装备铁靴子或
-<NEWLINE>
-锁链靴子。
-<NEWLINE>
-    玩家在被红帽地精攻击时举盾会被破
-<NEWLINE>
-盾，且盾牌进入冷却。
-<NEWLINE>
-    击倒红帽地精有几率掉落治愈莓果，
-<NEWLINE>
-食用后可以治疗少量生命值。
+When a Redcap is defeated, it can drop some Cureberry which can recover some health when eaten.
 
  

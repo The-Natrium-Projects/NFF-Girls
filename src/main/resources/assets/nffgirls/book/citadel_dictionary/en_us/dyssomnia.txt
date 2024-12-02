@@ -3,7 +3,7 @@
 <NEWLINE>
 <NEWLINE>
 <NEWLINE>
-The Dyssomnia is the leader of Phantoms. It's stronger than the Phantom, larger and more fierce.
+The Dyssomnia is the leader of Phantoms. It's stronger than the Phantom, larger and more dangerous.
 It can be found in open biomes like the Plain, and the spawn chance depends on the phase of the moon.
 It's most likely to spawn under the full moon, and doesn't spawn at all under the new moon.
 <NEWLINE>
@@ -19,7 +19,7 @@ The Sword of Insomnia can boost its strength as long as you don't sleep. After 3
 the damage will increase by 1 each night you don't sleep. After sleeping, the level will return to 1.
 You'll feel awake and cannot sleep when having this sword.
 <NEWLINE>
-The Fruit of Insomnia is a non-consuming food. It's level increase as long as you don't sleep, just like
+The Fruit of Insomnia is an infinite food. It's level increase as long as you don't sleep, just like
 the Sword of Insomnia.
 <NEWLINE>
 Each time eating, you'll recover 5 hunger points and 3 saturation, and get different effects:

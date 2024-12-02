@@ -1,7 +1,7 @@
 {
   "parent": "nffgirls_dictionary.json",
   "text": "favorability.txt",
-  "title": "Favorability",
+  "title": "dict.nffgirls.title_favorability",
   "entity_buttons": [
 
   ],

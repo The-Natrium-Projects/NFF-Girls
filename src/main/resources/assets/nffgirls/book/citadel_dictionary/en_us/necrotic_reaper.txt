@@ -3,11 +3,11 @@
 <NEWLINE>
 <NEWLINE>
 The Necrostalker is an undead creature living in the darkness, found below Y=0 in the overworld. It attacks with its
-scythe-shaped arms and give Slowness I.
+scythe-shaped arms and gives Slowness I.
 <NEWLINE>
 As an undead mob, it burns under the sun.
 <NEWLINE>
-When a Necrostalker is slain, it has a chance to drop some Necrofibre. This unique ingredient can be used to make the
+When a Necrostalker is slain, it has a chance to drop some Necrofiber. This unique ingredient can be used to make the
 Necrotic Chainmail suit.
 <NEWLINE>
 The Necrotic Chainmail suit is an upgrade of the Chainmail suit, providing extra attacking speed.

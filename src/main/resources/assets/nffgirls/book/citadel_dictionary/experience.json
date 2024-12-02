@@ -1,7 +1,7 @@
 {
   "parent": "nffgirls_dictionary.json",
   "text": "experience.txt",
-  "title": "Experience",
+  "title": "dict.nffgirls.title_xp",
   "entity_buttons": [
 
   ],

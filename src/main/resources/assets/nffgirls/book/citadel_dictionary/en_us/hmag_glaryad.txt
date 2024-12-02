@@ -2,72 +2,13 @@
 <NEWLINE>
 <NEWLINE>
 <NEWLINE>
-    想要与怒目树妖化敌为友，需要玩
+To get friendly with a Glaryad, you need to right-click to give it items. To give, the mob must have Regeneration III
+effect for over 10 seconds, meaning you need Splash Potion of Regeneration III to satisfy the condition. Also, you must
+hold a Mysterious Petal on the off-hand. Note that you must not have provoked the mob before.
 <NEWLINE>
-家手持礼物右键怒目树妖赠予，礼物
+The Glaryad's favorite items are Cureberries, Randomberries, XP Berries and Mysterious Petals, and also receives
+Spore Blossoms and other flowers.
 <NEWLINE>
-赠予的冷却时间为5秒。同时，为了使
-<NEWLINE>
-怒目树妖感到舒适，赠予礼物前，怒
-<NEWLINE>
-目树妖需要拥有生命恢复Ⅲ效果超过
-<NEWLINE>
-10秒，这意味着玩家需要向怒目树妖
-<NEWLINE>
-投掷喷溅型生命恢复Ⅲ药水来创造合
-<NEWLINE>
-适的条件。同时，玩家副手需要持有
-<NEWLINE>
-神秘花瓣，并且之前从未激怒过怒目
-<NEWLINE>
-树妖。
-<NEWLINE>
-    怒目树妖喜爱的礼物及每种礼物增
-<NEWLINE>
-加的友好化进度如下:
-<NEWLINE>
-    孢子花：每个增加0.08 ~ 0.16的友
-<NEWLINE>
-好化进度；
-<NEWLINE>
-    神秘花瓣：每个增加0.15 ~ 0.3的
-<NEWLINE>
-友好化进度。
-<NEWLINE>
-    治愈莓果/随机莓果/经验莓果：每
-<NEWLINE>
-个增加0.3 ~ 0.5的友好化进度；
-<NEWLINE>
-    任意花朵：每个增加0.06 ~ 0.1
-<NEWLINE>
-的友好化进度。
-<NEWLINE>
-    怒目树妖友好化成功后，可以定制
-<NEWLINE>
-3个饰品栏。
-<NEWLINE>
-    怒目树妖可以利用以下物品进行治
-<NEWLINE>
-疗，每次使用治疗物品冷却时间为2
-<NEWLINE>
-秒。
-<NEWLINE>
-    小麦种子：每次治疗2生命值；
-<NEWLINE>
-    骨粉：每次治疗5生命值；
-<NEWLINE>
-    孢子花：每次治疗15生命值；
-<NEWLINE>
-    神秘花瓣：恢复满生命值。
-<NEWLINE>
-    怒目树妖的独特交易清单为：
-<NEWLINE>
-等级1：
-<NEWLINE>
-等级2：
-<NEWLINE>
-等级3：
-<NEWLINE>
-等级4：
-<NEWLINE>
-等级5：
+After being friendly, the Glaryad has 3 Bauble slots. It can be healed with the Wheat Seed, Bone Meal and Spore Blossom.
+A Mysterious Petal can fully recover its health.
+

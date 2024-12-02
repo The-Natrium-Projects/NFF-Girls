@@ -5,4 +5,4 @@
 The Drowned Girl is a common mob which spawns occasionally in place of the Drowned in the Overworld.
 Its behaviors are similar to the Vanilla Drowned while the attributes are a bit higher.
 <NEWLINE>
-When a Drowned Girl is slain, it has a chance to dropsome Evil Crystal Fragments, a basic ingredient for most items in this mod.
+When a Drowned Girl is slain, it has a chance to drop some Evil Crystal Fragments, a basic ingredient for most items in this mod.

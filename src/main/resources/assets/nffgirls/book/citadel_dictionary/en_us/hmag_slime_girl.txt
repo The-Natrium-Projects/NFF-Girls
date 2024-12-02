@@ -2,220 +2,33 @@
 <NEWLINE>
 <NEWLINE>
 <NEWLINE>
-    想要与史莱姆娘化敌为友，玩家要
+To get friendly with a Slime Girl, you need to provide the Magical Gel by giving Magical Gel Balls or from Magical Gel
+Bottles. The gel in the Magical Gel Bottle has a color. The closer its color is to the Slime Girl's color, the more
+efficient it will be. The Magical Gel Ball is much less efficient (only 2-4% each), so it's recommended to use the bottle.
 <NEWLINE>
-协助增长史莱姆娘的力量。玩家需要
+The Magical Gel Ball is a throwable item. If a thrown Magical Gel Ball hits a large vanilla Slime, it has a chance (25%)
+to generate a small Magical Slime of random color. If it hits a Slime Girl, it has a chance to generate a small Magical
+Slime of the complementary color of the Slime Girl. Hitting a non-slime mob will give a knock back and Slowness II for 30s.
 <NEWLINE>
-为史莱姆娘补充身体中的魔法凝胶，
+The Magical Gel Bottle is an item for getting friendly with the Slime Girl, and modifying the color of friendly Slime Girls.
+Right-click a Magical Gel Bottle to a small Magical Slime to collect it as gel of the same color. If there's already content
+in the bottle, the color will be blended into the existing gel.
 <NEWLINE>
-这可以通过赠予魔法凝胶瓶或魔法凝
+Each bottle's capacity is 6. If you're trying to collect a Magical Slime with a full bottle, the extra unit of gel will
+drop as a Magical Gel Ball after blending the color. Craft with an empty Magical Gel Bottle to divide the content into
+2 bottles.
 <NEWLINE>
-胶球实现。
+Also, crafting a Magical Gel Bottle with an HMaG mob ingredient can also modify its color.
 <NEWLINE>
-    魔法凝胶球是一种可投掷道具。如
+When getting friendly with a Slime Girl with a Magical Gel Bottle, the progress provided by a single unit of gel depends
+on how close the gel's color is to the Slime Girl's color. Note that the progress may drop if you're using a color too
+far from its color. If the progress increases, it will generate green star particles; otherwise it generates angry particles.
 <NEWLINE>
-果投出的魔法凝胶球击中一个大型原
+To estimate the Slime Girl's color, you can hit it with a Magical Gel Ball to generate a Magical Slime
+of the complementary, collect it with an empty bottle and see the color.
 <NEWLINE>
-版史莱姆，将会有25%的概率生成一
+After getting friendly, the Slime Girl has 4 Bauble slots. Its color can be modified with the Magical Gel Bottle, and
+after modification it has a chance to drop a Magical Gel Ball. Note that the magical gel's color will be blended with
+the Slime Girl's original color.
 <NEWLINE>
-个随机颜色的小型魔法史莱姆。
-<NEWLINE>
-    如果击中一个史莱姆娘（无论是否
-<NEWLINE>
-友好化），将有25%的概率生成一个
-<NEWLINE>
-颜色为史莱姆娘的补色的小型魔法史
-<NEWLINE>
-莱姆，例如红色史莱姆娘将会生成青
-<NEWLINE>
-色魔法史莱姆。由于魔法史莱姆和未
-<NEWLINE>
-友好化的史莱姆娘只有32种固定的颜
-<NEWLINE>
-色，实际生成的颜色与计算出的补色
-<NEWLINE>
-将有一定差别。
-<NEWLINE>
-    如果击中非史莱姆类生物，则会产
-<NEWLINE>
-生一个无伤害的击退效果，并付与缓
-<NEWLINE>
-慢Ⅱ效果30秒。
-<NEWLINE>
-    魔法凝胶瓶是用于友好化史莱姆娘
-<NEWLINE>
-以及修改友好化后的史莱姆娘颜色的
-<NEWLINE>
-道具。使用魔法凝胶瓶右键小型魔法
-<NEWLINE>
-史莱姆可以将其收集为魔法凝胶。收
-<NEWLINE>
-集之后，瓶子的容量会增加1单位，
-<NEWLINE>
-魔法史莱姆的颜色将会与瓶中此前的
-<NEWLINE>
-颜色混合。
-<NEWLINE>
-    每个瓶子的最大容量为6。如果试
-<NEWLINE>
-图用装满的瓶子收集，多出的1单位
-<NEWLINE>
-凝胶在混合后会掉落为一个魔法凝胶
-<NEWLINE>
-球。
-<NEWLINE>
-    魔法凝胶瓶与粘液球合成可将其转
-<NEWLINE>
-化为魔法凝胶球，每一个消耗1单位
-<NEWLINE>
-魔法凝胶瓶容量；与空魔法凝胶瓶合
-<NEWLINE>
-成可将内容平分到2个瓶中。
-<NEWLINE>
-    除了混合更多魔法史莱姆以外，玩
-<NEWLINE>
-家也可以用某些材料通过合成调整凝
-<NEWLINE>
-胶颜色。此时凝胶瓶的容量将不会改
-<NEWLINE>
-变。可用的染料见下，从左往右分别
-<NEWLINE>
-为作为染料的材料，材料提供的颜色
-<NEWLINE>
-和颜色的强度。
-<NEWLINE>
-尖牙 白 0.5
-<NEWLINE>
-食人魔之角 淡灰 1.0
-<NEWLINE>
-邪恶水晶碎片 灰 0.5
-<NEWLINE>
-远古晶石 黑 0.5
-<NEWLINE>
-绯红表皮 红 1.0
-<NEWLINE>
-治愈莓果 红 1.0
-<NEWLINE>
-狗头人皮革 蓝 0.5
-<NEWLINE>
-幻骨蝠的皮肤 蓝 1.2
-<NEWLINE>
-随机莓果 紫 1.0
-<NEWLINE>
-坏死纤维 紫 0.5
-<NEWLINE>
-巫妖碎布 棕 1.0
-<NEWLINE>
-灵魂之果 淡蓝 0.5
-<NEWLINE>
-神秘花瓣 粉红 0.5
-<NEWLINE>
-核心立方体 粉红 0.5
-<NEWLINE>
-末影血滴 品红 0.5
-<NEWLINE>
-经验莓果 黄绿 1.0
-<NEWLINE>
-岩浆核心 橙 0.5
-<NEWLINE>
-   以下是友好化史莱姆娘过程中的要
-<NEWLINE>
-点。 如果使用魔法凝胶球作为赠礼，
-<NEWLINE>
-每一个魔法凝胶球会提高友好化进度
-<NEWLINE>
-0.02~0.05，并也有25%的概率生成
-<NEWLINE>
-补色的魔法史莱姆；如果使用魔法凝
-<NEWLINE>
-胶瓶作为赠礼，魔法凝胶瓶的颜色与
-<NEWLINE>
-史莱姆娘颜色相差越小，每单位魔法
-<NEWLINE>
-凝胶能提升的友好化进度值越高。如
-<NEWLINE>
-果差异小于0.5会提高友好化进度值，
-<NEWLINE>
-反之则下降，但友好化进度不会低于
-<NEWLINE>
-0。当友好化进度提升时，史莱姆娘
-<NEWLINE>
-将会产生绿星粒子；友好化进度下降
-<NEWLINE>
-时则会产生愤怒粒子。粒子的数量取
-<NEWLINE>
-决于友好化进度变化的绝对值，颜色
-<NEWLINE>
-差异在0 ~ 0.5时，产生绿星粒子1 ~ 
-<NEWLINE>
-40个；颜色差异在0.5 ~ 1时，产生
-<NEWLINE>
-愤怒粒子1 ~ 5个。
-<NEWLINE>
-    以下是可以参考的计算公式：
-<NEWLINE>
-    用魔法凝胶瓶收集魔法史莱姆：
-<NEWLINE>
-    新颜色 = (原颜色 * 原容量 + 史莱
-<NEWLINE>
-姆颜色)/(原容量 + 1) 
-<NEWLINE>
-    在工作台上用材料给魔法凝胶瓶染
-<NEWLINE>
-色： 
-<NEWLINE>
-    新颜色 = (旧颜色 * 容量 + 染料颜
-<NEWLINE>
-色 * 染料强度)/(容量 + 染料强度) 
-<NEWLINE>
-    颜色之间的差异定义为RGB空间中
-<NEWLINE>
-的归一化直线距离：
-<NEWLINE>
-    颜色差异 = sqrt[(R1-R2)^2+(G1-
-<NEWLINE>
-G2)^2+(B1-B2)^2] /sqrt(3*255^2)
-<NEWLINE>
-    要估计史莱姆娘的颜色，玩家可以
-<NEWLINE>
-先投掷魔法凝胶球生成补色的魔法史
-<NEWLINE>
-莱姆，然后用空凝胶瓶收集以看到数
-<NEWLINE>
-值，之后再调整对比。
-<NEWLINE>
-    史莱姆娘友好化成功后，可以定制
-<NEWLINE>
-4个饰品栏位。
-<NEWLINE>
-    玩家还可以用魔法凝胶瓶右键自己
-<NEWLINE>
-的史莱姆娘以改变其颜色。每使用1单
-<NEWLINE>
-位魔法凝胶，凝胶颜色与原颜色将会
-<NEWLINE>
-以1 : 4的比例混合，并有25%概率额
-<NEWLINE>
-外掉落一个魔法凝胶球。
-<NEWLINE>
-    史莱姆娘可以利用以下物品进行治
-<NEWLINE>
-疗，每次使用治疗物品冷却时间为2秒。
-<NEWLINE>
-    粘液球：每次治疗5生命值；
-<NEWLINE>
-    魔法凝胶球：每次治疗15生命值；
-<NEWLINE>
-    核心立方体：恢复满生命值。
-<NEWLINE>
-    史莱姆娘的独特交易清单为：
-<NEWLINE>
-等级1：
-<NEWLINE>
-等级2：
-<NEWLINE>
-等级3：
-<NEWLINE>
-等级4：
-<NEWLINE>
-等级5：
+The Slime Girl can be healed with Slime Ball and Magical Gel Ball. A Cubic Nucleus can fully recover its health.

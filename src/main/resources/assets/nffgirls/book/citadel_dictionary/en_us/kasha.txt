@@ -3,10 +3,9 @@
 <NEWLINE>
 <NEWLINE>
 The Kasha is a cat-like monster found in the Nether Wastes, Soul Sand Valley and Basalt Delta biomes. It stalks to its
-prey silently and rush suddenly to attack. Its attack has a strong knockback and, if the difficulty is normal or above,
-ignite the enemy.
+prey silently and rush suddenly to attack. Its attack has a strong knockback and ignites the enemy.
 <NEWLINE>
-When spawn on Soul Sand or Soul Soil, it will become a variation of soul fire, and slightly stronger than normal ones.
+When spawned on Soul Sand or Soul Soil, it will become a variation of soul fire, and be slightly stronger than normal ones.
 <NEWLINE>
 The Kasha is immune to fire, but takes damage in water or rain. It's also immune to falling damage and can jump onto
 2 blocks above. It's hostile to the Chicken and baby Hoglin.

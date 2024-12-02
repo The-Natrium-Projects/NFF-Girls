@@ -2,100 +2,19 @@
 <NEWLINE>
 <NEWLINE>
 <NEWLINE>
-    要想与绯红屠戮者化敌为友，首先
+To get friendly with a Crimson Slaughterer, first you must suppress its hostility with Warped blocks before giving items.
+It must be standing on a Warped block. If so, it will get Slowness I effect, but the attack knockback will become very
+strong. Also, there must be >16 Shroomlight blocks around. If there aren't enough, the friending progress will drop
+quickly.
 <NEWLINE>
-要压制她难以抑制的凶性。赠予礼物
+The Crimson Slaughterer loves the Nether Star, Netherite Ingot and Golden Apple best. It also receives the Shroomlight,
+Nether Wart, Crimson Fungus, Crimson Roots and Weeping Vines.
 <NEWLINE>
-之前，绯红屠戮者需要站在诡异方块
+After being friendly, it has 4 Bauble slots.
 <NEWLINE>
-上，这包括诡异菌岩和诡异疣块。站
+If you're close to your Crimson Slaughterer, it will give you 1 hunger value each 10 seconds. Specially, if you're
+holding a Crimson Bow, it doesn't give but removes 1 hunger value until the hunger reaches 7, allowing you to make
+more damage with the bow.
 <NEWLINE>
-上诡异方块后，绯红屠戮者会获得缓
-<NEWLINE>
-慢Ⅰ效果，但击退距离会变得非常远。
-<NEWLINE>
-同时，以绯红屠戮者为中心13x7x13
-<NEWLINE>
-范围内需要有至少16个菌光体方块。
-<NEWLINE>
-一旦不到16个，友好化进度会每秒下
-<NEWLINE>
-降0.1，同时产生大量烟雾粒子。此时
-<NEWLINE>
-玩家需要手持礼物右键绯红屠戮者赠
-<NEWLINE>
-予，礼物赠予的冷却时间为10秒。
-<NEWLINE>
-    绯红屠戮者喜爱的礼物及每种礼物
-<NEWLINE>
-增加的友好化进度如下:
-<NEWLINE>
-    绯红菌索/垂泪藤：每个增加0.02 
-<NEWLINE>
-~ 0.04的友好化进度；
-<NEWLINE>
-    下界疣/绯红菌：每个增加0.03 ~ 
-<NEWLINE>
-0.06的友好化进度；
-<NEWLINE>
-    金苹果：每个增加0.08 ~ 0.16的
-<NEWLINE>
-友好化进度；
-<NEWLINE>
-    下界合金锭：每个增加0.16 ~ 
-<NEWLINE>
-0.32的友好化进度；
-<NEWLINE>
-    下界之星：每个有80%概率增加0.5
-<NEWLINE>
-友好化进度，20%概率增加1友好化
-<NEWLINE>
-进度。
-<NEWLINE>
-    绯红屠戮者友好化成功后，可以定制
-<NEWLINE>
-4个饰品栏位。
-<NEWLINE>
-    当玩家与他的绯红屠戮者相距8个方
-<NEWLINE>
-块以内并且玩家可以被绯红屠戮者直接
-<NEWLINE>
-看到时，绯红屠戮者会每10秒提供1点
-<NEWLINE>
-饥饿值。
-<NEWLINE>
-    特别地，当玩家主手拿着绯红菌丝弓
-<NEWLINE>
-并且饥饿值大于7点时，绯红屠戮者不
-<NEWLINE>
-会提供饥饿值，而是每5秒降低1点饥饿
-<NEWLINE>
-值，使玩家可以用绯红菌丝弓打出更多
-<NEWLINE>
-伤害。
-<NEWLINE>
-    绯红屠戮者可以利用以下物品进行
-<NEWLINE>
-治疗，每次使用治疗物品的冷却时间
-<NEWLINE>
-为2秒。
-<NEWLINE>
-    绯红菌：每次治疗5生命值；
-<NEWLINE>
-    下界疣：每次治疗5生命值；
-<NEWLINE>
-    菌光体：每次治疗15生命值；
-<NEWLINE>
-    金苹果：恢复满生命值。
-<NEWLINE>
-    绯红屠戮者的独特交易清单为：
-<NEWLINE>
-等级1：
-<NEWLINE>
-等级2：
-<NEWLINE>
-等级3：
-<NEWLINE>
-等级4：
-<NEWLINE>
-等级5：
+The Crimson Slaughterer can be healed with the Crimson Fungus, Nether Wart and Shroomlight. A Golden Apple can fully
+recover its health.

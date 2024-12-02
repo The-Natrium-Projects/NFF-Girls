@@ -5,7 +5,7 @@
 The Monolith is an ancient automated defensive device, found rarely in the Small End Islands and End Barrens, and
 commonly in the End City.
 <NEWLINE>
-The Monolith doesn't move when it doesn't see a player. It can perform 2 types of distant attacks depending on the
+The Monolith doesn't move when it doesn't detect a player. It can perform 2 types of distant attacks depending on the
 distance of the enemy. When the enemy is far away, it performs beam attack like the Guardian, and gives Weakness I,
 Slowness I and Mining Fatigue I. When the enemy is nearby, it sprays smoke, causing Weakness II, Blindness,
 Slowness II, Mining Fatigue II and knockback.

@@ -2,114 +2,21 @@
 <NEWLINE>
 <NEWLINE>
 <NEWLINE>
-    想要与苦力怕娘化敌为友，需要玩
+To get friendly with a Creeper Girl, first you must right-click to give it items. It loves the Particle of Lightning
+best, and also receives the TNT and Gunpowder.
 <NEWLINE>
-家手持礼物右键苦力怕娘赠予，礼物
+When the progress is full, it will stop moving, swell for 4 second with massive green star and smoke particles.
+After the 4 seconds, it will make a HUGE EXPLOSION (power 12). During this process, you must not get over 8 blocks away
+from the Creeper Girl, or the process will be interrupted, and you have to restart from giving items. You must survive
+from the explosion no matter how, and it will finally get friendly with you.
 <NEWLINE>
-赠予的冷却时间为5秒。
+After getting friendly, you can equip armor and hand items to it. It also has an ammo slot which accepts Gunpowder or TNT.
+If it has ammo, it can approach the enemy and perform explosions. Gunpowder cannot break blocks but TNT can. Also,
+you can use a Particle of Lightning by Shift + Right-click to charge it, and its next explosion will have double power.
+Shift + Right-click your charged Creeper Girl to uncharge it and recover a Particle of Lightning.
 <NEWLINE>
-    苦力怕娘喜爱的礼物及每种礼物增
+Its explosions will not hurt itself, but can hurt any players and mobs. The explosions will not kill the owner's other
+monster girls or tamed animals, but can kill its owner.
 <NEWLINE>
-加的友好化进度如下:
-<NEWLINE>
-    雷电粒子：每个有10%概率增加0.5
-<NEWLINE>
-友好化进度，30%概率增加0.25友好
-<NEWLINE>
-化进度, 60%概率增加0.125友好化进
-<NEWLINE>
-度；
-<NEWLINE>
-    TNT：每个增加0.03 ~ 0.06的友好
-<NEWLINE>
-化进度；
-<NEWLINE>
-    火药：每个增加0.015 ~ 0.03的友
-<NEWLINE>
-好化进度。
-<NEWLINE>
-    当友好化进度达到1时，苦力怕娘
-<NEWLINE>
-会停止移动，开始膨胀4秒，同时产生
-<NEWLINE>
-大量的绿星及烟雾粒子。4秒后，苦力
-<NEWLINE>
-怕娘会引发一个威力12且破坏方块的
-<NEWLINE>
-巨大的爆炸。当膨胀时，玩家必须距离
-<NEWLINE>
-苦力怕娘不超过8格，否则友好化过程
-<NEWLINE>
-将会被打断，必须从道具给予重新开始。
-<NEWLINE>
-玩家必须在这场大爆炸中生存下来，此
-<NEWLINE>
-后苦力怕娘会认可你并完成友好化。
-<NEWLINE>
-    苦力怕娘友好化成功后，可以定制整
-<NEWLINE>
-套盔甲和主副手物品，并拥有一个弹药
-<NEWLINE>
-栏，但没有饰品栏。
-<NEWLINE>
-    苦力怕娘在战斗时，如果携带了弹药，
-<NEWLINE>
-则会尝试靠近敌人后爆炸。如果手中有
-<NEWLINE>
-武器也会尝试近战。
-<NEWLINE>
-    苦力怕娘的爆炸不会伤害到自身，但
-<NEWLINE>
-会伤害所有其他实体，包括玩家和其他
-<NEWLINE>
-友好生物。爆炸会杀死玩家，但不会杀
-<NEWLINE>
-死其他怪物娘、友好生物或驯服的动物，
-<NEWLINE>
-会保留最后一点生命值。
-<NEWLINE>
-    苦力怕娘的弹药栏接受火药或TNT，
-<NEWLINE>
-每次爆炸消耗1个。当使用火药时，爆炸
-<NEWLINE>
-威力为3， 不破坏方块。使用TNT时，爆
-<NEWLINE>
-炸威力为4，破坏方块。
-<NEWLINE>
-    玩家可以手持雷电粒子shift+右键为苦
-<NEWLINE>
-力怕娘充能。充能消耗一个雷电粒子。当
-<NEWLINE>
-被充能时，苦力怕娘的爆炸威力会加倍，
-<NEWLINE>
-火药为6爆炸威力， TNT为8爆炸威力，
-<NEWLINE>
-爆炸后消耗2个弹药并解除充能。充能后，
-<NEWLINE>
-玩家空手shift+右键苦力怕娘可以解除充
-<NEWLINE>
-能，并掉落一个雷电粒子。
-<NEWLINE>
-    苦力怕娘可以利用以下物品进行治
-<NEWLINE>
-疗，每次使用治疗物品的冷却时间为
-<NEWLINE>
-2秒。
-<NEWLINE>
-    红石：每次治疗5生命值；
-<NEWLINE>
-    火药：每次治疗5生命值；
-<NEWLINE>
-    红石块：每次治疗15生命值。
-<NEWLINE>
-    苦力怕娘的独特交易清单为：
-<NEWLINE>
-等级1：
-<NEWLINE>
-等级2：
-<NEWLINE>
-等级3：
-<NEWLINE>
-等级4：
-<NEWLINE>
-等级5：
+The Creeper Girl can be healed with the Redstone, Gunpowder and Redstone Block.
+

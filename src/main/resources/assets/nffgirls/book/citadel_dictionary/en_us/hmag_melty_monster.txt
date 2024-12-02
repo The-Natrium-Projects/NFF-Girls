@@ -2,120 +2,24 @@
 <NEWLINE>
 <NEWLINE>
 <NEWLINE>
-    想要与岩浆娘化敌为友，需要玩家
+To get friendly with a Melty Monster, you need to be "Into Fire" before giving items. You must be either in the Lava or
+on fire, and NOT having a Fire Resistance effect. Each item given, you'll get Combustion effect for 30s.
 <NEWLINE>
-“与火共舞”，并手持礼物右键岩浆
+The Melty Monster's favorite items are the Nether Star and Burning Core Block (1.19.2+). It also receives the Burning Core,
+Blaze Rod and Blaze Powder.
 <NEWLINE>
-娘赠予，礼物赠予的冷却时间为10秒。
+After getting friendly, it has 4 Bauble slots and a Lava Bucket slot. The Lava Bucket slot only receives Lava Bucket,
+and changes its behavior. If the Lava Bucket is present, its movement speed will increase on the ground, and will not
+try to return to the Lava.
 <NEWLINE>
-给予道具时，玩家必须处于熔岩中或
+The Melty Monster has a "Heat" property. It will consume "Heat" outside the Lava, and equipping a Lava Bucket can slow the
+consuming. The Heat will be restored when it's in Lava. If the Heat runs out, it will be unable to fire, its movement will
+slow down, and will try to return to Lava no matter if it's equipping a Lava Bucket. Its maximum Heat will increase while
+the XP level boosts.
 <NEWLINE>
-着火状态且没有抗火效果。每给予一
+It attacks by shooting fireballs like the Blaze. Each fireball consumes 5 Heat. When it reaches some specific XP levels,
+it will be able to shoot more fireballs in a single attack, and also consume more Heat.
 <NEWLINE>
-次道具，玩家会获得燃烧效果30秒。
+Right click with a Water Bucket to prevent it from igniting its standing block. Use a Flint and Steel to enable igniting.
 <NEWLINE>
-    岩浆娘喜爱的礼物及每种礼物增加
-<NEWLINE>
-的友好化进度如下:
-<NEWLINE>
-    烈焰粉：每个增加0.02 ~ 0.04的
-<NEWLINE>
-友好化进度；
-<NEWLINE>
-    烈焰棒：每个增加0.03 ~ 0.06的
-<NEWLINE>
-友好化进度；
-<NEWLINE>
-    岩浆核心：每个增加0.03 ~ 0.06
-<NEWLINE>
-的友好化进度；
-<NEWLINE>
-    岩浆核心块：每个增加0.12 ~ 0.24
-<NEWLINE>
-的友好化进度。
-<NEWLINE>
-    下界之星：每个有30%概率增加1
-<NEWLINE>
-友好化进度，70%概率增加0.5友好
-<NEWLINE>
-化进度。
-<NEWLINE>
-    岩浆娘友好化成功后，可以定制1
-<NEWLINE>
-个特殊道具栏（熔岩桶图标）和4个
-<NEWLINE>
-饰品栏。
-<NEWLINE>
-    玩家可以向特殊道具栏放入一个熔
-<NEWLINE>
-岩桶可以改变岩浆娘在地面上的行为：
-<NEWLINE>
-移动速度加快，且不会尝试返回熔岩。
-<NEWLINE>
-    玩家右键岩浆娘使用一个水桶可以
-<NEWLINE>
-防止岩浆娘点燃所站的地面，或者右
-<NEWLINE>
-键岩浆娘使用一个打火石重新允许岩
-<NEWLINE>
-浆娘点燃地面。
-<NEWLINE>
-    与岩浆娘一起泡岩浆浴可以缓慢提
-<NEWLINE>
-高好感度，每分钟提高1。玩家需要
-<NEWLINE>
-和岩浆娘同时在熔岩中，互相可以看
-<NEWLINE>
-到对方，且距离少于3格。
-<NEWLINE>
-    岩浆娘有一个“热量”属性。离开
-<NEWLINE>
-熔岩会消耗热量，默认为2点/秒，当
-<NEWLINE>
-装备熔岩桶时为1点/秒。岩浆娘在熔
-<NEWLINE>
-岩中会恢复热量，默认5点/秒。如果
-<NEWLINE>
-热量耗尽，岩浆娘将无法开火，移动
-<NEWLINE>
-速度会减慢，并且即使装备了熔岩桶
-<NEWLINE>
-也会尝试返回熔岩中。
-<NEWLINE>
-    岩浆娘的热量上限初始为10000，
-<NEWLINE>
-每升1级会提高1000。
-<NEWLINE>
-    岩浆娘可以像烈焰人一样开火，每
-<NEWLINE>
-一个火球消耗5点热量。当等级达到
-<NEWLINE>
-15、30、60、80级时，岩浆娘每一
-<NEWLINE>
-次开火动作将会发射出更多火球，同
-<NEWLINE>
-时也会更快消耗热量。
-<NEWLINE>
-    岩浆娘可以利用以下物品进行治疗，
-<NEWLINE>
-每次使用治疗物品冷却时间为2秒。
-<NEWLINE>
-    煤炭：每次治疗5生命值；
-<NEWLINE>
-    火焰弹：每次治疗10生命值；
-<NEWLINE>
-    烈焰粉：每次治疗15生命值；
-<NEWLINE>
-    岩浆核心：恢复满生命值。
-<NEWLINE>
-    岩浆娘的独特交易清单为：
-<NEWLINE>
-等级1：
-<NEWLINE>
-等级2：
-<NEWLINE>
-等级3：
-<NEWLINE>
-等级4：
-<NEWLINE>
-等级5：
+The Melty Monster can be healed with the Coal, Fire Charge and Blaze Powder. A Burning Core can fully recover its health.

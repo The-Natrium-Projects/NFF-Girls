@@ -1,7 +1,7 @@
 {
   "parent": "root.json",
   "text": "nffgirls_dictionary.txt",
-  "title": "\u5c11\u5973\u7684\u4e92\u52a8\u65b9\u6cd5",
+  "title": "dict.nffgirls.title_friendable",
   "entity_buttons": [
     {
       "entity": "nffgirls:hmag_zombie_girl",
@@ -342,8 +342,8 @@
   ],
   "linked_page_buttons": [
     {
-      "linked_page": "befriending.json",
-      "text": "\u5316\u654c\u4e3a\u53cb",
+      "linked_page": "friending.json",
+      "text": "dict.nffgirls.button_friending",
       "x": 90,
       "y": 60,
       "page": 0,
@@ -351,7 +351,7 @@
     },
     {
       "linked_page": "favorability.json",
-      "text": "\u597d\u611f\u5ea6\u7cfb\u7edf",
+      "text": "dict.nffgirls.button_favorability",
       "x": 90,
       "y": 90,
       "page": 0,
@@ -359,7 +359,7 @@
     },
     {
       "linked_page": "experience.json",
-      "text": "\u7ecf\u9a8c\u503c\u548c\u7b49\u7ea7",
+      "text": "dict.nffgirls.button_xp",
       "x": 90,
       "y": 120,
       "page": 0,
@@ -367,7 +367,7 @@
     },
     {
       "linked_page": "interaction.json",
-      "text": "\u4e92\u52a8\u5185\u5bb9\u6982\u8ff0",
+      "text": "dict.nffgirls.button_interaction",
       "x": 90,
       "y": 150,
       "page": 0,
