@@ -58,7 +58,6 @@ public class NFFGirlsItems {
 	
 	public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, NFFGirls.MOD_ID);
 	public static final HashSet<RegistryObject<? extends Item>> NO_TAB = new HashSet<>();
-	public static final DeferredRegister<Item> ITEMS_CITADEL_DEPENDING = DeferredRegister.create(ForgeRegistries.ITEMS, NFFGirls.MOD_ID);
 	// General register function for items
 	
 	/** 
@@ -75,7 +74,7 @@ public class NFFGirlsItems {
 	public static <T extends Item> RegistryObject<T> registerItem(String name, Class<T> clazz, boolean tab, Supplier<T> supplier)
 	{
 		var res = ITEMS.register(name, supplier);
-		if (tab)
+		if (!tab)
 			NO_TAB.add(res);
 		return res;
 	}
@@ -107,7 +106,13 @@ public class NFFGirlsItems {
 	{
 		return registerNoTab(name, () -> new Item(new Item.Properties()));
 	}
-		
+
+	public static <T extends Item> Optional<RegistryObject<T>> registerDepending(boolean tab, String key, String dependingModId, Supplier<T> supplier)
+	{
+		Optional<RegistryObject<T>> res = NaUtilsCompatStatics.registerModDependent(ITEMS, key, dependingModId, supplier);
+		res.ifPresent(obj -> {if (!tab) NO_TAB.add(obj);});
+		return res;
+	}
 	/************************************/
 	/* Item Registering, with constants */ 
 	/************************************/
@@ -266,7 +271,7 @@ public class NFFGirlsItems {
 
 	// Other mod depending
 
-	public static final Optional<RegistryObject<Item>> CITADEL_MOB_DICT = registerDepending("mob_dictionary_citadel", "citadel",
+	public static final Optional<RegistryObject<Item>> CITADEL_MOB_DICT = registerDepending(true, "mob_dictionary_citadel", "citadel",
 			() -> new CitadelBasedMobDictionaryItem(new Item.Properties().stacksTo(1)));
 
 

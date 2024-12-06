@@ -311,7 +311,7 @@ public class HmagNightwalkerEntity extends NightwalkerEntity implements INFFGirl
 			if (!this.level().isClientSide)
 			{
 				if (!NaUtilsMathStatics.withinManhattanDistance(result.getBlockPos(), this.shouldExpandTransformingRange ? 3 : 2)
-					.map(pos -> transformBlocks(this.level, pos)).filter(Boolean::booleanValue).toList().isEmpty())
+					.map(pos -> transformBlocks(this.level(), pos)).filter(Boolean::booleanValue).toList().isEmpty())
 				{
 					NaUtilsEntityStatics.sendParticlesToEntity(this, ParticleTypes.EXPLOSION, 0, 0, 1, 0);
 					this.level().playSound(null, this, SoundEvents.GENERIC_EXPLODE, this.getSoundSource(), 2.0f, 0.7f);
@@ -333,10 +333,10 @@ public class HmagNightwalkerEntity extends NightwalkerEntity implements INFFGirl
 			if (shouldDealDamage)
 				super.onHitEntity(result);
 			if (!NaUtilsMathStatics.withinManhattanDistance(result.getEntity().getOnPos(), this.shouldExpandTransformingRange ? 3 : 2)
-				.map(pos -> transformBlocks(this.level, pos)).filter(Boolean::booleanValue).toList().isEmpty())
+				.map(pos -> transformBlocks(this.level(), pos)).filter(Boolean::booleanValue).toList().isEmpty())
 			{
 				NaUtilsEntityStatics.sendParticlesToEntity(this, ParticleTypes.EXPLOSION, 0, 0, 1, 0);
-				this.level.playSound(null, this, SoundEvents.GENERIC_EXPLODE, this.getSoundSource(), 2.0f, 0.7f);
+				this.level().playSound(null, this, SoundEvents.GENERIC_EXPLODE, this.getSoundSource(), 2.0f, 0.7f);
 			}
 
 		}
