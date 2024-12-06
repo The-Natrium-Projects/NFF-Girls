@@ -271,7 +271,7 @@ public class NFFGirlsItems {
 
 	// Other mod depending
 
-	public static final Optional<RegistryObject<Item>> CITADEL_MOB_DICT = registerDepending(true, "mob_dictionary_citadel", "citadel",
+	public static final Optional<RegistryObject<Item>> CITADEL_MOB_DICT = registerDepending(true, "mob_dictionary", "citadel",
 			() -> new CitadelBasedMobDictionaryItem(new Item.Properties().stacksTo(1)));
 
 
