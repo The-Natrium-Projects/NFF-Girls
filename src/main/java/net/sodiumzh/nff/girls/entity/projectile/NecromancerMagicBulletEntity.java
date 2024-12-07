@@ -24,7 +24,7 @@ import net.minecraftforge.network.PlayMessages;
 import net.sodiumzh.nautils.statics.NaUtilsEntityStatics;
 import net.sodiumzh.nautils.statics.NaUtilsReflectionStatics;
 import net.sodiumzh.nff.girls.entity.hmag.HmagNecroticReaperEntity;
-import net.sodiumzh.nff.girls.entity.tamingprocess.hmag.HmagNecroticReaperTamingProcess;
+import net.sodiumzh.nff.girls.entity.tamingprocesses.hmag.HmagNecroticReaperTamingProcess;
 import net.sodiumzh.nff.girls.registry.NFFGirlsEntityTypes;
 import net.sodiumzh.nff.services.entity.taming.NFFTamingMapping;
 
