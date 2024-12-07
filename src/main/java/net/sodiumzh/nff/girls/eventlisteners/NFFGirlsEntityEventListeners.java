@@ -223,12 +223,12 @@ public class NFFGirlsEntityEventListeners
 			// Tamable mobs don't attack their tamed variation
 			if (NFFTamingMapping.contains(mob)
 				&& NFFTamingMapping.getConvertTo(mob) == target.getType()
-				&& INFFGirlTamed.isBM(target)) {
+				&& INFFGirlsTamed.isBM(target)) {
 				event.setCanceled(true);
 				return;
 			}
 			// Tamed mobs don't attack their wild variation
-			if (INFFGirlTamed.isBM(mob)
+			if (INFFGirlsTamed.isBM(mob)
 				&& NFFTamingMapping.getTypeBefore(mob) == target.getType()) {
 				event.setCanceled(true);
 				return;
@@ -474,13 +474,13 @@ public class NFFGirlsEntityEventListeners
 			/** Cancel friendly damage */
 			if (event.getSource() instanceof EntityDamageSource eds && !NFFGirlsConfigs.ValueCache.Combat.ENABLE_FRIENDLY_DAMAGE)
 			{
-				if (INFFGirlTamed.isBMAnd(eds.getEntity(), tamed ->
+				if (INFFGirlsTamed.isBMAnd(eds.getEntity(), tamed ->
 					Optional.ofNullable(tamed.getOwnerInDimension()).map(owner -> owner == event.getEntity()).orElse(false)))
 				{
 					event.setCanceled(true);
 					return;
 				}
-				if (INFFGirlTamed.isBMAnd(event.getEntity(), tamed ->
+				if (INFFGirlsTamed.isBMAnd(event.getEntity(), tamed ->
 					Optional.ofNullable(tamed.getOwnerInDimension()).map(owner -> owner == eds.getEntity()).orElse(false)))
 				{
 					event.setCanceled(true);

@@ -24,6 +24,7 @@ import net.sodiumzh.nautils.entity.vanillatrade.CVanillaMerchant;
 import net.sodiumzh.nautils.entity.vanillatrade.VanillaMerchant;
 import net.sodiumzh.nautils.entity.vanillatrade.VanillaTradeListing;
 import net.sodiumzh.nautils.statics.NaUtilsContainerStatics;
+import net.sodiumzh.nautils.statics.NaUtilsNBTStatics;
 import net.sodiumzh.nff.girls.entity.INFFGirlsTamed;
 import net.sodiumzh.nff.girls.network.NFFGirlsChannels;
 import net.sodiumzh.nff.girls.registry.NFFGirlsItems;

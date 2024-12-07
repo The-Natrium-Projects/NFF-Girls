@@ -20,7 +20,7 @@ import net.sodiumzh.nff.services.entity.taming.TamingProcessItemGivingProgress;
 
 public class HmagMeltyMonsterTamingProcess extends TamingProcessItemGivingProgress
 {
-
+/*
 	@Override
 	protected double getProcValueToAdd(ItemStack item, Player player, Mob mob, double oldProc) {
 		if (item.is(Items.BLAZE_POWDER))
@@ -33,7 +33,7 @@ public class HmagMeltyMonsterTamingProcess extends TamingProcessItemGivingProgre
 			return RandomSelection.createDouble(0.5d).add(1.01d, 0.3d).getDouble();
 		else return 0;
 	}
-
+*/
 	@Override
 	public boolean isItemAcceptable(ItemStack itemstack) {
 		return getProcValueToAdd(itemstack, null, null, 0) > 0;

@@ -41,7 +41,7 @@ public class EnderberryItem extends NaUtilsBlockItem {
                 }
 
                 Vec3 vec3 = pEntityLiving.position();
-                pLevel.gameEvent(GameEvent.TELEPORT, vec3, GameEvent.Context.of(pEntityLiving));
+                //pLevel.gameEvent(GameEvent.TELEPORT, vec3);
                 net.minecraftforge.event.entity.EntityTeleportEvent.ChorusFruit event = net.minecraftforge.event.ForgeEventFactory.onChorusFruitTeleport(pEntityLiving, d3, d4, d5);
                 if (event.isCanceled()) return itemstack;
                 if (pEntityLiving.randomTeleport(event.getTargetX(), event.getTargetY(), event.getTargetZ(), true)) {

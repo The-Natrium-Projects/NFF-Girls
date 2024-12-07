@@ -39,26 +39,6 @@ public class HmagHornetTamingProcess extends TamingProcessItemGivingProgress
 				|| item.is(Items.HONEY_BLOCK);
 	}
 
-	/*
-	// No longer needed as remaining item is implemented in the parent class: 0.x.27
-	@Override
-	public TamableInteractionResult handleInteract(TamableInteractArguments args) 
-	{
-		// Get if using honey bottle
-		ItemStack stack = args.getPlayer().getItemInHand(args.getHand());
-		boolean flag = stack.is(Items.HONEY_BOTTLE);
-		int count = stack.getCount();
-		
-		TamableInteractionResult res = super.handleInteract(args);
-		
-		// If consumed honey bottle, drop a glass bottle
-		if (!args.isClient() && args.getPlayer().getItemInHand(args.getHand()).getCount() != count && flag)
-		{
-			NaUtilsItemStatics.giveOrDropDefault(args.getPlayer(), Items.GLASS_BOTTLE);
-		}
-		return res;
-	}*/
-	
 	@Override
 	public boolean additionalConditions(Player player, Mob mob) {
 		return !player.hasEffect(MobEffects.POISON) && has8HoneyBlocksAround(mob);

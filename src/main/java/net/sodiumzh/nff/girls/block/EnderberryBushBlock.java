@@ -1,4 +1,4 @@
-package net.sodiumzh.nff.girls.blocks;
+package net.sodiumzh.nff.girls.block;
 
 import com.github.mechalopa.hmag.registry.ModBlocks;
 import net.minecraft.core.BlockPos;
@@ -6,7 +6,6 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.tags.BlockTags;
-import net.minecraft.util.RandomSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.damagesource.DamageSource;
@@ -71,7 +70,7 @@ public class EnderberryBushBlock extends SweetBerryBushBlock {
         if (i < 3 && /*pLevel.getRawBrightness(pPos.above(), 0) >= 9 && */net.minecraftforge.common.ForgeHooks.onCropsGrowPre(pLevel, pPos, pState, pRandom.nextInt(20) == 0)) {
             BlockState blockstate = pState.setValue(CAN_GROW_ENDERBERRY, true);
             pLevel.setBlock(pPos, blockstate, 2);
-            pLevel.gameEvent(GameEvent.BLOCK_CHANGE, pPos, GameEvent.Context.of(blockstate));
+            pLevel.gameEvent(GameEvent.BLOCK_CHANGE, pPos);
         }
     }
 
@@ -86,7 +85,7 @@ public class EnderberryBushBlock extends SweetBerryBushBlock {
             pLevel.playSound((Player)null, pPos, SoundEvents.ENDERMAN_TELEPORT, SoundSource.BLOCKS, 1.0F, 0.8F + pLevel.random.nextFloat() * 0.4F);
             BlockState blockstate = pState.setValue(AGE, Integer.valueOf(0)).setValue(CAN_GROW_ENDERBERRY, false);
             pLevel.setBlock(pPos, blockstate, 2);
-            pLevel.gameEvent(GameEvent.BLOCK_CHANGE, pPos, GameEvent.Context.of(pPlayer, blockstate));
+            pLevel.gameEvent(GameEvent.BLOCK_CHANGE, pPos);
             return InteractionResult.sidedSuccess(pLevel.isClientSide);
         } else {
             // For debug

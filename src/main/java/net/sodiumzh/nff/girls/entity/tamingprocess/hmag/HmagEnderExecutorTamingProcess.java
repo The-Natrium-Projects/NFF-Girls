@@ -48,31 +48,6 @@ public class HmagEnderExecutorTamingProcess extends TamingProcessItemGivingProgr
 			CNFFTamable.getCap(args.getTarget()).getNbt().putUUID("player_uuid_on_befriending", args.getPlayer().getUUID());
 		return result;
 	}
-	
-	/*@Override
-	protected double getProcValueToAdd(ItemStack item, Player player, Mob mob, double lastProc) {
-		if (item.is(Items.ENDER_EYE))
-			return NaUtilsMathStatics.rndRangedDouble(0.005d, 0.01d);
-		else if (item.is(ModItems.ENDER_PLASM.get()))
-			return NaUtilsMathStatics.rndRangedDouble(0.01d, 0.015d);
-		else if (item.is(NFFGirlsItems.ENDER_PIE.get()))
-		{
-			double rnd = this.rnd.nextDouble();
-			if (rnd < 0.05d)
-				return 0.750d;
-			else if (rnd < 0.15d)
-				return 0.500d;
-			else return 0.250d;
-		}
-		else return 0.0d;
-	}
-
-	@Override
-	public boolean isItemAcceptable(ItemStack item) {
-		return item.is(Items.ENDER_EYE)
-			|| item.is(ModItems.ENDER_PLASM.get())
-			|| item.is(NFFGirlsItems.ENDER_PIE.get());
-	}*/
 
 	@Override
 	public boolean additionalConditions(Player player, Mob mob) {

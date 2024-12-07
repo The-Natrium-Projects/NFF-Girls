@@ -190,6 +190,7 @@ dependencies {
 	implementation fg.deobf("curse.maven:gog4-228948:4525159")
 	//implementation fg.deobf("curse.maven:tf-227639:4337390")
 	implementation fg.deobf("curse.maven:testdummy-225738:3820503")
+    implementation fg.deobf("curse.maven:citadel-331936:3783096")
 }
 
 // This block of code expands all declared replace properties in the specified resource targets.

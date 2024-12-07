@@ -38,7 +38,7 @@ import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.sodiumzh.nff.girls.NFFGirls;
-import net.sodiumzh.nff.girls.blocks.EnderberryBushBlock;
+import net.sodiumzh.nff.girls.block.EnderberryBushBlock;
 import net.sodiumzh.nff.girls.entity.ICarriesBlock;
 import net.sodiumzh.nff.girls.entity.INFFGirlsTamed;
 import net.sodiumzh.nff.girls.entity.ai.goal.NFFGirlsFollowOwnerGoal;
@@ -46,8 +46,8 @@ import net.sodiumzh.nff.girls.entity.ai.goal.target.NFFGirlsNearestHostileToOwne
 import net.sodiumzh.nff.girls.entity.ai.goal.target.NFFGirlsNearestHostileToSelfTargetGoal;
 import net.sodiumzh.nff.girls.entity.ai.goal.target.NFFGirlsOwnerHurtByTargetGoal;
 import net.sodiumzh.nff.girls.entity.ai.goal.target.NFFGirlsOwnerHurtTargetGoal;
-import net.sodiumzh.nff.girls.inventory.NFFGirlsEnderExecutorInventory;
-import net.sodiumzh.nff.girls.inventory.NFFGirlsHmagEnderExecutorInventoryMenu;
+import net.sodiumzh.nff.girls.inventory.HmagEnderExecutorInventory;
+import net.sodiumzh.nff.girls.inventory.HmagEnderExecutorInventoryMenu;
 import net.sodiumzh.nff.girls.registry.NFFGirlsBlocks;
 import net.sodiumzh.nff.girls.registry.NFFGirlsHealingItems;
 import net.sodiumzh.nff.girls.registry.NFFGirlsItems;
@@ -550,7 +550,7 @@ public class HmagEnderExecutorEntity extends NFFTamedEnderManPreset implements I
 			bs = bs.setValue(EnderberryBushBlock.CAN_GROW_ENDERBERRY, false);
 			bs = bs.setValue(EnderberryBushBlock.AGE, bs.getValue(EnderberryBushBlock.AGE) + 1);
 			this.getLevel().setBlock(pos, bs, 2);
-			this.getLevel().gameEvent(GameEvent.BLOCK_CHANGE, pos, GameEvent.Context.of(bs));
+			this.getLevel().gameEvent(GameEvent.BLOCK_CHANGE, pos);
 			this.startGrowEnderberryCooldown();
 			this.getEntityData().set(GROW_ENDERBERRY_POS, Optional.empty());
 			return true;

@@ -18,22 +18,6 @@ public class HmagAnimalTamingProcess extends NFFGirlsItemDroppingTamingProcess
 		cap.getNbt().put("strength", DoubleTag.valueOf(0));
 	}
 
-	/*
-	@SuppressWarnings("unchecked")
-	@Override
-	public Map<String, Supplier<Double>> getDeltaProcMap() {
-		return NaUtilsContainerStatics.<String, Supplier<Double>>mapOf(
-				MapPair.of("minecraft:cooked_chicken", () -> NaUtilsMathStatics.rndRangedDouble(0.04, 0.06)),
-				MapPair.of("minecraft:cooked_rabbit", () -> NaUtilsMathStatics.rndRangedDouble(0.04, 0.06)),
-				MapPair.of("minecraft:cooked_mutton", () -> NaUtilsMathStatics.rndRangedDouble(0.04, 0.06)),
-				MapPair.of("minecraft:cooked_porkchop", () -> NaUtilsMathStatics.rndRangedDouble(0.05, 0.07)),
-				MapPair.of("minecraft:cooked_beef", () -> NaUtilsMathStatics.rndRangedDouble(0.05, 0.07)),
-				MapPair.of("hmag:golden_tropical_fish", () -> NaUtilsMathStatics.rndRangedDouble(0.07, 0.10)),
-				MapPair.of("hmag:cooked_ravager_meat", () -> NaUtilsMathStatics.rndRangedDouble(0.08, 0.12)),
-				MapPair.of("minecraft:golden_apple", () -> NaUtilsMathStatics.rndRangedDouble(0.12, 0.16)),
-				MapPair.of("minecraft:enchanted_golden_apple", () -> NaUtilsMathStatics.rndRangedDouble(0.40, 0.70)));
-	}
-*/
 	@Override
 	public int getHoldingItemTime() {
 		return 5 * 20;

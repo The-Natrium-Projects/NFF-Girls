@@ -212,13 +212,6 @@ public class HmagCreeperGirlTamingProcess extends TamingProcessItemGivingProgres
 		return 100;
 	}
 
-	/*@Override
-	public boolean isItemAcceptable(ItemStack item) {
-		return item.is(Items.GUNPOWDER)
-				|| item.is(Items.TNT)
-				|| item.is(ModItems.LIGHTNING_PARTICLE.get());
-	}*/
-
 	@Override
 	public INFFTamed finalActions(Player player, Mob mob)
 	{

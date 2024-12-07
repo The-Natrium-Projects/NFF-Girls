@@ -5,12 +5,14 @@ import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.client.Minecraft;
 import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.ItemLike;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.sodiumzh.nautils.math.HtmlColors;
+import net.sodiumzh.nautils.statics.NaUtilsInfoStatics;
 import net.sodiumzh.nff.girls.registry.NFFGirlsItems;
 
 @OnlyIn(Dist.CLIENT)
@@ -20,11 +22,11 @@ public class CitadelBasedMobDictionaryGUI extends GuiBasicBook {
     private static final String TEXT_FILE_DIR = "nffgirls:book/mob_dictionary/";
 
     public CitadelBasedMobDictionaryGUI(ItemStack bookStack) {
-        super(bookStack, Component.translatable(TITLE_TRANSLATION_KEY));
+        super(bookStack, NaUtilsInfoStatics.createTranslatable(TITLE_TRANSLATION_KEY));
     }
 
     public CitadelBasedMobDictionaryGUI(ItemStack bookStack, String page) {
-        super(bookStack, Component.translatable(TITLE_TRANSLATION_KEY));
+        super(bookStack, new TranslatableComponent(TITLE_TRANSLATION_KEY));
         String dir = this.getTextFileDirectory();
         this.currentPageJSON = new ResourceLocation(dir + page + ".json");
     }
