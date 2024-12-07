@@ -14,6 +14,7 @@ import net.minecraft.world.entity.player.Player;
 import net.sodiumzh.nff.girls.registry.NFFGirlsEffects;
 import net.sodiumzh.nff.services.entity.taming.TamableHatredReason;
 import net.sodiumzh.nff.services.entity.taming.TamingProcessItemGivingProgress;
+
 public class HmagVanillaUndeadTamingProcess extends TamingProcessItemGivingProgress
 {
 

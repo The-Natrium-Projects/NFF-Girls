@@ -31,8 +31,13 @@ public class NFFGirlsHmagAlrauneTamingProcess extends TamingProcessItemGivingPro
 		else if (item.is(ModItems.CUREBERRY.get()) || item.is(ModItems.EXP_BERRY.get()) || item.is(ModItems.RANDOMBERRY.get()))
 			return NaUtilsMathStatics.rndRangedDouble(0.2, 0.3);
 		else if (item.getItem() != null && item.getItem() instanceof BlockItem blockitem && blockitem.getBlock() instanceof FlowerBlock)
+<<<<<<<< HEAD:src/main/java/net/sodiumzh/nff/girls/entity/tamingprocesses/hmag/NFFGirlsHmagAlrauneTamingProcess.java
+			return NaUtilsMathStatics.rndRangedDouble(0.03, 0.06);
+		else return 0;
+========
 			return RndUtil.rndRangedDouble(0.03, 0.06);
 		else return 0；
+>>>>>>>> b2ab5b02 (Taming):src/main/java/net/sodiumzh/nff/girls/entity/tamingprocesses/hmag/HmagAlrauneTamingProcess.java
 	}
 
 	@Override

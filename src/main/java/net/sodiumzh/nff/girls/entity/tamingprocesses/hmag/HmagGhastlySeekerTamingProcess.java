@@ -12,7 +12,7 @@ import net.sodiumzh.nautils.statics.NaUtilsMathStatics;
 import net.sodiumzh.nff.girls.registry.NFFGirlsItems;
 import net.sodiumzh.nff.services.entity.taming.TamableHatredReason;
 
-public class HmagGhastlySeekerTamingProcess extends HmagSkeletonGirlTamingProcess
+public class HmagGhastlySeekerTamingProcess extends HmagVanillaUndeadTamingProcess
 {
 
 	@Override
@@ -28,7 +28,7 @@ public class HmagGhastlySeekerTamingProcess extends HmagSkeletonGirlTamingProces
 		return set;
 	}
 	
-	@Override
+	/*@Override
 	protected double getProcValueToAdd(ItemStack item, Player player, Mob mob, double lastProc) {
 		double rnd = this.rnd.nextDouble();
 		if (item.is(NFFGirlsItems.SOUL_CAKE_SLICE.get()))
@@ -38,7 +38,7 @@ public class HmagGhastlySeekerTamingProcess extends HmagSkeletonGirlTamingProces
 		else if (item.is(ModItems.SOUL_APPLE.get()))
 			return NaUtilsMathStatics.rndRangedDouble(0.03, 0.06);
 		else return 0;
-	}
+	}*/
 	
 	@Override
 	public void onAttackProcessingPlayer(Mob mob, Player player, boolean damageGiven)
