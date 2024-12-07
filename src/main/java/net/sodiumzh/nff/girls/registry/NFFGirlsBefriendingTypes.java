@@ -84,10 +84,6 @@ public class NFFGirlsTamingMappings {
 				new ResourceLocation(NFFGirls.MOD_ID, "hmag_slime_girl"),
 				NFFGirlsTamingProcesses.HMAG_SLIME_GIRL::get);
 		event.register(
-				new ResourceLocation(HMaG.MODID, "jiangshi"),
-				new ResourceLocation(NFFGirls.MOD_ID, "hmag_jiangshi"),
-				NFFGirlsTamingProcesses.HMAG_JIANGSHI::get);
-		event.register(
 				new ResourceLocation(HMaG.MODID, "dullahan"),
 				new ResourceLocation(NFFGirls.MOD_ID, "hmag_dullahan"),
 				NFFGirlsTamingProcesses.VANILLA_UNDEAD_B::get);
@@ -123,9 +119,5 @@ public class NFFGirlsTamingMappings {
 				new ResourceLocation(HMaG.MODID, "melty_monster"),
 				new ResourceLocation(NFFGirls.MOD_ID, "hmag_melty_monster"),
 				NFFGirlsTamingProcesses.HMAG_MELTY_MONSTER::get);
-		event.register(
-				new ResourceLocation(HMaG.MODID, "nightwalker"),
-				new ResourceLocation(NFFGirls.MOD_ID, "hmag_nightwalker"),
-				NFFGirlsTamingProcesses.HMAG_NIGHTWALKER::get);
 	}
 }

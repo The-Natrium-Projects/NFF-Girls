@@ -41,6 +41,8 @@ import net.sodiumzh.nff.girls.registry.NFFGirlsTags;
 import net.sodiumzh.nff.services.NFFServices;
 import net.sodiumzh.nff.services.registry.NFFItemRegistry;
 
+import java.util.Random;
+
 public class EnderberryBushBlock extends SweetBerryBushBlock {
     private static final float HURT_SPEED_THRESHOLD = 0.003F;
     public static final int MAX_AGE = 3;
@@ -64,7 +66,7 @@ public class EnderberryBushBlock extends SweetBerryBushBlock {
      * Performs a random tick on a block.
      */
     @Override
-    public void randomTick(BlockState pState, ServerLevel pLevel, BlockPos pPos, RandomSource pRandom) {
+    public void randomTick(BlockState pState, ServerLevel pLevel, BlockPos pPos, Random pRandom) {
         int i = pState.getValue(AGE);
         if (i < 3 && /*pLevel.getRawBrightness(pPos.above(), 0) >= 9 && */net.minecraftforge.common.ForgeHooks.onCropsGrowPre(pLevel, pPos, pState, pRandom.nextInt(20) == 0)) {
             BlockState blockstate = pState.setValue(CAN_GROW_ENDERBERRY, true);

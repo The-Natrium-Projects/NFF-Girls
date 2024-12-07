@@ -23,6 +23,7 @@ import net.sodiumzh.nautils.capability.SerializableCapabilityProvider;
 import net.sodiumzh.nautils.entity.vanillatrade.CVanillaMerchant;
 import net.sodiumzh.nautils.entity.vanillatrade.VanillaMerchant;
 import net.sodiumzh.nautils.entity.vanillatrade.VanillaTradeListing;
+import net.sodiumzh.nautils.statics.NaUtilsContainerStatics;
 import net.sodiumzh.nff.girls.entity.INFFGirlsTamed;
 import net.sodiumzh.nff.girls.network.NFFGirlsChannels;
 import net.sodiumzh.nff.girls.registry.NFFGirlsItems;
@@ -158,7 +159,7 @@ public interface CNFFGirlsTradeHandler extends CVanillaMerchant
 		{
 			// Don't allow to regenerate at the introduction letter entry
 			if (index < 0 || index >= this.getOffersRaw().size() - 1) throw new IllegalArgumentException();
-			Set<VanillaTradeListing> available = NFFGirlsTrades.TRADES.getListings(INFFGirlTamed.getBM(this.getMob()).getData().getInitialEntityType())
+			Set<VanillaTradeListing> available = NFFGirlsTrades.TRADES.getListings(INFFGirlsTamed.getBM(this.getMob()).getData().getInitialEntityType())
 				.forLevel(this.getMeta(index).requiredMerchantLevel);
 			if (available.size() == 0) return;
 

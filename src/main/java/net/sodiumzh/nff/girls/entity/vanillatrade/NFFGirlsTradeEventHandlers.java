@@ -30,9 +30,9 @@ public class NFFGirlsTradeEventHandlers
 				&& !event.getEntity().isShiftKeyDown()
 				)
 		{
-			INFFGirlTamed.getBM(event.getTarget()).asMob().getCapability(NFFGirlsCapabilities.CAP_TRADE_HANDLER).ifPresent(cap -> {
+			INFFGirlsTamed.getBM(event.getTarget()).asMob().getCapability(NFFGirlsCapabilities.CAP_TRADE_HANDLER).ifPresent(cap -> {
 				if (cap.isValidTrader()) {
-					cap.openTradingScreen(event.getEntity(), NaUtilsInfoStatics.createTranslatable("info.nffgirls.open_trade"), 1);
+					cap.openTradingScreen(event.getPlayer(), NaUtilsInfoStatics.createTranslatable("info.nffgirls.open_trade"), 1);
 					event.setCanceled(true);
 					event.setCancellationResult(InteractionResult.sidedSuccess(event.getEntity().getLevel().isClientSide()));
 				}
