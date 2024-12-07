@@ -5,25 +5,8 @@ import com.github.mechalopa.hmag.registry.ModEntityTypes;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.sodiumzh.nff.girls.NFFGirls;
-import net.sodiumzh.nff.girls.entity.tamingprocesses.hmag.HmagCreeperGirlTamingProcess;
-import net.sodiumzh.nff.girls.entity.tamingprocesses.hmag.HmagCrimsonSlaughtererTamingProcess;
-import net.sodiumzh.nff.girls.entity.tamingprocesses.hmag.HmagCursedDollTamingProcess;
-import net.sodiumzh.nff.girls.entity.tamingprocesses.hmag.HmagEnderExecutorTamingProcess;
-import net.sodiumzh.nff.girls.entity.tamingprocesses.hmag.HmagGhastlySeekerTamingProcess;
-import net.sodiumzh.nff.girls.entity.tamingprocesses.hmag.HmagHarpyTamingProcess;
-import net.sodiumzh.nff.girls.entity.tamingprocesses.hmag.HmagHornetTamingProcess;
-import net.sodiumzh.nff.girls.entity.tamingprocesses.hmag.HmagHuskGirlTamingProcess;
-import net.sodiumzh.nff.girls.entity.tamingprocesses.hmag.HmagImpTamingProcess;
-import net.sodiumzh.nff.girls.entity.tamingprocesses.hmag.HmagJackFrostTamingProcess;
-import net.sodiumzh.nff.girls.entity.tamingprocesses.hmag.HmagKoboldTamingProcess;
-import net.sodiumzh.nff.girls.entity.tamingprocesses.hmag.HmagMeltyMonsterTamingProcess;
-import net.sodiumzh.nff.girls.entity.tamingprocesses.hmag.HmagNecroticReaperTamingProcess;
-import net.sodiumzh.nff.girls.entity.tamingprocesses.hmag.HmagRedcapTamingProcess;
-import net.sodiumzh.nff.girls.entity.tamingprocesses.hmag.HmagSkeletonGirlTamingProcess;
-import net.sodiumzh.nff.girls.entity.tamingprocesses.hmag.HmagSlimeGirlTamingProcess;
-import net.sodiumzh.nff.girls.entity.tamingprocesses.hmag.HmagSnowCanineTamingProcess;
-import net.sodiumzh.nff.girls.entity.tamingprocesses.hmag.HmagWitherSkeletonGirlTamingProcess;
-import net.sodiumzh.nff.girls.entity.tamingprocesses.hmag.NFFGirlsHmagAlrauneTamingProcess;
+import net.sodiumzh.nff.girls.entity.tamingprocess.hmag.*;
+import net.sodiumzh.nff.girls.entity.tamingprocesses.hmag.*;
 import net.sodiumzh.nff.girls.entity.tamingprocesses.hmag.NFFGirlsHmagBansheeTamingProcess;
 import net.sodiumzh.nff.girls.entity.tamingprocesses.hmag.NFFGirlsZombieGirlTamingProcess;
 import net.sodiumzh.nff.services.event.setup.NFFTamingMappingRegisterEvent;
@@ -42,7 +25,7 @@ public class NFFGirlsBefriendingTypes {
 		event.register(
 				ModEntityTypes.SKELETON_GIRL.get(),
 				NFFGirlsEntityTypes.HMAG_SKELETON_GIRL.get(),
-				new HmagSkeletonGirlTamingProcess());		
+				new HmagSkeletonGirlTamingProcess());
 		event.register(
 				ModEntityTypes.HUSK_GIRL.get(),
 				NFFGirlsEntityTypes.HMAG_HUSK_GIRL.get(),
@@ -58,7 +41,7 @@ public class NFFGirlsBefriendingTypes {
 		event.register(
 				ModEntityTypes.ENDER_EXECUTOR.get(),
 				NFFGirlsEntityTypes.HMAG_ENDER_EXECUTOR.get(),
-				new HmagEnderExecutorTamingProcess());	
+				new HmagEnderExecutorTamingProcess());
 		event.register(
 				ModEntityTypes.STRAY_GIRL.get(),
 				NFFGirlsEntityTypes.HMAG_STRAY_GIRL.get(),
@@ -114,11 +97,11 @@ public class NFFGirlsBefriendingTypes {
 		event.register(
 				ModEntityTypes.ALRAUNE.get(),
 				NFFGirlsEntityTypes.HMAG_ALRAUNE.get(),
-				new NFFGirlsHmagAlrauneTamingProcess());
+				new HmagAlrauneTamingProcess());
 		event.register(
 				ModEntityTypes.GLARYAD.get(),
 				NFFGirlsEntityTypes.HMAG_GLARYAD.get(),
-				new NFFGirlsHmagAlrauneTamingProcess());
+				new HmagAlrauneTamingProcess());
 		event.register(
 				ModEntityTypes.CRIMSON_SLAUGHTERER.get(),
 				NFFGirlsEntityTypes.HMAG_CRIMSON_SLAUGHTERER.get(),

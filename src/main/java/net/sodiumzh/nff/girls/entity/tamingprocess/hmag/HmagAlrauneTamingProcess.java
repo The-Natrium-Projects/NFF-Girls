@@ -1,4 +1,4 @@
-package net.sodiumzh.nff.girls.entity.tamingprocesses.hmag;
+package net.sodiumzh.nff.girls.entity.tamingprocess.hmag;
 
 import java.util.HashSet;
 
@@ -13,13 +13,10 @@ import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.FlowerBlock;
 import net.sodiumzh.nautils.statics.NaUtilsContainerStatics;
 import net.sodiumzh.nautils.statics.NaUtilsMathStatics;
-import net.sodiumzh.nautils.entity.MobApplicableItemTable;
-import net.sodiumzh.nautils.math.RndUtil;
-import net.sodiumzh.nff.girls.registry.NFFGirlsTamingItems;
 import net.sodiumzh.nff.services.entity.taming.TamableHatredReason;
 import net.sodiumzh.nff.services.entity.taming.TamingProcessItemGivingProgress;
 
-public class NFFGirlsHmagAlrauneTamingProcess extends TamingProcessItemGivingProgress
+public class HmagAlrauneTamingProcess extends TamingProcessItemGivingProgress
 {
 
 	/*Override

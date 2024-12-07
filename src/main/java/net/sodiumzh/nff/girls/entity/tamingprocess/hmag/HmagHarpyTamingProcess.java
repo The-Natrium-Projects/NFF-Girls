@@ -1,4 +1,4 @@
-package net.sodiumzh.nff.girls.entity.tamingprocesses.hmag;
+package net.sodiumzh.nff.girls.entity.tamingprocess.hmag;
 
 import com.github.mechalopa.hmag.world.entity.HarpyEntity;
 

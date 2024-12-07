@@ -101,7 +101,7 @@ import net.sodiumzh.nff.girls.entity.hmag.HmagStrayGirlEntity;
 import net.sodiumzh.nff.girls.entity.hmag.HmagWitherSkeletonGirlEntity;
 import net.sodiumzh.nff.girls.entity.hmag.HmagZombieGirlEntity;
 import net.sodiumzh.nff.girls.entity.projectile.NecromancerMagicBulletEntity;
-import net.sodiumzh.nff.girls.entity.tamingprocesses.hmag.NFFGirlsItemDroppingTamingProcess;
+import net.sodiumzh.nff.girls.entity.tamingprocess.hmag.NFFGirlsItemDroppingTamingProcess;
 import net.sodiumzh.nff.girls.item.NecromancerArmorItem;
 import net.sodiumzh.nff.girls.registry.NFFGirlsCapabilities;
 import net.sodiumzh.nff.girls.registry.NFFGirlsConfigs;

@@ -1,4 +1,4 @@
-package net.sodiumzh.nff.girls.entity.tamingprocesses.hmag;
+package net.sodiumzh.nff.girls.entity.tamingprocess.hmag;
 
 import java.util.Map;
 import java.util.function.Supplier;

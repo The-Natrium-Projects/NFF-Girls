@@ -1,18 +1,14 @@
-package net.sodiumzh.nff.girls.entity.tamingprocesses.hmag;
+package net.sodiumzh.nff.girls.entity.tamingprocess.hmag;
 
 import java.util.Map;
 import java.util.function.Supplier;
 
 <<<<<<< HEAD
 import net.sodiumzh.nautils.statics.NaUtilsContainerStatics;
-import net.sodiumzh.nautils.statics.NaUtilsMathStatics;
 import net.sodiumzh.nautils.containers.MapPair;
 import net.sodiumzh.nautils.math.RandomSelection;
 =======
-import net.sodiumzh.nautils.containers.MapPair;
-import net.sodiumzh.nautils.math.RandomSelection;
 import net.sodiumzh.nautils.math.RndUtil;
-import net.sodiumzh.nautils.statics.NaUtilsContainerStatics;
 >>>>>>> b2ab5b02 (Taming)
 
 public class HmagImpTamingProcess extends NFFGirlsItemDroppingTamingProcess

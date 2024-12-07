@@ -1,7 +1,4 @@
-package net.sodiumzh.nff.girls.entity.tamingprocesses.hmag;
-
-import java.util.Map;
-import java.util.function.Supplier;
+package net.sodiumzh.nff.girls.entity.tamingprocess.hmag;
 
 import net.minecraft.nbt.DoubleTag;
 import net.minecraft.world.effect.MobEffectInstance;
@@ -9,12 +6,9 @@ import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.item.ItemStack;
 import net.sodiumzh.nautils.statics.NaUtilsEntityStatics;
-import net.sodiumzh.nautils.statics.NaUtilsContainerStatics;
-import net.sodiumzh.nautils.statics.NaUtilsMathStatics;
-import net.sodiumzh.nautils.containers.MapPair;
 import net.sodiumzh.nff.services.entity.capability.CNFFTamable;
 
-public class HmagAnimalTamingProcess extends NFFGirlsItemDroppingTamingProcess
+public class HmagSnowCanineTamingProcess extends NFFGirlsItemDroppingTamingProcess
 {
 
 	@Override

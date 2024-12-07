@@ -1,4 +1,4 @@
-package net.sodiumzh.nff.girls.entity.tamingprocesses.hmag;
+package net.sodiumzh.nff.girls.entity.tamingprocess.hmag;
 
 import java.util.HashSet;
 
@@ -16,11 +16,7 @@ import net.sodiumzh.nautils.statics.NaUtilsNBTStatics;
 import net.sodiumzh.nff.services.entity.capability.CNFFTamable;
 import net.sodiumzh.nff.services.entity.taming.TamableHatredReason;
 
-<<<<<<<< HEAD:src/main/java/net/sodiumzh/nff/girls/entity/tamingprocesses/hmag/NFFGirlsHmagBansheeTamingProcess.java
-public class NFFGirlsHmagBansheeTamingProcess extends HmagSkeletonGirlTamingProcess
-========
 public class HmagBansheeTamingProcess extends HmagVanillaUndeadTamingProcess
->>>>>>>> b2ab5b02 (Taming):src/main/java/net/sodiumzh/nff/girls/entity/tamingprocesses/hmag/HmagBansheeTamingProcess.java
 {
 	@Override
 	public boolean additionalConditions(Player player, Mob mob)

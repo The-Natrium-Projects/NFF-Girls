@@ -1,10 +1,9 @@
-package net.sodiumzh.nff.girls.entity.tamingprocesses.hmag;
+package net.sodiumzh.nff.girls.entity.tamingprocess.hmag;
 
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
-import java.util.Optional;
 import java.util.function.Predicate;
 import java.util.function.Supplier;
 
@@ -16,7 +15,6 @@ import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
-import net.minecraftforge.registries.ForgeRegistries;
 import net.sodiumzh.nautils.entity.MobApplicableItemTable;
 import net.sodiumzh.nautils.statics.NaUtilsDebugStatics;
 import net.sodiumzh.nautils.statics.NaUtilsEntityStatics;

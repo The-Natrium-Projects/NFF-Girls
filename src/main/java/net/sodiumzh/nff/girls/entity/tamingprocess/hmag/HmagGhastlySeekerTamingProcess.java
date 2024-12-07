@@ -1,15 +1,10 @@
-package net.sodiumzh.nff.girls.entity.tamingprocesses.hmag;
+package net.sodiumzh.nff.girls.entity.tamingprocess.hmag;
 
 import java.util.HashSet;
 
-import com.github.mechalopa.hmag.registry.ModItems;
-
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
-import net.sodiumzh.nautils.statics.NaUtilsMathStatics;
-import net.sodiumzh.nff.girls.registry.NFFGirlsItems;
 import net.sodiumzh.nff.services.entity.taming.TamableHatredReason;
 
 public class HmagGhastlySeekerTamingProcess extends HmagVanillaUndeadTamingProcess
