@@ -5,8 +5,7 @@
 To get friendly with a Melty Monster, you need to be "Into Fire" before giving items. You must be either in the Lava or
 on fire, and NOT having a Fire Resistance effect. Each item given, you'll get Combustion effect for 30s.
 <NEWLINE>
-The Melty Monster's favorite items are the Nether Star and Burning Core Block (1.19.2+). It also receives the Burning Core,
-Blaze Rod and Blaze Powder.
+The Melty Monster's favorite items are the Nether Star and Burning Core. It also receives Blaze Rod and Blaze Powder.
 <NEWLINE>
 After getting friendly, it has 4 Bauble slots and a Lava Bucket slot. The Lava Bucket slot only receives Lava Bucket,
 and changes its behavior. If the Lava Bucket is present, its movement speed will increase on the ground, and will not

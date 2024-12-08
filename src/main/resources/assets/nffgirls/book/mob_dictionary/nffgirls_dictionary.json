@@ -314,36 +314,12 @@
       "offset_y": 7,
       "linked_page": "hmag_glaryad.json",
       "hover_text": "entity.nffgirls.hmag_glaryad"
-    },
-    {
-      "entity": "nffgirls:hmag_jiangshi",
-      "x": 115,
-      "y": 90,
-      "page" : 1,
-      "scale": 1.6,
-      "entity_scale": 1.7,
-      "offset_x": -16,
-      "offset_y": 7,
-      "linked_page": "hmag_jiangshi.json",
-      "hover_text": "entity.nffgirls.hmag_jiangshi"
-    },
-    {
-      "entity": "nffgirls:hmag_nightwalker",
-      "x": 155,
-      "y": 90,
-      "page" : 1,
-      "scale": 1.6,
-      "entity_scale": 1.7,
-      "offset_x": -16,
-      "offset_y": 8,
-      "linked_page": "hmag_nightwalker.json",
-      "hover_text": "entity.nffgirls.hmag_nightwalker"
     }
   ],
   "linked_page_buttons": [
     {
       "linked_page": "friending.json",
-      "text": "dict.nffgirls.button_friending",
+      "text": "Getting Friendly",
       "x": 90,
       "y": 60,
       "page": 0,
@@ -351,7 +327,7 @@
     },
     {
       "linked_page": "favorability.json",
-      "text": "dict.nffgirls.button_favorability",
+      "text": "Favorability",
       "x": 90,
       "y": 90,
       "page": 0,
@@ -359,7 +335,7 @@
     },
     {
       "linked_page": "experience.json",
-      "text": "dict.nffgirls.button_xp",
+      "text": "Experience",
       "x": 90,
       "y": 120,
       "page": 0,
@@ -367,7 +343,7 @@
     },
     {
       "linked_page": "interaction.json",
-      "text": "dict.nffgirls.button_interaction",
+      "text": "Interaction",
       "x": 90,
       "y": 150,
       "page": 0,

@@ -316,28 +316,28 @@
       "hover_text": "entity.hmag.glaryad"
     },
     {
-      "entity": "hmag:jiangshi",
+      "entity": "hmag:savagefang",
       "x": 115,
       "y": 90,
       "page" : 1,
       "scale": 1.6,
       "entity_scale": 1.7,
-      "offset_x": -16,
-      "offset_y": 7,
-      "linked_page": "jiangshi.json",
-      "hover_text": "entity.hmag.jiangshi"
+      "offset_x": -21,
+      "offset_y": -16,
+      "linked_page": "savagefang.json",
+      "hover_text": "entity.hmag.savagefang"
     },
     {
-      "entity": "hmag:nightwalker",
+      "entity": "hmag:fortress_keeper",
       "x": 155,
       "y": 90,
       "page" : 1,
       "scale": 1.6,
-      "entity_scale": 1.7,
-      "offset_x": -16,
-      "offset_y": 8,
-      "linked_page": "nightwalker.json",
-      "hover_text": "entity.hmag.nightwalker"
+      "entity_scale": 1.5,
+      "offset_x": -18,
+      "offset_y": 7,
+      "linked_page": "fortress_keeper.json",
+      "hover_text": "entity.hmag.fortress_keeper"
     },
     {
       "entity": "hmag:ghost",
@@ -482,60 +482,12 @@
       "offset_y": -13,
       "linked_page": "dyssomnia.json",
       "hover_text": "entity.hmag.dyssomnia"
-    },
-    {
-      "entity": "hmag:savagefang",
-      "x": 230,
-      "y": 90,
-      "page" : 1,
-      "scale": 1.6,
-      "entity_scale": 1.7,
-      "offset_x": -21,
-      "offset_y": -16,
-      "linked_page": "savagefang.json",
-      "hover_text": "entity.hmag.savagefang"
-    },
-    {
-      "entity": "hmag:fortress_keeper",
-      "x": 270,
-      "y": 90,
-      "page" : 1,
-      "scale": 1.6,
-      "entity_scale": 1.5,
-      "offset_x": -18,
-      "offset_y": 7,
-      "linked_page": "fortress_keeper.json",
-      "hover_text": "entity.hmag.fortress_keeper"
-    },
-    {
-      "entity": "hmag:giant_mummy",
-      "x": 310,
-      "y": 90,
-      "page" : 1,
-      "scale": 1.6,
-      "entity_scale": 1.7,
-      "offset_x": -16,
-      "offset_y": 19,
-      "linked_page": "giant_mummy.json",
-      "hover_text": "entity.hmag.giant_mummy"
-    },
-    {
-      "entity": "hmag:swamper",
-      "x": 350,
-      "y": 90,
-      "page" : 1,
-      "scale": 1.6,
-      "entity_scale": 1.5,
-      "offset_x": -18,
-      "offset_y": -8,
-      "linked_page": "swamper.json",
-      "hover_text": "entity.hmag.swamper"
     }
   ],
   "linked_page_buttons": [
     {
       "linked_page": "nffgirls_dictionary.json",
-      "text": "dict.nffgirls.button_friendable",
+      "text": "A Special Encounter?",
       "x": 90,
       "y": 160,
       "page": 0,
