@@ -251,7 +251,7 @@ public class NFFGirlsEntityEventListeners
 			.stream().filter(e ->
 				e instanceof Mob mob
 				&& mob.getType().equals(tamedType)
-				&& INFFGirlTamed.isBMAnd(mob, m -> p.equals(m.getOwner())))
+				&& INFFGirlsTamed.isBMAnd(mob, m -> p.equals(m.getOwner())))
 			.filter(e -> attacker.hasLineOfSight(e))
 			.toList();
 		return !tamed.isEmpty();
