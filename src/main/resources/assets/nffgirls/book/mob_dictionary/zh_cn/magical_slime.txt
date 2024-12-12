@@ -2,7 +2,7 @@
 <NEWLINE>
 <NEWLINE>
 <NEWLINE>
-    魔法史莱姆使史莱姆的一个亚种，仅当
+    魔法史莱姆是史莱姆的一个亚种，仅当
 <NEWLINE>
 史莱姆娘被杀死时才会生成最小尺寸的魔
 <NEWLINE>
