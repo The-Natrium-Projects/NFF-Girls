@@ -1220,14 +1220,14 @@ public class NFFGirlsEntityEventListeners
 				boolean didConvert = false;
 				if (event.getRayTraceResult().getType() == HitResult.Type.BLOCK
 					&& event.getRayTraceResult() instanceof BlockHitResult bhr) {
-					didConvert = NaUtilsMathStatics.withinManhattanDistance(bhr.getBlockPos(), 2)
+					didConvert = !NaUtilsMathStatics.withinManhattanDistance(bhr.getBlockPos(), 2)
 						.map(pos -> Boolean.valueOf(nightwalkerTerracottaUpgrade(event.getProjectile().level, pos)))
 						.filter(Boolean::booleanValue).toList().isEmpty();
 				}
 				else if (event.getRayTraceResult().getType() == HitResult.Type.ENTITY
 					&& event.getRayTraceResult() instanceof EntityHitResult ehr)
 				{
-					didConvert = NaUtilsMathStatics.withinManhattanDistance(ehr.getEntity().getOnPos(), 2)
+					didConvert = !NaUtilsMathStatics.withinManhattanDistance(ehr.getEntity().getOnPos(), 2)
 						.map(pos -> nightwalkerTerracottaUpgrade(event.getProjectile().level, pos))
 						.filter(Boolean::booleanValue).toList().isEmpty();
 				}
