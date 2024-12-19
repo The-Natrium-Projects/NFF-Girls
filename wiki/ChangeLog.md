@@ -4,7 +4,7 @@
 
 Added mob dictionary (Requires Citadel as dependency). Special thanks to Koishi for his significant help in making the dictionary!
 
-Added data pack support for mob healing items, taming items and trade list. For usage, see data pack reference on GitHub.
+Added data pack support for mob healing items, taming items and trade list. For usage, see data pack reference on GitHub (ongoing).
 
 Added Enderberry Bush. Now Enderberry is growable and needs friendly Ender Executor to help growing.
 
@@ -26,7 +26,7 @@ Fixed `/give` command giving invalid Respawners or Magical Slime Bottles which m
 
 Fixed Nightwalkers only converting Pink Glazed Terracotta.
 
-
+Fixed Soul Carpet recipe error in 1.18.2.
 
 
 
