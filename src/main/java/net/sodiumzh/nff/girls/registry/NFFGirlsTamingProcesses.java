@@ -25,7 +25,7 @@ public class NFFGirlsTamingProcesses {
     public static final NaUtilsRegistry.Accessor<NFFTamingProcess> HMAG_ENDER_EXECUTOR = TAMING_PROCESSES.register(
             "hmag_ender_executor",  () -> new HmagEnderExecutorTamingProcess().setItemGivingTableOverride(NFFGirlsTamingItems.ENDERMAN::get));
     public static final NaUtilsRegistry.Accessor<NFFTamingProcess> HMAG_GHASTLY_SEEKER = TAMING_PROCESSES.register(
-            "hmag_ghastly_seeker",  () -> new HmagGhastlySeekerTamingProcess().setItemGivingTableOverride(NFFGirlsTamingItems.UNDEAD_B::get));
+            "hmag_ghastly_seeker",  () -> new HmagGhastlySeekerTamingProcess().setItemGivingTableOverride(NFFGirlsTamingItems.UNDEAD_NETHER_B::get));
     public static final NaUtilsRegistry.Accessor<NFFTamingProcess> HMAG_GLARYAD = TAMING_PROCESSES.register(
             "hmag_glaryad",  () -> new HmagGlaryadTamingProcess().setItemGivingTableOverride(NFFGirlsTamingItems.PLANT_B::get));
     public static final NaUtilsRegistry.Accessor<NFFTamingProcess> HMAG_HORNET = TAMING_PROCESSES.register(

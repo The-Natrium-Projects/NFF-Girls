@@ -38,6 +38,10 @@ public class NFFGirlsTamingItems {
             TAMING_ITEMS.register("taming_undead_c", () -> MobApplicableItemTable.builder()
                     .readData(new ResourceLocation(NFFGirls.MOD_ID, "taming_items/undead_c.json"),NFFGirlsDataReaders::readMobApplicableItemTable)
                     .build());
+    public static final NaUtilsRegistry.Accessor<MobApplicableItemTable> UNDEAD_NETHER_B=
+            TAMING_ITEMS.register("taming_undead_nether_b", () -> MobApplicableItemTable.builder()
+                    .readData(new ResourceLocation(NFFGirls.MOD_ID, "taming_items/undead_nether_b.json"),NFFGirlsDataReaders::readMobApplicableItemTable)
+                    .build());
     // For Creeper Girl
     public static final NaUtilsRegistry.Accessor<MobApplicableItemTable> CREEPER =
             TAMING_ITEMS.register("taming_creeper", () -> MobApplicableItemTable.builder()
