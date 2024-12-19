@@ -13,6 +13,7 @@ import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.monster.EnderMan;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
@@ -30,6 +31,7 @@ import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.level.block.state.properties.IntegerProperty;
 import net.minecraft.world.level.gameevent.GameEvent;
+import net.minecraft.world.level.pathfinder.BlockPathTypes;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.Vec3;
 import net.minecraft.world.phys.shapes.CollisionContext;
@@ -40,6 +42,8 @@ import net.sodiumzh.nff.girls.registry.NFFGirlsItems;
 import net.sodiumzh.nff.girls.registry.NFFGirlsTags;
 import net.sodiumzh.nff.services.NFFServices;
 import net.sodiumzh.nff.services.registry.NFFItemRegistry;
+
+import javax.annotation.Nullable;
 
 public class EnderberryBushBlock extends SweetBerryBushBlock {
     private static final float HURT_SPEED_THRESHOLD = 0.003F;
@@ -104,12 +108,20 @@ public class EnderberryBushBlock extends SweetBerryBushBlock {
         }
     }
 
+    @Override
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> pBuilder) {
         super.createBlockStateDefinition(pBuilder);
         pBuilder.add(CAN_GROW_ENDERBERRY);
     }
 
+    @Override
     protected boolean mayPlaceOn(BlockState pState, BlockGetter pLevel, BlockPos pPos) {
         return pState.is(NFFGirlsTags.CAN_GROW_ENDERBERRY_ON);
+    }
+
+    @Override
+    public BlockPathTypes getAiPathNodeType(BlockState state, BlockGetter level, BlockPos pos, @Nullable Mob entity)
+    {
+        return BlockPathTypes.DAMAGE_OTHER;
     }
 }
