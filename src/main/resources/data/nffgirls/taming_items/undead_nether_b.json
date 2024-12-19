@@ -1,0 +1,18 @@
+[
+  {
+    "item": "nffgirls:soul_cake_slice",
+    "amount": [0.25, [0.50, 0.2], [0.75, 0.05], [1.01, 0.01]]
+  },
+  {
+    "item": "hmag:soul_powder",
+    "amount": [0.015, 0.03]
+  },
+  {
+    "item": "hmag:soul_apple",
+    "amount": [0.03, 0.06]
+  },
+  {
+    "item": "minecraft:nether_star",
+    "amount": [0.50, [1.01, 0.20]]
+  }
+]
