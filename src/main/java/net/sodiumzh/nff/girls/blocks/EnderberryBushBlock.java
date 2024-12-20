@@ -42,8 +42,7 @@ import net.sodiumzh.nff.girls.registry.NFFGirlsItems;
 import net.sodiumzh.nff.girls.registry.NFFGirlsTags;
 import net.sodiumzh.nff.services.NFFServices;
 import net.sodiumzh.nff.services.registry.NFFItemRegistry;
-
-import javax.annotation.Nullable;
+import org.jetbrains.annotations.Nullable;
 
 public class EnderberryBushBlock extends SweetBerryBushBlock {
     private static final float HURT_SPEED_THRESHOLD = 0.003F;
@@ -120,7 +119,7 @@ public class EnderberryBushBlock extends SweetBerryBushBlock {
     }
 
     @Override
-    public BlockPathTypes getAiPathNodeType(BlockState state, BlockGetter level, BlockPos pos, @Nullable Mob entity)
+    public BlockPathTypes getBlockPathType(BlockState state, BlockGetter level, BlockPos pos, @Nullable Mob mob)
     {
         return BlockPathTypes.DAMAGE_OTHER;
     }
