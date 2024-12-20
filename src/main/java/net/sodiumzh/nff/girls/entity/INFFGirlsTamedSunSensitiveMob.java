@@ -7,7 +7,7 @@ import net.sodiumzh.nff.girls.registry.NFFGirlsItems;
 import net.sodiumzh.nff.girls.subsystem.baublesystem.NFFGirlsBaubleStatics;
 import net.sodiumzh.nff.services.entity.taming.INFFTamedSunSensitiveMob;
 
-public interface INFFGirlTamedSunSensitiveMob extends INFFGirlTamed, INFFTamedSunSensitiveMob
+public interface INFFGirlsTamedSunSensitiveMob extends INFFGirlsTamed, INFFTamedSunSensitiveMob
 {
 	@Override
 	public default void setupSunImmunityRules()

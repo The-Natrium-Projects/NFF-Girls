@@ -21,7 +21,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
-import net.sodiumzh.nff.girls.entity.INFFGirlTamedSunSensitiveMob;
+import net.sodiumzh.nff.girls.entity.INFFGirlsTamedSunSensitiveMob;
 import net.sodiumzh.nff.girls.entity.ai.goal.NFFGirlsFollowOwnerGoal;
 import net.sodiumzh.nff.girls.entity.ai.goal.target.NFFGirlsNearestHostileToOwnerTargetGoal;
 import net.sodiumzh.nff.girls.entity.ai.goal.target.NFFGirlsNearestHostileToSelfTargetGoal;
@@ -45,7 +45,7 @@ import net.sodiumzh.nff.services.inventory.NFFTamedInventoryMenu;
 import net.sodiumzh.nff.services.inventory.NFFTamedMobInventory;
 import net.sodiumzh.nff.services.inventory.NFFTamedMobInventoryWithEquipment;
 
-public class HmagZombieGirlEntity extends ZombieGirlEntity implements INFFGirlTamedSunSensitiveMob {
+public class HmagZombieGirlEntity extends ZombieGirlEntity implements INFFGirlsTamedSunSensitiveMob {
 
 	/* Initialization */
 

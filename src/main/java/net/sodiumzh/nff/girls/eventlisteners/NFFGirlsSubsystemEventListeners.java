@@ -8,7 +8,7 @@ import net.minecraftforge.event.entity.living.LivingEvent.LivingTickEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.sodiumzh.nff.girls.NFFGirls;
-import net.sodiumzh.nff.girls.entity.INFFGirlTamed;
+import net.sodiumzh.nff.girls.entity.INFFGirlsTamed;
 import net.sodiumzh.nff.girls.entity.capability.CNFFGirlsFavorabilityHandler;
 import net.sodiumzh.nff.girls.entity.capability.CNFFGirlsLevelHandler;
 import net.sodiumzh.nff.girls.registry.NFFGirlsCapabilities;
@@ -48,7 +48,7 @@ public class NFFGirlsSubsystemEventListeners
 	@SubscribeEvent
 	public static void onHealingItemSucceed(CHealingHandler.HealingSucceededEvent event)
 	{
-		if (event.living instanceof INFFGirlTamed bm)
+		if (event.living instanceof INFFGirlsTamed bm)
 		{
 			bm.getFavorabilityHandler().addFavorability(event.healedValue / 50);
 		}
@@ -72,7 +72,7 @@ public class NFFGirlsSubsystemEventListeners
 				lv : Math.min((int)Math.round(NFFGirlsConfigs.ValueCache.Combat.MAX_HEALTH_BOOST_BY_LEVEL / NFFGirlsConfigs.ValueCache.Combat.HEALTH_BOOST_PER_LEVEL), lv);
 		int atkLevel = NFFGirlsConfigs.ValueCache.Combat.MAX_ATK_BOOST_BY_LEVEL <= 0 ?
 				lv : Math.min((int)Math.round(NFFGirlsConfigs.ValueCache.Combat.MAX_ATK_BOOST_BY_LEVEL / NFFGirlsConfigs.ValueCache.Combat.ATK_BOOST_PER_LEVEL), lv);
-		if (!event.mob.level.isClientSide && event.mob instanceof INFFGirlTamed bm)
+		if (!event.mob.level.isClientSide && event.mob instanceof INFFGirlsTamed bm)
 		{
 			CNFFGirlsLevelHandler.LVL_HP_MODIFIER.apply(event.mob, Attributes.MAX_HEALTH, hpLevel);
 			CNFFGirlsLevelHandler.LVL_ATK_MODIFIER.apply(event.mob, Attributes.ATTACK_DAMAGE, atkLevel);

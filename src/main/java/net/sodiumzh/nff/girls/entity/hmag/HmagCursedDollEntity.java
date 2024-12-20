@@ -29,7 +29,7 @@ import net.sodiumzh.nautils.statics.NaUtilsContainerStatics;
 import net.sodiumzh.nautils.statics.NaUtilsEntityStatics;
 import net.sodiumzh.nautils.statics.NaUtilsParticleStatics;
 import net.sodiumzh.nff.girls.NFFGirls;
-import net.sodiumzh.nff.girls.entity.INFFGirlTamedSunSensitiveMob;
+import net.sodiumzh.nff.girls.entity.INFFGirlsTamedSunSensitiveMob;
 import net.sodiumzh.nff.girls.entity.ai.goal.NFFGirlsFollowOwnerGoal;
 import net.sodiumzh.nff.girls.entity.ai.goal.target.NFFGirlsNearestHostileToOwnerTargetGoal;
 import net.sodiumzh.nff.girls.entity.ai.goal.target.NFFGirlsNearestHostileToSelfTargetGoal;
@@ -51,7 +51,7 @@ import net.sodiumzh.nff.services.inventory.NFFTamedInventoryMenu;
 import net.sodiumzh.nff.services.inventory.NFFTamedMobInventory;
 import net.sodiumzh.nff.services.inventory.NFFTamedMobInventoryWithHandItems;
 
-public class HmagCursedDollEntity extends CursedDollEntity implements INFFGirlTamedSunSensitiveMob {
+public class HmagCursedDollEntity extends CursedDollEntity implements INFFGirlsTamedSunSensitiveMob {
 
 	/* Initialization */
 

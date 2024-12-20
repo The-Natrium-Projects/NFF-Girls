@@ -41,7 +41,7 @@ import net.minecraft.world.level.block.FlowerBlock;
 import net.minecraft.world.phys.AABB;
 import net.sodiumzh.nautils.statics.NaUtilsEntityStatics;
 import net.sodiumzh.nff.girls.NFFGirls;
-import net.sodiumzh.nff.girls.entity.INFFGirlTamedSunSensitiveMob;
+import net.sodiumzh.nff.girls.entity.INFFGirlsTamedSunSensitiveMob;
 import net.sodiumzh.nff.girls.entity.ai.goal.NFFGirlsFlyingFollowOwnerGoal;
 import net.sodiumzh.nff.girls.entity.ai.goal.NFFGirlsHmagFlyingGoal;
 import net.sodiumzh.nff.girls.entity.ai.goal.target.NFFGirlsNearestHostileToOwnerTargetGoal;
@@ -63,7 +63,7 @@ import net.sodiumzh.nff.services.inventory.NFFTamedInventoryMenu;
 import net.sodiumzh.nff.services.inventory.NFFTamedMobInventory;
 import net.sodiumzh.nff.services.inventory.NFFTamedMobInventoryWithHandItems;
 
-public class HmagBansheeEntity extends BansheeEntity implements INFFGirlTamedSunSensitiveMob
+public class HmagBansheeEntity extends BansheeEntity implements INFFGirlsTamedSunSensitiveMob
 {
 	
 	/* Initialization */

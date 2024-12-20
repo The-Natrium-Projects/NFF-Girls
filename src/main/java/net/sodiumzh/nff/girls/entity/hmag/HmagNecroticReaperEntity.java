@@ -25,7 +25,7 @@ import net.minecraft.world.phys.Vec3;
 import net.sodiumzh.nautils.statics.NaUtilsInfoStatics;
 import net.sodiumzh.nautils.statics.NaUtilsMiscStatics;
 import net.sodiumzh.nff.girls.NFFGirls;
-import net.sodiumzh.nff.girls.entity.INFFGirlTamedSunSensitiveMob;
+import net.sodiumzh.nff.girls.entity.INFFGirlsTamedSunSensitiveMob;
 import net.sodiumzh.nff.girls.entity.ai.goal.NFFGirlsFollowOwnerGoal;
 import net.sodiumzh.nff.girls.entity.ai.goal.target.NFFGirlsNearestHostileToOwnerTargetGoal;
 import net.sodiumzh.nff.girls.entity.ai.goal.target.NFFGirlsNearestHostileToSelfTargetGoal;
@@ -48,7 +48,7 @@ import net.sodiumzh.nff.services.inventory.NFFTamedInventoryMenu;
 import net.sodiumzh.nff.services.inventory.NFFTamedMobInventory;
 import net.sodiumzh.nff.services.inventory.NFFTamedMobInventoryWithHandItems;
 
-public class HmagNecroticReaperEntity extends NecroticReaperEntity implements INFFGirlTamedSunSensitiveMob
+public class HmagNecroticReaperEntity extends NecroticReaperEntity implements INFFGirlsTamedSunSensitiveMob
 {
 
 	/* Initialization */

@@ -23,7 +23,6 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.network.PacketDistributor;
-import net.minecraftforge.registries.ForgeRegistries;
 import net.sodiumzh.nautils.capability.SerializableCapabilityProvider;
 import net.sodiumzh.nautils.entity.vanillatrade.CVanillaMerchant;
 import net.sodiumzh.nautils.entity.vanillatrade.VanillaMerchant;
@@ -31,7 +30,7 @@ import net.sodiumzh.nautils.entity.vanillatrade.VanillaTradeListing;
 import net.sodiumzh.nautils.statics.NaUtilsContainerStatics;
 import net.sodiumzh.nautils.statics.NaUtilsMiscStatics;
 import net.sodiumzh.nautils.statics.NaUtilsNBTStatics;
-import net.sodiumzh.nff.girls.entity.INFFGirlTamed;
+import net.sodiumzh.nff.girls.entity.INFFGirlsTamed;
 import net.sodiumzh.nff.girls.network.NFFGirlsChannels;
 import net.sodiumzh.nff.girls.registry.NFFGirlsCapabilities;
 import net.sodiumzh.nff.girls.registry.NFFGirlsItems;
@@ -44,13 +43,13 @@ public interface CNFFGirlsTradeHandler extends CVanillaMerchant
 	public static final ItemListing INTRODUCTION = (e, rnd) -> 
 	{
 		ItemStack res = new ItemStack(NFFGirlsItems.TRADE_INTRODUCTION_LETTER.get());
-		NFFGirlsItems.TRADE_INTRODUCTION_LETTER.get().write(res, INFFGirlTamed.getBM(e));
+		NFFGirlsItems.TRADE_INTRODUCTION_LETTER.get().write(res, INFFGirlsTamed.getBM(e));
 		return new MerchantOffer(new ItemStack(Items.WRITABLE_BOOK), res, 1, 0, 0);
 	};
 
 	public void serverTick();
 
-	public INFFGirlTamed getBM();
+	public INFFGirlsTamed getBM();
 	
 	public List<NFFGirlsTradeOfferMetaData> getMeta();
 	
@@ -99,15 +98,15 @@ public interface CNFFGirlsTradeHandler extends CVanillaMerchant
 		private List<NFFGirlsTradeOfferMetaData> backupMeta = null;
 		private int tradePoints = 0;
 		
-		public Impl(INFFGirlTamed bm)
+		public Impl(INFFGirlsTamed bm)
 		{
 			super(bm.asMob());
 		}
 		
 		@Override
-		public INFFGirlTamed getBM()
+		public INFFGirlsTamed getBM()
 		{
-			return (INFFGirlTamed) this.getMob();
+			return (INFFGirlsTamed) this.getMob();
 		}
 		
 		@Override
@@ -119,7 +118,7 @@ public interface CNFFGirlsTradeHandler extends CVanillaMerchant
 		@Override
 		public int getPointsPerIntroduction()
 		{
-			return INFFGirlTamed.isBM(this.getMob()) ? INFFGirlTamed.getBM(this.getMob()).pointsPerIntroductionLetter() : 128;
+			return INFFGirlsTamed.isBM(this.getMob()) ? INFFGirlsTamed.getBM(this.getMob()).pointsPerIntroductionLetter() : 128;
 		}
 		
 		@Override
@@ -140,7 +139,7 @@ public interface CNFFGirlsTradeHandler extends CVanillaMerchant
 			this.getOffersRaw().clear();
 			this.getMeta().clear();
 			List<VanillaTradeListing> trades = 
-					NFFGirlsTrades.TRADES.getListings(INFFGirlTamed.getBM(this.getMob()).getData().getInitialEntityType()).pickListingForSpecifiedLevels(INFFGirlTamed.getBM(this.getMob()).getTradeEntryCountEachLevel());
+					NFFGirlsTrades.TRADES.getListings(INFFGirlsTamed.getBM(this.getMob()).getData().getInitialEntityType()).pickListingForSpecifiedLevels(INFFGirlsTamed.getBM(this.getMob()).getTradeEntryCountEachLevel());
 				/*var trades = DwmgTradeRegistry.getTradesImmutable(this.getMob().getType(), getProfession(), i);
 				Collection<ItemListing> picked = NaUtilsContainerStatics.getRandomSubset
 						(NaUtilsContainerStatics.iterableToSet(trades), Math.min(2, trades.size()));*/
@@ -167,7 +166,7 @@ public interface CNFFGirlsTradeHandler extends CVanillaMerchant
 		{
 			// Don't allow to regenerate at the introduction letter entry
 			if (index < 0 || index >= this.getOffersRaw().size() - 1) throw new IllegalArgumentException();
-			Set<VanillaTradeListing> available = NFFGirlsTrades.TRADES.getListings(INFFGirlTamed.getBM(this.getMob()).getData().getInitialEntityType())
+			Set<VanillaTradeListing> available = NFFGirlsTrades.TRADES.getListings(INFFGirlsTamed.getBM(this.getMob()).getData().getInitialEntityType())
 				.forLevel(this.getMeta(index).requiredMerchantLevel);
 			if (available.size() == 0) return;
 
@@ -206,7 +205,7 @@ public interface CNFFGirlsTradeHandler extends CVanillaMerchant
 
 		@Override
 		public int getMerchantLevel() {
-			if (this.getMob() instanceof INFFGirlTamed bm)
+			if (this.getMob() instanceof INFFGirlsTamed bm)
 			{
 				for (int i = LEVEL_REQUIREMENTS.length; i > 0; --i)
 				{
@@ -469,7 +468,7 @@ public interface CNFFGirlsTradeHandler extends CVanillaMerchant
 	public static class Prvd extends SerializableCapabilityProvider<CompoundTag, CNFFGirlsTradeHandler>
 	{
 
-		public Prvd(INFFGirlTamed bm, Capability<CNFFGirlsTradeHandler> holder)
+		public Prvd(INFFGirlsTamed bm, Capability<CNFFGirlsTradeHandler> holder)
 		{
 			super(() -> new Impl(bm), holder);
 		}

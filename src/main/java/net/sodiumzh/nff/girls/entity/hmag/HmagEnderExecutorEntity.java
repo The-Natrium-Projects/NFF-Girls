@@ -13,7 +13,6 @@ import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
-import net.minecraft.util.Tuple;
 import net.minecraft.world.Container;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
@@ -40,7 +39,7 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 import net.sodiumzh.nff.girls.NFFGirls;
 import net.sodiumzh.nff.girls.blocks.EnderberryBushBlock;
 import net.sodiumzh.nff.girls.entity.ICarriesBlock;
-import net.sodiumzh.nff.girls.entity.INFFGirlTamed;
+import net.sodiumzh.nff.girls.entity.INFFGirlsTamed;
 import net.sodiumzh.nff.girls.entity.ai.goal.NFFGirlsFollowOwnerGoal;
 import net.sodiumzh.nff.girls.entity.ai.goal.target.NFFGirlsNearestHostileToOwnerTargetGoal;
 import net.sodiumzh.nff.girls.entity.ai.goal.target.NFFGirlsNearestHostileToSelfTargetGoal;
@@ -66,10 +65,9 @@ import net.sodiumzh.nff.services.inventory.NFFTamedMobInventory;
 import java.util.List;
 import java.util.Optional;
 import java.util.function.Predicate;
-import java.util.stream.Stream;
 
 // Adjusted from EnderExcutor in HMaG
-public class HmagEnderExecutorEntity extends NFFTamedEnderManPreset implements IBeamAttackMob, INFFGirlTamed, ICarriesBlock
+public class HmagEnderExecutorEntity extends NFFTamedEnderManPreset implements IBeamAttackMob, INFFGirlsTamed, ICarriesBlock
 {
 
 	// This value is by default -20, and increases every tick if it should do beam attack.

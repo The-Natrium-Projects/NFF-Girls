@@ -35,7 +35,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
-import net.sodiumzh.nff.girls.entity.INFFGirlTamed;
+import net.sodiumzh.nff.girls.entity.INFFGirlsTamed;
 import net.sodiumzh.nff.girls.entity.ai.goal.NFFGirlsHmagCreeperGirlExplosionAttackGoal;
 import net.sodiumzh.nff.girls.entity.ai.goal.NFFGirlsHmagCreeperGirlMeleeAttackGoal;
 import net.sodiumzh.nff.girls.entity.ai.goal.NFFTamedCreeperFollowOwnerGoal;
@@ -57,7 +57,7 @@ import net.sodiumzh.nff.services.inventory.NFFTamedMobInventory;
 import net.sodiumzh.nff.services.inventory.NFFTamedMobInventoryWithEquipment;
 
 // Rewritten from HMaG CreeperGirlEntity
-public class HmagCreeperGirlEntity extends NFFTamedCreeperPreset implements INFFGirlTamed
+public class HmagCreeperGirlEntity extends NFFTamedCreeperPreset implements INFFGirlsTamed
 {
 
 	protected static final EntityDataAccessor<Integer> DATA_VARIANT_ID = 

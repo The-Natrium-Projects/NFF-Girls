@@ -11,7 +11,7 @@ import net.minecraftforge.fml.common.Mod;
 import net.sodiumzh.nautils.mixin.events.entity.MobInteractEvent;
 import net.sodiumzh.nautils.statics.NaUtilsInfoStatics;
 import net.sodiumzh.nff.girls.NFFGirls;
-import net.sodiumzh.nff.girls.entity.INFFGirlTamed;
+import net.sodiumzh.nff.girls.entity.INFFGirlsTamed;
 import net.sodiumzh.nff.girls.registry.NFFGirlsCapabilities;
 import net.sodiumzh.nff.girls.registry.NFFGirlsItems;
 
@@ -22,15 +22,15 @@ public class NFFGirlsTradeEventListeners
 	@SubscribeEvent(priority = EventPriority.HIGH)
 	public static void onMobInteract(EntityInteract event)
 	{
-		if (INFFGirlTamed.isBM(event.getTarget())
+		if (INFFGirlsTamed.isBM(event.getTarget())
 				&& !event.getTarget().getLevel().isClientSide()
-				&& INFFGirlTamed.getBM(event.getTarget()).getOwnerUUID().equals(event.getEntity().getUUID())
+				&& INFFGirlsTamed.getBM(event.getTarget()).getOwnerUUID().equals(event.getEntity().getUUID())
 				&& (event.getEntity().getItemInHand(InteractionHand.MAIN_HAND).isEmpty() || event.getEntity().getItemInHand(InteractionHand.MAIN_HAND).is(NFFGirlsItems.EVIL_GEM.get()))
-				&& INFFGirlTamed.getBM(event.getTarget()).asMob().getTarget() == null
+				&& INFFGirlsTamed.getBM(event.getTarget()).asMob().getTarget() == null
 				&& !event.getEntity().isShiftKeyDown()
 				)
 		{
-			INFFGirlTamed.getBM(event.getTarget()).asMob().getCapability(NFFGirlsCapabilities.CAP_TRADE_HANDLER).ifPresent(cap -> {
+			INFFGirlsTamed.getBM(event.getTarget()).asMob().getCapability(NFFGirlsCapabilities.CAP_TRADE_HANDLER).ifPresent(cap -> {
 				if (cap.isValidTrader()) {
 					cap.openTradingScreen(event.getEntity(), NaUtilsInfoStatics.createTranslatable("info.nffgirls.open_trade"), 1);
 					event.setCanceled(true);

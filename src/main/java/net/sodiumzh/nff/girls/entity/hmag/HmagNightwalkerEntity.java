@@ -35,7 +35,7 @@ import net.sodiumzh.nautils.entity.RepeatableAttributeModifier;
 import net.sodiumzh.nautils.statics.NaUtilsEntityStatics;
 import net.sodiumzh.nautils.statics.NaUtilsMathStatics;
 import net.sodiumzh.nff.girls.NFFGirls;
-import net.sodiumzh.nff.girls.entity.INFFGirlTamed;
+import net.sodiumzh.nff.girls.entity.INFFGirlsTamed;
 import net.sodiumzh.nff.girls.entity.ai.goal.NFFGirlsFollowOwnerGoal;
 import net.sodiumzh.nff.girls.entity.ai.goal.NFFGirlsRangedAttackGoal;
 import net.sodiumzh.nff.girls.entity.ai.goal.target.NFFGirlsNearestHostileToOwnerTargetGoal;
@@ -55,7 +55,7 @@ import net.sodiumzh.nautils.entity.MobApplicableItemTable;
 import net.sodiumzh.nff.services.entity.taming.NFFTamedStatics;
 import net.sodiumzh.nff.services.inventory.NFFTamedInventoryMenu;
 import net.sodiumzh.nff.services.inventory.NFFTamedMobInventory;
-public class HmagNightwalkerEntity extends NightwalkerEntity implements INFFGirlTamed {
+public class HmagNightwalkerEntity extends NightwalkerEntity implements INFFGirlsTamed {
 
 
 	private static final RepeatableAttributeModifier ARMOR_MODIFIER = new RepeatableAttributeModifier(0.1d, AttributeModifier.Operation.ADDITION, 300);

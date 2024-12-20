@@ -14,7 +14,7 @@ import net.minecraftforge.fml.common.Mod;
 import net.sodiumzh.nautils.mixin.events.entity.ItemEntityHurtEvent;
 import net.sodiumzh.nautils.statics.NaUtilsNBTStatics;
 import net.sodiumzh.nff.girls.NFFGirls;
-import net.sodiumzh.nff.girls.entity.INFFGirlTamed;
+import net.sodiumzh.nff.girls.entity.INFFGirlsTamed;
 import net.sodiumzh.nff.girls.item.IWithDuration;
 import net.sodiumzh.nff.girls.registry.NFFGirlsItems;
 import net.sodiumzh.nff.services.eventlisteners.ServerEntityTickEvent;
@@ -80,7 +80,7 @@ public class NFFGirlsItemEventListeners
 		}
 	}
 
-	/** @deprecated Use {@link INFFGirlTamed#getSharpnessModifierUUID} instead */
+	/** @deprecated Use {@link INFFGirlsTamed#getSharpnessModifierUUID} instead */
 	@Deprecated
 	protected static final UUID SHARPNESS_MODIFIER_UUID = UUID.fromString("9c12b503-63c0-43e6-bd30-d7aae9818c99");
 	
@@ -157,7 +157,7 @@ public class NFFGirlsItemEventListeners
 	@SubscribeEvent
 	public static void onItemEntityHurt(ItemEntityHurtEvent event)
 	{
-		if (event.damageSource.getEntity() != null && event.damageSource.getEntity() instanceof INFFGirlTamed)
+		if (event.damageSource.getEntity() != null && event.damageSource.getEntity() instanceof INFFGirlsTamed)
 			event.setCanceled(true);
 	}
 }

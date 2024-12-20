@@ -25,7 +25,7 @@ import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
 import net.sodiumzh.nautils.statics.NaUtilsReflectionStatics;
-import net.sodiumzh.nff.girls.entity.INFFGirlTamed;
+import net.sodiumzh.nff.girls.entity.INFFGirlsTamed;
 import net.sodiumzh.nff.girls.entity.ai.goal.NFFGirlsFlyingFollowOwnerGoal;
 import net.sodiumzh.nff.girls.entity.ai.goal.NFFGirlsHmagFlyingGoal;
 import net.sodiumzh.nff.girls.entity.ai.goal.target.NFFGirlsNearestHostileToOwnerTargetGoal;
@@ -55,7 +55,7 @@ import net.sodiumzh.nff.services.inventory.NFFTamedMobInventory;
  * NOT IMPLEMENTED YET
  */
 
-public class HmagGhastlySeekerEntity extends GhastlySeekerEntity implements INFFGirlTamed
+public class HmagGhastlySeekerEntity extends GhastlySeekerEntity implements INFFGirlsTamed
 {
 	
 	/** Handled in {@link NFFGirlsEntityEventListeners#onLivingSetAttackTarget} */

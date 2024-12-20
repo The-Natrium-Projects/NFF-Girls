@@ -13,7 +13,7 @@ import net.sodiumzh.nautils.info.ComponentBuilder;
 import net.sodiumzh.nautils.math.GuiPos;
 import net.sodiumzh.nautils.statics.NaUtilsInfoStatics;
 import net.sodiumzh.nff.girls.NFFGirls;
-import net.sodiumzh.nff.girls.entity.INFFGirlTamed;
+import net.sodiumzh.nff.girls.entity.INFFGirlsTamed;
 import net.sodiumzh.nff.services.client.gui.screen.NFFTamedGui;
 import net.sodiumzh.nff.services.entity.taming.INFFTamed;
 import net.sodiumzh.nff.services.inventory.NFFTamedInventoryMenu;
@@ -97,7 +97,7 @@ public class NFFGirlsGuiPreset0 extends NFFTamedGui {
 	
 	protected MutableComponent getDefaultLevelAndExpInfo()
 	{
-		INFFGirlTamed bm = (INFFGirlTamed)mob;		
+		INFFGirlsTamed bm = (INFFGirlsTamed)mob;
 		String lv = Integer.toString(bm.getLevelHandler().getExpectedLevel());
 		String exp = Long.toString(bm.getLevelHandler().getExpInThisLevel());
 		String expup = Long.toString(bm.getLevelHandler().getRequiredExpInThisLevel());
@@ -107,7 +107,7 @@ public class NFFGirlsGuiPreset0 extends NFFTamedGui {
 	
 	protected MutableComponent getDefaultLevelInfo()
 	{
-		INFFGirlTamed bm = (INFFGirlTamed)mob;		
+		INFFGirlsTamed bm = (INFFGirlsTamed)mob;
 		String lv = Integer.toString(bm.getLevelHandler().getExpectedLevel());
 		return NaUtilsInfoStatics.createTranslatable("info.nffgirls.gui_level")
 				.append(NaUtilsInfoStatics.createText(": " + lv));	
@@ -115,7 +115,7 @@ public class NFFGirlsGuiPreset0 extends NFFTamedGui {
 	
 	protected MutableComponent getDefaultExpInfo()
 	{
-		INFFGirlTamed bm = (INFFGirlTamed)mob;
+		INFFGirlsTamed bm = (INFFGirlsTamed)mob;
 		String exp = Long.toString(bm.getLevelHandler().getExpInThisLevel());
 		String expup = Long.toString(bm.getLevelHandler().getRequiredExpInThisLevel());
 		return NaUtilsInfoStatics.createTranslatable("info.nffgirls.gui_exp")
@@ -125,7 +125,7 @@ public class NFFGirlsGuiPreset0 extends NFFTamedGui {
 	
 	protected MutableComponent getDefaultFavInfo()
 	{
-		INFFGirlTamed bm = (INFFGirlTamed)mob;	
+		INFFGirlsTamed bm = (INFFGirlsTamed)mob;
 		String fav = Integer.toString(Mth.floor(bm.getFavorabilityHandler().getFavorability()));
 		String favmax = Integer.toString(Mth.floor(bm.getFavorabilityHandler().getMaxFavorability()));
 		return NaUtilsInfoStatics.createTranslatable("info.nffgirls.gui_favorability")

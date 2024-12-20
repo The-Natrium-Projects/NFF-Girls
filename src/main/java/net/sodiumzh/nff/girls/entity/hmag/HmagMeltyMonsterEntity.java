@@ -51,7 +51,7 @@ import net.sodiumzh.nautils.statics.NaUtilsItemStatics;
 import net.sodiumzh.nautils.statics.NaUtilsParticleStatics;
 import net.sodiumzh.nff.girls.NFFGirls;
 import net.sodiumzh.nff.girls.befriendmobs.entity.ai.goal.NFFMeltyMonsterFollowOwnerGoal;
-import net.sodiumzh.nff.girls.entity.INFFGirlTamed;
+import net.sodiumzh.nff.girls.entity.INFFGirlsTamed;
 import net.sodiumzh.nff.girls.entity.ai.goal.NFFGirlsRangedAttackGoal;
 import net.sodiumzh.nff.girls.entity.ai.goal.target.NFFGirlsNearestHostileToOwnerTargetGoal;
 import net.sodiumzh.nff.girls.entity.ai.goal.target.NFFGirlsNearestHostileToSelfTargetGoal;
@@ -71,7 +71,7 @@ import net.sodiumzh.nff.services.entity.taming.NFFTamedStatics;
 import net.sodiumzh.nff.services.inventory.NFFTamedInventoryMenu;
 import net.sodiumzh.nff.services.inventory.NFFTamedMobInventory;
 
-public class HmagMeltyMonsterEntity extends MeltyMonsterEntity implements INFFGirlTamed, ILivingDelayedActions {
+public class HmagMeltyMonsterEntity extends MeltyMonsterEntity implements INFFGirlsTamed, ILivingDelayedActions {
 
 	public static final ConditionalAttributeModifier MODIFIER_SLOWNESS_ON_LOW_STAMINA = 
 			new ConditionalAttributeModifier(Attributes.MOVEMENT_SPEED, -0.5d,  AttributeModifier.Operation.MULTIPLY_TOTAL, living ->

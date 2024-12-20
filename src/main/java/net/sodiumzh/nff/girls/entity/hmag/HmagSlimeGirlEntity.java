@@ -27,7 +27,7 @@ import net.sodiumzh.nautils.annotation.DontCallManually;
 import net.sodiumzh.nautils.math.LinearColor;
 import net.sodiumzh.nautils.registries.NaUtilsEntityDataSerializers;
 import net.sodiumzh.nff.girls.NFFGirls;
-import net.sodiumzh.nff.girls.entity.INFFGirlTamed;
+import net.sodiumzh.nff.girls.entity.INFFGirlsTamed;
 import net.sodiumzh.nff.girls.entity.ai.goal.target.NFFGirlsNearestHostileToOwnerTargetGoal;
 import net.sodiumzh.nff.girls.entity.ai.goal.target.NFFGirlsNearestHostileToSelfTargetGoal;
 import net.sodiumzh.nff.girls.entity.ai.goal.target.NFFGirlsOwnerHurtByTargetGoal;
@@ -49,7 +49,7 @@ import net.sodiumzh.nff.services.entity.taming.NFFTamedStatics;
 import net.sodiumzh.nff.services.inventory.NFFTamedInventoryMenu;
 import net.sodiumzh.nff.services.inventory.NFFTamedMobInventory;
 
-public class HmagSlimeGirlEntity extends SlimeGirlEntity implements INFFGirlTamed {
+public class HmagSlimeGirlEntity extends SlimeGirlEntity implements INFFGirlsTamed {
 
 	/* Data sync */
 

@@ -23,7 +23,7 @@ import net.minecraft.world.level.block.Block;
 import net.sodiumzh.nautils.statics.NaUtilsContainerStatics;
 import net.sodiumzh.nautils.statics.NaUtilsTagStatics;
 import net.sodiumzh.nff.girls.NFFGirls;
-import net.sodiumzh.nff.girls.entity.INFFGirlTamed;
+import net.sodiumzh.nff.girls.entity.INFFGirlsTamed;
 import net.sodiumzh.nff.girls.entity.ai.goal.IBlockLocator;
 import net.sodiumzh.nff.girls.entity.ai.goal.NFFGirlsFollowOwnerGoal;
 import net.sodiumzh.nff.girls.entity.ai.goal.NFFGirlsLocateBlockGoal;
@@ -45,7 +45,7 @@ import net.sodiumzh.nff.services.inventory.NFFTamedInventoryMenu;
 import net.sodiumzh.nff.services.inventory.NFFTamedMobInventory;
 import net.sodiumzh.nff.services.inventory.NFFTamedMobInventoryWithHandItems;
 
-public class HmagKoboldEntity extends KoboldEntity implements INFFGirlTamed, IBlockLocator
+public class HmagKoboldEntity extends KoboldEntity implements INFFGirlsTamed, IBlockLocator
 {
 
 	/* Initialization */

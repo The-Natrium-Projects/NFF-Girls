@@ -3,7 +3,6 @@ package net.sodiumzh.nff.girls.registry;
 import java.util.Optional;
 import java.util.function.Supplier;
 
-import com.github.mechalopa.hmag.registry.ModItems;
 import com.github.mechalopa.hmag.world.item.ModSwordItem;
 
 import net.minecraft.ChatFormatting;
@@ -11,11 +10,7 @@ import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.item.*;
-import net.minecraftforge.event.entity.player.ItemTooltipEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.ModList;
-import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
@@ -24,7 +19,7 @@ import net.sodiumzh.nautils.statics.NaUtilsCompatStatics;
 import net.sodiumzh.nautils.statics.NaUtilsInfoStatics;
 import net.sodiumzh.nff.girls.NFFGirls;
 import net.sodiumzh.nff.girls.NFFGirlsTab;
-import net.sodiumzh.nff.girls.entity.INFFGirlTamed;
+import net.sodiumzh.nff.girls.entity.INFFGirlsTamed;
 import net.sodiumzh.nff.girls.item.*;
 import net.sodiumzh.nff.girls.subsystem.baublesystem.baubles.AquaJadeBaubleItem;
 import net.sodiumzh.nff.girls.subsystem.baublesystem.baubles.CourageAmuletBaubleItem;
@@ -202,7 +197,7 @@ public class NFFGirlsItems {
 	public static final RegistryObject<NFFMobRespawnerItem> MOB_STORAGE_POD = ITEMS.register("mob_storage_pod", () -> new DwmgRespawnerItem(new Item.Properties())
 		.redirectDefaultInstance(new ResourceLocation(NFFGirls.MOD_ID, "empty_mob_storage_pod")).setGiveCommandUsesDefaultInstance().cast());
 	public static final RegistryObject<MobCatcherItem> EMPTY_MOB_STORAGE_POD = ITEMS.register("empty_mob_storage_pod", () -> new MobCatcherItem(new Item.Properties().tab(TAB), MOB_STORAGE_POD.get()).canCatchCondition(
-			((m, p) -> (m instanceof INFFGirlTamed bm && bm.getOwnerUUID().equals(p.getUUID())))));
+			((m, p) -> (m instanceof INFFGirlsTamed bm && bm.getOwnerUUID().equals(p.getUUID())))));
 
 
 	// Technical

@@ -4,19 +4,19 @@ import java.util.function.Predicate;
 
 import net.minecraft.world.entity.Mob;
 import net.sodiumzh.nff.girls.befriendmobs.entity.ai.target.NFFNearestUnfriendlyMobTargetGoal;
-import net.sodiumzh.nff.girls.entity.INFFGirlTamed;
+import net.sodiumzh.nff.girls.entity.INFFGirlsTamed;
 
 public class NFFGirlsNearestHostileToOwnerTargetGoal extends NFFNearestUnfriendlyMobTargetGoal
 {
-	public NFFGirlsNearestHostileToOwnerTargetGoal(INFFGirlTamed mob, Predicate<Mob> condition)
+	public NFFGirlsNearestHostileToOwnerTargetGoal(INFFGirlsTamed mob, Predicate<Mob> condition)
 	{		
 		super(mob, true, true);
-		stateConditions(bm -> bm instanceof INFFGirlTamed dbm && dbm.shouldAttackMobsHostileToOwner());
+		stateConditions(bm -> bm instanceof INFFGirlsTamed dbm && dbm.shouldAttackMobsHostileToOwner());
 		targetOfTargetConditions(living -> mob.isOwnerPresent() && living == mob.getOwner());
 		allowAllStatesExceptWait();
 	}
 	
-	public NFFGirlsNearestHostileToOwnerTargetGoal(INFFGirlTamed pMob)
+	public NFFGirlsNearestHostileToOwnerTargetGoal(INFFGirlsTamed pMob)
 	{
 		this(pMob, l -> true);
 	}

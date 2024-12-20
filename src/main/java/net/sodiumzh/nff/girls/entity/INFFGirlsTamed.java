@@ -40,7 +40,7 @@ import net.sodiumzh.nff.services.entity.taming.INFFTamed;
 import net.sodiumzh.nff.services.item.NFFMobRespawnerItem;
 import net.sodiumzh.nff.services.item.capability.wrapper.IItemStackMonitor;
 
-public interface INFFGirlTamed extends INFFTamed, /*IBaubleEquipable, */IAttributeMonitor, IItemStackMonitor
+public interface INFFGirlsTamed extends INFFTamed, /*IBaubleEquipable, */IAttributeMonitor, IItemStackMonitor
 {
 	//public static final NFFTamedMobAIState GUARD = new NFFTamedMobAIState(NFFGirls.MOD_ID, "guard");
 	
@@ -54,7 +54,7 @@ public interface INFFGirlTamed extends INFFTamed, /*IBaubleEquipable, */IAttribu
 	public static boolean isBM(Object o)
 	{
 		if (o == null) return false;
-		if (o instanceof INFFGirlTamed bm)
+		if (o instanceof INFFGirlsTamed bm)
 			return true;
 		else return false;
 	}
@@ -66,10 +66,10 @@ public interface INFFGirlTamed extends INFFTamed, /*IBaubleEquipable, */IAttribu
 	 * always use this to cast a mob to BM.
 	 */
 	@Nullable
-	public static INFFGirlTamed getBM(Object o)
+	public static INFFGirlsTamed getBM(Object o)
 	{
 		if (o == null) return null;
-		if (o instanceof INFFGirlTamed bm)
+		if (o instanceof INFFGirlsTamed bm)
 			return bm;
 		else return null;
 	}
@@ -81,12 +81,12 @@ public interface INFFGirlTamed extends INFFTamed, /*IBaubleEquipable, */IAttribu
 	 * you can use this to safely cast and do things to BM.
 	 * @return Whether the action is invoked.
 	 */
-	public static boolean ifBM(Object o, Consumer<INFFGirlTamed> action)
+	public static boolean ifBM(Object o, Consumer<INFFGirlsTamed> action)
 	{
 		if (o == null) return false;
-		if (INFFGirlTamed.isBM(o))
+		if (INFFGirlsTamed.isBM(o))
 		{
-			action.accept(INFFGirlTamed.getBM(o));
+			action.accept(INFFGirlsTamed.getBM(o));
 			return true;
 		}
 		else return false;
@@ -98,7 +98,7 @@ public interface INFFGirlTamed extends INFFTamed, /*IBaubleEquipable, */IAttribu
 	 * As INFFTamed could also be implemented in capabilities instead of the mob class in the future,
 	 * always use this instead of {@code instanceof} check and followed checks of the cast BM.
 	 */
-	public static boolean isBMAnd(Object o, Predicate<INFFGirlTamed> cond)
+	public static boolean isBMAnd(Object o, Predicate<INFFGirlsTamed> cond)
 	{
 		if (!isBM(o)) return false;
 		return cond.test(getBM(o));

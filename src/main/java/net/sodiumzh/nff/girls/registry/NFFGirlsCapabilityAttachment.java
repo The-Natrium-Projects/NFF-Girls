@@ -5,12 +5,11 @@ import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.MobType;
 import net.minecraft.world.entity.ai.attributes.Attributes;
-import net.minecraft.world.entity.npc.VillagerProfession;
 import net.minecraftforge.event.AttachCapabilitiesEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.sodiumzh.nff.girls.NFFGirls;
-import net.sodiumzh.nff.girls.entity.INFFGirlTamed;
+import net.sodiumzh.nff.girls.entity.INFFGirlsTamed;
 import net.sodiumzh.nff.girls.entity.capability.CNFFGirlsFavorabilityHandler;
 import net.sodiumzh.nff.girls.entity.capability.CNFFGirlsLevelHandler;
 import net.sodiumzh.nff.girls.entity.capability.CUndeadMobProvider;
@@ -49,8 +48,8 @@ public class NFFGirlsCapabilityAttachment {
 			{
 				event.addCapability(new ResourceLocation(NFFGirls.MOD_ID, KEY_UNDEAD_AFFINITY_HANDLER), new CUndeadMobProvider());
 			}
-			INFFGirlTamed bm;
-			if ((bm = INFFGirlTamed.getBM(living)) != null)
+			INFFGirlsTamed bm;
+			if ((bm = INFFGirlsTamed.getBM(living)) != null)
 			{
 				event.addCapability(new ResourceLocation(NFFGirls.MOD_ID, KEY_FAVORABILITY), new CNFFGirlsFavorabilityHandler.Prvd(bm.asMob()));
 				event.addCapability(new ResourceLocation(NFFGirls.MOD_ID, KEY_XP_LEVEL), new CNFFGirlsLevelHandler.Prvd(bm.asMob()));
@@ -63,7 +62,7 @@ public class NFFGirlsCapabilityAttachment {
 	@SubscribeEvent
 	public static void setupAttributeMonitor(CAttributeMonitor.SetupEvent event)
 	{
-		if (INFFGirlTamed.isBM(event.living))
+		if (INFFGirlsTamed.isBM(event.living))
 		{
 			event.monitor.listen(Attributes.MAX_HEALTH);
 		}

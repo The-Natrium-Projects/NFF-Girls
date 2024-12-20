@@ -18,7 +18,7 @@ import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.sodiumzh.nff.girls.NFFGirls;
-import net.sodiumzh.nff.girls.entity.INFFGirlTamed;
+import net.sodiumzh.nff.girls.entity.INFFGirlsTamed;
 import net.sodiumzh.nff.girls.entity.INFFGirlsBowShootingMob;
 import net.sodiumzh.nff.girls.entity.ai.goal.NFFGirlsFollowOwnerGoal;
 import net.sodiumzh.nff.girls.entity.ai.goal.NFFGirlsSkeletonMeleeAttackGoal;
@@ -41,7 +41,7 @@ import net.sodiumzh.nff.services.inventory.NFFTamedMobInventory;
 import net.sodiumzh.nff.services.inventory.NFFTamedMobInventoryWithEquipment;
 
 
-public class HmagWitherSkeletonGirlEntity extends WitherSkeletonGirlEntity implements INFFGirlTamed, INFFGirlsBowShootingMob
+public class HmagWitherSkeletonGirlEntity extends WitherSkeletonGirlEntity implements INFFGirlsTamed, INFFGirlsBowShootingMob
 {
 	
 	public HmagWitherSkeletonGirlEntity(EntityType<? extends HmagWitherSkeletonGirlEntity> pEntityType, Level pLevel) {

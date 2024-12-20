@@ -31,7 +31,7 @@ import net.sodiumzh.nautils.function.MutablePredicate;
 import net.sodiumzh.nautils.statics.NaUtilsMathStatics;
 import net.sodiumzh.nautils.math.RndUtil;
 import net.sodiumzh.nff.girls.NFFGirls;
-import net.sodiumzh.nff.girls.entity.INFFGirlTamed;
+import net.sodiumzh.nff.girls.entity.INFFGirlsTamed;
 import net.sodiumzh.nff.girls.entity.ai.goal.NFFGirlsFollowOwnerGoal;
 import net.sodiumzh.nff.girls.entity.ai.goal.NFFGirlsRangedAttackGoal;
 import net.sodiumzh.nff.girls.entity.ai.goal.target.NFFGirlsNearestHostileToOwnerTargetGoal;
@@ -53,7 +53,7 @@ import net.sodiumzh.nff.services.entity.taming.NFFTamedStatics;
 import net.sodiumzh.nff.services.inventory.NFFTamedInventoryMenu;
 import net.sodiumzh.nff.services.inventory.NFFTamedMobInventory;
 
-public class HmagJackFrostEntity extends JackFrostEntity implements INFFGirlTamed, ILivingDelayedActions {
+public class HmagJackFrostEntity extends JackFrostEntity implements INFFGirlsTamed, ILivingDelayedActions {
 
 	@Override
 	public void onInit(UUID playerUUID, Mob from)

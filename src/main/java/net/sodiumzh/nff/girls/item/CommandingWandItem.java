@@ -14,7 +14,7 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.phys.AABB;
 import net.sodiumzh.nautils.math.RndUtil;
-import net.sodiumzh.nff.girls.entity.INFFGirlTamed;
+import net.sodiumzh.nff.girls.entity.INFFGirlsTamed;
 import net.sodiumzh.nff.girls.registry.NFFGirlsItems;
 import net.sodiumzh.nff.services.entity.ai.NFFTamedMobAIState;
 import net.sodiumzh.nff.services.entity.taming.NFFTamedStatics;
@@ -41,8 +41,8 @@ public class CommandingWandItem extends Item
 				List<Entity> bmList = sl.getEntities(null, bound);
 				for (Entity e: bmList)
 				{
-					if (e instanceof INFFGirlTamed bm && bm.getOwnerUUID().equals(context.getPlayer().getUUID()))
-						((INFFGirlTamed)e).setAIState(NFFTamedMobAIState.FOLLOW, true);
+					if (e instanceof INFFGirlsTamed bm && bm.getOwnerUUID().equals(context.getPlayer().getUUID()))
+						((INFFGirlsTamed)e).setAIState(NFFTamedMobAIState.FOLLOW, true);
 					else if (e instanceof ItemEntity ie)
 					{
 						if (ie.getItem().is(NFFGirlsItems.MOB_RESPAWNER.get()))

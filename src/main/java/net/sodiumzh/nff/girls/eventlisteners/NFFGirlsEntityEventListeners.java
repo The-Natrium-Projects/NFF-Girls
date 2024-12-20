@@ -84,7 +84,7 @@ import net.sodiumzh.nautils.mixin.events.entity.ThrownTridentSetBaseDamageEvent;
 import net.sodiumzh.nff.girls.NFFGirls;
 import net.sodiumzh.nff.girls.befriendmobs.entity.ai.goal.FreezeGoal;
 import net.sodiumzh.nff.girls.effects.NecromancerWitherEffect;
-import net.sodiumzh.nff.girls.entity.INFFGirlTamed;
+import net.sodiumzh.nff.girls.entity.INFFGirlsTamed;
 import net.sodiumzh.nff.girls.entity.ai.goal.NFFGirlsTamableGhastlySeekerRandomFlyGoal;
 import net.sodiumzh.nff.girls.entity.ai.goal.NFFGirlsTamableJiangshiMutableLeapGoal;
 import net.sodiumzh.nff.girls.entity.ai.goal.NFFGirlsTamablePickItemGoal;
@@ -218,12 +218,12 @@ public class NFFGirlsEntityEventListeners
 			// Tamable mobs don't attack their tamed variation
 			if (NFFTamingMapping.contains(mob)
 				&& NFFTamingMapping.getConvertTo(mob) == target.getType()
-				&& INFFGirlTamed.isBM(target)) {
+				&& INFFGirlsTamed.isBM(target)) {
 				event.setCanceled(true);
 				return;
 			}
 			// Tamed mobs don't attack their wild variation
-			if (INFFGirlTamed.isBM(mob)
+			if (INFFGirlsTamed.isBM(mob)
 				&& NFFTamingMapping.getTypeBefore(mob) == target.getType()) {
 				event.setCanceled(true);
 				return;
@@ -246,7 +246,7 @@ public class NFFGirlsEntityEventListeners
 			.stream().filter(e ->
 				e instanceof Mob mob
 				&& mob.getType().equals(tamedType)
-				&& INFFGirlTamed.isBMAnd(mob, m -> p.equals(m.getOwner())))
+				&& INFFGirlsTamed.isBMAnd(mob, m -> p.equals(m.getOwner())))
 			.filter(e -> attacker.hasLineOfSight(e))
 			.toList();
 		return !tamed.isEmpty();
@@ -290,7 +290,7 @@ public class NFFGirlsEntityEventListeners
 		}
 
 		/** Favorability & Level */
-		if (event.getMob() instanceof INFFGirlTamed bm && bm.isOwnerPresent())
+		if (event.getMob() instanceof INFFGirlsTamed bm && bm.isOwnerPresent())
 		{
 			// Favorability loss on death
 			if (event.getDamageSource().getEntity() != null
@@ -337,7 +337,7 @@ public class NFFGirlsEntityEventListeners
 			}
 			
 			// Cancel indirect player attack from owner e.g. sweeping
-			if (event.getEntity() instanceof INFFGirlTamed bm
+			if (event.getEntity() instanceof INFFGirlsTamed bm
 					&& event.getSource().msgId.equals("player")
 					&& event.getSource().getEntity() != null
 					&& event.getSource().getEntity() instanceof Player player
@@ -421,7 +421,7 @@ public class NFFGirlsEntityEventListeners
 			// Weapon durability
 			if (event.getSource().getEntity() != null)
 			{
-				INFFGirlTamed.ifBM(event.getSource().getEntity(), bm -> {
+				INFFGirlsTamed.ifBM(event.getSource().getEntity(), bm -> {
 					if (!bm.asMob().getMainHandItem().isEmpty() && bm.asMob().getMainHandItem().getItem() instanceof DiggerItem dg)
 					{
 						bm.asMob().getMainHandItem().hurtAndBreak(2, bm.asMob(), (mob) ->
@@ -439,7 +439,7 @@ public class NFFGirlsEntityEventListeners
 				});
 			}
 			// Armor durability
-			if (event.getEntity() instanceof INFFGirlTamed bm
+			if (event.getEntity() instanceof INFFGirlsTamed bm
 					&& bm.getModId().equals(NFFGirls.MOD_ID))
 			{
 				if (!bm.asMob().getItemBySlot(EquipmentSlot.HEAD).isEmpty())
@@ -457,7 +457,7 @@ public class NFFGirlsEntityEventListeners
 			// Label player on bef mob attacking target, just like for TamableAnimal, so that it can drop player's loot table
 			if (event.getEntity() instanceof Mob mob
 					&& event.getSource().getEntity() != null
-					&& event.getSource().getEntity() instanceof INFFGirlTamed bm)
+					&& event.getSource().getEntity() instanceof INFFGirlsTamed bm)
 			{
 				mob.setLastHurtByPlayer(bm.getOwner());
 			}
@@ -465,13 +465,13 @@ public class NFFGirlsEntityEventListeners
 			/** Cancel friendly damage */
 			if (event.getSource() instanceof EntityDamageSource eds && !NFFGirlsConfigs.ValueCache.Combat.ENABLE_FRIENDLY_DAMAGE)
 			{
-				if (INFFGirlTamed.isBMAnd(eds.getEntity(), tamed ->
+				if (INFFGirlsTamed.isBMAnd(eds.getEntity(), tamed ->
 					Optional.ofNullable(tamed.getOwnerInDimension()).map(owner -> owner == event.getEntity()).orElse(false)))
 				{
 					event.setCanceled(true);
 					return;
 				}
-				if (INFFGirlTamed.isBMAnd(event.getEntity(), tamed ->
+				if (INFFGirlsTamed.isBMAnd(event.getEntity(), tamed ->
 					Optional.ofNullable(tamed.getOwnerInDimension()).map(owner -> owner == eds.getEntity()).orElse(false)))
 				{
 					event.setCanceled(true);
@@ -491,7 +491,7 @@ public class NFFGirlsEntityEventListeners
 			}
 			
 			/** Cancel projectile friendly damage */
-			if (event.getSource() instanceof EntityDamageSource eds && eds.getEntity() instanceof INFFGirlTamed bm && eds.getDirectEntity() instanceof Projectile)
+			if (event.getSource() instanceof EntityDamageSource eds && eds.getEntity() instanceof INFFGirlsTamed bm && eds.getDirectEntity() instanceof Projectile)
 			{
 				if (!NFFGirlsConfigs.ValueCache.Combat.ENABLE_PROJECTILE_FRIENDLY_DAMAGE && NFFGirlsEntityStatics.isAlly(bm, event.getEntity()))
 				{
@@ -632,11 +632,11 @@ public class NFFGirlsEntityEventListeners
 					}
 				}*/
 				// Sync mobs
-				if (mob instanceof INFFGirlTamed bm)
+				if (mob instanceof INFFGirlsTamed bm)
 					bm.doSync();
 			}
 			/** Send overlap event */
-			if (event.getEntity() instanceof INFFGirlTamed bm)
+			if (event.getEntity() instanceof INFFGirlsTamed bm)
 			{
 				if (bm.asMob().getHealth() > 0.0F) {
 			         AABB aabb;
@@ -697,7 +697,7 @@ public class NFFGirlsEntityEventListeners
 	}
 	
 	@SubscribeEvent
-	public static void onBMOverlap(INFFGirlTamed.OverlapEntityEvent event)
+	public static void onBMOverlap(INFFGirlsTamed.OverlapEntityEvent event)
 	{
 		if (event.touchedEntity instanceof Slime slime)
 		{
@@ -712,7 +712,7 @@ public class NFFGirlsEntityEventListeners
 	@SubscribeEvent
 	public static void onBefriendedSwitchAiState(NFFTamedChangeAiStateEvent event)
 	{
-		if (INFFGirlTamed.isBM(event.getMob()) && !event.getMob().asMob().level.isClientSide)
+		if (INFFGirlsTamed.isBM(event.getMob()) && !event.getMob().asMob().level.isClientSide)
 		{
 			NaUtilsMiscStatics.printToScreen(NaUtilsInfoStatics.createText("")
 					.append(event.getMob().asMob().getName())
@@ -731,7 +731,7 @@ public class NFFGirlsEntityEventListeners
 				return;
 			// When BM killed a mob targeting the player, favorability + 0.5 
 			if (event.getSource().getEntity() != null 
-					&& event.getSource().getEntity() instanceof INFFGirlTamed bm
+					&& event.getSource().getEntity() instanceof INFFGirlsTamed bm
 					&& event.getEntity() instanceof Mob mob
 					&& mob.getTarget() != null
 					&& mob.getTarget() == bm.getOwner())
@@ -742,7 +742,7 @@ public class NFFGirlsEntityEventListeners
 			if (event.getSource().getEntity() != null
 					&& event.getSource().getEntity() instanceof Player player
 					&& event.getEntity() instanceof Mob mob
-					&& mob.getTarget() instanceof INFFGirlTamed bm
+					&& mob.getTarget() instanceof INFFGirlsTamed bm
 					&& bm.getOwner() == player)
 			{
 				bm.getFavorabilityHandler().addFavorability(1f);
@@ -759,7 +759,7 @@ public class NFFGirlsEntityEventListeners
 	{
 		if (event.getDamageSource() != null
 			&& event.getDamageSource().getEntity() != null
-			&& event.getDamageSource().getEntity() instanceof INFFGirlTamed bm)
+			&& event.getDamageSource().getEntity() instanceof INFFGirlsTamed bm)
 		{
 			/** After this, vanilla will use LivingEntity#lastHurtByPlayerTime to check if it's killed by player
 			 * so force set this to make it drop player-kill loot */
@@ -779,7 +779,7 @@ public class NFFGirlsEntityEventListeners
 	{
 		// When a mob is killed by a befriended mob, it don't drop exp orbs, but directly add exp to the mob.
 		if (event.getEntity().getLastHurtByMob() != null 
-				&& event.getEntity().getLastHurtByMob() instanceof INFFGirlTamed bm)
+				&& event.getEntity().getLastHurtByMob() instanceof INFFGirlsTamed bm)
 		{
 			int exp = event.getOriginalExperience();
 			exp = (int)handleMending(exp, bm.asMob());
@@ -903,14 +903,14 @@ public class NFFGirlsEntityEventListeners
 				// On player attack a mob attacking the BM
 				if (source instanceof Player player 
 						&& mob.getTarget() != null
-						&& mob.getTarget() instanceof INFFGirlTamed bm
+						&& mob.getTarget() instanceof INFFGirlsTamed bm
 						&& bm.asMob().isAlive()
 						&& bm.getOwner() == player)
 				{
 					bm.getFavorabilityHandler().addFavorability(event.getAmount() / 50f);
 				}
 				// On BM attack a mob attacking the player
-				if (source instanceof INFFGirlTamed bm
+				if (source instanceof INFFGirlsTamed bm
 						&& mob.getTarget() != null
 						&& mob.getTarget() instanceof Player player
 						&& bm.asMob().isAlive()
@@ -921,7 +921,7 @@ public class NFFGirlsEntityEventListeners
 				// If owner attacked friendly mob, lose favorability depending on damage; no lost if < 0.5
 				if (event.getSource().getEntity() != null
 						&& event.getSource().getEntity() instanceof Player player
-						&& INFFGirlTamed.isBMAnd(event.getEntity(), bm -> bm.getOwnerUUID().equals(player.getUUID()))
+						&& INFFGirlsTamed.isBMAnd(event.getEntity(), bm -> bm.getOwnerUUID().equals(player.getUUID()))
 						&& !event.getSource().equals(DamageSource.OUT_OF_WORLD)
 						&& !event.getSource().isCreativePlayer())
 				{
@@ -1113,7 +1113,7 @@ public class NFFGirlsEntityEventListeners
 	 */
 	public static void setHostileToAllBefriendedMobs(Mob mob, Predicate<LivingEntity> condition)
 	{
-		NaUtilsAIStatics.setHostileTo(mob, Mob.class, condition.and(m -> m instanceof INFFGirlTamed));
+		NaUtilsAIStatics.setHostileTo(mob, Mob.class, condition.and(m -> m instanceof INFFGirlsTamed));
 	}
 
 	public static void setHostileToAllBefriendedMobs(Mob mob)
@@ -1139,7 +1139,7 @@ public class NFFGirlsEntityEventListeners
 	public static void onEntityInteract_PriorityHighest(EntityInteract event)
 	{
 		// Detect missing-owner cases
-		if (event.getTarget() instanceof INFFGirlTamed bm && !event.getEntity().level.isClientSide)
+		if (event.getTarget() instanceof INFFGirlsTamed bm && !event.getEntity().level.isClientSide)
 		{
 			if (bm.getOwnerUUID() == null)
 			{
@@ -1158,7 +1158,7 @@ public class NFFGirlsEntityEventListeners
 	@SubscribeEvent
 	public static void onEntityInteract(EntityInteract event)
 	{
-		if (event.getTarget() instanceof INFFGirlTamed bm && event.getSide() == LogicalSide.SERVER 
+		if (event.getTarget() instanceof INFFGirlsTamed bm && event.getSide() == LogicalSide.SERVER
 				&& event.getHand() == InteractionHand.MAIN_HAND && !event.getEntity().getItemInHand(InteractionHand.MAIN_HAND).isEmpty()
 				&& !(event.getEntity().getItemInHand(InteractionHand.MAIN_HAND).getItem() instanceof NFFMobOwnershipTransfererItem))
 		{
@@ -1264,14 +1264,14 @@ public class NFFGirlsEntityEventListeners
 	{
 		if (event.getEntity().getItem().getItem() instanceof NFFMobRespawnerItem item)
 			event.setCanceled(true);
-		if (event.damageSource.getEntity() != null && event.damageSource.getEntity() instanceof INFFGirlTamed mob)
+		if (event.damageSource.getEntity() != null && event.damageSource.getEntity() instanceof INFFGirlsTamed mob)
 			event.setCanceled(true);
 	}
 	
 	@SubscribeEvent
 	public static void onSweepHurt(LivingEntitySweepHurtEvent event)
 	{
-		if (event.getEntity() instanceof INFFGirlTamed) {
+		if (event.getEntity() instanceof INFFGirlsTamed) {
 			event.setCanceled(true);
 		}
 	}
@@ -1293,7 +1293,7 @@ public class NFFGirlsEntityEventListeners
 	@SubscribeEvent
 	public static void onThrownTridentSetBaseDamage(ThrownTridentSetBaseDamageEvent event)
 	{
-		if (event.getEntity().getOwner() != null && event.getEntity().getOwner() instanceof INFFGirlTamed dbm)
+		if (event.getEntity().getOwner() != null && event.getEntity().getOwner() instanceof INFFGirlsTamed dbm)
 		{
 			event.setDamage((float) (event.getOriginalDamage() - dbm.asMob().getAttribute(Attributes.ATTACK_DAMAGE).getBaseValue() + dbm.asMob().getAttribute(Attributes.ATTACK_DAMAGE).getValue()));
 		}
@@ -1302,7 +1302,7 @@ public class NFFGirlsEntityEventListeners
 	@SubscribeEvent
 	public static void onMobPickUpItem(MobPickUpItemEvent event)
 	{
-		if (INFFGirlTamed.isBM(event.getEntity()))
+		if (INFFGirlsTamed.isBM(event.getEntity()))
 			event.setCanceled(true);
 	}
 }

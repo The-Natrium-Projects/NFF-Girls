@@ -24,7 +24,7 @@ import net.minecraft.world.entity.projectile.Arrow;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
 import net.sodiumzh.nff.girls.NFFGirls;
-import net.sodiumzh.nff.girls.entity.INFFGirlTamedSunSensitiveMob;
+import net.sodiumzh.nff.girls.entity.INFFGirlsTamedSunSensitiveMob;
 import net.sodiumzh.nff.girls.entity.INFFGirlsBowShootingMob;
 import net.sodiumzh.nff.girls.entity.ai.goal.NFFGirlsFollowOwnerGoal;
 import net.sodiumzh.nff.girls.entity.ai.goal.NFFGirlsSkeletonMeleeAttackGoal;
@@ -50,7 +50,7 @@ import net.sodiumzh.nff.services.inventory.NFFTamedInventoryMenu;
 import net.sodiumzh.nff.services.inventory.NFFTamedMobInventory;
 import net.sodiumzh.nff.services.inventory.NFFTamedMobInventoryWithEquipment;
 
-public class HmagStrayGirlEntity extends StrayGirlEntity implements INFFGirlTamedSunSensitiveMob, INFFGirlsBowShootingMob
+public class HmagStrayGirlEntity extends StrayGirlEntity implements INFFGirlsTamedSunSensitiveMob, INFFGirlsBowShootingMob
 {
 
 	

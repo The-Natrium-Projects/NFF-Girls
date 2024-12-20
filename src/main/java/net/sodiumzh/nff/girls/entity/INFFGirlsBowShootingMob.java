@@ -10,7 +10,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.enchantment.Enchantments;
 
-public interface INFFGirlsBowShootingMob extends INFFGirlTamed, INFFGirlsBowShootingMobUtils
+public interface INFFGirlsBowShootingMob extends INFFGirlsTamed, INFFGirlsBowShootingMobUtils
 {
 	
 	@Nullable
