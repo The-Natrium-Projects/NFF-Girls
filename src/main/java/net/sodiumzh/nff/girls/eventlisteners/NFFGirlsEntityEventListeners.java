@@ -25,7 +25,6 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.InteractionHand;
-import net.minecraft.world.InteractionResult;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.damagesource.EntityDamageSource;
 import net.minecraft.world.effect.MobEffectInstance;
@@ -52,7 +51,10 @@ import net.minecraft.world.entity.monster.piglin.Piglin;
 import net.minecraft.world.entity.monster.piglin.PiglinBrute;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.Projectile;
-import net.minecraft.world.item.*;
+import net.minecraft.world.item.ArmorItem;
+import net.minecraft.world.item.DiggerItem;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.SwordItem;
 import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Blocks;
@@ -72,11 +74,13 @@ import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.LogicalSide;
 import net.minecraftforge.fml.common.Mod;
-import net.sodiumzh.nautils.mixin.events.entity.*;
 import net.sodiumzh.nautils.statics.*;
-import net.sodiumzh.nff.services.entity.taming.NFFTamedStatics;
 import org.apache.commons.lang3.mutable.MutableObject;
 import net.sodiumzh.nautils.block.ColoredBlocks;
+import net.sodiumzh.nautils.mixin.events.entity.ItemEntityHurtEvent;
+import net.sodiumzh.nautils.mixin.events.entity.LivingEntitySweepHurtEvent;
+import net.sodiumzh.nautils.mixin.events.entity.MobPickUpItemEvent;
+import net.sodiumzh.nautils.mixin.events.entity.ThrownTridentSetBaseDamageEvent;
 import net.sodiumzh.nff.girls.NFFGirls;
 import net.sodiumzh.nff.girls.befriendmobs.entity.ai.goal.FreezeGoal;
 import net.sodiumzh.nff.girls.effects.NecromancerWitherEffect;
@@ -1253,7 +1257,7 @@ public class NFFGirlsEntityEventListeners
 		else return false;
 	}
 	
-	// SODIUM'S UTILITIES MIXIN EVENTS BELOW //
+	// NAUTILS MIXIN EVENTS BELOW //
 	
 	@SubscribeEvent
 	public static void onItemEntityHurt(ItemEntityHurtEvent event)
@@ -1300,45 +1304,5 @@ public class NFFGirlsEntityEventListeners
 	{
 		if (INFFGirlsTamed.isBM(event.getEntity()))
 			event.setCanceled(true);
-	}
-
-	@SubscribeEvent
-	public static void onMobInteract(MobInteractEvent event) {
-		INFFGirlsTamed.ifBM(event.getEntity(), tamed -> {
-			if (tamed == null) return;
-			if (tamed.shouldBypassCommonInteractions()) return;
-			Player player = event.player;
-			InteractionHand hand = event.hand;
-			if (!player.isShiftKeyDown()) {
-				if (player.getUUID().equals(tamed.getOwnerUUID())) {
-					if (!player.level().isClientSide() && hand == InteractionHand.MAIN_HAND) {
-						InteractionResult res = tamed.serversideMainHandInteraction(player, hand);
-						if (res.consumesAction()) {
-							event.setInteractionResult(InteractionResult.sidedSuccess(player.level().isClientSide()));
-						} else if (tamed.tryApplyHealingItems(player.getItemInHand(hand)) != InteractionResult.PASS) {
-						} else if (tamed.isCommandingItem(player.getItemInHand(hand))) {
-							tamed.switchAIState();
-						} else return;
-					}
-					event.setInteractionResult(InteractionResult.sidedSuccess(player.level().isClientSide()));
-					return;
-				}
-				return;
-			} else {
-				if (player.getUUID().equals(tamed.getOwnerUUID())) {
-					if (hand == InteractionHand.MAIN_HAND) {
-						if (NFFGirlsEntityStatics.isOnEitherHand(player, NFFGirlsItems.COMMANDING_WAND.get())) {
-							NFFTamedStatics.openBefriendedInventory(player, tamed);
-							event.setInteractionResult(InteractionResult.sidedSuccess(player.level().isClientSide));
-							return;
-						} else {
-							tamed.clientsideMainHandInteraction(player, hand);
-						}
-					}
-					return;
-				}
-			}
-		});
-		return;
 	}
 }

@@ -7,11 +7,6 @@ import java.util.function.Predicate;
 
 import javax.annotation.Nullable;
 
-import net.minecraft.world.InteractionHand;
-import net.minecraft.world.InteractionResult;
-import net.minecraft.world.entity.player.Player;
-import net.sodiumzh.nautils.mixin.events.entity.MobInteractEvent;
-import net.sodiumzh.nff.girls.eventlisteners.NFFGirlsEntityEventListeners;
 import org.apache.commons.lang3.mutable.MutableObject;
 
 import com.mojang.logging.LogUtils;
@@ -45,9 +40,11 @@ import net.sodiumzh.nff.services.entity.taming.INFFTamed;
 import net.sodiumzh.nff.services.item.NFFMobRespawnerItem;
 import net.sodiumzh.nff.services.item.capability.wrapper.IItemStackMonitor;
 
-public interface INFFGirlsTamed extends INFFTamed, IAttributeMonitor, IItemStackMonitor
+public interface INFFGirlsTamed extends INFFTamed, /*IBaubleEquipable, */IAttributeMonitor, IItemStackMonitor
 {
-
+	//public static final NFFTamedMobAIState GUARD = new NFFTamedMobAIState(NFFGirls.MOD_ID, "guard");
+	
+	
 	/**
 	 * Check if a mob has a NFFGirls BM interface.
 	 * <p>
@@ -198,38 +195,7 @@ public interface INFFGirlsTamed extends INFFTamed, IAttributeMonitor, IItemStack
 		}
 	}
 
-	// === Interactions
-
-	/**
-	 * If true, it will bypass common interactions defined in {@link NFFGirlsEntityEventListeners#onMobInteract}.
-	 */
-	public default boolean shouldBypassCommonInteractions() { return false; }
-
-	public default InteractionResult serversideMainHandInteraction(Player player, InteractionHand hand)
-	{
-		return InteractionResult.PASS;
-	}
-/*
-	public default InteractionResult serversideOffHandInteraction(Player player, InteractionHand hand)
-	{
-		return InteractionResult.PASS;
-	}
-*/
-	public default InteractionResult clientsideMainHandInteraction(Player player, InteractionHand hand)
-	{
-		return InteractionResult.PASS;
-	}
-	/*
-	public default InteractionResult clientsideOffHandInteraction(Player player, InteractionHand hand)
-	{
-		return InteractionResult.PASS;
-	}*/
-
-	public default boolean isCommandingItem(ItemStack test)
-	{
-		return test.is(NFFGirlsItems.COMMANDING_WAND.get());
-	}
-
+	/* Bauble related */
 	// === INFFTamed interface
 	
 	@Override
@@ -265,7 +231,7 @@ public interface INFFGirlsTamed extends INFFTamed, IAttributeMonitor, IItemStack
 
 	@Override
 	public MobApplicableItemTable getHealingItems();
-
+	
 	// === IItemStackMonitor interface
 	
 	private static UUID getSharpnessModifierUUID()
