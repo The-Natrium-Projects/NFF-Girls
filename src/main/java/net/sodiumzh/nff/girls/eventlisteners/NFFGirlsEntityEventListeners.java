@@ -1311,16 +1311,16 @@ public class NFFGirlsEntityEventListeners
 			InteractionHand hand = event.hand;
 			if (!player.isShiftKeyDown()) {
 				if (player.getUUID().equals(tamed.getOwnerUUID())) {
-					if (!player.level.isClientSide() && hand == InteractionHand.MAIN_HAND) {
+					if (!player.level().isClientSide() && hand == InteractionHand.MAIN_HAND) {
 						InteractionResult res = tamed.serversideMainHandInteraction(player, hand);
 						if (res.consumesAction()) {
-							event.setInteractionResult(InteractionResult.sidedSuccess(player.level.isClientSide()));
+							event.setInteractionResult(InteractionResult.sidedSuccess(player.level().isClientSide()));
 						} else if (tamed.tryApplyHealingItems(player.getItemInHand(hand)) != InteractionResult.PASS) {
 						} else if (tamed.isCommandingItem(player.getItemInHand(hand))) {
 							tamed.switchAIState();
 						} else return;
 					}
-					event.setInteractionResult(InteractionResult.sidedSuccess(player.level.isClientSide()));
+					event.setInteractionResult(InteractionResult.sidedSuccess(player.level().isClientSide()));
 					return;
 				}
 				return;
@@ -1329,7 +1329,7 @@ public class NFFGirlsEntityEventListeners
 					if (hand == InteractionHand.MAIN_HAND) {
 						if (NFFGirlsEntityStatics.isOnEitherHand(player, NFFGirlsItems.COMMANDING_WAND.get())) {
 							NFFTamedStatics.openBefriendedInventory(player, tamed);
-							event.setInteractionResult(InteractionResult.sidedSuccess(player.level.isClientSide));
+							event.setInteractionResult(InteractionResult.sidedSuccess(player.level().isClientSide));
 							return;
 						} else {
 							tamed.clientsideMainHandInteraction(player, hand);
