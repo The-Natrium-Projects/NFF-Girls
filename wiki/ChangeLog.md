@@ -1,6 +1,10 @@
 # Change Log
 
-### 0.0.27
+### 0.x.27.1
+
+Fixed friending processes not consuming items.
+
+### 0.x.27
 
 Added mob dictionary (Requires Citadel as dependency). Special thanks to Koishi for his significant help in making the dictionary!
 
