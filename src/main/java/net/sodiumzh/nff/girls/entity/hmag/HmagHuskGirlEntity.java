@@ -82,7 +82,7 @@ public class HmagHuskGirlEntity extends HuskGirlEntity implements INFFGirlsTamed
 		return NFFGirlsHealingItems.UNDEAD.get();
 	}
 	
-	@Override
+	/*@Override
 	public InteractionResult mobInteract(Player player, InteractionHand hand)
 	{
 		if (!player.isShiftKeyDown())
@@ -116,7 +116,7 @@ public class HmagHuskGirlEntity extends HuskGirlEntity implements INFFGirlsTamed
 			return InteractionResult.PASS;
 		}
 	}
-
+*/
 	/* Inventory */
 
 	@Override

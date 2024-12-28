@@ -191,7 +191,14 @@ public class HmagCursedDollEntity extends CursedDollEntity implements INFFGirlsT
 		}
 		else return false;
 	}
-	
+
+	@Override
+	public InteractionResult serversideMainHandInteraction(Player player, InteractionHand hand) {
+		if (giveEnhancingItems())
+			return InteractionResult.sidedSuccess(player.level.isClientSide);
+		return InteractionResult.PASS;
+	}
+/*
 	@Override
 	public InteractionResult mobInteract(Player player, InteractionHand hand)
 	{
@@ -201,7 +208,6 @@ public class HmagCursedDollEntity extends CursedDollEntity implements INFFGirlsT
 			{
 				if (!player.level.isClientSide()) 
 				{
-					/* Put checks before healing item check */
 					if (giveEnhancingItems())
 						return InteractionResult.sidedSuccess(player.level.isClientSide);
 					else if (this.tryApplyHealingItems(player.getItemInHand(hand)) != InteractionResult.PASS)
@@ -231,7 +237,7 @@ public class HmagCursedDollEntity extends CursedDollEntity implements INFFGirlsT
 		} 
 		// Always pass when not owning this mob
 		return InteractionResult.PASS;
-	}
+	}*/
 	
 	/* Inventory */
 
