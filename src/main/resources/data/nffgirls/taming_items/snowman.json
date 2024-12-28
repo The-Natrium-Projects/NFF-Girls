@@ -1,34 +1,34 @@
 [
   {
     "item": "minecraft:blue_ice",
-    "amount": [0.03, 0.06]
-  },
-  {
-    "item": "minecraft:lapis_lazuli",
-    "amount": [0.03, 0.06]
-  },
-  {
-    "item": "minecraft:emerald",
     "amount": [0.04, 0.08]
   },
   {
-    "item": "minecraft:diamond",
+    "item": "minecraft:lapis_lazuli",
+    "amount": [0.04, 0.08]
+  },
+  {
+    "item": "minecraft:emerald",
     "amount": [0.06, 0.10]
   },
   {
+    "item": "minecraft:diamond",
+    "amount": [0.08, 0.14]
+  },
+  {
     "tag": "nffgirls:hmag_berries",
-    "amount": [0.08, 0.12]
+    "amount": [0.10, 0.16]
   },
   {
     "item": "minecraft:golden_apple",
-    "amount": [0.10, 0.15]
+    "amount": [0.15, 0.25]
   },
   {
     "item": "hmag:golden_tropical_fish",
-    "amount": [0.10, 0.15]
+    "amount": [0.15, 0.25]
   },
   {
     "item": "twilightforest:ice_bomb",
-    "amount": [0.10, 0.15]
+    "amount": [0.15, 0.30]
   }
 ]

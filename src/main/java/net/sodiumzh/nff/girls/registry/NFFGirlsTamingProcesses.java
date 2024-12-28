@@ -55,6 +55,6 @@ public class NFFGirlsTamingProcesses {
             "vanilla_undead_b",  () -> new HmagVanillaUndeadTamingProcess().setItemGivingTableOverride(NFFGirlsTamingItems.UNDEAD_B::get));
     // Previously for Wither Skeleton Girl
     public static final NaUtilsRegistry.Accessor<NFFTamingProcess> VANILLA_UNDEAD_C = TAMING_PROCESSES.register(
-            "vanilla_undead_c",  () -> new HmagVanillaUndeadTamingProcess().setItemGivingTableOverride(NFFGirlsTamingItems.UNDEAD_C::get));
+            "vanilla_undead_c",  () -> new HmagVanillaUndeadTamingProcess().setItemGivingTableOverride(NFFGirlsTamingItems.UNDEAD_NETHER_C::get));
 
 }
