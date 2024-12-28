@@ -1,38 +1,38 @@
 [
   {
     "item": "minecraft:cooked_chicken",
-    "amount": [0.04, 0.06]
+    "amount": [0.06, 0.08]
   },
   {
     "item": "minecraft:cooked_rabbit",
-    "amount": [0.04, 0.06]
+    "amount": [0.06, 0.08]
   },
   {
     "item": "minecraft:cooked_mutton",
-    "amount": [0.04, 0.06]
+    "amount": [0.06, 0.08]
   },
   {
     "item": "minecraft:cooked_porkchop",
-    "amount": [0.05, 0.07]
-  },
-  {
-    "item": "minecraft:cooked_beef",
-    "amount": [0.05, 0.07]
-  },
-  {
-    "item": "hmag:golden_tropical_fish",
-    "amount": [0.07, 0.10]
-  },
-  {
-    "item": "hmag:cooked_ravager_meat",
     "amount": [0.08, 0.12]
   },
   {
+    "item": "minecraft:cooked_beef",
+    "amount": [0.08, 0.12]
+  },
+  {
+    "item": "hmag:golden_tropical_fish",
+    "amount": [0.20, 0.30]
+  },
+  {
+    "item": "hmag:cooked_ravager_meat",
+    "amount": [0.12, 0.18]
+  },
+  {
     "item": "minecraft:golden_apple",
-    "amount": [0.12, 0.16]
+    "amount": [0.20, 0.30]
   },
   {
     "item": "minecraft:enchanted_golden_apple",
-    "amount": [0.40, 0.70]
+    "amount": [0.75, 1.25]
   }
 ]

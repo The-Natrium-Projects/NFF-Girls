@@ -1,42 +1,42 @@
 [
   {
     "item": "minecraft:wheat",
-    "amount": [0.02, 0.04]
+    "amount": [0.03, 0.05]
   },
   {
     "item": "minecraft:bread",
-    "amount": [0.03, 0.06]
+    "amount": [0.04, 0.06]
   },
   {
     "tag": "nffgirls:hmag_berries",
-    "amount": [0.08, 0.12]
+    "amount": [0.10, 0.16]
   },
   {
     "item": "minecraft:golden_apple",
-    "amount": [0.10, 0.15]
+    "amount": [0.15, 0.22]
   },
   {
     "item": "hmag:golden_tropical_fish",
-    "amount": [0.10, 0.15]
+    "amount": [0.15, 0.22]
   },
   {
     "item": "minecraft:iron_axe",
-    "amount": [0.05, 0.07]
+    "amount": [0.08, 0.14]
   },
   {
     "item": "minecraft:golden_axe",
-    "amount": [0.07, 0.10]
+    "amount": [0.10, 0.16]
   },
   {
     "item": "minecraft:diamond_axe",
-    "amount": [0.12, 0.18]
+    "amount": [0.20, 0.30]
   },
   {
     "item": "minecraft:netherite_axe",
-    "amount": [0.50, 1.00]
+    "amount": [0.75, 1.01]
   },
   {
     "item": "twilightforest:maze_map_focus",
-    "amount": [0.15, 0.30]
+    "amount": [0.20, 0.40]
   }
 ]

@@ -5,10 +5,10 @@
   },
   {
     "item": "minecraft:gunpowder",
-    "amount": [0.015, 0.03]
+    "amount": [0.05, 0.10]
   },
   {
     "item": "minecraft:tnt",
-    "amount": [0.03, 0.06]
+    "amount": [0.08, 0.16]
   }
 ]
