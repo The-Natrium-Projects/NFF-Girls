@@ -47,7 +47,7 @@ import net.sodiumzh.nff.services.inventory.NFFTamedMobInventoryWithEquipment;
 public class HmagSkeletonGirlEntity extends SkeletonGirlEntity implements INFFGirlsTamedSunSensitiveMob, INFFGirlsBowShootingMob
 {
 
-	
+
 	public HmagSkeletonGirlEntity(EntityType<? extends HmagSkeletonGirlEntity> pEntityType, Level pLevel) {
 		super(pEntityType, pLevel);
 		this.xpReward = 0;
@@ -73,11 +73,11 @@ public class HmagSkeletonGirlEntity extends SkeletonGirlEntity implements INFFGi
 		targetSelector.addGoal(3, new NFFGirlsOwnerHurtTargetGoal(this));
 		targetSelector.addGoal(5, new NFFGirlsNearestHostileToSelfTargetGoal(this));
 		targetSelector.addGoal(6, new NFFGirlsNearestHostileToOwnerTargetGoal(this));
-		
+
 	}
-	
+
 	/* Bow shooting related */
-	
+
 	private boolean justShot = false;
 
 	@Override
@@ -97,18 +97,18 @@ public class HmagSkeletonGirlEntity extends SkeletonGirlEntity implements INFFGi
 				this.postShoot();
 				justShot = false;
 			}
-			
+
 			if (this.getTarget() != null) {
 				this.checkSwitchingWeapons();
 			}
 		}
 	}
-	
+
 	// It's not needed here
 	@Override
-	public void reassessWeaponGoal() 
+	public void reassessWeaponGoal()
 	{}
-	
+
 	/* Bow shooting end */
 
 
@@ -119,8 +119,8 @@ public class HmagSkeletonGirlEntity extends SkeletonGirlEntity implements INFFGi
 	{
 		return NFFGirlsHealingItems.UNDEAD.get();
 	}
-	
-	@Override
+
+	/*@Override
 	public InteractionResult mobInteract(Player player, InteractionHand hand)
 	{
 		if (!player.isShiftKeyDown())
@@ -152,7 +152,7 @@ public class HmagSkeletonGirlEntity extends SkeletonGirlEntity implements INFFGi
 			}
 			return InteractionResult.PASS;
 		}
-	}
+	}*/
 
 	/* Inventory */
 
