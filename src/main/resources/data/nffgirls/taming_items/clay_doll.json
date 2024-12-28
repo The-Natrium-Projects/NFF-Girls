@@ -1,14 +1,14 @@
 [
   {
     "item": "minecraft:clay_ball",
-    "amount": [0.03, 0.06]
-  },
-  {
-    "item": "hmag:ancient_stone",
     "amount": [0.05, 0.10]
   },
   {
+    "item": "hmag:ancient_stone",
+    "amount": [0.10, 0.15]
+  },
+  {
     "tag": "nffgirls:hmag_berries",
-    "amount": [0.06, 0.14]
+    "amount": [0.12, 0.18]
   }
 ]
