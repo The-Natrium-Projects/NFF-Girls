@@ -112,7 +112,7 @@ public class HmagWitherSkeletonGirlEntity extends WitherSkeletonGirlEntity imple
 		return NFFGirlsHealingItems.UNDEAD.get();
 	}
 	
-	@Override
+	/*@Override
 	public InteractionResult mobInteract(Player player, InteractionHand hand)
 	{
 		if (!player.isShiftKeyDown())
@@ -145,7 +145,7 @@ public class HmagWitherSkeletonGirlEntity extends WitherSkeletonGirlEntity imple
 			return InteractionResult.PASS;
 		}
 	}
-
+*/
 	/* Inventory */
 
 	@Override

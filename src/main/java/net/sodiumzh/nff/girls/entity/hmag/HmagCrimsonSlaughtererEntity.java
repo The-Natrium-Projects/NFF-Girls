@@ -124,7 +124,7 @@ public class HmagCrimsonSlaughtererEntity extends CrimsonSlaughtererEntity imple
 		return NFFGirlsHealingItems.CRIMSON.get();
 	}
 
-	@Override
+	/*@Override
 	public InteractionResult mobInteract(Player player, InteractionHand hand)
 	{
 		if (player.getUUID().equals(getOwnerUUID())) {
@@ -133,7 +133,6 @@ public class HmagCrimsonSlaughtererEntity extends CrimsonSlaughtererEntity imple
 			{
 				if (!player.level.isClientSide()) 
 				{
-					/* Put checks before healing item check */
 					if (this.tryApplyHealingItems(player.getItemInHand(hand)) != InteractionResult.PASS)
 						return InteractionResult.sidedSuccess(player.level.isClientSide);
 					// The function above returns PASS when the items are not correct. So when not PASS it should stop here
@@ -161,7 +160,7 @@ public class HmagCrimsonSlaughtererEntity extends CrimsonSlaughtererEntity imple
 		} 
 		// Always pass when not owning this mob
 		return InteractionResult.PASS;
-	}
+	}*/
 	
 	/* Inventory */
 

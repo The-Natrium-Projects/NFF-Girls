@@ -199,8 +199,23 @@ public class HmagCreeperGirlEntity extends NFFTamedCreeperPreset implements INFF
 	{
 		return NFFGirlsHealingItems.CREEPER.get();
 	}
-	
+
 	@Override
+	public InteractionResult serversideMainHandInteraction(Player player, InteractionHand hand) {
+		if (player.getItemInHand(hand).is(Items.FLINT_AND_STEEL)
+				&& this.canIgnite
+				&& (!this.isPowered() || this.getAdditionalInventory().getItem(6).getCount() >= 2)
+				&& this.getSwell() == 0)
+		{
+
+			this.playerIgniteDefault(player, hand);
+			isPlayerIgnited = true;
+			return InteractionResult.sidedSuccess(player.level.isClientSide);
+		}
+		return InteractionResult.PASS;
+	}
+
+/*	@Override
 	public InteractionResult mobInteract(Player player, InteractionHand hand)
 	{
 		if (!player.isShiftKeyDown())
@@ -257,7 +272,7 @@ public class HmagCreeperGirlEntity extends NFFTamedCreeperPreset implements INFF
 			}
 			return InteractionResult.PASS;
 		}
-	}
+	}*/
 	
 	// Inventory
 	

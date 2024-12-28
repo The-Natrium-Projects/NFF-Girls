@@ -109,7 +109,7 @@ public class HmagSlimeGirlEntity extends SlimeGirlEntity implements INFFGirlsTam
 		return NFFGirlsHealingItems.SLIME.get();
 	}
 
-	@Override
+	/*@Override
 	public InteractionResult mobInteract(Player player, InteractionHand hand)
 	{
 		if (player.getUUID().equals(getOwnerUUID())) {
@@ -118,13 +118,7 @@ public class HmagSlimeGirlEntity extends SlimeGirlEntity implements INFFGirlsTam
 			{
 				if (!player.level.isClientSide()) 
 				{
-					/* Put checks before healing item check */
-					/* if (....)
-					 {
-					 	....
-					 }
-					else */if (this.tryApplyHealingItems(player.getItemInHand(hand)) != InteractionResult.PASS)
-						return InteractionResult.sidedSuccess(player.level.isClientSide);
+					return InteractionResult.sidedSuccess(player.level.isClientSide);
 					// The function above returns PASS when the items are not correct. So when not PASS it should stop here
 					else if (hand == InteractionHand.MAIN_HAND
 							&& NFFGirlsEntityStatics.isOnEitherHand(player, NFFGirlsItems.COMMANDING_WAND.get()))
@@ -151,7 +145,7 @@ public class HmagSlimeGirlEntity extends SlimeGirlEntity implements INFFGirlsTam
 		// Always pass when not owning this mob
 		return InteractionResult.PASS;
 	}
-	
+	*/
 	/* Inventory */
 
 	@Override

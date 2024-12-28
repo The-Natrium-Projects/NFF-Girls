@@ -211,7 +211,7 @@ public class HmagJackFrostEntity extends JackFrostEntity implements INFFGirlsTam
 		return NFFGirlsHealingItems.SNOWMAN.get();
 	}
 
-	@Override
+	/*@Override
 	public InteractionResult mobInteract(Player player, InteractionHand hand)
 	{
 		if (player.getUUID().equals(getOwnerUUID())) {
@@ -220,12 +220,7 @@ public class HmagJackFrostEntity extends JackFrostEntity implements INFFGirlsTam
 			{
 				if (!player.level.isClientSide()) 
 				{
-					/* Put checks before healing item check */
-					/* if (....)
-					 {
-					 	....
-					 }
-					else */if (this.tryApplyHealingItems(player.getItemInHand(hand)) != InteractionResult.PASS)
+					if (this.tryApplyHealingItems(player.getItemInHand(hand)) != InteractionResult.PASS)
 						return InteractionResult.sidedSuccess(player.level.isClientSide);
 					// The function above returns PASS when the items are not correct. So when not PASS it should stop here
 					else if (hand == InteractionHand.MAIN_HAND
@@ -253,7 +248,7 @@ public class HmagJackFrostEntity extends JackFrostEntity implements INFFGirlsTam
 		// Always pass when not owning this mob
 		return InteractionResult.PASS;
 	}
-
+*/
 	
 	/* Inventory */
 	

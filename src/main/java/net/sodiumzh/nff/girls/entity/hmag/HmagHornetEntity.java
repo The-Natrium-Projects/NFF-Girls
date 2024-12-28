@@ -127,7 +127,7 @@ public class HmagHornetEntity extends HornetEntity implements INFFGirlsTamed
 		return NFFGirlsHealingItems.BEE.get();
 	}
 
-	@Override
+	/*@Override
 	public InteractionResult mobInteract(Player player, InteractionHand hand)
 	{
 		if (!player.isShiftKeyDown())
@@ -135,14 +135,8 @@ public class HmagHornetEntity extends HornetEntity implements INFFGirlsTamed
 			if (player.getUUID().equals(getOwnerUUID())) {
 				if (!player.level.isClientSide()) 
 				{
-					/* Put checks before healing item check */
-					/* if (....)
-					 {
-					 	....
-					 }
-					else */
 					boolean isHoneyBottle = (player.getItemInHand(hand).is(Items.HONEY_BOTTLE));
-					if (this.tryApplyHealingItems(player.getItemInHand(hand)) != InteractionResult.PASS) 
+					if (this.tryApplyHealingItems(player.getItemInHand(hand), player) != InteractionResult.PASS)
 					{
 						if (isHoneyBottle)
 							NaUtilsItemStatics.giveOrDropDefault(player, Items.GLASS_BOTTLE);
@@ -175,7 +169,7 @@ public class HmagHornetEntity extends HornetEntity implements INFFGirlsTamed
 			return InteractionResult.PASS;
 		}
 	}
-
+*/
 	/* Inventory */
 
 	@Override
