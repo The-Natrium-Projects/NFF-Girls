@@ -6,6 +6,7 @@ import java.util.function.Supplier;
 import com.github.mechalopa.hmag.registry.ModItems;
 import com.github.mechalopa.hmag.world.item.ModSwordItem;
 
+import com.mojang.datafixers.util.Either;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.resources.ResourceLocation;
@@ -19,6 +20,7 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
+import net.sodiumzh.nautils.compat.ModDependencyFallbackItem;
 import net.sodiumzh.nautils.item.NaUtilsItem;
 import net.sodiumzh.nautils.statics.NaUtilsCompatStatics;
 import net.sodiumzh.nautils.statics.NaUtilsInfoStatics;
@@ -112,19 +114,23 @@ public class NFFGirlsItems {
 			.description(NaUtilsInfoStatics.createTranslatable("info.nffgirls.bauble.soul_amulet").withStyle(ChatFormatting.GRAY))
 			.description(baubleHPMax(15.0))
 			.description(baubleAtk(5.0))
+			.description(NaUtilsInfoStatics.createTranslatable("info.nffgirls.bauble.speed", "+10%").withStyle(ChatFormatting.GRAY))
 			.description(NaUtilsInfoStatics.createTranslatable("info.nffgirls.bauble.sun_immune").withStyle(ChatFormatting.GRAY)).cast());
 	public static final RegistryObject<SoulAmuletBaubleItem> SOUL_AMULET_III = ITEMS.register("soul_amulet_iii", () -> new SoulAmuletBaubleItem(
 			"nffgirls:soul_amulet", 3, new Item.Properties().rarity(Rarity.RARE).tab(TAB))
 			.description(NaUtilsInfoStatics.createTranslatable("info.nffgirls.bauble.soul_amulet").withStyle(ChatFormatting.GRAY))
 			.description(baubleHPMax(25.0))
 			.description(baubleAtk(8.0))
+			.description(NaUtilsInfoStatics.createTranslatable("info.nffgirls.bauble.speed", "+15%").withStyle(ChatFormatting.GRAY))
 			.description(NaUtilsInfoStatics.createTranslatable("info.nffgirls.bauble.sun_immune").withStyle(ChatFormatting.GRAY)).cast());
 	public static final RegistryObject<SoulAmuletBaubleItem> SOUL_AMULET_IV = ITEMS.register("soul_amulet_iv", () -> new SoulAmuletBaubleItem(
 			"nffgirls:soul_amulet", 4, new Item.Properties().rarity(Rarity.EPIC).tab(TAB)).alwaysFoil()
 			.description(NaUtilsInfoStatics.createTranslatable("info.nffgirls.bauble.soul_amulet").withStyle(ChatFormatting.GRAY))
 			.description(baubleHPMax(40.0))
 			.description(baubleAtk(12.0))
+			.description(NaUtilsInfoStatics.createTranslatable("info.nffgirls.bauble.speed", "+20%").withStyle(ChatFormatting.GRAY))
 			.description(baubleHPRecovery(0.1))
+
 			.description(NaUtilsInfoStatics.createTranslatable("info.nffgirls.bauble.sun_immune").withStyle(ChatFormatting.GRAY)).cast());
 	public static final RegistryObject<CourageAmuletBaubleItem> COURAGE_AMULET = ITEMS.register("courage_amulet", () -> new CourageAmuletBaubleItem(
 			"nffgirls:courage_amulet", 1, new Item.Properties().rarity(Rarity.UNCOMMON).tab(TAB))
@@ -140,13 +146,11 @@ public class NFFGirlsItems {
 			"nffgirls:resistance_amulet", 1, new Item.Properties().rarity(Rarity.UNCOMMON).tab(TAB))
 			.description(baubleArmor(4.0))
 			.description(baubleHPMax(15.0))
-			.description(NaUtilsInfoStatics.createTranslatable("info.nffgirls.bauble.speed", "-10%").withStyle(ChatFormatting.GRAY))
 			.description(NaUtilsInfoStatics.createTranslatable("info.nffgirls.bauble.sun_immune").withStyle(ChatFormatting.GRAY)).cast());
 	public static final RegistryObject<ResistanceAmuletBaubleItem> RESISTANCE_AMULET_II = ITEMS.register("resistance_amulet_ii", () -> new ResistanceAmuletBaubleItem(
 			"nffgirls:resistance_amulet", 2, new Item.Properties().rarity(Rarity.UNCOMMON).tab(TAB)).alwaysFoil()
 			.description(baubleArmor(6.0))
 			.description(baubleHPMax(25.0))
-			.description(NaUtilsInfoStatics.createTranslatable("info.nffgirls.bauble.speed", "-10%").withStyle(ChatFormatting.GRAY))
 			.description(NaUtilsInfoStatics.createTranslatable("info.nffgirls.bauble.sun_immune").withStyle(ChatFormatting.GRAY)).cast());
 	public static final RegistryObject<HealingJadeBaubleItem> HEALING_JADE = ITEMS.register("healing_jade", () -> new HealingJadeBaubleItem(
 			"nffgirls:healing_jade", 1, new Item.Properties().rarity(Rarity.UNCOMMON).tab(TAB))
@@ -221,9 +225,10 @@ public class NFFGirlsItems {
 
 	// Other mod depending
 
-	public static final Optional<RegistryObject<Item>> MOB_DICTIONARY = NaUtilsCompatStatics.registerModDependent(
-		ITEMS, "mob_dictionary", "citadel",
-			() -> new CitadelBasedMobDictionaryItem(new Item.Properties().stacksTo(1).tab(TAB)));
+	public static final Either<RegistryObject<CitadelBasedMobDictionaryItem>, RegistryObject<ModDependencyFallbackItem>> MOB_DICTIONARY =
+		NaUtilsCompatStatics.registerModDependentOrElse(ITEMS, "mob_dictionary", "citadel",
+			() -> new CitadelBasedMobDictionaryItem(new Item.Properties().stacksTo(1).tab(TAB)),
+			() -> new ModDependencyFallbackItem("Citadel", new Item.Properties().stacksTo(1).tab(TAB)));
 
 	/*static
 	{

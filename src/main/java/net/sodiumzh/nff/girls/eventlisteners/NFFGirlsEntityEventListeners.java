@@ -1297,7 +1297,7 @@ public class NFFGirlsEntityEventListeners
 						InteractionResult res = tamed.serversideMainHandInteraction(player, hand);
 						if (res.consumesAction()) {
 							event.setInteractionResult(InteractionResult.sidedSuccess(player.level.isClientSide()));
-						} else if (tamed.tryApplyHealingItems(player.getItemInHand(hand)) != InteractionResult.PASS) {
+						} else if (tamed.tryApplyHealingItems(player.getItemInHand(hand), player) != InteractionResult.PASS) {
 						} else if (tamed.isCommandingItem(player.getItemInHand(hand))) {
 							tamed.switchAIState();
 						} else return;
