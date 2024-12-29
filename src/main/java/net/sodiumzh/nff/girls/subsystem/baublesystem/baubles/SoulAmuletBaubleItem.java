@@ -35,19 +35,22 @@ public class SoulAmuletBaubleItem extends NFFGirlsDedicatedBaubleItem
 		{
 			return BaubleAttributeModifier.makeModifiers(
 					Attributes.MAX_HEALTH, 15d * NFFGirlsConfigs.ValueCache.Baubles.BAUBLE_MAX_HP_BOOSTING_SCALE,
-					Attributes.ATTACK_DAMAGE, 5d * NFFGirlsConfigs.ValueCache.Baubles.BAUBLE_ATK_BOOSTING_SCALE);
+					Attributes.ATTACK_DAMAGE, 5d * NFFGirlsConfigs.ValueCache.Baubles.BAUBLE_ATK_BOOSTING_SCALE,
+					Attributes.MOVEMENT_SPEED, 0.10d, "mb");
 		}
 		case 3:
 		{
 			return BaubleAttributeModifier.makeModifiers(
 					Attributes.MAX_HEALTH, 25d * NFFGirlsConfigs.ValueCache.Baubles.BAUBLE_MAX_HP_BOOSTING_SCALE,
-					Attributes.ATTACK_DAMAGE, 8d * NFFGirlsConfigs.ValueCache.Baubles.BAUBLE_ATK_BOOSTING_SCALE);
+					Attributes.ATTACK_DAMAGE, 8d * NFFGirlsConfigs.ValueCache.Baubles.BAUBLE_ATK_BOOSTING_SCALE,
+					Attributes.MOVEMENT_SPEED, 0.15d, "mb");
 		}
 		case 4:
 		{
 			return BaubleAttributeModifier.makeModifiers(
 					Attributes.MAX_HEALTH, 35d * NFFGirlsConfigs.ValueCache.Baubles.BAUBLE_MAX_HP_BOOSTING_SCALE,
-					Attributes.ATTACK_DAMAGE, 12d * NFFGirlsConfigs.ValueCache.Baubles.BAUBLE_ATK_BOOSTING_SCALE);
+					Attributes.ATTACK_DAMAGE, 12d * NFFGirlsConfigs.ValueCache.Baubles.BAUBLE_ATK_BOOSTING_SCALE,
+					Attributes.MOVEMENT_SPEED, 0.20d, "mb");
 		}
 		default:
 		{
