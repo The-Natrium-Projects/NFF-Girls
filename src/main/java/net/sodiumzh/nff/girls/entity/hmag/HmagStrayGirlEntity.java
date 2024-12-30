@@ -152,7 +152,7 @@ public class HmagStrayGirlEntity extends StrayGirlEntity implements INFFGirlsTam
 						this.convertToSkeleton();
 						return InteractionResult.sidedSuccess(player.level().isClientSide);
 					} 
-					else if (this.tryApplyHealingItems(player.getItemInHand(hand)) != InteractionResult.PASS)
+					else if (this.tryApplyHealingItems(player.getItemInHand(hand), player) != InteractionResult.PASS)
 					{}
 					else if (hand == InteractionHand.MAIN_HAND
 							&& NFFGirlsEntityStatics.isOnEitherHand(player, NFFGirlsItems.COMMANDING_WAND.get()))
