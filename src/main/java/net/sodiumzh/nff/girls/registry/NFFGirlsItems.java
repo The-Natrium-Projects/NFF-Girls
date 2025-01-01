@@ -54,6 +54,38 @@ public class NFFGirlsItems {
 		return regItem(name, new Item.Properties());
 	}
 
+	protected static <T extends Item> RegistryObject<T> register(String name, Supplier<T> itemSupplier)
+	{
+		return ITEMS.register(name, itemSupplier);
+	}
+	
+	protected static <T extends Item> RegistryObject<T> registerNoTab(String name, Supplier<T> itemSupplier)
+	{
+		RegistryObject<T> res = ITEMS.register(name, itemSupplier);
+		NO_TAB.add(res);
+		return res;
+	}
+
+	public static RegistryObject<Item> registerDefault(String name)
+	{
+		return register(name, () -> new Item(new Item.Properties()));
+	}
+
+	public static RegistryObject<Item> registerDefaultNoTab(String name)
+	{
+		return registerNoTab(name, () -> new Item(new Item.Properties()));
+	}
+
+	public static <T extends Item> Either<RegistryObject<T>, RegistryObject<ModDependencyFallbackItem>>
+		registerDepending(boolean tab, String key, String dependingModId, Supplier<T> supplier)
+	{
+		Either<RegistryObject<T>, RegistryObject<ModDependencyFallbackItem>> res =
+				NaUtilsCompatStatics.registerModDependentOrElse(ITEMS, key, dependingModId, supplier,
+						() -> new ModDependencyFallbackItem(dependingModId, new Item.Properties()));
+		res.ifLeft(obj -> {if (!tab) NO_TAB.add(obj);}).ifRight(obj -> {if (!tab) NO_TAB.add(obj);});
+		return res;
+	}
+	
 	/************************************/
 	/* Item Registering, with constants */ 
 	/************************************/	
@@ -222,9 +254,8 @@ public class NFFGirlsItems {
 	// Other mod depending
 
 	public static final Either<RegistryObject<CitadelBasedMobDictionaryItem>, RegistryObject<ModDependencyFallbackItem>> MOB_DICTIONARY =
-		NaUtilsCompatStatics.registerModDependentOrElse(ITEMS, "mob_dictionary", "citadel",
-			() -> new CitadelBasedMobDictionaryItem(new Item.Properties().stacksTo(1).tab(TAB)),
-			() -> new ModDependencyFallbackItem("Citadel", new Item.Properties().stacksTo(1).tab(TAB)));
+			registerDepending(true,"mob_dictionary", "citadel",
+			() -> new CitadelBasedMobDictionaryItem(new Item.Properties().stacksTo(1)));
 
 	/*static
 	{
