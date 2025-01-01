@@ -139,7 +139,7 @@ public class HmagEnderExecutorEntity extends NFFTamedEnderManPreset implements I
 		return NFFGirlsHealingItems.ENDERMAN.get();
 	}
 	
-	/*@Override
+	@Override
 	public InteractionResult mobInteract(Player player, InteractionHand hand)
 	{
 		if (!player.isShiftKeyDown())
@@ -168,9 +168,10 @@ public class HmagEnderExecutorEntity extends NFFTamedEnderManPreset implements I
 					return InteractionResult.sidedSuccess(player.level().isClientSide);
 				}
 			}
+			/* Other actions... */
 			return InteractionResult.PASS;
 		}
-	}*/
+	}
 
 
 	// Interaction end

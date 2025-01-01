@@ -19,7 +19,6 @@ import net.minecraft.world.entity.ai.goal.LookAtPlayerGoal;
 import net.minecraft.world.entity.ai.goal.RandomLookAroundGoal;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
@@ -124,41 +123,7 @@ public class HmagNecroticReaperEntity extends NecroticReaperEntity implements IN
 		return NFFGirlsHealingItems.UNDEAD.get();
 	}
 
-	/*@Override
-	public InteractionResult clientsideMainHandInteraction(Player player, InteractionHand hand)
-	{
-		if (player.getItemInHand(hand).is(NFFGirlsItems.COMMANDING_WAND.get()))
-		{
-			if (this.getFavorability() >= 90 || player.getItemBySlot(EquipmentSlot.HEAD).is(NFFGirlsItems.NECROMANCER_HAT.get()))
-			{
-				NFFTamedStatics.openBefriendedInventory(player, this);
-				return InteractionResult.sidedSuccess(player.level.isClientSide);
-			}
-			else {
-				NaUtilsMiscStatics.printToScreen(NaUtilsInfoStatics.createTranslatable("info.nffgirls.necrotic_reaper_using_commanding_wand"), player);
-				return InteractionResult.PASS;
-			}
-		}
-		return InteractionResult.PASS;
-	}*/
-
 	@Override
-	public boolean isCommandingItem(ItemStack test) {
-		if (test.is(NFFGirlsItems.NECROMANCER_WAND.get()))
-			return true;
-		else if (test.is(NFFGirlsItems.COMMANDING_WAND.get()))
-		{
-			if (this.getFavorability() >= 90 || this.getOwner().getItemBySlot(EquipmentSlot.HEAD).is(NFFGirlsItems.NECROMANCER_HAT.get()))
-				return true;
-			else {
-				NaUtilsMiscStatics.printToScreen(NaUtilsInfoStatics.createTranslatable("info.nffgirls.necrotic_reaper_using_commanding_wand"), this.getOwner());
-				return false;
-			}
-		}
-		return false;
-	}
-
-	/*@Override
 	public InteractionResult mobInteract(Player player, InteractionHand hand)
 	{
 		if (player.getUUID().equals(getOwnerUUID())) {
@@ -212,7 +177,7 @@ public class HmagNecroticReaperEntity extends NecroticReaperEntity implements IN
 		} 
 		// Always pass when not owning this mob
 		return InteractionResult.PASS;
-	}*/
+	}
 	
 	/* Inventory */
 

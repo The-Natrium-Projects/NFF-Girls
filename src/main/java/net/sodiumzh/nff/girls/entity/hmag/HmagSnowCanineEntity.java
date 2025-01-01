@@ -29,13 +29,13 @@ import net.sodiumzh.nff.girls.registry.NFFGirlsHealingItems;
 import net.sodiumzh.nff.girls.registry.NFFGirlsItems;
 import net.sodiumzh.nff.girls.sound.NFFGirlsSoundPresets;
 import net.sodiumzh.nff.girls.util.NFFGirlsEntityStatics;
-import net.sodiumzh.nff.services.entity.ai.goal.preset.NFFLeapAtOwnerGoal;
-import net.sodiumzh.nff.services.entity.ai.goal.preset.NFFLeapAtTargetGoal;
-import net.sodiumzh.nff.services.entity.ai.goal.preset.NFFMeleeAttackGoal;
-import net.sodiumzh.nff.services.entity.ai.goal.preset.NFFWaterAvoidingRandomStrollGoal;
-import net.sodiumzh.nff.services.entity.ai.goal.preset.target.NFFHurtByTargetGoal;
-import net.sodiumzh.nff.services.entity.ai.goal.preset.target.NFFOwnerHurtByTargetGoal;
-import net.sodiumzh.nff.services.entity.ai.goal.preset.target.NFFOwnerHurtTargetGoal;
+import net.sodiumzh.nff.services.entity.ai.goal.presets.NFFLeapAtOwnerGoal;
+import net.sodiumzh.nff.services.entity.ai.goal.presets.NFFLeapAtTargetGoal;
+import net.sodiumzh.nff.services.entity.ai.goal.presets.NFFMeleeAttackGoal;
+import net.sodiumzh.nff.services.entity.ai.goal.presets.NFFWaterAvoidingRandomStrollGoal;
+import net.sodiumzh.nff.services.entity.ai.goal.presets.target.NFFHurtByTargetGoal;
+import net.sodiumzh.nff.services.entity.ai.goal.presets.target.NFFOwnerHurtByTargetGoal;
+import net.sodiumzh.nff.services.entity.ai.goal.presets.target.NFFOwnerHurtTargetGoal;
 import net.sodiumzh.nautils.entity.MobApplicableItemTable;
 import net.sodiumzh.nff.services.entity.taming.NFFTamedStatics;
 import net.sodiumzh.nff.services.inventory.NFFTamedInventoryMenu;
@@ -93,17 +93,22 @@ public class HmagSnowCanineEntity extends SnowCanineEntity implements INFFGirlsT
 		return NFFGirlsHealingItems.ANIMAL.get();
 	}
 
-	/*@Override
+	@Override
 	public InteractionResult mobInteract(Player player, InteractionHand hand)
 	{
 		if (player.getUUID().equals(getOwnerUUID())) {
 			// For normal interaction
 			if (!player.isShiftKeyDown())
 			{
-				if (!player.level.isClientSide()) 
+				if (!player.level().isClientSide()) 
 				{
-					if (this.tryApplyHealingItems(player.getItemInHand(hand)) != InteractionResult.PASS)
-						return InteractionResult.sidedSuccess(player.level.isClientSide);
+					/* Put checks before healing item check */
+					/* if (....)
+					 {
+					 	....
+					 }
+					else */if (this.tryApplyHealingItems(player.getItemInHand(hand)) != InteractionResult.PASS)
+						return InteractionResult.sidedSuccess(player.level().isClientSide);
 					// The function above returns PASS when the items are not correct. So when not PASS it should stop here
 					else if (hand == InteractionHand.MAIN_HAND
 							&& NFFGirlsEntityStatics.isOnEitherHand(player, NFFGirlsItems.COMMANDING_WAND.get()))
@@ -114,7 +119,7 @@ public class HmagSnowCanineEntity extends SnowCanineEntity implements INFFGirlsT
 					else return InteractionResult.PASS;
 				}
 				// Interacted
-				return InteractionResult.sidedSuccess(player.level.isClientSide);
+				return InteractionResult.sidedSuccess(player.level().isClientSide);
 			}
 			// For interaction with shift key down
 			else
@@ -123,14 +128,14 @@ public class HmagSnowCanineEntity extends SnowCanineEntity implements INFFGirlsT
 				if (hand == InteractionHand.MAIN_HAND && NFFGirlsEntityStatics.isOnEitherHand(player, NFFGirlsItems.COMMANDING_WAND.get()))
 				{
 					NFFTamedStatics.openBefriendedInventory(player, this);
-					return InteractionResult.sidedSuccess(player.level.isClientSide);
+					return InteractionResult.sidedSuccess(player.level().isClientSide);
 				}
 			}
 		} 
 		// Always pass when not owning this mob
 		return InteractionResult.PASS;
 	}
-	*/
+	
 	/* Inventory */
 
 	@Override

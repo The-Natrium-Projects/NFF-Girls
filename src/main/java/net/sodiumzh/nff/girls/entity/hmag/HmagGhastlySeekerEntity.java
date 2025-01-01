@@ -33,18 +33,18 @@ import net.sodiumzh.nff.girls.entity.ai.goal.target.NFFGirlsNearestHostileToSelf
 import net.sodiumzh.nff.girls.entity.ai.movecontrol.NFFGirlsHmagFlyingMoveControl;
 import net.sodiumzh.nff.girls.entity.projectile.NFFGhastFireballEntity;
 import net.sodiumzh.nff.girls.eventlisteners.NFFGirlsEntityEventListeners;
-import net.sodiumzh.nff.girls.inventory.NFFGirlsGhastlySeekerInventoryMenu;
+import net.sodiumzh.nff.girls.inventory.NFFGirlsHmagGhastlySeekerInventoryMenu;
 import net.sodiumzh.nff.girls.registry.NFFGirlsHealingItems;
 import net.sodiumzh.nff.girls.registry.NFFGirlsItems;
 import net.sodiumzh.nff.girls.sound.NFFGirlsSoundPresets;
 import net.sodiumzh.nff.girls.util.NFFGirlsEntityStatics;
 import net.sodiumzh.nff.services.entity.ai.goal.NFFGoal;
-import net.sodiumzh.nff.services.entity.ai.goal.preset.INFFFollowOwner;
-import net.sodiumzh.nff.services.entity.ai.goal.preset.NFFFlyingLandGoal;
-import net.sodiumzh.nff.services.entity.ai.goal.preset.NFFFlyingRandomMoveGoal;
-import net.sodiumzh.nff.services.entity.ai.goal.preset.target.NFFHurtByTargetGoal;
-import net.sodiumzh.nff.services.entity.ai.goal.preset.target.NFFOwnerHurtByTargetGoal;
-import net.sodiumzh.nff.services.entity.ai.goal.preset.target.NFFOwnerHurtTargetGoal;
+import net.sodiumzh.nff.services.entity.ai.goal.presets.INFFFollowOwner;
+import net.sodiumzh.nff.services.entity.ai.goal.presets.NFFFlyingLandGoal;
+import net.sodiumzh.nff.services.entity.ai.goal.presets.NFFFlyingRandomMoveGoal;
+import net.sodiumzh.nff.services.entity.ai.goal.presets.target.NFFHurtByTargetGoal;
+import net.sodiumzh.nff.services.entity.ai.goal.presets.target.NFFOwnerHurtByTargetGoal;
+import net.sodiumzh.nff.services.entity.ai.goal.presets.target.NFFOwnerHurtTargetGoal;
 import net.sodiumzh.nautils.entity.MobApplicableItemTable;
 import net.sodiumzh.nff.services.entity.taming.INFFTamed;
 import net.sodiumzh.nff.services.entity.taming.NFFTamedStatics;
@@ -109,7 +109,7 @@ public class HmagGhastlySeekerEntity extends GhastlySeekerEntity implements INFF
 	/*@Override
 	public void aiStep()
 	{
-		if (!level.isClientSide)
+		if (!level().isClientSide)
 			super.aiStep();
 		else super.aiStep();
 	}*/
@@ -124,17 +124,22 @@ public class HmagGhastlySeekerEntity extends GhastlySeekerEntity implements INFF
 		return NFFGirlsHealingItems.GHAST.get();
 	}
 
-	/*@Override
+	@Override
 	public InteractionResult mobInteract(Player player, InteractionHand hand)
 	{
 		if (player.getUUID().equals(getOwnerUUID())) {
 			// For normal interaction
 			if (!player.isShiftKeyDown())
 			{
-				if (!player.level.isClientSide()) 
+				if (!player.level().isClientSide()) 
 				{
-					if (this.tryApplyHealingItems(player.getItemInHand(hand)) != InteractionResult.PASS)
-						return InteractionResult.sidedSuccess(player.level.isClientSide);
+					/* Put checks before healing item check */
+					/* if (....)
+					 {
+					 	....
+					 }
+					else */if (this.tryApplyHealingItems(player.getItemInHand(hand)) != InteractionResult.PASS)
+						return InteractionResult.sidedSuccess(player.level().isClientSide);
 					// The function above returns PASS when the items are not correct. So when not PASS it should stop here
 					else if (hand == InteractionHand.MAIN_HAND
 							&& NFFGirlsEntityStatics.isOnEitherHand(player, NFFGirlsItems.COMMANDING_WAND.get()))
@@ -144,7 +149,7 @@ public class HmagGhastlySeekerEntity extends GhastlySeekerEntity implements INFF
 					else return InteractionResult.PASS;
 				}
 				// Interacted
-				return InteractionResult.sidedSuccess(player.level.isClientSide);
+				return InteractionResult.sidedSuccess(player.level().isClientSide);
 			}
 			// For interaction with shift key down
 			else
@@ -152,13 +157,13 @@ public class HmagGhastlySeekerEntity extends GhastlySeekerEntity implements INFF
 				if (hand == InteractionHand.MAIN_HAND && NFFGirlsEntityStatics.isOnEitherHand(player, NFFGirlsItems.COMMANDING_WAND.get()))
 				{
 					NFFTamedStatics.openBefriendedInventory(player, this);
-					return InteractionResult.sidedSuccess(player.level.isClientSide);
+					return InteractionResult.sidedSuccess(player.level().isClientSide);
 				}
 			}
 		} 
 		// Always pass when not owning this mob
 		return InteractionResult.PASS;
-	}*/
+	}
 	
 	/* Inventory */
 
@@ -169,7 +174,7 @@ public class HmagGhastlySeekerEntity extends GhastlySeekerEntity implements INFF
 
 	@Override
 	public NFFTamedInventoryMenu makeMenu(int containerId, Inventory playerInventory, Container container) {
-		return new NFFGirlsGhastlySeekerInventoryMenu(containerId, playerInventory, container, this); 
+		return new NFFGirlsHmagGhastlySeekerInventoryMenu(containerId, playerInventory, container, this);
 	}
 
 	/* Save and Load */
@@ -297,7 +302,7 @@ public class HmagGhastlySeekerEntity extends GhastlySeekerEntity implements INFF
 				if (mob.getAdditionalInventory().getItem(4).isEmpty())
 					return;
 				
-				Level world = this.parent.level;
+				Level world = this.parent.level();
 				++this.attackTimer;
 
 				if (this.attackTimer == 10 && !this.parent.isSilent())

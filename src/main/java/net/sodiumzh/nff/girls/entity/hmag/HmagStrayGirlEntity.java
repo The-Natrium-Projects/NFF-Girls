@@ -178,30 +178,6 @@ public class HmagStrayGirlEntity extends StrayGirlEntity implements INFFGirlsTam
 		}
 	}
 
-	@Override
-	public InteractionResult serversideMainHandInteraction(Player player, InteractionHand hand)
-	{
-		if (NFFGirlsConfigs.ValueCache.Interaction.ALLOW_REVERSE_CONVERSION
-				&& player.getItemInHand(hand).is(Items.FLINT_AND_STEEL)
-				&& (isFromSkeleton || NFFGirlsConfigs.ValueCache.Interaction.ALL_STRAY_GIRLS_CAN_CONVERT_TO_SKELETONS))
-		{
-			// Use flint&steel
-			this.level.playSound(player, this.getX(), this.getY(), this.getZ(), SoundEvents.FLINTANDSTEEL_USE,
-					this.getSoundSource(), 1.0F, this.random.nextFloat() * 0.4F + 0.8F);
-			if (!this.level.isClientSide)
-			{
-				player.getItemInHand(hand).hurtAndBreak(1, player, (p) ->
-				{
-					p.broadcastBreakEvent(hand);
-				});
-			}
-			// and convert
-			this.convertToSkeleton();
-			return InteractionResult.sidedSuccess(player.level.isClientSide);
-		}
-		return InteractionResult.PASS;
-	}
-
 	/* Inventory */
 
 	@Override

@@ -107,21 +107,8 @@ public class HmagZombieGirlEntity extends ZombieGirlEntity implements INFFGirlsT
 	{
 		return NFFGirlsHealingItems.UNDEAD.get();
 	}
-
+	
 	@Override
-	public InteractionResult serversideMainHandInteraction(Player player, InteractionHand hand) {
-		if (NFFGirlsConfigs.ValueCache.Interaction.ALLOW_REVERSE_CONVERSION
-				&& player.getItemInHand(hand).is(Items.SPONGE)
-				&& (isFromHusk || NFFGirlsConfigs.ValueCache.Interaction.ALL_ZOMBIE_GIRLS_CAN_CONVERT_TO_HUSKS)) {
-			player.getItemInHand(hand).shrink(1);
-			this.spawnAtLocation(new ItemStack(Items.WET_SPONGE, 1));
-			this.convertToHusk();
-			return InteractionResult.sidedSuccess(player.level.isClientSide);
-		}
-		return InteractionResult.PASS;
-	}
-
-	/*@Override
 	public InteractionResult mobInteract(Player player, InteractionHand hand)
 	{
 		if (!player.isShiftKeyDown())
@@ -161,7 +148,7 @@ public class HmagZombieGirlEntity extends ZombieGirlEntity implements INFFGirlsT
 			}
 			return InteractionResult.PASS;
 		}
-	}*/
+	}
 
 	/* Inventory */
 

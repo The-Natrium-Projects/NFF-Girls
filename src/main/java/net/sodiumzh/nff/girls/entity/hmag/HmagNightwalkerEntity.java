@@ -40,17 +40,17 @@ import net.sodiumzh.nff.girls.entity.ai.goal.NFFGirlsFollowOwnerGoal;
 import net.sodiumzh.nff.girls.entity.ai.goal.NFFGirlsRangedAttackGoal;
 import net.sodiumzh.nff.girls.entity.ai.goal.target.NFFGirlsNearestHostileToOwnerTargetGoal;
 import net.sodiumzh.nff.girls.entity.ai.goal.target.NFFGirlsNearestHostileToSelfTargetGoal;
-import net.sodiumzh.nff.girls.inventory.NFFGirlsNightwalkerInventoryMenu;
+import net.sodiumzh.nff.girls.inventory.NFFGirlsHmagNightwalkerInventoryMenu;
 import net.sodiumzh.nff.girls.registry.NFFGirlsBlocks;
 import net.sodiumzh.nff.girls.registry.NFFGirlsConfigs;
 import net.sodiumzh.nff.girls.registry.NFFGirlsHealingItems;
 import net.sodiumzh.nff.girls.registry.NFFGirlsItems;
 import net.sodiumzh.nff.girls.sound.NFFGirlsSoundPresets;
 import net.sodiumzh.nff.girls.util.NFFGirlsEntityStatics;
-import net.sodiumzh.nff.services.entity.ai.goal.preset.NFFWaterAvoidingRandomStrollGoal;
-import net.sodiumzh.nff.services.entity.ai.goal.preset.target.NFFHurtByTargetGoal;
-import net.sodiumzh.nff.services.entity.ai.goal.preset.target.NFFOwnerHurtByTargetGoal;
-import net.sodiumzh.nff.services.entity.ai.goal.preset.target.NFFOwnerHurtTargetGoal;
+import net.sodiumzh.nff.services.entity.ai.goal.presets.NFFWaterAvoidingRandomStrollGoal;
+import net.sodiumzh.nff.services.entity.ai.goal.presets.target.NFFHurtByTargetGoal;
+import net.sodiumzh.nff.services.entity.ai.goal.presets.target.NFFOwnerHurtByTargetGoal;
+import net.sodiumzh.nff.services.entity.ai.goal.presets.target.NFFOwnerHurtTargetGoal;
 import net.sodiumzh.nautils.entity.MobApplicableItemTable;
 import net.sodiumzh.nff.services.entity.taming.NFFTamedStatics;
 import net.sodiumzh.nff.services.inventory.NFFTamedInventoryMenu;
@@ -102,11 +102,11 @@ public class HmagNightwalkerEntity extends NightwalkerEntity implements INFFGirl
 		double d3 = target.getZ() - this.getZ();
 		double d4 = Math.sqrt(d1 * d1 + d3 * d3) * 0.04D;
 		BefriendedNightwalkerMagicBallEntity bullet = 
-				new BefriendedNightwalkerMagicBallEntity(this.level, this, d1 + this.getRandom().nextGaussian() * d4, d2, d3 + this.getRandom().nextGaussian() * d4);
+				new BefriendedNightwalkerMagicBallEntity(this.level(), this, d1 + this.getRandom().nextGaussian() * d4, d2, d3 + this.getRandom().nextGaussian() * d4);
 		bullet.setPos(bullet.getX(), this.getY(0.4D) + 0.25D, bullet.getZ());
 		bullet.setDamage(4.0F + (float)(this.getAttributeValue(Attributes.ATTACK_DAMAGE)));
 		bullet.setEffectLevel((byte)1);
-		bullet.setVariant(3);
+		bullet.setVariant(MagicBulletEntity.Variant.byId(3));
 		if (this.getAdditionalInventory().getItem(4).is(ModItems.ANCIENT_STONE.get()))
 		{
 			bullet.setExpandsTransformingRange();
@@ -118,7 +118,7 @@ public class HmagNightwalkerEntity extends NightwalkerEntity implements INFFGirl
 			this.getAdditionalInventory().getItem(4).shrink(1);
 			bullet.setDamage(bullet.getDamage() * 1.2f);
 		}
-		this.level.addFreshEntity(bullet);
+		this.level().addFreshEntity(bullet);
 		this.playSound(SoundEvents.SHULKER_SHOOT, 2.0F, (this.getRandom().nextFloat() - this.getRandom().nextFloat()) * 0.2F + 1.0F);	
 	}
 	
@@ -141,17 +141,22 @@ public class HmagNightwalkerEntity extends NightwalkerEntity implements INFFGirl
 		return NFFGirlsHealingItems.CLAY_DOLL.get();
 	}
 
-	/*@Override
+	@Override
 	public InteractionResult mobInteract(Player player, InteractionHand hand)
 	{
 		if (player.getUUID().equals(getOwnerUUID())) {
 			// For normal interaction
 			if (!player.isShiftKeyDown())
 			{
-				if (!player.level.isClientSide()) 
+				if (!player.level().isClientSide()) 
 				{
-					if (this.tryApplyHealingItems(player.getItemInHand(hand)) != InteractionResult.PASS)
-						return InteractionResult.sidedSuccess(player.level.isClientSide);
+					/* Put checks before healing item check */
+					/* if (....)
+					 {
+					 	....
+					 }
+					else */if (this.tryApplyHealingItems(player.getItemInHand(hand)) != InteractionResult.PASS)
+						return InteractionResult.sidedSuccess(player.level().isClientSide);
 					// The function above returns PASS when the items are not correct. So when not PASS it should stop here
 					else if (hand == InteractionHand.MAIN_HAND
 							&& NFFGirlsEntityStatics.isOnEitherHand(player, NFFGirlsItems.COMMANDING_WAND.get()))
@@ -162,7 +167,7 @@ public class HmagNightwalkerEntity extends NightwalkerEntity implements INFFGirl
 					else return InteractionResult.PASS;
 				}
 				// Interacted
-				return InteractionResult.sidedSuccess(player.level.isClientSide);
+				return InteractionResult.sidedSuccess(player.level().isClientSide);
 			}
 			// For interaction with shift key down
 			else
@@ -171,13 +176,13 @@ public class HmagNightwalkerEntity extends NightwalkerEntity implements INFFGirl
 				if (hand == InteractionHand.MAIN_HAND && NFFGirlsEntityStatics.isOnEitherHand(player, NFFGirlsItems.COMMANDING_WAND.get()))
 				{
 					NFFTamedStatics.openBefriendedInventory(player, this);
-					return InteractionResult.sidedSuccess(player.level.isClientSide);
+					return InteractionResult.sidedSuccess(player.level().isClientSide);
 				}
 			}
 		} 
 		// Always pass when not owning this mob
 		return InteractionResult.PASS;
-	}*/
+	}
 	
 	/* Inventory */
 
@@ -188,7 +193,7 @@ public class HmagNightwalkerEntity extends NightwalkerEntity implements INFFGirl
 	
 	@Override
 	public NFFTamedInventoryMenu makeMenu(int containerId, Inventory playerInventory, Container container) {
-		return new NFFGirlsNightwalkerInventoryMenu(containerId, playerInventory, container, this);
+		return new NFFGirlsHmagNightwalkerInventoryMenu(containerId, playerInventory, container, this);
 	}
 
 	/* Save and Load */
@@ -303,13 +308,13 @@ public class HmagNightwalkerEntity extends NightwalkerEntity implements INFFGirl
 		public void onHitBlock(BlockHitResult result)
 		{
 			super.onHitBlock(result);
-			if (!this.level.isClientSide)
+			if (!this.level().isClientSide)
 			{
 				if (!NaUtilsMathStatics.withinManhattanDistance(result.getBlockPos(), this.shouldExpandTransformingRange ? 3 : 2)
-					.map(pos -> transformBlocks(this.level, pos)).filter(Boolean::booleanValue).toList().isEmpty())
+					.map(pos -> transformBlocks(this.level(), pos)).filter(Boolean::booleanValue).toList().isEmpty())
 				{
 					NaUtilsEntityStatics.sendParticlesToEntity(this, ParticleTypes.EXPLOSION, 0, 0, 1, 0);
-					this.level.playSound(null, this, SoundEvents.GENERIC_EXPLODE, this.getSoundSource(), 2.0f, 0.7f);
+					this.level().playSound(null, this, SoundEvents.GENERIC_EXPLODE, this.getSoundSource(), 2.0f, 0.7f);
 				}
 			}
 		}
@@ -318,7 +323,7 @@ public class HmagNightwalkerEntity extends NightwalkerEntity implements INFFGirl
 		public void onHitEntity(EntityHitResult result)
 		{
 			boolean shouldDealDamage = true;
-			if (!this.level.isClientSide 
+			if (!this.level().isClientSide
 					&& result.getEntity() instanceof LivingEntity living 
 					&& NFFGirlsEntityStatics.isAlly(getOwner(), living) 
 					&& !NFFGirlsConfigs.ValueCache.Combat.ENABLE_PROJECTILE_FRIENDLY_DAMAGE)
@@ -328,10 +333,10 @@ public class HmagNightwalkerEntity extends NightwalkerEntity implements INFFGirl
 			if (shouldDealDamage)
 				super.onHitEntity(result);
 			if (!NaUtilsMathStatics.withinManhattanDistance(result.getEntity().getOnPos(), this.shouldExpandTransformingRange ? 3 : 2)
-				.map(pos -> transformBlocks(this.level, pos)).filter(Boolean::booleanValue).toList().isEmpty())
+				.map(pos -> transformBlocks(this.level(), pos)).filter(Boolean::booleanValue).toList().isEmpty())
 			{
 				NaUtilsEntityStatics.sendParticlesToEntity(this, ParticleTypes.EXPLOSION, 0, 0, 1, 0);
-				this.level.playSound(null, this, SoundEvents.GENERIC_EXPLODE, this.getSoundSource(), 2.0f, 0.7f);
+				this.level().playSound(null, this, SoundEvents.GENERIC_EXPLODE, this.getSoundSource(), 2.0f, 0.7f);
 			}
 
 		}

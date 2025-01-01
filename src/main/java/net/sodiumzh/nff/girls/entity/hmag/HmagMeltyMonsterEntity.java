@@ -319,52 +319,8 @@ public class HmagMeltyMonsterEntity extends MeltyMonsterEntity implements INFFGi
 	}
 	
 	protected int takingLavaCooldown = 0;
-
+	
 	@Override
-	public InteractionResult serversideMainHandInteraction(Player player, InteractionHand hand) {
-		if (player.getItemInHand(hand).is(Items.BUCKET))
-		{
-			if (this.takingLavaCooldown <= 0)
-			{
-				player.getItemInHand(hand).shrink(1);
-				NaUtilsItemStatics.giveOrDrop(player, new ItemStack(Items.LAVA_BUCKET, 1));
-				this.takingLavaCooldown = 5 * 60 * 20;	// 5 min
-			}
-			else
-			{
-				NaUtilsParticleStatics.sendSmokeParticlesToEntityDefault(this);
-			}
-			return InteractionResult.sidedSuccess(this.level.isClientSide);
-		}
-		// Use water bucket to suppress setting fire
-		else if (player.getItemInHand(hand).is(Items.WATER_BUCKET) && this.shouldSetFire)
-		{
-			this.level.playSound(player, this.getX(), this.getY(), this.getZ(), SoundEvents.GENERIC_EXTINGUISH_FIRE,
-					this.getSoundSource(), 1.0F, this.random.nextFloat() * 0.4F + 0.8F);
-			player.getItemInHand(hand).shrink(1);
-			NaUtilsItemStatics.giveOrDrop(player, new ItemStack(Items.BUCKET));
-			this.shouldSetFire = false;
-			return InteractionResult.sidedSuccess(this.level.isClientSide);
-		}
-		// Use Flint and Steel to allow setting fire
-		else if (player.getItemInHand(hand).is(Items.FLINT_AND_STEEL) && !this.shouldSetFire)
-		{
-			this.level.playSound(player, this.getX(), this.getY(), this.getZ(), SoundEvents.FLINTANDSTEEL_USE,
-					this.getSoundSource(), 1.0F, this.random.nextFloat() * 0.4F + 0.8F);
-			if (!this.level.isClientSide)
-			{
-				player.getItemInHand(hand).hurtAndBreak(1, player, (p) ->
-				{
-					p.broadcastBreakEvent(hand);
-				});
-			}
-			this.shouldSetFire = true;
-			return InteractionResult.sidedSuccess(this.level.isClientSide);
-		}
-		return InteractionResult.PASS;
-	}
-
-	/*@Override
 	public InteractionResult mobInteract(Player player, InteractionHand hand)
 	{
 		if (player.getUUID().equals(getOwnerUUID())) {
@@ -373,6 +329,7 @@ public class HmagMeltyMonsterEntity extends MeltyMonsterEntity implements INFFGi
 			{
 				if (!player.level().isClientSide()) 
 				{
+					/* Put checks before healing item check */
 					// You can take a bucket of lava each 5 minutes
 					if (player.getItemInHand(hand).is(Items.BUCKET))
 					{
@@ -438,7 +395,7 @@ public class HmagMeltyMonsterEntity extends MeltyMonsterEntity implements INFFGi
 		} 
 		// Always pass when not owning this mob
 		return InteractionResult.PASS;
-	}*/
+	}
 	
 	/* Inventory */
 

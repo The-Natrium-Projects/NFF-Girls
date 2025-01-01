@@ -124,22 +124,8 @@ public class HmagDrownedGirlEntity extends DrownedGirlEntity implements INFFGirl
 	{
 		return NFFGirlsHealingItems.UNDEAD.get();
 	}
-
+	
 	@Override
-	public InteractionResult serversideMainHandInteraction(Player player, InteractionHand hand) {
-		if (NFFGirlsConfigs.ValueCache.Interaction.ALLOW_REVERSE_CONVERSION
-				&& player.getItemInHand(hand).is(Items.SPONGE)
-				&& (isFromZombie || NFFGirlsConfigs.ValueCache.Interaction.ALL_DROWNED_GIRLS_CAN_CONVERT_TO_ZOMBIES)) {
-			player.getItemInHand(hand).shrink(1);
-			this.spawnAtLocation(new ItemStack(Items.WET_SPONGE, 1));
-			HmagZombieGirlEntity z = this.convertToZombie();
-			z.isFromHusk = this.isFromHusk;
-			return InteractionResult.sidedSuccess(this.level.isClientSide);
-		}
-		return InteractionResult.PASS;
-	}
-
-	/*@Override
 	public InteractionResult mobInteract(Player player, InteractionHand hand)
 	{
 		if (!player.isShiftKeyDown())
@@ -184,7 +170,7 @@ public class HmagDrownedGirlEntity extends DrownedGirlEntity implements INFFGirl
 			return InteractionResult.PASS;
 		}
 	}
-*/
+
 	/* Inventory */
 
 	@Override
