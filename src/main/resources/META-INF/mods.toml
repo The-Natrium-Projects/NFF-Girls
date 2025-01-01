@@ -4,7 +4,7 @@ license="LGPL-3.0"
 issueTrackerURL="https://github.com/SodiumZH/Days-with-Monster-Girls"
 [[mods]] #mandatory
 modId="nffgirls" #mandatory
-version="0.2.27.1" #mandatory
+version="0.2.28" #mandatory
 displayName="NFF: Girls" #mandatory
 displayURL="https://www.curseforge.com/minecraft/mc-mods/nff-girls" 
 #logoFile="examplemod.png" #optional
@@ -29,7 +29,7 @@ description='''Enjoy your Minecraft days with monster girls!'''
 [[dependencies.nffgirls]]
     modId="nffservices"
     mandatory=true
-    versionRange="[0.2.27.1, 0.2.28)"
+    versionRange="[0.2.28, 0.2.29)"
     ordering="NONE"
     side="BOTH"  
     
