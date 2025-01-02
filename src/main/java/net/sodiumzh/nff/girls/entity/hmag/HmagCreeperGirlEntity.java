@@ -210,7 +210,7 @@ public class HmagCreeperGirlEntity extends NFFTamedCreeperPreset implements INFF
 
 			this.playerIgniteDefault(player, hand);
 			isPlayerIgnited = true;
-			return InteractionResult.sidedSuccess(player.level.isClientSide);
+			return InteractionResult.sidedSuccess(player.level().isClientSide);
 		}
 		return InteractionResult.PASS;
 	}

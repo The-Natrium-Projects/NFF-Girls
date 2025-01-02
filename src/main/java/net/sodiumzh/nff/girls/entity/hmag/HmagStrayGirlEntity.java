@@ -186,9 +186,9 @@ public class HmagStrayGirlEntity extends StrayGirlEntity implements INFFGirlsTam
 				&& (isFromSkeleton || NFFGirlsConfigs.ValueCache.Interaction.ALL_STRAY_GIRLS_CAN_CONVERT_TO_SKELETONS))
 		{
 			// Use flint&steel
-			this.level.playSound(player, this.getX(), this.getY(), this.getZ(), SoundEvents.FLINTANDSTEEL_USE,
+			this.level().playSound(player, this.getX(), this.getY(), this.getZ(), SoundEvents.FLINTANDSTEEL_USE,
 					this.getSoundSource(), 1.0F, this.random.nextFloat() * 0.4F + 0.8F);
-			if (!this.level.isClientSide)
+			if (!this.level().isClientSide)
 			{
 				player.getItemInHand(hand).hurtAndBreak(1, player, (p) ->
 				{
@@ -197,7 +197,7 @@ public class HmagStrayGirlEntity extends StrayGirlEntity implements INFFGirlsTam
 			}
 			// and convert
 			this.convertToSkeleton();
-			return InteractionResult.sidedSuccess(player.level.isClientSide);
+			return InteractionResult.sidedSuccess(player.level().isClientSide);
 		}
 		return InteractionResult.PASS;
 	}

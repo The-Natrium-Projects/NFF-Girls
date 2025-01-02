@@ -195,7 +195,7 @@ public class HmagCursedDollEntity extends CursedDollEntity implements INFFGirlsT
 	@Override
 	public InteractionResult serversideMainHandInteraction(Player player, InteractionHand hand) {
 		if (giveEnhancingItems())
-			return InteractionResult.sidedSuccess(player.level.isClientSide);
+			return InteractionResult.sidedSuccess(player.level().isClientSide);
 		return InteractionResult.PASS;
 	}
 /*
