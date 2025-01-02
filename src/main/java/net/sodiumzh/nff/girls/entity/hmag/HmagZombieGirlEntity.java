@@ -116,7 +116,7 @@ public class HmagZombieGirlEntity extends ZombieGirlEntity implements INFFGirlsT
 			player.getItemInHand(hand).shrink(1);
 			this.spawnAtLocation(new ItemStack(Items.WET_SPONGE, 1));
 			this.convertToHusk();
-			return InteractionResult.sidedSuccess(player.level.isClientSide);
+			return InteractionResult.sidedSuccess(player.level().isClientSide);
 		}
 		return InteractionResult.PASS;
 	}
