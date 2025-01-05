@@ -20,7 +20,8 @@ import net.sodiumzh.nff.girls.registry.NFFGirlsItems;
 import net.sodiumzh.nff.services.event.entity.ServerEntityTickEvent;
 import net.sodiumzh.nff.services.item.NFFMobRespawnerInstance;
 import net.sodiumzh.nff.services.item.NFFMobRespawnerItem;
-import net.sodiumzh.nff.services.item.event.NFFMobRespawnerConstructEvent;
+import net.sodiumzh.nff.services.item.event.NFFMobRespawnerAfterConstructEvent;
+import net.sodiumzh.nff.services.item.event.NFFMobRespawnerBeforeConstructEvent;
 import net.sodiumzh.nff.services.item.event.NFFMobRespawnerStartRespawnEvent;
 
 
@@ -28,12 +29,12 @@ import net.sodiumzh.nff.services.item.event.NFFMobRespawnerStartRespawnEvent;
 public class NFFGirlsItemEventListeners
 {
 	@SubscribeEvent
-	public static void beforeRespawnerConstruct(NFFMobRespawnerConstructEvent.Before event)
+	public static void beforeRespawnerConstruct(NFFMobRespawnerBeforeConstructEvent event)
 	{
 	}
 	
 	@SubscribeEvent
-	public static void afterRespawnerConstruct(NFFMobRespawnerConstructEvent.After event)
+	public static void afterRespawnerConstruct(NFFMobRespawnerAfterConstructEvent event)
 	{
 		CompoundTag mobNbt = event.getRespawner().getMobNbt();
 		
@@ -79,7 +80,6 @@ public class NFFGirlsItemEventListeners
 		}
 	}
 
-	/** @deprecated Use {@link INFFGirlsTamed#getSharpnessModifierUUID} instead */
 	@Deprecated
 
 	protected static final UUID SHARPNESS_MODIFIER_UUID = UUID.fromString("9c12b503-63c0-43e6-bd30-d7aae9818c99");
