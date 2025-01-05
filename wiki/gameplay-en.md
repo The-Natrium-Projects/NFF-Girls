@@ -4,11 +4,11 @@
 
 ### Current version: 
 
-#### 0.0.19 (1.18.2)
+#### 0.0.22 (1.18.2)
 
-#### 0.1.20 (1.19.2)
+#### 0.1.23 (1.19.2)
 
-#### 0.2.19 (1.20.1)
+#### 0.2.22 (1.20.1)
 
 
 
@@ -17,64 +17,6 @@
 ##### Note: the wiki update may lag behind the game. Check which version the wiki is supporting. You could also check the wiki/gameplay_en.md file, but it may contain information and changes that haven't been published.
 
 
-
-## Supported mobs
-
-### HMaG
-
-Zombie Girl
-
-Skeleton Girl
-
-Husk Girl
-
-Creeper Girl
-
-Ender Executor
-
-Stray Girl
-
-Wither Skeleton Girl
-
-Drowned Girl
-
-Hornet
-
-Necrotic Reaper
-
-Banshee
-
-Ghastly Seeker
-
-Kobold
-
-Imp
-
-Harpy
-
-Slime Girl
-
-Jiangshi (1.19.2 only)
-
-Dullahan
-
-Dodomeki
-
-Alraune
-
-Glaryad
-
-Crimson Slaughterer (0.x.16)
-
-Cursed Doll (0.x.16)
-
-Redcap (0.x.17)
-
-Jack o'Frost (0.x.17)
-
-Melty Monster (0.x.19)
-
-Nightwalker (0.x.20) (1.19.2+ only)
 
 ## General befriending methods
 
@@ -131,6 +73,16 @@ Mobs can upgrade their level by killing enemies. If an enemy is killed by a befr
 Each level increases the mob's max HP by 1 and attack damage by 0.1.
 
 If the mob dies, it will lose a half of all its EXP accumulated.
+
+## Trade (0.x.23)
+
+Mobs can trade similarly like Villagers by interacting with empty hand or Evil Gem. They uses Evil Gem as currency, just like Emerald for Villagers.
+
+Each mob will have 10 trade offers, 2 offers each for tier 1-5. Offer tier 1-5 requires EXP level 0, 5, 15, 30, 45 respectively. The specific offers depend on their types.
+
+Each mob has a "Trade Introduction Letter" offer, and you can consume "trade points" to get it. Trade points can be accumulated by trading with a specific mob. The Trade Introduction Letter can be used to **another** mob (not the mob from whom you got the letter) to refresh all its trade offers.
+
+
 
 ## Mob details
 
@@ -346,7 +298,7 @@ It can be healed with Eye of Ender(5).
 
 With general item-giving process. (Item giving cooldown 10s)
 
-During the whole process, there must be at least 8 Honey Blocks in the 9x9x9 area around it. (As it can fly, probably you need far more than 8 Honey Blocks.) Once there is <8, the progress will drop by 0.1 each second. If it damaged you, there will be 60s cooldown during which you cannot give item, but no interruption.
+During the whole process, there must be at least 8 Honey Blocks in the 9x9x9 area around it. (As it can fly, probably you need far more than 8 Honey Blocks.) Once there is <8, the progress will drop by 0.1 each second (with large amount of smoke particles). If it damaged you, there will be 60s cooldown during which you cannot give item, but no interruption.
 
 Accepted Items:
 
@@ -364,7 +316,7 @@ It has 2 bauble slots.
 
 
 
-#### Necrotic Reaper (HMaG)
+#### Necrostalker (previous Necrotic Reaper) (HMaG)
 
 ##### Befriending
 
@@ -372,7 +324,7 @@ At first you must be wearing Necromancer's Hat on head and have a Necromancer's 
 
 When it's standing on a Soul Carpet, cast with *Necromancer's Wand* to hit it. 6 hits overall are required. Once hit, it will be always hostile to you. Each time it's hit, it will release more smoke particles, and increase attack damage by 5. 
 
-If it failed to attack you for 10s, the hit count will drop by 1. (If the attack is Shield-blocked, it's still regarded as attacked.)
+If it failed to attack you for 10s, the hit count will drop by 1. (If the attack is blocked by shield, it's still regarded as attacked.)
 
 If you get >32 blocks away from it, the process will be interrupted.
 
@@ -480,7 +432,7 @@ It has 2 Bauble slots.
 
 Its main hand can only hold pickaxes. Like for Necrotic Reapers, Fortune enchantment will act as Looting on killing mobs.
 
-If it's holding mineral nuggets on the off hand, it will help locate surrounding corresponding ores, even if not seen. When it found the ore, it will consume a nugget, try moving towards the ore and generate massive glint (green star) particles.
+If it's holding mineral nuggets on the off hand, it will help locate surrounding corresponding ores, even if not seen. When it found the ore, it will consume a nugget, try moving towards the ore and generate massive glint (green star) particles. (0.x.21: there's a known issue wasting the nugget without searching the ore.)
 
 Supported minerals: Copper, Iron, Gold, Emerald, Diamond, Coal, Lapis Lazuli, Redstone.
 
@@ -520,7 +472,7 @@ Accepted items:
 
 It has 2 Bauble slots.
 
-Like Kobold, it can locate Ancient Debris. It required the mob to hold a Netherite Fork on the main hand and have Netherite Scrap nuggets on the off hand.
+Like Kobold, it can locate Ancient Debris. It required the mob to hold a Netherite Fork on the main hand and have Netherite Scrap nuggets on the off hand. (0.x.21: there's a known issue wasting the nugget without searching the ore.)
 
 It can be healed with Apple (5), Cookie (5), Pumpkin Pie (5), Lemon (10), Lemon Pie (20) and Golden Apple (to max).
 
@@ -814,7 +766,7 @@ Below Diamond: Haste I
 
 Diamond or equal: Haste II
 
-Above Diamond (including Netherite): Haste III (allowing to instantly break Logs with Netherite Axe)
+Above Diamond (including Netherite): Haste III (allowing to instantly break Logs with Netherite Axe + Efficiency V)
 
 Healing items: Apple (5), Cookie (5), Pumpkin Pie (15), Lemon (10), Lemon Pie (20) and Golden Apple (to max).
 
@@ -858,7 +810,7 @@ Healing items: Snowball (2), Snow Block (5), Pumpkin Pie (15) and Golden Apple (
 
 Using Item-Giving Process.
 
-To give items, the player must be in lava or on fire **without Fire Resistance effect**. Each time given, player will get **Combustion effect for 30 s**.
+To give items, the player must be in lava or on fire **without Fire Resistance effect**. Each time given, player will get **Combustion effect (HMaG) for 30 s**.
 
 Accepted items:
 
@@ -868,7 +820,7 @@ Accepted items:
 
 *Burning Core*: 0.03 - 0.06
 
-*Burning Core Block*: 0.12 - 0.24
+*Burning Core Block* (1.19.2+): 0.12 - 0.24
 
 *Nether Star*: 30% for 1.00, 70% for 0.50
 
@@ -878,7 +830,7 @@ It has 4 bauble slots.
 
 Equipping it with a lava bucket can change its behavior on the ground: speed-up, and not trying to return to lava.
 
-Using a water bucket will prevent it from igniting the standing blocks, while Flint and Steel will enable igniting.
+Using a water bucket will prevent it from igniting the standing blocks, while Flint and Steel will enable igniting. (Right click the mob to use, not placing water! Or it will damage the mob!)
 
 Having lava-bath with it will gradually boost the favorability, 1 per minute. (Both player and the mob are in lava, can see each other, and are less 3 blocks away.)
 
@@ -922,7 +874,7 @@ HMaG berries: 0.06 - 0.14
 
 It has 4 Bauble slots.
 
-It has a "Clay" slot which can add Clay Balls or Ancient Stones as ammo. When using Clay Balls, the magic ball will have 1.2x damage. When using Ancient Stones, it will have 1.5x damage and can transform blocks like "wild" ones.
+It has an ammo slot (clay ball icon) which can add Clay Balls or Ancient Stones as ammo. When using Clay Balls, the magic ball will have 1.2x damage. When using Ancient Stones, it will have 1.5x damage and can transform blocks like "wild" ones. (It can fire without ammo.)
 
 It can be healed with Clay Ball (2), Lapis Lazuli (5), Ancient Stone (15) and Golden Apple (to max).
 
@@ -976,7 +928,7 @@ It can be obtained by eating Ender Pie.
 
 ### Curse of Necromancy
 
-The harmful effect of Necromancer's Hat. ~~This effect is same as Wither, but not causing the health bar turning black.~~ It causes 1 damage each 4 seconds, bypassing armor and enchantment (since 0.x.17). Wither Skeletons are immune to this effect.
+The harmful effect of Necromancer's Hat. It causes 1 damage each 4 seconds, bypassing armor and enchantment . Wither Skeletons are immune to this effect.
 
 
 
@@ -1000,8 +952,6 @@ A variant of Luminous Terracotta which can emit lv.15 light. It can be obtained 
 
 ### Respawner
 
-~~An item dropped on befriended mob die to respawn the mob. Only owner can pick up and use it to respawn.~~  (Removal: 0.1.15)
-
 An item generated on befriended mob die to respawn the mob. It will automatically given to the owner.(0.x.15)
 
 The dropped respawner item entities are invulnerable (except to creative player or /kill), and don't expire. If it drops into the void, it will be lifted up and find a solid ground to place. If there's no solid ground, it will get floating.
@@ -1020,9 +970,9 @@ Lv. 2: Max HP +15, ATK +5, sun immunity
 
 #### Amulet of Resistance
 
-Lv. 1: Armor +4, Speed -10%, sun immunity for undead mobs
+Lv. 1: Armor +4, Speed -10%, sun immunity for undead mobs, Max HP +15 (0.x.21)
 
-Lv. 2: Armor +6, Speed -10%, sun immunity for undead mobs
+Lv. 2: Armor +6, Speed -10%, sun immunity for undead mobs, Max HP +25 (0.x.21)
 
 #### Amulet of Courage
 
@@ -1050,7 +1000,7 @@ Speed 4x in water (Only usable for Drowned Girls, applying only once)
 
 #### Poisonous Thorn
 
-Giving or enhancing Poison effect on attacking. (Only usable for ~~Hornet~~ Arthropod mobs (0.x.16))
+Giving or enhancing Poison and Slowness effect on attacking. (Only usable for Arthropod mobs.)
 
 
 
@@ -1076,11 +1026,11 @@ It's durability is identical to Iron Helmet, and other properties are identical 
 
 Hold on either hand to switch mobs' AI state and open the GUI.
 
-Use this item to (right click) an Evil Crystal Block to set all mobs' AI state to Follow in the 32x32x32 area centered by the block, and simultaneously move all respawners in the area onto the block.
+Use this item to (right click) an Evil Crystal Block to set all mobs' AI state to Follow in the 32x32x32 area centered by the block, and simultaneously move all respawners in the area onto the block. (Pending removal)
 
 
 
-#### Evil Magnet
+#### Evil Magnet (Pending Removal)
 
 Use this item to an Evil Crystal Block to move all respawner in the world onto the block.
 
@@ -1217,7 +1167,7 @@ Burning Core			Orange				0.5
 
 
 
-#### Taoist Talisman (0.1.14) (1.19.2+ only)
+#### Taoist Talisman (1.19.2+ only)
 
 An item that can freeze Jiangshi for 10 seconds.
 
@@ -1225,7 +1175,7 @@ When applied, the Jiangshi will stop moving and get extra 20 armor. After the 10
 
 
 
-#### Peach-Wood Sword (0.1.14) (1.19.2+ only)
+#### Peach-Wood Sword (1.19.2+ only)
 
 A weapon especially effective to undead mobs. It cannot sweep.
 
@@ -1239,7 +1189,7 @@ It can be repaired with Purification Cloth.
 
 
 
-#### Reinforced Fishing Rod (0.1.15)
+#### Reinforced Fishing Rod
 
 A fishing rod with higher durability (4x vanilla Fishing Rod).
 
@@ -1251,10 +1201,26 @@ When the fishing hook hits an entity, right click to pull the entity without ret
 
 
 
-## Collaboration with other mods
+#### Evil Gem
+
+A currency for trading with the mobs.
+
+It can be crafted with 8 * Evil Crystal Fragments + Emerald, but can only be broken down to 4 * Evil Crystal Fragments.
+
+
+
+#### Trade Introduction Letter
+
+An item obtainable by trading, consuming "trade points". (See **Trade** section.)
+
+It can be used to **another** mob (not the mob from whom you got the letter) to refresh all its trade offers.
+
+
+
+## Mod Interaction
 
 ### Twilight Forest
 
-Maze Map Focus can be used to befriend Redcap (0.15 - 0.30). (0.x.17)
+Maze Map Focus can be used to befriend Redcap (0.15 - 0.30).
 
-Ice Bomb can be used to befriend Jack o' Frost (0.10 - 0.15). (0.x.17)
+Ice Bomb can be used to befriend Jack o' Frost (0.10 - 0.15).

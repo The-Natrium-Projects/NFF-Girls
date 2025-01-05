@@ -1,5 +1,67 @@
 # Change Log
 
+### 0.x.27.1
+
+Fixed friending processes not consuming items.
+
+### 0.x.27
+
+Added mob dictionary (Requires Citadel as dependency). Special thanks to Koishi for his significant help in making the dictionary!
+
+Added data pack support for mob healing items, taming items and trade list. For usage, see data pack reference on GitHub (ongoing).
+
+Added Enderberry Bush. Now Enderberry is growable and needs friendly Ender Executor to help growing.
+
+Updated trade list. Now mobs below have trades: all Vanilla mob girls, Ender Executor, Kobold, Necrostalker (Necrotic Reaper).
+
+Added configs:
+
+​	-`enableFriendlyDamage`: If false, players and owned NFF-Girls mobs will not be able to damage each other.
+
+Now friendly Ender Executor will not do random teleport unless hurt by water.
+
+Now Nightwalker's magic ball can convert blocks in larger area.
+
+Now friendly Nightwalker's magic ball can always convert blocks, and will convert blocks of larger range when using the Ancient Stone.
+
+Fixed friendly Ender Executor not performing beam attack in the easy mode.
+
+Fixed `/give` command giving invalid Respawners or Magical Slime Bottles which may cause data break.
+
+Fixed Nightwalkers only converting Pink Glazed Terracotta.
+
+Fixed Soul Carpet recipe error in 1.18.2.
+
+
+
+ 
+
+### 0.0.26.1
+
+Fixed pickaxe unable to dig blocks caused by a broken tag.
+
+### 0.x.26
+
+WARNING: This update has massive save data format changes. Back up before update!
+
+Renamed project name from *Days with Monster Girls* to *NFF: Girls*.
+
+Renamed mod ID from `dwmg` to `nffgirls`.
+
+Fixed mobs not moving on wandering mode.
+
+Renamed tag:
+
+​	- `dwmg:can_befriend_nightwalker_on` -> `nffgirls:can_tame_nightwalker_on`
+
+### 0.x.25
+
+WARNING: This update has save data format changes. Back up before update!
+
+Fixed Dullahan missing variant.
+
+Fixed Melty Monster GUI attribute display error.
+
 ### 0.x.24
 
 Config changes:
@@ -13,6 +75,20 @@ Config changes:
 ​		-`maxHealthBoostByLevel` => `maxHealthIncreaseByLevel`
 
 ​		-`maxAtkIncreaseByLevel` => `maxAtkIncreaseByLevel`
+
+Bauble changes:
+
+​	-Added Soul Amulet III and IV.
+
+​	-Reduced the costs of baubles.
+
+​	-Modified the effect of Aqua Jade.
+
+​	-Now the off-hand of Necrostalker (previouly Necrotic Reaper) can equip hoes and increase ATK.
+
+Added trades for Creeper Girl and Necrostalker.
+
+Fixed Necrostalker unable to keep the attack-boosting effect after restarting the game during befriending process.
 
 Fixed Nightwalker armor increase by level-up not taking effect.
 
