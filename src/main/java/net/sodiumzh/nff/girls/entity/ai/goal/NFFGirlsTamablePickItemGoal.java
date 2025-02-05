@@ -39,10 +39,10 @@ public class NFFGirlsTamablePickItemGoal extends Goal
 		this.mob = mob;
 		if (mob.getCapability(NFFCapRegistry.CAP_BEFRIENDABLE_MOB).isPresent())
 		{
-			cap = CNFFTamable.getCap(mob);
+			cap = CNFFTamable.get(mob);
 		}
 		else throw new UnsupportedOperationException("This goal supports only mobs with CNFFTamable capability.");
-		if (!(NFFTamingMapping.getHandler(mob) instanceof NFFGirlsItemDroppingTamingProcess))
+		if (!(NFFTamingMapping.getProcess(mob) instanceof NFFGirlsItemDroppingTamingProcess))
 			throw new UnsupportedOperationException("This goal supports befriendable mobs only with NFFGirlsItemDroppingTamingProcess as befriending handler.");
 
 		this.handler = (NFFGirlsItemDroppingTamingProcess) NFFTamingMapping.getHandler((EntityType<? extends Mob>) mob.getType());
@@ -62,7 +62,7 @@ public class NFFGirlsTamablePickItemGoal extends Goal
 	
 	protected CNFFTamable cap()
 	{
-		return CNFFTamable.getCap(mob);
+		return CNFFTamable.get(mob);
 	}
 	
 	protected List<ItemEntity> getAcceptableItems()
@@ -103,7 +103,7 @@ public class NFFGirlsTamablePickItemGoal extends Goal
 	@Override
 	public void start()
 	{
-		/** If it doesn't have a target item or existing item is out of range,
+		/* If it doesn't have a target item or existing item is out of range,
 		 * reset the item to the closest one. 
 		 * If the old target is still valid, don't reset.
 		 */

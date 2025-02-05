@@ -101,7 +101,7 @@ public class HmagBansheeEntity extends BansheeEntity implements INFFGirlsTamedSu
 		this.goalSelector.addGoal(4, new NFFGirlsHmagFlyingGoal.ChargeAttackGoal(this, 0.5D, 1.5F, 6));
 		// this.goalSelector.addGoal(4, new NFFMeleeAttackGoal(this, 1d, false));
 		this.goalSelector.addGoal(6, new NFFGirlsFlyingFollowOwnerGoal(this));
-		this.goalSelector.addGoal(8, new NFFFlyingRandomMoveGoal(this).heightLimit(10));
+		this.goalSelector.addGoal(8, new NFFFlyingRandomMoveGoal(this).heightLimit(7));
 		this.goalSelector.addGoal(9, new LookAtPlayerGoal(this, Player.class, 3.0F, 1.0F));
 		this.goalSelector.addGoal(10, new LookAtPlayerGoal(this, Mob.class, 8.0F));
 		this.goalSelector.addGoal(11, new RandomLookAroundGoal(this));

@@ -1,8 +1,5 @@
 package net.sodiumzh.nff.girls.entity.tamingprocess.hmag;
 
-import java.util.HashSet;
-import java.util.stream.Stream;
-
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.Mob;
@@ -12,33 +9,45 @@ import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.AABB;
-import net.sodiumzh.nautils.statics.NaUtilsEntityStatics;
-import net.sodiumzh.nautils.statics.NaUtilsItemStatics;
+import net.sodiumzh.nautils.entity.anger.MobAngerRules;
 import net.sodiumzh.nautils.statics.NaUtilsMathStatics;
+import net.sodiumzh.nff.girls.entity.NFFGirlsTamingRules;
+import net.sodiumzh.nff.girls.registry.NFFGirlsAngerRules;
+import net.sodiumzh.nff.services.entity.capability.CNFFTamable;
 import net.sodiumzh.nff.services.entity.taming.TamableHatredReason;
-import net.sodiumzh.nff.services.entity.taming.TamableInteractArguments;
-import net.sodiumzh.nff.services.entity.taming.TamableInteractionResult;
 import net.sodiumzh.nff.services.entity.taming.TamingProcessItemGivingProgress;
+
+import java.util.HashSet;
+import java.util.stream.Stream;
 
 public class HmagHornetTamingProcess extends TamingProcessItemGivingProgress
 {
-
-
-	@Override
-	protected double getProcValueToAdd(ItemStack item, Player player, Mob mob, double lastProc) {
-		if (item.is(Items.HONEY_BOTTLE))
-			return NaUtilsMathStatics.rndRangedDouble(0.04d, 0.08d);
-		else if (item.is(Items.HONEY_BLOCK))
-			return NaUtilsMathStatics.rndRangedDouble(0.08d, 0.16d);
-		else return 0;
-	}
-
 	@Override
 	public boolean isItemAcceptable(ItemStack item) {
 		return item.is(Items.HONEY_BOTTLE)
 				|| item.is(Items.HONEY_BLOCK);
 	}
 
+	/*
+	// No longer needed as remaining item is implemented in the parent class: 0.x.27
+	@Override
+	public TamingInteractionResult handleInteract(TamableInteractArguments args) 
+	{
+		// Get if using honey bottle
+		ItemStack stack = args.getPlayer().getItemInHand(args.getHand());
+		boolean flag = stack.is(Items.HONEY_BOTTLE);
+		int count = stack.getCount();
+		
+		TamingInteractionResult res = super.handleInteract(args);
+		
+		// If consumed honey bottle, drop a glass bottle
+		if (!args.isClient() && args.getPlayer().getItemInHand(args.getHand()).getCount() != count && flag)
+		{
+			NaUtilsItemStatics.giveOrDropDefault(args.getPlayer(), Items.GLASS_BOTTLE);
+		}
+		return res;
+	}*/
+	
 	@Override
 	public boolean additionalConditions(Player player, Mob mob) {
 		return !player.hasEffect(MobEffects.POISON) && has8HoneyBlocksAround(mob);
@@ -56,61 +65,30 @@ public class HmagHornetTamingProcess extends TamingProcessItemGivingProgress
 	
 	@Override
 	public int getItemGivingCooldownTicks() {
-		return 200;
+		return NFFGirlsTamingRules.COOLDOWN_MIDDLE;
 	}
 	
 	@Override
 	public void serverTick(Mob mob)
 	{
-		this.forAllPlayersInProcess(mob, (p) -> {
-			if (p != null && mob != null && p.distanceToSqr(mob) > 32 * 32)
-				this.interrupt(p, mob, false);
-		});
-		
-		if (!has8HoneyBlocksAround(mob) && this.isInProcess(mob))
+		Player ongoing = this.getOngoingPlayerInLevel(mob).orElse(null);
+		if (ongoing != null) {
+			if (ongoing.distanceToSqr(mob) > 32d * 32d)
+				this.interrupt(ongoing, mob, true);
+		}
+		if (!has8HoneyBlocksAround(mob) && this.isInAnyProcess(mob))
 		{
-			this.forAllPlayersInProcess(mob, player -> {
-				this.addProgressValue(mob, player, -0.005);	// 0.1 per second
-				if (this.getProgressValue(mob, player) <= 0)
-				{
-					interrupt(player, mob, false);
-				}
-			});
-			NaUtilsEntityStatics.sendSmokeParticlesToLivingDefault(mob);
+			NFFGirlsTamingRules.tickContinuousProgressLoss(this, mob);
 		}		
 	}
 
 	@Override
-	public HashSet<TamableHatredReason> getAddHatredReasons() {
-		HashSet<TamableHatredReason> set = new HashSet<TamableHatredReason>();
-		set.add(TamableHatredReason.ATTACKED);
-		set.add(TamableHatredReason.ATTACKING);
-		set.add(TamableHatredReason.HIT);
-		return set;
+	public MobAngerRules getAngerRules() {
+		return NFFGirlsAngerRules.ATTACKER_AND_MINOR_ATTACKING.get();
 	}
-	
+
 	@Override
-	public int getHatredDurationTicks(TamableHatredReason reason)
-	{
-		switch (reason)
-		{
-		case ATTACKED:
-			return 300 * 20;
-		case ATTACKING:
-			return 30 * 20; 
-		case HIT:
-			return 30 * 20;
-		default:
-			return 0;				
-		}
+	public void tamableInit(CNFFTamable cnffTamable) {
+
 	}
-	
-	@Override
-	public void onAddingHatred(Mob mob, Player player, TamableHatredReason reason)
-	{
-		if (reason != TamableHatredReason.ATTACKING)
-			super.onAddingHatred(mob, player, reason);
-	}
-	
-	
 }

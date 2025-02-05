@@ -1,0 +1,8 @@
+{
+  "desc": "Items with this tag can be used to make Death Crystal.",
+  "replace" : false,
+  "values" : [
+    "hmag:necrofiber",
+    "hmag:lich_cloth"
+  ]
+}

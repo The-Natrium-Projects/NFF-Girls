@@ -33,18 +33,27 @@ public class NFFGirlsTamingProcesses {
     public static final NaUtilsRegistry.Accessor<NFFTamingProcess> HMAG_ANIMAL_A = TAMING_PROCESSES.register(
             "hmag_animal_a",  () -> new HmagAnimalTamingProcess().setItemGivingTableOverride(NFFGirlsTamingItems.ANIMAL_A::get));
     public static final NaUtilsRegistry.Accessor<NFFTamingProcess> HMAG_IMP = TAMING_PROCESSES.register(
-            "hmag_imp",  () -> new HmagImpTamingProcess().setItemGivingTableOverride(NFFGirlsTamingItems.HMAG_IMP::get));
+            "hmag_imp",  () -> new HmagImpTamingProcess().setItemGivingTableOverride(NFFGirlsTamingItems.HMAG_IMP::get)
+                    .setWatchAndPickItemGoalPriorities(2, 4));
     public static final NaUtilsRegistry.Accessor<NFFTamingProcess> HMAG_JACK_FROST = TAMING_PROCESSES.register(
-            "hmag_jack_frost",  () -> new HmagImpTamingProcess().setItemGivingTableOverride(NFFGirlsTamingItems.SNOWMAN::get));
+            "hmag_jack_frost",  () -> new HmagImpTamingProcess().setItemGivingTableOverride(NFFGirlsTamingItems.SNOWMAN::get)
+                    .setWatchAndPickItemGoalPriorities(3, 4));
+/*    public static final NaUtilsRegistry.Accessor<NFFTamingProcess> HMAG_JIANGSHI = TAMING_PROCESSES.register(
+            "hmag_jiangshi",  () -> new HmagJiangshiTamingProcess());*/
+
     public static final NaUtilsRegistry.Accessor<NFFTamingProcess> HMAG_KOBOLD = TAMING_PROCESSES.register(
-            "hmag_kobold",  () -> new HmagImpTamingProcess().setItemGivingTableOverride(NFFGirlsTamingItems.HMAG_KOBOLD::get));
+            "hmag_kobold",  () -> new HmagImpTamingProcess().setItemGivingTableOverride(NFFGirlsTamingItems.HMAG_KOBOLD::get)
+                    .setWatchAndPickItemGoalPriorities(2, 4));
     public static final NaUtilsRegistry.Accessor<NFFTamingProcess> HMAG_MELTY_MONSTER = TAMING_PROCESSES.register(
-            "hmag_melty_monster",  () -> new HmagMeltyMonsterTamingProcess().setItemGivingTableOverride(NFFGirlsTamingItems.BLAZE::get));
+            "hmag_melty_monster",  () -> new HmagMeltyMonsterTamingProcess()
+                    .setItemGivingTableOverride(NFFGirlsTamingItems.BLAZE::get));
     // Use the old name of the mob as the entity type key didn't change
     public static final NaUtilsRegistry.Accessor<NFFTamingProcess> HMAG_NECROTIC_REAPER = TAMING_PROCESSES.register(
             "hmag_necrotic_reaper",  () -> new HmagNecroticReaperTamingProcess());
     public static final NaUtilsRegistry.Accessor<NFFTamingProcess> HMAG_REDCAP = TAMING_PROCESSES.register(
-            "hmag_redcap",  () -> new HmagImpTamingProcess().setItemGivingTableOverride(NFFGirlsTamingItems.HMAG_REDCAP::get));
+            "hmag_redcap",  () -> new HmagImpTamingProcess()
+                    .setItemGivingTableOverride(NFFGirlsTamingItems.HMAG_REDCAP::get)
+                    .setWatchAndPickItemGoalPriorities(3, 4));
     public static final NaUtilsRegistry.Accessor<NFFTamingProcess> HMAG_SLIME_GIRL = TAMING_PROCESSES.register(
             "hmag_slime_girl",  () -> new HmagSlimeGirlTamingProcess());
     // Previously for Zombie Girls etc.

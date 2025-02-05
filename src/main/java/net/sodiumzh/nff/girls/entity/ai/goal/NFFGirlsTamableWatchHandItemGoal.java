@@ -20,10 +20,10 @@ public class NFFGirlsTamableWatchHandItemGoal extends Goal
 		this.mob = mobBefriendable;
 		if (mob.getCapability(NFFCapRegistry.CAP_BEFRIENDABLE_MOB).isPresent())
 		{
-			cap = CNFFTamable.getCap(mob);
+			cap = CNFFTamable.get(mob);
 		}
 		else throw new UnsupportedOperationException("This goal supports only mobs with CNFFTamable capability.");
-		if (!(NFFTamingMapping.getHandler(mob) instanceof NFFGirlsItemDroppingTamingProcess))
+		if (!(NFFTamingMapping.getProcess(mob) instanceof NFFGirlsItemDroppingTamingProcess))
 			throw new UnsupportedOperationException("This goal supports befriendable mobs only with NFFGirlsItemDroppingTamingProcess as befriending handler.");
 		this.setFlags(EnumSet.of(Goal.Flag.MOVE, Goal.Flag.LOOK, Goal.Flag.JUMP));
 	}

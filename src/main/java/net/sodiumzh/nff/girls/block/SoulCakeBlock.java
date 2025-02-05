@@ -3,6 +3,7 @@ package net.sodiumzh.nff.girls.block;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
+import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
@@ -64,13 +65,15 @@ public class SoulCakeBlock extends CakeBlock
 
 	  protected static InteractionResult eat(LevelAccessor pLevel, BlockPos pPos, BlockState pState, Player player) {
 	  {
-	         player.getFoodData().eat(3, 0.1F);
+	         player.getFoodData().eat(6, 0.1F);
 	         // 30s undead affinity
-	         NaUtilsEntityStatics.addEffectSafe(player, NFFGirlsEffects.UNDEAD_AFFINITY.get(), 90*20);
+	         NaUtilsEntityStatics.addEffectSafe(player, NFFGirlsEffects.UNDEAD_AFFINITY.get(), 5*60*20);
+			 NaUtilsEntityStatics.addEffectSafe(player, MobEffects.REGENERATION, 5*60*20);
+			 NaUtilsEntityStatics.addEffectSafe(player, MobEffects.SATURATION, 5*60*20);
 	         int i = pState.getValue(BITES);
 	         pLevel.gameEvent(player, GameEvent.EAT, pPos);
 	         if (i < 6) {
-	            pLevel.setBlock(pPos, pState.setValue(BITES, Integer.valueOf(i + 1)), 3);
+	            pLevel.setBlock(pPos, pState.setValue(BITES, i + 1), 3);
 	         } else {
 	            pLevel.removeBlock(pPos, false);
 	            pLevel.gameEvent(player, GameEvent.BLOCK_DESTROY, pPos);

@@ -1,26 +1,23 @@
 package net.sodiumzh.nff.girls.entity.tamingprocess.hmag;
 
-import java.util.HashSet;
-import java.util.UUID;
-
 import com.github.mechalopa.hmag.world.entity.CrimsonSlaughtererEntity;
-
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.Blocks;
+import net.sodiumzh.nautils.entity.anger.MobAngerRules;
 import net.sodiumzh.nautils.statics.NaUtilsEntityStatics;
-import net.sodiumzh.nautils.statics.NaUtilsTagStatics;
-import net.sodiumzh.nautils.statics.NaUtilsMathStatics;
-import net.sodiumzh.nautils.math.RandomSelection;
+import net.sodiumzh.nff.girls.entity.NFFGirlsTamingRules;
+import net.sodiumzh.nff.girls.registry.NFFGirlsAngerRules;
 import net.sodiumzh.nff.girls.registry.NFFGirlsTags;
-import net.sodiumzh.nff.services.entity.taming.TamableHatredReason;
+import net.sodiumzh.nff.services.entity.capability.CNFFTamable;
 import net.sodiumzh.nff.services.entity.taming.TamingProcessItemGivingProgress;
+
+import java.util.HashSet;
+import java.util.UUID;
 
 public class HmagCrimsonSlaughtererTamingProcess extends TamingProcessItemGivingProgress
 {
@@ -35,26 +32,12 @@ public class HmagCrimsonSlaughtererTamingProcess extends TamingProcessItemGiving
 
 	@Override
 	public int getItemGivingCooldownTicks() {
-		return 10 * 20;
+		return NFFGirlsTamingRules.COOLDOWN_MIDDLE;
 	}
 
 	@Override
-	public int getHatredDurationTicks(TamableHatredReason reason)
-	{
-		switch (reason)
-		{
-		case ATTACKED:
-			return 300 * 20;
-		default:
-			return 0;				
-		}
-	}
-	
-	@Override
-	public HashSet<TamableHatredReason> getAddHatredReasons() {
-		HashSet<TamableHatredReason> set = new HashSet<TamableHatredReason>();
-		set.add(TamableHatredReason.ATTACKED);
-		return set;
+	public MobAngerRules getAngerRules() {
+		return NFFGirlsAngerRules.DEFAULT.get();
 	}
 
 	@Override
@@ -75,16 +58,9 @@ public class HmagCrimsonSlaughtererTamingProcess extends TamingProcessItemGiving
 			}
 		}
 		
-		if (!satisfiesShroomlightCondition(mob) && this.isInProcess(mob))
+		if (!satisfiesShroomlightCondition(mob) && this.isInAnyProcess(mob))
 		{
-			this.forAllPlayersInProcess(mob, player -> {
-				this.addProgressValue(mob, player, -0.005);	// 0.1 per second
-				if (this.getProgressValue(mob, player) <= 0)
-				{
-					interrupt(player, mob, false);
-				}
-			});
-			NaUtilsEntityStatics.sendSmokeParticlesToLivingDefault(mob);
+			NFFGirlsTamingRules.tickContinuousProgressLoss(this, mob);
 		}
 	}
 	
@@ -99,5 +75,9 @@ public class HmagCrimsonSlaughtererTamingProcess extends TamingProcessItemGiving
 				.toList().size() >= 16;
 	}
 
-	
+
+	@Override
+	public void tamableInit(CNFFTamable cnffTamable) {
+
+	}
 }

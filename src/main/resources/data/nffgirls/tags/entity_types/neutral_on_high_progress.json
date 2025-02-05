@@ -1,0 +1,10 @@
+{
+  "desc": "Tamable mobs with this tag will be neutral when the taming progress reaches 0.7.",
+  "replace" : false,
+  "values" : [
+    "hmag:kobold",
+    "hmag:imp",
+    "hmag:redcap",
+    "hmag:jack_frost"
+  ]
+}

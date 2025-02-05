@@ -21,6 +21,8 @@ public class NFFGirlsTags
 
 	public static final TagKey<Item> DEATH_CRYSTAL_INGREDIENTS = NaUtilsTagStatics.createItemTag(
 			NFFGirls.MOD_ID, "death_crystal_ingredients");
+	public static final TagKey<Item> DEATH_CRYSTAL_INGREDIENTS_B = NaUtilsTagStatics.createItemTag(
+			NFFGirls.MOD_ID, "death_crystal_ingredients_b");
 	public static final TagKey<Item> ENDER_FRUIT_JAM_OPTIONAL_FRUITS = NaUtilsTagStatics.createItemTag(
 			NFFGirls.MOD_ID, "ender_fruit_jam_optional_fruits");
 	public static final TagKey<Item> ENDERBERRY_CRAFTING_INGREDIENTS_A = NaUtilsTagStatics.createItemTag(
@@ -46,8 +48,8 @@ public class NFFGirlsTags
 			NFFGirls.MOD_ID, "can_equip_soul_amulet");
 	public static final TagKey<EntityType<?>> CAN_EQUIP_POISONOUS_THORN = NaUtilsTagStatics.createEntityTypeTag(
 			NFFGirls.MOD_ID, "can_equip_poisonous_thorn");
-	public static final TagKey<EntityType<?>> NO_TELEPORT_IN_ENDERBERRY_BUSH = NaUtilsTagStatics.createEntityTypeTag(
-		NFFGirls.MOD_ID, "no_teleport_in_enderberry_bush");
+	public static final TagKey<EntityType<?>> NEUTRAL_ON_HIGH_PROGRESS = NaUtilsTagStatics.createEntityTypeTag(
+		NFFGirls.MOD_ID, "neutral_on_high_progress");
 	/*
 	protected static TagKey<Block> blockTag(String name)
 	{

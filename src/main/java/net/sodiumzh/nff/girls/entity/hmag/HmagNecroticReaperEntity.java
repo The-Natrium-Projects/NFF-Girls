@@ -69,47 +69,14 @@ public class HmagNecroticReaperEntity extends NecroticReaperEntity implements IN
 		goalSelector.addGoal(1, new NFFRestrictSunGoal(this));
 		goalSelector.addGoal(2, new NFFFleeSunGoal(this, 1));
 		goalSelector.addGoal(3, new NFFZombieAttackGoal(this, 1.0d, true));
-		// To control a NecroticReaper player must have a Necromancer's Hat or a Necromancer's Wand
 		goalSelector.addGoal(4, new NFFGirlsFollowOwnerGoal(this, 1.0d, 5.0f, 2.0f, false)
-		{
-			@Override
-			public boolean checkCanUse()
-			{
-				return super.checkCanUse() && ((HmagNecroticReaperEntity)mob).controllable();
-			}
-		}
-				.avoidSunCondition(NFFGirlsEntityStatics::isSunSensitive));
-		goalSelector.addGoal(5, new NFFWaterAvoidingRandomStrollGoal(this, 1.0d)
-		{
-			@Override
-			public boolean checkCanUse()
-			{
-				return super.checkCanUse() 
-						&& !(((HmagNecroticReaperEntity)mob).controllable() && mob.getAIState() == NFFTamedMobAIState.FOLLOW);
-			}
-		}
-		.allowState(NFFTamedMobAIState.FOLLOW));		
+			.avoidSunCondition(NFFGirlsEntityStatics::isSunSensitive));
+		goalSelector.addGoal(5, new NFFWaterAvoidingRandomStrollGoal(this, 1.0d));
 		goalSelector.addGoal(6, new LookAtPlayerGoal(this, Player.class, 8.0F));
 		goalSelector.addGoal(7, new RandomLookAroundGoal(this));
-
-		// Without a Necromancer's Hat, NecroticReaper will not 
-		targetSelector.addGoal(1, new NFFGirlsOwnerHurtByTargetGoal(this)
-		{
-			@Override
-			public boolean checkCanUse()
-			{
-				return super.checkCanUse() && ((HmagNecroticReaperEntity)mob).controllable();
-			}
-		});
+		targetSelector.addGoal(1, new NFFGirlsOwnerHurtByTargetGoal(this));
 		targetSelector.addGoal(2, new NFFHurtByTargetGoal(this));
-		targetSelector.addGoal(3, new NFFGirlsOwnerHurtTargetGoal(this)
-		{
-			@Override
-			public boolean checkCanUse()
-			{
-				return super.checkCanUse() && ((HmagNecroticReaperEntity)mob).controllable();
-			}
-		});
+		targetSelector.addGoal(3, new NFFGirlsOwnerHurtTargetGoal(this));
 		targetSelector.addGoal(5, new NFFGirlsNearestHostileToSelfTargetGoal(this));
 		targetSelector.addGoal(6, new NFFGirlsNearestHostileToOwnerTargetGoal(this));
 	}
@@ -141,23 +108,6 @@ public class HmagNecroticReaperEntity extends NecroticReaperEntity implements IN
 		}
 		return InteractionResult.PASS;
 	}*/
-
-	@Override
-	public boolean isCommandingItem(ItemStack test) {
-		if (test.is(NFFGirlsItems.NECROMANCER_WAND.get()))
-			return true;
-		else if (test.is(NFFGirlsItems.COMMANDING_WAND.get()))
-		{
-			if (this.getFavorability() >= 90 || this.getOwner().getItemBySlot(EquipmentSlot.HEAD).is(NFFGirlsItems.NECROMANCER_HAT.get()))
-				return true;
-			else {
-				NaUtilsMiscStatics.printToScreen(NaUtilsInfoStatics.createTranslatable("info.nffgirls.necrotic_reaper_using_commanding_wand"), this.getOwner());
-				return false;
-			}
-		}
-		return false;
-	}
-
 	/*@Override
 	public InteractionResult mobInteract(Player player, InteractionHand hand)
 	{
@@ -317,12 +267,10 @@ public class HmagNecroticReaperEntity extends NecroticReaperEntity implements IN
 	
 	// Util
 	// If player can control this mob
+	@Deprecated
 	public boolean controllable()
 	{
-		return this.getOwner().getItemBySlot(EquipmentSlot.HEAD).is(NFFGirlsItems.NECROMANCER_HAT.get())
-				|| this.getOwner().getItemBySlot(EquipmentSlot.MAINHAND).is(NFFGirlsItems.NECROMANCER_WAND.get())
-				|| this.getOwner().getItemBySlot(EquipmentSlot.OFFHAND).is(NFFGirlsItems.NECROMANCER_WAND.get())
-				|| this.getFavorabilityHandler().getFavorability() >= 90f;
+		return true;
 	}
 	
 	// Get how many Necrotic Reapers is <8 blocks away from owner 

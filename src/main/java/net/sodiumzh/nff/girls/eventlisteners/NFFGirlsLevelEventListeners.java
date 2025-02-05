@@ -1,7 +1,5 @@
 package net.sodiumzh.nff.girls.eventlisteners;
 
-import java.util.List;
-
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Player;
@@ -12,6 +10,8 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.sodiumzh.nff.girls.NFFGirls;
 import net.sodiumzh.nff.girls.entity.INFFGirlsTamed;
+
+import java.util.List;
 
 @Mod.EventBusSubscriber(modid = NFFGirls.MOD_ID, bus = Mod.EventBusSubscriber.Bus.FORGE)
 public class NFFGirlsLevelEventListeners
@@ -36,18 +36,5 @@ public class NFFGirlsLevelEventListeners
 				}
 			}
 		}
-	}
-	
-	@SubscribeEvent
-	public static void onLevelEndTick(WorldTickEvent event)
-	{
-	/*	if (event.phase == TickEvent.Phase.END && event.level instanceof ServerLevel sl)
-		{
-			for (Entity e: sl.getAllEntities())
-			{
-				if (e instanceof Mob mob && mob.isDeadOrDying())
-					e.discard();
-			}
-		}*/
 	}
 }

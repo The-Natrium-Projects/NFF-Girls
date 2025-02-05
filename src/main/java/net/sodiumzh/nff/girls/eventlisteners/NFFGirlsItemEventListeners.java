@@ -1,28 +1,32 @@
 package net.sodiumzh.nff.girls.eventlisteners;
 
-import java.util.UUID;
-
 import com.github.mechalopa.hmag.registry.ModItems;
-
 import net.minecraft.nbt.CompoundTag;
-import net.minecraft.world.entity.item.ItemEntity;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResult;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.phys.EntityHitResult;
+import net.minecraft.world.phys.HitResult;
 import net.minecraftforge.event.AnvilUpdateEvent;
 import net.minecraftforge.event.entity.player.EntityItemPickupEvent;
+import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
-import net.sodiumzh.nautils.statics.NaUtilsNBTStatics;
 import net.sodiumzh.nautils.mixin.event.entity.ItemEntityHurtEvent;
+import net.sodiumzh.nautils.statics.NaUtilsLevelStatics;
 import net.sodiumzh.nff.girls.NFFGirls;
 import net.sodiumzh.nff.girls.entity.INFFGirlsTamed;
 import net.sodiumzh.nff.girls.item.IWithDuration;
 import net.sodiumzh.nff.girls.registry.NFFGirlsItems;
-import net.sodiumzh.nff.services.event.entity.ServerEntityTickEvent;
 import net.sodiumzh.nff.services.item.NFFMobRespawnerInstance;
 import net.sodiumzh.nff.services.item.NFFMobRespawnerItem;
 import net.sodiumzh.nff.services.item.event.NFFMobRespawnerAfterConstructEvent;
 import net.sodiumzh.nff.services.item.event.NFFMobRespawnerBeforeConstructEvent;
 import net.sodiumzh.nff.services.item.event.NFFMobRespawnerStartRespawnEvent;
+
+import java.util.Objects;
+import java.util.UUID;
 
 
 @Mod.EventBusSubscriber(modid = NFFGirls.MOD_ID, bus = Mod.EventBusSubscriber.Bus.FORGE)
@@ -55,13 +59,12 @@ public class NFFGirlsItemEventListeners
 	{
 		if (event.getItem().getItem().getItem() instanceof NFFMobRespawnerItem)
 		{
-			NFFMobRespawnerInstance ins = NFFMobRespawnerInstance.create(event.getItem().getItem());
+			NFFMobRespawnerInstance ins = NFFMobRespawnerInstance.createIfValid(event.getItem().getItem());
 				// If the mob isn't a nffgirls befriended mob, it should not have this uuid
-				if (ins.getMobNbt().hasUUID("nffgirls:befriended_owner")
-					 && !ins.getMobNbt().getUUID("nffgirls:befriended_owner").equals(event.getEntity().getUUID()))
-				{
-					event.setCanceled(true);
-				}
+			if (ins != null && !ins.getOwnerUUID().equals(event.getEntity().getUUID()))
+			{
+				event.setCanceled(true);
+			}
 		}
 		// Clear already picked mobs when player picking up
 		if (event.getItem().getItem().getTag() != null && event.getItem().getItem().getTag().contains("already_picked_befriendable_mobs"))
@@ -129,30 +132,6 @@ public class NFFGirlsItemEventListeners
 			}
 		}
 	}
-
-	@SubscribeEvent
-	public static void onServerItemEntityTick(ServerEntityTickEvent.PreWorldTick event)
-	{
-		if (event.getEntity() instanceof ItemEntity ie)
-		{
-			if (ie.getItem().getTag() != null 
-					&& ie.getItem().getTag().contains("already_picked_befriendable_mobs", NaUtilsNBTStatics.TAG_COMPOUND_ID))
-			{
-				for (String key: ie.getItem().getTag().getCompound("already_picked_befriendable_mobs").getAllKeys())
-				{
-					if (ie.getItem().getTag().getCompound("already_picked_befriendable_mobs").getInt(key) > 0)
-					{
-						ie.getItem().getTag().getCompound("already_picked_befriendable_mobs").putInt(key, 
-								ie.getItem().getTag().getCompound("already_picked_befriendable_mobs").getInt(key) - 1);
-					}
-					if (ie.getItem().getTag().getCompound("already_picked_befriendable_mobs").getInt(key) == 0)
-					{
-						ie.getItem().getTag().getCompound("already_picked_befriendable_mobs").remove(key);
-					}
-				}
-			}
-		}
-	}
 	
 	@SubscribeEvent
 	public static void onItemEntityHurt(ItemEntityHurtEvent event)
@@ -160,4 +139,28 @@ public class NFFGirlsItemEventListeners
 		if (event.damageSource.getEntity() != null && event.damageSource.getEntity() instanceof INFFGirlsTamed)
 			event.setCanceled(true);
 	}
+
+	@SubscribeEvent
+	public static void longDistanceInteract(PlayerInteractEvent.RightClickItem event) {
+		// Lengthen the AI switching distance
+		if (!event.getEntity().level().isClientSide()
+				&& !event.getEntity().isShiftKeyDown()) {
+			Player player = event.getEntity();
+			InteractionHand usedHand = event.getHand();
+
+			NaUtilsLevelStatics.eyeTrace(player, 32d).ifPresent(hr -> {
+				if (hr.getType().equals(HitResult.Type.ENTITY)
+						&& hr instanceof EntityHitResult ehr
+						&& INFFGirlsTamed.isBMAnd(ehr.getEntity(), tamed ->
+						Objects.equals(tamed.getOwnerUUID(), player.getUUID())
+						&& tamed.isCommandingItem(player.getItemInHand(usedHand))))
+				{
+					INFFGirlsTamed.ifBM(ehr.getEntity(), INFFGirlsTamed::switchAIState);
+					event.setCanceled(true);
+					event.setCancellationResult(InteractionResult.SUCCESS);
+				}
+			});
+		}
+	}
+
 }
