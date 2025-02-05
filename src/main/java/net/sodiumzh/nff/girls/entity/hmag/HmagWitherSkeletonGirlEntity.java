@@ -75,7 +75,9 @@ public class HmagWitherSkeletonGirlEntity extends WitherSkeletonGirlEntity imple
 	@Override
 	public void performRangedAttack(LivingEntity pTarget, float pVelocity) {	
 		var arrowEntity = this.shoot(pTarget, pVelocity);
-		arrowEntity.setSecondsOnFire(100);	
+		if (arrowEntity == null)
+			return;
+		arrowEntity.setSecondsOnFire(100);
 		justShot = true;
 	}
 

@@ -8,17 +8,20 @@ import com.github.mechalopa.hmag.world.entity.SlimeGirlEntity;
 
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.util.Mth;
+import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
+import net.sodiumzh.nautils.entity.anger.MobAngerRules;
+import net.sodiumzh.nautils.entity.taming.TamingInteractionResult;
 import net.sodiumzh.nautils.math.LinearColor;
 import net.sodiumzh.nautils.math.RndUtil;
 import net.sodiumzh.nautils.statics.NaUtilsEntityStatics;
+import net.sodiumzh.nff.girls.entity.NFFGirlsTamingRules;
 import net.sodiumzh.nff.girls.item.MagicalGelColorUtils;
+import net.sodiumzh.nff.girls.registry.NFFGirlsAngerRules;
 import net.sodiumzh.nff.girls.registry.NFFGirlsItems;
-import net.sodiumzh.nff.services.entity.taming.TamableHatredReason;
-import net.sodiumzh.nff.services.entity.taming.TamableInteractArguments;
-import net.sodiumzh.nff.services.entity.taming.TamableInteractionResult;
+import net.sodiumzh.nff.services.entity.capability.CNFFTamable;
 import net.sodiumzh.nff.services.entity.taming.TamingProcessItemGivingProgress;
 import net.sodiumzh.nff.services.registry.NFFCapRegistry;
 
@@ -42,44 +45,9 @@ public class HmagSlimeGirlTamingProcess extends TamingProcessItemGivingProgress
 	}
 	
 	@Override
-	public TamableHatredReason[] getAddHatredReasons() {
-		return new TamableHatredReason[] {TamableHatredReason.ATTACKED, TamableHatredReason.HIT};
+	public MobAngerRules getAngerRules() {
+		return NFFGirlsAngerRules.DEFAULT.get();
 	}
-		
-	@Override
-	public int getHatredDurationTicks(TamableHatredReason reason)
-	{
-		switch (reason)
-		{
-		case ATTACKED:
-			return 60 * 20;
-		case HIT:
-			return 15 * 20;
-		default:
-			return 0;				
-		}
-	}
-	@Override
-	protected double getProcValueToAdd(ItemStack item, Player player, Mob mob, double lastProc) {
-		if (item.is(NFFGirlsItems.MAGICAL_GEL_BOTTLE.get()) && mob instanceof SlimeGirlEntity sg)
-		{
-			return getDeltaProc(NFFGirlsItems.MAGICAL_GEL_BOTTLE.get().getColor(item), MagicalGelColorUtils.getSlimeColor(sg))
-					* Mth.clamp(rnd.nextGaussian() + 1d, 0.5d, 1.5d);
-		}
-		else if (item.is(NFFGirlsItems.MAGICAL_GEL_BALL.get()))
-		{
-			return RndUtil.rndRangedDouble(0.02, 0.05);
-		}
-			
-		else return 0;
-	}
-
-	@Override
-	public boolean isItemAcceptable(ItemStack item) {
-		return item.is(NFFGirlsItems.MAGICAL_GEL_BOTTLE.get())
-				|| item.is(NFFGirlsItems.MAGICAL_GEL_BALL.get());
-	}
-
 	@Override
 	public boolean additionalConditions(Player player, Mob mob) {
 		return true;
@@ -87,13 +55,9 @@ public class HmagSlimeGirlTamingProcess extends TamingProcessItemGivingProgress
 
 	@Override
 	public int getItemGivingCooldownTicks() {
-		return 10 * 20;
+		return NFFGirlsTamingRules.COOLDOWN_MIDDLE;
 	}
-	
-	@Override
-	public void onAddingHatred(Mob mob, Player player, TamableHatredReason reason)
-	{}
-	
+
 	@Override
 	public ItemStack getReturnedItem(Player player, Mob mob, ItemStack itemGivenCopy, double procBefore, double procAfter)
 	{
@@ -154,15 +118,21 @@ public class HmagSlimeGirlTamingProcess extends TamingProcessItemGivingProgress
 	public void sendParticlesOnItemReceived(Mob target) {}
 	
 	@Override
-	public TamableInteractionResult handleInteract(TamableInteractArguments args)
+	public TamingInteractionResult handleInteract(Player player, Mob mob, InteractionHand hand)
 	{
-		if (!args.isClient() && args.isMainHand() && args.getPlayer().getMainHandItem().is(NFFGirlsItems.MAGICAL_GEL_BALL.get()))
+		if (!player.level().isClientSide() && hand.equals(InteractionHand.MAIN_HAND)
+				&& player.getMainHandItem().is(NFFGirlsItems.MAGICAL_GEL_BALL.get()))
 		{
-			args.getPlayer().getCapability(NFFCapRegistry.CAP_BM_PLAYER).ifPresent((c) -> 
+			player.getCapability(NFFCapRegistry.CAP_BM_PLAYER).ifPresent((c) ->
 			{
 				c.getNbt().putBoolean("magical_gel_ball_no_use", true);
 			});
 		}
-		return super.handleInteract(args);
+		return super.handleInteract(player, mob, hand);
+	}
+
+	@Override
+	public void tamableInit(CNFFTamable cnffTamable) {
+
 	}
 }

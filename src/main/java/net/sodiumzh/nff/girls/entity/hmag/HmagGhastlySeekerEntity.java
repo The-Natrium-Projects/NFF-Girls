@@ -95,7 +95,8 @@ public class HmagGhastlySeekerEntity extends GhastlySeekerEntity implements INFF
 		this.goalSelector.addGoal(5, new NFFFlyingLandGoal(this));
 		this.goalSelector.addGoal(6, new HmagGhastlySeekerEntity.FollowOwnerGoal(this));
 		this.goalSelector.addGoal(7, new FireballAttackGoal(this));
-		this.goalSelector.addGoal(8, new NFFFlyingRandomMoveGoal(this, 0.25d, 20, 8, 2));
+		this.goalSelector.addGoal(8, new NFFFlyingRandomMoveGoal(this, 0.25d, 20, 8, 2)
+				.heightLimit(7));
 		this.goalSelector.addGoal(9, new LookAtPlayerGoal(this, Player.class, 3.0F, 1.0F));
 		this.goalSelector.addGoal(10, new LookAtPlayerGoal(this, Mob.class, 8.0F));
 		this.goalSelector.addGoal(11, new RandomLookAroundGoal(this));
@@ -368,7 +369,7 @@ public class HmagGhastlySeekerEntity extends GhastlySeekerEntity implements INFF
 			if (!mob.isOwnerInDimension())
 				return;
 			this.teleportToOwner();
-			this.moveToOwner(getActualSpeed(), new Vec3(0, 3, 0));		
+			this.moveToOwner(getActualSpeed(), new Vec3(0, 2, 0));
 		}		
 	}
 

@@ -1,10 +1,6 @@
 package net.sodiumzh.nff.girls.registry;
 
-import java.util.Optional;
-import java.util.function.Supplier;
-
 import com.github.mechalopa.hmag.world.item.ModSwordItem;
-
 import com.mojang.datafixers.util.Either;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.MutableComponent;
@@ -23,15 +19,11 @@ import net.sodiumzh.nff.girls.NFFGirls;
 import net.sodiumzh.nff.girls.NFFGirlsTab;
 import net.sodiumzh.nff.girls.entity.INFFGirlsTamed;
 import net.sodiumzh.nff.girls.item.*;
-import net.sodiumzh.nff.girls.subsystem.baublesystem.baubles.AquaJadeBaubleItem;
-import net.sodiumzh.nff.girls.subsystem.baublesystem.baubles.CourageAmuletBaubleItem;
-import net.sodiumzh.nff.girls.subsystem.baublesystem.baubles.HealingJadeBaubleItem;
-import net.sodiumzh.nff.girls.subsystem.baublesystem.baubles.LifeJadeBaubleItem;
-import net.sodiumzh.nff.girls.subsystem.baublesystem.baubles.PoisonousThornBaubleItem;
-import net.sodiumzh.nff.girls.subsystem.baublesystem.baubles.ResistanceAmuletBaubleItem;
-import net.sodiumzh.nff.girls.subsystem.baublesystem.baubles.SoulAmuletBaubleItem;
+import net.sodiumzh.nff.girls.subsystem.baublesystem.baubles.*;
 import net.sodiumzh.nff.services.item.MobCatcherItem;
 import net.sodiumzh.nff.services.item.NFFMobRespawnerItem;
+
+import java.util.function.Supplier;
 
 public class NFFGirlsItems {
 	
@@ -208,12 +200,15 @@ public class NFFGirlsItems {
 			NFFGirlsArmorMaterials.SUNHAT,
 			EquipmentSlot.HEAD,
 			new Item.Properties().tab(TAB)));
-	public static final RegistryObject<Item> NETHERITE_FORK = ITEMS.register("netherite_fork", () -> new ModSwordItem(Tiers.NETHERITE, 2.0F, -2.4F, new Item.Properties().tab(NFFGirlsTab.TAB).fireResistant()));
+	public static final RegistryObject<Item> NETHERITE_FORK = ITEMS.register("netherite_fork", () -> new ModSwordItem(Tiers.NETHERITE, 0F, -2.4F, new Item.Properties().tab(NFFGirlsTab.TAB).fireResistant()));
 	public static final RegistryObject<Item> NECROMANCER_WAND = ITEMS.register("necromancer_wand", () -> new NecromancerWandItem(
 			new Item.Properties().tab(TAB).rarity(Rarity.UNCOMMON).stacksTo(1)));
-	public static final RegistryObject<Item> COMMANDING_WAND = ITEMS.register("commanding_wand", () -> new CommandingWandItem(new Item.Properties().tab(TAB).stacksTo(1)));
+	public static final RegistryObject<CommandingWandItem> COMMANDING_WAND = ITEMS.register("commanding_wand", () ->
+			new CommandingWandItem(new Item.Properties().stacksTo(1).tab(TAB))
+					.descTranslatable("desc.nffgirls.item.commanding_wand_0").cast()
 	@Deprecated
-	public static final RegistryObject<Item> EVIL_MAGNET = ITEMS.register("evil_magnet", () -> new EvilMagnetItem(new Item.Properties().stacksTo(1)));
+	public static final RegistryObject<Item> EVIL_MAGNET = ITEMS.register("evil_magnet", () -> new EvilMagnetItem(new Item.Properties().stacksTo(1))
+			.descTranslatable("info.nffgirls.item.deprecated_recover_ingredients").cast());
 	public static final RegistryObject<SwordItem> PEACH_WOOD_SWORD = ITEMS.register("peach_wood_sword", () -> new PeachWoodSwordItem(Tiers.WOOD, 3, -2.4F, (new Item.Properties()).tab(TAB).rarity(Rarity.UNCOMMON)));
 	public static final RegistryObject<ReinforcedFishingRodItem> REINFORCED_FISHING_ROD = ITEMS.register("reinforced_fishing_rod", () -> new ReinforcedFishingRodItem(new Item.Properties().durability(256).tab(TAB)));
 	

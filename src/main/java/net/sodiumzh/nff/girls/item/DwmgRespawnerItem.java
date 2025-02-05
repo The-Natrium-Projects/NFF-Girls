@@ -28,8 +28,9 @@ public class DwmgRespawnerItem extends NFFMobRespawnerItem
 		super.appendHoverText(stack, level, list, tooltipFlag);
 		if (stack.getTag() != null)
 		{
-			NFFMobRespawnerInstance inst = NFFMobRespawnerInstance.create(stack);
-			MutableComponent name = (MutableComponent) inst.getName();
+			NFFMobRespawnerInstance inst = NFFMobRespawnerInstance.createIfValid(stack);
+			if (inst == null) return;
+			MutableComponent name = (MutableComponent) (inst.getName());
 			MutableComponent type = (MutableComponent) inst.getType().getDescription();
 			
 			if (name != null && type != null)

@@ -88,8 +88,8 @@ public class HmagStrayGirlEntity extends StrayGirlEntity implements INFFGirlsTam
 	@Override
 	public void performRangedAttack(LivingEntity pTarget, float pVelocity) {
 		var absArrow = this.shoot(pTarget, pVelocity);
-		if (absArrow != null && absArrow instanceof Arrow arrow)
-			arrow.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 600));
+		if (!(absArrow instanceof Arrow arrow)) return;
+		arrow.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 600));
 		justShot = true;
 	}
 
