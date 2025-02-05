@@ -11,14 +11,14 @@ public class HmagHarpyTamingProcess extends HmagAnimalTamingProcess
 {
 
 	@Override
-	public INFFTamed doTaming(Player player, Mob target)
+	public Mob doTaming(Player player, Mob target)
 	{
 		HarpyEntity.Variant variant = HarpyEntity.Variant.byId(0);
 		if (target instanceof HarpyEntity h)
 		{
 			variant = h.getVariant();
 		}
-		INFFTamed mob = super.doTaming(player, target);
+		Mob mob = super.doTaming(player, target);
 		if (mob instanceof HmagHarpyEntity h && variant.getId() >= 0)
 		{
 			h.setVariant(variant);

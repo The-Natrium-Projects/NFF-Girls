@@ -18,6 +18,7 @@
   "item.nffgirls.netherite_fork": "下界合金叉",
   "item.nffgirls.peach_wood_sword": "桃木剑",
   "item.nffgirls.reinforced_fishing_rod": "强化鱼竿",
+  "item.nffgirls.combat_commanding_wand": "战斗指挥杖",
 
   "item.nffgirls.poisonous_thorn": "剧毒棘刺",
   "item.nffgirls.healing_jade": "治愈勾玉",
@@ -60,8 +61,6 @@
   "effect.nffgirls.ender_protection": "末影之护",
   "effect.nffgirls.necromancer_wither": "死灵诅咒",
   
-  "item_group.nffgirls_tab" : "NFF：女孩们",
-  
   "entity.nffgirls.hmag_zombie_girl" : "僵尸娘",
   "entity.nffgirls.hmag_skeleton_girl" : "骷髅娘",
   "entity.nffgirls.hmag_husk_girl" : "尸壳娘",
@@ -90,12 +89,9 @@
   "entity.nffgirls.hmag_jack_frost": "冰霜女巫",
   "entity.nffgirls.hmag_melty_monster": "岩浆娘",
   "entity.nffgirls.hmag_nightwalker": "夜行者",
-  
-  "info.nffgirls.necrotic_reaper_not_controllable": "你需要拥有死灵巫师的帽子或死灵巫师之杖以指挥死灵收割者。",
-  "info.nffgirls.necrotic_reaper_not_controllable_inventory": "你需要拥有死灵巫师的帽子或死灵巫师之杖以打开死灵收割者的道具栏。",
+
   "info.nffgirls.interact_not_owning": "这个生物属于%1$s，你无法与之互动。",
   "info.nffgirls.interact_not_owning_unpresent": "这个生物属于其他人，你无法与之互动。（拥有者目前不在世界中）",
-  "info.nffgirls.necrotic_reaper_using_commanding_wand": "使用死灵巫师之杖以与死灵收割者互动。",
   "info.nffgirls.ender_protection_lift": "由于末影之护效果，你被从虚空中拉了上来！",
   "info.nffgirls.ender_protection_lift_teleport_failed": "由于末影之护效果，你被从虚空中拉了上来，但是……",
   "info.nffgirls.gui_level": "等级",
@@ -109,6 +105,14 @@
   "info.nffgirls.item.transferring_tag_mob": "生物: %1$s",
   "info.nffgirls.item.transferring_tag_owner": "原所有者: %1$s",
   "info.nffgirls.item.transferring_tag_locked": "已锁定",
+  "info.nffgirls.item.deprecated_recover_ingredients": "该道具已弃用。右键回收制作材料。",
+  "info.nffgirls.item.combat_set_target_all": "已指示周围生物攻击%1$s",
+  "info.nffgirls.item.combat_set_target": "已指示%1$s攻击%2$s",
+  "info.nffgirls.item.combat_set_target_failed": "这不是可攻击的目标",
+  "info.nffgirls.item.combat_setting_target_selected": "正在指示%1$s攻击...",
+  "info.nffgirls.item.combat_set_target_reset": "已重置",
+  "info.nffgirls.item.combat_stop_attacking": "已指示%1$s停止攻击",
+
   "info.nffgirls.bauble.hpmax": "生命最大值 %1$s", 
   "info.nffgirls.bauble.atk": "攻击 %1$s",
   "info.nffgirls.bauble.armor": "护甲 %1$s",

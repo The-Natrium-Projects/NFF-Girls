@@ -1,36 +1,42 @@
 package net.sodiumzh.nff.girls.entity.tamingprocesses.hmag;
 
 import java.util.Collection;
-import java.util.HashSet;
-
-import com.github.mechalopa.hmag.registry.ModItems;
 import com.github.mechalopa.hmag.world.entity.CreeperGirlEntity;
 
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.AreaEffectCloud;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
+import net.sodiumzh.nautils.annotation.DontCallManually;
+import net.sodiumzh.nautils.capability.CEntityTimerCapability;
+import net.sodiumzh.nautils.entity.anger.MobAngerRules;
+import net.sodiumzh.nautils.statics.NaUtilsParticleStatics;
+import net.sodiumzh.nff.girls.entity.NFFGirlsTamingRules;
+import net.sodiumzh.nff.services.entity.capability.CNFFTamable;
 import org.apache.commons.lang3.mutable.MutableObject;
-import net.sodiumzh.nautils.statics.NaUtilsMathStatics;
 import net.sodiumzh.nautils.statics.NaUtilsEntityStatics;
 import net.sodiumzh.nff.girls.NFFGirls;
-import net.sodiumzh.nff.services.entity.taming.INFFTamed;
-import net.sodiumzh.nff.services.entity.taming.TamableHatredReason;
 import net.sodiumzh.nff.services.entity.taming.TamingProcessItemGivingProgress;
-import net.sodiumzh.nff.services.eventlisteners.TamableTimerUpEvent;
 import net.sodiumzh.nff.services.registry.NFFCapRegistry;
 
 @Mod.EventBusSubscriber(modid = NFFGirls.MOD_ID, bus = Mod.EventBusSubscriber.Bus.FORGE)
 public class HmagCreeperGirlTamingProcess extends TamingProcessItemGivingProgress
 {
-	
+
+	protected static final String NBT_KEY_FINAL_EXPLOSION_PLAYER = "final_explosion_player";
+	protected static final String NBT_KEY_FINAL_EXPLOSION_TICKS_BEFORE = "final_explosion_ticks_before";
+	protected static final String NBT_KEY_FINAL_EXPLOSION_TICKS_AFTER = "final_explosion_ticks_after";
+	protected static final String TIMER_KEY_FINAL_EXPLOSION_FAIL_COOLDOWN = "final_explosion_fail_cooldown";
 	@Override
-	public INFFTamed doTaming(Player player, Mob target)
+	public void tamableInit(CNFFTamable cnffTamable) {
+
+	}
+
+	@Override
+	public Mob doTaming(Player player, Mob target)
 	{
 		target.setNoAi(false);
 		return super.doTaming(player, target);
@@ -42,7 +48,7 @@ public class HmagCreeperGirlTamingProcess extends TamingProcessItemGivingProgres
 		MutableObject<Boolean> res = new MutableObject<Boolean>(false);
 		mob.getCapability(NFFCapRegistry.CAP_BEFRIENDABLE_MOB).ifPresent((cap) -> 
 		{
-			res.setValue(!cap.hasTimer("final_explosion_fail_cooldown"));
+			res.setValue(!cap.hasTimer(TIMER_KEY_FINAL_EXPLOSION_FAIL_COOLDOWN));
 		});
 		return res.getValue();
 	}
@@ -51,9 +57,9 @@ public class HmagCreeperGirlTamingProcess extends TamingProcessItemGivingProgres
 	public void serverTick(Mob mob)
 	{
 		CreeperGirlEntity cg = (CreeperGirlEntity)mob;
-		mob.getCapability(NFFCapRegistry.CAP_BEFRIENDABLE_MOB).ifPresent((l) ->
+		mob.getCapability(NFFCapRegistry.CAP_BEFRIENDABLE_MOB).ifPresent((tamable) ->
 		{
-			if (l.getNbt().contains("final_explosion_player", 11)) 
+			if (tamable.getGeneralNBT().hasUUID(NBT_KEY_FINAL_EXPLOSION_PLAYER))
 			{
 				
 				if (cg.getSwelling(1.0f) * 28.0f <= 26.0f)
@@ -65,12 +71,12 @@ public class HmagCreeperGirlTamingProcess extends TamingProcessItemGivingProgres
 					cg.setSwellDir(-1);
 				}
 				
-				Player player = mob.level().getPlayerByUUID(l.getNbt().getUUID("final_explosion_player"));
+				Player player = mob.level().getPlayerByUUID(tamable.getGeneralNBT().getUUID(NBT_KEY_FINAL_EXPLOSION_PLAYER));
 				// Fix reloading crash after quit after player die 
 				if (player == null)
 					return;
-				int tb = l.getNbt().getInt("final_explosion_ticks_before");
-				int ta = l.getNbt().getInt("final_explosion_ticks_after");
+				int tb = tamable.getGeneralNBT().getInt(NBT_KEY_FINAL_EXPLOSION_TICKS_BEFORE);
+				int ta = tamable.getGeneralNBT().getInt(NBT_KEY_FINAL_EXPLOSION_TICKS_AFTER);
 				if (mob.distanceToSqr(player) >= 64.0f)
 				{
 					this.interrupt(player, cg, false);
@@ -78,9 +84,9 @@ public class HmagCreeperGirlTamingProcess extends TamingProcessItemGivingProgres
 				else if (tb > 0)
 				{
 					if (tb % 3 == 1 || tb <= 13)
-						NaUtilsEntityStatics.sendGlintParticlesToLivingDefault(cg);
-					NaUtilsEntityStatics.sendSmokeParticlesToLivingDefault(cg);
-					l.getNbt().putInt("final_explosion_ticks_before", tb - 1);
+						NaUtilsParticleStatics.sendGlintParticlesToEntityDefault(cg);
+					NaUtilsParticleStatics.sendSmokeParticlesToEntityDefault(cg);
+					tamable.getGeneralNBT().putInt(NBT_KEY_FINAL_EXPLOSION_TICKS_BEFORE, tb - 1);
 				}
 				else if (ta > 0)
 				{
@@ -88,12 +94,12 @@ public class HmagCreeperGirlTamingProcess extends TamingProcessItemGivingProgres
 					{
 						doFinalExplosion((CreeperGirlEntity)mob, player);
 					}
-					l.getNbt().putInt("final_explosion_ticks_after", ta - 1);
+					tamable.getGeneralNBT().putInt(NBT_KEY_FINAL_EXPLOSION_TICKS_AFTER, ta - 1);
 				}
 				else
 				{
 					this.doTaming(player, mob);
-					NaUtilsEntityStatics.sendHeartParticlesToLivingDefault(mob);
+					NaUtilsParticleStatics.sendHeartParticlesToEntityDefault(mob);
 				}
 			}
 		});
@@ -101,11 +107,11 @@ public class HmagCreeperGirlTamingProcess extends TamingProcessItemGivingProgres
 	
 	protected void finalExplosionStart(CreeperGirlEntity mob, Player player)
 	{
-		mob.getCapability(NFFCapRegistry.CAP_BEFRIENDABLE_MOB).ifPresent((l) ->
+		mob.getCapability(NFFCapRegistry.CAP_BEFRIENDABLE_MOB).ifPresent((tamable) ->
 		{
-			l.getNbt().putUUID("final_explosion_player", player.getUUID());
-			l.getNbt().putInt("final_explosion_ticks_before", 80);
-			l.getNbt().putInt("final_explosion_ticks_after", 5);
+			tamable.getGeneralNBT().putUUID(NBT_KEY_FINAL_EXPLOSION_PLAYER, player.getUUID());
+			tamable.getGeneralNBT().putInt(NBT_KEY_FINAL_EXPLOSION_TICKS_BEFORE, 80);
+			tamable.getGeneralNBT().putInt(NBT_KEY_FINAL_EXPLOSION_TICKS_AFTER, 5);
 			mob.setNoAi(true);
 			if (mob.getSwelling(1.0f) * 28.0f < 24.0f)	// getSwelling(1) is ((float)swell/28.0f)
 				mob.setSwellDir(1);
@@ -115,14 +121,14 @@ public class HmagCreeperGirlTamingProcess extends TamingProcessItemGivingProgres
 	
 	protected void finalExplosionFailed(CreeperGirlEntity mob, Player player, boolean isQuiet)
 	{
-		mob.getCapability(NFFCapRegistry.CAP_BEFRIENDABLE_MOB).ifPresent((l) ->
+		mob.getCapability(NFFCapRegistry.CAP_BEFRIENDABLE_MOB).ifPresent((tamable) ->
 		{
-			if (l.getNbt().contains("final_explosion_player", 11) && l.getNbt().getUUID("final_explosion_player").equals(player.getUUID()))
+			if (tamable.getGeneralNBT().contains(NBT_KEY_FINAL_EXPLOSION_PLAYER, 11) && tamable.getGeneralNBT().getUUID(NBT_KEY_FINAL_EXPLOSION_PLAYER).equals(player.getUUID()))
 			{
-					l.getNbt().remove("final_explosion_player");
-					l.getNbt().remove("final_explosion_ticks_before");
-					l.getNbt().remove("final_explosion_ticks_after");
-					//l.setTimer("final_explosion_fail_cooldown", 60);	/* NOT WORKING NOW */
+					tamable.getGeneralNBT().remove(NBT_KEY_FINAL_EXPLOSION_PLAYER);
+					tamable.getGeneralNBT().remove(NBT_KEY_FINAL_EXPLOSION_TICKS_BEFORE);
+					tamable.getGeneralNBT().remove(NBT_KEY_FINAL_EXPLOSION_TICKS_AFTER);
+					//l.setTimer(TIMER_KEY_FINAL_EXPLOSION_FAIL_COOLDOWN, 60);	/* NOT WORKING NOW */
 					mob.setNoAi(false);
 					mob.setSwellDir(-1);
 					/*if (!isQuiet)
@@ -151,8 +157,8 @@ public class HmagCreeperGirlTamingProcess extends TamingProcessItemGivingProgres
 			{
 				cg.getCapability(NFFCapRegistry.CAP_BEFRIENDABLE_MOB).ifPresent((l) ->
 				{
-					if (l.getNbt().contains("final_explosion_player", 11)
-							&& cg.level.getPlayerByUUID(l.getNbt().getUUID("final_explosion_player")) == player)
+					if (l.getNbt().contains(NBT_KEY_FINAL_EXPLOSION_PLAYER, 11)
+							&& cg.level.getPlayerByUUID(l.getNbt().getUUID(NBT_KEY_FINAL_EXPLOSION_PLAYER)) == player)
 					{
 						((HmagCreeperGirlTamingProcess) (NFFTamingMapping.getHandler(ModEntityTypes.CREEPER_GIRL.get())))
 								.finalExplosionFailed(cg, player, true);
@@ -163,8 +169,8 @@ public class HmagCreeperGirlTamingProcess extends TamingProcessItemGivingProgres
 			{
 				cg.getCapability(NFFCapRegistry.CAP_BEFRIENDABLE_MOB).ifPresent((l) ->
 				{
-					if (l.getNbt().contains("final_explosion_player", 11) && bef.getOwner() != null
-							&& cg.level.getPlayerByUUID(l.getNbt().getUUID("final_explosion_player")) == bef.getOwner())
+					if (l.getNbt().contains(NBT_KEY_FINAL_EXPLOSION_PLAYER, 11) && bef.getOwner() != null
+							&& cg.level.getPlayerByUUID(l.getNbt().getUUID(NBT_KEY_FINAL_EXPLOSION_PLAYER)) == bef.getOwner())
 					{
 						
 					}
@@ -209,7 +215,7 @@ public class HmagCreeperGirlTamingProcess extends TamingProcessItemGivingProgres
 
 	@Override
 	public int getItemGivingCooldownTicks() {
-		return 100;
+		return NFFGirlsTamingRules.COOLDOWN_SHORT;
 	}
 
 	/*@Override
@@ -220,7 +226,7 @@ public class HmagCreeperGirlTamingProcess extends TamingProcessItemGivingProgres
 	}*/
 
 	@Override
-	public INFFTamed finalActions(Player player, Mob mob)
+	public Mob finalActions(Player player, Mob mob)
 	{
 		finalExplosionStart((CreeperGirlEntity)mob, player);
 		return null;
@@ -233,28 +239,29 @@ public class HmagCreeperGirlTamingProcess extends TamingProcessItemGivingProgres
 		this.finalExplosionFailed((CreeperGirlEntity) mob, player, isQuiet);
 	}
 
-	// Duration of neutral added
-	// -1 means permanent
 	@Override
-	public int getHatredDurationTicks(TamableHatredReason reason)
-	{
-		return 200;
+	public MobAngerRules getAngerRules() {
+		return MobAngerRules.ATTACKER_DAMAGED_AND_ATTACKING.get();
 	}
-	
+
 	@Override
-	public HashSet<TamableHatredReason> getAddHatredReasons() {
-		HashSet<TamableHatredReason> set = new HashSet<TamableHatredReason>();
-		set.add(TamableHatredReason.ATTACKED);
-		return set;
+	public void onGeneralTimerExpire(Mob mob, String key) {
+		if (key.equals(TIMER_KEY_FINAL_EXPLOSION_FAIL_COOLDOWN))
+			mob.setNoAi(false);
 	}
-	
-	@SubscribeEvent
-	public static void onTimerUp(TamableTimerUpEvent event)
-	{
-		if (event.getMob() != null && event.getMob().isAlive() && event.getMob() instanceof CreeperGirlEntity)
-		{
-			if (event.getKey().equals("final_explosion_fail_cooldown"))
-				event.getMob().setNoAi(false);			
-		}
+
+	@DontCallManually
+	public void handleFinalExplosionKillingOtherTamedMob(Mob thisMob, Mob impactedMob) {
+		// NFF tamed mobs won't be killed by CreeperGirl's "final explosion".
+		// They leave 1 health and get invulnerable for 3s,
+		// preventing them to be killed by falling down after blew up by the explosion.
+		CNFFTamable.getOptional(thisMob).ifPresent(tamable -> {
+			if (tamable.getGeneralNBT().contains("final_explosion_player", 11))
+			{
+				impactedMob.setHealth(1.0f);
+				impactedMob.invulnerableTime += 60;
+				NaUtilsParticleStatics.sendGlintParticlesToEntityDefault(impactedMob);
+			}
+		});
 	}
 }

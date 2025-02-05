@@ -1,0 +1,30 @@
+{
+	"type": "minecraft:crafting_shaped",
+	
+	"pattern": 
+	[ 
+	"EIE",
+	" S ",
+	" S "	
+	],
+	
+	"key":{ 
+	
+		"S":{
+		"item": "minecraft:stick"
+		},
+		
+		"E":{ 
+		"item": "hmag:evil_crystal_fragment"
+		},
+
+		"I": {
+		"tag": "forge:ingots/iron"
+		}
+	},
+	
+	"result":{ 
+		"item": "nffgirls:combat_commanding_wand",
+		"count": 1
+	}
+}

@@ -3,6 +3,7 @@ package net.sodiumzh.nff.girls.registry;
 import net.minecraftforge.common.ForgeConfigSpec;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.event.config.ModConfigEvent;
+import net.sodiumzh.nff.girls.eventlisteners.NFFGirlsEntityEventListeners;
 
 public class NFFGirlsConfigs
 {
@@ -32,13 +33,18 @@ public class NFFGirlsConfigs
 	public static ForgeConfigSpec.BooleanValue ALL_ZOMBIE_GIRLS_CAN_CONVERT_TO_HUSKS;
 	public static ForgeConfigSpec.BooleanValue ALL_DROWNED_GIRLS_CAN_CONVERT_TO_ZOMBIES;
 	public static ForgeConfigSpec.BooleanValue ALL_STRAY_GIRLS_CAN_CONVERT_TO_SKELETONS;
-	
+
 	// Baubles
 	public static ForgeConfigSpec.DoubleValue BAUBLE_HEALTH_RECOVERY_SCALE;
 	public static ForgeConfigSpec.DoubleValue BAUBLE_MAX_HP_BOOSTING_SCALE;
 	public static ForgeConfigSpec.DoubleValue BAUBLE_ATK_BOOSTING_SCALE;
 	public static ForgeConfigSpec.DoubleValue BAUBLE_ARMOR_BOOSTING_SCALE;
-	
+
+	// Misc
+	/** Implemented through {@link NFFGirlsEntityEventListeners#onTamed} */
+	public static ForgeConfigSpec.BooleanValue REMOVE_HAND_ITEM_ON_TAMING;
+	public static ForgeConfigSpec.BooleanValue REMOVE_ARMOR_ON_TAMING;
+
 	static
 	{
 		BUILDER.push("sound");
@@ -95,7 +101,13 @@ public class NFFGirlsConfigs
 				.defineInRange("baubleATKScale", 1.0d, 0.0d, 1e+6);
 		BAUBLE_ARMOR_BOOSTING_SCALE = BUILDER.comment("Bauble armor increase will be scaled with this value.")
 				.defineInRange("baubleMaxHPScale", 1.0d, 0.0d, 1e+6);
-		
+		BUILDER.pop();
+
+		BUILDER.push("misc");
+		REMOVE_HAND_ITEM_ON_TAMING = BUILDER.comment("If true, the hand items of the mobs will be removed by default on getting friendly.")
+				.define("removeHandItemsOnFriending", false);
+		REMOVE_ARMOR_ON_TAMING = BUILDER.comment("If true, the armor of the mobs will be removed by default on getting friendly.")
+				.define("removeArmorOnFriending", false);
 		CONFIG = BUILDER.build();
 	}
 	
@@ -139,7 +151,12 @@ public class NFFGirlsConfigs
 			public static double BAUBLE_ARMOR_BOOSTING_SCALE;
 			
 		}
-		
+
+		public static class Misc {
+			public static boolean REMOVE_HAND_ITEM_ON_TAMING;
+			public static boolean REMOVE_ARMOR_ON_TAMING;
+		}
+
 		public static void refreshCommon()
 		{
 			Sound.AMBIENT_SOUND_CHANCE = NFFGirlsConfigs.AMBIENT_SOUND_CHANCE.get();
@@ -164,6 +181,8 @@ public class NFFGirlsConfigs
 			Baubles.BAUBLE_MAX_HP_BOOSTING_SCALE = NFFGirlsConfigs.BAUBLE_MAX_HP_BOOSTING_SCALE.get();
 			Baubles.BAUBLE_ATK_BOOSTING_SCALE = NFFGirlsConfigs.BAUBLE_ATK_BOOSTING_SCALE.get();
 			Baubles.BAUBLE_ARMOR_BOOSTING_SCALE = NFFGirlsConfigs.BAUBLE_ARMOR_BOOSTING_SCALE.get();
+			Misc.REMOVE_HAND_ITEM_ON_TAMING = NFFGirlsConfigs.REMOVE_HAND_ITEM_ON_TAMING.get();
+			Misc.REMOVE_ARMOR_ON_TAMING = NFFGirlsConfigs.REMOVE_ARMOR_ON_TAMING.get();
 		}
 		
 		/*public static void refreshServer()

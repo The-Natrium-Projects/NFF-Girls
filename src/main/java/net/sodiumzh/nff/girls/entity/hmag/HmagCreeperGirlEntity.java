@@ -202,15 +202,32 @@ public class HmagCreeperGirlEntity extends NFFTamedCreeperPreset implements INFF
 
 	@Override
 	public InteractionResult serversideMainHandInteraction(Player player, InteractionHand hand) {
-		if (player.getItemInHand(hand).is(Items.FLINT_AND_STEEL)
-				&& this.canIgnite
-				&& (!this.isPowered() || this.getAdditionalInventory().getItem(6).getCount() >= 2)
-				&& this.getSwell() == 0)
-		{
+		if (!player.isShiftKeyDown()) {
+			if (player.getItemInHand(hand).is(Items.FLINT_AND_STEEL)
+					&& this.canIgnite
+					&& (!this.isPowered() || this.getAdditionalInventory().getItem(6).getCount() >= 2)
+					&& this.getSwell() == 0) {
 
-			this.playerIgniteDefault(player, hand);
-			isPlayerIgnited = true;
-			return InteractionResult.sidedSuccess(player.level().isClientSide);
+				this.playerIgniteDefault(player, hand);
+				isPlayerIgnited = true;
+				return InteractionResult.sidedSuccess(player.level().isClientSide);
+			}
+		}
+		else {
+			// Power with a lightning particle
+			if (player.getItemInHand(hand).is(ModItems.LIGHTNING_PARTICLE.get()) && !this.isPowered())
+			{
+				this.setPowered(true);
+				player.getItemInHand(hand).shrink(1);
+				return InteractionResult.sidedSuccess(player.level().isClientSide);
+			}
+			// Unpower with empty hand )and get a lightning particle
+			else if (player.getItemInHand(hand).isEmpty() && this.isPowered() && hand.equals(InteractionHand.MAIN_HAND))
+			{
+				this.setPowered(false);
+				this.spawnAtLocation(new ItemStack(ModItems.LIGHTNING_PARTICLE.get(), 1));
+				return InteractionResult.sidedSuccess(player.level().isClientSide);
+			}
 		}
 		return InteractionResult.PASS;
 	}

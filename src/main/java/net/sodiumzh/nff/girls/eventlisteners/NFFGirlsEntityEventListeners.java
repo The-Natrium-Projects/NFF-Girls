@@ -29,6 +29,7 @@ import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.damagesource.DamageTypes;
+import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.Entity;
@@ -65,6 +66,7 @@ import net.minecraftforge.event.entity.EntityMobGriefingEvent;
 import net.minecraftforge.event.entity.EntityStruckByLightningEvent;
 import net.minecraftforge.event.entity.EntityTeleportEvent;
 import net.minecraftforge.event.entity.ProjectileImpactEvent;
+import net.minecraftforge.event.entity.item.ItemEvent;
 import net.minecraftforge.event.entity.living.*;
 import net.minecraftforge.event.entity.living.LivingEvent.LivingTickEvent;
 import net.minecraftforge.event.entity.player.AttackEntityEvent;
@@ -73,8 +75,12 @@ import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.LogicalSide;
 import net.minecraftforge.fml.common.Mod;
+import net.sodiumzh.nautils.entity.taming.ITamingProcessWithProgress;
 import net.sodiumzh.nautils.mixin.events.entity.*;
 import net.sodiumzh.nautils.statics.*;
+import net.sodiumzh.nff.girls.entity.tamingprocesses.hmag.HmagCreeperGirlTamingProcess;
+import net.sodiumzh.nff.girls.item.CombatCommandingWandItem;
+import net.sodiumzh.nff.services.entity.taming.NFFTamableAngryEvent;
 import net.sodiumzh.nff.services.entity.taming.NFFTamedStatics;
 import org.apache.commons.lang3.mutable.MutableObject;
 import net.sodiumzh.nautils.block.ColoredBlocks;
@@ -99,7 +105,6 @@ import net.sodiumzh.nff.girls.entity.hmag.HmagWitherSkeletonGirlEntity;
 import net.sodiumzh.nff.girls.entity.hmag.HmagZombieGirlEntity;
 import net.sodiumzh.nff.girls.entity.projectile.NecromancerMagicBulletEntity;
 import net.sodiumzh.nff.girls.entity.tamingprocesses.hmag.HmagJiangshiTamingProcess;
-import net.sodiumzh.nff.girls.entity.tamingprocesses.hmag.NFFGirlsItemDroppingTamingProcess;
 import net.sodiumzh.nff.girls.item.NecromancerArmorItem;
 import net.sodiumzh.nff.girls.registry.NFFGirlsBlocks;
 import net.sodiumzh.nff.girls.registry.NFFGirlsCapabilities;
@@ -111,15 +116,12 @@ import net.sodiumzh.nff.girls.registry.NFFGirlsTags;
 import net.sodiumzh.nff.girls.util.NFFGirlsEntityStatics;
 import net.sodiumzh.nff.services.entity.ai.NFFTamedMobAIState;
 import net.sodiumzh.nff.services.entity.ai.goal.presets.FreezeGoal;
-import net.sodiumzh.nff.services.entity.capability.CNFFTamable;
 import net.sodiumzh.nff.services.entity.taming.INFFTamed;
 import net.sodiumzh.nff.services.entity.taming.NFFTamingMapping;
-import net.sodiumzh.nff.services.entity.taming.TamableHatredReason;
 import net.sodiumzh.nff.services.event.entity.NFFMobTamedEvent;
 import net.sodiumzh.nff.services.event.entity.ai.NFFTamedChangeAiStateEvent;
 import net.sodiumzh.nff.services.eventlisteners.NFFTamedDeathEvent;
 import net.sodiumzh.nff.services.eventlisteners.ServerEntityTickEvent;
-import net.sodiumzh.nff.services.eventlisteners.TamableAddHatredEvent;
 import net.sodiumzh.nff.services.item.NFFMobOwnershipTransfererItem;
 import net.sodiumzh.nff.services.item.NFFMobRespawnerItem;
 import net.sodiumzh.nff.services.registry.NFFCapRegistry;
@@ -155,7 +157,7 @@ public class NFFGirlsEntityEventListeners
 	        	// Handle CUndeadAffinityHandler //
         		mob.getCapability(NFFGirlsCapabilities.CAP_UNDEAD_AFFINITY_HANDLER).ifPresent((l) ->
         		{
-        			if (target != null && target.hasEffect(NFFGirlsEffects.UNDEAD_AFFINITY.get()) && lastHurtBy != target && !l.getHatred().contains(target.getUUID()))
+        			if (target.hasEffect(NFFGirlsEffects.UNDEAD_AFFINITY.get()) && lastHurtBy != target && !l.getHatred().contains(target.getUUID()))
         			{
         				event.setCanceled(true);
         				return;
@@ -170,8 +172,7 @@ public class NFFGirlsEntityEventListeners
 	        if (mob instanceof HmagGhastlySeekerEntity gs)
 	        {
 	        	// If last target is still attackable, prevent removing target
-	        	if (target == null 
-	        		&& gs.lastTarget != null 
+	        	if (gs.lastTarget != null
 	        		&& gs.lastTarget.isAlive() 
 	        		&& gs.lastTarget.distanceToSqr(gs) <= gs.getAttributeValue(Attributes.FOLLOW_RANGE) * gs.getAttributeValue(Attributes.FOLLOW_RANGE)
 	        		&& gs.hasLineOfSight(gs.lastTarget))
@@ -208,10 +209,11 @@ public class NFFGirlsEntityEventListeners
 		}
 	}
 
+	@SubscribeEvent
 	public static void onLivingChangeTarget(LivingChangeTargetEvent event)
 	{
 		LivingEntity target = event.getNewTarget();
-		if (event.getEntity() instanceof Mob mob) {
+		if (target != null && event.getEntity() instanceof Mob mob) {
 			// Tamable mobs don't attack their tamed variation
 			if (NFFTamingMapping.contains(mob)
 				&& NFFTamingMapping.getConvertTo(mob) == target.getType()
@@ -244,38 +246,23 @@ public class NFFGirlsEntityEventListeners
 				e instanceof Mob mob
 				&& mob.getType().equals(tamedType)
 				&& INFFGirlsTamed.isBMAnd(mob, m -> p.equals(m.getOwner())))
-			.filter(e -> attacker.hasLineOfSight(e))
+			.filter(attacker::hasLineOfSight)
 			.toList();
 		return !tamed.isEmpty();
 	}
 
 	@SubscribeEvent
-	public static void onBefriendedDie(NFFTamedDeathEvent event)
+	public static void onTamedDeath(NFFTamedDeathEvent event)
 	{
-		if (event.getDamageSource().getEntity() != null)
+		if (event.getDamageSource().getEntity() instanceof Mob srcMob)
 		{
-			if (event.getDamageSource().getEntity().getCapability(NFFCapRegistry.CAP_BEFRIENDABLE_MOB).isPresent())
+			srcMob.getCapability(NFFCapRegistry.CAP_BEFRIENDABLE_MOB).ifPresent((tamable) ->
 			{
-				event.getDamageSource().getEntity().getCapability(NFFCapRegistry.CAP_BEFRIENDABLE_MOB).ifPresent((l) -> 
-				{
-					if (event.getDamageSource().getEntity() instanceof CreeperGirlEntity cg)
-					{
-						// Befriended mobs won't be killed by CreeperGirl's "final explosion". They leave 1 health and get invulnerable for 3s, 
-						// preventing them to be killed by falling down after blowed up by the explosion.
-						if (l.getNbt().contains("final_explosion_player", 11)
-						&& event.getMob().getOwner() != null
-						&& l.getNbt().getUUID("final_explosion_player").equals(event.getMob().getOwnerUUID()))
-						{
-							event.getMob().asMob().setHealth(1.0f);
-							event.getMob().asMob().invulnerableTime += 60;
-							NaUtilsParticleStatics.sendGlintParticlesToEntityDefault(event.getMob().asMob());
-							event.setCanceled(true);
-							return;
-						}
-					}
-				});
-			
-			}
+				if (tamable.getTamingProcess() instanceof HmagCreeperGirlTamingProcess process) {
+					process.handleFinalExplosionKillingOtherTamedMob(srcMob, event.getMob().asMob());
+					event.setCanceled(true);
+				}
+			});
 			if (event.isCanceled())
 				return;
 		}
@@ -286,8 +273,8 @@ public class NFFGirlsEntityEventListeners
 				cg.spawnAtLocation(new ItemStack(ModItems.LIGHTNING_PARTICLE.get(), 1));
 		}
 
-		/** Favorability & Level */
-		if (event.getMob() instanceof INFFGirlsTamed bm && bm.isOwnerPresent())
+		/* Favorability & Level */
+		if (event.getMob() instanceof INFFGirlsTamed bm && bm.isOwnerInDimension())
 		{
 			// Favorability loss on death
 			if (event.getDamageSource().getEntity() != null
@@ -298,13 +285,14 @@ public class NFFGirlsEntityEventListeners
 				bm.getFavorabilityHandler().setFavorability(0);
 			else if (bm.asMob().distanceToSqr(bm.getOwner()) < 64d 
 					&& bm.asMob().hasLineOfSight(bm.getOwner())
-					&& !event.getDamageSource().is(DamageTypes.FELL_OUT_OF_WORLD))
+					&& !event.getDamageSource().is(DamageTypes.FELL_OUT_OF_WORLD)
+					&& !event.getDamageSource().is(DamageTypes.GENERIC_KILL))
 				bm.getFavorabilityHandler().addFavorability(-20);
 			// EXP loses by a half on death
 			// As respawner construction (in befriendmobs) is after posting NFFTamedDeathEvent, it can be set here
 			bm.getLevelHandler().setExp(bm.getLevelHandler().getExp() / 2);
 		}
-		/** Favorability & Level end */
+		/* Favorability & Level end */
 	}
 	
 	
@@ -500,7 +488,23 @@ public class NFFGirlsEntityEventListeners
 					return;
 				}
 			}
-			
+
+			// Handle peach sword
+			if (event.getEntity() instanceof Mob mob
+					&& mob.getMobType() == MobType.UNDEAD
+					&& event.getSource().getEntity() instanceof Player player
+					&& player.getItemInHand(InteractionHand.MAIN_HAND).is(NFFGirlsItems.PEACH_WOOD_SWORD.get()))
+			{
+				// For Jiangshi, processed in befriending handler
+				if (mob.getType() == ModEntityTypes.JIANGSHI.get()
+						&& NFFTamingMapping.getProcess(mob) instanceof HmagJiangshiTamingProcess proc
+						&& proc.onPeachSwordHit(mob, player)) {}
+				else {
+					NaUtilsEntityStatics.addEffectSafe(mob, MobEffects.HEAL, 1, 1);
+					NaUtilsEntityStatics.addEffectSafe(mob, MobEffects.WEAKNESS, 5 * 20, 2);
+					NaUtilsEntityStatics.addEffectSafe(mob, MobEffects.MOVEMENT_SLOWDOWN, 5 * 20, 2);
+				}
+			}
 		}
 	}
 		
@@ -549,42 +553,17 @@ public class NFFGirlsEntityEventListeners
 	{
 		if (event.getEntityLiving() instanceof EnderExecutorEntity ee)
 		{
-			ee.getCapability(NFFCapRegistry.CAP_BEFRIENDABLE_MOB).ifPresent((l) -> 
+			ee.getCapability(NFFCapRegistry.CAP_BEFRIENDABLE_MOB).ifPresent((tamable) ->
 			{
-				if (l.getNbt().getBoolean("cannot_teleport"))
+				if (tamable.getGeneralNBT().getBoolean("cannot_teleport"))
 				{
 					// Still teleport in water
 					if (!ee.isInWater())
 					{
 						event.setCanceled(true);
 					}
-					
 				}
 			});
-		}
-	}
-	
-	@SubscribeEvent
-	public static void onBefriendableAddHatred(TamableAddHatredEvent event)
-	{
-		if (NFFTamingMapping.contains(event.mob))
-		{
-			// Cancel add neutral if undead mob trying targeting to a player with undead affinity
-			// Setting target will also be canceled in NFFServices-EntityEvents
-			if (event.mob.getMobType() == MobType.UNDEAD
-				&& event.toAdd.hasEffect(NFFGirlsEffects.UNDEAD_AFFINITY.get())
-				&& event.reason == TamableHatredReason.SET_TARGET
-				)
-				
-			{
-				MutableObject<Boolean> inHatred = new MutableObject<Boolean>(false);
-				event.mob.getCapability(NFFCapRegistry.CAP_BEFRIENDABLE_MOB).ifPresent((cap) -> 
-				{
-					inHatred.setValue(cap.isInHatred(event.toAdd));
-				});
-				if (!inHatred.getValue())
-					event.setCanceled(true);
-			}
 		}
 	}
 	
@@ -611,33 +590,18 @@ public class NFFGirlsEntityEventListeners
 			if (event.getEntity() instanceof Mob mob)
 			{
 				// Undead mob forgiving player
+				// TODO Is this out-of-date?
 				mob.getCapability(NFFGirlsCapabilities.CAP_UNDEAD_AFFINITY_HANDLER).ifPresent(cap -> 
 				{
 					cap.updateForgivingTimers();
 					if (mob.getTarget() != null && mob.getTarget().hasEffect(NFFGirlsEffects.UNDEAD_AFFINITY.get()) && !cap.getHatred().contains(mob.getTarget().getUUID()))
 						mob.setTarget(null);
 				});
-				
-				/*for (Player player: mob.level.players())
-				{
-					if (player instanceof ServerPlayer sp)
-					{
-						mob.getCapability(NFFGirlsCapabilities.CAP_FAVORABILITY_HANDLER).ifPresent((cap) -> 
-						{
-							cap.sync(sp);
-						});
-						mob.getCapability(NFFGirlsCapabilities.CAP_LEVEL_HANDLER).ifPresent((cap) -> 
-						{
-							cap.sync(sp);
-						});
-						
-					}
-				}*/
 				// Sync mobs
 				if (mob instanceof INFFGirlsTamed bm)
 					bm.doSync();
 			}
-			/** Send overlap event */
+			// Send overlap event
 			if (event.getEntity() instanceof INFFGirlsTamed bm)
 			{
 				if (bm.asMob().getHealth() > 0.0F) {
@@ -658,7 +622,7 @@ public class NFFGirlsEntityEventListeners
 			         }
 			     }
 			}
-			/** Handle necromancer wither effect */
+			// Handle necromancer wither effect
 			if (event.getEntity().hasEffect(NFFGirlsEffects.NECROMANCER_WITHER.get()))
 			{
 				// Wither skeletons are immune to this effect
@@ -695,6 +659,12 @@ public class NFFGirlsEntityEventListeners
 					}
 				}
 			}
+			// In Combat Commanding Wand it will manually set target, which may cause the mob to keep attacking
+			// after the target dies. Fix it here
+			INFFGirlsTamed.ifBM(event.getEntity(), tamed -> {
+				if (tamed.asMob().getTarget() != null && !tamed.asMob().getTarget().isAlive())
+					tamed.asMob().setTarget(null);
+			});
 		}
 	}
 	
@@ -867,39 +837,7 @@ public class NFFGirlsEntityEventListeners
 		{
 			if (event.getSource().getEntity() != null && event.getSource().getEntity() instanceof LivingEntity source)
 			{
-				// Handle Peach-Wood Sword
-				if (mob.getMobType() == MobType.UNDEAD 
-						&& source instanceof Player player 
-						&& player.getItemInHand(InteractionHand.MAIN_HAND).is(NFFGirlsItems.PEACH_WOOD_SWORD.get()))
-				{
-					// For Jiangshi, processed in befriending handler
-					if (mob.getType() == ModEntityTypes.JIANGSHI.get())
-					{
-						if (NFFTamingMapping.getHandler(mob) instanceof HmagJiangshiTamingProcess handler)
-						{
-							handler.onPeachSwordHit(mob, player);
-						}
-					}
-					// For other undead mobs, it will force hurt a half, at most 50
-					else
-					{
-						float newDmg = (float) Math.min(50d, mob.getAttributeValue(Attributes.MAX_HEALTH) / 2d);
-						if (event.getAmount() < newDmg)
-						{
-							float oldDmg = event.getAmount();
-							NFFGirlsHooks.PeachWoodSwordForceHurtEvent dmgEvent = new NFFGirlsHooks.PeachWoodSwordForceHurtEvent(player, mob, oldDmg, newDmg);
-							if (!MinecraftForge.EVENT_BUS.post(dmgEvent))
-							{
-								event.setAmount(dmgEvent.newDamage);
-								if (oldDmg < newDmg)
-								{
-									player.getItemInHand(InteractionHand.MAIN_HAND).hurtAndBreak(Math.round((newDmg - oldDmg) / 5f), player, 
-											l -> l.broadcastBreakEvent(EquipmentSlot.MAINHAND));
-								}
-							}
-						}
-					}
-				}
+
 				
 				// Favorbility change
 				// On player attack a mob attacking the BM
@@ -1021,9 +959,9 @@ public class NFFGirlsEntityEventListeners
 				{
 					setHostileToAllBefriendedMobs(mob, (living) -> (living.getMobType() != MobType.ARTHROPOD));
 				}
-				/** Mob hostility end */
+				/* Mob hostility end */
 				
-				/** Existing befriendable mob adjustment */
+				/* Existing befriendable mob adjustment */
 				if (NFFTamingMapping.contains(mob))
 				{
 					// Ghastly Seeker in overworld
@@ -1045,26 +983,30 @@ public class NFFGirlsEntityEventListeners
 						}
 					}
 					// Kobolds and Imps picking up and being neutral
-					if (NFFTamingMapping.getHandler(mob) instanceof NFFGirlsItemDroppingTamingProcess)
+					if (NFFTamingMapping.getProcess(mob) instanceof ITamingProcessWithProgress<?> processRaw)
 					{
-						if (mob instanceof KoboldEntity || mob instanceof ImpEntity)
+						if (mob.getType().is(NFFGirlsTags.NEUTRAL_ON_HIGH_PROGRESS))
 						{
 							for (WrappedGoal wg: mob.targetSelector.getAvailableGoals())
 							{
 								// Neutral to players with progress > 0.7
 								if (wg.getGoal() instanceof NearestAttackableTargetGoal<?> tg)
 								{
-									NaUtilsAIStatics.addAndTargetingCondition(tg, (le) -> 
-										!(CNFFTamable.getCapNbt(mob).getCompound("ongoing_players").contains(le.getStringUUID(), NaUtilsNBTStatics.TAG_DOUBLE_ID)
-										&& CNFFTamable.getCapNbt(mob).getCompound("ongoing_players").getDouble(le.getStringUUID()) > 0.7d));
+									@SuppressWarnings("unchecked")
+									ITamingProcessWithProgress<Mob> process = (ITamingProcessWithProgress<Mob>)processRaw;
+									NaUtilsAIStatics.addAndTargetingCondition(tg, (le) ->
+										!(le instanceof Player player &&
+												process.getProgressValue(mob, player.getUUID()) .orElse(0d) > 0.7d));
 								}
 							}
-							mob.goalSelector.addGoal(2, new NFFGirlsTamableWatchHandItemGoal(mob));
-							mob.goalSelector.addGoal(4, new NFFGirlsTamablePickItemGoal(mob));
+							// Now it's added in NFFGirlsItemDroppingTamingProcess#tamableInit
+							/*mob.goalSelector.addGoal(2, new NFFGirlsTamableWatchHandItemGoal(mob));
+							mob.goalSelector.addGoal(4, new NFFGirlsTamablePickItemGoal(mob));*/
 						}
 					}
 					// Jiangshi
-					if (mob instanceof JiangshiEntity js)
+					// Handled in HmagJiangshiTamingProcess now
+					/*if (mob instanceof JiangshiEntity js)
 					{
 						// Frozen by talisman
 						js.goalSelector.addGoal(1, new FreezeGoal(js, HmagJiangshiTamingProcess::isFrozen));
@@ -1072,7 +1014,7 @@ public class NFFGirlsEntityEventListeners
 						WrappedGoal oldLeapGoal = null;
 						for (WrappedGoal wg : js.goalSelector.getAvailableGoals())
 						{
-							if (wg.getPriority() == 2 /* Priority 2 is only for leap goal */)
+							if (wg.getPriority() == 2)
 							{
 								oldLeapGoal = wg;
 								break;
@@ -1083,9 +1025,10 @@ public class NFFGirlsEntityEventListeners
 							js.goalSelector.getAvailableGoals().remove(oldLeapGoal);//.getAvailableGoals().remove(oldMoveGoal);
 							js.goalSelector.addGoal(2, new NFFGirlsTamableJiangshiMutableLeapGoal(js));
 						}
-					}
+					}*/
+					// Now it's added in NFFGirlsItemDroppingTamingProcess#tamableInit
 					// Harpy and Snow Canine
-					if (mob instanceof HarpyEntity || mob instanceof SnowCanineEntity)
+					/*if (mob instanceof HarpyEntity || mob instanceof SnowCanineEntity)
 					{
 						mob.goalSelector.addGoal(2, new NFFGirlsTamableWatchHandItemGoal(mob));
 						mob.goalSelector.addGoal(3, new NFFGirlsTamablePickItemGoal(mob));
@@ -1094,7 +1037,7 @@ public class NFFGirlsEntityEventListeners
 					{
 						mob.goalSelector.addGoal(3, new NFFGirlsTamableWatchHandItemGoal(mob));
 						mob.goalSelector.addGoal(4, new NFFGirlsTamablePickItemGoal(mob));
-					}
+					}*/
 				}
 			}
 			/** Add ConditionalAttributeModifier */
@@ -1178,6 +1121,8 @@ public class NFFGirlsEntityEventListeners
 				}
 			}			
 		}
+		if (event.getEntity().getItemInHand(event.getHand()).is(NFFGirlsItems.COMBAT_COMMANDING_WAND.get()))
+			event.setCanceled(true);
 	}
 	
 	@SubscribeEvent
@@ -1206,7 +1151,17 @@ public class NFFGirlsEntityEventListeners
 	@SubscribeEvent
 	public static void onBefriended(NFFMobTamedEvent event)
 	{
-		event.mobBefriended.asMob().setCustomName(null);
+		event.mobBefriended.setCustomName(null);
+		if (NFFGirlsConfigs.ValueCache.Misc.REMOVE_HAND_ITEM_ON_TAMING) {
+			event.mobBefriended.setItemSlot(EquipmentSlot.MAINHAND, ItemStack.EMPTY);
+			event.mobBefriended.setItemSlot(EquipmentSlot.OFFHAND, ItemStack.EMPTY);
+		}
+		if (NFFGirlsConfigs.ValueCache.Misc.REMOVE_ARMOR_ON_TAMING) {
+			event.mobBefriended.setItemSlot(EquipmentSlot.HEAD, ItemStack.EMPTY);
+			event.mobBefriended.setItemSlot(EquipmentSlot.CHEST, ItemStack.EMPTY);
+			event.mobBefriended.setItemSlot(EquipmentSlot.LEGS, ItemStack.EMPTY);
+			event.mobBefriended.setItemSlot(EquipmentSlot.FEET, ItemStack.EMPTY);
+		}
 	}
 	
 	@SubscribeEvent
@@ -1347,4 +1302,11 @@ public class NFFGirlsEntityEventListeners
 		});
 		return;
 	}
+
+	@SubscribeEvent
+	public static void onEntitySpecificInteraction(EntitySpecificInteractionEvent event) {
+		if (event.getPlayer().getItemInHand(event.getHand()).getItem() instanceof CombatCommandingWandItem)
+			event.setCanceled(true);
+	}
+
 }

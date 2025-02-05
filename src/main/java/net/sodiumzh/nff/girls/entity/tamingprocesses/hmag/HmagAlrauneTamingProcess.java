@@ -11,9 +11,12 @@ import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.FlowerBlock;
+import net.sodiumzh.nautils.entity.anger.MobAngerRules;
 import net.sodiumzh.nautils.statics.NaUtilsMathStatics;
 import net.sodiumzh.nautils.statics.NaUtilsContainerStatics;
-import net.sodiumzh.nff.services.entity.taming.TamableHatredReason;
+import net.sodiumzh.nff.girls.entity.NFFGirlsTamingRules;
+import net.sodiumzh.nff.girls.registry.NFFGirlsAngerRules;
+import net.sodiumzh.nff.services.entity.capability.CNFFTamable;
 import net.sodiumzh.nff.services.entity.taming.TamingProcessItemGivingProgress;
 
 public class HmagAlrauneTamingProcess extends TamingProcessItemGivingProgress
@@ -59,12 +62,16 @@ public class HmagAlrauneTamingProcess extends TamingProcessItemGivingProgress
 
 	@Override
 	public int getItemGivingCooldownTicks() {
-		return 5 * 20;
+		return NFFGirlsTamingRules.COOLDOWN_SHORT;
 	}
 
 	@Override
-	public HashSet<TamableHatredReason> getAddHatredReasons() {
-		return NaUtilsContainerStatics.setOf(TamableHatredReason.ATTACKED);
+	public void tamableInit(CNFFTamable cnffTamable) {
+
 	}
 
+	@Override
+	public MobAngerRules getAngerRules() {
+		return NFFGirlsAngerRules.DEFAULT.get();
+	}
 }

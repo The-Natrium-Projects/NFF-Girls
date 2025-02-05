@@ -66,7 +66,7 @@ public class HmagHornetEntity extends HornetEntity implements INFFGirlsTamed
 		//this.goalSelector.addGoal(4, new NFFMeleeAttackGoal(this, 1d, false));
 		this.goalSelector.addGoal(5, new NFFFlyingLandGoal(this));
 		this.goalSelector.addGoal(6, new NFFGirlsFlyingFollowOwnerGoal(this));
-		this.goalSelector.addGoal(8, new NFFFlyingRandomMoveGoal(this).heightLimit(10));
+		this.goalSelector.addGoal(8, new NFFFlyingRandomMoveGoal(this).heightLimit(7));
 		this.goalSelector.addGoal(9, new LookAtPlayerGoal(this, Player.class, 3.0F, 1.0F));
 		this.goalSelector.addGoal(10, new LookAtPlayerGoal(this, Mob.class, 8.0F));
 		this.goalSelector.addGoal(11, new RandomLookAroundGoal(this));
@@ -107,11 +107,9 @@ public class HmagHornetEntity extends HornetEntity implements INFFGirlsTamed
 					|| instance.getAmplifier() == addPoisonLevel && instance.getDuration() < addPoisonTicks
 					|| instance.getAmplifier() < addPoisonLevel)
 			{
-				// Don't add poison to undead mobs as it will heal them
-				if (!(living instanceof Mob) || ((Mob)living).getMobType() != MobType.UNDEAD)
-					// Add poison based on this mob's properties
-					living.removeEffect(MobEffects.POISON);
-					living.addEffect(new MobEffectInstance(MobEffects.POISON, addPoisonTicks, addPoisonLevel));
+				// Add poison based on this mob's properties
+				living.removeEffect(MobEffects.POISON);
+				living.addEffect(new MobEffectInstance(MobEffects.POISON, addPoisonTicks, addPoisonLevel));
 			}
 		}
 		return true;

@@ -240,10 +240,15 @@ public class NFFGirlsItems {
 			new Item.Properties()));
 	public static final RegistryObject<Item> NETHERITE_FORK = register("netherite_fork", () -> new ModSwordItem(Tiers.NETHERITE, 2.0F, -2.4F, new Item.Properties().fireResistant()));
 	public static final RegistryObject<Item> NECROMANCER_WAND = register("necromancer_wand", () -> new NecromancerWandItem(		new Item.Properties().rarity(Rarity.UNCOMMON).stacksTo(1)));
-	public static final RegistryObject<Item> COMMANDING_WAND = register("commanding_wand", () -> new CommandingWandItem(new Item.Properties().stacksTo(1)));
+	public static final RegistryObject<CommandingWandItem> COMMANDING_WAND = register("commanding_wand", () ->
+			new CommandingWandItem(new Item.Properties().stacksTo(1))
+					.descTranslatable("desc.nffgirls.item.commanding_wand_0").cast());
+	public static final RegistryObject<CombatCommandingWandItem> COMBAT_COMMANDING_WAND = register("combat_commanding_wand",
+			() -> new CombatCommandingWandItem(new Item.Properties().stacksTo(1)));
 	@Deprecated
-	public static final RegistryObject<Item> EVIL_MAGNET = register("evil_magnet", () -> new EvilMagnetItem(new Item.Properties().stacksTo(1)));
-	public static final RegistryObject<SwordItem> PEACH_WOOD_SWORD = register("peach_wood_sword", () -> new PeachWoodSwordItem(Tiers.WOOD, 3, -2.4F, (new Item.Properties()).rarity(Rarity.UNCOMMON)));
+	public static final RegistryObject<EvilMagnetItem> EVIL_MAGNET = register("evil_magnet", () -> new EvilMagnetItem(new Item.Properties().stacksTo(1))
+			.descTranslatable("info.nffgirls.item.deprecated_recover_ingredients").cast());
+	public static final RegistryObject<SwordItem> PEACH_WOOD_SWORD = register("peach_wood_sword", () -> new PeachWoodSwordItem(Tiers.WOOD, 0, -2.4F, (new Item.Properties()).rarity(Rarity.UNCOMMON)));
 	public static final RegistryObject<ReinforcedFishingRodItem> REINFORCED_FISHING_ROD = register("reinforced_fishing_rod", () -> new ReinforcedFishingRodItem(new Item.Properties().durability(256)));
 	
 	// Utility items

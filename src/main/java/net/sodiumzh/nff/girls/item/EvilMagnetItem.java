@@ -19,11 +19,12 @@ import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
+import net.sodiumzh.nautils.item.NaUtilsItem;
 import net.sodiumzh.nautils.statics.NaUtilsInfoStatics;
 import net.sodiumzh.nautils.statics.NaUtilsItemStatics;
 
 @Deprecated
-public class EvilMagnetItem extends Item implements IWithDuration
+public class EvilMagnetItem extends NaUtilsItem implements IWithDuration
 {
 
 	public EvilMagnetItem(Properties pProperties)
@@ -75,6 +76,7 @@ public class EvilMagnetItem extends Item implements IWithDuration
 		return super.useOn(context);
 	}
 	
+	@Override
 	public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand pUsedHand)
 	{
 		if (!player.level().isClientSide)

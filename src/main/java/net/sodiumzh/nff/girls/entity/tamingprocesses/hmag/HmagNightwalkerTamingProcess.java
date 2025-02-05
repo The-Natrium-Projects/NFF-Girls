@@ -14,27 +14,20 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 import net.sodiumzh.nautils.block.ColoredBlocks;
+import net.sodiumzh.nautils.entity.anger.MobAngerRules;
 import net.sodiumzh.nautils.statics.NaUtilsMathStatics;
 import net.sodiumzh.nautils.statics.NaUtilsContainerStatics;
+import net.sodiumzh.nff.girls.entity.NFFGirlsTamingRules;
+import net.sodiumzh.nff.girls.registry.NFFGirlsAngerRules;
 import net.sodiumzh.nff.girls.registry.NFFGirlsBlocks;
 import net.sodiumzh.nff.girls.registry.NFFGirlsTags;
+import net.sodiumzh.nff.services.entity.capability.CNFFTamable;
 import net.sodiumzh.nff.services.entity.taming.INFFTamed;
-import net.sodiumzh.nff.services.entity.taming.TamableHatredReason;
+import net.sodiumzh.nautils.entity.anger.MobAngerReason;
 import net.sodiumzh.nff.services.entity.taming.TamingProcessItemGivingProgress;
 
 public class HmagNightwalkerTamingProcess extends TamingProcessItemGivingProgress
 {
-	
-	@Override
-	protected double getProcValueToAdd(ItemStack itemstack, Player player, Mob mob, double oldProc) {
-		if (itemstack.is(Items.CLAY_BALL))
-			return NaUtilsMathStatics.rndRangedDouble(0.03, 0.06);
-		else if (itemstack.is(ModItems.ANCIENT_STONE.get()))
-			return NaUtilsMathStatics.rndRangedDouble(0.05, 0.10);
-		else if (itemstack.is(NFFGirlsTags.HMAG_BERRIES))
-			return NaUtilsMathStatics.rndRangedDouble(0.06, 0.14);
-		else return 0d;
-	}
 
 	@Override
 	public boolean additionalConditions(Player player, Mob mob) {
@@ -43,31 +36,12 @@ public class HmagNightwalkerTamingProcess extends TamingProcessItemGivingProgres
 
 	@Override
 	public int getItemGivingCooldownTicks() {
-		return 10 * 20;
+		return NFFGirlsTamingRules.COOLDOWN_MIDDLE;
 	}
 
 	@Override
-	public boolean isItemAcceptable(ItemStack itemstack) {
-		return getProcValueToAdd(itemstack, null, null, 0) > 0;
-	}
-
-	@Override
-	public HashSet<TamableHatredReason> getAddHatredReasons() {
-		return NaUtilsContainerStatics.setOf(TamableHatredReason.ATTACKED, TamableHatredReason.ATTACKING);
-	}
-
-	@Override
-	public int getHatredDurationTicks(TamableHatredReason reason)
-	{
-		switch (reason)
-		{
-		case ATTACKED:
-			return 300 * 20;
-		case ATTACKING:
-			return 30 * 20;
-		default:
-			return 0;				
-		}
+	public MobAngerRules getAngerRules() {
+		return NFFGirlsAngerRules.DEFAULT.get();
 	}
 	
 	@Override
@@ -82,7 +56,7 @@ public class HmagNightwalkerTamingProcess extends TamingProcessItemGivingProgres
 	}
 	
 	@Override
-	public INFFTamed finalActions(Player player, Mob mob)
+	public Mob finalActions(Player player, Mob mob)
 	{
 		afterItemGiven(player, mob, null);
 		return super.finalActions(player, mob);
@@ -106,5 +80,9 @@ public class HmagNightwalkerTamingProcess extends TamingProcessItemGivingProgres
 		if (convertTo != null)
 			level.setBlock(pos, convertTo.defaultBlockState(), 1 | 2);
 	}
-	
+
+	@Override
+	public void tamableInit(CNFFTamable cnffTamable) {
+
+	}
 }

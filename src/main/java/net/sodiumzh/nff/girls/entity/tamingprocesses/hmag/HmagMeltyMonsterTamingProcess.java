@@ -11,17 +11,21 @@ import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
+import net.sodiumzh.nautils.entity.anger.MobAngerRules;
 import net.sodiumzh.nautils.math.RandomSelection;
 import net.sodiumzh.nautils.statics.NaUtilsMathStatics;
 import net.sodiumzh.nautils.statics.NaUtilsContainerStatics;
 import net.sodiumzh.nautils.statics.NaUtilsEntityStatics;
-import net.sodiumzh.nff.services.entity.taming.TamableHatredReason;
+import net.sodiumzh.nautils.entity.anger.MobAngerReason;
+import net.sodiumzh.nff.girls.entity.NFFGirlsTamingRules;
+import net.sodiumzh.nff.girls.registry.NFFGirlsAngerRules;
+import net.sodiumzh.nff.services.entity.capability.CNFFTamable;
 import net.sodiumzh.nff.services.entity.taming.TamingProcessItemGivingProgress;
 
 public class HmagMeltyMonsterTamingProcess extends TamingProcessItemGivingProgress
 {
 
-	@Override
+	/*@Override
 	protected double getProcValueToAdd(ItemStack item, Player player, Mob mob, double oldProc) {
 		if (item.is(Items.BLAZE_POWDER))
 			return NaUtilsMathStatics.rndRangedDouble(0.02, 0.04);
@@ -34,12 +38,7 @@ public class HmagMeltyMonsterTamingProcess extends TamingProcessItemGivingProgre
 		else if (item.is(Items.NETHER_STAR))
 			return RandomSelection.createDouble(0.5d).add(1.01d, 0.3d).getDouble();
 		else return 0;
-	}
-
-	@Override
-	public boolean isItemAcceptable(ItemStack itemstack) {
-		return getProcValueToAdd(itemstack, null, null, 0) > 0;
-	}
+	}*/
 
 	@Override
 	public boolean additionalConditions(Player player, Mob mob) {
@@ -49,7 +48,7 @@ public class HmagMeltyMonsterTamingProcess extends TamingProcessItemGivingProgre
 
 	@Override
 	public int getItemGivingCooldownTicks() {
-		return 15 * 20;
+		return NFFGirlsTamingRules.COOLDOWN_LONG;
 	}
 
 	@Override
@@ -60,8 +59,12 @@ public class HmagMeltyMonsterTamingProcess extends TamingProcessItemGivingProgre
 	}
 	
 	@Override
-	public HashSet<TamableHatredReason> getAddHatredReasons() {
-		return NaUtilsContainerStatics.setOf(TamableHatredReason.ATTACKED);
+	public MobAngerRules getAngerRules() {
+		return NFFGirlsAngerRules.DEFAULT.get();
 	}
 
+	@Override
+	public void tamableInit(CNFFTamable cnffTamable) {
+
+	}
 }

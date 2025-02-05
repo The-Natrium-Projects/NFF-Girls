@@ -28,14 +28,14 @@ public class NFFTamingProgressProbeItem extends Item
 		{
 			if (target instanceof Mob mob && target.getCapability(NFFCapRegistry.CAP_BEFRIENDABLE_MOB).isPresent())
 			{
-				if (NFFTamingMapping.getHandler(mob) instanceof TamingProcessItemGivingProgress prog)
+				if (NFFTamingMapping.getProcess(mob) instanceof TamingProcessItemGivingProgress prog)
 				{
-					NaUtilsMiscStatics.printToScreen("Progress: " + Double.toString(prog.getProgressValue(mob, player)), player);
+					NaUtilsMiscStatics.printToScreen("Progress: " + prog.getProgressValue(mob, player.getUUID()), player);
 					return InteractionResult.CONSUME;
 				}
-				else if (NFFTamingMapping.getHandler(mob) instanceof NFFGirlsItemDroppingTamingProcess dropping)
+				else if (NFFTamingMapping.getProcess(mob) instanceof NFFGirlsItemDroppingTamingProcess dropping)
 				{
-					NaUtilsMiscStatics.printToScreen("Progress: " + Double.toString(dropping.getProgress(mob, player)), player);
+					NaUtilsMiscStatics.printToScreen("Progress: " + dropping.getProgressValue(mob, player.getUUID()), player);
 					return InteractionResult.CONSUME;
 				}
 			}

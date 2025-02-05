@@ -17,6 +17,7 @@
   "item.nffgirls.netherite_fork": "Netherite Fork",
   "item.nffgirls.peach_wood_sword": "Peach-Wood Sword",
   "item.nffgirls.reinforced_fishing_rod": "Reinforced Fishing Rod",
+  "item.nffgirls.combat_commanding_wand": "Combat Commanding Wand",
   
   "item.nffgirls.poisonous_thorn": "Poisonous Thorn",
   "item.nffgirls.soul_amulet": "Soul Amulet",
@@ -48,12 +49,37 @@
   "item.nffgirls.taoist_talisman": "Taoist Talisman",
   "item.nffgirls.evil_gem": "Evil Gem",
   "item.nffgirls.trade_introduction_letter": "Trade Introduction Letter",
-  
+
+  "item.minecraft.potion.effect.nffgirls.undead_affinity": "Potion of Undead Affinity",
+  "item.minecraft.potion.effect.nffgirls.undead_affinity_long": "Potion of Undead Affinity",
+  "item.minecraft.potion.effect.nffgirls.undead_affinity_long_2": "Potion of Undead Affinity",
+  "item.minecraft.splash_potion.effect.nffgirls.undead_affinity": "Splash Potion of Undead Affinity",
+  "item.minecraft.splash_potion.effect.nffgirls.undead_affinity_long": "Splash Potion of Undead Affinity",
+  "item.minecraft.splash_potion.effect.nffgirls.undead_affinity_long_2": "Splash Potion of Undead Affinity",
+  "item.minecraft.lingering_potion.effect.nffgirls.undead_affinity": "Lingering Potion of Undead Affinity",
+  "item.minecraft.lingering_potion.effect.nffgirls.undead_affinity_long": "Lingering Potion of Undead Affinity",
+  "item.minecraft.lingering_potion.effect.nffgirls.undead_affinity_long_2": "Lingering Potion of Undead Affinity",
+  "item.minecraft.tipped_arrow.effect.nffgirls.undead_affinity": "Arrow of Undead Affinity",
+  "item.minecraft.tipped_arrow.effect.nffgirls.undead_affinity_long": "Arrow of Undead Affinity",
+  "item.minecraft.tipped_arrow.effect.nffgirls.undead_affinity_long_2": "Arrow of Undead Affinity",
+  "item.minecraft.potion.effect.nffgirls.ender_protection": "Potion of Ender Protection",
+  "item.minecraft.potion.effect.nffgirls.ender_protection_long": "Potion of Ender Protection",
+  "item.minecraft.potion.effect.nffgirls.ender_protection_long_2": "Potion of Ender Protection",
+  "item.minecraft.splash_potion.effect.nffgirls.ender_protection": "Splash Potion of Ender Protection",
+  "item.minecraft.splash_potion.effect.nffgirls.ender_protection_long": "Splash Potion of Ender Protection",
+  "item.minecraft.splash_potion.effect.nffgirls.ender_protection_long_2": "Splash Potion of Ender Protection",
+  "item.minecraft.lingering_potion.effect.nffgirls.ender_protection": "Lingering Potion of Ender Protection",
+  "item.minecraft.lingering_potion.effect.nffgirls.ender_protection_long": "Lingering Potion of Ender Protection",
+  "item.minecraft.lingering_potion.effect.nffgirls.ender_protection_long_2": "Lingering Potion of Ender Protection",
+  "item.minecraft.tipped_arrow.effect.nffgirls.ender_protection": "Arrow of Ender Protection",
+  "item.minecraft.tipped_arrow.effect.nffgirls.ender_protection_long": "Arrow of Ender Protection",
+  "item.minecraft.tipped_arrow.effect.nffgirls.ender_protection_long_2": "Arrow of Ender Protection",
+
   "item.nffgirls.taming_progress_probe": "Taming Progress Probe (Debug)",
   "item.nffgirls.exp_modifier": "EXP Modifier (Debug)",
   "item.nffgirls.favorability_modifier": "Favorability Modifier (Debug)",
   "item.nffgirls.mob_dictionary": "HMaG Mob Dictionary - By NFF: Girls",
-    
+
   "block.nffgirls.soul_cake" : "Soul Cake",
   "block.nffgirls.soul_carpet" : "Soul Carpet",
   "block.nffgirls.luminous_terracotta" : "Luminous Terracotta",
@@ -61,7 +87,7 @@
   "block.nffgirls.enderberry_bush" : "Enderberry Bush",
 
   "effect.nffgirls.undead_affinity": "Undead Affinity",
-  "effect.nffgirls.ender_protection": "Protection of the End",
+  "effect.nffgirls.ender_protection": "Ender Protection",
   "effect.nffgirls.necromancer_wither": "Curse of Necromancy",
 
   "item_group.nffgirls_tab" : "NFF: Girls",
@@ -100,8 +126,8 @@
   "info.nffgirls.interact_not_owning": "This mob belongs to %1$s and you can't interact with it.",
   "info.nffgirls.interact_not_owning_unpresent": "This mob belongs to someone else and you can't interact with it. (Its owner isn't in the world now.)",
   "info.nffgirls.necrotic_reaper_using_commanding_wand": "Use Necromancer's Wand instead to interact with the Necrotic Reaper.",
-  "info.nffgirls.ender_protection_lift": "You were saved from the void because of Protection of the End!",
-  "info.nffgirls.ender_protection_lift_teleport_failed": "You were lifted from the void because of Protection of the End, but...",
+  "info.nffgirls.ender_protection_lift": "You were saved from the void because of the Ender Protection!",
+  "info.nffgirls.ender_protection_lift_teleport_failed": "You were lifted from the void because of the Ender Protection, but...",
   "info.nffgirls.gui_level": "Level",
   "info.nffgirls.gui_exp": "Exp",
   "info.nffgirls.gui_favorability": "Favorability",
@@ -112,6 +138,14 @@
   "info.nffgirls.item.transferring_tag_mob": "Mob: %1$s",
   "info.nffgirls.item.transferring_tag_owner": "Previous Owner: %1$s",
   "info.nffgirls.item.transferring_tag_locked": "Locked",
+  "info.nffgirls.item.deprecated_recover_ingredients": "This item is deprecated. Right click to recover crafting ingredients.",
+  "info.nffgirls.item.combat_set_target_all": "Commanded mobs around to attack %1$s",
+  "info.nffgirls.item.combat_set_target": "Commanded %1$s to attack %2$s",
+  "info.nffgirls.item.combat_set_target_failed": "This is not a viable attack target",
+  "info.nffgirls.item.combat_setting_target_selected": "Commanding %1$s to attack...",
+  "info.nffgirls.item.combat_set_target_reset": "Mob selection reset.",
+  "info.nffgirls.item.combat_stop_attacking": "Commanded %1$s to stop attacking.",
+
   "info.nffgirls.bauble": "Bauble", 
   "info.nffgirls.bauble.hpmax": "Max HP %1$s", 
   "info.nffgirls.bauble.atk": "ATK %1$s",
@@ -139,6 +173,9 @@
   "info.nffgirls.introduction_unavailable": "Required points: %2$d; current points: %1$d",
   "info.nffgirls.introduction_written": "%1$s signed on the Trade Introduction Letter.",
   "death.attack.necromancer_wither": "%1$s failed to bear the curse of necromancy.",
+
+  "desc.nffgirls.item.commanding_wand: "Right click an NFF mob to switch the AI\nShift+Right click an NFF mob to open the GUI\nShift+Right click without target to gather NFF mobs within 16 blocks",
+
 
   "dict.nffgirls.title": "HMaG - Mob Dictionary",
   "dict.nffgirls.button_friendable": "A Special Encounter?",

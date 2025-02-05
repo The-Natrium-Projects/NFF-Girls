@@ -82,7 +82,8 @@ public class HmagSkeletonGirlEntity extends SkeletonGirlEntity implements INFFGi
 
 	@Override
 	public void performRangedAttack(LivingEntity pTarget, float pVelocity) {
-		this.shoot(pTarget, pVelocity);
+		var arrow = this.shoot(pTarget, pVelocity);
+		if (arrow == null) return;
 		justShot = true;
 	}
 
