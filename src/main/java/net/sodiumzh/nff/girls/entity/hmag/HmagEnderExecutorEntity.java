@@ -170,6 +170,13 @@ public class HmagEnderExecutorEntity extends NFFTamedEnderManPreset implements I
 		}
 	}*/
 
+	// Cancel super interaction. Handled in event.
+	@Override
+	public InteractionResult mobInteract(Player player, InteractionHand hand) {
+		return InteractionResult.PASS;
+	}
+
+
 
 	// Interaction end
 
@@ -593,8 +600,8 @@ public class HmagEnderExecutorEntity extends NFFTamedEnderManPreset implements I
 	 */
 	@OnlyIn(Dist.CLIENT)
 	public Optional<Vec3> getBeamEndPoint(float partialTicks) {
-		return this.getTarget() != null ?
-			Optional.of(ModClientUtils.getPosition(this.getTarget(), (double)this.getTarget().getBbHeight() * 0.5D, partialTicks))
+		return this.getActiveAttackTarget() != null ?
+			Optional.of(ModClientUtils.getPosition(this.getActiveAttackTarget(), (double)this.getActiveAttackTarget().getBbHeight() * 0.5D, partialTicks))
 			: this.getBeamingPos().map(pos -> new Vec3(pos.getX() + 0.5d, pos.getY() + 0.5d, pos.getZ() + 0.5d));
 	}
 

@@ -52,8 +52,8 @@ public class CommandingWandItem extends NaUtilsItem
 				List<Entity> bmList = sl.getEntities(null, bound);
 				for (Entity e: bmList)
 				{
-					if (e instanceof INFFGirlsTamed bm && bm.getOwnerUUID().equals(context.getPlayer().getUUID()))
-						((INFFGirlsTamed)e).setAIState(NFFTamedMobAIState.FOLLOW, true);
+					if (INFFGirlsTamed.isBMAnd(e,  bm -> bm.getOwnerUUID().equals(context.getPlayer().getUUID())))
+						INFFGirlsTamed.ifBM(e, tamed -> tamed.setAIState(NFFTamedMobAIState.FOLLOW, true));
 					else if (e instanceof ItemEntity ie)
 					{
 						if (ie.getItem().is(NFFGirlsItems.MOB_RESPAWNER.get()))
