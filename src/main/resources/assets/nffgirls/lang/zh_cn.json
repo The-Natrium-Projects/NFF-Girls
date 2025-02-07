@@ -141,6 +141,9 @@
   "info.nffgirls.book.tamable": "一场特殊的邂逅？",
   "death.attack.necromancer_wither": "%1$s没能承受住死灵巫术的诅咒",
 
+  "desc.nffgirls.item.commanding_wand": "右键你的生物切换AI\nShift+右键你的生物打开GUI面板\n对空气Shift+右键集合16格内的生物",
+  "desc.nffgirls.item.combat_commanding_wand": "右键你的生物选定，然后右键其他对象以指示你的生物攻击这个对象\nShift+右键你的生物以指示其停止攻击\nShift+右键敌人使你周围的生物集火攻击",
+
   "dict.nffgirls.title": "HMaG - 生物图鉴",
   "dict.nffgirls.button_friendable": "一场特殊的邂逅？",
   "dict.nffgirls.button_interaction" : "互动",

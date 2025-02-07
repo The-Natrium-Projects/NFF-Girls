@@ -242,9 +242,10 @@ public class NFFGirlsItems {
 	public static final RegistryObject<Item> NECROMANCER_WAND = register("necromancer_wand", () -> new NecromancerWandItem(		new Item.Properties().rarity(Rarity.UNCOMMON).stacksTo(1)));
 	public static final RegistryObject<CommandingWandItem> COMMANDING_WAND = register("commanding_wand", () ->
 			new CommandingWandItem(new Item.Properties().stacksTo(1))
-					.descTranslatable("desc.nffgirls.item.commanding_wand_0").cast());
+					.descTranslatable("desc.nffgirls.item.commanding_wand").cast());
 	public static final RegistryObject<CombatCommandingWandItem> COMBAT_COMMANDING_WAND = register("combat_commanding_wand",
-			() -> new CombatCommandingWandItem(new Item.Properties().stacksTo(1)));
+			() -> new CombatCommandingWandItem(new Item.Properties().stacksTo(1))
+					.descTranslatable("desc.nffgirls.item.combat_commanding_wand").cast());
 	@Deprecated
 	public static final RegistryObject<EvilMagnetItem> EVIL_MAGNET = register("evil_magnet", () -> new EvilMagnetItem(new Item.Properties().stacksTo(1))
 			.descTranslatable("info.nffgirls.item.deprecated_recover_ingredients").cast());
