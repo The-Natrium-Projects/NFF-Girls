@@ -30,6 +30,8 @@ import net.sodiumzh.nff.girls.NFFGirls;
 import net.sodiumzh.nff.girls.entity.INFFGirlsTamed;
 import net.sodiumzh.nff.girls.item.IWithDuration;
 import net.sodiumzh.nff.girls.registry.NFFGirlsItems;
+import net.sodiumzh.nff.girls.registry.NFFGirlsTags;
+import net.sodiumzh.nff.services.entity.ai.NFFTamedMobAIState;
 import net.sodiumzh.nff.services.entity.taming.INFFTamed;
 import net.sodiumzh.nff.services.eventlisteners.ServerEntityTickEvent;
 import net.sodiumzh.nff.services.item.NFFMobRespawnerInstance;

@@ -95,7 +95,7 @@ public interface INFFGirlsTamed extends INFFTamed, IAttributeMonitor, IItemStack
 		}
 		else return false;
 	}
-	
+
 	/**
 	 * Check if a mob has a NFFGirls BM interface and satisfied the given condition.
 	 * <p>
@@ -107,7 +107,13 @@ public interface INFFGirlsTamed extends INFFTamed, IAttributeMonitor, IItemStack
 		if (!isBM(o)) return false;
 		return cond.test(getBM(o));
 	}
-	
+
+	public static void ifBMAnd(Object o, Predicate<INFFGirlsTamed> cond, Consumer<INFFGirlsTamed> operation) {
+		if (isBMAnd(o, cond)) {
+			ifBM(o, operation);
+		}
+	}
+
 	@DontOverride
 	public default CNFFGirlsFavorabilityHandler getFavorabilityHandler()
 	{
