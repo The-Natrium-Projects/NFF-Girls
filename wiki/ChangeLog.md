@@ -1,5 +1,45 @@
 # Change Log
 
+### 0.x.28
+
+Note: this update may have respawner format change. Release mobs from respawners and storage pods before update.
+
+Taming process refactor.
+
+​	-Now a mob only allows 1 player in process. If the ongoing player is online, other players are not allowed to enter the process.
+
+​	-Reduced the progress loss from 0.1/s to 0.02/s for mobs with the continuous progress loss mechanics when some conditions are not satisfied.
+
+​	-Reduced the item giving cool-down. (5s -> 2s; 10s -> 3s; 15s -> 5s)
+
+​	-Modified mob anger durations.
+
+Several changes to make the mod more friendly to early-stage players.
+
+​	-Added potions for Undead Affinity and Ender Protection.
+
+​	-Reduced some item's costs.
+
+​	-Enhanced the effects of the Soul Cake, Soul Cake Slice and Ender Pie.
+
+​	-Reduced the costs for getting friendly with mobs.
+
+Commanding Wand optimization.
+
+​	-Now Commanding Wand can switch mob's AI from at most 64 blocks away.
+
+​	-Now Shift+Right click can make all mobs follow within 16 blocks.
+
+​	-Added Combat Commanding Wand, allowing to control your mob's attack target.
+
+Now Necrostalker will gain Strength and Speed effects instead of silently boost its ATK during the friending process, and will lose progress after not hitting the player for 30 s instead of 10 s.
+
+Now Necrostalker's interaction uses Commanding Wand like other mobs, and no longer requires necromancer items.
+
+Now Peach-Wood Sword no longer makes percentage damage, but provides Instant Health II (damage for undead), Weakness III (5 s) and Slowness III (5 s).
+
+Fixed Ender Executor crash on attacking.
+
 ### 0.x.27.1
 
 Fixed friending processes not consuming items.
