@@ -324,8 +324,8 @@
   "info.nffgirls.book.tamable": "A Special Encounter?",
   "death.attack.necromancer_wither": "%1$s failed to bear the curse of necromancy.",
 
-  "desc.nffgirls.item.commanding_wand: "Right click an NFF mob to switch the AI\nShift+Right click an NFF mob to open the GUI\nShift+Right click without target to gather NFF mobs within 16 blocks",
-
+  "desc.nffgirls.item.commanding_wand": "Right click your mob to switch the AI\nShift+Right click an NFF mob to open the GUI\nShift+Right click without target to gather NFF mobs within 16 blocks",
+  "desc.nffgirls.item.combat_commanding_wand": "Right click an NFF mob to select, and then right click an enemy to make your mob attack it\nShift+Right click your mob to make it stop attacking\nShift+Right click an enemy to make all your mobs around attack it together",
 
   "dict.nffgirls.title": "HMaG - Mob Dictionary",
   "dict.nffgirls.button_friendable": "A Special Encounter?",
