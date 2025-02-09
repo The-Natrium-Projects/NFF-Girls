@@ -1,4 +1,4 @@
-buildscript {
+  buildscript {
     repositories {
         jcenter()
         mavenCentral()
@@ -201,7 +201,7 @@ dependencies {
 	implementation fg.deobf("curse.maven:testdummy-225738:4410143")
 	implementation fg.deobf("curse.maven:citadel-331936:4556677")
 	implementation fg.deobf("curse.maven:alexsmobs-426558:4159154")
-	//implementation fg.deobf("curse.maven:iceandfire-264231:5037952")
+	implementation fg.deobf("curse.maven:iceandfire-264231:5037952")
 	implementation fg.deobf("curse.maven:bop-220318:4473556")
 	implementation fg.deobf("curse.maven:terrablender-563928:4618490")
 	implementation fg.deobf("curse.maven:corgilib-693313:4554111")

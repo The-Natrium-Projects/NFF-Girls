@@ -1,5 +1,17 @@
 # Change Log
 
+### 0.x.28
+
+Slightly modified the mob accessory effects.
+
+Slightly modified the taming items. 
+
+  -Now Ghastly Seeker uses `undead_nether_b` instead of `undead_b`.
+
+  -Now Wither Skeleton Girl uses `undead_nether_c` instead of `undead_c`.
+
+Fixed mobs not avoiding Enderberry Bush.
+
 ### 0.x.27.1
 
 Fixed friending processes not consuming items.
@@ -16,7 +28,7 @@ Updated trade list. Now mobs below have trades: all Vanilla mob girls, Ender Exe
 
 Added configs:
 
-​	-`enableFriendlyDamage`: If false, players and owned NFF-Girls mobs will not be able to damage each other.
+  -`enableFriendlyDamage`: If false, players and owned NFF-Girls mobs will not be able to damage each other.
 
 Now friendly Ender Executor will not do random teleport unless hurt by water.
 
