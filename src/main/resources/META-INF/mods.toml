@@ -29,7 +29,7 @@ description='''Enjoy your Minecraft days with monster girls!'''
 [[dependencies.nffgirls]]
     modId="nffservices"
     mandatory=true
-    versionRange="[0.2.27, 0.2.29)"
+    versionRange="[0.2.28, 0.2.29)"
     ordering="NONE"
     side="BOTH"  
     
