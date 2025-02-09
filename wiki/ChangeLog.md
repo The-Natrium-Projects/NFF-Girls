@@ -24,6 +24,14 @@ Several changes to make the mod more friendly to early-stage players.
 
 ​	-Reduced the costs for getting friendly with mobs.
 
+Slightly modified the mob accessory effects.
+
+Slightly modified the taming items. 
+
+  -Now Ghastly Seeker uses `undead_nether_b` instead of `undead_b`.
+
+  -Now Wither Skeleton Girl uses `undead_nether_c` instead of `undead_c`.
+
 Commanding Wand optimization.
 
 ​	-Now Commanding Wand can switch mob's AI from at most 64 blocks away.
@@ -41,6 +49,8 @@ Now Necrostalker's interaction uses Commanding Wand like other mobs, and no long
 Now Peach-Wood Sword no longer makes percentage damage, but provides Instant Health II (damage for undead), Weakness III (5 s) and Slowness III (5 s).
 
 Fixed Ender Executor crash on attacking.
+
+Fixed mobs not avoiding Enderberry Bush.
 
 ### 0.x.27.1
 
