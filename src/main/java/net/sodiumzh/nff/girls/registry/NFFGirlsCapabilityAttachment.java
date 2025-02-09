@@ -26,6 +26,7 @@ public class NFFGirlsCapabilityAttachment {
 	public static final String KEY_FAVORABILITY = "favorability";
 	public static final String KEY_XP_LEVEL = "xp_level";
 	public static final String KEY_TRADE = "trade";
+	public static final String KEY_DEFAULT_ANGER_HANDLER = "defaultAngerHandler";
 	
 	public static final String KEY_UNDEAD_AFFINITY_HANDLER_LEGACY = "cap_undead";
 	public static final String KEY_FAVORABILITY_LEGACY = "cap_favorability";
