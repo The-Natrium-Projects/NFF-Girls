@@ -32,6 +32,8 @@ Commanding Wand optimization.
 
 ​	-Added Combat Commanding Wand, allowing to control your mob's attack target.
 
+Added config options to remove mob's equipment on friended.
+
 Now Necrostalker will gain Strength and Speed effects instead of silently boost its ATK during the friending process, and will lose progress after not hitting the player for 30 s instead of 10 s.
 
 Now Necrostalker's interaction uses Commanding Wand like other mobs, and no longer requires necromancer items.
