@@ -10,14 +10,11 @@ import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.AABB;
 import net.sodiumzh.nautils.entity.anger.MobAngerRules;
-import net.sodiumzh.nautils.statics.NaUtilsMathStatics;
 import net.sodiumzh.nff.girls.entity.NFFGirlsTamingRules;
 import net.sodiumzh.nff.girls.registry.NFFGirlsAngerRules;
-import net.sodiumzh.nff.services.entity.capability.CNFFTamable;
-import net.sodiumzh.nff.services.entity.taming.TamableHatredReason;
+import net.sodiumzh.nff.services.entity.taming.CNFFTamable;
 import net.sodiumzh.nff.services.entity.taming.TamingProcessItemGivingProgress;
 
-import java.util.HashSet;
 import java.util.stream.Stream;
 
 public class HmagHornetTamingProcess extends TamingProcessItemGivingProgress

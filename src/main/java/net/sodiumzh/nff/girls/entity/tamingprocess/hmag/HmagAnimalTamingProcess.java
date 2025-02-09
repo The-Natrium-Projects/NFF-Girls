@@ -7,7 +7,7 @@ import net.minecraft.world.item.ItemStack;
 import net.sodiumzh.nautils.entity.anger.MobAngerRules;
 import net.sodiumzh.nautils.statics.NaUtilsEntityStatics;
 import net.sodiumzh.nff.girls.registry.NFFGirlsAngerRules;
-import net.sodiumzh.nff.services.entity.capability.CNFFTamable;
+import net.sodiumzh.nff.services.entity.taming.CNFFTamable;
 
 public class HmagAnimalTamingProcess extends NFFGirlsItemDroppingTamingProcess
 {
@@ -17,7 +17,6 @@ public class HmagAnimalTamingProcess extends NFFGirlsItemDroppingTamingProcess
 	@Override
 	public void tamableInit(CNFFTamable cap)
 	{
-		super.tamableInit(cap);
 		cap.getGeneralNBT().putDouble(NBT_KEY_STRENGTH, 0d);
 	}
 

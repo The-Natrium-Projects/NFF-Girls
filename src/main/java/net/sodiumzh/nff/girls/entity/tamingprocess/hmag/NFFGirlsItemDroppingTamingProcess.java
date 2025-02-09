@@ -23,16 +23,17 @@ import net.sodiumzh.nautils.statics.NaUtilsItemStatics;
 import net.sodiumzh.nautils.statics.NaUtilsParticleStatics;
 import net.sodiumzh.nff.girls.entity.ai.goal.NFFGirlsTamablePickItemGoal;
 import net.sodiumzh.nff.girls.entity.ai.goal.NFFGirlsTamableWatchHandItemGoal;
-import net.sodiumzh.nff.services.entity.capability.CNFFTamable;
+import net.sodiumzh.nff.services.entity.taming.CNFFTamable;
 import net.sodiumzh.nff.services.entity.taming.INFFDefaultProgressedTamingProcess;
 import net.sodiumzh.nff.services.entity.taming.NFFTamingProcess;
-import net.sodiumzh.nff.services.entity.taming.TamableHatredReason;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.util.*;
 import java.util.function.Predicate;
 import java.util.function.Supplier;
+
+import static net.sodiumzh.nff.services.entity.taming.CNFFTamable.getOptional;
 
 public abstract class NFFGirlsItemDroppingTamingProcess extends NFFTamingProcess implements INFFDefaultProgressedTamingProcess<Mob>
 {
@@ -62,7 +63,7 @@ public abstract class NFFGirlsItemDroppingTamingProcess extends NFFTamingProcess
 
 	@Override
 	public TamingInteractionResult handleInteract(Player player, Mob mob, InteractionHand hand) {
-		return TamingInteractionResult.unhandled(player.level());
+		return TamingInteractionResult.unhandled(player.level);
 	}
 
 	@Override
@@ -122,7 +123,7 @@ public abstract class NFFGirlsItemDroppingTamingProcess extends NFFTamingProcess
 		if (!isItemAcceptableInternal(itemEntity.getItem(), mob))
 			return false;
 		// If item not thrown by player, pass
-		Entity entityThrown = itemEntity.getOwner();
+		Entity entityThrown = itemEntity.getThrowingEntity();
 		if (entityThrown == null)
 			return false;
 		if (!(entityThrown instanceof Player playerThrown))
@@ -177,7 +178,7 @@ public abstract class NFFGirlsItemDroppingTamingProcess extends NFFTamingProcess
 		// Pick one
 		ItemStack stack = itemEntity.getItem().copy();
 		stack.setCount(1);
-		stack.getOrCreateTag().putUUID(ITEM_NBT_KEY_PICKED_FROM_PLAYER, itemEntity.getOwner().getUUID());
+		stack.getOrCreateTag().putUUID(ITEM_NBT_KEY_PICKED_FROM_PLAYER, itemEntity.getOwner());
 		mob.setItemInHand(InteractionHand.OFF_HAND, stack);
 		if (itemEntity.getItem().getCount() <= 1)
 		{
@@ -218,7 +219,7 @@ public abstract class NFFGirlsItemDroppingTamingProcess extends NFFTamingProcess
 				&& mob.getItemInHand(InteractionHand.OFF_HAND).getTag() != null
 				&& mob.getItemInHand(InteractionHand.OFF_HAND).getTag().hasUUID(ITEM_NBT_KEY_PICKED_FROM_PLAYER))
 		{
-			Player player = mob.level().getPlayerByUUID(mob.getItemInHand(InteractionHand.OFF_HAND)
+			Player player = mob.level.getPlayerByUUID(mob.getItemInHand(InteractionHand.OFF_HAND)
 					.getTag().getUUID(ITEM_NBT_KEY_PICKED_FROM_PLAYER));
 			if (player != null && mob.hasLineOfSight(player))
 			{
@@ -274,7 +275,7 @@ public abstract class NFFGirlsItemDroppingTamingProcess extends NFFTamingProcess
 			Predicate<ItemEntity> pickCondition = (ItemEntity ie) -> ie.getBoundingBox().intersects(mob.getBoundingBox()) 
 					|| (Math.abs(ie.getBlockX() - mob.getBlockX()) <= 1 && Math.abs(ie.getBlockZ() - mob.getBlockZ()) <= 1 && ie.getBlockY() == mob.getBlockY());
 			List<ItemEntity> overlappingItems =
-					mob.level().getEntitiesOfClass(ItemEntity.class, mob.getBoundingBox().minmax(mob.getBoundingBox().inflate(2.0d)))
+					mob.level.getEntitiesOfClass(ItemEntity.class, mob.getBoundingBox().minmax(mob.getBoundingBox().inflate(2.0d)))
 						.stream().filter(pickCondition)
 						.toList();
 			if (!overlappingItems.isEmpty())
@@ -383,7 +384,7 @@ public abstract class NFFGirlsItemDroppingTamingProcess extends NFFTamingProcess
 	@SubscribeEvent
 	public static void tickItemEntityPickingCooldown(EntityTickEvent event)
 	{
-		if (event.getEntity() instanceof ItemEntity ie && !ie.level().isClientSide)
+		if (event.getEntity() instanceof ItemEntity ie && !ie.level.isClientSide)
 		{
 			ie.getCapability(NaUtilsCaps.CAP_ENTITY_DATA).ifPresent(dataCap -> {
 				CompoundTag allTimers = dataCap.getNBT().getCompound(ENTITY_DATA_KEY_ALREADY_PICKED_TAMABLE_MOBS);

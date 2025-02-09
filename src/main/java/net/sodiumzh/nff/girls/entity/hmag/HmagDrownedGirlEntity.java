@@ -134,7 +134,7 @@ public class HmagDrownedGirlEntity extends DrownedGirlEntity implements INFFGirl
 			this.spawnAtLocation(new ItemStack(Items.WET_SPONGE, 1));
 			HmagZombieGirlEntity z = this.convertToZombie();
 			z.isFromHusk = this.isFromHusk;
-			return InteractionResult.sidedSuccess(this.level().isClientSide);
+			return InteractionResult.sidedSuccess(this.level.isClientSide);
 		}
 		return InteractionResult.PASS;
 	}

@@ -335,24 +335,24 @@ public class HmagMeltyMonsterEntity extends MeltyMonsterEntity implements INFFGi
 			{
 				NaUtilsParticleStatics.sendSmokeParticlesToEntityDefault(this);
 			}
-			return InteractionResult.sidedSuccess(this.level().isClientSide);
+			return InteractionResult.sidedSuccess(this.level.isClientSide);
 		}
 		// Use water bucket to suppress setting fire
 		else if (player.getItemInHand(hand).is(Items.WATER_BUCKET) && this.shouldSetFire)
 		{
-			this.level().playSound(player, this.getX(), this.getY(), this.getZ(), SoundEvents.GENERIC_EXTINGUISH_FIRE,
+			this.level.playSound(player, this.getX(), this.getY(), this.getZ(), SoundEvents.GENERIC_EXTINGUISH_FIRE,
 					this.getSoundSource(), 1.0F, this.random.nextFloat() * 0.4F + 0.8F);
 			player.getItemInHand(hand).shrink(1);
 			NaUtilsItemStatics.giveOrDrop(player, new ItemStack(Items.BUCKET));
 			this.shouldSetFire = false;
-			return InteractionResult.sidedSuccess(this.level().isClientSide);
+			return InteractionResult.sidedSuccess(this.level.isClientSide);
 		}
 		// Use Flint and Steel to allow setting fire
 		else if (player.getItemInHand(hand).is(Items.FLINT_AND_STEEL) && !this.shouldSetFire)
 		{
-			this.level().playSound(player, this.getX(), this.getY(), this.getZ(), SoundEvents.FLINTANDSTEEL_USE,
+			this.level.playSound(player, this.getX(), this.getY(), this.getZ(), SoundEvents.FLINTANDSTEEL_USE,
 					this.getSoundSource(), 1.0F, this.random.nextFloat() * 0.4F + 0.8F);
-			if (!this.level().isClientSide)
+			if (!this.level.isClientSide)
 			{
 				player.getItemInHand(hand).hurtAndBreak(1, player, (p) ->
 				{
@@ -360,7 +360,7 @@ public class HmagMeltyMonsterEntity extends MeltyMonsterEntity implements INFFGi
 				});
 			}
 			this.shouldSetFire = true;
-			return InteractionResult.sidedSuccess(this.level().isClientSide);
+			return InteractionResult.sidedSuccess(this.level.isClientSide);
 		}
 		return InteractionResult.PASS;
 	}

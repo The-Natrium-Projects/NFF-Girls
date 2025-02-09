@@ -11,9 +11,6 @@ import net.minecraftforge.eventbus.api.Event;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.sodiumzh.nff.girls.entity.NFFGirlsTamingRules;
 import net.sodiumzh.nff.services.entity.capability.CNFFTamable;
-import net.sodiumzh.nff.services.entity.taming.TamableHatredReason;
-
-import java.util.HashSet;
 
 public class HmagBansheeTamingProcess extends HmagVanillaUndeadTamingProcess
 {
@@ -46,7 +43,7 @@ public class HmagBansheeTamingProcess extends HmagVanillaUndeadTamingProcess
 	public boolean witherRoseCondition(Mob mob)
 	{
 		AABB area = mob.getBoundingBox().inflate(7d, 7d, 7d);
-		return mob.level().getBlockStates(area).filter((b) -> b.is(Blocks.WITHER_ROSE)).count() >= 8;
+		return mob.level.getBlockStates(area).filter((b) -> b.is(Blocks.WITHER_ROSE)).count() >= 8;
 	}
 
 	@SubscribeEvent

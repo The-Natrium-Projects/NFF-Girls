@@ -16,7 +16,6 @@ import net.sodiumzh.nff.girls.registry.NFFGirlsTags;
 import net.sodiumzh.nff.services.entity.capability.CNFFTamable;
 import net.sodiumzh.nff.services.entity.taming.TamingProcessItemGivingProgress;
 
-import java.util.HashSet;
 import java.util.UUID;
 
 public class HmagCrimsonSlaughtererTamingProcess extends TamingProcessItemGivingProgress

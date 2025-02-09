@@ -143,7 +143,7 @@ public class NFFGirlsItemEventListeners
 	@SubscribeEvent
 	public static void longDistanceInteract(PlayerInteractEvent.RightClickItem event) {
 		// Lengthen the AI switching distance
-		if (!event.getEntity().level().isClientSide()
+		if (!event.getEntity().level.isClientSide()
 				&& !event.getEntity().isShiftKeyDown()) {
 			Player player = event.getEntity();
 			InteractionHand usedHand = event.getHand();

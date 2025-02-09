@@ -20,7 +20,7 @@ import net.sodiumzh.nff.girls.entity.NFFGirlsTamingRules;
 import net.sodiumzh.nff.girls.item.MagicalGelColorUtils;
 import net.sodiumzh.nff.girls.registry.NFFGirlsAngerRules;
 import net.sodiumzh.nff.girls.registry.NFFGirlsItems;
-import net.sodiumzh.nff.services.entity.capability.CNFFTamable;
+import net.sodiumzh.nff.services.entity.taming.CNFFTamable;
 import net.sodiumzh.nff.services.entity.taming.TamingProcessItemGivingProgress;
 import net.sodiumzh.nff.services.registry.NFFCapRegistry;
 
@@ -131,7 +131,7 @@ public class HmagSlimeGirlTamingProcess extends TamingProcessItemGivingProgress
 	@Override
 	public TamingInteractionResult handleInteract(Player player, Mob mob, InteractionHand hand)
 	{
-		if (!player.level().isClientSide() && hand.equals(InteractionHand.MAIN_HAND)
+		if (!player.level.isClientSide() && hand.equals(InteractionHand.MAIN_HAND)
 				&& player.getMainHandItem().is(NFFGirlsItems.MAGICAL_GEL_BALL.get()))
 		{
 			player.getCapability(NFFCapRegistry.CAP_BM_PLAYER).ifPresent((c) ->
