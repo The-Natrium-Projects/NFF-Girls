@@ -41,7 +41,7 @@ public class NFFGirlsConfigs
 	public static ForgeConfigSpec.DoubleValue BAUBLE_ARMOR_BOOSTING_SCALE;
 
 	// Misc
-	/** Implemented through {@link NFFGirlsEntityEventListeners#onTamed} */
+	/** Implemented through {@link NFFGirlsEntityEventListeners#onBefriended} */
 	public static ForgeConfigSpec.BooleanValue REMOVE_HAND_ITEM_ON_TAMING;
 	public static ForgeConfigSpec.BooleanValue REMOVE_ARMOR_ON_TAMING;
 
