@@ -16,6 +16,7 @@ import net.sodiumzh.nautils.entity.taming.TamingInteractionResult;
 import net.sodiumzh.nautils.statics.NaUtilsContainerStatics;
 import net.sodiumzh.nautils.statics.NaUtilsParticleStatics;
 import net.sodiumzh.nff.girls.entity.NFFGirlsTamingRules;
+import net.sodiumzh.nff.services.entity.taming.CNFFTamable;
 import net.sodiumzh.nff.services.entity.taming.NFFTamingProcess;
 import org.apache.commons.lang3.mutable.MutableObject;
 
@@ -59,9 +60,9 @@ public class HmagCursedDollTamingProcess extends NFFTamingProcess
 	@Override
 	public TamingInteractionResult handleInteract(Player player, Mob mob, InteractionHand hand) {
 		CNFFTamable cap = CNFFTamable.get(mob);
-		TamingInteractionResult result = TamingInteractionResult.unhandled(player.level());
+		TamingInteractionResult result = TamingInteractionResult.unhandled(player.level);
 		
-		if (!player.level().isClientSide)
+		if (!player.level.isClientSide)
 		{
 			// In hatred, if try using acceptable item, send angry particles
 			if (cap.isAngryAt(player))
@@ -145,6 +146,7 @@ public class HmagCursedDollTamingProcess extends NFFTamingProcess
 	public void tamableInit(CNFFTamable cnffTamable) {
 
 	}
+
 
 	@Override
 	public void interrupt(Player player, Mob mob, boolean isQuiet) {

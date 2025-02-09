@@ -14,7 +14,6 @@ import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.damagesource.DamageSource;
-import net.minecraft.world.damagesource.DamageTypes;
 import net.minecraft.world.damagesource.EntityDamageSource;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
@@ -235,8 +234,7 @@ public class NFFGirlsEntityEventListeners
 				bm.getFavorabilityHandler().setFavorability(0);
 			else if (bm.asMob().distanceToSqr(bm.getOwner()) < 64d 
 					&& bm.asMob().hasLineOfSight(bm.getOwner())
-					&& !event.getDamageSource().is(DamageTypes.FELL_OUT_OF_WORLD)
-					&& !event.getDamageSource().is(DamageTypes.GENERIC_KILL))
+					&& !event.getDamageSource().equals(DamageSource.OUT_OF_WORLD))
 				bm.getFavorabilityHandler().addFavorability(-20);
 			// EXP loses by a half on death
 			// As respawner construction (in befriendmobs) is after posting NFFTamedDeathEvent, it can be set here

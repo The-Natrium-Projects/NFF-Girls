@@ -15,7 +15,7 @@ import javax.annotation.Nonnull;
 public class HmagImpTamingProcess extends NFFGirlsItemDroppingTamingProcess
 {
 
-	@SuppressWarnings("unchecked")
+/*	@SuppressWarnings("unchecked")
 	@Override
 	public Map<String, Supplier<Double>> getDeltaProcMap() {
 		return NaUtilsContainerStatics.<String, Supplier<Double>>mapOf(
@@ -28,7 +28,7 @@ public class HmagImpTamingProcess extends NFFGirlsItemDroppingTamingProcess
 			MapPair.of("minecraft:gilded_blackstone", () -> RndUtil.rndRangedDouble(0.04, 0.07)),
 			MapPair.of("minecraft:enchanted_golden_apple", () -> RndUtil.rndRangedDouble(0.50, 1.00)),
 			MapPair.of("minecraft:nether_star", () -> RandomSelection.createDouble(0.50d).add(1.01d, 0.20d).getDouble()));
-	}
+	}*/
 
 	@Override
 	public int getHoldingItemTime() {

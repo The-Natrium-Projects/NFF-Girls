@@ -1,7 +1,6 @@
 package net.sodiumzh.nff.girls.entity.tamingprocesses.hmag;
 
 import com.github.mechalopa.hmag.world.entity.BansheeEntity;
-import net.minecraft.core.BlockPos;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.player.Player;
@@ -10,11 +9,8 @@ import net.minecraft.world.phys.AABB;
 import net.minecraftforge.event.entity.living.MobEffectEvent;
 import net.minecraftforge.eventbus.api.Event;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.sodiumzh.nautils.statics.NaUtilsNBTStatics;
 import net.sodiumzh.nff.girls.entity.NFFGirlsTamingRules;
-import net.sodiumzh.nff.services.entity.capability.CNFFTamable;
-
-import javax.annotation.Nullable;
+import net.sodiumzh.nff.services.entity.taming.CNFFTamable;
 
 public class HmagBansheeTamingProcess extends HmagVanillaUndeadTamingProcess
 {
@@ -47,7 +43,7 @@ public class HmagBansheeTamingProcess extends HmagVanillaUndeadTamingProcess
 	public boolean witherRoseCondition(Mob mob)
 	{
 		AABB area = mob.getBoundingBox().inflate(7d, 7d, 7d);
-		return mob.level().getBlockStates(area).filter((b) -> b.is(Blocks.WITHER_ROSE)).count() >= 8;
+		return mob.level.getBlockStates(area).filter((b) -> b.is(Blocks.WITHER_ROSE)).count() >= 8;
 	}
 
 	@SubscribeEvent

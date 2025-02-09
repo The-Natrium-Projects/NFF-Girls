@@ -14,7 +14,6 @@ import net.sodiumzh.nautils.entity.anger.MobAngerRules;
 import net.sodiumzh.nautils.entity.taming.TamingInteractionResult;
 import net.sodiumzh.nautils.statics.NaUtilsEntityStatics;
 import net.sodiumzh.nautils.statics.NaUtilsMathStatics;
-import net.sodiumzh.nautils.statics.NaUtilsNBTStatics;
 import net.sodiumzh.nautils.statics.NaUtilsParticleStatics;
 import net.sodiumzh.nff.girls.NFFGirls;
 import net.sodiumzh.nff.girls.blocks.SoulCarpetBlock;
@@ -112,7 +111,7 @@ public class HmagNecroticReaperTamingProcess extends NFFTamingProcess
 		// you can continue taming the mob and inherit his progress
 		else if (cap.getGeneralNBT().hasUUID(NBT_KEY_ONGOING_PLAYER_UUID)
 				&& !cap.getGeneralNBT().getUUID(NBT_KEY_ONGOING_PLAYER_UUID).equals(player.getUUID())) {
-			if (player.level().getPlayerByUUID(cap.getGeneralNBT().getUUID(NBT_KEY_ONGOING_PLAYER_UUID)) != null)
+			if (player.level.getPlayerByUUID(cap.getGeneralNBT().getUUID(NBT_KEY_ONGOING_PLAYER_UUID)) != null)
 				return true;
 		}
 		// If mob is not on soul carpet, nothing happens but don't add wither
@@ -160,7 +159,7 @@ public class HmagNecroticReaperTamingProcess extends NFFTamingProcess
 
 	@Override
 	public TamingInteractionResult handleInteract(Player player, Mob mob, InteractionHand interactionHand) {
-		return TamingInteractionResult.unhandled(player.level());
+		return TamingInteractionResult.unhandled(player.level);
 	}
 
 	@Override
@@ -171,9 +170,9 @@ public class HmagNecroticReaperTamingProcess extends NFFTamingProcess
 		boolean isAlwaysHostile = false;
 		if (	// Is in player process
 			cap.getGeneralNBT().hasUUID(NBT_KEY_ONGOING_PLAYER_UUID)
-			&& mob.level().getPlayerByUUID(cap.getGeneralNBT().getUUID(NBT_KEY_ONGOING_PLAYER_UUID)) != null)
+			&& mob.level.getPlayerByUUID(cap.getGeneralNBT().getUUID(NBT_KEY_ONGOING_PLAYER_UUID)) != null)
 		{
-			Player player = mob.level().getPlayerByUUID(cap.getGeneralNBT().getUUID(NBT_KEY_ONGOING_PLAYER_UUID));
+			Player player = mob.level.getPlayerByUUID(cap.getGeneralNBT().getUUID(NBT_KEY_ONGOING_PLAYER_UUID));
 			/*mob.getCapability(NFFGirlsCapabilities.CAP_UNDEAD_AFFINITY_HANDLER).ifPresent((capUM) ->
 			{
 				capUM.addHatred(player, 300 * 20);	// This blocks the effect of undead affinity
@@ -246,7 +245,7 @@ public class HmagNecroticReaperTamingProcess extends NFFTamingProcess
 	public void onGeneralTimerExpire(Mob mob, String key) {
 		CNFFTamable tamable = CNFFTamable.get(mob);
 		if (tamable.getGeneralNBT().hasUUID(NBT_KEY_ONGOING_PLAYER_UUID)) return;
-		Player player = tamable.getEntity().level().getPlayerByUUID(tamable.getGeneralNBT().getUUID(NBT_KEY_ONGOING_PLAYER_UUID));
+		Player player = tamable.getEntity().level.getPlayerByUUID(tamable.getGeneralNBT().getUUID(NBT_KEY_ONGOING_PLAYER_UUID));
 		if (player == null || !player.isCreative() && tamable.getGeneralNBT().getInt(NBT_KEY_HIT_COUNT) > 0)
 		{
 			int hits = tamable.getGeneralNBT().getInt(NBT_KEY_HIT_COUNT);

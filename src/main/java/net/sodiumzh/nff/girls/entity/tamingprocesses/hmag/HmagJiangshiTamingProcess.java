@@ -24,6 +24,7 @@ import net.sodiumzh.nautils.statics.NaUtilsEntityStatics;
 import net.sodiumzh.nautils.statics.NaUtilsParticleStatics;
 import net.sodiumzh.nff.girls.befriendmobs.entity.ai.goal.FreezeGoal;
 import net.sodiumzh.nff.girls.entity.ai.goal.NFFGirlsTamableJiangshiMutableLeapGoal;
+import net.sodiumzh.nff.girls.eventlisteners.NFFGirlsEntityEventListeners;
 import net.sodiumzh.nff.girls.item.TaoistTalismanItem;
 import net.sodiumzh.nff.girls.registry.NFFGirlsItems;
 import net.sodiumzh.nff.girls.util.NFFGirlsEntityStatics;
@@ -167,7 +168,7 @@ public class HmagJiangshiTamingProcess extends NFFTamingProcess
 			mob.clearFire();
 		}
 		if (cap.getGeneralNBT().hasUUID(NBT_KEY_ONGOING_PLAYER) && cap.getGeneralNBT().getInt(NBT_KEY_PROGRESS) > 0) {
-			cap.setAlwaysHostileTo(mob.level().getPlayerByUUID(cap.getGeneralNBT().getUUID(NBT_KEY_ONGOING_PLAYER)));
+			cap.setAlwaysHostileTo(mob.level.getPlayerByUUID(cap.getGeneralNBT().getUUID(NBT_KEY_ONGOING_PLAYER)));
 		}
 		else {
 			cap.setAlwaysHostileTo(null);
@@ -208,7 +209,7 @@ public class HmagJiangshiTamingProcess extends NFFTamingProcess
 				thunderEffect(mob);
 			}
 			updateModifiers(mob);
-			mob.level().playSound(null, mob, SoundEvents.GENERIC_EXPLODE, SoundSource.BLOCKS, 2f, 0.7f);
+			mob.level.playSound(null, mob, SoundEvents.GENERIC_EXPLODE, SoundSource.BLOCKS, 2f, 0.7f);
 			CNFFTamable.get(mob).getGeneralNBT().putUUID(NBT_KEY_ONGOING_PLAYER, player.getUUID());
 			return true;
 		}

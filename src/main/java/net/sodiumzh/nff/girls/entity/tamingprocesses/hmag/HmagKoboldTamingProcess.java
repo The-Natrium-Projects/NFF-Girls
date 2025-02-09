@@ -11,7 +11,7 @@ import java.util.function.Supplier;
 
 public class HmagKoboldTamingProcess extends NFFGirlsItemDroppingTamingProcess
 {
-
+/*
 	@SuppressWarnings("unchecked")
 	@Override
 	public Map<String, Supplier<Double>> getDeltaProcMap() {
@@ -28,7 +28,7 @@ public class HmagKoboldTamingProcess extends NFFGirlsItemDroppingTamingProcess
 				MapPair.of("minecraft:netherite_pickaxe", () -> RndUtil.rndRangedDouble(0.50, 1.00))
 				);
 	}
-
+*/
 	@Override
 	public int getHoldingItemTime() {
 		return 5 * 20;

@@ -16,7 +16,7 @@ import net.sodiumzh.nff.girls.entity.NFFGirlsTamingRules;
 import net.sodiumzh.nff.girls.entity.hmag.HmagEnderExecutorEntity;
 import net.sodiumzh.nff.girls.registry.NFFGirlsAngerRules;
 import net.sodiumzh.nff.girls.registry.NFFGirlsConfigs;
-import net.sodiumzh.nff.services.entity.capability.CNFFTamable;
+import net.sodiumzh.nff.services.entity.taming.CNFFTamable;
 import net.sodiumzh.nff.services.entity.taming.*;
 import org.jetbrains.annotations.NotNull;
 
@@ -96,7 +96,7 @@ public class HmagEnderExecutorTamingProcess extends TamingProcessItemGivingProgr
 	public static boolean allowTeleport(Mob mob) {
 		NFFTamingProcess processRaw = CNFFTamable.getOptional(mob).map(CNFFTamable::getTamingProcess).orElse(null);
 		if (!(processRaw instanceof HmagEnderExecutorTamingProcess process)) return true;
-		for (Player player: mob.level().players()) {
+		for (Player player: mob.level.players()) {
 			if (player.distanceToSqr(mob) <= 7d * 7d && process.isInProcess(player, mob)) return false;
 		}
 		return true;
