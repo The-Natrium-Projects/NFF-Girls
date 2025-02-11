@@ -5,9 +5,6 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.sodiumzh.nautils.entity.anger.MobAngerRules;
 import net.sodiumzh.nff.girls.registry.NFFGirlsAngerRules;
-import net.sodiumzh.nff.services.entity.taming.TamableHatredReason;
-
-import java.util.HashSet;
 
 public class HmagGhastlySeekerTamingProcess extends HmagVanillaUndeadTamingProcess {
 

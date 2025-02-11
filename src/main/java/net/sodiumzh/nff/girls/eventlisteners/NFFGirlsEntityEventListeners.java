@@ -51,8 +51,7 @@ import net.sodiumzh.nff.girls.entity.INFFGirlsTamed;
 import net.sodiumzh.nff.girls.entity.ai.goal.NFFGirlsTamableGhastlySeekerRandomFlyGoal;
 import net.sodiumzh.nff.girls.entity.hmag.*;
 import net.sodiumzh.nff.girls.entity.projectile.NecromancerMagicBulletEntity;
-import net.sodiumzh.nff.girls.entity.tamingprocesses.hmag.HmagCreeperGirlTamingProcess;
-import net.sodiumzh.nff.girls.entity.tamingprocesses.hmag.HmagJiangshiTamingProcess;
+import net.sodiumzh.nff.girls.entity.tamingprocess.hmag.HmagCreeperGirlTamingProcess;
 import net.sodiumzh.nff.girls.item.CombatCommandingWandItem;
 import net.sodiumzh.nff.girls.item.NecromancerArmorItem;
 import net.sodiumzh.nff.girls.registry.*;
@@ -445,22 +444,6 @@ public class NFFGirlsEntityEventListeners
 				{
 					event.setCanceled(true);
 					return;
-				}
-			}
-			// Handle peach sword
-			if (event.getEntity() instanceof Mob mob
-					&& mob.getMobType() == MobType.UNDEAD
-					&& event.getSource().getEntity() instanceof Player player
-					&& player.getItemInHand(InteractionHand.MAIN_HAND).is(NFFGirlsItems.PEACH_WOOD_SWORD.get()))
-			{
-				// For Jiangshi, processed in befriending handler
-				if (mob.getType() == ModEntityTypes.JIANGSHI.get()
-						&& NFFTamingMapping.getProcess(mob) instanceof HmagJiangshiTamingProcess proc
-						&& proc.onPeachSwordHit(mob, player)) {}
-				else {
-					NaUtilsEntityStatics.addEffectSafe(mob, MobEffects.HEAL, 1, 1);
-					NaUtilsEntityStatics.addEffectSafe(mob, MobEffects.WEAKNESS, 5 * 20, 2);
-					NaUtilsEntityStatics.addEffectSafe(mob, MobEffects.MOVEMENT_SLOWDOWN, 5 * 20, 2);
 				}
 			}
 		}

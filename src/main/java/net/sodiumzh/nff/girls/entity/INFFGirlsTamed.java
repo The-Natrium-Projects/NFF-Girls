@@ -10,7 +10,6 @@ import javax.annotation.Nullable;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
-import net.sodiumzh.nautils.mixin.events.entity.MobInteractEvent;
 import net.sodiumzh.nff.girls.eventlisteners.NFFGirlsEntityEventListeners;
 import org.apache.commons.lang3.mutable.MutableObject;
 

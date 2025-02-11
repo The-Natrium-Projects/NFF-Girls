@@ -4,7 +4,6 @@ import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.Tag;
 import net.minecraft.world.InteractionHand;
-import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
@@ -17,13 +16,14 @@ import net.sodiumzh.nautils.capability.EntityTimerAccessor;
 import net.sodiumzh.nautils.entity.MobApplicableItemTable;
 import net.sodiumzh.nautils.entity.taming.ITamingProcess;
 import net.sodiumzh.nautils.entity.taming.TamingInteractionResult;
-import net.sodiumzh.nautils.mixin.events.entity.EntityTickEvent;
+import net.sodiumzh.nautils.mixin.event.entity.EntityTickEvent;
 import net.sodiumzh.nautils.registries.NaUtilsCaps;
+import net.sodiumzh.nautils.statics.NaUtilsEntityStatics;
 import net.sodiumzh.nautils.statics.NaUtilsItemStatics;
 import net.sodiumzh.nautils.statics.NaUtilsParticleStatics;
 import net.sodiumzh.nff.girls.entity.ai.goal.NFFGirlsTamablePickItemGoal;
 import net.sodiumzh.nff.girls.entity.ai.goal.NFFGirlsTamableWatchHandItemGoal;
-import net.sodiumzh.nff.services.entity.taming.CNFFTamable;
+import net.sodiumzh.nff.services.entity.capability.CNFFTamable;
 import net.sodiumzh.nff.services.entity.taming.INFFDefaultProgressedTamingProcess;
 import net.sodiumzh.nff.services.entity.taming.NFFTamingProcess;
 
@@ -32,8 +32,6 @@ import javax.annotation.Nullable;
 import java.util.*;
 import java.util.function.Predicate;
 import java.util.function.Supplier;
-
-import static net.sodiumzh.nff.services.entity.taming.CNFFTamable.getOptional;
 
 public abstract class NFFGirlsItemDroppingTamingProcess extends NFFTamingProcess implements INFFDefaultProgressedTamingProcess<Mob>
 {
@@ -123,10 +121,9 @@ public abstract class NFFGirlsItemDroppingTamingProcess extends NFFTamingProcess
 		if (!isItemAcceptableInternal(itemEntity.getItem(), mob))
 			return false;
 		// If item not thrown by player, pass
-		Entity entityThrown = itemEntity.getThrowingEntity();
-		if (entityThrown == null)
-			return false;
-		if (!(entityThrown instanceof Player playerThrown))
+		Player playerThrown = Optional.ofNullable(itemEntity.getThrower()).flatMap(uuid ->
+				NaUtilsEntityStatics.findPlayerInAllDimensions(uuid, itemEntity.getLevel())).orElse(null);
+		if (playerThrown == null)
 			return false;
 		// If other player ongoing, pass
 		if (this.getOngoingPlayer(mob).map(p -> !p.equals(playerThrown)).orElse(false))
@@ -264,7 +261,7 @@ public abstract class NFFGirlsItemDroppingTamingProcess extends NFFTamingProcess
 	@Override
 	public void serverTick(Mob mob)
 	{
-		LazyOptional<CNFFTamable> tamableOptional = getOptional(mob);
+		LazyOptional<CNFFTamable> tamableOptional = CNFFTamable.getOptional(mob);
 		if (!tamableOptional.isPresent())
 			return;
 		CNFFTamable tamable = tamableOptional.orElseThrow(RuntimeException::new);

@@ -203,7 +203,6 @@ public class NFFGirlsItems {
 	@Deprecated
 	public static final RegistryObject<Item> EVIL_MAGNET = ITEMS.register("evil_magnet", () -> new EvilMagnetItem(new Item.Properties().stacksTo(1))
 			.descTranslatable("info.nffgirls.item.deprecated_recover_ingredients").cast());
-	public static final RegistryObject<SwordItem> PEACH_WOOD_SWORD = ITEMS.register("peach_wood_sword", () -> new PeachWoodSwordItem(Tiers.WOOD, 3, -2.4F, (new Item.Properties()).tab(TAB).rarity(Rarity.UNCOMMON)));
 	public static final RegistryObject<ReinforcedFishingRodItem> REINFORCED_FISHING_ROD = ITEMS.register("reinforced_fishing_rod", () -> new ReinforcedFishingRodItem(new Item.Properties().durability(256).tab(TAB)));
 
 	// Utility items

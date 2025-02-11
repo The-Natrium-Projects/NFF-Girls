@@ -7,7 +7,7 @@ import net.minecraft.world.item.ItemStack;
 import net.sodiumzh.nautils.entity.anger.MobAngerRules;
 import net.sodiumzh.nautils.statics.NaUtilsEntityStatics;
 import net.sodiumzh.nff.girls.registry.NFFGirlsAngerRules;
-import net.sodiumzh.nff.services.entity.taming.CNFFTamable;
+import net.sodiumzh.nff.services.entity.capability.CNFFTamable;
 
 public class HmagAnimalTamingProcess extends NFFGirlsItemDroppingTamingProcess
 {

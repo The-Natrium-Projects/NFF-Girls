@@ -4,6 +4,8 @@ import net.sodiumzh.nautils.registries.NaUtilsRegistry;
 import net.sodiumzh.nautils.registries.RegistryEntryCollection;
 import net.sodiumzh.nff.girls.NFFGirls;
 import net.sodiumzh.nff.girls.entity.tamingprocess.hmag.*;
+import net.sodiumzh.nff.girls.entity.tamingprocesses.hmag.HmagAlrauneTamingProcess;
+import net.sodiumzh.nff.girls.entity.tamingprocesses.hmag.HmagGlaryadTamingProcess;
 import net.sodiumzh.nff.services.entity.taming.NFFTamingProcess;
 import net.sodiumzh.nff.services.registry.NFFRegistries;
 

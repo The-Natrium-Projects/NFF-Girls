@@ -6,7 +6,7 @@ import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.phys.AABB;
-import net.minecraftforge.event.entity.living.MobEffectEvent;
+import net.minecraftforge.event.entity.living.PotionEvent;
 import net.minecraftforge.eventbus.api.Event;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.sodiumzh.nff.girls.entity.NFFGirlsTamingRules;
@@ -47,8 +47,8 @@ public class HmagBansheeTamingProcess extends HmagVanillaUndeadTamingProcess
 	}
 
 	@SubscribeEvent
-	public static void preventWitherInProcess(MobEffectEvent.Applicable event) {
-		if (event.getEffectInstance().getEffect().equals(MobEffects.WITHER)
+	public static void preventWitherInProcess(PotionEvent.PotionApplicableEvent event) {
+		if (event.getPotionEffect().getEffect().equals(MobEffects.WITHER)
 				&& event.getEntity() instanceof BansheeEntity e
 				&& (CNFFTamable.getOptional(e).map(tamable -> tamable.getTamingProcess() instanceof HmagBansheeTamingProcess).orElse(false)
 				&& CNFFTamable.get(e).getTamingProcess().isInAnyProcess(e)))

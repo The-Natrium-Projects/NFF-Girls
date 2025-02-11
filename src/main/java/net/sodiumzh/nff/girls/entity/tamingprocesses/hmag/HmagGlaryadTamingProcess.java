@@ -7,7 +7,7 @@ import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.player.Player;
 import net.sodiumzh.nautils.entity.anger.MobAngerRules;
 import net.sodiumzh.nff.girls.registry.NFFGirlsAngerRules;
-import net.sodiumzh.nff.services.entity.taming.CNFFTamable;
+import net.sodiumzh.nff.services.entity.capability.CNFFTamable;
 import net.sodiumzh.nff.services.entity.taming.TamingProcessItemGivingProgress;
 
 public class HmagGlaryadTamingProcess extends TamingProcessItemGivingProgress
@@ -18,7 +18,7 @@ public class HmagGlaryadTamingProcess extends TamingProcessItemGivingProgress
 		return mob.hasEffect(MobEffects.REGENERATION) 
 				&& mob.getEffect(MobEffects.REGENERATION).getAmplifier() >= 2
 				&& mob.getEffect(MobEffects.REGENERATION).getDuration() > 10 * 20
-				&& player.getOffhandItem().is(ModTags.ItemTags.GLARYAD_TEMPT_ITEMS)
+				&& player.getOffhandItem().is(ModTags.GLARYAD_TEMPT_ITEMS)
 				&& !player.getUUID().equals(((GlaryadEntity)mob).getPersistentAngerTarget());
 	}
 
