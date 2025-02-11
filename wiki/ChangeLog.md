@@ -1,5 +1,9 @@
 # Change Log
 
+### 0.2.28.1
+
+Fixed HMaG mobs vanishing after reloading the world.
+
 ### 0.x.28
 
 Note: this update may have respawner format change. Release mobs from respawners and storage pods before update.
