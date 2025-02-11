@@ -21,7 +21,7 @@ public class CUndeadMobProvider implements ICapabilitySerializable<CompoundTag>
 	@Override
 	public <T> LazyOptional<T> getCapability(@Nonnull Capability<T> cap, @Nullable Direction side) 
 	{
-		if(cap == NFFGirlsCapabilities.CAP_UNDEAD_MOB)
+		if(cap == NFFGirlsCapabilities.CAP_UNDEAD_AFFINITY_HANDLER)
 			return LazyOptional.of(() -> {return capability;}).cast();
 		else
 			return LazyOptional.empty();

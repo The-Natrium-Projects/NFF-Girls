@@ -41,6 +41,10 @@ import net.sodiumzh.nff.girls.registry.NFFGirlsItems;
 import net.sodiumzh.nff.girls.registry.NFFGirlsTags;
 import net.sodiumzh.nff.services.NFFServices;
 import net.sodiumzh.nff.services.registry.NFFItemRegistry;
+
+import javax.annotation.Nullable;
+import java.util.Random;
+
 public class EnderberryBushBlock extends SweetBerryBushBlock {
     private static final float HURT_SPEED_THRESHOLD = 0.003F;
     public static final int MAX_AGE = 3;

@@ -1,4 +1,4 @@
-package net.sodiumzh.nff.girls.entity.tamingprocess.hmag;
+package net.sodiumzh.nff.girls.entity.tamingprocesses.hmag;
 
 import com.github.mechalopa.hmag.world.entity.EnderExecutorEntity;
 import net.minecraft.world.entity.Mob;
@@ -18,7 +18,6 @@ import net.sodiumzh.nff.services.entity.capability.CNFFTamable;
 import net.sodiumzh.nff.services.entity.taming.*;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.HashSet;
 import java.util.Optional;
 import java.util.UUID;
 

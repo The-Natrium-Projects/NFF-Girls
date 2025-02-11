@@ -27,6 +27,7 @@ import net.minecraft.world.item.ArmorItem;
 import net.minecraft.world.item.DiggerItem;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.SwordItem;
+import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.phys.AABB;
@@ -44,6 +45,8 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.LogicalSide;
 import net.minecraftforge.fml.common.Mod;
 import net.sodiumzh.nautils.entity.taming.ITamingProcessWithProgress;
+import net.sodiumzh.nautils.mixin.event.entity.*;
+import net.sodiumzh.nautils.mixin.events.entity.EntitySpecificInteractionEvent;
 import net.sodiumzh.nautils.statics.*;
 import net.sodiumzh.nff.girls.NFFGirls;
 import net.sodiumzh.nff.girls.effect.NecromancerWitherEffect;
@@ -51,7 +54,7 @@ import net.sodiumzh.nff.girls.entity.INFFGirlsTamed;
 import net.sodiumzh.nff.girls.entity.ai.goal.NFFGirlsTamableGhastlySeekerRandomFlyGoal;
 import net.sodiumzh.nff.girls.entity.hmag.*;
 import net.sodiumzh.nff.girls.entity.projectile.NecromancerMagicBulletEntity;
-import net.sodiumzh.nff.girls.entity.tamingprocess.hmag.HmagCreeperGirlTamingProcess;
+import net.sodiumzh.nff.girls.entity.tamingprocesses.hmag.HmagCreeperGirlTamingProcess;
 import net.sodiumzh.nff.girls.item.CombatCommandingWandItem;
 import net.sodiumzh.nff.girls.item.NecromancerArmorItem;
 import net.sodiumzh.nff.girls.registry.*;
@@ -102,7 +105,7 @@ public class NFFGirlsEntityEventListeners
 	        		&& !event.getEntity().getType().is(NFFGirlsTags.IGNORES_UNDEAD_AFFINITY)) 
 	        {
 	        	// Handle CUndeadAffinityHandler //
-        		mob.getCapability(NFFGirlsCapabilities.CAP_UNDEAD_MOB).ifPresent((l) ->
+        		mob.getCapability(NFFGirlsCapabilities.CAP_UNDEAD_AFFINITY_HANDLER).ifPresent((l) ->
         		{
         			if (target.hasEffect(NFFGirlsEffects.UNDEAD_AFFINITY.get()) && lastHurtBy != target && !l.getHatred().contains(target.getUUID()))
         			{
@@ -157,7 +160,7 @@ public class NFFGirlsEntityEventListeners
 		if (event.getEntity() instanceof Mob mob)
 		{
 			// Undead mob add neutral here to prevent compat issues with other mods that can make undead mobs non-hostile
-			event.getEntity().getCapability(NFFGirlsCapabilities.CAP_UNDEAD_MOB).ifPresent((l) ->
+			event.getEntity().getCapability(NFFGirlsCapabilities.CAP_UNDEAD_AFFINITY_HANDLER).ifPresent((l) ->
 			{
 				LivingEntity target = mob.getTarget();
 				if (target != null && mob.getLastHurtByMob() == target)
@@ -1038,7 +1041,7 @@ public class NFFGirlsEntityEventListeners
 				}
 			}			
 		}
-		if (event.getEntity().getItemInHand(event.getHand()).is(NFFGirlsItems.COMBAT_COMMANDING_WAND.get()))
+		if (event.getPlayer().getItemInHand(event.getHand()).is(NFFGirlsItems.COMBAT_COMMANDING_WAND.get()))
 			event.setCanceled(true);
 	}
 	
