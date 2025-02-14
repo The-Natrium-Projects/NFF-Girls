@@ -196,7 +196,7 @@ public class NFFGirlsItems {
 			new Item.Properties().tab(TAB).rarity(Rarity.UNCOMMON).stacksTo(1)));
 	public static final RegistryObject<CommandingWandItem> COMMANDING_WAND = ITEMS.register("commanding_wand", () ->
 			new CommandingWandItem(new Item.Properties().stacksTo(1).tab(TAB))
-					.descTranslatable("desc.nffgirls.item.combat_commanding_wand").cast());
+					.descTranslatable("desc.nffgirls.item.commanding_wand").cast());
 	public static final RegistryObject<CombatCommandingWandItem> COMBAT_COMMANDING_WAND = ITEMS.register("combat_commanding_wand",
 			() -> new CombatCommandingWandItem(new Item.Properties().stacksTo(1).tab(TAB))
 					.descTranslatable("desc.nffgirls.item.combat_commanding_wand").cast());
