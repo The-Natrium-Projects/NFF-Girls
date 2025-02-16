@@ -92,10 +92,10 @@ public class NFFGirlsEntityEventListeners
 
 	@SuppressWarnings("unused")
 	@SubscribeEvent
-	public static void onLivingSetAttackTarget(LivingSetAttackTargetEvent event)
+	public static void onLivingSetAttackTarget(LivingChangeTargetEvent event)
 	{
 		@SuppressWarnings("deprecation")
-		LivingEntity target = event.getTarget();		
+		LivingEntity target = event.getNewTarget();
 		LivingEntity lastHurtBy = event.getEntity().getLastHurtByMob();
 		MutableObject<Boolean> isCancelledByEffect = new MutableObject<Boolean>(Boolean.FALSE);
 		
@@ -112,8 +112,7 @@ public class NFFGirlsEntityEventListeners
         		{
         			if (target.hasEffect(NFFGirlsEffects.UNDEAD_AFFINITY.get()) && lastHurtBy != target && !l.getHatred().contains(target.getUUID()))
         			{
-        				mob.setTarget(null);
-        				isCancelledByEffect.setValue(true);
+        				event.setCanceled(true);
         			}
         			// Hatred will be added in priority-lowest event
         		});
@@ -134,7 +133,7 @@ public class NFFGirlsEntityEventListeners
 	        	}
 	        	if (gs.getLastHurtByMob() != gs.getTarget() && gs.getAIState() == NFFTamedMobAIState.WAIT)
 	        	{
-	        		gs.setTarget(null);
+	        		event.setNewTarget(null);
 	        	}
 	        	gs.lastTarget = gs.getTarget();
 	        }    
