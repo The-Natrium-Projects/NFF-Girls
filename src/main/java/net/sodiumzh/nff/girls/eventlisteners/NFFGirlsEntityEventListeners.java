@@ -145,7 +145,8 @@ public class NFFGirlsEntityEventListeners
 	        	{
 			        event.setCanceled(true);
 	        	}
-	        	gs.lastTarget = event.getNewTarget();
+				if (!event.isCanceled())
+	            	gs.lastTarget = event.getNewTarget();
 	        }    
 		}
 		// Handle befriended mobs //
