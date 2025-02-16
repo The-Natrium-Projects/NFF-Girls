@@ -1,5 +1,11 @@
 # Change Log
 
+### 0.2.28.2 & 0.0.28.1 & 0.1.28.1
+
+Fixed crash on Ghastly Seeker setting attack target.
+
+Fixed skeleton mobs keeping making shooting actions when the arrow runs out.
+
 ### 0.2.28.1
 
 Fixed HMaG mobs vanishing after reloading the world.
