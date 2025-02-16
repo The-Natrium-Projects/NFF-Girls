@@ -18,7 +18,8 @@ public interface INFFGirlsBowShootingMob extends INFFGirlsTamed, INFFGirlsBowSho
 	public default AbstractArrow shoot(LivingEntity pTarget, float pVelocity) {
 		
 		// Filter again to prevent it from shooting without arrow
-		if (this.getAdditionalInventory().getItem(8).isEmpty())
+		//if (this.getAdditionalInventory().getItem(8).isEmpty())
+		if (!this.canShoot())
 			return null;
 
 		AbstractArrow arrowEntity = this.createArrowEntity(this.getAdditionalInventory().getItem(8));
@@ -89,4 +90,6 @@ public interface INFFGirlsBowShootingMob extends INFFGirlsTamed, INFFGirlsBowSho
 	public default ItemStack getEquippingBow() {
 		return this.getAdditionalInventory().getItem(4);
 	}
+
+	public boolean canShoot();
 }
