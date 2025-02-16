@@ -89,10 +89,10 @@ public class NFFGirlsEntityEventListeners
 
 	@SuppressWarnings("unused")
 	@SubscribeEvent
-	public static void onLivingSetAttackTarget(LivingSetAttackTargetEvent event)
+	public static void onLivingSetAttackTarget(LivingChangeTargetEvent event)
 	{
 		@SuppressWarnings("deprecation")
-		LivingEntity target = event.getTarget();		
+		LivingEntity target = event.getNewTarget();
 		LivingEntity lastHurtBy = event.getEntityLiving().getLastHurtByMob();
 		MutableObject<Boolean> isCancelledByEffect = new MutableObject<Boolean>(Boolean.FALSE);
 		
@@ -109,8 +109,7 @@ public class NFFGirlsEntityEventListeners
         		{
         			if (target.hasEffect(NFFGirlsEffects.UNDEAD_AFFINITY.get()) && lastHurtBy != target && !l.getHatred().contains(target.getUUID()))
         			{
-        				mob.setTarget(null);
-        				isCancelledByEffect.setValue(true);
+        				event.setCanceled(true);
         			}
         			// Hatred will be added in priority-lowest event
         		});
@@ -123,14 +122,13 @@ public class NFFGirlsEntityEventListeners
 	        		&& NFFTamingMapping.getConvertTo(mob) == target.getType()
 	        		&& INFFGirlsTamed.isBM(target))
 	        {
-				mob.setTarget(null);
+				event.setNewTarget(null);
 	        }
 	        // Befriended mobs don't attack their wild variation
-	        if (mob instanceof INFFTamed bef 
-	        		&& bef.getModId().equals(NFFGirls.MOD_ID)
+	        if (INFFGirlsTamed.isBM(mob)
 	        		&& NFFTamingMapping.getTypeBefore(mob) == target.getType())
 	        {
-				mob.setTarget(null);
+		        event.setNewTarget(null);
 	        }
 	        // Handle Ghastly Seeker
 	        if (mob instanceof HmagGhastlySeekerEntity gs)
@@ -141,13 +139,13 @@ public class NFFGirlsEntityEventListeners
 	        		&& gs.lastTarget.distanceToSqr(gs) <= gs.getAttributeValue(Attributes.FOLLOW_RANGE) * gs.getAttributeValue(Attributes.FOLLOW_RANGE)
 	        		&& gs.hasLineOfSight(gs.lastTarget))
 	        	{
-	        		event.setNewTarget(gs.lastTarget);
+	        		event.setCanceled(true);
 	        	}
-	        	if (gs.getLastHurtByMob() != gs.getTarget() && gs.getAIState() == NFFTamedMobAIState.WAIT)
+	        	if (gs.getLastHurtByMob() != event.getNewTarget() && gs.getAIState() == NFFTamedMobAIState.WAIT)
 	        	{
-	        		gs.setTarget(null);
+			        event.setCanceled(true);
 	        	}
-	        	gs.lastTarget = gs.getTarget();
+	        	gs.lastTarget = event.getNewTarget();
 	        }    
 		}
 		// Handle befriended mobs //
