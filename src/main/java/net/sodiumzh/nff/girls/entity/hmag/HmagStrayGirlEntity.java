@@ -21,11 +21,13 @@ import net.minecraft.world.entity.ai.goal.RandomLookAroundGoal;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.Arrow;
+import net.minecraft.world.item.BowItem;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
 import net.sodiumzh.nff.girls.NFFGirls;
 import net.sodiumzh.nff.girls.entity.INFFGirlsTamedSunSensitiveMob;
 import net.sodiumzh.nff.girls.entity.INFFGirlsBowShootingMob;
+import net.sodiumzh.nff.girls.entity.ai.goal.NFFGirlsBowAttackGoal;
 import net.sodiumzh.nff.girls.entity.ai.goal.NFFGirlsFollowOwnerGoal;
 import net.sodiumzh.nff.girls.entity.ai.goal.NFFGirlsSkeletonMeleeAttackGoal;
 import net.sodiumzh.nff.girls.entity.ai.goal.target.NFFGirlsNearestHostileToOwnerTargetGoal;
@@ -67,7 +69,7 @@ public class HmagStrayGirlEntity extends StrayGirlEntity implements INFFGirlsTam
 	protected void registerGoals() {
 		goalSelector.addGoal(1, new NFFRestrictSunGoal(this));
 		goalSelector.addGoal(2, new NFFFleeSunGoal(this, 1));
-		goalSelector.addGoal(3, new NFFRangedBowAttackGoal(this, 1.0D, 20, 15.0F));
+		goalSelector.addGoal(3, new NFFGirlsBowAttackGoal(this, 1.0D, 20, 15.0F));
 		goalSelector.addGoal(4, new NFFGirlsSkeletonMeleeAttackGoal(this, 1.2d, true));
 		goalSelector.addGoal(5, new NFFGirlsFollowOwnerGoal(this, 1.0d, 5.0f, 2.0f, false)
 				.avoidSunCondition(NFFGirlsEntityStatics::isSunSensitive));
@@ -91,6 +93,13 @@ public class HmagStrayGirlEntity extends StrayGirlEntity implements INFFGirlsTam
 		if (!(absArrow instanceof Arrow arrow)) return;
 		arrow.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 600));
 		justShot = true;
+	}
+
+	@Override
+	public boolean canShoot() {
+		return !this.getAdditionalInventory().getItem(4).isEmpty()
+				&& this.getAdditionalInventory().getItem(4).getItem() instanceof BowItem
+				&& !this.getAdditionalInventory().getItem(8).isEmpty();
 	}
 
 	@Override
