@@ -129,13 +129,14 @@ public class NFFGirlsEntityEventListeners
 	        		&& gs.lastTarget.distanceToSqr(gs) <= gs.getAttributeValue(Attributes.FOLLOW_RANGE) * gs.getAttributeValue(Attributes.FOLLOW_RANGE)
 	        		&& gs.hasLineOfSight(gs.lastTarget))
 	        	{
-	        		event.setNewTarget(gs.lastTarget);
+			        event.setCanceled(true);
 	        	}
-	        	if (gs.getLastHurtByMob() != gs.getTarget() && gs.getAIState() == NFFTamedMobAIState.WAIT)
+	        	if (gs.getLastHurtByMob() != event.getNewTarget() && gs.getAIState() == NFFTamedMobAIState.WAIT)
 	        	{
-	        		event.setNewTarget(null);
+	        		event.setCanceled(true);
 	        	}
-	        	gs.lastTarget = gs.getTarget();
+				if (!event.isCanceled())
+	        	    gs.lastTarget = event.getNewTarget();
 	        }    
 		}
 		// Handle befriended mobs //
