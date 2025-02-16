@@ -130,7 +130,7 @@ public class NFFGirlsEntityEventListeners
 	        		&& gs.lastTarget.distanceToSqr(gs) <= gs.getAttributeValue(Attributes.FOLLOW_RANGE) * gs.getAttributeValue(Attributes.FOLLOW_RANGE)
 	        		&& gs.hasLineOfSight(gs.lastTarget))
 	        	{
-	        		gs.setTarget(gs.lastTarget);
+	        		event.setNewTarget(gs.lastTarget);
 	        	}
 	        	if (gs.getLastHurtByMob() != gs.getTarget() && gs.getAIState() == NFFTamedMobAIState.WAIT)
 	        	{
