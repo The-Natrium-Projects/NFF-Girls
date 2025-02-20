@@ -8,6 +8,7 @@ import com.github.mechalopa.hmag.world.entity.SlimeGirlEntity;
 
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.util.Mth;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.player.Player;
@@ -15,9 +16,10 @@ import net.minecraft.world.item.ItemStack;
 import net.sodiumzh.nautils.entity.anger.MobAngerRules;
 import net.sodiumzh.nautils.entity.taming.TamingInteractionResult;
 import net.sodiumzh.nautils.math.LinearColor;
-import net.sodiumzh.nautils.math.RndUtil;
-import net.sodiumzh.nautils.statics.NaUtilsEntityStatics;
+import net.sodiumzh.nautils.statics.NaUtilsMathStatics;
+import net.sodiumzh.nautils.statics.NaUtilsParticleStatics;
 import net.sodiumzh.nff.girls.entity.NFFGirlsTamingRules;
+import net.sodiumzh.nff.girls.item.MagicalGelBottleItem;
 import net.sodiumzh.nff.girls.item.MagicalGelColorUtils;
 import net.sodiumzh.nff.girls.registry.NFFGirlsAngerRules;
 import net.sodiumzh.nff.girls.registry.NFFGirlsItems;
@@ -28,19 +30,19 @@ import net.sodiumzh.nff.services.registry.NFFCapRegistry;
 public class HmagSlimeGirlTamingProcess extends TamingProcessItemGivingProgress
 {
 
-	protected static Random rnd = new Random();
+	protected static final RandomSource RND = RandomSource.create();
 	
-	protected double getDeltaProc(LinearColor color1, LinearColor color2)
+	protected double getColorDeltaProgress(LinearColor color1, LinearColor color2)
 	{
 		double colorDist = color1.toNormalized().distanceTo(color2.toNormalized()) / Math.sqrt(3d);
 		double res = 0;
-		if (colorDist < 0.3d)
+		if (colorDist < 0.5d)
 		{
+			// Close: 0-1, squared to make it more beneficial to make it very close
 			res = (0.5d - colorDist) / 0.5d;
 			res = res * res;
-			res = res * 0.5d;	// 0 ~ 0.5
 		}
-		else res = (0.5d - colorDist);	// -0.5 ~ 0
+		else res = (0.5d - colorDist) / 2d;	// Far : -0.25 ~ 0
 		return res;
 	}
 	
@@ -83,34 +85,34 @@ public class HmagSlimeGirlTamingProcess extends TamingProcessItemGivingProgress
 	{
 		if (itemGivenCopy.is(NFFGirlsItems.MAGICAL_GEL_BOTTLE.get()))
 		{
-			double delta = getDeltaProc(NFFGirlsItems.MAGICAL_GEL_BOTTLE.get().getColor(itemGivenCopy), MagicalGelColorUtils.getSlimeColor((SlimeGirlEntity)mob));
+			double delta = getColorDeltaProgress(NFFGirlsItems.MAGICAL_GEL_BOTTLE.get().getColor(itemGivenCopy), MagicalGelColorUtils.getSlimeColor((SlimeGirlEntity)mob));
 			if (delta > 0)
 			{
 				// 20 glints at most
-				int amount = (int) (delta / 0.0125d) + 1;
+				int amount = (int) (delta / 0.025d) + 1;
 				amount = Mth.clamp(amount, 1, 40);
-				NaUtilsEntityStatics.sendParticlesToEntity(mob, ParticleTypes.HAPPY_VILLAGER, mob.getBbHeight() - 0.2, 0.5d, amount, 1d);
+				NaUtilsParticleStatics.sendParticlesToEntity(mob, ParticleTypes.HAPPY_VILLAGER, mob.getBbHeight() - 0.2, 0.5d, amount, 1d);
 			}
 			else
 			{
-				int amount = (int) ((-delta) / 0.1d) + 1;
+				int amount = (int) ((-delta) / 0.05d) + 1;
 				amount = Mth.clamp(amount, 1, 5);
-				NaUtilsEntityStatics.sendParticlesToEntity(mob, ParticleTypes.ANGRY_VILLAGER, mob.getBbHeight() - 0.2, 0.3d, amount, 1d);
+				NaUtilsParticleStatics.sendParticlesToEntity(mob, ParticleTypes.ANGRY_VILLAGER, mob.getBbHeight() - 0.2, 0.3d, amount, 1d);
 			}
 		}
 		else if (itemGivenCopy.is(NFFGirlsItems.MAGICAL_GEL_BALL.get()))
 		{
-			if (mob.getType() == ModEntityTypes.SLIME_GIRL.get() && mob instanceof SlimeGirlEntity sg && rnd.nextDouble() < 0.25d)
+			if (mob.getType() == ModEntityTypes.SLIME_GIRL.get() && mob instanceof SlimeGirlEntity sg && RND.nextDouble() < 0.25d)
             {
 	            MagicalSlimeEntity slime = ModEntityTypes.MAGICAL_SLIME.get().create(mob.level);
 	            slime.setSize(1, true);
             	LinearColor sgColorCompl = MagicalGelColorUtils.getSlimeColor(sg).getComplementary();
             	SlimeGirlEntity.ColorVariant v = MagicalGelColorUtils.closestVariant(sgColorCompl);
             	slime.setVariant(v.getId());
-            	slime.moveTo(mob.getX() + RndUtil.rndRangedDouble(-0.5, 0.5), mob.getY() + 0.5D, mob.getZ() + RndUtil.rndRangedDouble(-0.5, 0.5), rnd.nextFloat() * 360.0F, 0.0F);
+            	slime.moveTo(mob.getX() + NaUtilsMathStatics.rndRangedDouble(-0.5, 0.5), mob.getY() + 0.5D, mob.getZ() + NaUtilsMathStatics.rndRangedDouble(-0.5, 0.5), RND.nextFloat() * 360.0F, 0.0F);
             	mob.level.addFreshEntity(slime);
             }
-			NaUtilsEntityStatics.sendGlintParticlesToLivingDefault(mob);
+			NaUtilsParticleStatics.sendGlintParticlesToEntityDefault(mob);
 		}
 	}
 	
@@ -134,5 +136,23 @@ public class HmagSlimeGirlTamingProcess extends TamingProcessItemGivingProgress
 	@Override
 	public void tamableInit(CNFFTamable cnffTamable) {
 
+	}
+
+	@Override
+	public boolean isItemAcceptable(ItemStack itemstack) {
+		return itemstack.is(NFFGirlsItems.MAGICAL_GEL_BOTTLE.get()) || itemstack.is(NFFGirlsItems.MAGICAL_GEL_BALL.get());
+	}
+
+	@Override
+	protected double getProgressToAdd(ItemStack item, Player player, Mob mob, double oldProc) {
+		if (item.is(NFFGirlsItems.MAGICAL_GEL_BOTTLE.get())
+				&& item.getItem() instanceof MagicalGelBottleItem bottle
+				&& mob instanceof SlimeGirlEntity slime)
+		{
+			return this.getColorDeltaProgress(bottle.getColor(item), MagicalGelColorUtils.getSlimeColor(slime));
+		}
+		else if (item.is(NFFGirlsItems.MAGICAL_GEL_BALL.get()))
+			return NaUtilsMathStatics.rndRangedDouble(0.04d, 0.08d);
+		else return 0d;
 	}
 }
