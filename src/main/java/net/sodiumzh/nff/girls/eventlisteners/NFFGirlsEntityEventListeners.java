@@ -170,6 +170,7 @@ public class NFFGirlsEntityEventListeners
 		}
 	}
 
+	// TODO merge two listeners together
 	@SubscribeEvent
 	public static void onLivingChangeTarget(LivingChangeTargetEvent event)
 	{
