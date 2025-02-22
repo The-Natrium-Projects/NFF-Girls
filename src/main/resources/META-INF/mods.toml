@@ -4,7 +4,7 @@ license="LGPL-3.0"
 issueTrackerURL="https://github.com/SodiumZH/NFF-Girls"
 [[mods]] #mandatory
 modId="nffgirls" #mandatory
-version="0.1.28.1" #mandatory
+version="0.1.28.2" #mandatory
 displayName="NFF: Girls" #mandatory
 displayURL="https://www.curseforge.com/minecraft/mc-mods/nff-girls" 
 #logoFile="examplemod.png" #optional
