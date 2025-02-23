@@ -5,7 +5,6 @@ import com.github.mechalopa.hmag.world.entity.MagicalSlimeEntity;
 import com.github.mechalopa.hmag.world.entity.SlimeGirlEntity;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.util.Mth;
-import net.minecraft.util.RandomSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.monster.Slime;
@@ -32,7 +31,7 @@ import java.util.Random;
 public class HmagSlimeGirlTamingProcess extends TamingProcessItemGivingProgress
 {
 
-	protected static final RandomSource RND = RandomSource.create();
+	protected static final Random RND = new Random();
 	
 	protected double getColorDeltaProgress(LinearColor color1, LinearColor color2)
 	{
