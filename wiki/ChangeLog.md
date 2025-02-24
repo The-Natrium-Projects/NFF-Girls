@@ -1,6 +1,18 @@
 # Change Log
 
-### 0.2.28.2 & 0.0.28.1 & 0.1.28.1
+### 0.0.28.1
+
+Fixed Slime Girls being not able to be given items.
+
+Fixed crash on Ghastly Seeker setting attack target.
+
+Fixed skeleton mobs keeping making shooting actions when the arrow runs out.
+
+### 0.2.28.3 & 0.1.28.2
+
+Fixed Slime Girls being not able to be given items.
+
+### 0.2.28.2 & 0.1.28.1
 
 Fixed crash on Ghastly Seeker setting attack target.
 
