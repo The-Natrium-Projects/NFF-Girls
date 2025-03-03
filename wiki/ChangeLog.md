@@ -1,5 +1,9 @@
 # Change Log
 
+### 0.2.28.4
+
+Fixed Soul Cake providing 5 minutes of saturation. (0.25 s expected)
+
 ### 0.0.28.1
 
 Fixed Slime Girls being not able to be given items.
