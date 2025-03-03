@@ -199,6 +199,7 @@ dependencies {
     implementation fg.deobf("curse.maven:citadel-331936:5633260")
 	//implementation fg.deobf("curse.maven:gog4-228948:4683680")
     implementation fg.deobf("curse.maven:ice-and-fire-dragons-264231:5633453")
+    implementation fg.deobf("curse.maven:touhou-little-maid-355044:6120178")
     // For more info:
     // http://www.gradle.org/docs/current/userguide/artifact_dependencies_tutorial.html
     // http://www.gradle.org/docs/current/userguide/dependency_management.html

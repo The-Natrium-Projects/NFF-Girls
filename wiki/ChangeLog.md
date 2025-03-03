@@ -56,7 +56,7 @@ Slightly modified the taming items.
 
 Commanding Wand optimization.
 
-​	-Now Commanding Wand can switch mob's AI from at most 64 blocks away.
+​	-Now Commanding Wand can switch mob's AI from at most 32 blocks away.
 
 ​	-Now Shift+Right click can make all mobs follow within 16 blocks.
 
