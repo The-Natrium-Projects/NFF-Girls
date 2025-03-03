@@ -69,7 +69,7 @@ public class SoulCakeBlock extends CakeBlock
 	         // 30s undead affinity
 	         NaUtilsEntityStatics.addEffectSafe(player, NFFGirlsEffects.UNDEAD_AFFINITY.get(), 5*60*20);
 			 NaUtilsEntityStatics.addEffectSafe(player, MobEffects.REGENERATION, 5*60*20);
-			 NaUtilsEntityStatics.addEffectSafe(player, MobEffects.SATURATION, 5*60*20);
+			 NaUtilsEntityStatics.addEffectSafe(player, MobEffects.SATURATION, 5);
 	         int i = pState.getValue(BITES);
 	         pLevel.gameEvent(player, GameEvent.EAT, pPos);
 	         if (i < 6) {
