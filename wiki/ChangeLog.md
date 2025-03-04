@@ -1,6 +1,6 @@
 # Change Log
 
-### 0.2.28.4
+### 0.2.28.4 & 0.1.28.3 & 0.0.28.2
 
 Fixed Soul Cake providing 5 minutes of saturation. (0.25 s expected)
 
