@@ -1,16 +1,28 @@
 package net.sodiumzh.nff.girls.entity;
 
-import java.util.HashMap;
-import java.util.UUID;
+import java.util.*;
 import java.util.function.Consumer;
 import java.util.function.Predicate;
 
 import javax.annotation.Nullable;
 
+import com.github.alexthe666.citadel.repack.jaad.Play;
+import net.minecraft.core.BlockPos;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.nbt.ListTag;
+import net.minecraft.nbt.Tag;
+import net.minecraft.resources.ResourceKey;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.level.Level;
+import net.minecraftforge.registries.ForgeRegistries;
+import net.sodiumzh.nautils.capability.CEntityDataCapability;
+import net.sodiumzh.nautils.containers.Tuple3;
 import net.sodiumzh.nautils.mixin.events.entity.MobInteractEvent;
+import net.sodiumzh.nautils.registries.NaUtilsCaps;
+import net.sodiumzh.nautils.statics.NaUtilsNBTStatics;
 import net.sodiumzh.nff.girls.eventlisteners.NFFGirlsEntityEventListeners;
 import org.apache.commons.lang3.mutable.MutableObject;
 
@@ -112,6 +124,10 @@ public interface INFFGirlsTamed extends INFFTamed, IAttributeMonitor, IItemStack
 		if (isBMAnd(o, cond)) {
 			ifBM(o, operation);
 		}
+	}
+
+	public static boolean isBMAndOwnedBy(Object o, UUID ownerUUID) {
+		return isBMAnd(o, bm -> Objects.equals(ownerUUID, bm.getOwnerUUID()));
 	}
 
 	@DontOverride
@@ -345,8 +361,7 @@ public interface INFFGirlsTamed extends INFFTamed, IAttributeMonitor, IItemStack
 		if (this.isOwnerInDimension() && this.getOwner() instanceof ServerPlayer toPlayer)
 			NFFGirlsChannels.SYNC_CHANNEL.send(PacketDistributor.PLAYER.with(() -> toPlayer), packet);
 	}
-	
-	
+
 	// ===== Util ===
 	
 	/**

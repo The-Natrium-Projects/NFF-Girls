@@ -10,6 +10,7 @@ import com.github.mechalopa.hmag.world.entity.MeltyMonsterEntity;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.chat.Component;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
@@ -67,8 +68,11 @@ import net.sodiumzh.nff.services.entity.ai.goal.presets.target.NFFOwnerHurtTarge
 import net.sodiumzh.nautils.entity.MobApplicableItemTable;
 import net.sodiumzh.nff.services.entity.capability.wrapper.ILivingDelayedActions;
 import net.sodiumzh.nff.services.entity.taming.NFFTamedStatics;
+import net.sodiumzh.nff.services.entity.taming.NFFTamingMapping;
 import net.sodiumzh.nff.services.inventory.NFFTamedInventoryMenu;
 import net.sodiumzh.nff.services.inventory.NFFTamedMobInventory;
+
+import javax.annotation.Nonnull;
 
 public class HmagMeltyMonsterEntity extends MeltyMonsterEntity implements INFFGirlsTamed, ILivingDelayedActions {
 
@@ -495,34 +499,14 @@ public class HmagMeltyMonsterEntity extends MeltyMonsterEntity implements INFFGi
 	}
 	
 	// Misc
-	
-	// Indicates which mod this mob belongs to
-	@Override
-	public String getModId() {
-		return NFFGirls.MOD_ID;
-	}
-	
-	// ==================================================================== //
-	// ========================= General Settings ========================= //
-	// Generally these can be copy-pasted to other INFFTamed classes //
-/*
-	@Override
-	public boolean isPersistenceRequired() {
-		return true;
-	}
 
 	@Override
-	public boolean isPreventingPlayerRest(Player pPlayer) {
-		return false;
+	@Nonnull
+	public Component getTypeName() {
+		EntityType<?> typeBefore = NFFTamingMapping.getTypeBefore(this);
+		return typeBefore != null ? typeBefore.getDescription() : super.getTypeName();
 	}
 
-	@Override
-	protected boolean shouldDespawnInPeaceful() {
-		return false;
-	}
-*/
-	// ========================= General Settings end ========================= //
-	// ======================================================================== //
 
 	public static class MMFireball extends SmallFireball
 	{

@@ -1,38 +1,40 @@
 package net.sodiumzh.nff.girls.item;
 
 import com.github.mechalopa.hmag.registry.ModBlocks;
-import net.minecraft.core.BlockPos;
-import net.minecraft.core.Vec3i;
+import com.github.mechalopa.hmag.registry.ModItems;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.nbt.ListTag;
+import net.minecraft.nbt.NbtUtils;
+import net.minecraft.nbt.Tag;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
-import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.Mob;
-import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.phys.AABB;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.entity.EntityTypeTest;
 import net.sodiumzh.nautils.item.NaUtilsItem;
-import net.sodiumzh.nautils.statics.NaUtilsAIStatics;
-import net.sodiumzh.nautils.statics.NaUtilsMathStatics;
+import net.sodiumzh.nautils.statics.*;
 import net.sodiumzh.nff.girls.entity.INFFGirlsTamed;
-import net.sodiumzh.nff.girls.registry.NFFGirlsItems;
 import net.sodiumzh.nff.services.entity.ai.NFFTamedMobAIState;
 import net.sodiumzh.nff.services.entity.ai.goal.presets.INFFFollowOwner;
-import net.sodiumzh.nff.services.entity.taming.CNFFTamedCommonData;
-import net.sodiumzh.nff.services.item.NFFMobRespawnerInstance;
+import net.sodiumzh.nff.services.entity.taming.INFFTamed;
 
 import javax.annotation.Nonnull;
+import java.util.*;
 import java.util.List;
-import java.util.Objects;
+import java.util.concurrent.atomic.AtomicReference;
 
 public class CommandingWandItem extends NaUtilsItem
 {
+	private static final UUID EMPTY_UUID = new UUID(0L, 0L);
+
 
 	public CommandingWandItem(Properties pProperties)
 	{
@@ -41,11 +43,12 @@ public class CommandingWandItem extends NaUtilsItem
 	
 	@Override
 	@SuppressWarnings("resource")
-	public @Nonnull InteractionResult useOn(UseOnContext context)
+	public @Nonnull InteractionResult onItemUseFirst(ItemStack stack, UseOnContext context)
 	{
-		if (context.getLevel().getBlockState(context.getClickedPos()).is(ModBlocks.EVIL_CRYSTAL_BLOCK.get()))
+		if (context.getHand().equals(InteractionHand.MAIN_HAND)
+			&& context.getPlayer() != null)
 		{
-			if (!context.getLevel().isClientSide && context.getLevel() instanceof ServerLevel sl)
+			/*if (!context.getLevel().isClientSide && context.getLevel() instanceof ServerLevel sl)
 			{
 				BlockPos blockpos = context.getClickedPos();
 				AABB bound = new AABB(blockpos.subtract(new Vec3i(16, 16, 16)), blockpos.offset(new Vec3i(16, 16, 16)));
@@ -70,32 +73,190 @@ public class CommandingWandItem extends NaUtilsItem
 			context.getLevel().playSound(context.getPlayer(), context.getClickedPos(),
 					SoundEvents.BELL_BLOCK, SoundSource.BLOCKS, 2.0F, 1.0F);
 			return InteractionResult.sidedSuccess(context.getLevel().isClientSide);
+			*/
+			if (!context.getLevel().isClientSide && context.getLevel() instanceof ServerLevel sl) {
+
+				if (context.getLevel().getBlockState(context.getClickedPos()).is(ModBlocks.SOUL_POWDER_BLOCK.get())) {
+					if (!context.getPlayer().isShiftKeyDown()) {
+						FindMobResult res = findNext(context.getItemInHand(), sl, context.getPlayer());
+						if (!res.isEnd()) {
+							NaUtilsInfoStatics.printMessageTranslatable(context.getPlayer(),
+								"info.nffgirls.item.commanding_wand.mob_search_found", res.location().mobName(),
+								res.location().dimension().location().toString(),
+								res.location().pos().getX(), res.location().pos().getY(), res.location().pos().getZ());
+							if (res.isFirst())
+								NaUtilsInfoStatics.printMessageTranslatable(context.getPlayer(),
+									"info.nffgirls.item.commanding_wand.mob_search_summoning_tip");
+						} else {
+							if (context.getItemInHand().getTag().getList("alreadyFound", Tag.TAG_COMPOUND).isEmpty())
+								NaUtilsInfoStatics.printMessageTranslatable(context.getPlayer(),
+									"info.nffgirls.item.commanding_wand.mob_search_not_found");
+							else NaUtilsInfoStatics.printMessageTranslatable(context.getPlayer(),
+								"info.nffgirls.item.commanding_wand.mob_search_end");
+						}
+					} else if (context.getPlayer().getOffhandItem().is(ModItems.EVIL_CRYSTAL_FRAGMENT.get())) {
+						Optional<UUID> idOpt = this.getLastFoundIdentifier(context.getItemInHand(), sl);
+						Optional<Mob> mobOpt = this.getLastFoundMob(context.getItemInHand(), sl);
+						if (idOpt.isEmpty()) {
+							NaUtilsInfoStatics.printMessageTranslatable(context.getPlayer(),
+								"info.nffgirls.item.commanding_wand.mob_search_summon_no_target");
+						} else if (mobOpt.isEmpty()) {
+							NaUtilsInfoStatics.printMessageTranslatable(context.getPlayer(),
+								"info.nffgirls.item.commanding_wand.mob_search_summon_not_found");
+						} else {
+							Mob mob = mobOpt.get();
+							if (this.summonMob(sl, context.getPlayer(), mob)) {
+								context.getPlayer().getOffhandItem().shrink(1);
+								NaUtilsInfoStatics.printMessageTranslatable(context.getPlayer(),
+									"info.nffgirls.item.commanding_wand.mob_search_summoned_mob", mob.getName().getString());
+							}
+						}
+					}
+				}
+
+				else if (context.getLevel().getBlockState(context.getClickedPos()).is(Blocks.BELL)
+					&& !context.getPlayer().isShiftKeyDown()) {
+					summonMobsAround(sl, context.getPlayer());
+				}
+			}
+			return InteractionResult.sidedSuccess(context.getLevel().isClientSide);
 		}
 		return InteractionResult.PASS;
 	}
 
 	// When shift key down, summon all mobs
-	@Override
+	/*@Override
 	public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand usedHand) {
-		if (!level.isClientSide() && player.isShiftKeyDown()) {
-			List<Entity> mobs = level.getEntities(player, player.getBoundingBox().inflate(16d),
-					(Entity e) -> INFFGirlsTamed.isBMAnd(e, tamed -> Objects.equals(player.getUUID(), tamed.getOwnerUUID())));
-			// Set each mob follow, clear target, try teleport
-			for (Entity mobEntity : mobs) {
-				if (mobEntity instanceof Mob mob) {
-					mob.setTarget(null);
-					INFFGirlsTamed.ifBM(mob, (bm) -> bm.setAIState(NFFTamedMobAIState.FOLLOW, false));
-					List<INFFFollowOwner> followGoals =
-							NaUtilsAIStatics.getGoalsAndPriorities(mob).keySet().stream()
-							.filter(goal -> goal instanceof INFFFollowOwner follow)
-							.map(goal -> (INFFFollowOwner)goal).toList();
-					if (followGoals.isEmpty()) continue;
-				}
-			}
-			level.playSound(player, player.blockPosition(),
-					SoundEvents.BELL_BLOCK, SoundSource.PLAYERS, 2.0F, 1.0F);
+		if (player.isShiftKeyDown()) {
+			if (!level.isClientSide) summonMobsAround(level, player);
 			return InteractionResultHolder.sidedSuccess(player.getItemInHand(usedHand), level.isClientSide);
 		}
 		return InteractionResultHolder.pass(player.getItemInHand(usedHand));
+	}*/
+
+	// Server only, no action on client
+	private boolean summonMobsAround(Level level, Player player) {
+		if (level.isClientSide) return false;
+		List<Entity> mobs = level.getEntities(player, player.getBoundingBox().inflate(16d),
+			(Entity e) -> INFFGirlsTamed.isBMAnd(e, tamed -> Objects.equals(player.getUUID(), tamed.getOwnerUUID())));
+		boolean res = false;
+		// Set each mob follow, clear target, try teleport
+		for (Entity mobEntity : mobs) {
+			if (mobEntity instanceof Mob mob && this.summonMob(level, player, mob)) {
+				res = true;
+				NaUtilsInfoStatics.printMessageTranslatable(player, "info.nffgirls.item.commanding_wand.summoned_mob", mob.getName().getString());
+			}
+		}
+		if (res) {
+			level.playSound(player, player.blockPosition(),
+				SoundEvents.BELL_BLOCK, SoundSource.PLAYERS, 2.0F, 1.0F);
+		} else {
+			NaUtilsInfoStatics.printMessageTranslatable(player, "info.nffgirls.item.commanding_wand.summon_failed");
+		}
+		return res;
+	}
+
+	// Summon a mob to the owner. No action if the mob isn't an nff mob of the player.
+	// Only on server, no action on client.
+	// Return if summoned.
+	private boolean summonMob(Level level, Player player, Mob mob) {
+		if (level.isClientSide) return false;
+		mob.setTarget(null);
+		return INFFGirlsTamed.isBMAnd(mob, bm -> {
+			bm.setAIState(NFFTamedMobAIState.FOLLOW, false);
+			List<INFFFollowOwner> followGoals =
+				NaUtilsAIStatics.getGoalsAndPriorities(mob).keySet().stream()
+					.filter(goal -> goal instanceof INFFFollowOwner follow)
+					.map(goal -> (INFFFollowOwner)goal).toList();
+			if (!followGoals.isEmpty()) followGoals.get(0).teleportToOwner();
+			return true;
+		});
+	}
+
+	// *** Mob Finding Related
+
+	private void tickFindMob(ItemStack stack, Level level) {
+		if (!level.isClientSide) {
+			if (stack.hasTag() && stack.getTag().contains("findMobData", Tag.TAG_COMPOUND)) {
+				CompoundTag findMobData = stack.getTag().getCompound("findMobData");
+				int expire = findMobData.contains("expire", Tag.TAG_INT) ? findMobData.getInt("expire") : 0;
+				if (expire > 0) {
+					findMobData.putInt("expire", expire - 1);
+				} else {
+					stack.getTag().remove("findMobData");
+				}
+			}
+		}
+	}
+
+	@Nonnull
+	private FindMobResult findNext(ItemStack stack, ServerLevel level, Player player) {
+		// Init nbt
+		if (!stack.getOrCreateTag().contains("findMobData", Tag.TAG_COMPOUND) ||
+			stack.getTag().getCompound("findMobData").getBoolean("ended"))
+		{
+			stack.getTag().put("findMobData", new CompoundTag());
+			stack.getTag().getCompound("findMobData").put("alreadyFound", new ListTag());
+			stack.getTag().getCompound("findMobData").putUUID("lastFound", EMPTY_UUID);
+			stack.getTag().getCompound("findMobData").putInt("expire", 10 * 20);
+			stack.getTag().getCompound("findMobData").putBoolean("ended", false);
+		}
+		List<UUID> alreadyFound = /*NaUtilsNBTStatics.listFromListTag(stack.getTag().getCompound("findMobData")
+			.getList("alreadyFound", Tag.TAG_INT_ARRAY), NbtUtils::loadUUID);*/
+			stack.getTag().getCompound("findMobData").getList("alreadyFound", Tag.TAG_INT_ARRAY)
+				.stream().map(NbtUtils::loadUUID).toList();
+		AtomicReference<FindMobResult> found = new AtomicReference<>(FindMobResult.end());
+
+		List<INFFTamed> mobsLoaded = NaUtilsEntityStatics.getEntitiesOnServer(level,
+			EntityTypeTest.forClass(Mob.class), e -> INFFGirlsTamed.isBMAndOwnedBy(e, player.getUUID()))
+			.stream().map(INFFTamed::getBM).filter(Objects::nonNull).toList();
+		// Search in levels
+		mobsLoaded.stream().filter(e -> {
+			UUID uuid = e.getIdentifier();
+			return !uuid.equals(EMPTY_UUID) && !alreadyFound.contains(e.getIdentifier());
+		}).findFirst().ifPresent(e -> found.set(new FindMobResult(INFFTamed.MobLocationInfo.fromMob(e), alreadyFound.isEmpty())));
+		// Search in saved locations
+		if (found.get().isEnd()) {
+			INFFTamed.removeSuspiciousMobLocations(player);
+			INFFTamed.getAllMobLocations(player).values().stream().filter(loc -> !alreadyFound.contains(loc.identifier())).findFirst()
+				.ifPresent(loc -> found.set(new FindMobResult(loc, alreadyFound.isEmpty())));
+		}
+		// Update nbt
+		if (!found.get().isEnd()) {
+			stack.getTag().getCompound("findMobData").getList("alreadyFound", Tag.TAG_INT_ARRAY)
+				.add(NbtUtils.createUUID(found.get().location().identifier()));
+			stack.getTag().getCompound("findMobData").putUUID("lastFound", found.get().location().identifier());
+			stack.getTag().getCompound("findMobData").putInt("expire", 10 * 20);
+		} else {
+			stack.getTag().getCompound("findMobData").putBoolean("ended", true);
+		}
+		return found.get();
+	}
+
+	private Optional<UUID> getLastFoundIdentifier(ItemStack stack, ServerLevel level) {
+		if (!stack.hasTag()
+			|| !stack.getTag().contains("findMobData")
+			|| !stack.getTag().getCompound("findMobData").hasUUID("lastFound"))
+			return Optional.empty();
+		UUID uuid = stack.getTag().getCompound("findMobData").getUUID("lastFound");
+		if (Objects.equals(uuid, EMPTY_UUID)) return Optional.empty();
+		return Optional.of(uuid);
+	}
+
+	private Optional<Mob> getLastFoundMob(ItemStack stack, ServerLevel level) {
+		return getLastFoundIdentifier(stack, level).flatMap(id -> INFFTamed.byIdentifier(id, level));
+	}
+
+	private static record FindMobResult(INFFTamed.MobLocationInfo location, boolean isFirst){
+		private static final FindMobResult END = new FindMobResult(null, false);
+		public boolean isEnd() {return this == END;}
+		public static FindMobResult end() { return END;}
+	}
+
+
+	@Override
+	public void inventoryTick(ItemStack stack, Level level, Entity entity, int slotId, boolean isSelected) {
+		super.inventoryTick(stack, level, entity, slotId, isSelected);
+		tickFindMob(stack, level);
 	}
 }

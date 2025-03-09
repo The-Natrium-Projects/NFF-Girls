@@ -5,9 +5,11 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.function.Supplier;
 
+import com.github.mechalopa.hmag.registry.ModEntityTypes;
 import com.github.mechalopa.hmag.world.entity.AlrauneEntity;
 
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.chat.Component;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.Container;
@@ -28,6 +30,7 @@ import net.sodiumzh.nff.girls.entity.ai.goal.target.NFFGirlsNearestHostileToOwne
 import net.sodiumzh.nff.girls.entity.ai.goal.target.NFFGirlsNearestHostileToSelfTargetGoal;
 import net.sodiumzh.nff.girls.entity.projectile.NFFHmagAlrauneSeedEntity;
 import net.sodiumzh.nff.girls.inventory.NFFGirlsThreeBaublesInventoryMenu;
+import net.sodiumzh.nff.girls.registry.NFFGirlsEntityTypes;
 import net.sodiumzh.nff.girls.registry.NFFGirlsHealingItems;
 import net.sodiumzh.nff.girls.registry.NFFGirlsItems;
 import net.sodiumzh.nff.girls.sound.NFFGirlsSoundPresets;
@@ -42,8 +45,11 @@ import net.sodiumzh.nff.services.entity.ai.goal.presets.target.NFFOwnerHurtTarge
 import net.sodiumzh.nautils.entity.MobApplicableItemTable;
 import net.sodiumzh.nff.services.entity.taming.INFFTamed;
 import net.sodiumzh.nff.services.entity.taming.NFFTamedStatics;
+import net.sodiumzh.nff.services.entity.taming.NFFTamingMapping;
 import net.sodiumzh.nff.services.inventory.NFFTamedInventoryMenu;
 import net.sodiumzh.nff.services.inventory.NFFTamedMobInventory;
+
+import javax.annotation.Nonnull;
 
 public class HmagAlrauneEntity extends AlrauneEntity implements INFFGirlsTamed {
 
@@ -236,33 +242,12 @@ public class HmagAlrauneEntity extends AlrauneEntity implements INFFGirlsTamed {
 	
 	// Misc
 	
-	// Indicates which mod this mob belongs to
 	@Override
-	public String getModId() {
-		return NFFGirls.MOD_ID;
+	@Nonnull
+	public Component getTypeName() {
+		EntityType<?> typeBefore = NFFTamingMapping.getTypeBefore(this);
+		return typeBefore != null ? typeBefore.getDescription() : super.getTypeName();
 	}
-	
-	// ==================================================================== //
-	// ========================= General Settings ========================= //
-	// Generally these can be copy-pasted to other INFFTamed classes //
-/*
-	@Override
-	public boolean isPersistenceRequired() {
-		return true;
-	}
-
-	@Override
-	public boolean isPreventingPlayerRest(Player pPlayer) {
-		return false;
-	}
-
-	@Override
-	protected boolean shouldDespawnInPeaceful() {
-		return false;
-	}
-*/
-	// ========================= General Settings end ========================= //
-	// ======================================================================== //
 
 	protected static class ShootHealingGoal extends NFFShootProjectileGoal
 	{

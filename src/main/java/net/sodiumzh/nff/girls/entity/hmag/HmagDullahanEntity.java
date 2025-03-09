@@ -3,9 +3,11 @@ package net.sodiumzh.nff.girls.entity.hmag;
 import java.util.Arrays;
 import java.util.UUID;
 
+import com.github.mechalopa.hmag.registry.ModEntityTypes;
 import com.github.mechalopa.hmag.world.entity.DullahanEntity;
 
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.chat.Component;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.world.Container;
 import net.minecraft.world.InteractionHand;
@@ -37,9 +39,12 @@ import net.sodiumzh.nff.services.entity.ai.goal.presets.NFFWaterAvoidingRandomSt
 import net.sodiumzh.nff.services.entity.ai.goal.presets.target.NFFHurtByTargetGoal;
 import net.sodiumzh.nautils.entity.MobApplicableItemTable;
 import net.sodiumzh.nff.services.entity.taming.NFFTamedStatics;
+import net.sodiumzh.nff.services.entity.taming.NFFTamingMapping;
 import net.sodiumzh.nff.services.inventory.NFFTamedInventoryMenu;
 import net.sodiumzh.nff.services.inventory.NFFTamedMobInventory;
 import net.sodiumzh.nff.services.inventory.NFFTamedMobInventoryWithHandItems;
+
+import javax.annotation.Nonnull;
 
 /**
  * This is a template with more preset
@@ -189,27 +194,13 @@ public class HmagDullahanEntity extends DullahanEntity implements INFFGirlsTamed
 	public String getModId() {
 		return NFFGirls.MOD_ID;
 	}
-	
-	// ==================================================================== //
-	// ========================= General Settings ========================= //
-	// Generally these can be copy-pasted to other INFFTamed classes //
-/*
-	@Override
-	public boolean isPersistenceRequired() {
-		return true;
-	}
 
 	@Override
-	public boolean isPreventingPlayerRest(Player pPlayer) {
-		return false;
+	@Nonnull
+	public Component getTypeName() {
+		EntityType<?> typeBefore = NFFTamingMapping.getTypeBefore(this);
+		return typeBefore != null ? typeBefore.getDescription() : super.getTypeName();
 	}
 
-	@Override
-	protected boolean shouldDespawnInPeaceful() {
-		return false;
-	}
-*/
-	// ========================= General Settings end ========================= //
-	// ======================================================================== //
 
 }

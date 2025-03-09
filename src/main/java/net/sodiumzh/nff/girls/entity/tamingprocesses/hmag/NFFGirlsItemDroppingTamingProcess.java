@@ -178,6 +178,7 @@ public abstract class NFFGirlsItemDroppingTamingProcess extends NFFTamingProcess
 		// Pick one
 		ItemStack stack = itemEntity.getItem().copy();
 		stack.setCount(1);
+
 		stack.getOrCreateTag().putUUID(ITEM_NBT_KEY_PICKED_FROM_PLAYER, itemEntity.getOwner().getUUID());
 		mob.setItemInHand(InteractionHand.OFF_HAND, stack);
 		if (itemEntity.getItem().getCount() <= 1)

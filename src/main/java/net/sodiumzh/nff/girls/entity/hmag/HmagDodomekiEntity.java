@@ -2,9 +2,11 @@ package net.sodiumzh.nff.girls.entity.hmag;
 
 import java.util.Arrays;
 
+import com.github.mechalopa.hmag.registry.ModEntityTypes;
 import com.github.mechalopa.hmag.world.entity.DodomekiEntity;
 
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.chat.Component;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.world.Container;
 import net.minecraft.world.InteractionHand;
@@ -35,9 +37,12 @@ import net.sodiumzh.nff.services.entity.ai.goal.presets.NFFWaterAvoidingRandomSt
 import net.sodiumzh.nff.services.entity.ai.goal.presets.target.NFFHurtByTargetGoal;
 import net.sodiumzh.nautils.entity.MobApplicableItemTable;
 import net.sodiumzh.nff.services.entity.taming.NFFTamedStatics;
+import net.sodiumzh.nff.services.entity.taming.NFFTamingMapping;
 import net.sodiumzh.nff.services.inventory.NFFTamedInventoryMenu;
 import net.sodiumzh.nff.services.inventory.NFFTamedMobInventory;
 import net.sodiumzh.nff.services.inventory.NFFTamedMobInventoryWithHandItems;
+
+import javax.annotation.Nonnull;
 
 public class HmagDodomekiEntity extends DodomekiEntity implements INFFGirlsTamedSunSensitiveMob
 {
@@ -156,18 +161,14 @@ public class HmagDodomekiEntity extends DodomekiEntity implements INFFGirlsTamed
 	}
 	*/
 	// Misc
-	
-	/*@Override
-	public void setupSunImmunityRules() {
-		this.getSunImmunity().putOptional("soul_amulet", mob -> ((INFFGirlsTamed)mob).hasDwmgBauble("soul_amulet"));
-		this.getSunImmunity().putOptional("resis_amulet", mob -> ((INFFGirlsTamed)mob).hasDwmgBauble("resistance_amulet"));
-	}*/
-	
-	// Indicates which mod this mob belongs to
+
 	@Override
-	public String getModId() {
-		return NFFGirls.MOD_ID;
+	@Nonnull
+	public Component getTypeName() {
+		EntityType<?> typeBefore = NFFTamingMapping.getTypeBefore(this);
+		return typeBefore != null ? typeBefore.getDescription() : super.getTypeName();
 	}
+
 	
 	// Sounds
 	

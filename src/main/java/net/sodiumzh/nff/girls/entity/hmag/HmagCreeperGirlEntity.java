@@ -2,11 +2,13 @@ package net.sodiumzh.nff.girls.entity.hmag;
 
 import java.util.UUID;
 
+import com.github.mechalopa.hmag.registry.ModEntityTypes;
 import com.github.mechalopa.hmag.registry.ModItems;
 import com.github.mechalopa.hmag.world.entity.CreeperGirlEntity;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.chat.Component;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
@@ -51,10 +53,13 @@ import net.sodiumzh.nff.services.entity.ai.goal.presets.NFFWaterAvoidingRandomSt
 import net.sodiumzh.nff.services.entity.ai.goal.presets.target.NFFHurtByTargetGoal;
 import net.sodiumzh.nautils.entity.MobApplicableItemTable;
 import net.sodiumzh.nff.services.entity.taming.NFFTamedStatics;
+import net.sodiumzh.nff.services.entity.taming.NFFTamingMapping;
 import net.sodiumzh.nff.services.entity.taming.presets.NFFTamedCreeperPreset;
 import net.sodiumzh.nff.services.inventory.NFFTamedInventoryMenu;
 import net.sodiumzh.nff.services.inventory.NFFTamedMobInventory;
 import net.sodiumzh.nff.services.inventory.NFFTamedMobInventoryWithEquipment;
+
+import javax.annotation.Nonnull;
 
 // Rewritten from HMaG CreeperGirlEntity
 public class HmagCreeperGirlEntity extends NFFTamedCreeperPreset implements INFFGirlsTamed
@@ -232,65 +237,6 @@ public class HmagCreeperGirlEntity extends NFFTamedCreeperPreset implements INFF
 		return InteractionResult.PASS;
 	}
 
-/*	@Override
-	public InteractionResult mobInteract(Player player, InteractionHand hand)
-	{
-		if (!player.isShiftKeyDown())
-		{
-			if (player.getUUID().equals(getOwnerUUID()))
-			{
-				if (!this.level().isClientSide && hand == InteractionHand.MAIN_HAND)
-				{
-					if (player.getItemInHand(hand).is(Items.FLINT_AND_STEEL)
-							&& this.canIgnite
-							&& (!this.isPowered() || this.getAdditionalInventory().getItem(6).getCount() >= 2)
-							&& this.getSwell() == 0)
-					{
-		
-						this.playerIgniteDefault(player, hand);
-						isPlayerIgnited = true;
-						return InteractionResult.sidedSuccess(player.level().isClientSide);
-					} 
-					else if (this.tryApplyHealingItems(player.getItemInHand(hand)) != InteractionResult.PASS)
-						return InteractionResult.sidedSuccess(player.level().isClientSide);
-					else if (hand == InteractionHand.MAIN_HAND
-							&& NFFGirlsEntityStatics.isOnEitherHand(player, NFFGirlsItems.COMMANDING_WAND.get()))
-					{
-						switchAIState();
-					}	
-					else return InteractionResult.PASS;
-				}
-				return InteractionResult.sidedSuccess(player.level().isClientSide);
-			}
-			return InteractionResult.PASS;
-		}
-		else
-		{
-			if (player.getUUID().equals(getOwnerUUID())) {	
-				// Power with a lightning particle
-				if (player.getItemInHand(hand).is(ModItems.LIGHTNING_PARTICLE.get()) && !this.isPowered())
-				{
-					this.setPowered(true);
-					player.getItemInHand(hand).shrink(1);
-					return InteractionResult.sidedSuccess(player.level().isClientSide);
-				}
-				// Unpower with empty hand )and get a lightning particle
-				else if (player.getItemInHand(hand).isEmpty() && this.isPowered() && hand.equals(InteractionHand.MAIN_HAND))
-				{
-					this.setPowered(false);
-					this.spawnAtLocation(new ItemStack(ModItems.LIGHTNING_PARTICLE.get(), 1));
-					return InteractionResult.sidedSuccess(player.level().isClientSide);
-				} 
-				else if (hand == InteractionHand.MAIN_HAND && NFFGirlsEntityStatics.isOnEitherHand(player, NFFGirlsItems.COMMANDING_WAND.get()))
-				{
-					NFFTamedStatics.openBefriendedInventory(player, this);
-					return InteractionResult.sidedSuccess(player.level().isClientSide);
-				}
-			}
-			return InteractionResult.PASS;
-		}
-	}*/
-	
 	// Inventory
 	
 	@Override
@@ -347,23 +293,7 @@ public class HmagCreeperGirlEntity extends NFFTamedCreeperPreset implements INFF
 	{
 		return !(this.getAdditionalInventory().getItem(6).isEmpty() || this.getAdditionalInventory().getItem(6).getCount() == 1 && this.isPowered());
 	}
-	
 
-	// IBaubleEquipable interface
-	// Actually it doesn't have bauble
-	/*
-	@Override
-	public HashMap<String, ItemStack> getBaubleSlots() {
-		return new HashMap<String, ItemStack>();
-	}
-
-	@Override
-	public BaubleHandler getBaubleHandler() {
-		return DwmgBaubleHandlers.EMPTY;
-	}
-	*/
-	// Sounds
-	
 	@Override
 	protected SoundEvent getAmbientSound()
 	{
@@ -377,12 +307,14 @@ public class HmagCreeperGirlEntity extends NFFTamedCreeperPreset implements INFF
 	}
 
 	// Misc
-	
-/*	@Override
-	public String getModId() {
-		return NFFGirls.MOD_ID;
+
+	@Override
+	@Nonnull
+	public Component getTypeName() {
+		EntityType<?> typeBefore = NFFTamingMapping.getTypeBefore(this);
+		return typeBefore != null ? typeBefore.getDescription() : super.getTypeName();
 	}
-	*/
+
 	@Override
 	public double getMyRidingOffset()
 	{

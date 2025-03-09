@@ -76,7 +76,6 @@
   "item.minecraft.tipped_arrow.effect.nffgirls.ender_protection_long": "末影之护之箭",
   "item.minecraft.tipped_arrow.effect.nffgirls.ender_protection_long_2": "末影之护之箭",
 
-
   "block.nffgirls.soul_cake" : "灵魂蛋糕",
   "block.nffgirls.soul_carpet" : "灵魂地毯",
   "block.nffgirls.luminous_terracotta" : "夜光陶瓦",
@@ -138,6 +137,15 @@
   "info.nffgirls.item.combat_setting_target_selected": "正在指示%1$s攻击...",
   "info.nffgirls.item.combat_set_target_reset": "已重置",
   "info.nffgirls.item.combat_stop_attacking": "已指示%1$s停止攻击",
+  "info.nffgirls.item.commanding_wand.summoned_mob": "召集了%1$s",
+  "info.nffgirls.item.commanding_wand.summon_failed": "未召集任何生物",
+  "info.nffgirls.item.commanding_wand.mob_search_found": "名称: %1$s, 维度: %2$s, 位置: (%3$d, %4$d, %5$d)",
+  "info.nffgirls.item.commanding_wand.mob_search_summoning_tip": "副手持有邪恶水晶碎片Shift+右键灵魂粉尘块以召唤当前生物（消耗1个碎片）。",
+  "info.nffgirls.item.commanding_wand.mob_search_end": "未找到更多生物。查找已重置。",
+  "info.nffgirls.item.commanding_wand.mob_search_not_found": "未找到生物",
+  "info.nffgirls.item.commanding_wand.mob_search_summon_no_target": "召唤失败，未指定目标",
+  "info.nffgirls.item.commanding_wand.mob_search_summon_not_found": "召唤失败。请走到离目标位置更近的地方重试。",
+  "info.nffgirls.item.commanding_wand.mob_search_summoned_mob": "召唤了%1$s",
 
   "info.nffgirls.bauble.hpmax": "生命最大值 %1$s", 
   "info.nffgirls.bauble.atk": "攻击 %1$s",
@@ -167,8 +175,8 @@
   "info.nffgirls.book.tamable": "一场特殊的邂逅？",
   "death.attack.necromancer_wither": "%1$s没能承受住死灵巫术的诅咒",
 
-  "desc.nffgirls.item.commanding_wand": "右键你的生物切换AI\nShift+右键你的生物打开GUI面板\n对空气Shift+右键集合16格内的生物",
-  "desc.nffgirls.item.combat_commanding_wand": "右键你的生物选定，然后右键其他对象以指示你的生物攻击这个对象\nShift+右键你的生物以指示其停止攻击\nShift+右键敌人使你周围的生物集火攻击",
+  "desc.nffgirls.item.commanding_wand": "右键你的NFF Girls生物切换AI\nShift+右键你的NFF Girls生物打开GUI面板\n右键钟以集合16格内的NFF Girls生物\n右键灵魂粉尘块以查找NFF Girls生物坐标",
+  "desc.nffgirls.item.combat_commanding_wand": "右键你的NFF Girls生物选定，然后右键其他对象以指示你的生物攻击这个对象\nShift+右键你的NFF Girls生物以指示其停止攻击\nShift+右键敌人使你周围的NFF Girls生物集火攻击",
 
   "dict.nffgirls.title": "HMaG - 生物图鉴",
   "dict.nffgirls.button_friendable": "一场特殊的邂逅？",
