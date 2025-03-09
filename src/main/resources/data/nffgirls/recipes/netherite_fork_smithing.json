@@ -1,5 +1,5 @@
 {
-  "type": "minecraft:smithing_transform",
+  "type": "minecraft:smithing",
   "base": {
     "item": "hmag:golden_fork"
   },
@@ -8,8 +8,6 @@
   },
   "result": {
     "item": "nffgirls:netherite_fork"
-  },
-  "template": {
-    "item": "minecraft:netherite_upgrade_smithing_template"
   }
+
 }

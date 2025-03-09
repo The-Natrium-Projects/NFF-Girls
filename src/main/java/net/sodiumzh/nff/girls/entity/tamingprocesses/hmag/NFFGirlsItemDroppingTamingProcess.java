@@ -111,7 +111,12 @@ public abstract class NFFGirlsItemDroppingTamingProcess extends NFFTamingProcess
 		return out;
 	}
 	
-	
+	@Nullable
+	private static Player getThrowingPlayer(ItemEntity ie) {
+		return Optional.ofNullable(ie.getThrower()).flatMap(uuid ->
+			NaUtilsEntityStatics.findPlayerInAllDimensions(uuid, ie.getLevel())).orElse(null);
+	}
+
 	/**
 	 * Check if a mob can pick up the item
 	 */
@@ -121,8 +126,7 @@ public abstract class NFFGirlsItemDroppingTamingProcess extends NFFTamingProcess
 		if (!isItemAcceptableInternal(itemEntity.getItem(), mob))
 			return false;
 		// If item not thrown by player, pass
-		Player playerThrown = Optional.ofNullable(itemEntity.getThrower()).flatMap(uuid ->
-				NaUtilsEntityStatics.findPlayerInAllDimensions(uuid, itemEntity.getLevel())).orElse(null);
+		Player playerThrown = getThrowingPlayer(itemEntity);
 		if (playerThrown == null)
 			return false;
 		// If other player ongoing, pass
@@ -175,7 +179,7 @@ public abstract class NFFGirlsItemDroppingTamingProcess extends NFFTamingProcess
 		// Pick one
 		ItemStack stack = itemEntity.getItem().copy();
 		stack.setCount(1);
-		stack.getOrCreateTag().putUUID(ITEM_NBT_KEY_PICKED_FROM_PLAYER, itemEntity.getOwner());
+		stack.getOrCreateTag().putUUID(ITEM_NBT_KEY_PICKED_FROM_PLAYER, getThrowingPlayer(itemEntity).getUUID());
 		mob.setItemInHand(InteractionHand.OFF_HAND, stack);
 		if (itemEntity.getItem().getCount() <= 1)
 		{

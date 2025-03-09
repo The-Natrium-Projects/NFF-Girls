@@ -1,5 +1,5 @@
 {
-  "type": "minecraft:smithing_transform",
+  "type": "minecraft:smithing",
   "base": {
     "item": "nffgirls:healing_jade"
   },
@@ -8,8 +8,5 @@
   },
   "result": {
     "item": "nffgirls:life_jade"
-  },
-  "template": {
-    "item": "hmag:evil_crystal_upgrade_smithing_template"
   }
 }
