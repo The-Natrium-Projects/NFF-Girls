@@ -10,6 +10,7 @@ import com.github.mechalopa.hmag.world.entity.projectile.MagicBulletEntity;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.chat.Component;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.Container;
@@ -53,8 +54,12 @@ import net.sodiumzh.nff.services.entity.ai.goal.presets.target.NFFOwnerHurtByTar
 import net.sodiumzh.nff.services.entity.ai.goal.presets.target.NFFOwnerHurtTargetGoal;
 import net.sodiumzh.nautils.entity.MobApplicableItemTable;
 import net.sodiumzh.nff.services.entity.taming.NFFTamedStatics;
+import net.sodiumzh.nff.services.entity.taming.NFFTamingMapping;
 import net.sodiumzh.nff.services.inventory.NFFTamedInventoryMenu;
 import net.sodiumzh.nff.services.inventory.NFFTamedMobInventory;
+
+import javax.annotation.Nonnull;
+
 public class HmagNightwalkerEntity extends NightwalkerEntity implements INFFGirlsTamed {
 
 
@@ -228,28 +233,13 @@ public class HmagNightwalkerEntity extends NightwalkerEntity implements INFFGirl
 	public String getModId() {
 		return NFFGirls.MOD_ID;
 	}
-	
-	// ==================================================================== //
-	// ========================= General Settings ========================= //
-	// Generally these can be copy-pasted to other INFFTamed classes //
-/*
-	@Override
-	public boolean isPersistenceRequired() {
-		return true;
-	}
 
 	@Override
-	public boolean isPreventingPlayerRest(Player pPlayer) {
-		return false;
+	@Nonnull
+	public Component getTypeName() {
+		EntityType<?> typeBefore = NFFTamingMapping.getTypeBefore(this);
+		return typeBefore != null ? typeBefore.getDescription() : super.getTypeName();
 	}
-
-	@Override
-	protected boolean shouldDespawnInPeaceful() {
-		return false;
-	}
-*/
-	// ========================= General Settings end ========================= //
-	// ======================================================================== //
 
 	protected static class BefriendedNightwalkerMagicBallEntity extends MagicBulletEntity
 	{

@@ -9,6 +9,7 @@ import com.mojang.logging.LogUtils;
 
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
+import net.minecraft.nbt.Tag;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
@@ -353,7 +354,7 @@ public interface CNFFGirlsTradeHandler extends CVanillaMerchant
 		{
 			var tag = super.serializeNBT();
 			ListTag tagMeta = new ListTag();
-			tagMeta.addAll(NaUtilsContainerStatics.castList(this.meta, meta -> meta.toTag()));
+			tagMeta.addAll(this.meta.stream().map(NFFGirlsTradeOfferMetaData::toTag).toList());
 			tag.put("meta", tagMeta);
 			tag.putInt("cached_level", this.cachedLevel);
 			tag.putInt("restock_timer", this.restockTimer);
@@ -365,7 +366,7 @@ public interface CNFFGirlsTradeHandler extends CVanillaMerchant
 		public void deserializeNBT(CompoundTag tag)
 		{
 			super.deserializeNBT(tag);
-			ListTag tagCachedUse = tag.getList("meta", NaUtilsNBTStatics.TAG_COMPOUND_ID);
+			ListTag tagCachedUse = tag.getList("meta", Tag.TAG_COMPOUND);
 			this.meta.clear();
 			for (int i = 0; i < tagCachedUse.size(); ++i)
 			{

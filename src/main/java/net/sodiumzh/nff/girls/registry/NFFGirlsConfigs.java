@@ -44,6 +44,7 @@ public class NFFGirlsConfigs
 	/** Implemented through {@link NFFGirlsEntityEventListeners#onBefriended} */
 	public static ForgeConfigSpec.BooleanValue REMOVE_HAND_ITEM_ON_TAMING;
 	public static ForgeConfigSpec.BooleanValue REMOVE_ARMOR_ON_TAMING;
+	public static ForgeConfigSpec.BooleanValue ENABLE_COMMANDING_WAND_MOB_SEARCH;
 
 	static
 	{
@@ -108,6 +109,8 @@ public class NFFGirlsConfigs
 				.define("removeHandItemsOnFriending", false);
 		REMOVE_ARMOR_ON_TAMING = BUILDER.comment("If true, the armor of the mobs will be removed by default on getting friendly.")
 				.define("removeArmorOnFriending", false);
+		ENABLE_COMMANDING_WAND_MOB_SEARCH = BUILDER.comment("If enabled, the Commanding Wand can be used on a Bell to search mobs. If it causes a server lag, consider disable it.")
+			.define("enableCommandingWandMobSearch", true);
 		CONFIG = BUILDER.build();
 	}
 	
@@ -155,6 +158,7 @@ public class NFFGirlsConfigs
 		public static class Misc {
 			public static boolean REMOVE_HAND_ITEM_ON_TAMING;
 			public static boolean REMOVE_ARMOR_ON_TAMING;
+			public static boolean ENABLE_COMMANDING_WAND_MOB_SEARCH;
 		}
 
 		public static void refreshCommon()
@@ -183,6 +187,7 @@ public class NFFGirlsConfigs
 			Baubles.BAUBLE_ARMOR_BOOSTING_SCALE = NFFGirlsConfigs.BAUBLE_ARMOR_BOOSTING_SCALE.get();
 			Misc.REMOVE_HAND_ITEM_ON_TAMING = NFFGirlsConfigs.REMOVE_HAND_ITEM_ON_TAMING.get();
 			Misc.REMOVE_ARMOR_ON_TAMING = NFFGirlsConfigs.REMOVE_ARMOR_ON_TAMING.get();
+			Misc.ENABLE_COMMANDING_WAND_MOB_SEARCH = NFFGirlsConfigs.ENABLE_COMMANDING_WAND_MOB_SEARCH.get();
 		}
 		
 		/*public static void refreshServer()

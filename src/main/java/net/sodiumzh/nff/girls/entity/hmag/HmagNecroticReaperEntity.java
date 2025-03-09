@@ -6,6 +6,7 @@ import java.util.List;
 import com.github.mechalopa.hmag.world.entity.NecroticReaperEntity;
 
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.chat.Component;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.world.Container;
 import net.minecraft.world.InteractionHand;
@@ -45,9 +46,12 @@ import net.sodiumzh.nff.services.entity.ai.goal.presets.NFFZombieAttackGoal;
 import net.sodiumzh.nff.services.entity.ai.goal.presets.target.NFFHurtByTargetGoal;
 import net.sodiumzh.nautils.entity.MobApplicableItemTable;
 import net.sodiumzh.nff.services.entity.taming.NFFTamedStatics;
+import net.sodiumzh.nff.services.entity.taming.NFFTamingMapping;
 import net.sodiumzh.nff.services.inventory.NFFTamedInventoryMenu;
 import net.sodiumzh.nff.services.inventory.NFFTamedMobInventory;
 import net.sodiumzh.nff.services.inventory.NFFTamedMobInventoryWithHandItems;
+
+import javax.annotation.Nonnull;
 
 public class HmagNecroticReaperEntity extends NecroticReaperEntity implements INFFGirlsTamedSunSensitiveMob
 {
@@ -242,28 +246,13 @@ public class HmagNecroticReaperEntity extends NecroticReaperEntity implements IN
 	{
 		return NFFGirlsSoundPresets.zombieDeath(super.getDeathSound());
 	}
-	
-	// ==================================================================== //
-	// ========================= General Settings ========================= //
-	// Generally these can be copy-pasted to other INFFTamed classes //
-/*
-	@Override
-	public boolean isPersistenceRequired() {
-		return true;
-	}
 
 	@Override
-	public boolean isPreventingPlayerRest(Player pPlayer) {
-		return false;
+	@Nonnull
+	public Component getTypeName() {
+		EntityType<?> typeBefore = NFFTamingMapping.getTypeBefore(this);
+		return typeBefore != null ? typeBefore.getDescription() : super.getTypeName();
 	}
-
-	@Override
-	protected boolean shouldDespawnInPeaceful() {
-		return false;
-	}
-*/
-	// ========================= General Settings end ========================= //
-	// ======================================================================== //
 	
 	// Util
 	// If player can control this mob

@@ -2,10 +2,12 @@ package net.sodiumzh.nff.girls.entity.hmag;
 
 import java.util.Arrays;
 
+import com.github.mechalopa.hmag.registry.ModEntityTypes;
 import com.github.mechalopa.hmag.registry.ModItems;
 import com.github.mechalopa.hmag.world.entity.CrimsonSlaughtererEntity;
 
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.world.Container;
@@ -39,8 +41,11 @@ import net.sodiumzh.nff.services.entity.ai.goal.presets.NFFWaterAvoidingRandomSt
 import net.sodiumzh.nff.services.entity.ai.goal.presets.target.NFFHurtByTargetGoal;
 import net.sodiumzh.nautils.entity.MobApplicableItemTable;
 import net.sodiumzh.nff.services.entity.taming.NFFTamedStatics;
+import net.sodiumzh.nff.services.entity.taming.NFFTamingMapping;
 import net.sodiumzh.nff.services.inventory.NFFTamedInventoryMenu;
 import net.sodiumzh.nff.services.inventory.NFFTamedMobInventory;
+
+import javax.annotation.Nonnull;
 
 public class HmagCrimsonSlaughtererEntity extends CrimsonSlaughtererEntity implements INFFGirlsTamed {
 
@@ -185,32 +190,20 @@ public class HmagCrimsonSlaughtererEntity extends CrimsonSlaughtererEntity imple
 		// Add other data reading here
 		setInit();
 	}
-/*
-	@Override
-	public HashMap<String, ItemStack> getBaubleSlots() {
-		return continuousBaubleSlots(0, 4);
-	}
 
 	@Override
-	public BaubleHandler getBaubleHandler() {
-		//return DwmgBaubleHandlers.CRIMSON_SLAUGHTERER;
-		return DwmgBaubleHandlers.EMPTY;
+	@Nonnull
+	public Component getTypeName() {
+		EntityType<?> typeBefore = NFFTamingMapping.getTypeBefore(this);
+		return typeBefore != null ? typeBefore.getDescription() : super.getTypeName();
 	}
-	*/
-	// Sounds
-	
+
 	@Override
 	protected SoundEvent getAmbientSound()
 	{
 		return NFFGirlsSoundPresets.generalAmbient(super.getAmbientSound());
 	}
 	// Misc
-	
-	// Indicates which mod this mob belongs to
-	@Override
-	public String getModId() {
-		return NFFGirls.MOD_ID;
-	}
 	
 	// ==================================================================== //
 	// ========================= General Settings ========================= //
