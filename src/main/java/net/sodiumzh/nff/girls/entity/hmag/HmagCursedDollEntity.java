@@ -4,9 +4,11 @@ import java.util.Arrays;
 import java.util.HashSet;
 import java.util.UUID;
 
+import com.github.mechalopa.hmag.registry.ModEntityTypes;
 import com.github.mechalopa.hmag.world.entity.CursedDollEntity;
 
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.chat.Component;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.world.Container;
 import net.minecraft.world.InteractionHand;
@@ -47,9 +49,12 @@ import net.sodiumzh.nff.services.entity.ai.goal.presets.NFFZombieAttackGoal;
 import net.sodiumzh.nff.services.entity.ai.goal.presets.target.NFFHurtByTargetGoal;
 import net.sodiumzh.nautils.entity.MobApplicableItemTable;
 import net.sodiumzh.nff.services.entity.taming.NFFTamedStatics;
+import net.sodiumzh.nff.services.entity.taming.NFFTamingMapping;
 import net.sodiumzh.nff.services.inventory.NFFTamedInventoryMenu;
 import net.sodiumzh.nff.services.inventory.NFFTamedMobInventory;
 import net.sodiumzh.nff.services.inventory.NFFTamedMobInventoryWithHandItems;
+
+import javax.annotation.Nonnull;
 
 public class HmagCursedDollEntity extends CursedDollEntity implements INFFGirlsTamedSunSensitiveMob {
 
@@ -261,25 +266,14 @@ public class HmagCursedDollEntity extends CursedDollEntity implements INFFGirlsT
 		// Add other data reading here
 		setInit();
 	}
-/*
-	@Override
-	public HashMap<String, ItemStack> getBaubleSlots() {
-		return this.continuousBaubleSlots(2, 8);
-	}
-
-	@Override
-	public BaubleHandler getBaubleHandler() {
-		return DwmgBaubleHandlers.UNDEAD;
-	}
-	*/
-	// INFFTamedSunSensitiveMob interface
 
 	// Misc
-	
-	// Indicates which mod this mob belongs to
+
 	@Override
-	public String getModId() {
-		return NFFGirls.MOD_ID;
+	@Nonnull
+	public Component getTypeName() {
+		EntityType<?> typeBefore = NFFTamingMapping.getTypeBefore(this);
+		return typeBefore != null ? typeBefore.getDescription() : super.getTypeName();
 	}
 
 	// Sounds

@@ -45,8 +45,8 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.LogicalSide;
 import net.minecraftforge.fml.common.Mod;
 import net.sodiumzh.nautils.entity.taming.ITamingProcessWithProgress;
-import net.sodiumzh.nautils.mixin.event.entity.*;
-import net.sodiumzh.nautils.mixin.events.entity.EntitySpecificInteractionEvent;
+import net.sodiumzh.nautils.mixin.events.entity.*;
+import net.sodiumzh.nautils.registries.NaUtilsCaps;
 import net.sodiumzh.nautils.statics.*;
 import net.sodiumzh.nff.girls.NFFGirls;
 import net.sodiumzh.nff.girls.effect.NecromancerWitherEffect;
@@ -609,6 +609,8 @@ public class NFFGirlsEntityEventListeners
 				if (tamed.asMob().getTarget() != null && !tamed.asMob().getTarget().isAlive())
 					tamed.asMob().setTarget(null);
 			});
+			// Record mob location
+
 		}
 	}
 	

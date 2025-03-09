@@ -2,10 +2,12 @@ package net.sodiumzh.nff.girls.entity.hmag;
 
 import java.util.Arrays;
 
+import com.github.mechalopa.hmag.registry.ModEntityTypes;
 import com.github.mechalopa.hmag.world.entity.DrownedGirlEntity;
 
 import net.minecraft.nbt.ByteTag;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.chat.Component;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.Container;
@@ -49,9 +51,12 @@ import net.sodiumzh.nff.services.entity.ai.goal.presets.target.NFFHurtByTargetGo
 import net.sodiumzh.nautils.entity.MobApplicableItemTable;
 import net.sodiumzh.nff.services.entity.taming.INFFTamedAmphibious;
 import net.sodiumzh.nff.services.entity.taming.NFFTamedStatics;
+import net.sodiumzh.nff.services.entity.taming.NFFTamingMapping;
 import net.sodiumzh.nff.services.inventory.NFFTamedInventoryMenu;
 import net.sodiumzh.nff.services.inventory.NFFTamedMobInventory;
 import net.sodiumzh.nff.services.inventory.NFFTamedMobInventoryWithEquipment;
+
+import javax.annotation.Nonnull;
 
 public class HmagDrownedGirlEntity extends DrownedGirlEntity implements INFFGirlsTamedSunSensitiveMob, INFFTamedAmphibious
 {
@@ -299,35 +304,13 @@ public class HmagDrownedGirlEntity extends DrownedGirlEntity implements INFFGirl
 	{
 		return NFFGirlsSoundPresets.zombieDeath(super.getDeathSound());
 	}
-	
-	// ==================================================================== //
-	// ========================= General Settings ========================= //
-	// Generally these can be copy-pasted to other INFFTamed classes //
-
-	// ------------------ INFFTamed interface end ------------------ //
-
-	// ------------------ Misc ------------------ //
-	/*
-	@Override
-	public String getModId() {
-		return NFFGirls.MOD_ID;
-	}
-	@Override
-	public boolean isPersistenceRequired() {
-		return true;
-	}
 
 	@Override
-	public boolean isPreventingPlayerRest(Player pPlayer) {
-		return false;
+	@Nonnull
+	public Component getTypeName() {
+		EntityType<?> typeBefore = NFFTamingMapping.getTypeBefore(this);
+		return typeBefore != null ? typeBefore.getDescription() : super.getTypeName();
 	}
 
-	@Override
-	protected boolean shouldDespawnInPeaceful() {
-		return false;
-	}
-*/
-	// ========================= General Settings end ========================= //
-	// ======================================================================== //
 
 }

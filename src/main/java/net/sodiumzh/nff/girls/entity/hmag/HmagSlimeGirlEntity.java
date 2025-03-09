@@ -6,6 +6,7 @@ import java.util.UUID;
 import com.github.mechalopa.hmag.world.entity.SlimeGirlEntity;
 
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.chat.Component;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.sounds.SoundEvent;
@@ -45,8 +46,11 @@ import net.sodiumzh.nff.services.entity.ai.goal.presets.NFFWaterAvoidingRandomSt
 import net.sodiumzh.nff.services.entity.ai.goal.presets.target.NFFHurtByTargetGoal;
 import net.sodiumzh.nautils.entity.MobApplicableItemTable;
 import net.sodiumzh.nff.services.entity.taming.NFFTamedStatics;
+import net.sodiumzh.nff.services.entity.taming.NFFTamingMapping;
 import net.sodiumzh.nff.services.inventory.NFFTamedInventoryMenu;
 import net.sodiumzh.nff.services.inventory.NFFTamedMobInventory;
+
+import javax.annotation.Nonnull;
 
 public class HmagSlimeGirlEntity extends SlimeGirlEntity implements INFFGirlsTamed {
 
@@ -239,28 +243,13 @@ public class HmagSlimeGirlEntity extends SlimeGirlEntity implements INFFGirlsTam
 	      this.invalidateCaps();
 	}
 
-	
-	// ==================================================================== //
-	// ========================= General Settings ========================= //
-	// Generally these can be copy-pasted to other INFFTamed classes //
-/*
 	@Override
-	public boolean isPersistenceRequired() {
-		return true;
+	@Nonnull
+	public Component getTypeName() {
+		EntityType<?> typeBefore = NFFTamingMapping.getTypeBefore(this);
+		return typeBefore != null ? typeBefore.getDescription() : super.getTypeName();
 	}
 
-	@Override
-	public boolean isPreventingPlayerRest(Player pPlayer) {
-		return false;
-	}
-
-	@Override
-	protected boolean shouldDespawnInPeaceful() {
-		return false;
-	}
-*/
-	// ========================= General Settings end ========================= //
-	// ======================================================================== //
 
 	protected static class SGLeapAtTargetGoal extends NFFLeapAtTargetGoal
 	{
