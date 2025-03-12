@@ -182,7 +182,6 @@ public class HmagEnderExecutorEntity extends NFFTamedEnderManPreset implements I
 	}
 
 
-
 	// Interaction end
 
 	// No armor, hand items(0, 1), holding block(2) and 2 baubles(3, 4)
@@ -311,6 +310,7 @@ public class HmagEnderExecutorEntity extends NFFTamedEnderManPreset implements I
 			this.tickUpdateClientBeamAttackTime();
 		}
 		super.aiStep();
+		this.getEntityData().set(DATA_CREEPY, this.getTarget() != null);
 	}
 	
 	@Override

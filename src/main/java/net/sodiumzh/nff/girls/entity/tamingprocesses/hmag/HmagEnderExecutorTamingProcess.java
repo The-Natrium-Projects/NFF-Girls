@@ -2,6 +2,7 @@ package net.sodiumzh.nff.girls.entity.tamingprocesses.hmag;
 
 import com.github.mechalopa.hmag.world.entity.EnderExecutorEntity;
 import net.minecraft.world.entity.Mob;
+import net.minecraft.world.entity.monster.EnderMan;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.event.entity.EntityTeleportEvent;
@@ -97,14 +98,16 @@ public class HmagEnderExecutorTamingProcess extends TamingProcessItemGivingProgr
 		NFFTamingProcess processRaw = CNFFTamable.getOptional(mob).map(CNFFTamable::getTamingProcess).orElse(null);
 		if (!(processRaw instanceof HmagEnderExecutorTamingProcess process)) return true;
 		for (Player player: mob.level().players()) {
-			if (player.distanceToSqr(mob) <= 7d * 7d && process.isInProcess(player, mob)) return false;
+			if (player.distanceToSqr(mob) <= 16d * 16d && process.isInProcess(player, mob)) return false;
 		}
 		return true;
 	}
 
+
+
 	@SubscribeEvent
 	public static void onEnderExecutorTeleport(EntityTeleportEvent.EnderEntity event) {
-		if (event.getEntity() instanceof EnderExecutorEntity e && !allowTeleport(e))
+		if (event.getEntity() instanceof Mob e && !allowTeleport(e))
 			event.setCanceled(true);
 	}
 }
