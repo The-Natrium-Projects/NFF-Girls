@@ -5,10 +5,10 @@
   },
   {
     "item": "hmag:soul_powder",
-    "amount": [5]
+    "amount": [10]
   },
   {
     "item": "hmag:soul_apple",
-    "amount": [15]
+    "amount_getter": "nffgirls:mob_max_health"
   }
 ]

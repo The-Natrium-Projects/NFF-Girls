@@ -18,7 +18,9 @@ import net.sodiumzh.nff.girls.entity.hmag.HmagEnderExecutorEntity;
 import net.sodiumzh.nff.girls.registry.NFFGirlsAngerRules;
 import net.sodiumzh.nff.girls.registry.NFFGirlsConfigs;
 import net.sodiumzh.nff.services.entity.taming.CNFFTamable;
-import net.sodiumzh.nff.services.entity.taming.*;
+import net.sodiumzh.nff.services.entity.taming.NFFTamingProcess;
+import net.sodiumzh.nff.services.entity.taming.TamingProcessItemGivingProgress;
+import net.sodiumzh.nff.services.entity.taming.presets.NFFTamedEnderManPreset;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Optional;
@@ -39,10 +41,12 @@ public class HmagEnderExecutorTamingProcess extends TamingProcessItemGivingProgr
 	@Override
 	public Mob doTaming(Player player, Mob target)
 	{
-		BlockState holdingBlock = ((EnderExecutorEntity)target).getCarriedBlock();
+		BlockState holdingBlock = null;
+		if (target instanceof EnderMan e)
+			holdingBlock = e.getCarriedBlock();
 		Mob mob = super.doTaming(player, target);
-		if (mob instanceof HmagEnderExecutorEntity tamed)
-			tamed.setCarryingBlock(NFFGirlsConfigs.ValueCache.Misc.REMOVE_HAND_ITEM_ON_TAMING ? null :holdingBlock);
+		if (mob instanceof NFFTamedEnderManPreset tamed)
+			tamed.setCarriedBlock(NFFGirlsConfigs.ValueCache.Misc.REMOVE_HAND_ITEM_ON_TAMING ? null :holdingBlock);
 		return mob;
 	}
 
