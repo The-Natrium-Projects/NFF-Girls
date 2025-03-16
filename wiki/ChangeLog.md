@@ -1,5 +1,19 @@
 # Change Log
 
+### 0.x.29
+
+Added mob searching with Commanding Wand. Right clicking with a Commanding Wand on a Soul Powder Block repeatedly will show the locations of mobs one by one. Shift+right click on a Soul Powder Block with an Evil Crystal Fragment on the off-hand will summon the latest-shown mob if it's in a loaded chunk, consuming a fragment.
+
+Now Commanding Wand doesn't summon mobs around by Shift+Right Click. Right click on a vanilla Bell instead.
+
+Now Ender Executor will not teleport on friending process within 16 blocks away from player instead of 7 blocks.
+
+Fixed Ender Executor keeping the attacking pose without an attacking target.
+
+
+
+
+
 ### 0.1.28.4
 
 Fixed HMaG mobs vanishing after reloading the world.

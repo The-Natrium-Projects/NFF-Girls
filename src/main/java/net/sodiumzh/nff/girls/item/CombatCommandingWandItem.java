@@ -11,12 +11,11 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.EntityHitResult;
 import net.minecraft.world.phys.HitResult;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.sodiumzh.nautils.item.NaUtilsItem;
-import net.sodiumzh.nautils.mixin.events.entity.EntitySpecificInteractionEvent;
 import net.sodiumzh.nautils.statics.NaUtilsInfoStatics;
 import net.sodiumzh.nautils.statics.NaUtilsLevelStatics;
 import net.sodiumzh.nff.girls.entity.INFFGirlsTamed;
+import net.sodiumzh.nff.services.entity.taming.INFFTamed;
 import org.apache.commons.lang3.mutable.MutableObject;
 
 import javax.annotation.Nonnull;
@@ -24,7 +23,7 @@ import javax.annotation.Nullable;
 
 public class CombatCommandingWandItem extends NaUtilsItem {
 
-	private static final String KEY_SETTING_MOB_UUID = "settingUUID";
+	private static final String KEY_SETTING_MOB_IDENTIFIER = "settingIdentifier";
 
 	public CombatCommandingWandItem(Properties pProperties) {
 		super(pProperties);
@@ -51,8 +50,8 @@ public class CombatCommandingWandItem extends NaUtilsItem {
 					if (done.getValue()) return InteractionResultHolder.sidedSuccess(player.getItemInHand(usedHand), level.isClientSide());
 				}
 			} else if (player.isShiftKeyDown()) {
-				if (player.getItemInHand(usedHand).hasTag() && player.getItemInHand(usedHand).getTag().hasUUID(KEY_SETTING_MOB_UUID)) {
-					player.getItemInHand(usedHand).removeTagKey(KEY_SETTING_MOB_UUID);
+				if (player.getItemInHand(usedHand).hasTag() && player.getItemInHand(usedHand).getTag().hasUUID(KEY_SETTING_MOB_IDENTIFIER)) {
+					player.getItemInHand(usedHand).removeTagKey(KEY_SETTING_MOB_IDENTIFIER);
 					NaUtilsInfoStatics.printMessageTranslatable(player, "info.nffgirls.item.combat_set_target_reset");
 					return InteractionResultHolder.sidedSuccess(player.getItemInHand(usedHand), level.isClientSide());
 				}
@@ -79,20 +78,20 @@ public class CombatCommandingWandItem extends NaUtilsItem {
 				NaUtilsInfoStatics.printMessageTranslatable(player, "info.nffgirls.item.combat_set_target_all", target.getName().getString());
 			return InteractionResult.sidedSuccess(player.level().isClientSide());
 		}
-		else if (player.getItemInHand(hand).hasTag() && player.getItemInHand(hand).getTag().hasUUID(KEY_SETTING_MOB_UUID)) {
+		else if (player.getItemInHand(hand).hasTag() && player.getItemInHand(hand).getTag().hasUUID(KEY_SETTING_MOB_IDENTIFIER)) {
 			if (player.level() instanceof ServerLevel sl) {
-				Entity attacker = sl.getEntity(player.getItemInHand(hand).getTag().getUUID(KEY_SETTING_MOB_UUID));
-				if (trySetTarget(player, sl.getEntity(player.getItemInHand(hand).getTag().getUUID(KEY_SETTING_MOB_UUID)), target)) {
+				Entity attacker = INFFTamed.byIdentifier(player.getItemInHand(hand).getTag().getUUID(KEY_SETTING_MOB_IDENTIFIER), sl).orElse(null);
+				if (trySetTarget(player, attacker, target)) {
 					NaUtilsInfoStatics.printMessageTranslatable(player, "info.nffgirls.item.combat_set_target", attacker.getName().getString(), target.getName().getString());
 				} else {
 					NaUtilsInfoStatics.printMessageTranslatable(player, "info.nffgirls.item.combat_set_target_failed");
 				}
-				player.getItemInHand(hand).removeTagKey(KEY_SETTING_MOB_UUID);
+				player.getItemInHand(hand).removeTagKey(KEY_SETTING_MOB_IDENTIFIER);
 				return InteractionResult.sidedSuccess(player.level().isClientSide());
 			}
 		}
 		else if (INFFGirlsTamed.isBMAnd(target, tamed -> player.getUUID().equals(tamed.getOwnerUUID()))) {
-			player.getItemInHand(hand).getOrCreateTag().putUUID(KEY_SETTING_MOB_UUID, target.getUUID());
+			player.getItemInHand(hand).getOrCreateTag().putUUID(KEY_SETTING_MOB_IDENTIFIER, INFFGirlsTamed.getBM(target).getIdentifier());
 			NaUtilsInfoStatics.printMessageTranslatable(player, "info.nffgirls.item.combat_setting_target_selected", target.getName().getString());
 			return InteractionResult.sidedSuccess(player.level().isClientSide());
 		}

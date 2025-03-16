@@ -55,7 +55,7 @@ public class HmagBansheeTamingProcess extends HmagVanillaUndeadTamingProcess
 	@SubscribeEvent
 	public static void preventWitherInProcess(MobEffectEvent.Applicable event) {
 		if (event.getEffectInstance().getEffect().equals(MobEffects.WITHER)
-				&& event.getEntity() instanceof BansheeEntity e
+				&& event.getEntity() instanceof Mob e
 				&& (CNFFTamable.getOptional(e).map(tamable -> tamable.getTamingProcess() instanceof HmagBansheeTamingProcess).orElse(false)
 				&& CNFFTamable.get(e).getTamingProcess().isInAnyProcess(e)))
 		{
