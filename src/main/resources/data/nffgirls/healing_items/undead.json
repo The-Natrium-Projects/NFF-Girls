@@ -1,10 +1,18 @@
 [
   {
-    "item": "hmag:soul_powder",
+    "item": "minecraft:bone",
     "amount": [5]
   },
   {
+    "item": "minecraft:rotten_flesh",
+    "amount": [5]
+  },
+  {
+    "item": "hmag:soul_powder",
+    "amount": [10]
+  },
+  {
     "item": "hmag:soul_apple",
-    "amount": [15]
+    "amount_getter": "nffgirls:mob_max_health"
   }
 ]

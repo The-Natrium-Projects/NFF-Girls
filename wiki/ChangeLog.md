@@ -1,6 +1,222 @@
 # Change Log
 
+### 0.x.29
+
+Added mob searching with Commanding Wand. Right clicking with a Commanding Wand on a Soul Powder Block repeatedly will show the locations of mobs one by one. Shift+right click on a Soul Powder Block with an Evil Crystal Fragment on the off-hand will summon the latest-shown mob if it's in a loaded chunk, consuming a fragment.
+
+Now Commanding Wand doesn't summon mobs around by Shift+Right Click. Right click on a vanilla Bell instead.
+
+Now Ender Executor will not teleport on friending process within 16 blocks away from player instead of 7 blocks.
+
+Fixed Ender Executor keeping the attacking pose without an attacking target.
+
+
+
+
+
+### 0.1.28.4
+
+Fixed HMaG mobs vanishing after reloading the world.
+
+Fixed crash on mob picking up item.
+
+### 0.2.28.4 & 0.1.28.3 & 0.0.28.2
+
+Fixed Soul Cake providing 5 minutes of saturation. (0.25 s expected)
+
+### 0.0.28.1
+
+Fixed Slime Girls being not able to be given items.
+
+Fixed crash on Ghastly Seeker setting attack target.
+
+Fixed skeleton mobs keeping making shooting actions when the arrow runs out.
+
+### 0.2.28.3 & 0.1.28.2
+
+Fixed Slime Girls being not able to be given items.
+
+### 0.2.28.2 & 0.1.28.1
+
+Fixed crash on Ghastly Seeker setting attack target.
+
+Fixed skeleton mobs keeping making shooting actions when the arrow runs out.
+
+### 0.2.28.1
+
+Fixed HMaG mobs vanishing after reloading the world.
+
+### 0.x.28
+
+Note: this update may have respawner format change. Release mobs from respawners and storage pods before update.
+
+Taming process refactor.
+
+​	-Now a mob only allows 1 player in process. If the ongoing player is online, other players are not allowed to enter the process.
+
+​	-Reduced the progress loss from 0.1/s to 0.02/s for mobs with the continuous progress loss mechanics when some conditions are not satisfied.
+
+​	-Reduced the item giving cool-down. (5s -> 2s; 10s -> 3s; 15s -> 5s)
+
+​	-Modified mob anger durations.
+
+Several changes to make the mod more friendly to early-stage players.
+
+​	-Added potions for Undead Affinity and Ender Protection.
+
+​	-Reduced some item's costs.
+
+​	-Enhanced the effects of the Soul Cake, Soul Cake Slice and Ender Pie.
+
+​	-Reduced the costs for getting friendly with mobs.
+
+Slightly modified the mob accessory effects.
+
+Slightly modified the taming items. 
+
+  -Now Ghastly Seeker uses `undead_nether_b` instead of `undead_b`.
+
+  -Now Wither Skeleton Girl uses `undead_nether_c` instead of `undead_c`.
+
+Commanding Wand optimization.
+
+​	-Now Commanding Wand can switch mob's AI from at most 32 blocks away.
+
+​	-Now Shift+Right click can make all mobs follow within 16 blocks.
+
+​	-Added Combat Commanding Wand, allowing to control your mob's attack target.
+
+Added config options to remove mob's equipment on friended.
+
+Now Necrostalker will gain Strength and Speed effects instead of silently boost its ATK during the friending process, and will lose progress after not hitting the player for 30 s instead of 10 s.
+
+Now Necrostalker's interaction uses Commanding Wand like other mobs, and no longer requires necromancer items.
+
+Now Peach-Wood Sword no longer makes percentage damage, but provides Instant Health II (damage for undead), Weakness III (5 s) and Slowness III (5 s).
+
+Fixed Ender Executor crash on attacking.
+
+Fixed mobs not avoiding Enderberry Bush.
+
+### 0.x.27.1
+
+Fixed friending processes not consuming items.
+
+### 0.x.27
+
+Added mob dictionary (Requires Citadel as dependency). Special thanks to Koishi for his significant help in making the dictionary!
+
+Added data pack support for mob healing items, taming items and trade list. For usage, see data pack reference on GitHub (ongoing).
+
+Added Enderberry Bush. Now Enderberry is growable and needs friendly Ender Executor to help growing.
+
+Updated trade list. Now mobs below have trades: all Vanilla mob girls, Ender Executor, Kobold, Necrostalker (Necrotic Reaper).
+
+Added configs:
+
+​	-`enableFriendlyDamage`: If false, players and owned NFF-Girls mobs will not be able to damage each other.
+
+Now friendly Ender Executor will not do random teleport unless hurt by water.
+
+Now Nightwalker's magic ball can convert blocks in larger area.
+
+Now friendly Nightwalker's magic ball can always convert blocks, and will convert blocks of larger range when using the Ancient Stone.
+
+Fixed friendly Ender Executor not performing beam attack in the easy mode.
+
+Fixed `/give` command giving invalid Respawners or Magical Slime Bottles which may cause data break.
+
+Fixed Nightwalkers only converting Pink Glazed Terracotta.
+
+Fixed Soul Carpet recipe error in 1.18.2.
+
+
+
+ 
+
+### 0.0.26.1
+
+Fixed pickaxe unable to dig blocks caused by a broken tag.
+
+### 0.x.26
+
+WARNING: This update has massive save data format changes. Back up before update!
+
+Renamed project name from *Days with Monster Girls* to *NFF: Girls*.
+
+Renamed mod ID from `dwmg` to `nffgirls`.
+
+Fixed mobs not moving on wandering mode.
+
+Renamed tag:
+
+​	- `dwmg:can_befriend_nightwalker_on` -> `nffgirls:can_tame_nightwalker_on`
+
+### 0.x.25
+
+WARNING: This update has save data format changes. Back up before update!
+
+Fixed Dullahan missing variant.
+
+Fixed Melty Monster GUI attribute display error.
+
+### 0.x.24
+
+Config changes:
+
+​	-Added configs for max HP and ATK increase on level upgrade.
+
+​	-Added configs for scaling some bauble effects.
+
+​	-Renamed some configs:
+
+​		-`maxHealthBoostByLevel` => `maxHealthIncreaseByLevel`
+
+​		-`maxAtkIncreaseByLevel` => `maxAtkIncreaseByLevel`
+
+Bauble changes:
+
+​	-Added Soul Amulet III and IV.
+
+​	-Reduced the costs of baubles.
+
+​	-Modified the effect of Aqua Jade.
+
+​	-Now the off-hand of Necrostalker (previouly Necrotic Reaper) can equip hoes and increase ATK.
+
+Added trades for Creeper Girl and Necrostalker.
+
+Fixed Necrostalker unable to keep the attack-boosting effect after restarting the game during befriending process.
+
+Fixed Nightwalker armor increase by level-up not taking effect.
+
+
+
+### 0.2.23.1
+
+Fixed dedicated server crash.
+
+### 0.1.23.2
+
+Fixed dedicated server crash.
+
+### 0.0.23.1
+
+Fixed dedicated server crash.
+
+Fixed wrong BefriendMobs Framework version.
+
+### 0.1.23.1
+
+Fixed wrong point requirement for introduction letter.
+
 ### 0.x.23
+
+Updated HMaG versions to 5.1.26/6.2.19/9.0.20.
+
+Added trades to Zombie/Skeleton-derived mobs (6 types overall). Interact with empty hand or Evil Gem to open the trade window. 
+
+Now Creeper Girl charging & uncharging requires Shift+Right Click.
 
 Rearranged the info of Slime Girls in the GUI to prevent from getting out of the box.
 
@@ -41,8 +257,6 @@ Fixed Melty Monster unable to switch whether to set fire with Water Bucket / Fli
 Fixed Harpy and flyable befriended mobs unexpectedly taking falling damage. (1.20.1)
 
 Fixed crash on Harpy and Slime Girl befriended. (1.20.1)
-
-Fixed Necromancer Wand crash. (1.20.1)
 
 
 
