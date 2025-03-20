@@ -272,7 +272,7 @@ public class HmagNecroticReaperEntity extends NecroticReaperEntity implements IN
 		for (Entity e: entityList)
 		{
 			if (e instanceof HmagNecroticReaperEntity nr
-					&& nr.getOwnerUUID() != null // On Necrotic Reaper befriended, a nullptr exception occured here
+					&& nr.getOwnerUUID() != null // On Necrotic Reaper befriended, a nullptr exception occurred here
 					&& nr.getOwnerUUID().equals(player.getUUID())
 					&& nr.distanceToSqr(player) <= 64d)
 			{
@@ -280,6 +280,11 @@ public class HmagNecroticReaperEntity extends NecroticReaperEntity implements IN
 			}
 		}
 		return count;
+	}
+
+	@Override
+	public float sitPositionOffset() {
+		return -0.5f;
 	}
 
 }

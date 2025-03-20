@@ -1,5 +1,5 @@
 {
-  "desc" : "Mobs that will increase looting table when killing something with tools having Fortune enchantment, as if they had the same level of Looting enchantment.",
+  "desc" : "Mobs that will increase looting level when killing something with tools having Fortune enchantment, as if they had the same level of Looting enchantment.",
   "replace" : false,
   "values" : [ 
   	"nffgirls:hmag_necrotic_reaper",

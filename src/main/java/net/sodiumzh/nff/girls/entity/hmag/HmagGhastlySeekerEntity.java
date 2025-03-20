@@ -363,4 +363,8 @@ public class HmagGhastlySeekerEntity extends GhastlySeekerEntity implements INFF
 		}		
 	}
 
+	@Override
+	public boolean shouldSitOnWaiting() {
+		return false;
+	}
 }

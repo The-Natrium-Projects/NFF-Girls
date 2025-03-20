@@ -215,4 +215,8 @@ public class HmagHornetEntity extends HornetEntity implements INFFGirlsTamed
 		return typeBefore != null ? typeBefore.getDescription() : super.getTypeName();
 	}
 
+	@Override
+	public boolean shouldSitOnWaiting() {
+		return false;
+	}
 }

@@ -366,5 +366,8 @@ public class HmagBansheeEntity extends BansheeEntity implements INFFGirlsTamedSu
 		return typeBefore != null ? typeBefore.getDescription() : super.getTypeName();
 	}
 
-
+	@Override
+	public boolean shouldSitOnWaiting() {
+		return false;
+	}
 }
