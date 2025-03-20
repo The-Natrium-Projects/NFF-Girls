@@ -1,5 +1,6 @@
 package net.sodiumzh.nff.girls.entity.hmag;
 
+import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
 import com.github.mechalopa.hmag.ModConfigs;
@@ -8,6 +9,7 @@ import com.github.mechalopa.hmag.world.entity.IBeamAttackMob;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.chat.Component;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
@@ -59,7 +61,8 @@ import net.sodiumzh.nff.services.entity.ai.goal.presets.target.NFFHurtByTargetGo
 import net.sodiumzh.nff.services.entity.ai.goal.presets.target.NFFNearestAttackableTargetGoal;
 import net.sodiumzh.nautils.entity.MobApplicableItemTable;
 import net.sodiumzh.nff.services.entity.taming.NFFTamedStatics;
-import net.sodiumzh.nff.services.entity.taming.preset.NFFTamedEnderManPreset;
+import net.sodiumzh.nff.services.entity.taming.NFFTamingMapping;
+import net.sodiumzh.nff.services.entity.taming.presets.NFFTamedEnderManPreset;
 import net.sodiumzh.nff.services.inventory.NFFTamedInventoryMenu;
 import net.sodiumzh.nff.services.inventory.NFFTamedMobInventory;
 
@@ -625,4 +628,18 @@ public class HmagEnderExecutorEntity extends NFFTamedEnderManPreset implements I
 			this.clientAttackTime = 0;
 		}
 	}
+
+	@Override
+	@Nonnull
+	public Component getTypeName() {
+		EntityType<?> typeBefore = NFFTamingMapping.getTypeBefore(this);
+		return typeBefore != null ? typeBefore.getDescription() : super.getTypeName();
+
+	}
+
+	@Override
+	public boolean shouldSitOnWaiting() {
+		return false;
+	}
+
 }

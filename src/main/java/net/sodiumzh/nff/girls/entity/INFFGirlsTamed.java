@@ -381,4 +381,13 @@ public interface INFFGirlsTamed extends INFFTamed, IAttributeMonitor, IItemStack
 		return map;
 	}
 
+	// CLIENT ONLY
+	public default boolean shouldSitOnWaiting() {
+		return true;
+	}
+
+	public default float sitPositionOffset() {
+		return -0.6f;
+	}
+	
 }
