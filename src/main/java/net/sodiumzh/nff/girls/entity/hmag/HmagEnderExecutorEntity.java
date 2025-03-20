@@ -641,6 +641,11 @@ public class HmagEnderExecutorEntity extends NFFTamedEnderManPreset implements I
 	public Component getTypeName() {
 		EntityType<?> typeBefore = NFFTamingMapping.getTypeBefore(this);
 		return typeBefore != null ? typeBefore.getDescription() : super.getTypeName();
+
 	}
 
+	@Override
+	public boolean shouldSitOnWaiting() {
+		return false;
+	}
 }

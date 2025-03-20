@@ -204,27 +204,9 @@ public class HmagCrimsonSlaughtererEntity extends CrimsonSlaughtererEntity imple
 		return NFFGirlsSoundPresets.generalAmbient(super.getAmbientSound());
 	}
 	// Misc
-	
-	// ==================================================================== //
-	// ========================= General Settings ========================= //
-	// Generally these can be copy-pasted to other INFFTamed classes //
-/*
-	@Override
-	public boolean isPersistenceRequired() {
-		return true;
-	}
 
 	@Override
-	public boolean isPreventingPlayerRest(Player pPlayer) {
+	public boolean shouldSitOnWaiting() {
 		return false;
 	}
-
-	@Override
-	protected boolean shouldDespawnInPeaceful() {
-		return false;
-	}
-*/
-	// ========================= General Settings end ========================= //
-	// ======================================================================== //
-
 }
