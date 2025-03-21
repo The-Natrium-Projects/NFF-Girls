@@ -50,7 +50,7 @@ public class NFFGirlsTamingProcesses {
     public static final NaUtilsRegistry.Accessor<NFFTamingProcess> HMAG_NECROTIC_REAPER = TAMING_PROCESSES.register(
             "hmag_necrotic_reaper",  () -> new HmagNecroticReaperTamingProcess());
     public static final NaUtilsRegistry.Accessor<NFFTamingProcess> HMAG_NIGHTWALKER = TAMING_PROCESSES.register(
-            "hmag_nightwalker",  () -> new HmagImpTamingProcess().setItemGivingTableOverride(NFFGirlsTamingItems.CLAY_DOLL::get));
+            "hmag_nightwalker",  () -> new HmagNightwalkerTamingProcess().setItemGivingTableOverride(NFFGirlsTamingItems.CLAY_DOLL::get));
     public static final NaUtilsRegistry.Accessor<NFFTamingProcess> HMAG_REDCAP = TAMING_PROCESSES.register(
             "hmag_redcap",  () -> new HmagImpTamingProcess()
                     .setItemGivingTableOverride(NFFGirlsTamingItems.HMAG_REDCAP::get)
