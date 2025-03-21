@@ -1,18 +1,18 @@
 [
   {
-    "item": "minecraft:coal",
+    "item": "minecraft:clay_ball",
+    "amount": [2]
+  },
+  {
+    "item": "minecraft:lapis_lazuli",
     "amount": [5]
   },
   {
-    "item": "minecraft:fire_charge",
-    "amount": [10]
-  },
-  {
-    "item": "minecraft:blaze_powder",
+    "item": "hmag:ancient_stone",
     "amount": [15]
   },
   {
-    "item": "hmag:burning_core",
+    "item": "minecraft:golden_apple",
     "amount_getter": "nffgirls:mob_max_health"
   }
 ]

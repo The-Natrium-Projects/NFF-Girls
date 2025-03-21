@@ -389,5 +389,5 @@ public interface INFFGirlsTamed extends INFFTamed, IAttributeMonitor, IItemStack
 	public default float sitPositionOffset() {
 		return -0.6f;
 	}
-	
+
 }
