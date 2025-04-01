@@ -146,6 +146,7 @@
   "info.nffgirls.item.commanding_wand.mob_search_summon_no_target": "召唤失败，未指定目标",
   "info.nffgirls.item.commanding_wand.mob_search_summon_not_found": "召唤失败。请走到离目标位置更近的地方重试。",
   "info.nffgirls.item.commanding_wand.mob_search_summoned_mob": "召唤了%1$s",
+  "info.nffgirls.item.mob_catching_failed_inventory_full": "收纳失败：物品栏已满",
 
   "info.nffgirls.bauble.hpmax": "生命最大值 %1$s", 
   "info.nffgirls.bauble.atk": "攻击 %1$s",

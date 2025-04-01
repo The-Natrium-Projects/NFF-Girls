@@ -1,0 +1,110 @@
+[
+  {
+    "key": "nffgirls:hmag_zombie_girl",
+    "collections": ["nffgirls:hmag_zombie_girl", "nffgirls:common_undead"]
+  },
+  {
+    "key": "nffgirls:hmag_skeleton_girl",
+    "collections": ["nffgirls:hmag_skeleton_girl", "nffgirls:common_undead", "nffgirls:common_archer"]
+  },
+  {
+    "key": "nffgirls:hmag_husk_girl",
+    "collections": ["nffgirls:hmag_husk_girl", "nffgirls:common_undead"]
+  },
+  {
+    "key": "nffgirls:hmag_drowned_girl",
+    "collections": ["nffgirls:hmag_drowned_girl", "nffgirls:common_undead"]
+  },
+  {
+    "key": "nffgirls:hmag_stray_girl",
+    "collections": ["nffgirls:hmag_stray_girl", "nffgirls:common_undead", "nffgirls:common_archer", "nffgirls:common_ice"]
+  },
+  {
+    "key": "nffgirls:hmag_wither_skeleton_girl",
+    "collections": ["nffgirls:hmag_wither_skeleton_girl", "nffgirls:common_undead", "nffgirls:common_archer", "nffgirls:common_nether"]
+  },
+  {
+    "key": "nffgirls:hmag_creeper_girl",
+    "collections": ["nffgirls:hmag_creeper_girl", "nffgirls:common_explosive"]
+  },
+  {
+    "key": "nffgirls:hmag_ender_executor",
+    "collections": ["nffgirls:hmag_ender_executor", "nffgirls:common_ender"]
+  },
+  {
+    "key": "nffgirls:hmag_kobold",
+    "collections": ["nffgirls:hmag_kobold"]
+  },
+  {
+    "key": "nffgirls:hmag_necrotic_reaper",
+    "collections": ["nffgirls:hmag_necrotic_reaper", "nffgirls:common_undead"]
+  },
+  {
+    "key": "nffgirls:hmag_melty_monster",
+    "collections": ["nffgirls:hmag_melty_monster", "nffgirls:common_nether", "nffgirls:common_fire"]
+  },
+  {
+    "key": "nffgirls:hmag_cursed_doll",
+    "collections": ["nffgirls:hmag_cursed_doll"]
+  },
+  {
+    "key": "nffgirls:hmag_jack_frost",
+    "collections": ["nffgirls:hmag_jack_frost"]
+  },
+  {
+    "key": "nffgirls:hmag_alraune",
+    "collections": ["nffgirls:hmag_alraune"]
+  },
+  {
+    "key": "nffgirls:hmag_banshee",
+    "collections": ["nffgirls:hmag_banshee"]
+  },
+  {
+    "key": "nffgirls:hmag_hornet",
+    "collections": ["nffgirls:hmag_hornet"]
+  },
+  {
+    "key": "nffgirls:hmag_ghastly_seeker",
+    "collections": ["nffgirls:hmag_ghastly_seeker"]
+  },
+  {
+    "key": "nffgirls:hmag_redcap",
+    "collections": ["nffgirls:hmag_redcap"]
+  },
+  {
+    "key": "nffgirls:hmag_slime_girl",
+    "collections": ["nffgirls:hmag_slime_girl"]
+  },
+  {
+    "key": "nffgirls:hmag_crimson_slaughterer",
+    "collections": ["nffgirls:hmag_crimson_slaughterer"]
+  },
+  {
+    "key": "nffgirls:hmag_snow_canine",
+    "collections": ["nffgirls:hmag_snow_canine"]
+  },
+  {
+    "key": "nffgirls:hmag_harpy",
+    "collections": ["nffgirls:hmag_harpy"]
+  },
+  {
+    "key": "nffgirls:hmag_dodomeki",
+    "collections": ["nffgirls:hmag_dodomeki"]
+  },
+  {
+    "key": "nffgirls:hmag_imp",
+    "collections": ["nffgirls:hmag_imp"]
+  },
+  {
+    "key": "nffgirls:hmag_glaryad",
+    "collections": ["nffgirls:hmag_glaryad"]
+  },
+  {
+    "key": "nffgirls:hmag_jiangshi",
+    "collections": ["nffgirls:hmag_jiangshi"]
+  },
+  {
+    "key": "nffgirls:hmag_nightwalker",
+    "collections": ["nffgirls:hmag_nightwalker"]
+  }
+]

@@ -284,7 +284,8 @@ public class HmagCursedDollEntity extends CursedDollEntity implements INFFGirlsT
 		return NFFGirlsSoundPresets.generalAmbient(super.getAmbientSound());
 	}
 
-	public boolean shouldSitOnWaiting() {
+	@Override
+    public boolean shouldSitOnWaiting() {
 		return false;
 	}
 }

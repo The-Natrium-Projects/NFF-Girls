@@ -386,7 +386,7 @@ public interface INFFGirlsTamed extends INFFTamed, IAttributeMonitor, IItemStack
 	}
 
 	public default float sitPositionOffset() {
-		return -0.6f;
+		return this.asMob().isBaby() ? -0.3f : -0.6f;
 	}
 
 }
