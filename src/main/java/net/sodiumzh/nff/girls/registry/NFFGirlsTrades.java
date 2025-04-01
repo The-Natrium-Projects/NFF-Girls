@@ -2,35 +2,58 @@ package net.sodiumzh.nff.girls.registry;
 
 import com.github.mechalopa.hmag.registry.ModItems;
 
+import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraftforge.registries.ForgeRegistries;
+import net.minecraftforge.registries.RegistryObject;
 import net.sodiumzh.nautils.NaUtils;
 import net.sodiumzh.nautils.entity.vanillatrade.VanillaTradeListing;
+import net.sodiumzh.nautils.entity.vanillatrade.VanillaTradeListingCollection;
+import net.sodiumzh.nautils.entity.vanillatrade.VanillaTradeListingCollectionHelper;
 import net.sodiumzh.nautils.entity.vanillatrade.VanillaTradeRegistry;
 import net.sodiumzh.nautils.item.ColoredItems;
 import net.sodiumzh.nautils.registries.NaUtilsRegistries;
 import net.sodiumzh.nautils.registries.NaUtilsRegistry;
 import net.sodiumzh.nautils.registries.RegistryEntryCollection;
+import net.sodiumzh.nautils.statics.NaUtilsDataStatics;
 import net.sodiumzh.nff.girls.NFFGirls;
+
+import java.util.*;
 
 public class NFFGirlsTrades
 {
-	public static final VanillaTradeRegistry TRADES = new VanillaTradeRegistry();
+
+	// REGISTRIES
+	
+	public static RegistryEntryCollection<VanillaTradeRegistry> TRADE_REGISTRIES =
+		RegistryEntryCollection.create(NaUtilsRegistries.VANILLA_TRADE_REGISTRIES, NFFGirls.MOD_ID);
+	
+	public static final NaUtilsRegistry.Accessor<VanillaTradeRegistry> TRADE_REGISTRY = 
+		TRADE_REGISTRIES.register("trade_registry", () -> 
+		new VanillaTradeRegistry().readData(new ResourceLocation(NFFGirls.MOD_ID, "trades/trade_registry.json")));
+
+	// COLLECTIONS
+	
+	
+	public static RegistryEntryCollection<VanillaTradeListingCollection<?>> TRADE_COLLECTIONS =
+		RegistryEntryCollection.create(NaUtilsRegistries.VANILLA_TRADE_LISTING_COLLECTIONS, NFFGirls.MOD_ID);
+	
 	// For all undead mobs
-	public static final ResourceLocation COMMON_UNDEAD = new ResourceLocation(NFFGirls.MOD_ID, "common_undead");
+	//public static final ResourceLocation COMMON_UNDEAD = new ResourceLocation(NFFGirls.MOD_ID, "common_undead");
 	// For all explosive-related mobs e.g. creeper, ghast etc.
-	public static final ResourceLocation COMMON_EXPLOSIVE = new ResourceLocation(NFFGirls.MOD_ID, "common_explosive");
+	//public static final ResourceLocation COMMON_EXPLOSIVE = new ResourceLocation(NFFGirls.MOD_ID, "common_explosive");
 	// For ice-related mobs
-	public static final ResourceLocation COMMON_ICE = new ResourceLocation(NFFGirls.MOD_ID, "common_ice");
+	//public static final ResourceLocation COMMON_ICE = new ResourceLocation(NFFGirls.MOD_ID, "common_ice");
 	// For nether-related mobs
-	public static final ResourceLocation COMMON_NETHER = new ResourceLocation(NFFGirls.MOD_ID, "common_nether");
+	//public static final ResourceLocation COMMON_NETHER = new ResourceLocation(NFFGirls.MOD_ID, "common_nether");
 	// For ender-related mobs
-	public static final ResourceLocation COMMON_ENDER = new ResourceLocation(NFFGirls.MOD_ID, "common_ender");
+	//public static final ResourceLocation COMMON_ENDER = new ResourceLocation(NFFGirls.MOD_ID, "common_ender");
 	// For archer mobs
-	public static final ResourceLocation COMMON_ARCHER = new ResourceLocation(NFFGirls.MOD_ID, "common_archer");
+	//public static final ResourceLocation COMMON_ARCHER = new ResourceLocation(NFFGirls.MOD_ID, "common_archer");
 
 	/* static final RegistryEntryCollection<VanillaTradeListing> LISTINGS = RegistryEntryCollection.create(NaUtilsRegistries.VANILLA_TRADE_LISTINGS,
 		NFFGirls.MOD_ID);
@@ -52,146 +75,158 @@ public class NFFGirlsTrades
 		return byKey("grimoireofgaia:" + key);
 	}
 	
+	private static ResourceLocation jsonPath(String rawPath) {
+		return new ResourceLocation(NFFGirls.MOD_ID, "trades/" + rawPath + ".json");
+	}
 	
-	static
-	{
-		try {
-			TRADES.setCurrency(NFFGirlsItems.EVIL_GEM.get())
-			// Common part
-				.push(COMMON_UNDEAD)
-				.setRequiredLevel(1)
-				.addBuys(ModItems.SOUL_POWDER.get(), 24, 32, 1, 1, 4)
-				.addBuys(Items.NETHER_WART, 56, 64, 1, 1, 4)
-				.addSells(1, 1, Items.RED_MUSHROOM, 16, 22, 4)
-				.addSells(1, 1, Items.BROWN_MUSHROOM, 16, 22, 4)
-				.setRequiredLevel(2)
-				.addBuys(Items.ROTTEN_FLESH, 56, 64, 1, 1, 2)
-				.addBuys(Items.BONE, 56, 64, 1, 1, 2)
-				.addBuys(Items.FERMENTED_SPIDER_EYE, 24, 36, 1, 1, 2)
-				.addSells(1, 1, Items.QUARTZ, 18, 24, 4)
-				.addSells(1, 1, NFFGirlsItems.DEATH_CRYSTAL_POWDER.get(), 2, 2, 4)
-				.setRequiredLevel(3)
-				.addBuys(ModItems.SOUL_APPLE.get(), 3, 4, 1, 1, 4)
-				.addBuys(Items.SOUL_SAND, 56, 64, 1, 1, 2)
-				.addBuys(Items.SOUL_SOIL, 56, 64, 1, 1, 2)
-				.addSells(1, 1, NFFGirlsBlocks.ITEM_SOUL_CARPET.get(), 4, 6, 4)
-				.addBuys(gaiaItem("stone_coal"), 16, 20, 1, 1, 4)
-				.addBuys(gaiaItem("rotten_heart"), 1, 1, 1, 1, 2)
-				.setRequiredLevel(4)
-				.addBuys(Items.GOLD_INGOT, 32, 40, 1, 1, 4)
-				.addBuys(Items.ZOMBIE_HEAD, 1, 1, 1, 1, 2)
-				.addBuys(Items.SKELETON_SKULL, 1, 1, 1, 1, 2)
-				.setRequiredLevel(5)
-				.addBuys(Items.CRYING_OBSIDIAN, 8, 12, 1, 1, 4)
-				.addBuys(Items.TOTEM_OF_UNDYING, 1, 1, 5, 7, 4)
-				.readAndPop()
+	private static ResourceLocation jsonPath(ResourceLocation raw) {
+		return new ResourceLocation(raw.getNamespace(), "trades/" + raw.getPath() + ".json");
+	}
+	
+	private static ResourceLocation jsonPath(RegistryObject<?> object) {
+		return jsonPath(object.getId());
+	}
+	
+	public static NaUtilsRegistry.Accessor<VanillaTradeListingCollection<?>> COMMON_UNDEAD = TRADE_COLLECTIONS.register(
+		"common_undead", () -> VanillaTradeListingCollectionHelper.newCollection()
+			.setCurrency(NFFGirlsItems.EVIL_GEM.get())
+			.setRequiredLevel(1)
+			.addBuys(ModItems.SOUL_POWDER.get(), 24, 32, 1, 1, 4)
+			.addBuys(Items.NETHER_WART, 56, 64, 1, 1, 4)
+			.addSells(1, 1, Items.RED_MUSHROOM, 16, 22, 4)
+			.addSells(1, 1, Items.BROWN_MUSHROOM, 16, 22, 4)
+			.setRequiredLevel(2)
+			.addBuys(Items.ROTTEN_FLESH, 56, 64, 1, 1, 2)
+			.addBuys(Items.BONE, 56, 64, 1, 1, 2)
+			.addBuys(Items.FERMENTED_SPIDER_EYE, 24, 36, 1, 1, 2)
+			.addSells(1, 1, Items.QUARTZ, 18, 24, 4)
+			.addSells(1, 1, NFFGirlsItems.DEATH_CRYSTAL_POWDER.get(), 2, 2, 4)
+			.setRequiredLevel(3)
+			.addBuys(ModItems.SOUL_APPLE.get(), 3, 4, 1, 1, 4)
+			.addBuys(Items.SOUL_SAND, 56, 64, 1, 1, 2)
+			.addBuys(Items.SOUL_SOIL, 56, 64, 1, 1, 2)
+			.addSells(1, 1, NFFGirlsBlocks.ITEM_SOUL_CARPET.get(), 4, 6, 4)
+			.addBuys(gaiaItem("stone_coal"), 16, 20, 1, 1, 4)
+			.addBuys(gaiaItem("rotten_heart"), 1, 1, 1, 1, 2)
+			.setRequiredLevel(4)
+			.addBuys(Items.GOLD_INGOT, 32, 40, 1, 1, 4)
+			.addBuys(Items.ZOMBIE_HEAD, 1, 1, 1, 1, 2)
+			.addBuys(Items.SKELETON_SKULL, 1, 1, 1, 1, 2)
+			.setRequiredLevel(5)
+			.addBuys(Items.CRYING_OBSIDIAN, 8, 12, 1, 1, 4)
+			.addBuys(Items.TOTEM_OF_UNDYING, 1, 1, 5, 7, 4)
+			.readData(jsonPath("common_undead")).get());
 
-				.push(COMMON_ICE)
-				.setRequiredLevel(1)
-				.addBuys(Items.SNOW_BLOCK, 56, 64, 1, 1, 4)
-				.setRequiredLevel(2)
-				.addBuys(Items.PACKED_ICE, 56, 64, 1, 1, 4)
-				.addBuys(Items.LAPIS_LAZULI, 40, 46, 1, 1, 4)
-				.setRequiredLevel(3)
-				.addSells(1, 1, Items.BLUE_ICE, 6, 10, 4)
-				.setRequiredLevel(4)
-				.readAndPop()
+	public static NaUtilsRegistry.Accessor<VanillaTradeListingCollection<?>> COMMON_ICE = TRADE_COLLECTIONS.register(
+		"common_ice", () -> VanillaTradeListingCollectionHelper.newCollection()
+			.setCurrency(NFFGirlsItems.EVIL_GEM.get())
+			.setRequiredLevel(1)
+			.addBuys(Items.SNOW_BLOCK, 56, 64, 1, 1, 4)
+			.setRequiredLevel(2)
+			.addBuys(Items.PACKED_ICE, 56, 64, 1, 1, 4)
+			.addBuys(Items.LAPIS_LAZULI, 40, 46, 1, 1, 4)
+			.setRequiredLevel(3)
+			.addSells(1, 1, Items.BLUE_ICE, 6, 10, 4)
+			.setRequiredLevel(4)
+			.readData(jsonPath("common_ice")).get());
 
-				.push(COMMON_ARCHER)
-				.setRequiredLevel(1)
-				.addBuys(Items.ARROW, 64, 64, 1, 1, 4)
-				.setRequiredLevel(4)
-				.addBuys(gaiaItem("bag_arrows"), 1, 1, 2, 3, 2)
-				.readAndPop()
+	public static NaUtilsRegistry.Accessor<VanillaTradeListingCollection<?>> COMMON_ARCHER = TRADE_COLLECTIONS.register(
+		"common_archer", () -> VanillaTradeListingCollectionHelper.newCollection()
+			.setCurrency(NFFGirlsItems.EVIL_GEM.get())
+			.setRequiredLevel(1)
+			.addBuys(Items.ARROW, 64, 64, 1, 1, 4)
+			.setRequiredLevel(4)
+			.addBuys(gaiaItem("bag_arrows"), 1, 1, 2, 3, 2)
+			.readData(jsonPath("common_archer")).get());
 
-				.push(COMMON_EXPLOSIVE)
-				.setRequiredLevel(1)
-				.addBuys(Items.GUNPOWDER, 28, 36, 1, 1, 4)
-				.addBuys(Items.CHARCOAL, 32, 48, 1, 1, 4)
-				.addBuys(Items.FIRE_CHARGE, 24, 32, 1, 1, 4)
-				.setRequiredLevel(2)
-				.addBuys(Items.TNT, 8, 12, 1, 1, 4)
-				.addSells(1, 1, ModItems.BLASTING_BOTTLE.get(), 3, 5, 4)
+	public static NaUtilsRegistry.Accessor<VanillaTradeListingCollection<?>> COMMON_EXPLOSIVE = TRADE_COLLECTIONS.register(
+		"common_explosive", () -> VanillaTradeListingCollectionHelper.newCollection()
+			.setCurrency(NFFGirlsItems.EVIL_GEM.get())
+			.setRequiredLevel(1)
+			.addBuys(Items.GUNPOWDER, 28, 36, 1, 1, 4)
+			.addBuys(Items.CHARCOAL, 32, 48, 1, 1, 4)
+			.addBuys(Items.FIRE_CHARGE, 24, 32, 1, 1, 4)
+			.setRequiredLevel(2)
+			.addBuys(Items.TNT, 8, 12, 1, 1, 4)
+			.addSells(1, 1, ModItems.BLASTING_BOTTLE.get(), 3, 5, 4)
+			.readData(jsonPath("common_explosive")).get());
+	
+	// Mob specific part
+	public static NaUtilsRegistry.Accessor<VanillaTradeListingCollection<?>> HMAG_ZOMBIE_GIRL = TRADE_COLLECTIONS.register(
+		NFFGirlsEntityTypes.HMAG_ZOMBIE_GIRL.getId().getPath(), () -> VanillaTradeListingCollectionHelper.newCollection()
+			.setCurrency(NFFGirlsItems.EVIL_GEM.get())
+			.setRequiredLevel(5)
+			.addSells(64, 64, Items.ZOMBIE_SPAWN_EGG, 1, 1, 1).weight(0.1d)
+			.readData(jsonPath(NFFGirlsEntityTypes.HMAG_ZOMBIE_GIRL)).get());
 
-				.readAndPop();
-			String anchor = "wither_skel";
+	public static NaUtilsRegistry.Accessor<VanillaTradeListingCollection<?>> HMAG_HUSK_GIRL = TRADE_COLLECTIONS.register(
+		NFFGirlsEntityTypes.HMAG_HUSK_GIRL.getId().getPath(), () -> VanillaTradeListingCollectionHelper.newCollection()
+			.setCurrency(NFFGirlsItems.EVIL_GEM.get())
+			.setRequiredLevel(1)
+			.addBuys(Items.RABBIT, 56, 64, 1, 1, 4)
+			.addBuys(Items.FLINT, 56, 64, 1, 1, 4)
+			.setRequiredLevel(3)
+			.addSells(1, 1, Items.RABBIT_FOOT, 1, 1, 4)
+			.setRequiredLevel(4)
+			.addBuys(gaiaItem("weapon_book_hunger"), 1, 1, 4, 6, 2)
+			.setRequiredLevel(5)
+			.addSells(64, 64, Items.HUSK_SPAWN_EGG, 1, 1, 1).weight(0.1d)
+			.readData(jsonPath(NFFGirlsEntityTypes.HMAG_HUSK_GIRL)).get());
 
+	public static NaUtilsRegistry.Accessor<VanillaTradeListingCollection<?>> HMAG_DROWNED_GIRL = TRADE_COLLECTIONS.register(
+		NFFGirlsEntityTypes.HMAG_DROWNED_GIRL.getId().getPath(), () -> VanillaTradeListingCollectionHelper.newCollection()
+			.setCurrency(NFFGirlsItems.EVIL_GEM.get())
+			.setRequiredLevel(1)
+			.addBuys(Items.SEA_PICKLE, 24, 36, 1, 1, 4)
+			.addBuys(Items.INK_SAC, 56, 64, 1, 1, 4)
+			.setRequiredLevel(2)
+			.addBuys(Items.COD, 56, 64, 1, 1, 4)
+			.addBuys(Items.SALMON, 56, 64, 1, 1, 4)
+			.addSells(3, 4, Items.NAUTILUS_SHELL, 1, 1, 4)
+			.setRequiredLevel(3)
+			.addBuys(ModItems.SAVAGEFANG_MEAT.get(), 24, 32, 1, 1, 4)
+			.addBuys(ModItems.SWAMPER_TENTACLE.get(), 8, 12, 1, 1, 4)
+			.addBuys(Items.SCUTE, 4, 6, 1, 1, 4)
+			.addSells(12, 20, Items.TRIDENT, 1, 1, 4)
+			.setRequiredLevel(4)
+			.addBuys(Items.PRISMARINE_CRYSTALS, 24, 32, 1, 1, 4)
+			.addBuys(Items.PRISMARINE_SHARD, 24, 32, 1, 1, 4)
+			.addBuys(Items.GLOW_INK_SAC, 12, 16, 1, 1, 4)
+			.addSells(1, 1, gaiaItem("shiny_pearl"), 12, 16, 4)
+			.setRequiredLevel(5)
+			.addSells(32, 40, Items.HEART_OF_THE_SEA, 1, 1, 1)
+			.addSells(64, 64, Items.DROWNED_SPAWN_EGG, 1, 1, 1).weight(0.1d)
+			.readData(jsonPath(NFFGirlsEntityTypes.HMAG_DROWNED_GIRL)).get());
 
-			// Mob speicific part
-			TRADES.setCurrency(NFFGirlsItems.EVIL_GEM.get())
+	public static NaUtilsRegistry.Accessor<VanillaTradeListingCollection<?>> HMAG_SKELETON_GIRL = TRADE_COLLECTIONS.register(
+		NFFGirlsEntityTypes.HMAG_SKELETON_GIRL.getId().getPath(), () -> VanillaTradeListingCollectionHelper.newCollection()
+			.setCurrency(NFFGirlsItems.EVIL_GEM.get())
+			.setRequiredLevel(1)
+			.addBuys(byKey("alexsmobs:fish_bones"), 24, 36, 1, 1, 4)
+			.setRequiredLevel(2)
+			.addBuys(Items.AMETHYST_SHARD, 24, 32, 1, 1, 4)
+			.setRequiredLevel(3)
+			.addBuys(byKey("alexsmobs:centipede_leg"), 4, 7, 1, 1, 4)
+			.setRequiredLevel(4)
+			.addSells(2, 4, ModItems.OGRE_HORN.get(), 2, 3, 2)
+			.addBuys(byKey("alexsmobs:rocky_shell"), 3, 5, 1, 1, 4)
+			.addBuys(byKey("iceandfire:troll_tusk"), 4, 6, 1, 1, 4)
+			.setRequiredLevel(5)
+			.addEnchantsBook(6, 8,  Enchantments.PROJECTILE_PROTECTION,4, 2)
+			.addSells(40, 48, byKey("twilightforest:triple_bow"), 1, 1, 1).weight(0.5)
+			.addSells(64, 64, Items.SKELETON_SPAWN_EGG, 1, 1, 1).weight(0.1)
+			.readData(jsonPath(NFFGirlsEntityTypes.HMAG_SKELETON_GIRL)).get());
 
-				.push(NFFGirlsEntityTypes.HMAG_ZOMBIE_GIRL.getId())
-				.linkListings(COMMON_UNDEAD)
-				.setRequiredLevel(5)
-				.addSells(64, 64, Items.ZOMBIE_SPAWN_EGG, 1, 1, 1).weight(0.1d)
-				.readAndPop()
-
-				.push(NFFGirlsEntityTypes.HMAG_HUSK_GIRL.getId())
-				.linkListings(COMMON_UNDEAD)
-				.setRequiredLevel(1)
-				.addBuys(Items.RABBIT, 56, 64, 1, 1, 4)
-				.addBuys(Items.FLINT, 56, 64, 1, 1, 4)
-				.setRequiredLevel(3)
-				.addSells(1, 1, Items.RABBIT_FOOT, 1, 1, 4)
-				.setRequiredLevel(4)
-				.addBuys(gaiaItem("weapon_book_hunger"), 1, 1, 4, 6, 2)
-				.setRequiredLevel(5)
-				.addSells(64, 64, Items.HUSK_SPAWN_EGG, 1, 1, 1).weight(0.1d)
-				.readAndPop()
-
-				.push(NFFGirlsEntityTypes.HMAG_DROWNED_GIRL.getId())
-				.linkListings(COMMON_UNDEAD)
-				.setRequiredLevel(1)
-				.addBuys(Items.SEA_PICKLE, 24, 36, 1, 1, 4)
-				.addBuys(Items.INK_SAC, 56, 64, 1, 1, 4)
-				.setRequiredLevel(2)
-				.addBuys(Items.COD, 56, 64, 1, 1, 4)
-				.addBuys(Items.SALMON, 56, 64, 1, 1, 4)
-				.addSells(3, 4, Items.NAUTILUS_SHELL, 1, 1, 4)
-				.setRequiredLevel(3)
-				.addBuys(ModItems.SAVAGEFANG_MEAT.get(), 24, 32, 1, 1, 4)
-				.addBuys(ModItems.SWAMPER_TENTACLE.get(), 8, 12, 1, 1, 4)
-				.addBuys(Items.SCUTE, 4, 6, 1, 1, 4)
-				.addSells(12, 20, Items.TRIDENT, 1, 1, 4)
-				.setRequiredLevel(4)
-				.addBuys(Items.PRISMARINE_CRYSTALS, 24, 32, 1, 1, 4)
-				.addBuys(Items.PRISMARINE_SHARD, 24, 32, 1, 1, 4)
-				.addBuys(Items.GLOW_INK_SAC, 12, 16, 1, 1, 4)
-				.addSells(1, 1, gaiaItem("shiny_pearl"), 12, 16, 4)
-				.setRequiredLevel(5)
-				.addSells(32, 40, Items.HEART_OF_THE_SEA, 1, 1, 1)
-				.addSells(64, 64, Items.DROWNED_SPAWN_EGG, 1, 1, 1).weight(0.1d)
-				.readAndPop()
-
-				.push(NFFGirlsEntityTypes.HMAG_SKELETON_GIRL.getId())
-				.linkListings(COMMON_UNDEAD)
-				.linkListings(COMMON_ARCHER)
-				.setRequiredLevel(1)
-				.addBuys(byKey("alexsmobs:fish_bones"), 24, 36, 1, 1, 4)
-				.setRequiredLevel(2)
-				.addBuys(Items.AMETHYST_SHARD, 24, 32, 1, 1, 4)
-				.setRequiredLevel(3)
-				.addBuys(byKey("alexsmobs:centipede_leg"), 4, 7, 1, 1, 4)
-				.setRequiredLevel(4)
-				.addSells(2, 4, ModItems.OGRE_HORN.get(), 2, 3, 2)
-				.addBuys(byKey("alexsmobs:rocky_shell"), 3, 5, 1, 1, 4)
-				.addBuys(byKey("iceandfire:troll_tusk"), 4, 6, 1, 1, 4)
-				.setRequiredLevel(5)
-				.addEnchantsBook(6, 8,  Enchantments.PROJECTILE_PROTECTION,4, 2)
-				.addSells(40, 48, byKey("twilightforest:triple_bow"), 1, 1, 1).weight(0.5)
-				.addSells(64, 64, Items.SKELETON_SPAWN_EGG, 1, 1, 1).weight(0.1)
-				.readAndPop()
-
-				.push(NFFGirlsEntityTypes.HMAG_STRAY_GIRL.getId())
-				.linkListings(COMMON_UNDEAD)
-				.linkListings(COMMON_ICE)
-				.linkListings(COMMON_ARCHER)
+	public static NaUtilsRegistry.Accessor<VanillaTradeListingCollection<?>> HMAG_STRAY_GIRL = TRADE_COLLECTIONS.register(
+		NFFGirlsEntityTypes.HMAG_STRAY_GIRL.getId().getPath(), () -> VanillaTradeListingCollectionHelper.newCollection()
+			.setCurrency(NFFGirlsItems.EVIL_GEM.get())
 				.setRequiredLevel(4)
 				.addBuys(gaiaItem("weapon_book_freezing"), 1, 1, 4, 6, 2)
-
-				.readAndPop().push(NFFGirlsEntityTypes.HMAG_WITHER_SKELETON_GIRL.getId())
-				.linkListings(COMMON_UNDEAD)
-				.linkListings(COMMON_ARCHER)
+				.readData(jsonPath(NFFGirlsEntityTypes.HMAG_STRAY_GIRL)).get());
+	
+	public static NaUtilsRegistry.Accessor<VanillaTradeListingCollection<?>> HMAG_WITHER_SKELETON_GIRL = TRADE_COLLECTIONS.register(
+		NFFGirlsEntityTypes.HMAG_WITHER_SKELETON_GIRL.getId().getPath(), () -> VanillaTradeListingCollectionHelper.newCollection()
+			.setCurrency(NFFGirlsItems.EVIL_GEM.get())
 				.setRequiredLevel(1)
 				.addBuys(Items.COAL, 48, 64, 1, 1, 4)
 				.setRequiredLevel(2)
@@ -208,10 +243,11 @@ public class NFFGirlsTrades
 				.addEnchantsBook(6, 8,  Enchantments.POWER_ARROWS,5, 2)
 				.addSells(64, 64, Items.WITHER_SKELETON_SPAWN_EGG, 1, 1, 1).weight(0.05d)
 				.addSells(12, 16, ModItems.NETHER_STAR_FRAGMENT.get(), 1, 1, 2)
-				.readAndPop()
+				.readData(jsonPath(NFFGirlsEntityTypes.HMAG_WITHER_SKELETON_GIRL)).get());
 
-				.push(NFFGirlsEntityTypes.HMAG_CREEPER_GIRL.getId())
-				.linkListings(COMMON_EXPLOSIVE)
+	public static NaUtilsRegistry.Accessor<VanillaTradeListingCollection<?>> HMAG_CREEPER_GIRL = TRADE_COLLECTIONS.register(
+		NFFGirlsEntityTypes.HMAG_CREEPER_GIRL.getId().getPath(), () -> VanillaTradeListingCollectionHelper.newCollection()
+			.setCurrency(NFFGirlsItems.EVIL_GEM.get())
 				.setRequiredLevel(3)
 				.addBuys(Items.REDSTONE, 40, 48, 1, 1, 4)
 				.addSells(1, 1, Items.REPEATER, 3, 4, 4)
@@ -227,7 +263,11 @@ public class NFFGirlsTrades
 				.addEnchantsBook(6, 8, Enchantments.BLAST_PROTECTION, 4, 2)
 				.addBuys(gaiaItem("doll_creeper_girl"), 1, 1, 8, 12, 2)
 
-				.readAndPop().push(NFFGirlsEntityTypes.HMAG_ENDER_EXECUTOR.getId())
+				.readData(jsonPath(NFFGirlsEntityTypes.HMAG_CREEPER_GIRL)).get());
+	
+	public static NaUtilsRegistry.Accessor<VanillaTradeListingCollection<?>> HMAG_ENDER_EXECUTOR = TRADE_COLLECTIONS.register(
+		NFFGirlsEntityTypes.HMAG_ENDER_EXECUTOR.getId().getPath(), () -> VanillaTradeListingCollectionHelper.newCollection()
+			.setCurrency(NFFGirlsItems.EVIL_GEM.get())
 				.setRequiredLevel(1)
 				.addBuys(Items.ENDER_PEARL, 16, 24, 1, 1, 4)
 				.addBuys(Items.TWISTING_VINES, 36, 56, 1, 1, 4)
@@ -249,9 +289,11 @@ public class NFFGirlsTrades
 				.setRequiredLevel(5)
 				.addBuys(Items.DRAGON_HEAD, 1, 1, 4, 5, 4)
 				.addBuys(gaiaItem("doll_ender_girl"), 1, 1, 8, 12, 2)
-				.readAndPop()
+				.readData(jsonPath(NFFGirlsEntityTypes.HMAG_ENDER_EXECUTOR)).get());
 
-				.push(NFFGirlsEntityTypes.HMAG_KOBOLD.getId())
+	public static NaUtilsRegistry.Accessor<VanillaTradeListingCollection<?>> HMAG_KOBOLD=  TRADE_COLLECTIONS.register(
+		NFFGirlsEntityTypes.HMAG_KOBOLD.getId().getPath(), () -> VanillaTradeListingCollectionHelper.newCollection()
+			.setCurrency(NFFGirlsItems.EVIL_GEM.get())
 				.setRequiredLevel(1)
 				.addBuys(Items.COAL, 48, 64, 1, 1, 4)
 				.addBuys(Items.RAW_COPPER, 48, 64, 1, 1, 4)
@@ -281,10 +323,12 @@ public class NFFGirlsTrades
 				.addBuys(Items.SCULK_SENSOR, 20, 28, 1, 1, 4)
 				.addSells(3, 4, Items.SCULK_CATALYST, 1, 1, 2)
 				.addEnchantsBook(8, 10, Enchantments.BLOCK_EFFICIENCY, 5, 2)
-				.readAndPop()
+				.readData(jsonPath(NFFGirlsEntityTypes.HMAG_KOBOLD)).get());
 
-				.push("nffgirls:hmag_necrotic_reaper")
-				.linkListings(COMMON_UNDEAD)
+	public static NaUtilsRegistry.Accessor<VanillaTradeListingCollection<?>> HMAG_NECROTIC_REAPER=  TRADE_COLLECTIONS.register(
+		NFFGirlsEntityTypes.HMAG_NECROTIC_REAPER.getId().getPath(), () -> VanillaTradeListingCollectionHelper.newCollection()
+			.setCurrency(NFFGirlsItems.EVIL_GEM.get())
+				//.linkListings(COMMON_UNDEAD)
 				.setRequiredLevel(1)
 				.addBuys(Items.FLINT, 56, 64, 1, 1, 4)
 				.addBuys(Items.STRING, 56, 64, 1, 1, 4)
@@ -304,10 +348,12 @@ public class NFFGirlsTrades
 				.addSellsEnchantmentBook(64, 64, Enchantments.SWIFT_SNEAK, 3, 1).weight(0.05)
 				.addSellsEnchantmentBook(6, 8, Enchantments.SHARPNESS, 5, 2)
 
-				.readAndPop()
-/*
-				.push(NFFGirlsEntityTypes.HMAG_MELTY_MONSTER.getId())
-				.setRequiredLevel(1)
+				.readData(jsonPath(NFFGirlsEntityTypes.HMAG_NECROTIC_REAPER)).get());
+
+	public static NaUtilsRegistry.Accessor<VanillaTradeListingCollection<?>> HMAG_MELTY_MONSTER = TRADE_COLLECTIONS.register(
+		NFFGirlsEntityTypes.HMAG_MELTY_MONSTER.getId().getPath(), () -> VanillaTradeListingCollectionHelper.newCollection()
+			.setCurrency(NFFGirlsItems.EVIL_GEM.get())
+				/*.setRequiredLevel(1)
 				.addBuys(Items.COAL, 48, 56, 1, 1, 4)
 				.addBuys(Items.BLAZE_ROD, 24, 32, 1, 1, 4)
 				.addBuys(Items.MAGMA_BLOCK, 48, 64, 1, 1, 2)
@@ -327,10 +373,13 @@ public class NFFGirlsTrades
 				.addSellsEnchantmentBook(16, 20, Enchantments.FIRE_ASPECT, 5, 2)
 				.addSellsEnchantmentBook(16, 20, Enchantments.FIRE_PROTECTION, 8, 2)
 				.addSells(2, 3, byKey("twilightforest:fiery_ingot"), 1, 1, 2)
-				.addSells(24, 48, byKey("iceandfire:dragonforge_fire_input"), 1, 1, 2)
+				.addSells(24, 48, byKey("iceandfire:dragonforge_fire_input"), 1, 1, 2)*/
+				.readData(jsonPath(NFFGirlsEntityTypes.HMAG_MELTY_MONSTER)).get());
 
-				.readAndPop().push("nffgirls:hmag_cursed_doll")
-				.setRequiredLevel(1)
+	public static NaUtilsRegistry.Accessor<VanillaTradeListingCollection<?>> HMAG_CURSED_DOLL = TRADE_COLLECTIONS.register(
+		NFFGirlsEntityTypes.HMAG_CURSED_DOLL.getId().getPath(), () -> VanillaTradeListingCollectionHelper.newCollection()
+			.setCurrency(NFFGirlsItems.EVIL_GEM.get())
+				/*.setRequiredLevel(1)
 				.addBuys(Items.FEATHER, 32, 48, 1, 1, 16)
 				.addBuys(Items.STRING, 56, 64, 1, 1, 16)
 				.addBuys(Items.PAPER, 32, 40, 1, 1, 16)
@@ -357,10 +406,13 @@ public class NFFGirlsTrades
 				.addBuys(byKey("twilightforest:peacock_feather_fan"), 1, 1, 4, 6, 4)
 				.addSells(8, 16, ModItems.FORTUNE_CRYSTAL_PLUS.get(), 2, 3, 4)
 				.addSells(8, 12, ModItems.PURIFICATION_CLOTH.get(), 2, 3, 4)
-				.addSells(16, 32, byKey("iceandfire:pixie_wings"), 1, 1, 2)
+				.addSells(16, 32, byKey("iceandfire:pixie_wings"), 1, 1, 2)*/
+			.readData(jsonPath(NFFGirlsEntityTypes.HMAG_CURSED_DOLL)).get());
 
-				.readAndPop().push("nffgirls:hmag_jack_frost")
-				.setRequiredLevel(1)
+	public static NaUtilsRegistry.Accessor<VanillaTradeListingCollection<?>> HMAG_JACK_FROST = TRADE_COLLECTIONS.register(
+		NFFGirlsEntityTypes.HMAG_JACK_FROST.getId().getPath(), () -> VanillaTradeListingCollectionHelper.newCollection()
+			.setCurrency(NFFGirlsItems.EVIL_GEM.get())
+				/*.setRequiredLevel(1)
 				.addBuys(Items.NETHER_WART, 24, 32, 1, 1, 16)
 				.addBuys(Items.LAPIS_LAZULI, 28, 36, 1, 1, 16)
 				.addBuys(Items.SNOW_BLOCK, 48, 56, 1, 1, 16)
@@ -387,9 +439,13 @@ public class NFFGirlsTrades
 				.addSells(12, 32, ModItems.FORTUNE_CRYSTAL_PLUS.get(), 1, 1, 4)
 				.addSells(16, 32, byKey("iceandfire:dragonforge_ice_input"), 1, 1, 2)
 				.addSells(64, 128, byKey("iceandfire:dread_queen_sword"), 1, 1, 1)
+*/
+				.readData(jsonPath(NFFGirlsEntityTypes.HMAG_JACK_FROST)).get());
 
-				.readAndPop().push("nffgirls:hmag_alraune")
-				.setRequiredLevel(1)
+	public static NaUtilsRegistry.Accessor<VanillaTradeListingCollection<?>> HMAG_ALRAUNE = TRADE_COLLECTIONS.register(
+		NFFGirlsEntityTypes.HMAG_ALRAUNE.getId().getPath(), () -> VanillaTradeListingCollectionHelper.newCollection()
+			.setCurrency(NFFGirlsItems.EVIL_GEM.get())
+				/*.setRequiredLevel(1)
 				.addBuys(Items.WHEAT_SEEDS, 48, 64, 1, 1, 16)
 				.addBuys(Items.PUMPKIN_SEEDS, 36, 56, 1, 1, 16)
 				.addBuys(Items.MELON_SEEDS, 36, 56, 1, 1, 16)
@@ -420,9 +476,13 @@ public class NFFGirlsTrades
 				.addSells(12, 32, ModItems.GREEDY_CRYSTAL_PLUS.get(), 1, 1, 4)
 				.addSells(10, 24, byKey("twilightforest:magic_beans"), 1, 1, 2)
 				.addSells(24, 42, byKey("twilightforest:charm_of_life_2"), 1, 1, 2)
-
-				.readAndPop().push("nffgirls:hmag_banshee")
-				.setRequiredLevel(1)
+*/
+				.readData(jsonPath(NFFGirlsEntityTypes.HMAG_ALRAUNE)).get());
+	
+	public static NaUtilsRegistry.Accessor<VanillaTradeListingCollection<?>> HMAG_BANSHEE = TRADE_COLLECTIONS.register(
+		NFFGirlsEntityTypes.HMAG_BANSHEE.getId().getPath(), () -> VanillaTradeListingCollectionHelper.newCollection()
+			.setCurrency(NFFGirlsItems.EVIL_GEM.get())
+				/*.setRequiredLevel(1)
 				.addBuys(Items.ALLIUM, 32, 36, 1, 1, 16)
 				.addBuys(Items.RED_TULIP, 32, 36, 1, 1, 16)
 				.addBuys(Items.ORANGE_TULIP, 32, 36, 1, 1, 16)
@@ -455,9 +515,13 @@ public class NFFGirlsTrades
 				.addSells(12, 32, ModItems.PURIFICATION_CLOTH.get(), 1, 1, 4)
 				.addSells(48, 96, byKey("twilightforest:glass_sword"), 1, 1, 2)
 				.addSells(48, 96, byKey("iceandfire:ghost_sword"), 1, 1, 2)
+*/
+				.readData(jsonPath(NFFGirlsEntityTypes.HMAG_BANSHEE)).get());
 
-				.readAndPop().push("nffgirls:hmag_hornet")
-				.setRequiredLevel(1)
+	public static NaUtilsRegistry.Accessor<VanillaTradeListingCollection<?>> HMAG_HORNET = TRADE_COLLECTIONS.register(
+		NFFGirlsEntityTypes.HMAG_HORNET.getId().getPath(), () -> VanillaTradeListingCollectionHelper.newCollection()
+			.setCurrency(NFFGirlsItems.EVIL_GEM.get())
+				/*.setRequiredLevel(1)
 				.addBuys(Items.SUNFLOWER, 24, 32, 1, 1, 16)
 				.addBuys(Items.ROSE_BUSH, 24, 32, 1, 1, 16)
 				.addBuys(Items.PEONY, 24, 32, 1, 1, 16)
@@ -483,7 +547,7 @@ public class NFFGirlsTrades
 				.addSells(72, 112, ModItems.INSOMNIA_FRUIT.get(), 1, 1, 2)
 				.addSellsEnchantmentBook(16, 20, Enchantments.SILK_TOUCH, 1, 4)
 
-				.readAndPop().push("nffgirls:hmag_dullahan")
+				.readData(jsonPath(NFFGirlsEntityTypes.)).get());.push("nffgirls:hmag_dullahan")
 				.setRequiredLevel(1)
 				.addBuys(Items.IRON_INGOT, 36, 48, 1, 1, 16)
 				.addBuys(Items.BRICK, 56, 64, 1, 1, 16)
@@ -514,9 +578,13 @@ public class NFFGirlsTrades
 				//.addSells(64, 128, gaiaItem("weapon_book_buff"), 1, 1, 2)
 				.addSells(8, 16, ModItems.MULTIPLEX_REINFORCING_CHAIN.get(), 1, 1, 4)
 				//.addSellsEnchantmentBook(48, 72, Enchantments.PROTECTION, 8, 2)
-
-				.readAndPop().push("nffgirls:hmag_ghastly_seeker")
-				.setRequiredLevel(1)
+*/
+				.readData(jsonPath(NFFGirlsEntityTypes.HMAG_HORNET)).get());
+	
+	public static NaUtilsRegistry.Accessor<VanillaTradeListingCollection<?>> HMAG_GHASTLY_SEEKER = TRADE_COLLECTIONS.register(
+		NFFGirlsEntityTypes.HMAG_GHASTLY_SEEKER.getId().getPath(), () -> VanillaTradeListingCollectionHelper.newCollection()
+			.setCurrency(NFFGirlsItems.EVIL_GEM.get())
+				/*.setRequiredLevel(1)
 				.addBuys(Items.SOUL_SOIL, 48, 64, 1, 1, 16)
 				.addBuys(Items.SOUL_SAND, 48, 64, 1, 1, 16)
 				.addBuys(Items.SOUL_LANTERN, 16, 24, 1, 1, 16)
@@ -542,9 +610,14 @@ public class NFFGirlsTrades
 				.addBuys(byKey("twilightforest:ur_ghast_trophy"), 1, 1, 8, 12, 2)
 				.addSells(48, 84, ModItems.NEMESIS_BLADE.get(), 1, 1, 2)
 				.addSells(12, 24, Items.NETHER_STAR, 1, 1, 2)
-
-				.readAndPop().push("nffgirls:hmag_redcap")
-				.setRequiredLevel(1)
+*/
+				.readData(jsonPath(NFFGirlsEntityTypes.HMAG_GHASTLY_SEEKER)).get());
+	
+	public static NaUtilsRegistry.Accessor<VanillaTradeListingCollection<?>> HMAG_REDCAP = TRADE_COLLECTIONS.register(
+		NFFGirlsEntityTypes.HMAG_REDCAP.getId().getPath(), () -> VanillaTradeListingCollectionHelper.newCollection()
+			.setCurrency(NFFGirlsItems.EVIL_GEM.get())
+			.readData(jsonPath(NFFGirlsEntityTypes.HMAG_REDCAP)).get());
+				/*.setRequiredLevel(1)
 				.addBuys(Items.SPIDER_EYE, 42, 56, 1, 1, 16)
 				.addBuys(Items.RED_DYE, 48, 64, 1, 1, 16)
 				.addBuys(Items.REDSTONE, 48, 64, 1, 1, 16)
@@ -574,8 +647,13 @@ public class NFFGirlsTrades
 				.addSells(72, 96, byKey("twilightforest:moonworm_queen"), 1, 1, 2)
 				.addSells(96, 128, byKey("alexsmobs:dimensional_carver"), 1, 1, 2)
 
-				.readAndPop().push("nffgirls:hmag_slime_girl")
-				.setRequiredLevel(1)
+				.readData(jsonPath(NFFGirlsEntityTypes.)).get());*/
+
+	public static NaUtilsRegistry.Accessor<VanillaTradeListingCollection<?>> HMAG_SLIME_GIRL = TRADE_COLLECTIONS.register(
+		NFFGirlsEntityTypes.HMAG_SLIME_GIRL.getId().getPath(), () -> VanillaTradeListingCollectionHelper.newCollection()
+			.setCurrency(NFFGirlsItems.EVIL_GEM.get())
+			.readData(jsonPath(NFFGirlsEntityTypes.HMAG_SLIME_GIRL)).get());
+				/*.setRequiredLevel(1)
 				.addBuys(ColoredItems.DYES.objectArray(), 48, 64, 1, 1, 4)
 				.addBuys(ColoredItems.DYES.objectArray(), 48, 64, 1, 1, 4)
 				.addBuys(ColoredItems.DYES.objectArray(), 48, 64, 1, 1, 4)
@@ -602,8 +680,13 @@ public class NFFGirlsTrades
 				.addSells(24, 36, byKey("alexsmobs:rainbow_jelly"), 1, 1, 4)
 				.addSells(16, 36, byKey("alexsmobs:mimicream"), 1, 1, 4)
 
-				.readAndPop().push("nffgirls:hmag_crimson_slaughterer")
-				.setRequiredLevel(1)
+				.readData(jsonPath(NFFGirlsEntityTypes.)).get());*/
+
+	public static NaUtilsRegistry.Accessor<VanillaTradeListingCollection<?>> HMAG_CRIMSON_SLAUGHTERER= TRADE_COLLECTIONS.register(
+		NFFGirlsEntityTypes.HMAG_CRIMSON_SLAUGHTERER.getId().getPath(), () -> VanillaTradeListingCollectionHelper.newCollection()
+			.setCurrency(NFFGirlsItems.EVIL_GEM.get())
+			.readData(jsonPath(NFFGirlsEntityTypes.HMAG_CRIMSON_SLAUGHTERER)).get());
+				/*.setRequiredLevel(1)
 				.addBuys(Items.GOLD_INGOT, 32, 48, 1, 1, 16)
 				.addBuys(Items.NETHERRACK, 56, 64, 1, 1, 16)
 				.addBuys(Items.QUARTZ, 48, 64, 1, 1, 16)
@@ -632,9 +715,15 @@ public class NFFGirlsTrades
 				.addSellsEnchantmentBook(56, 84, Enchantments.THORNS, 5, 4)
 				.addSells(64, 96, byKey("alexsmobs:hemolymph_blaster"), 1, 1, 2)
 				.addSells(64, 96, byKey("twilightforest:lifedrain_scepter"), 1, 1, 2)
+	
 
-				.readAndPop().push("nffgirls:hmag_snow_canine")
-				.setRequiredLevel(1)
+				.readData(jsonPath(NFFGirlsEntityTypes.)).get());*/
+
+	public static NaUtilsRegistry.Accessor<VanillaTradeListingCollection<?>> HMAG_SNOW_CANINE= TRADE_COLLECTIONS.register(
+		NFFGirlsEntityTypes.HMAG_SNOW_CANINE.getId().getPath(), () -> VanillaTradeListingCollectionHelper.newCollection()
+			.setCurrency(NFFGirlsItems.EVIL_GEM.get())
+			.readData(jsonPath(NFFGirlsEntityTypes.HMAG_SNOW_CANINE)).get());
+/*				.setRequiredLevel(1)
 				.addBuys(Items.PORKCHOP, 32, 48, 1, 1, 16)
 				.addBuys(Items.MUTTON, 32, 48, 1, 1, 16)
 				.addBuys(Items.BEEF, 32, 48, 1, 1, 16)
@@ -670,8 +759,13 @@ public class NFFGirlsTrades
 				//.addSellsEnchantmentBook(72, 112, Enchantments.LOOTING, 5, 4)
 				.addSells(56, 72, byKey("twilightforest:diamond_minotaur_axe"), 1, 1, 2)
 
-				.readAndPop().push("nffgirls:hmag_harpy")
-				.setRequiredLevel(1)
+				.readData(jsonPath(NFFGirlsEntityTypes.)).get());*/
+
+	public static NaUtilsRegistry.Accessor<VanillaTradeListingCollection<?>> HMAG_HARPY= TRADE_COLLECTIONS.register(
+		NFFGirlsEntityTypes.HMAG_HARPY.getId().getPath(), () -> VanillaTradeListingCollectionHelper.newCollection()
+			.setCurrency(NFFGirlsItems.EVIL_GEM.get())
+			.readData(jsonPath(NFFGirlsEntityTypes.HMAG_HARPY)).get());
+				/*.setRequiredLevel(1)
 				.addBuys(Items.EGG, 12, 16, 1, 1, 8)
 				.addBuys(Items.SPIDER_EYE, 28, 36, 1, 1, 16)
 				.addBuys(Items.CHICKEN, 24, 36, 1, 1, 16)
@@ -700,8 +794,13 @@ public class NFFGirlsTrades
 				.addSells(12, 32, ModItems.FORTUNE_CRYSTAL_PLUS.get(), 1, 1, 4)
 				.addSellsEnchantmentBook(64, 84, Enchantments.KNOCKBACK, 10, 4)
 
-				.readAndPop().push("nffgirls:hmag_dodomeki")
-				.setRequiredLevel(1)
+				.readData(jsonPath(NFFGirlsEntityTypes.)).get());*/
+
+	public static NaUtilsRegistry.Accessor<VanillaTradeListingCollection<?>> HMAG_DODOMEKI= TRADE_COLLECTIONS.register(
+		NFFGirlsEntityTypes.HMAG_DODOMEKI.getId().getPath(), () -> VanillaTradeListingCollectionHelper.newCollection()
+			.setCurrency(NFFGirlsItems.EVIL_GEM.get())
+			.readData(jsonPath(NFFGirlsEntityTypes.HMAG_DODOMEKI)).get());
+				/*.setRequiredLevel(1)
 				.addBuys(Items.GOLD_INGOT, 24, 32, 1, 2, 16)
 				.addBuys(Items.EMERALD, 36, 48, 1, 2, 16)
 				.addBuys(Items.DIAMOND, 18, 24, 1, 2, 16)
@@ -727,8 +826,13 @@ public class NFFGirlsTrades
 				//.addSellsEnchantmentBook(64, 96, Enchantments.LOOTING, 6, 2)
 				//.addSellsEnchantmentBook(64, 96, Enchantments.FORTUNE, 6, 2)
 
-				.readAndPop().push("nffgirls:hmag_imp")
-				.setRequiredLevel(1)
+				.readData(jsonPath(NFFGirlsEntityTypes.)).get());*/
+
+	public static NaUtilsRegistry.Accessor<VanillaTradeListingCollection<?>> HMAG_IMP= TRADE_COLLECTIONS.register(
+		NFFGirlsEntityTypes.HMAG_IMP.getId().getPath(), () -> VanillaTradeListingCollectionHelper.newCollection()
+			.setCurrency(NFFGirlsItems.EVIL_GEM.get())
+			.readData(jsonPath(NFFGirlsEntityTypes.HMAG_IMP)).get());
+				/*.setRequiredLevel(1)
 				.addBuys(Items.GOLD_INGOT, 28, 36, 1, 1, 16)
 				.addBuys(Items.OBSIDIAN, 18, 28, 1, 1, 16)
 				.addBuys(Items.GLOWSTONE_DUST, 36, 48, 1, 1, 16)
@@ -757,8 +861,13 @@ public class NFFGirlsTrades
 				.addSells(12, 32, ModItems.FORTUNE_CRYSTAL_PLUS.get(), 1, 1, 8)
 				//.addSellsEnchantmentBook(96, 128, Enchantments.FORTUNE, 8, 2)
 
-				.readAndPop().push("nffgirls:hmag_glaryad")
-				.setRequiredLevel(1)
+				.readData(jsonPath(NFFGirlsEntityTypes.)).get());*/
+
+	public static NaUtilsRegistry.Accessor<VanillaTradeListingCollection<?>> HMAG_GLARYAD= TRADE_COLLECTIONS.register(
+		NFFGirlsEntityTypes.HMAG_GLARYAD.getId().getPath(), () -> VanillaTradeListingCollectionHelper.newCollection()
+			.setCurrency(NFFGirlsItems.EVIL_GEM.get())
+			.readData(jsonPath(NFFGirlsEntityTypes.HMAG_GLARYAD)).get());
+			/*	.setRequiredLevel(1)
 				.addBuys(Items.AZALEA_LEAVES, 48, 56, 1, 1, 16)
 				.addBuys(Items.MOSS_BLOCK, 56, 64, 1, 1, 16)
 				.addBuys(Items.AZALEA, 24, 32, 1, 1, 16)
@@ -789,8 +898,13 @@ public class NFFGirlsTrades
 				.addSells(12, 32, ModItems.PURIFICATION_CLOTH.get(), 1, 1, 4)
 				.addSellsEnchantmentBook(84, 112, Enchantments.UNBREAKING, 10, 4)
 
-				.readAndPop().push("nffgirls:hmag_jiangshi")
-				.setRequiredLevel(1)
+				.readData(jsonPath(NFFGirlsEntityTypes.)).get());*/
+
+	public static NaUtilsRegistry.Accessor<VanillaTradeListingCollection<?>> HMAG_JIANGSHI= TRADE_COLLECTIONS.register(
+		NFFGirlsEntityTypes.HMAG_JIANGSHI.getId().getPath(), () -> VanillaTradeListingCollectionHelper.newCollection()
+			.setCurrency(NFFGirlsItems.EVIL_GEM.get())
+			.readData(jsonPath(NFFGirlsEntityTypes.HMAG_JIANGSHI)).get());
+			/*	.setRequiredLevel(1)
 				.addBuys(Items.LILY_PAD, 48, 56, 1, 1, 16)
 				.addBuys(Items.MANGROVE_ROOTS, 32, 48, 1, 1, 16)
 				.addBuys(Items.BAMBOO, 48, 56, 1, 1, 16)
@@ -817,8 +931,13 @@ public class NFFGirlsTrades
 				.addSellsEnchantmentBook(36, 48, Enchantments.CHANNELING, 1, 4)
 				.addSells(16, 32, byKey("iceandfire:dragonforge_lightning_input"), 1, 1, 2)
 
-				.readAndPop().push("nffgirls:hmag_nightwalker")
-				.setRequiredLevel(1)
+				.readData(jsonPath(NFFGirlsEntityTypes.)).get());*/
+
+	public static NaUtilsRegistry.Accessor<VanillaTradeListingCollection<?>> HMAG_NIGHTWALKER= TRADE_COLLECTIONS.register(
+		NFFGirlsEntityTypes.HMAG_NIGHTWALKER.getId().getPath(), () -> VanillaTradeListingCollectionHelper.newCollection()
+			.setCurrency(NFFGirlsItems.EVIL_GEM.get())
+			.readData(jsonPath(NFFGirlsEntityTypes.HMAG_NIGHTWALKER)).get());
+				/*.setRequiredLevel(1)
 				.addBuys(Items.TERRACOTTA, 36, 48, 1, 1, 16)
 				.addBuys(Items.BRICKS, 36, 48, 1, 1, 16)
 				.addBuys(Items.NETHER_BRICKS, 48, 56, 1, 1, 16)
@@ -850,17 +969,7 @@ public class NFFGirlsTrades
 				.addSells(12, 32, ModItems.REPULSION_GADGET.get(), 1, 1, 4)
 				.setRequiredLevel(5)
 				.addSells(24, 36, ModItems.NETHERITE_SCRAP_BLOCK.get(), 1, 1, 4)
-				.addSells(24, 36, ModItems.ANCIENT_STONE_BLOCK.get(), 1, 1, 4)*/
-			;
+				.addSells(24, 36, ModItems.ANCIENT_STONE_BLOCK.get(), 1, 1, 4)
+			;*/
 
-		/*if (NaUtils.getServer() != null)
-		{
-
-		}*/
-
-		} catch(Throwable t) {
-			t.printStackTrace();
-			throw t;
-		}
-	}
 }
