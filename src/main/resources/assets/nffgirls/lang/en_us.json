@@ -127,7 +127,7 @@
   "info.nffgirls.item.commanding_wand.mob_search_summon_no_target": "Summoning failed: no target is specified.",
   "info.nffgirls.item.commanding_wand.mob_search_summon_not_found": "Summoning failed. Try getting closer to the location and summon again.",
   "info.nffgirls.item.commanding_wand.mob_search_summoned_mob": "Summoned %1$s.",
-
+  "info.nffgirls.item.mob_catching_failed_inventory_full": "Storage failed - inventory is full.",
 
   "info.nffgirls.bauble": "Bauble",
   "info.nffgirls.bauble.hpmax": "Max HP %1$s",

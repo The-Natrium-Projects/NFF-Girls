@@ -216,11 +216,12 @@ public class NFFGirlsItems {
 	
 	// Misc
 	public static final RegistryObject<NFFMobRespawnerItem> MOB_RESPAWNER = ITEMS.register("mob_respawner", () -> new NFFGirlsRespawnerItem(new Item.Properties())
-		.setRetainBefriendedMobInventory(false).setGiveCommandUsesDefaultInstance().cast());
+		.setRetainBefriendedMobInventory(false).noDefaultInstance(false).cast());
 	public static final RegistryObject<NFFMobRespawnerItem> MOB_STORAGE_POD = ITEMS.register("mob_storage_pod", () -> new NFFGirlsRespawnerItem(new Item.Properties())
-		.redirectDefaultInstance(new ResourceLocation(NFFGirls.MOD_ID, "empty_mob_storage_pod")).setGiveCommandUsesDefaultInstance().cast());
-	public static final RegistryObject<MobCatcherItem> EMPTY_MOB_STORAGE_POD = ITEMS.register("empty_mob_storage_pod", () -> new MobCatcherItem(new Item.Properties().tab(TAB), MOB_STORAGE_POD.get()).canCatchCondition(
-			((m, p) -> (m instanceof INFFGirlsTamed bm && bm.getOwnerUUID().equals(p.getUUID())))));
+		.redirectDefaultInstance(new ResourceLocation(NFFGirls.MOD_ID, "empty_mob_storage_pod"))
+		.setGiveCommandUsesDefaultInstance().cast());
+	public static final RegistryObject<MobCatcherItem> EMPTY_MOB_STORAGE_POD = ITEMS.register("empty_mob_storage_pod", () -> new NFFGirlsMobCatcherItem(new Item.Properties().tab(TAB), MOB_STORAGE_POD.get()).canCatchCondition(
+			(m, p) -> (m instanceof INFFGirlsTamed bm && bm.getOwnerUUID().equals(p.getUUID()))));
 
 	// Technical
 	public static final RegistryObject<NaUtilsItem> TAB_ICON = ITEMS.register("tab_icon", () -> new NaUtilsItem(new Item.Properties()));
