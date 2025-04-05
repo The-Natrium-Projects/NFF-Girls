@@ -1,6 +1,9 @@
 package net.sodiumzh.nff.girls;
 
+import net.minecraftforge.fml.LogicalSide;
+import net.minecraftforge.fml.util.thread.EffectiveSide;
 import net.sodiumzh.nautils.registries.NaUtilsRegistries;
+import net.sodiumzh.nautils.statics.NaUtilsDataStatics;
 import net.sodiumzh.nff.girls.registry.*;
 import org.slf4j.Logger;
 import net.sodiumzh.nff.girls.registry.*;

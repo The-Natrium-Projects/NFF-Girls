@@ -100,7 +100,7 @@ public class CombatCommandingWandItem extends NaUtilsItem {
 
 	private static boolean canTamedAttackTarget(Entity tamed, LivingEntity target) {
 		if (tamed == null || target == null) return false;
-		return INFFGirlsTamed.isBMAnd(tamed, tm -> tm.asMob().hasLineOfSight(target) && tm.wantsToAttack(target));
+		return INFFGirlsTamed.isBMAnd(tamed, tm -> tm.wantsToAttack(target));
 	}
 
 	private static boolean trySetTarget(@Nonnull Player owner, @Nullable Entity tamedEntity, @Nullable LivingEntity target) {
@@ -113,4 +113,8 @@ public class CombatCommandingWandItem extends NaUtilsItem {
 		return false;
 	}
 
+	@Override
+	public boolean shouldSkipEntityInteract(Player user, Entity target, InteractionHand hand) {
+		return true;
+	}
 }
