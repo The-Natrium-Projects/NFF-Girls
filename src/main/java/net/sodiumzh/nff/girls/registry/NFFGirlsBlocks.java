@@ -18,7 +18,7 @@ import net.sodiumzh.nautils.block.BlockMaterial;
 import net.sodiumzh.nff.girls.NFFGirls;
 import net.sodiumzh.nff.girls.block.SoulCakeBlock;
 import net.sodiumzh.nff.girls.block.SoulCarpetBlock;
-import net.sodiumzh.nff.girls.blocks.EnderberryBushBlock;
+import net.sodiumzh.nff.girls.block.EnderberryBushBlock;
 
 @Mod.EventBusSubscriber(modid = NFFGirls.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class NFFGirlsBlocks {

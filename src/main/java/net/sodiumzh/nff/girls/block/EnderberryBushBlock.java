@@ -1,4 +1,4 @@
-package net.sodiumzh.nff.girls.blocks;
+package net.sodiumzh.nff.girls.block;
 
 import com.github.mechalopa.hmag.registry.ModBlocks;
 import net.minecraft.core.BlockPos;

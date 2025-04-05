@@ -1306,10 +1306,4 @@ public class NFFGirlsEntityEventListeners
 		return;
 	}
 
-	@SubscribeEvent
-	public static void onEntitySpecificInteraction(EntitySpecificInteractionEvent event) {
-		if (event.getPlayer().getItemInHand(event.getHand()).getItem() instanceof CombatCommandingWandItem)
-			event.setCanceled(true);
-	}
-
 }

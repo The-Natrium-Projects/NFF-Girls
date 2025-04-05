@@ -42,7 +42,7 @@ import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.sodiumzh.nff.girls.NFFGirls;
-import net.sodiumzh.nff.girls.blocks.EnderberryBushBlock;
+import net.sodiumzh.nff.girls.block.EnderberryBushBlock;
 import net.sodiumzh.nff.girls.entity.ICarriesBlock;
 import net.sodiumzh.nff.girls.entity.INFFGirlsTamed;
 import net.sodiumzh.nff.girls.entity.ai.goal.NFFGirlsFollowOwnerGoal;

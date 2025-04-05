@@ -1,29 +1,31 @@
 package net.sodiumzh.nff.girls.registry;
 
 import com.github.mechalopa.hmag.registry.ModItems;
-
-import com.google.gson.JsonArray;
-import com.google.gson.JsonElement;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.server.packs.resources.Resource;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.enchantment.Enchantments;
+import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.minecraftforge.fml.LogicalSide;
+import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
-import net.sodiumzh.nautils.NaUtils;
-import net.sodiumzh.nautils.entity.vanillatrade.VanillaTradeListing;
+import net.sodiumzh.nautils.containers.Tuple2;
 import net.sodiumzh.nautils.entity.vanillatrade.VanillaTradeListingCollection;
 import net.sodiumzh.nautils.entity.vanillatrade.VanillaTradeListingCollectionHelper;
 import net.sodiumzh.nautils.entity.vanillatrade.VanillaTradeRegistry;
-import net.sodiumzh.nautils.item.ColoredItems;
 import net.sodiumzh.nautils.registries.NaUtilsRegistries;
 import net.sodiumzh.nautils.registries.NaUtilsRegistry;
+import net.sodiumzh.nautils.registries.NaUtilsRegistryGenerateValuesEvent;
 import net.sodiumzh.nautils.registries.RegistryEntryCollection;
 import net.sodiumzh.nautils.statics.NaUtilsDataStatics;
 import net.sodiumzh.nff.girls.NFFGirls;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
+@Mod.EventBusSubscriber(modid = NFFGirls.MOD_ID, bus = Mod.EventBusSubscriber.Bus.FORGE)
 public class NFFGirlsTrades
 {
 
@@ -971,5 +973,34 @@ public class NFFGirlsTrades
 				.addSells(24, 36, ModItems.NETHERITE_SCRAP_BLOCK.get(), 1, 1, 4)
 				.addSells(24, 36, ModItems.ANCIENT_STONE_BLOCK.get(), 1, 1, 4)
 			;*/
+
+	@SubscribeEvent
+	public static void readJsonCollections(NaUtilsRegistryGenerateValuesEvent.Server event) {
+		if (event.registry.equals(NaUtilsRegistries.VANILLA_TRADE_LISTING_COLLECTIONS)) {
+			List<ResourceLocation> allKeys = NaUtilsDataStatics.getJsonsUnderPath(LogicalSide.SERVER, "trades")
+				.stream()
+				.map(Tuple2::getA)
+				.map(loc -> {
+					var filename = Arrays.stream(loc.getPath().split("/"))
+						.filter(part -> part.endsWith(".json"))
+						.map(str -> str.replace(".json", ""))
+						.toList();
+					return filename.isEmpty() ? null : new ResourceLocation(loc.getNamespace(), filename.get(0));
+				})
+				.filter(Objects::nonNull)
+				.filter(str -> !str.getPath().equals("trade_registry"))
+				.filter(key -> !TRADE_COLLECTIONS.hasKey(key))
+				.toList();
+
+			Map<String, RegistryEntryCollection<VanillaTradeListingCollection<?>>> collections = new HashMap<>();
+			allKeys.stream().map(ResourceLocation::getNamespace).collect(Collectors.toSet())
+				.forEach(key -> collections.put(key, RegistryEntryCollection.create(NaUtilsRegistries.VANILLA_TRADE_LISTING_COLLECTIONS, key)));
+			allKeys.forEach((ResourceLocation key) -> collections.get(key.getNamespace()).register(key.getPath(),
+					() -> VanillaTradeListingCollectionHelper.newCollection()
+						.setCurrency(NFFGirlsItems.EVIL_GEM.get())
+						.readData(jsonPath(key)).get()));
+			collections.values().forEach(RegistryEntryCollection::merge);
+		}
+	}
 
 }
