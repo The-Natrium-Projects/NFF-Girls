@@ -427,6 +427,7 @@ public interface CNFFGirlsTradeHandler extends CVanillaMerchant
 		@Override
 		public boolean isValidTrader()
 		{
+			if (NFFGirlsTrades.TRADE_REGISTRY.get() == null) return false;
 			return !NFFGirlsTrades.TRADE_REGISTRY.get().collect()
 				.get(ForgeRegistries.ENTITY_TYPES.getKey(this.getMob().getType()), VillagerProfession.NONE)
 				.isEmpty();

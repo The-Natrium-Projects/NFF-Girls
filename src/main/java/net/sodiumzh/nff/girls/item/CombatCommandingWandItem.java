@@ -20,6 +20,7 @@ import org.apache.commons.lang3.mutable.MutableObject;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 public class CombatCommandingWandItem extends NaUtilsItem {
 
@@ -33,23 +34,18 @@ public class CombatCommandingWandItem extends NaUtilsItem {
 	public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand usedHand) {
 		if (!level.isClientSide()) {
 			HitResult res = NaUtilsLevelStatics.eyeTrace(player, 32d).orElse(null);
-			if (res != null && res.getType().equals(HitResult.Type.ENTITY) && res instanceof EntityHitResult ehr && ehr.getEntity() instanceof LivingEntity target) {
-				if (!player.isShiftKeyDown()) {
-					return doServerInteractLivingEntity(player, target, usedHand).consumesAction() ?
-							InteractionResultHolder.sidedSuccess(player.getItemInHand(usedHand), level.isClientSide()) :
-							InteractionResultHolder.pass(player.getItemInHand(usedHand));
-				} else {
-					MutableObject<Boolean> done = new MutableObject<>(false);
-					INFFGirlsTamed.ifBM(target, tamed -> {
-						if (player.getUUID().equals(tamed.getOwnerUUID())) {
-							tamed.asMob().setTarget(null);
-							NaUtilsInfoStatics.printMessageTranslatable(player, "info.nffgirls.item.combat_stop_attacking", target.getName().getString());
-							done.setValue(true);
-						}
-					});
-					if (done.getValue()) return InteractionResultHolder.sidedSuccess(player.getItemInHand(usedHand), level.isClientSide());
-				}
-			} else if (player.isShiftKeyDown()) {
+			// If targeting an entity
+			if (res != null && res.getType().equals(HitResult.Type.ENTITY)
+				&& res instanceof EntityHitResult ehr
+				&& ehr.getEntity() instanceof LivingEntity target
+				&& target.distanceTo(player) > player.getEntityReach()) {
+				return doServerInteractLivingEntity(player, target, usedHand).consumesAction() ?
+					InteractionResultHolder.sidedSuccess(player.getItemInHand(usedHand), level.isClientSide()) :
+					InteractionResultHolder.pass(player.getItemInHand(usedHand));
+			}
+
+			// Not targeting entity, reset
+			else if (player.isShiftKeyDown()) {
 				if (player.getItemInHand(usedHand).hasTag() && player.getItemInHand(usedHand).getTag().hasUUID(KEY_SETTING_MOB_IDENTIFIER)) {
 					player.getItemInHand(usedHand).removeTagKey(KEY_SETTING_MOB_IDENTIFIER);
 					NaUtilsInfoStatics.printMessageTranslatable(player, "info.nffgirls.item.combat_set_target_reset");
@@ -57,6 +53,7 @@ public class CombatCommandingWandItem extends NaUtilsItem {
 				}
 			}
 		}
+
 		return InteractionResultHolder.pass(player.getItemInHand(usedHand));
 	}
 
@@ -69,14 +66,20 @@ public class CombatCommandingWandItem extends NaUtilsItem {
 
 	private InteractionResult doServerInteractLivingEntity(Player player, LivingEntity target, InteractionHand hand) {
 		if (player.isShiftKeyDown()) {
-			MutableObject<Boolean> set = new MutableObject<>(false);
-			player.level.getEntities(player, player.getBoundingBox().inflate(16d), INFFGirlsTamed::isBM)
+			return INFFGirlsTamed.get(target).filter(t -> t.isOwnedBy(player)).map(tamed -> {
+				tamed.asMob().setTarget(null);
+				NaUtilsInfoStatics.printMessageTranslatable(player, "info.nffgirls.item.combat_stop_attacking", target.getName().getString());
+				return InteractionResult.sidedSuccess(player.level.isClientSide());
+			}).orElseGet(() -> {
+				AtomicBoolean set = new AtomicBoolean(false);
+				player.level.getEntities(player, player.getBoundingBox().inflate(16d), INFFGirlsTamed::isBM)
 					.forEach(e -> {
-						if (trySetTarget(player, e, target)) set.setValue(true);
+						if (trySetTarget(player, e, target)) set.set(true);
 					});
-			if (set.getValue())
-				NaUtilsInfoStatics.printMessageTranslatable(player, "info.nffgirls.item.combat_set_target_all", target.getName().getString());
-			return InteractionResult.sidedSuccess(player.level.isClientSide());
+				if (set.get())
+					NaUtilsInfoStatics.printMessageTranslatable(player, "info.nffgirls.item.combat_set_target_all", target.getName().getString());
+				return InteractionResult.sidedSuccess(player.level.isClientSide());
+			});
 		}
 		else if (player.getItemInHand(hand).hasTag() && player.getItemInHand(hand).getTag().hasUUID(KEY_SETTING_MOB_IDENTIFIER)) {
 			if (player.level instanceof ServerLevel sl) {
@@ -92,7 +95,8 @@ public class CombatCommandingWandItem extends NaUtilsItem {
 		}
 		else if (INFFGirlsTamed.isBMAnd(target, tamed -> player.getUUID().equals(tamed.getOwnerUUID()))) {
 			player.getItemInHand(hand).getOrCreateTag().putUUID(KEY_SETTING_MOB_IDENTIFIER, INFFGirlsTamed.getBM(target).getIdentifier());
-			NaUtilsInfoStatics.printMessageTranslatable(player, "info.nffgirls.item.combat_setting_target_selected", target.getName().getString());
+			NaUtilsInfoStatics.printMessageTranslatable(player, "info.nffgirls.item." +
+				"combat_setting_target_selected", target.getName().getString());
 			return InteractionResult.sidedSuccess(player.level.isClientSide());
 		}
 		return InteractionResult.PASS;

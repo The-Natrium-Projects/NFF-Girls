@@ -21,6 +21,7 @@ import net.minecraftforge.registries.ForgeRegistries;
 import net.sodiumzh.nautils.capability.CEntityDataCapability;
 import net.sodiumzh.nautils.containers.Tuple3;
 import net.sodiumzh.nautils.mixin.events.entity.MobInteractEvent;
+import net.sodiumzh.nautils.object.NaUtilsMapper;
 import net.sodiumzh.nautils.registries.NaUtilsCaps;
 import net.sodiumzh.nautils.statics.NaUtilsNBTStatics;
 import net.sodiumzh.nff.girls.eventlisteners.NFFGirlsEntityEventListeners;
@@ -60,18 +61,27 @@ import net.sodiumzh.nff.services.item.capability.wrapper.IItemStackMonitor;
 public interface INFFGirlsTamed extends INFFTamed, IAttributeMonitor, IItemStackMonitor
 {
 
+	public static NaUtilsMapper<Object, INFFGirlsTamed> GETTER = NaUtilsMapper.unconditionalNoVararg(Object.class, INFFGirlsTamed.class, o -> {
+			if (o == null) return null;
+			if (o instanceof INFFGirlsTamed bm)
+				return bm;
+			else return null;
+		});
+
+	public static Optional<INFFGirlsTamed> get(Object o) {
+		return GETTER.apply(o);
+	}
+
 	/**
 	 * Check if a mob has a NFFGirls BM interface.
 	 * <p>
 	 * As INFFTamed could also be implemented in capabilities instead of the mob class in the future,
 	 * always use this instead of {@code instanceof} check.
 	 */
+	@Deprecated
 	public static boolean isBM(Object o)
 	{
-		if (o == null) return false;
-		if (o instanceof INFFGirlsTamed bm)
-			return true;
-		else return false;
+		return get(o).isPresent();
 	}
 	
 	/**
@@ -80,13 +90,11 @@ public interface INFFGirlsTamed extends INFFTamed, IAttributeMonitor, IItemStack
 	 * As INFFTamed could also be implemented in capabilities instead of the mob class in the future,
 	 * always use this to cast a mob to BM.
 	 */
+	@Deprecated
 	@Nullable
 	public static INFFGirlsTamed getBM(Object o)
 	{
-		if (o == null) return null;
-		if (o instanceof INFFGirlsTamed bm)
-			return bm;
-		else return null;
+		return get(o).orElse(null);
 	}
 	
 	/**
@@ -96,15 +104,13 @@ public interface INFFGirlsTamed extends INFFTamed, IAttributeMonitor, IItemStack
 	 * you can use this to safely cast and do things to BM.
 	 * @return Whether the action is invoked.
 	 */
+	@Deprecated
 	public static boolean ifBM(Object o, Consumer<INFFGirlsTamed> action)
 	{
-		if (o == null) return false;
-		if (INFFGirlsTamed.isBM(o))
-		{
-			action.accept(INFFGirlsTamed.getBM(o));
+		return get(o).map(t -> {
+			action.accept(t);
 			return true;
-		}
-		else return false;
+		}).orElse(false);
 	}
 
 	/**
@@ -113,18 +119,18 @@ public interface INFFGirlsTamed extends INFFTamed, IAttributeMonitor, IItemStack
 	 * As INFFTamed could also be implemented in capabilities instead of the mob class in the future,
 	 * always use this instead of {@code instanceof} check and followed checks of the cast BM.
 	 */
+	@Deprecated
 	public static boolean isBMAnd(Object o, Predicate<INFFGirlsTamed> cond)
 	{
-		if (!isBM(o)) return false;
-		return cond.test(getBM(o));
+		return get(o).filter(cond).isPresent();
 	}
 
+	@Deprecated
 	public static void ifBMAnd(Object o, Predicate<INFFGirlsTamed> cond, Consumer<INFFGirlsTamed> operation) {
-		if (isBMAnd(o, cond)) {
-			ifBM(o, operation);
-		}
+		get(o).filter(cond).ifPresent(operation);
 	}
 
+	@Deprecated
 	public static boolean isBMAndOwnedBy(Object o, UUID ownerUUID) {
 		return isBMAnd(o, bm -> Objects.equals(ownerUUID, bm.getOwnerUUID()));
 	}
