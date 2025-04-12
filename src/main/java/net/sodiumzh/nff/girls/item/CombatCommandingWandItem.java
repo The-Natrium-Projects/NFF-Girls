@@ -38,7 +38,7 @@ public class CombatCommandingWandItem extends NaUtilsItem {
 			if (res != null && res.getType().equals(HitResult.Type.ENTITY)
 				&& res instanceof EntityHitResult ehr
 				&& ehr.getEntity() instanceof LivingEntity target
-				&& target.distanceTo(player) > player.getEntityReach()) {
+				&& target.distanceTo(player) > player.getReachDistance()) {
 				return doServerInteractLivingEntity(player, target, usedHand).consumesAction() ?
 					InteractionResultHolder.sidedSuccess(player.getItemInHand(usedHand), level.isClientSide()) :
 					InteractionResultHolder.pass(player.getItemInHand(usedHand));

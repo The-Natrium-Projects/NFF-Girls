@@ -28,6 +28,7 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.network.PacketDistributor;
+import net.minecraftforge.registries.ForgeRegistries;
 import net.sodiumzh.nautils.capability.SerializableCapabilityProvider;
 import net.sodiumzh.nautils.containers.Tuple2;
 import net.sodiumzh.nautils.containers.Tuple3;

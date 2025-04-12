@@ -210,7 +210,7 @@ public class CommandingWandItem extends NaUtilsItem
 
 		List<INFFTamed> mobsLoaded = NaUtilsEntityStatics.getEntitiesOnServer(level,
 			EntityTypeTest.forClass(Mob.class), e -> INFFGirlsTamed.isBMAndOwnedBy(e, player.getUUID()))
-			.stream().map(INFFTamed::getBM).filter(Objects::nonNull).toList();
+			.stream().map(e -> INFFTamed.get(e).orElse(null)).filter(Objects::nonNull).toList();
 		// Search in levels
 		mobsLoaded.stream().filter(e -> {
 			UUID uuid = e.getIdentifier();
