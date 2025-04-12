@@ -2,17 +2,23 @@
 
 ### 0.x.29
 
-Added mob searching with Commanding Wand. Right clicking with a Commanding Wand on a Soul Powder Block repeatedly will show the locations of mobs one by one. Shift+right click on a Soul Powder Block with an Evil Crystal Fragment on the off-hand will summon the latest-shown mob if it's in a loaded chunk, consuming a fragment.
+Note: this version has trade data format change, and related datapacks will stop working. To port old datapack format to new version, rename the path `nffgirls/vanilla_trade_listings` to `nffgirls/trades`, and use `trade_registry.json` to add new trade collections to mobs (see source for details).
 
-Now Commanding Wand doesn't summon mobs around by Shift+Right Click. Right click on a vanilla Bell instead.
+Added mob searching feature for Commanding Wand. Right clicking with a Commanding Wand on a Soul Powder Block repeatedly will show the locations of mobs one by one. Shift+right click on a Soul Powder Block with an Evil Crystal Fragment on the off-hand will summon the latest-shown mob if it's in a loaded chunk, consuming a fragment.
+
+Now Commanding Wand summons mobs around by right-clicking on a vanilla Bell instead of Shift+Right Click without target.
 
 Now Ender Executor will not teleport on friending process within 16 blocks away from player instead of 7 blocks.
 
-Fixed Ender Executor keeping the attacking pose without an attacking target.
+Fixed Ender Executor keeping the attacking pose without an attacking target in some permanent-anger modes.
 
+Fixed Nightwalker using wrong friending process.
 
+Fixed Nightwalker and Melty Monster using wrong healing items.
 
+Fixed /give still giving uninitialized items.
 
+Fixed respawners not consuming in the creative mode.
 
 ### 0.1.28.4
 
