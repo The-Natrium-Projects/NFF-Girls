@@ -3,7 +3,7 @@ package net.sodiumzh.nff.girls.entity.ai.goal;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.ai.navigation.GroundPathNavigation;
-import net.sodiumzh.nff.services.entity.ai.goal.preset.NFFFollowOwnerGoal;
+import net.sodiumzh.nff.services.entity.ai.goal.presets.NFFFollowOwnerGoal;
 import net.sodiumzh.nff.services.entity.taming.INFFTamed;
 import net.sodiumzh.nff.services.entity.taming.INFFTamedAmphibious;
 
