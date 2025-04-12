@@ -18,7 +18,7 @@ plugins {
     id 'org.spongepowered.mixin' version '0.7.+'
 }
 
-version = mod_version
+version = filename_version
 group = mod_group_id
 
 base {
@@ -178,17 +178,17 @@ dependencies {
     }
     // Example mod dependency with JEI - using fg.deobf() ensures the dependency is remapped to your development mappings
     // The JEI API is declared for compile time use, while the full JEI artifact is used at runtime
-    compileOnly fg.deobf("mezz.jei:jei-${mc_version}-common-api:${jei_version}")
-    compileOnly fg.deobf("mezz.jei:jei-${mc_version}-forge-api:${jei_version}")
-    runtimeOnly fg.deobf("mezz.jei:jei-${mc_version}-forge:${jei_version}")
-	implementation fg.deobf("blank:nffservices-${mc_version}:${services_version}")
-    implementation fg.deobf("blank:iconrenderer-${mc_version}:1.2.0")
-    //implementation fg.deobf("blank:mobbottle-${mc_version}:0.2")
-	/*jarJar(group: 'net.sodiumzh.nautils', name: 'nautils', version: "[${mc_version}-${nautils_version},)"){
-		jarJar.pin(it, "${mc_version}-${nautils_version}")
+    compileOnly fg.deobf("mezz.jei:jei-${minecraft_version}-common-api:${jei_version}")
+    compileOnly fg.deobf("mezz.jei:jei-${minecraft_version}-forge-api:${jei_version}")
+    runtimeOnly fg.deobf("mezz.jei:jei-${minecraft_version}-forge:${jei_version}")
+	implementation fg.deobf("blank:nffservices-${minecraft_version}:${services_version}")
+    implementation fg.deobf("blank:iconrenderer-${minecraft_version}:1.2.0")
+    //implementation fg.deobf("blank:mobbottle-${minecraft_version}:0.2")
+	/*jarJar(group: 'net.sodiumzh.nautils', name: 'nautils', version: "[${minecraft_version}-${nautils_version},)"){
+		jarJar.pin(it, "${minecraft_version}-${nautils_version}")
 	}*/
-	jarJar(group: 'net.sodiumzh', name: 'nffservices', version: "[${mc_version}-${services_version},)"){
-		jarJar.pin(it, "${mc_version}-${services_version}")
+	jarJar(group: 'net.sodiumzh', name: 'nffservices', version: "[${minecraft_version}-${services_version},)"){
+		jarJar.pin(it, "${minecraft_version}-${services_version}")
 	}
 	
     implementation fg.deobf("curse.maven:jade-324717:4986594")
@@ -215,7 +215,8 @@ tasks.named('processResources', ProcessResources).configure {
             forge_version: forge_version, forge_version_range: forge_version_range,
             loader_version_range: loader_version_range,
             mod_id: mod_id, mod_name: mod_name, mod_license: mod_license, mod_version: mod_version,
-            mod_authors: mod_authors, mod_description: mod_description,
+            mod_authors: mod_authors, mod_description: mod_description, services_version_range: services_version_range,
+            hmag_version_range: hmag_version_range
     ]
     inputs.properties replaceProperties
 
