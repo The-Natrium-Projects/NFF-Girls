@@ -18,9 +18,9 @@ public class NFFGirlsMobCatcherItem extends MobCatcherItem {
     public InteractionResult interactLivingEntity(Player player, LivingEntity interactionTarget, InteractionHand usedHand) {
         // Prevent usage when inventory is full, to prevent respawner loss
         if (player.getInventory().getFreeSlot() == -1) {
-            if (!player.level().isClientSide)
+            if (!player.level.isClientSide)
                 NaUtilsInfoStatics.printMessageTranslatable(player, "info.nffgirls.item.mob_catching_failed_inventory_full");
-            return InteractionResult.sidedSuccess(player.level().isClientSide);
+            return InteractionResult.sidedSuccess(player.level.isClientSide);
         }
         return super.interactLivingEntity(player, interactionTarget, usedHand);
     }
