@@ -16,7 +16,7 @@ public class CitadelBasedMobDictionaryItem extends NaUtilsItem {
         super(pProperties);
     }
 
-    private boolean usedOnEntity = false;
+    //private boolean usedOnEntity = false;
 
 
     /*public InteractionResult interactLivingEntity(Player playerIn, LivingEntity target, InteractionHand hand) {
@@ -69,7 +69,7 @@ public class CitadelBasedMobDictionaryItem extends NaUtilsItem {
             }
         }
 
-        this.usedOnEntity = false;
+        //this.usedOnEntity = false;
         return new InteractionResultHolder<>(InteractionResult.PASS, itemStackIn);
     }
 
