@@ -48,6 +48,15 @@ import net.sodiumzh.nautils.entity.taming.ITamingProcessWithProgress;
 import net.sodiumzh.nautils.mixin.events.entity.*;
 import net.sodiumzh.nautils.registries.NaUtilsCaps;
 import net.sodiumzh.nautils.statics.*;
+import net.sodiumzh.nff.girls.entity.tamingprocesses.hmag.HmagCreeperGirlTamingProcess;
+import net.sodiumzh.nff.girls.item.CombatCommandingWandItem;
+import net.sodiumzh.nff.services.entity.taming.NFFTamableAngryEvent;
+import net.sodiumzh.nff.services.entity.taming.NFFTamedStatics;
+import net.sodiumzh.nff.services.inventory.NFFTamedMobInventory;
+import net.sodiumzh.nff.services.inventory.NFFTamedMobInventoryWithEquipment;
+import net.sodiumzh.nff.services.inventory.NFFTamedMobInventoryWithHandItems;
+import org.apache.commons.lang3.mutable.MutableObject;
+import net.sodiumzh.nautils.block.ColoredBlocks;
 import net.sodiumzh.nff.girls.NFFGirls;
 import net.sodiumzh.nff.girls.effect.NecromancerWitherEffect;
 import net.sodiumzh.nff.girls.entity.INFFGirlsTamed;
@@ -1075,10 +1084,29 @@ public class NFFGirlsEntityEventListeners
 	{
 		event.mobBefriended.setCustomName(null);
 		if (NFFGirlsConfigs.ValueCache.Misc.REMOVE_HAND_ITEM_ON_TAMING) {
+			INFFGirlsTamed.get(event.mobBefriended).ifPresent(tamed -> {
+				NFFTamedMobInventory inv = tamed.getAdditionalInventory();
+				if (inv instanceof NFFTamedMobInventoryWithHandItems) {
+					inv.setItem(0, ItemStack.EMPTY);
+					inv.setItem(1, ItemStack.EMPTY);
+				} else if (inv instanceof NFFTamedMobInventoryWithEquipment) {
+					inv.setItem(4, ItemStack.EMPTY);
+					inv.setItem(5, ItemStack.EMPTY);
+				}
+			});
 			event.mobBefriended.setItemSlot(EquipmentSlot.MAINHAND, ItemStack.EMPTY);
 			event.mobBefriended.setItemSlot(EquipmentSlot.OFFHAND, ItemStack.EMPTY);
 		}
 		if (NFFGirlsConfigs.ValueCache.Misc.REMOVE_ARMOR_ON_TAMING) {
+			INFFGirlsTamed.get(event.mobBefriended).ifPresent(tamed -> {
+				NFFTamedMobInventory inv = tamed.getAdditionalInventory();
+				if (inv instanceof NFFTamedMobInventoryWithEquipment) {
+					inv.setItem(0, ItemStack.EMPTY);
+					inv.setItem(1, ItemStack.EMPTY);
+					inv.setItem(2, ItemStack.EMPTY);
+					inv.setItem(3, ItemStack.EMPTY);
+				}
+			});
 			event.mobBefriended.setItemSlot(EquipmentSlot.HEAD, ItemStack.EMPTY);
 			event.mobBefriended.setItemSlot(EquipmentSlot.CHEST, ItemStack.EMPTY);
 			event.mobBefriended.setItemSlot(EquipmentSlot.LEGS, ItemStack.EMPTY);
