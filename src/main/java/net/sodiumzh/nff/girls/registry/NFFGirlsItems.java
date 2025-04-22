@@ -211,9 +211,9 @@ public class NFFGirlsItems {
 			() -> new TradeIntroductionLetterItem(new Item.Properties().stacksTo(1).rarity(Rarity.UNCOMMON)));
 	
 	// Misc
-	public static final RegistryObject<NFFMobRespawnerItem> MOB_RESPAWNER = ITEMS.register("mob_respawner", () -> new NFFGirlsRespawnerItem(new Item.Properties().tab(TAB)).setRetainBefriendedMobInventory(false)
+	public static final RegistryObject<NFFMobRespawnerItem> MOB_RESPAWNER = ITEMS.register("mob_respawner", () -> new NFFGirlsRespawnerItem(new Item.Properties()).setRetainBefriendedMobInventory(false)
 		.setRetainBefriendedMobInventory(false).noDefaultInstance(false).cast());
-	public static final RegistryObject<NFFMobRespawnerItem> MOB_STORAGE_POD = ITEMS.register("mob_storage_pod", () -> new NFFGirlsRespawnerItem(new Item.Properties().tab(TAB))
+	public static final RegistryObject<NFFMobRespawnerItem> MOB_STORAGE_POD = ITEMS.register("mob_storage_pod", () -> new NFFGirlsRespawnerItem(new Item.Properties())
 		.redirectDefaultInstance(new ResourceLocation(NFFGirls.MOD_ID, "empty_mob_storage_pod")).cast());
 	public static final RegistryObject<MobCatcherItem> EMPTY_MOB_STORAGE_POD = ITEMS.register("empty_mob_storage_pod", () -> new NFFGirlsMobCatcherItem(new Item.Properties().tab(TAB), MOB_STORAGE_POD.get())
 		.canCatchCondition((m, p) -> (m instanceof INFFGirlsTamed bm && bm.getOwnerUUID().equals(p.getUUID()))));
