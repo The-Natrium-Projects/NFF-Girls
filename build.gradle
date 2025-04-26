@@ -119,7 +119,7 @@ minecraft {
         // This run config launches GameTestServer and runs all registered gametests, then exits.
         // By default, the server will crash when no gametests are provided.
         // The gametest system is also enabled by default for other run configs under the /test command.
-        gameTestServer {
+        /*gameTestServer {
             property 'forge.enabledGameTestNamespaces', mod_id
         }
 
@@ -129,7 +129,7 @@ minecraft {
 
             // Specify the modid for data generation, where to output the resulting resource, and where to look for existing resources.
             args '--mod', mod_id, '--all', '--output', file('src/generated/resources/'), '--existing', file('src/main/resources/')
-        }
+        }*/
     }
 }
 

@@ -1,5 +1,9 @@
 # Change Log
 
+### 0.x.29.1
+
+Fixed "removing equipment on friended" configs not taking effect.
+
 ### 0.x.29
 
 Note: this version has trade data format change, and related datapacks will stop working. To port old datapack format to new version, rename the path `nffgirls/vanilla_trade_listings` to `nffgirls/trades`, and use `trade_registry.json` to add new trade collections to mobs (see source for details).
@@ -7,6 +11,8 @@ Note: this version has trade data format change, and related datapacks will stop
 Added mob searching feature for Commanding Wand. Right clicking with a Commanding Wand on a Soul Powder Block repeatedly will show the locations of mobs one by one. Shift+right click on a Soul Powder Block with an Evil Crystal Fragment on the off-hand will summon the latest-shown mob if it's in a loaded chunk, consuming a fragment.
 
 Now Commanding Wand summons mobs around by right-clicking on a vanilla Bell instead of Shift+Right Click without target.
+
+Now waiting mobs will be sitting.
 
 Now Ender Executor will not teleport on friending process within 16 blocks away from player instead of 7 blocks.
 
