@@ -13,4 +13,4 @@ have to restart from the beginning.
 <NEWLINE>
 After getting friendly, you can equip it with armors and hand items. It has 2 Bauble slots. It can also use the Trident.
 <NEWLINE>
-The Drowned Girl can be healed with the Soul Powder and Soul Apple.
+The Drowned Girl can be healed with Rotten Flesh, Bone and Soul Powder. A Soul Apple can fully recover the health.
