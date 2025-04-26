@@ -17,21 +17,32 @@ import net.sodiumzh.nff.girls.registry.NFFGirlsItems;
 @OnlyIn(Dist.CLIENT)
 public class CitadelBasedMobDictionaryGUI extends GuiBasicBook {
     private static final ResourceLocation ROOT = new ResourceLocation("nffgirls:book/mob_dictionary/root.json");
-    private static final String TITLE_TRANSLATION_KEY = "dict.nffgirls.title";
+    //private static final String TITLE_TRANSLATION_KEY = "dict.nffgirls.title";
     private static final String TEXT_FILE_DIR = "nffgirls:book/mob_dictionary/";
 
-    public CitadelBasedMobDictionaryGUI(ItemStack bookStack) {
-        super(bookStack, Component.translatable(TITLE_TRANSLATION_KEY));
+    private final ResourceLocation root;
+    //private final String titleTranslationKey;
+    private final String textFileDirectory;
+
+    public CitadelBasedMobDictionaryGUI(ItemStack bookStack, Component title, ResourceLocation rootLocation,// String titleTranslationKey,
+                                        String textFileDirectory) {
+        super(bookStack, title);
+        this.root = rootLocation;
+        this.currentPageJSON = getRootPage();   // The root page field is not initialized in the super constructor call, so refresh it here
+        //this.titleTranslationKey = titleTranslationKey;
+        this.textFileDirectory = textFileDirectory;
     }
 
-    public CitadelBasedMobDictionaryGUI(ItemStack bookStack, String page) {
-        super(bookStack, Component.translatable(TITLE_TRANSLATION_KEY));
+    public CitadelBasedMobDictionaryGUI(ItemStack bookStack, ResourceLocation rootLocation, String titleTranslationKey,
+                                        String textFileDirectory) {
+        this(bookStack, Component.translatable(titleTranslationKey), rootLocation, /*titleTranslationKey, */textFileDirectory);
+    }
+
+    public CitadelBasedMobDictionaryGUI(ItemStack bookStack, String page, ResourceLocation rootLocation, String titleTranslationKey,
+                                        String textFileDirectory) {
+        this(bookStack, rootLocation, titleTranslationKey, textFileDirectory);
         String dir = this.getTextFileDirectory();
         this.currentPageJSON = new ResourceLocation(dir + page + ".json");
-    }
-
-    public CitadelBasedMobDictionaryGUI(ItemStack bookStack, Component title) {
-        super(bookStack, title);
     }
 
     public void render(GuiGraphics matrixStack, int x, int y, float partialTicks) {
@@ -58,23 +69,30 @@ public class CitadelBasedMobDictionaryGUI extends GuiBasicBook {
         RenderUnderminer.renderWithPickaxe = false;*/
     }
 
+    @Override
     protected int getBindingColor() {
         return HtmlColors.HTML_COLORS.get("dark_orchid").toCode();
     }
 
+    @Override
     public ResourceLocation getRootPage() {
-        return ROOT;
+        return root;
     }
 
+    @Override
     public String getTextFileDirectory() {
-        return TEXT_FILE_DIR;
+        return textFileDirectory;
     }
 
-    public static void openGUI(ItemStack itemStackIn) {
-        Minecraft.getInstance().setScreen(new CitadelBasedMobDictionaryGUI(itemStackIn));
+    public static void openGUI(ItemStack itemStackIn, ResourceLocation rootLocation, String titleTranslationKey,
+                               String textFileDirectory) {
+        Minecraft.getInstance().setScreen(new CitadelBasedMobDictionaryGUI(
+            itemStackIn, rootLocation, titleTranslationKey, textFileDirectory));
     }
 
-    public static void openGUI(ItemStack itemStackIn, String page) {
-        Minecraft.getInstance().setScreen(new CitadelBasedMobDictionaryGUI(itemStackIn, page));
+    public static void openGUI(ItemStack itemStackIn, String page, ResourceLocation rootLocation, String titleTranslationKey,
+                               String textFileDirectory) {
+        Minecraft.getInstance().setScreen(new CitadelBasedMobDictionaryGUI(
+            itemStackIn, page, rootLocation, titleTranslationKey, textFileDirectory));
     }
 }

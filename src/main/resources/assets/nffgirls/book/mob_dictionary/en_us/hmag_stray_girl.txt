@@ -16,4 +16,4 @@ After getting friendly, you can equip it with armors and hand items. It has 2 Ba
 It requires arrows to shoot, and can auto switch between the main and secondary weapons, either bows or melee weapons,
 depending on the distance to its enemy.
 <NEWLINE>
-The Stray Girl can be healed with the Soul Powder and Soul Apple.
+The Stray Girl can be healed with Rotten Flesh, Bone and Soul Powder. A Soul Apple can fully recover the health.

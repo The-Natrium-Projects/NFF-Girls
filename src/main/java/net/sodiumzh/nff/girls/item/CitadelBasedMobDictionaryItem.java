@@ -1,5 +1,6 @@
 package net.sodiumzh.nff.girls.item;
 
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.InteractionResultHolder;
@@ -12,8 +13,16 @@ import net.sodiumzh.nff.girls.client.gui.screen.CitadelBasedMobDictionaryGUI;
 // Copied and adjusted from Alex's Mobs book
 public class CitadelBasedMobDictionaryItem extends NaUtilsItem {
 
-    public CitadelBasedMobDictionaryItem(Properties pProperties) {
+    private final ResourceLocation root;
+    private final String titleTranslationKey;
+    private final String textFileDirectory;
+
+    public CitadelBasedMobDictionaryItem(Properties pProperties,
+          ResourceLocation rootLocation, String titleTranslationKey, String textFileDirectory) {
         super(pProperties);
+        this.root = rootLocation;
+        this.titleTranslationKey = titleTranslationKey;
+        this.textFileDirectory = textFileDirectory;
     }
 
     //private boolean usedOnEntity = false;
@@ -65,7 +74,7 @@ public class CitadelBasedMobDictionaryItem extends NaUtilsItem {
             }*/
 
             if (worldIn.isClientSide) {
-                CitadelBasedMobDictionaryGUI.openGUI(itemStackIn);
+                CitadelBasedMobDictionaryGUI.openGUI(itemStackIn, this.root, this.titleTranslationKey, this.textFileDirectory);
             }
         }
 

@@ -13,5 +13,5 @@ have to restart from the beginning.
 <NEWLINE>
 After getting friendly, you can equip it with armors and hand items. It has 2 Bauble slots.
 <NEWLINE>
-The Zombie Girl can be healed with the Soul Powder and Soul Apple. Like the vanilla Zombie, it will convert to the
+The Zombie Girl can be healed with Rotten Flesh, Bone and Soul Powder. A Soul Apple can fully recover the health. Like the vanilla Zombie, it will convert to the
 Drowned Girl after sinking into water for a few seconds. This conversion can be reverted with a Sponge.

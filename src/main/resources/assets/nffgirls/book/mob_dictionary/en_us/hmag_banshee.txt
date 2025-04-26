@@ -8,7 +8,7 @@ and there must be over 8 Wither Roses around you on the ground. Then you can rig
 Note that the friending progress will drop quickly when there aren't enough Wither Roses. If you're hit by the mob,
 you'll enter a cooling time of 60 seconds during which you cannot give any items to it.
 <NEWLINE>
-Like most undead mobs, the Banshee loves Soul Cake Slices best. It also receives Soul Apples and Soul Powders.
+Like most undead mobs, the Banshee loves Soul Cake Slices best. It also receives Soul Apples and s.
 <NEWLINE>
 After getting friendly, you can put items on its hands, and it has 3 Bauble slots. Note that the item on its off-hand
 cannot be stacked no matter what it is.
@@ -17,5 +17,5 @@ If it's holding a flower on the off-hand, it will provide effects depending on t
 Suspicious Stew's effect. If the effect is positive, it will apply to the owner and allies within 8 blocks around;
 the negative effects will be applied on the enemy when hit.
 <NEWLINE>
-Like most undead mobs, it can be healed with the Soul Powder and Soul Apple.
+Like most undead mobs, they can be healed with Rotten Flesh, Bone and Soul Powder. A Soul Apple can fully recover the health.
 
