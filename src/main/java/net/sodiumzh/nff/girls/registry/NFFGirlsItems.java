@@ -240,7 +240,9 @@ public class NFFGirlsItems {
 
 	public static final Either<RegistryObject<CitadelBasedMobDictionaryItem>, RegistryObject<ModDependencyFallbackItem>> MOB_DICTIONARY =
 			registerDepending(true,"mob_dictionary", "citadel",
-			() -> new CitadelBasedMobDictionaryItem(new Item.Properties().stacksTo(1).tab(TAB)));
+			() -> new CitadelBasedMobDictionaryItem(new Item.Properties().stacksTo(1).tab(TAB),
+				new ResourceLocation("nffgirls:book/mob_dictionary/root.json"),
+				"dict.nffgirls.title", "nffgirls:book/mob_dictionary/"));
 
 	/*static
 	{

@@ -22,4 +22,4 @@ take this damage.
 After getting friendly, the Jiangshi has 4 Bauble slots. When it's thunder-struck, it will not take damage but get powerful
 effects, including Strength III, Damage Absorption III and Fire Resistance for 1 minute, and get 20 experience.
 <NEWLINE>
-Like most undead mobs, it can be healed with the Soul Powder and Soul Apple.
+Like most undead mobs, it can be healed with Rotten Flesh, Bone and Soul Powder. A Soul Apple can fully recover the health.

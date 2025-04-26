@@ -16,5 +16,5 @@ After getting friendly, you can equip it with armors and hand items. It has 2 Ba
 It requires arrows to shoot, and can auto switch between the main and secondary weapons, either bows or melee weapons,
 depending on the distance to its enemy.
 <NEWLINE>
-The Skeleton Girl can be healed with the Soul Powder and Soul Apple. Like the vanilla Skeleton, it will convert to the
+The Skeleton Girl can be healed with Rotten Flesh, Bone and Soul Powder. A Soul Apple can fully recover the health. Like the vanilla Skeleton, it will convert to the
 Stray Girl after standing in the Powder Snow for a few seconds. This conversion can be reverted by using a Flint and Steel.

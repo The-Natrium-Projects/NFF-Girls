@@ -14,4 +14,4 @@ have to restart from the beginning.
 After getting friendly, you can modify its items on hands. It has 2 Bauble slots. Although not undead, it can equip
 the Soul Amulet.
 <NEWLINE>
-The Dullahan can be healed with the Soul Powder and Soul Apple.
+The Dullahan can be healed with Rotten Flesh, Bone and Soul Powder. A Soul Apple can fully recover the health.
