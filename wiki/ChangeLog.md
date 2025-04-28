@@ -1,6 +1,10 @@
 # Change Log
 
-### 0.x.29.1
+### 0.2.29.2
+
+Modified Mob Dictionary to match 0.2.29 features.
+
+### 0.2.29.1
 
 Fixed "removing equipment on friended" configs not taking effect.
 
