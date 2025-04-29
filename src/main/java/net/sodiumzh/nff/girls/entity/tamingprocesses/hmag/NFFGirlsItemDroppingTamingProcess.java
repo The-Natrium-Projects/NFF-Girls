@@ -16,7 +16,7 @@ import net.sodiumzh.nautils.capability.EntityTimerAccessor;
 import net.sodiumzh.nautils.entity.MobApplicableItemTable;
 import net.sodiumzh.nautils.entity.taming.ITamingProcess;
 import net.sodiumzh.nautils.entity.taming.TamingInteractionResult;
-import net.sodiumzh.nautils.mixin.event.entity.EntityTickEvent;
+import net.sodiumzh.nautils.mixin.events.entity.EntityTickEvent;
 import net.sodiumzh.nautils.registries.NaUtilsCaps;
 import net.sodiumzh.nautils.statics.NaUtilsEntityStatics;
 import net.sodiumzh.nautils.statics.NaUtilsItemStatics;

@@ -1,7 +1,7 @@
 package net.sodiumzh.nff.girls.entity.ai.goal;
 
 import net.minecraft.world.entity.EquipmentSlot;
-import net.sodiumzh.nff.services.entity.ai.goal.presets.NFFFleeSunGoal;
+import net.sodiumzh.nff.services.entity.ai.goal.preset.NFFFleeSunGoal;
 import net.sodiumzh.nff.services.entity.taming.INFFTamed;
 
 public class NFFGirlsAvoidSunOnSleepGoal extends NFFFleeSunGoal

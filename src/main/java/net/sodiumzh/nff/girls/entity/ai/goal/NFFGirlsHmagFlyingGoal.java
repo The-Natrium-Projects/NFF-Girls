@@ -18,7 +18,7 @@ import net.sodiumzh.nff.services.entity.ai.NFFTamedMobAIState;
 import net.sodiumzh.nff.services.entity.ai.goal.NFFGoal;
 import net.sodiumzh.nff.services.entity.ai.goal.NFFMoveGoal;
 import net.sodiumzh.nff.services.entity.ai.goal.NFFTargetGoal;
-import net.sodiumzh.nff.services.entity.ai.goal.presets.INFFFollowOwner;
+import net.sodiumzh.nff.services.entity.ai.goal.preset.INFFFollowOwner;
 import net.sodiumzh.nff.services.entity.taming.INFFTamed;
 
 /* Ported from HMaG-AbstractFlyingMonsterEntity (Mechalopa)

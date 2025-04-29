@@ -17,6 +17,7 @@ import net.sodiumzh.nff.girls.registry.NFFGirlsAngerRules;
 import net.sodiumzh.nff.girls.registry.NFFGirlsConfigs;
 import net.sodiumzh.nff.services.entity.capability.CNFFTamable;
 import net.sodiumzh.nff.services.entity.taming.*;
+import net.sodiumzh.nff.services.entity.taming.preset.NFFTamedEnderManPreset;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Optional;

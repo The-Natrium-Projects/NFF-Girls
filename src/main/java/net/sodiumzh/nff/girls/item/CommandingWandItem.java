@@ -22,11 +22,10 @@ import net.minecraft.world.level.entity.EntityTypeTest;
 import net.sodiumzh.nautils.item.NaUtilsItem;
 import net.sodiumzh.nautils.statics.NaUtilsAIStatics;
 import net.sodiumzh.nautils.statics.NaUtilsMathStatics;
-import net.sodiumzh.nautils.math.RndUtil;
 import net.sodiumzh.nautils.statics.*;
 import net.sodiumzh.nff.girls.entity.INFFGirlsTamed;
 import net.sodiumzh.nff.services.entity.ai.NFFTamedMobAIState;
-import net.sodiumzh.nff.services.entity.ai.goal.presets.INFFFollowOwner;
+import net.sodiumzh.nff.services.entity.ai.goal.preset.INFFFollowOwner;
 import net.sodiumzh.nff.services.entity.taming.INFFTamed;
 
 import javax.annotation.Nonnull;

@@ -187,7 +187,7 @@ public class NFFGirlsTrades
 			.addSells(3, 4, Items.NAUTILUS_SHELL, 1, 1, 4)
 			.setRequiredLevel(3)
 			.addBuys(ModItems.SAVAGEFANG_MEAT.get(), 24, 32, 1, 1, 4)
-			.addBuys(ModItems.SWAMPER_TENTACLE.get(), 8, 12, 1, 1, 4)
+			//.addBuys(ModItems.SWAMPER_TENTACLE.get(), 8, 12, 1, 1, 4)
 			.addBuys(Items.SCUTE, 4, 6, 1, 1, 4)
 			.addSells(12, 20, Items.TRIDENT, 1, 1, 4)
 			.setRequiredLevel(4)
@@ -903,9 +903,9 @@ public class NFFGirlsTrades
 				.readData(jsonPath(NFFGirlsEntityTypes.)).get());*/
 
 	public static NaUtilsRegistry.Accessor<VanillaTradeListingCollection<?>> HMAG_JIANGSHI= TRADE_COLLECTIONS.register(
-		NFFGirlsEntityTypes.HMAG_JIANGSHI.getId().getPath(), () -> VanillaTradeListingCollectionHelper.newCollection()
+		"hmag_jiangshi", () -> VanillaTradeListingCollectionHelper.newCollection()
 			.setCurrency(NFFGirlsItems.EVIL_GEM.get())
-			.readData(jsonPath(NFFGirlsEntityTypes.HMAG_JIANGSHI)).get());
+			.readData(jsonPath(new ResourceLocation("nffgirls", "hmag_jiangshi"))).get());
 			/*	.setRequiredLevel(1)
 				.addBuys(Items.LILY_PAD, 48, 56, 1, 1, 16)
 				.addBuys(Items.MANGROVE_ROOTS, 32, 48, 1, 1, 16)
@@ -936,9 +936,9 @@ public class NFFGirlsTrades
 				.readData(jsonPath(NFFGirlsEntityTypes.)).get());*/
 
 	public static NaUtilsRegistry.Accessor<VanillaTradeListingCollection<?>> HMAG_NIGHTWALKER= TRADE_COLLECTIONS.register(
-		NFFGirlsEntityTypes.HMAG_NIGHTWALKER.getId().getPath(), () -> VanillaTradeListingCollectionHelper.newCollection()
+		"hmag_nightwalker", () -> VanillaTradeListingCollectionHelper.newCollection()
 			.setCurrency(NFFGirlsItems.EVIL_GEM.get())
-			.readData(jsonPath(NFFGirlsEntityTypes.HMAG_NIGHTWALKER)).get());
+			.readData(jsonPath(new ResourceLocation("nffgirls", "hmag_nightwalker"))).get());
 				/*.setRequiredLevel(1)
 				.addBuys(Items.TERRACOTTA, 36, 48, 1, 1, 16)
 				.addBuys(Items.BRICKS, 36, 48, 1, 1, 16)

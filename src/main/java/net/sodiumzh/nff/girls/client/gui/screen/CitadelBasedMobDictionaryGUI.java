@@ -36,7 +36,7 @@ public class CitadelBasedMobDictionaryGUI extends GuiBasicBook {
 
     public CitadelBasedMobDictionaryGUI(ItemStack bookStack, ResourceLocation rootLocation, String titleTranslationKey,
                                         String textFileDirectory) {
-        this(bookStack, Component.translatable(titleTranslationKey), rootLocation, /*titleTranslationKey, */textFileDirectory);
+        this(bookStack, new TranslatableComponent(titleTranslationKey), rootLocation, /*titleTranslationKey, */textFileDirectory);
     }
 
     public CitadelBasedMobDictionaryGUI(ItemStack bookStack, String page, ResourceLocation rootLocation, String titleTranslationKey,

@@ -143,7 +143,7 @@ public interface CNFFGirlsTradeHandler extends CVanillaMerchant
 			this.getMeta().clear();
 			Multimap<Integer, IVanillaTradeListing> trades =
 					NFFGirlsTrades.TRADE_REGISTRY.get().collect()
-						.get(ForgeRegistries.ENTITY_TYPES.getKey(this.getMob().getType()), VillagerProfession.NONE)
+						.get(ForgeRegistries.ENTITIES.getKey(this.getMob().getType()), VillagerProfession.NONE)
 						.pickListingForSpecifiedLevels(this.getBM().getTradeEntryCountEachLevel());
 
 			//.getListings(INFFGirlsTamed.getBM(this.getMob()).getData().getInitialEntityType()).pickListingForSpecifiedLevels(INFFGirlsTamed.getBM(this.getMob()).getTradeEntryCountEachLevel());
@@ -173,7 +173,7 @@ public interface CNFFGirlsTradeHandler extends CVanillaMerchant
 			// Don't allow to regenerate at the introduction letter entry
 			if (index < 0 || index >= this.getOffersRaw().size() - 1) throw new IllegalArgumentException();
 			Set<IVanillaTradeListing> available = NFFGirlsTrades.TRADE_REGISTRY.get().collect().
-				get(ForgeRegistries.ENTITY_TYPES.getKey(INFFGirlsTamed.getBM(this.getMob()).getData().getInitialEntityType()), VillagerProfession.NONE)
+				get(ForgeRegistries.ENTITIES.getKey(INFFGirlsTamed.getBM(this.getMob()).getData().getInitialEntityType()), VillagerProfession.NONE)
 				.forLevel(this.getMeta(index).requiredMerchantLevel);
 			if (available.isEmpty()) return;
 			int merchantLevel = this.getMeta(index).requiredMerchantLevel;
@@ -429,7 +429,7 @@ public interface CNFFGirlsTradeHandler extends CVanillaMerchant
 		{
 			if (NFFGirlsTrades.TRADE_REGISTRY.get() == null) return false;
 			return !NFFGirlsTrades.TRADE_REGISTRY.get().collect()
-				.get(ForgeRegistries.ENTITY_TYPES.getKey(this.getMob().getType()), VillagerProfession.NONE)
+				.get(ForgeRegistries.ENTITIES.getKey(this.getMob().getType()), VillagerProfession.NONE)
 				.isEmpty();
 		}
 

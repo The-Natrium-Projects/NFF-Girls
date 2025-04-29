@@ -1,7 +1,7 @@
 package net.sodiumzh.nff.girls.entity.ai.goal;
 
 import net.minecraft.world.item.BowItem;
-import net.sodiumzh.nff.services.entity.ai.goal.presets.NFFRangedBowAttackGoal;
+import net.sodiumzh.nff.services.entity.ai.goal.preset.NFFRangedBowAttackGoal;
 import net.sodiumzh.nff.services.entity.taming.INFFTamed;
 
 public class NFFGirlsBowAttackGoal extends NFFRangedBowAttackGoal {
