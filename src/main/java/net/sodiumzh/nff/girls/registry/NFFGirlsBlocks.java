@@ -35,8 +35,7 @@ public class NFFGirlsBlocks {
 	{
 		return NFFGirlsItems.ITEMS.register(name, () -> new BlockItem(block.get(), properties.tab(NFFGirlsItems.TAB)));
 	}
-	
-	
+
 	/* Blocks */
 	
 	public static final RegistryObject<Block> SOUL_CARPET = NFFGirlsBlocks.BLOCKS.register("soul_carpet", () -> 
