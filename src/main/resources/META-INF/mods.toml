@@ -43,6 +43,6 @@ description='''Enjoy your Minecraft days with monster girls!'''
 [[dependencies.${mod_id}]]
     modId="nautils"
     mandatory=true
-    versionRange="[0.0.28, 0.0.29)"
+    versionRange="${nautils_version_range}"
     ordering="NONE"
     side="BOTH"

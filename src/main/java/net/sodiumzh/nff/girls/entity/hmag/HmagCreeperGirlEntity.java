@@ -7,6 +7,7 @@ import com.github.mechalopa.hmag.world.entity.CreeperGirlEntity;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.chat.Component;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
@@ -51,10 +52,13 @@ import net.sodiumzh.nff.services.entity.ai.goal.preset.NFFWaterAvoidingRandomStr
 import net.sodiumzh.nff.services.entity.ai.goal.preset.target.NFFHurtByTargetGoal;
 import net.sodiumzh.nautils.entity.MobApplicableItemTable;
 import net.sodiumzh.nff.services.entity.taming.NFFTamedStatics;
+import net.sodiumzh.nff.services.entity.taming.NFFTamingMapping;
 import net.sodiumzh.nff.services.entity.taming.preset.NFFTamedCreeperPreset;
 import net.sodiumzh.nff.services.inventory.NFFTamedInventoryMenu;
 import net.sodiumzh.nff.services.inventory.NFFTamedMobInventory;
 import net.sodiumzh.nff.services.inventory.NFFTamedMobInventoryWithEquipment;
+
+import javax.annotation.Nonnull;
 
 // Rewritten from HMaG CreeperGirlEntity
 public class HmagCreeperGirlEntity extends NFFTamedCreeperPreset implements INFFGirlsTamed
@@ -394,5 +398,13 @@ public class HmagCreeperGirlEntity extends NFFTamedCreeperPreset implements INFF
 	{
 		return 1.74F;
 	}
+
+	@Override
+	@Nonnull
+	public Component getTypeName() {
+		EntityType<?> typeBefore = NFFTamingMapping.getTypeBefore(this);
+		return typeBefore != null ? typeBefore.getDescription() : super.getTypeName();
+	}
+
 
 }

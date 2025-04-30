@@ -8,6 +8,7 @@ import java.util.function.Supplier;
 import com.github.mechalopa.hmag.world.entity.AlrauneEntity;
 
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.chat.Component;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.Container;
@@ -42,8 +43,11 @@ import net.sodiumzh.nff.services.entity.ai.goal.preset.target.NFFOwnerHurtTarget
 import net.sodiumzh.nautils.entity.MobApplicableItemTable;
 import net.sodiumzh.nff.services.entity.taming.INFFTamed;
 import net.sodiumzh.nff.services.entity.taming.NFFTamedStatics;
+import net.sodiumzh.nff.services.entity.taming.NFFTamingMapping;
 import net.sodiumzh.nff.services.inventory.NFFTamedInventoryMenu;
 import net.sodiumzh.nff.services.inventory.NFFTamedMobInventory;
+
+import javax.annotation.Nonnull;
 
 public class HmagAlrauneEntity extends AlrauneEntity implements INFFGirlsTamed {
 
@@ -309,6 +313,12 @@ public class HmagAlrauneEntity extends AlrauneEntity implements INFFGirlsTamed {
 		}
 		
 	}
-	
-	
+
+	@Override
+	@Nonnull
+	public Component getTypeName() {
+		EntityType<?> typeBefore = NFFTamingMapping.getTypeBefore(this);
+		return typeBefore != null ? typeBefore.getDescription() : super.getTypeName();
+	}
+
 }
