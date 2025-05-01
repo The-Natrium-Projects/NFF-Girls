@@ -1,10 +1,6 @@
 package net.sodiumzh.nff.girls.entity.hmag;
 
-import java.util.Arrays;
-
-import com.github.mechalopa.hmag.registry.ModEntityTypes;
 import com.github.mechalopa.hmag.world.entity.DrownedGirlEntity;
-
 import net.minecraft.nbt.ByteTag;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
@@ -38,25 +34,20 @@ import net.sodiumzh.nff.girls.inventory.NFFGirlsEquipmentTwoBaublesInventoryMenu
 import net.sodiumzh.nff.girls.registry.NFFGirlsConfigs;
 import net.sodiumzh.nff.girls.registry.NFFGirlsEntityTypes;
 import net.sodiumzh.nff.girls.registry.NFFGirlsHealingItems;
-import net.sodiumzh.nff.girls.registry.NFFGirlsItems;
 import net.sodiumzh.nff.girls.sound.NFFGirlsSoundPresets;
 import net.sodiumzh.nff.girls.util.NFFGirlsEntityStatics;
-import net.sodiumzh.nff.services.entity.ai.goal.presets.NFFAmphibiousGoals;
-import net.sodiumzh.nff.services.entity.ai.goal.presets.NFFFleeSunGoal;
-import net.sodiumzh.nff.services.entity.ai.goal.presets.NFFRandomStrollGoal;
-import net.sodiumzh.nff.services.entity.ai.goal.presets.NFFRandomSwimGoal;
-import net.sodiumzh.nff.services.entity.ai.goal.presets.NFFRestrictSunGoal;
-import net.sodiumzh.nff.services.entity.ai.goal.presets.NFFZombieAttackGoal;
-import net.sodiumzh.nff.services.entity.ai.goal.presets.target.NFFHurtByTargetGoal;
-import net.sodiumzh.nautils.entity.MobApplicableItemTable;
+import net.sodiumzh.nff.services.entity.ai.goal.preset.*;
+import net.sodiumzh.nff.services.entity.ai.goal.preset.target.NFFHurtByTargetGoal;
 import net.sodiumzh.nff.services.entity.taming.INFFTamedAmphibious;
 import net.sodiumzh.nff.services.entity.taming.NFFTamedStatics;
 import net.sodiumzh.nff.services.entity.taming.NFFTamingMapping;
 import net.sodiumzh.nff.services.inventory.NFFTamedInventoryMenu;
 import net.sodiumzh.nff.services.inventory.NFFTamedMobInventory;
 import net.sodiumzh.nff.services.inventory.NFFTamedMobInventoryWithEquipment;
+import net.sodiumzh.nfu.entity.MobApplicableItemTable;
 
 import javax.annotation.Nonnull;
+import java.util.Arrays;
 
 public class HmagDrownedGirlEntity extends DrownedGirlEntity implements INFFGirlsTamedSunSensitiveMob, INFFTamedAmphibious
 {

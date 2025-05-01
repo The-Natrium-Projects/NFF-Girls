@@ -1,17 +1,13 @@
 package net.sodiumzh.nff.girls.entity;
 
-import javax.annotation.Nullable;
-
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.projectile.AbstractArrow;
-import net.minecraft.world.item.ArrowItem;
-import net.minecraft.world.item.BowItem;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Items;
-import net.minecraft.world.item.TieredItem;
+import net.minecraft.world.item.*;
 import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.item.enchantment.Enchantments;
 import net.sodiumzh.nff.girls.registry.NFFGirlsTags;
+
+import javax.annotation.Nullable;
 
 /**
  * Utilities for bow-shooting mob behaviors.

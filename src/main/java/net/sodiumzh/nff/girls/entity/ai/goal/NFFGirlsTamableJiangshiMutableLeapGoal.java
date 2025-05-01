@@ -3,7 +3,6 @@ package net.sodiumzh.nff.girls.entity.ai.goal;
 import com.github.mechalopa.hmag.registry.ModSoundEvents;
 import com.github.mechalopa.hmag.world.entity.JiangshiEntity;
 import com.github.mechalopa.hmag.world.entity.ai.goal.LeapAtTargetGoal2;
-
 import net.minecraft.world.entity.Mob;
 
 /**

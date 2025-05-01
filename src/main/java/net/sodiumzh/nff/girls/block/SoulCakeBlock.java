@@ -12,8 +12,8 @@ import net.minecraft.world.level.block.CakeBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.gameevent.GameEvent;
 import net.minecraft.world.phys.BlockHitResult;
-import net.sodiumzh.nautils.statics.NaUtilsEntityStatics;
 import net.sodiumzh.nff.girls.registry.NFFGirlsEffects;
+import net.sodiumzh.nfu.util.NFUEntityStatics;
 
 public class SoulCakeBlock extends CakeBlock
 {
@@ -67,9 +67,9 @@ public class SoulCakeBlock extends CakeBlock
 	  {
 	         player.getFoodData().eat(6, 0.1F);
 	         // 30s undead affinity
-	         NaUtilsEntityStatics.addEffectSafe(player, NFFGirlsEffects.UNDEAD_AFFINITY.get(), 5*60*20);
-			 NaUtilsEntityStatics.addEffectSafe(player, MobEffects.REGENERATION, 5*60*20);
-			 NaUtilsEntityStatics.addEffectSafe(player, MobEffects.SATURATION, 5);
+	         NFUEntityStatics.addEffectSafe(player, NFFGirlsEffects.UNDEAD_AFFINITY.get(), 5*60*20);
+			 NFUEntityStatics.addEffectSafe(player, MobEffects.REGENERATION, 5*60*20);
+			 NFUEntityStatics.addEffectSafe(player, MobEffects.SATURATION, 5);
 	         int i = pState.getValue(BITES);
 	         pLevel.gameEvent(player, GameEvent.EAT, pPos);
 	         if (i < 6) {

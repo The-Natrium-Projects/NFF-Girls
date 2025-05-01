@@ -1,10 +1,5 @@
 package net.sodiumzh.nff.girls.client.renderer;
 
-import java.util.Random;
-
-import org.joml.Matrix3f;
-import org.joml.Matrix4f;
-
 import com.github.mechalopa.hmag.HMaG;
 import com.github.mechalopa.hmag.client.ModModelLayers;
 import com.github.mechalopa.hmag.client.renderer.layers.ItemInHandLayer2;
@@ -12,7 +7,6 @@ import com.github.mechalopa.hmag.client.util.ModClientUtils;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.mojang.math.Axis;
-
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.culling.Frustum;
@@ -29,6 +23,10 @@ import net.sodiumzh.nff.girls.client.model.NFFGirlsHmagEnderExecutorModel;
 import net.sodiumzh.nff.girls.client.renderer.layer.NFFGirlsHmagEnderExecutorCarriedBlockLayer;
 import net.sodiumzh.nff.girls.client.renderer.layer.NFFGirlsHmagEnderExecutorEyesLayer;
 import net.sodiumzh.nff.girls.entity.hmag.HmagEnderExecutorEntity;
+import org.joml.Matrix3f;
+import org.joml.Matrix4f;
+
+import java.util.Random;
 
 // Ported from hmag
 @OnlyIn(Dist.CLIENT)

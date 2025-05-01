@@ -4,7 +4,7 @@ import net.minecraft.world.entity.EntitySelector;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.TieredItem;
 import net.sodiumzh.nff.girls.entity.hmag.HmagCreeperGirlEntity;
-import net.sodiumzh.nff.services.entity.ai.goal.presets.NFFMeleeAttackGoal;
+import net.sodiumzh.nff.services.entity.ai.goal.preset.NFFMeleeAttackGoal;
 import net.sodiumzh.nff.services.entity.taming.INFFTamed;
 
 public class NFFGirlsHmagCreeperGirlMeleeAttackGoal extends NFFMeleeAttackGoal

@@ -1,7 +1,5 @@
 package net.sodiumzh.nff.girls.registry;
 
-import java.util.function.Function;
-
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
@@ -14,39 +12,10 @@ import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 import net.sodiumzh.nff.girls.NFFGirls;
-import net.sodiumzh.nff.girls.entity.hmag.HmagAlrauneEntity;
-import net.sodiumzh.nff.girls.entity.hmag.HmagBansheeEntity;
-import net.sodiumzh.nff.girls.entity.hmag.HmagCreeperGirlEntity;
-import net.sodiumzh.nff.girls.entity.hmag.HmagCrimsonSlaughtererEntity;
-import net.sodiumzh.nff.girls.entity.hmag.HmagCursedDollEntity;
-import net.sodiumzh.nff.girls.entity.hmag.HmagDodomekiEntity;
-import net.sodiumzh.nff.girls.entity.hmag.HmagDrownedGirlEntity;
-import net.sodiumzh.nff.girls.entity.hmag.HmagDullahanEntity;
-import net.sodiumzh.nff.girls.entity.hmag.HmagEnderExecutorEntity;
-import net.sodiumzh.nff.girls.entity.hmag.HmagGhastlySeekerEntity;
-import net.sodiumzh.nff.girls.entity.hmag.HmagGlaryadEntity;
-import net.sodiumzh.nff.girls.entity.hmag.HmagHarpyEntity;
-import net.sodiumzh.nff.girls.entity.hmag.HmagHornetEntity;
-import net.sodiumzh.nff.girls.entity.hmag.HmagHuskGirlEntity;
-import net.sodiumzh.nff.girls.entity.hmag.HmagImpEntity;
-import net.sodiumzh.nff.girls.entity.hmag.HmagJackFrostEntity;
-import net.sodiumzh.nff.girls.entity.hmag.HmagJiangshiEntity;
-import net.sodiumzh.nff.girls.entity.hmag.HmagKoboldEntity;
-import net.sodiumzh.nff.girls.entity.hmag.HmagMeltyMonsterEntity;
-import net.sodiumzh.nff.girls.entity.hmag.HmagNecroticReaperEntity;
-import net.sodiumzh.nff.girls.entity.hmag.HmagNightwalkerEntity;
-import net.sodiumzh.nff.girls.entity.hmag.HmagRedcapEntity;
-import net.sodiumzh.nff.girls.entity.hmag.HmagSkeletonGirlEntity;
-import net.sodiumzh.nff.girls.entity.hmag.HmagSlimeGirlEntity;
-import net.sodiumzh.nff.girls.entity.hmag.HmagSnowCanineEntity;
-import net.sodiumzh.nff.girls.entity.hmag.HmagStrayGirlEntity;
-import net.sodiumzh.nff.girls.entity.hmag.HmagWitherSkeletonGirlEntity;
-import net.sodiumzh.nff.girls.entity.hmag.HmagZombieGirlEntity;
-import net.sodiumzh.nff.girls.entity.projectile.MagicalGelBallEntity;
-import net.sodiumzh.nff.girls.entity.projectile.NFFGhastFireballEntity;
-import net.sodiumzh.nff.girls.entity.projectile.NFFHmagAlrauneSeedEntity;
-import net.sodiumzh.nff.girls.entity.projectile.NecromancerMagicBulletEntity;
-import net.sodiumzh.nff.girls.entity.projectile.ReinforcedFishingHookEntity;
+import net.sodiumzh.nff.girls.entity.hmag.*;
+import net.sodiumzh.nff.girls.entity.projectile.*;
+
+import java.util.function.Function;
 
 @Mod.EventBusSubscriber(modid = NFFGirls.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class NFFGirlsEntityTypes {

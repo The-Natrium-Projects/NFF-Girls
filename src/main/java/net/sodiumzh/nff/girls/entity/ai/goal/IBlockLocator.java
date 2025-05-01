@@ -1,8 +1,8 @@
 package net.sodiumzh.nff.girls.entity.ai.goal;
 
-import java.util.Collection;
-
 import net.minecraft.world.level.block.Block;
+
+import java.util.Collection;
 
 /**
  * Interface for mobs that can locate a certain type of block nearby

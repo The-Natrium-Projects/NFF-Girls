@@ -1,10 +1,6 @@
 package net.sodiumzh.nff.girls.entity.hmag;
 
-import java.util.Arrays;
-import java.util.UUID;
-
 import com.github.mechalopa.hmag.world.entity.SlimeGirlEntity;
-
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.syncher.EntityDataAccessor;
@@ -12,8 +8,7 @@ import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.Container;
-import net.minecraft.world.InteractionHand;
-import net.minecraft.world.InteractionResult;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.ai.goal.FloatGoal;
@@ -24,11 +19,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
-import net.sodiumzh.nautils.annotation.DontCallManually;
-import net.sodiumzh.nautils.math.LinearColor;
-import net.sodiumzh.nautils.registries.NaUtilsEntityDataSerializers;
 import net.sodiumzh.nff.girls.NFFGirls;
-import net.sodiumzh.nff.girls.entity.INFFGirlsTamed;
 import net.sodiumzh.nff.girls.entity.INFFGirlsTamed;
 import net.sodiumzh.nff.girls.entity.ai.goal.target.NFFGirlsNearestHostileToOwnerTargetGoal;
 import net.sodiumzh.nff.girls.entity.ai.goal.target.NFFGirlsNearestHostileToSelfTargetGoal;
@@ -37,29 +28,28 @@ import net.sodiumzh.nff.girls.entity.ai.goal.target.NFFGirlsOwnerHurtTargetGoal;
 import net.sodiumzh.nff.girls.inventory.NFFGirlsSlimeGirlInventoryMenu;
 import net.sodiumzh.nff.girls.item.MagicalGelColorUtils;
 import net.sodiumzh.nff.girls.registry.NFFGirlsHealingItems;
-import net.sodiumzh.nff.girls.registry.NFFGirlsItems;
 import net.sodiumzh.nff.girls.sound.NFFGirlsSoundPresets;
-import net.sodiumzh.nff.girls.util.NFFGirlsEntityStatics;
-import net.sodiumzh.nff.services.entity.ai.goal.presets.NFFFollowOwnerGoal;
-import net.sodiumzh.nff.services.entity.ai.goal.presets.NFFLeapAtOwnerGoal;
-import net.sodiumzh.nff.services.entity.ai.goal.presets.NFFLeapAtTargetGoal;
-import net.sodiumzh.nff.services.entity.ai.goal.presets.NFFMeleeAttackGoal;
-import net.sodiumzh.nff.services.entity.ai.goal.presets.NFFWaterAvoidingRandomStrollGoal;
-import net.sodiumzh.nff.services.entity.ai.goal.presets.target.NFFHurtByTargetGoal;
-import net.sodiumzh.nautils.entity.MobApplicableItemTable;
+import net.sodiumzh.nff.services.entity.ai.goal.preset.*;
+import net.sodiumzh.nff.services.entity.ai.goal.preset.target.NFFHurtByTargetGoal;
 import net.sodiumzh.nff.services.entity.taming.NFFTamedStatics;
 import net.sodiumzh.nff.services.entity.taming.NFFTamingMapping;
 import net.sodiumzh.nff.services.inventory.NFFTamedInventoryMenu;
 import net.sodiumzh.nff.services.inventory.NFFTamedMobInventory;
+import net.sodiumzh.nfu.annotation.DontCallManually;
+import net.sodiumzh.nfu.entity.MobApplicableItemTable;
+import net.sodiumzh.nfu.math.LinearColor;
+import net.sodiumzh.nfu.registry.NFUEntityDataSerializers;
 
 import javax.annotation.Nonnull;
+import java.util.Arrays;
+import java.util.UUID;
 
 public class HmagSlimeGirlEntity extends SlimeGirlEntity implements INFFGirlsTamed {
 
 	/* Data sync */
 
 	protected static final EntityDataAccessor<LinearColor> DATA_COLOR = SynchedEntityData
-			.defineId(HmagSlimeGirlEntity.class, NaUtilsEntityDataSerializers.LINEAR_COLOR.get());
+			.defineId(HmagSlimeGirlEntity.class, NFUEntityDataSerializers.LINEAR_COLOR.get());
 	
 	
 	@Override
@@ -240,7 +230,7 @@ public class HmagSlimeGirlEntity extends SlimeGirlEntity implements INFFGirlsTam
 	}
 	
 	@Override
-	public void remove(RemovalReason reason)
+	public void remove(Entity.RemovalReason reason)
 	{
 	      this.setRemoved(reason);
 	      this.invalidateCaps();

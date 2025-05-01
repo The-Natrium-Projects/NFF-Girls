@@ -1,60 +1,28 @@
 package net.sodiumzh.nff.girls.registry;
 
-import java.util.HashSet;
-import java.util.Optional;
-import java.util.function.Supplier;
-
-import com.github.mechalopa.hmag.registry.ModItems;
 import com.github.mechalopa.hmag.world.item.ModSwordItem;
-
 import com.mojang.datafixers.util.Either;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.EquipmentSlot;
-import net.minecraft.world.entity.Mob;
-import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.*;
-import net.minecraftforge.event.entity.player.ItemTooltipEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.ModList;
-import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
-import net.sodiumzh.nautils.compat.ModDependencyFallbackItem;
-import net.sodiumzh.nautils.item.NaUtilsItem;
-import net.sodiumzh.nautils.statics.NaUtilsCompatStatics;
-import net.sodiumzh.nautils.statics.NaUtilsInfoStatics;
 import net.sodiumzh.nff.girls.NFFGirls;
 import net.sodiumzh.nff.girls.entity.INFFGirlsTamed;
-import net.sodiumzh.nff.girls.item.CommandingWandItem;
-import net.sodiumzh.nff.girls.item.EmptyMagicalGelBottleItem;
-import net.sodiumzh.nff.girls.item.EvilMagnetItem;
-import net.sodiumzh.nff.girls.item.FavorabilityModifierItem;
-import net.sodiumzh.nff.girls.item.MagicalGelBallItem;
-import net.sodiumzh.nff.girls.item.MagicalGelBottleItem;
-import net.sodiumzh.nff.girls.item.NFFGirlsRespawnerItem;
-import net.sodiumzh.nff.girls.item.NFFTamingProgressProbeItem;
-import net.sodiumzh.nff.girls.item.NecromancerArmorItem;
-import net.sodiumzh.nff.girls.item.NecromancerWandItem;
-import net.sodiumzh.nff.girls.item.PeachWoodSwordItem;
-import net.sodiumzh.nff.girls.item.ReinforcedFishingRodItem;
-import net.sodiumzh.nff.girls.item.TaoistTalismanItem;
-import net.sodiumzh.nff.girls.item.TradeIntroductionLetterItem;
-import net.sodiumzh.nff.girls.item.TransferringTagItem;
-import net.sodiumzh.nff.girls.item.XPModifierItem;
 import net.sodiumzh.nff.girls.item.*;
-import net.sodiumzh.nff.girls.subsystem.baublesystem.baubles.AquaJadeBaubleItem;
-import net.sodiumzh.nff.girls.subsystem.baublesystem.baubles.CourageAmuletBaubleItem;
-import net.sodiumzh.nff.girls.subsystem.baublesystem.baubles.HealingJadeBaubleItem;
-import net.sodiumzh.nff.girls.subsystem.baublesystem.baubles.LifeJadeBaubleItem;
-import net.sodiumzh.nff.girls.subsystem.baublesystem.baubles.PoisonousThornBaubleItem;
-import net.sodiumzh.nff.girls.subsystem.baublesystem.baubles.ResistanceAmuletBaubleItem;
-import net.sodiumzh.nff.girls.subsystem.baublesystem.baubles.SoulAmuletBaubleItem;
+import net.sodiumzh.nff.girls.subsystem.bauble.bauble.*;
 import net.sodiumzh.nff.services.item.MobCatcherItem;
 import net.sodiumzh.nff.services.item.NFFMobRespawnerItem;
+import net.sodiumzh.nfu.compat.ModDependencyFallbackItem;
+import net.sodiumzh.nfu.util.NFUCompatStatics;
+import net.sodiumzh.nfu.util.NFUInfoStatics;
+
+import java.util.HashSet;
+import java.util.function.Supplier;
 
 public class NFFGirlsItems {
 	
@@ -113,7 +81,7 @@ public class NFFGirlsItems {
 		registerDepending(boolean tab, String key, String dependingModId, Supplier<T> supplier)
 	{
 		Either<RegistryObject<T>, RegistryObject<ModDependencyFallbackItem>> res =
-				NaUtilsCompatStatics.registerModDependentOrElse(ITEMS, key, dependingModId, supplier,
+				NFUCompatStatics.registerModDependentOrElse(ITEMS, key, dependingModId, supplier,
 						() -> new ModDependencyFallbackItem(dependingModId, new Item.Properties()));
 		res.ifLeft(obj -> {if (!tab) NO_TAB.add(obj);}).ifRight(obj -> {if (!tab) NO_TAB.add(obj);});
 		return res;
@@ -139,72 +107,72 @@ public class NFFGirlsItems {
 	// Baubles
 	// Desc utils
 	public static Supplier<MutableComponent> baubleHPRecovery(double rawValue) {
-		return () -> NaUtilsInfoStatics.createTranslatable("info.nffgirls.bauble.healing_per_second", 
+		return () -> NFUInfoStatics.createTranslatable("info.nffgirls.bauble.healing_per_second",
 				String.format("%.2f", NFFGirlsConfigs.ValueCache.Baubles.BAUBLE_HEALTH_RECOVERY_SCALE * rawValue)).withStyle(ChatFormatting.GRAY); 
 	}
 	public static Supplier<MutableComponent> baubleHPMax(double rawValue) {
-		return () -> NaUtilsInfoStatics.createTranslatable("info.nffgirls.bauble.hpmax", 
+		return () -> NFUInfoStatics.createTranslatable("info.nffgirls.bauble.hpmax",
 			String.format("+%.1f", NFFGirlsConfigs.ValueCache.Baubles.BAUBLE_MAX_HP_BOOSTING_SCALE * rawValue)).withStyle(ChatFormatting.GRAY); 
 	}
 	public static Supplier<MutableComponent> baubleAtk(double rawValue) {
-		return () -> NaUtilsInfoStatics.createTranslatable("info.nffgirls.bauble.atk", 
+		return () -> NFUInfoStatics.createTranslatable("info.nffgirls.bauble.atk",
 				String.format("+%.1f", NFFGirlsConfigs.ValueCache.Baubles.BAUBLE_ATK_BOOSTING_SCALE * rawValue)).withStyle(ChatFormatting.GRAY); 
 	}
 	public static Supplier<MutableComponent> baubleArmor(double rawValue) {
-		return () -> NaUtilsInfoStatics.createTranslatable("info.nffgirls.bauble.armor", 
+		return () -> NFUInfoStatics.createTranslatable("info.nffgirls.bauble.armor",
 				String.format("+%.1f", NFFGirlsConfigs.ValueCache.Baubles.BAUBLE_ARMOR_BOOSTING_SCALE * rawValue)).withStyle(ChatFormatting.GRAY); 
 	}
 
 	// Registry
 	public static final RegistryObject<SoulAmuletBaubleItem> SOUL_AMULET = register("soul_amulet", () -> new SoulAmuletBaubleItem(
 			NFFGirls.MOD_ID + ":soul_amulet", 1, new Item.Properties().rarity(Rarity.UNCOMMON))
-			.description(NaUtilsInfoStatics.createTranslatable("info.nffgirls.bauble.soul_amulet").withStyle(ChatFormatting.GRAY))
+			.description(NFUInfoStatics.createTranslatable("info.nffgirls.bauble.soul_amulet").withStyle(ChatFormatting.GRAY))
 			.description(baubleHPMax(10.0))
 			.description(baubleAtk(3.0))
-			.description(NaUtilsInfoStatics.createTranslatable("info.nffgirls.bauble.sun_immune").withStyle(ChatFormatting.GRAY)).cast());
+			.description(NFUInfoStatics.createTranslatable("info.nffgirls.bauble.sun_immune").withStyle(ChatFormatting.GRAY)).cast());
 	public static final RegistryObject<SoulAmuletBaubleItem> SOUL_AMULET_II = register("soul_amulet_ii", () -> new SoulAmuletBaubleItem(
 			NFFGirls.MOD_ID + ":soul_amulet", 2, new Item.Properties().rarity(Rarity.RARE)).alwaysFoil()
-			.description(NaUtilsInfoStatics.createTranslatable("info.nffgirls.bauble.soul_amulet").withStyle(ChatFormatting.GRAY))
+			.description(NFUInfoStatics.createTranslatable("info.nffgirls.bauble.soul_amulet").withStyle(ChatFormatting.GRAY))
 			.description(baubleHPMax(15.0))
 			.description(baubleAtk(5.0))
-			.description(NaUtilsInfoStatics.createTranslatable("info.nffgirls.bauble.speed", "+10%").withStyle(ChatFormatting.GRAY))
-			.description(NaUtilsInfoStatics.createTranslatable("info.nffgirls.bauble.sun_immune").withStyle(ChatFormatting.GRAY)).cast());
+			.description(NFUInfoStatics.createTranslatable("info.nffgirls.bauble.speed", "+10%").withStyle(ChatFormatting.GRAY))
+			.description(NFUInfoStatics.createTranslatable("info.nffgirls.bauble.sun_immune").withStyle(ChatFormatting.GRAY)).cast());
 	public static final RegistryObject<SoulAmuletBaubleItem> SOUL_AMULET_III = register("soul_amulet_iii", () -> new SoulAmuletBaubleItem(
 			NFFGirls.MOD_ID + ":soul_amulet", 3, new Item.Properties().rarity(Rarity.RARE))
-			.description(NaUtilsInfoStatics.createTranslatable("info.nffgirls.bauble.soul_amulet").withStyle(ChatFormatting.GRAY))
+			.description(NFUInfoStatics.createTranslatable("info.nffgirls.bauble.soul_amulet").withStyle(ChatFormatting.GRAY))
 			.description(baubleHPMax(25.0))
 			.description(baubleAtk(8.0))
-			.description(NaUtilsInfoStatics.createTranslatable("info.nffgirls.bauble.speed", "+15%").withStyle(ChatFormatting.GRAY))
-			.description(NaUtilsInfoStatics.createTranslatable("info.nffgirls.bauble.sun_immune").withStyle(ChatFormatting.GRAY)).cast());
+			.description(NFUInfoStatics.createTranslatable("info.nffgirls.bauble.speed", "+15%").withStyle(ChatFormatting.GRAY))
+			.description(NFUInfoStatics.createTranslatable("info.nffgirls.bauble.sun_immune").withStyle(ChatFormatting.GRAY)).cast());
 	public static final RegistryObject<SoulAmuletBaubleItem> SOUL_AMULET_IV = register("soul_amulet_iv", () -> new SoulAmuletBaubleItem(
 			NFFGirls.MOD_ID + ":soul_amulet", 4, new Item.Properties().rarity(Rarity.EPIC)).alwaysFoil()
-			.description(NaUtilsInfoStatics.createTranslatable("info.nffgirls.bauble.soul_amulet").withStyle(ChatFormatting.GRAY))
+			.description(NFUInfoStatics.createTranslatable("info.nffgirls.bauble.soul_amulet").withStyle(ChatFormatting.GRAY))
 			.description(baubleHPMax(40.0))
 			.description(baubleAtk(12.0))
-			.description(NaUtilsInfoStatics.createTranslatable("info.nffgirls.bauble.speed", "+20%").withStyle(ChatFormatting.GRAY))
+			.description(NFUInfoStatics.createTranslatable("info.nffgirls.bauble.speed", "+20%").withStyle(ChatFormatting.GRAY))
 			.description(baubleHPRecovery(0.1))
 
-			.description(NaUtilsInfoStatics.createTranslatable("info.nffgirls.bauble.sun_immune").withStyle(ChatFormatting.GRAY)).cast());
+			.description(NFUInfoStatics.createTranslatable("info.nffgirls.bauble.sun_immune").withStyle(ChatFormatting.GRAY)).cast());
 	public static final RegistryObject<CourageAmuletBaubleItem> COURAGE_AMULET = register("courage_amulet", () -> new CourageAmuletBaubleItem(
 			NFFGirls.MOD_ID + ":courage_amulet", 1, new Item.Properties().rarity(Rarity.UNCOMMON))
-			.description(NaUtilsInfoStatics.createTranslatable("info.nffgirls.bauble.proactive_attack").withStyle(ChatFormatting.GRAY))
+			.description(NFUInfoStatics.createTranslatable("info.nffgirls.bauble.proactive_attack").withStyle(ChatFormatting.GRAY))
 			.description(baubleAtk(4.0))
-			.description(NaUtilsInfoStatics.createTranslatable("info.nffgirls.bauble.speed", "+20%").withStyle(ChatFormatting.GRAY)).cast());
+			.description(NFUInfoStatics.createTranslatable("info.nffgirls.bauble.speed", "+20%").withStyle(ChatFormatting.GRAY)).cast());
 	public static final RegistryObject<CourageAmuletBaubleItem> COURAGE_AMULET_II = register("courage_amulet_ii", () -> new CourageAmuletBaubleItem(
 			NFFGirls.MOD_ID + ":courage_amulet", 2, new Item.Properties().rarity(Rarity.RARE)).alwaysFoil()
-			.description(NaUtilsInfoStatics.createTranslatable("info.nffgirls.bauble.proactive_attack").withStyle(ChatFormatting.GRAY))
+			.description(NFUInfoStatics.createTranslatable("info.nffgirls.bauble.proactive_attack").withStyle(ChatFormatting.GRAY))
 			.description(baubleAtk(6.0))
-			.description(NaUtilsInfoStatics.createTranslatable("info.nffgirls.bauble.speed", "+30%").withStyle(ChatFormatting.GRAY)).cast());
+			.description(NFUInfoStatics.createTranslatable("info.nffgirls.bauble.speed", "+30%").withStyle(ChatFormatting.GRAY)).cast());
 	public static final RegistryObject<ResistanceAmuletBaubleItem> RESISTANCE_AMULET = register("resistance_amulet", () -> new ResistanceAmuletBaubleItem(
 			NFFGirls.MOD_ID + ":resistance_amulet", 1, new Item.Properties().rarity(Rarity.UNCOMMON))
 			.description(baubleArmor(4.0))
 			.description(baubleHPMax(15.0))
-			.description(NaUtilsInfoStatics.createTranslatable("info.nffgirls.bauble.sun_immune").withStyle(ChatFormatting.GRAY)).cast());
+			.description(NFUInfoStatics.createTranslatable("info.nffgirls.bauble.sun_immune").withStyle(ChatFormatting.GRAY)).cast());
 	public static final RegistryObject<ResistanceAmuletBaubleItem> RESISTANCE_AMULET_II = register("resistance_amulet_ii", () -> new ResistanceAmuletBaubleItem(
 			NFFGirls.MOD_ID + ":resistance_amulet", 2, new Item.Properties().rarity(Rarity.UNCOMMON)).alwaysFoil()
 			.description(baubleArmor(6.0))
 			.description(baubleHPMax(25.0))
-			.description(NaUtilsInfoStatics.createTranslatable("info.nffgirls.bauble.sun_immune").withStyle(ChatFormatting.GRAY)).cast());
+			.description(NFUInfoStatics.createTranslatable("info.nffgirls.bauble.sun_immune").withStyle(ChatFormatting.GRAY)).cast());
 	public static final RegistryObject<HealingJadeBaubleItem> HEALING_JADE = register("healing_jade", () -> new HealingJadeBaubleItem(
 			NFFGirls.MOD_ID + ":healing_jade", 1, new Item.Properties().rarity(Rarity.UNCOMMON))
 			.description(baubleHPRecovery(0.1)).cast());
@@ -218,14 +186,14 @@ public class NFFGirlsItems {
 			.description(baubleHPMax(10.0)).cast());
 	public static final RegistryObject<AquaJadeBaubleItem> AQUA_JADE = register("aqua_jade", () -> new AquaJadeBaubleItem(
 			NFFGirls.MOD_ID + ":aqua_jade", 1, new Item.Properties().rarity(Rarity.UNCOMMON))
-			.description(NaUtilsInfoStatics.createTranslatable("info.nffgirls.bauble.aqua_jade").withStyle(ChatFormatting.GRAY))
-			.description(NaUtilsInfoStatics.createTranslatable("info.nffgirls.bauble.in_water").withStyle(ChatFormatting.GRAY))
-			.description(NaUtilsInfoStatics.createTranslatable("info.nffgirls.bauble.speed", "4x").withStyle(ChatFormatting.GRAY))
+			.description(NFUInfoStatics.createTranslatable("info.nffgirls.bauble.aqua_jade").withStyle(ChatFormatting.GRAY))
+			.description(NFUInfoStatics.createTranslatable("info.nffgirls.bauble.in_water").withStyle(ChatFormatting.GRAY))
+			.description(NFUInfoStatics.createTranslatable("info.nffgirls.bauble.speed", "4x").withStyle(ChatFormatting.GRAY))
 			.description(baubleHPRecovery(0.25)).cast());
 	public static final RegistryObject<PoisonousThornBaubleItem> POISONOUS_THORN = register("poisonous_thorn", () -> new PoisonousThornBaubleItem(
 			NFFGirls.MOD_ID + ":poisonous_thorn", 1, new Item.Properties().rarity(Rarity.UNCOMMON))
-			.description(NaUtilsInfoStatics.createTranslatable("info.nffgirls.bauble.poisonous_thorn").withStyle(ChatFormatting.GRAY))
-			.description(NaUtilsInfoStatics.createTranslatable("info.nffgirls.bauble.poisonous_thorn_1").withStyle(ChatFormatting.GRAY)).cast());
+			.description(NFUInfoStatics.createTranslatable("info.nffgirls.bauble.poisonous_thorn").withStyle(ChatFormatting.GRAY))
+			.description(NFUInfoStatics.createTranslatable("info.nffgirls.bauble.poisonous_thorn_1").withStyle(ChatFormatting.GRAY)).cast());
 
 
 	

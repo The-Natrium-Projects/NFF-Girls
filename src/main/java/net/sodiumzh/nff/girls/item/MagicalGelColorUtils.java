@@ -1,12 +1,11 @@
 package net.sodiumzh.nff.girls.item;
 
-import java.util.Random;
-
 import com.github.mechalopa.hmag.world.entity.MagicalSlimeEntity;
 import com.github.mechalopa.hmag.world.entity.SlimeGirlEntity;
-
 import net.minecraft.world.phys.Vec3;
-import net.sodiumzh.nautils.math.LinearColor;
+import net.sodiumzh.nfu.math.LinearColor;
+
+import java.util.Random;
 
 public class MagicalGelColorUtils
 {

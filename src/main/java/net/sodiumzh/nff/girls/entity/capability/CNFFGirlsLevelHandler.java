@@ -16,11 +16,11 @@ import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.eventbus.api.Cancelable;
 import net.minecraftforge.eventbus.api.Event;
 import net.minecraftforge.network.PacketDistributor;
-import net.sodiumzh.nautils.entity.RepeatableAttributeModifier;
 import net.sodiumzh.nff.girls.network.NFFGirlsChannels;
 import net.sodiumzh.nff.girls.network.NFFGirlsClientGamePacketHandler;
 import net.sodiumzh.nff.girls.registry.NFFGirlsCapabilities;
 import net.sodiumzh.nff.girls.registry.NFFGirlsConfigs;
+import net.sodiumzh.nfu.entity.RepeatableAttributeModifier;
 
 public interface CNFFGirlsLevelHandler extends INBTSerializable<LongTag>
 {
@@ -294,7 +294,7 @@ public interface CNFFGirlsLevelHandler extends INBTSerializable<LongTag>
 		@Override
 		public void handle(ClientGamePacketListener handler) 
 		{
-			NFFGirlsClientGamePacketHandler.handleLevelHandlerSync(this, handler);	
+			NFFGirlsClientGamePacketHandler.handleLevelHandlerSync(this, handler);
 		}	
 	}
 	

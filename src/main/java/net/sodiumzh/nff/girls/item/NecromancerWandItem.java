@@ -1,9 +1,5 @@
 package net.sodiumzh.nff.girls.item;
 
-import java.util.List;
-
-import javax.annotation.Nullable;
-
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResultHolder;
@@ -18,6 +14,9 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.sodiumzh.nff.girls.entity.projectile.NecromancerMagicBulletEntity;
 import net.sodiumzh.nff.girls.registry.NFFGirlsItems;
+
+import javax.annotation.Nullable;
+import java.util.List;
 
 public class NecromancerWandItem extends Item implements IWithDuration
 {

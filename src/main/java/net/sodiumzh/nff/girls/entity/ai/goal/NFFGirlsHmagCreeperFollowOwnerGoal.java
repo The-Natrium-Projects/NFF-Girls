@@ -1,9 +1,9 @@
 package net.sodiumzh.nff.girls.entity.ai.goal;
 
-import javax.annotation.Nonnull;
-
 import net.sodiumzh.nff.services.entity.taming.INFFTamed;
 import net.sodiumzh.nff.services.entity.taming.presets.NFFTamedCreeperPreset;
+
+import javax.annotation.Nonnull;
 
 /* Adjusted from vanilla FollowOwnerGoal for TameableAnimal */
 public class NFFGirlsHmagCreeperFollowOwnerGoal extends NFFGirlsFollowOwnerGoal {

@@ -1,16 +1,10 @@
 package net.sodiumzh.nff.girls.entity.hmag;
 
-import java.util.Arrays;
-import java.util.Collection;
-
 import com.github.mechalopa.hmag.world.entity.ImpEntity;
-
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.world.Container;
-import net.minecraft.world.InteractionHand;
-import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.ai.goal.FloatGoal;
 import net.minecraft.world.entity.ai.goal.LookAtPlayerGoal;
@@ -20,8 +14,6 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
-import net.sodiumzh.nautils.statics.NaUtilsContainerStatics;
-import net.sodiumzh.nautils.statics.NaUtilsTagStatics;
 import net.sodiumzh.nff.girls.NFFGirls;
 import net.sodiumzh.nff.girls.entity.INFFGirlsTamed;
 import net.sodiumzh.nff.girls.entity.ai.goal.IBlockLocator;
@@ -33,20 +25,23 @@ import net.sodiumzh.nff.girls.inventory.NFFGirlsHmagImpInventoryMenu;
 import net.sodiumzh.nff.girls.registry.NFFGirlsHealingItems;
 import net.sodiumzh.nff.girls.registry.NFFGirlsItems;
 import net.sodiumzh.nff.girls.sound.NFFGirlsSoundPresets;
-import net.sodiumzh.nff.girls.util.NFFGirlsEntityStatics;
-import net.sodiumzh.nff.services.entity.ai.goal.presets.*;
-import net.sodiumzh.nautils.entity.MobApplicableItemTable;
-import net.sodiumzh.nff.services.entity.ai.goal.presets.target.NFFHurtByTargetGoal;
-import net.sodiumzh.nff.services.entity.ai.goal.presets.target.NFFOwnerHurtByTargetGoal;
-import net.sodiumzh.nff.services.entity.ai.goal.presets.target.NFFOwnerHurtTargetGoal;
-import net.sodiumzh.nautils.entity.MobApplicableItemTable;
+import net.sodiumzh.nff.services.entity.ai.goal.preset.NFFMeleeAttackGoal;
+import net.sodiumzh.nff.services.entity.ai.goal.preset.NFFWaterAvoidingRandomStrollGoal;
+import net.sodiumzh.nff.services.entity.ai.goal.preset.target.NFFHurtByTargetGoal;
+import net.sodiumzh.nff.services.entity.ai.goal.preset.target.NFFOwnerHurtByTargetGoal;
+import net.sodiumzh.nff.services.entity.ai.goal.preset.target.NFFOwnerHurtTargetGoal;
 import net.sodiumzh.nff.services.entity.taming.NFFTamedStatics;
 import net.sodiumzh.nff.services.entity.taming.NFFTamingMapping;
 import net.sodiumzh.nff.services.inventory.NFFTamedInventoryMenu;
 import net.sodiumzh.nff.services.inventory.NFFTamedMobInventory;
 import net.sodiumzh.nff.services.inventory.NFFTamedMobInventoryWithHandItems;
+import net.sodiumzh.nfu.entity.MobApplicableItemTable;
+import net.sodiumzh.nfu.util.NFUContainerStatics;
+import net.sodiumzh.nfu.util.NFUTagStatics;
 
 import javax.annotation.Nonnull;
+import java.util.Arrays;
+import java.util.Collection;
 
 public class HmagImpEntity extends ImpEntity implements INFFGirlsTamed, IBlockLocator
 {
@@ -143,11 +138,11 @@ public class HmagImpEntity extends ImpEntity implements INFFGirlsTamed, IBlockLo
 	@Override
 	public Collection<Block> getLocatingBlocks() {
 		if (!this.getAdditionalInventory().getItem(0).is(NFFGirlsItems.NETHERITE_FORK.get()))
-			return NaUtilsContainerStatics.listOf();
+			return NFUContainerStatics.listOf();
 		Item offhand = this.getOffhandItem().getItem();
-		if (NaUtilsTagStatics.hasTag(offhand, "forge:nuggets/netherite_scrap"))
-			return NaUtilsTagStatics.getAllBlocksUnderTag("forge:ores/netherite_scrap");
-		return NaUtilsContainerStatics.listOf();
+		if (NFUTagStatics.hasTag(offhand, "forge:nuggets/netherite_scrap"))
+			return NFUTagStatics.getAllBlocksUnderTag("forge:ores/netherite_scrap");
+		return NFUContainerStatics.listOf();
 	}
 
 	@Override

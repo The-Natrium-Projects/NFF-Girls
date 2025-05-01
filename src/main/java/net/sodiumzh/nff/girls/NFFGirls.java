@@ -1,14 +1,6 @@
 package net.sodiumzh.nff.girls;
 
-import net.minecraftforge.fml.LogicalSide;
-import net.minecraftforge.fml.util.thread.EffectiveSide;
-import net.sodiumzh.nautils.registries.NaUtilsRegistries;
-import net.sodiumzh.nautils.statics.NaUtilsDataStatics;
-import net.sodiumzh.nff.girls.registry.*;
-import org.slf4j.Logger;
-
 import com.mojang.logging.LogUtils;
-
 import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.eventbus.api.IEventBus;
@@ -16,9 +8,9 @@ import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.config.ModConfig;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
-import net.sodiumzh.nautils.savedata.redirector.SaveDataLocationRedirector;
-import net.sodiumzh.nff.services.NFFServices;
-import net.sodiumzh.nff.services.registry.NFFCapabilityAttachments;
+import net.sodiumzh.nff.girls.registry.*;
+import net.sodiumzh.nfu.savedata.redirector.SaveDataLocationRedirector;
+import org.slf4j.Logger;
 
 @Mod(NFFGirls.MOD_ID)
 public class NFFGirls

@@ -8,11 +8,9 @@ import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.level.ItemLike;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
-import net.sodiumzh.nautils.math.HtmlColors;
-import net.sodiumzh.nff.girls.registry.NFFGirlsItems;
+import net.sodiumzh.nfu.math.HtmlColors;
 
 @OnlyIn(Dist.CLIENT)
 public class CitadelBasedMobDictionaryGUI extends GuiBasicBook {

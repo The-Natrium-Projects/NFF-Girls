@@ -2,9 +2,9 @@ package net.sodiumzh.nff.girls.client.gui.screen;
 
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.world.entity.player.Inventory;
-import net.sodiumzh.nautils.math.GuiPos;
 import net.sodiumzh.nff.services.entity.taming.INFFTamed;
 import net.sodiumzh.nff.services.inventory.NFFTamedInventoryMenu;
+import net.sodiumzh.nfu.math.GuiPos;
 
 // Gui for mobs with bow shooting attack + secondary weapon + one bouble
 public class NFFGirlsBowSecWeaponOneBaubleGUI extends NFFGirlsGUIPreset0 {

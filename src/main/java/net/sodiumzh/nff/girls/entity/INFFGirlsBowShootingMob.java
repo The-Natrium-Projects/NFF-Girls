@@ -1,7 +1,5 @@
 package net.sodiumzh.nff.girls.entity;
 
-import javax.annotation.Nullable;
-
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.Attributes;
@@ -9,6 +7,8 @@ import net.minecraft.world.entity.projectile.AbstractArrow;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.enchantment.Enchantments;
+
+import javax.annotation.Nullable;
 
 public interface INFFGirlsBowShootingMob extends INFFGirlsTamed, INFFGirlsBowShootingMobUtils
 {

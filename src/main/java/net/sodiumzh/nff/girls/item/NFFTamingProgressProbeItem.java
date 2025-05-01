@@ -7,11 +7,11 @@ import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
-import net.sodiumzh.nautils.statics.NaUtilsMiscStatics;
-import net.sodiumzh.nff.girls.entity.tamingprocesses.hmag.NFFGirlsItemDroppingTamingProcess;
+import net.sodiumzh.nff.girls.entity.tamingprocess.hmag.NFFGirlsItemDroppingTamingProcess;
 import net.sodiumzh.nff.services.entity.taming.NFFTamingMapping;
 import net.sodiumzh.nff.services.entity.taming.TamingProcessItemGivingProgress;
 import net.sodiumzh.nff.services.registry.NFFCapRegistry;
+import net.sodiumzh.nfu.util.NFUMiscStatics;
 
 public class NFFTamingProgressProbeItem extends Item
 {
@@ -30,12 +30,12 @@ public class NFFTamingProgressProbeItem extends Item
 			{
 				if (NFFTamingMapping.getProcess(mob) instanceof TamingProcessItemGivingProgress prog)
 				{
-					NaUtilsMiscStatics.printToScreen("Progress: " + prog.getProgressValue(mob, player.getUUID()), player);
+					NFUMiscStatics.printToScreen("Progress: " + prog.getProgressValue(mob, player.getUUID()), player);
 					return InteractionResult.CONSUME;
 				}
 				else if (NFFTamingMapping.getProcess(mob) instanceof NFFGirlsItemDroppingTamingProcess dropping)
 				{
-					NaUtilsMiscStatics.printToScreen("Progress: " + dropping.getProgressValue(mob, player.getUUID()), player);
+					NFUMiscStatics.printToScreen("Progress: " + dropping.getProgressValue(mob, player.getUUID()), player);
 					return InteractionResult.CONSUME;
 				}
 			}

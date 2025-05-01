@@ -1,18 +1,17 @@
 package net.sodiumzh.nff.girls.item;
 
-import java.util.Optional;
-
 import com.github.mechalopa.hmag.registry.ModEntityTypes;
 import com.github.mechalopa.hmag.world.entity.MagicalSlimeEntity;
-
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
-import net.sodiumzh.nautils.math.LinearColor;
 import net.sodiumzh.nff.girls.registry.NFFGirlsItems;
+import net.sodiumzh.nfu.math.LinearColor;
+
+import java.util.Optional;
 
 public class EmptyMagicalGelBottleItem extends Item
 {

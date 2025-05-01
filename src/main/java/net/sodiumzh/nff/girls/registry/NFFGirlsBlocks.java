@@ -5,7 +5,6 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Rarity;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.SoundType;
-import net.minecraft.world.level.block.SweetBerryBushBlock;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.material.MapColor;
 import net.minecraft.world.level.material.PushReaction;
@@ -14,11 +13,11 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
-import net.sodiumzh.nautils.block.BlockMaterial;
 import net.sodiumzh.nff.girls.NFFGirls;
+import net.sodiumzh.nff.girls.block.EnderberryBushBlock;
 import net.sodiumzh.nff.girls.block.SoulCakeBlock;
 import net.sodiumzh.nff.girls.block.SoulCarpetBlock;
-import net.sodiumzh.nff.girls.block.EnderberryBushBlock;
+import net.sodiumzh.nfu.block.BlockMaterial;
 
 @Mod.EventBusSubscriber(modid = NFFGirls.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class NFFGirlsBlocks {

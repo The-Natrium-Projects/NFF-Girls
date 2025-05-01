@@ -2,7 +2,6 @@ package net.sodiumzh.nff.girls.item;
 
 import com.github.mechalopa.hmag.registry.ModEntityTypes;
 import com.github.mechalopa.hmag.world.entity.JiangshiEntity;
-
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionHand;
@@ -10,14 +9,13 @@ import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
-import net.minecraft.world.item.ItemStack;
-import net.sodiumzh.nautils.item.NaUtilsItem;
-import net.sodiumzh.nff.girls.entity.tamingprocesses.hmag.HmagJiangshiTamingProcess;
-import org.apache.commons.lang3.mutable.MutableObject;
+import net.sodiumzh.nff.girls.entity.tamingprocess.hmag.HmagJiangshiTamingProcess;
 import net.sodiumzh.nff.services.entity.taming.NFFTamingMapping;
 import net.sodiumzh.nff.services.registry.NFFCapRegistry;
+import net.sodiumzh.nfu.item.NFUItem;
+import org.apache.commons.lang3.mutable.MutableObject;
 
-public class TaoistTalismanItem extends NaUtilsItem
+public class TaoistTalismanItem extends NFUItem
 {
 
 	public TaoistTalismanItem(Item.Properties pProperties)

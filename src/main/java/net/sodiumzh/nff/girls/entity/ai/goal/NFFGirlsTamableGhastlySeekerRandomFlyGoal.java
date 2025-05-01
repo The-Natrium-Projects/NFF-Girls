@@ -1,9 +1,6 @@
 package net.sodiumzh.nff.girls.entity.ai.goal;
 
-import java.util.EnumSet;
-
 import com.github.mechalopa.hmag.world.entity.GhastlySeekerEntity;
-
 import net.minecraft.core.BlockPos;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.LivingEntity;
@@ -13,8 +10,10 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
-import net.sodiumzh.nautils.statics.NaUtilsMathStatics;
-import net.sodiumzh.nff.girls.eventlisteners.NFFGirlsEntityEventListeners;
+import net.sodiumzh.nff.girls.eventlistener.NFFGirlsEntityEventListeners;
+import net.sodiumzh.nfu.util.NFUMathStatics;
+
+import java.util.EnumSet;
 
 /**
  * Adjusted from {@code GhastlySeekerEntity$RandomFlyGoal}, mainly for behaviors outside Nether
@@ -106,7 +105,7 @@ public class NFFGirlsTamableGhastlySeekerRandomFlyGoal extends Goal
 			double d0 = this.gs.getX() + (random.nextFloat() * 2.0F - 1.0F) * 16.0F;
 			double d1 = this.gs.getY() + (random.nextFloat() * 2.0F - 1.0F) * 16.0F;
 			double d2 = this.gs.getZ() + (random.nextFloat() * 2.0F - 1.0F) * 16.0F;
-			BlockPos pos = NaUtilsMathStatics.getBlockPos(d0, d1, d2);
+			BlockPos pos = NFUMathStatics.getBlockPos(d0, d1, d2);
 			while (gs.level().getBlockState(pos.below()).isAir() && pos.getY() > gs.level().getMinBuildHeight())
 				pos = pos.below();
 			pos = pos.above(31);
@@ -139,7 +138,7 @@ public class NFFGirlsTamableGhastlySeekerRandomFlyGoal extends Goal
 			return false;
 		
 		/* Check if it's too high */
-		BlockPos blockpos = NaUtilsMathStatics.getBlockPos(pos.x, pos.y, pos.z);
+		BlockPos blockpos = NFUMathStatics.getBlockPos(pos.x, pos.y, pos.z);
 		int height = 0;
 		while (level.getBlockState(blockpos.below()).isAir())
 		{

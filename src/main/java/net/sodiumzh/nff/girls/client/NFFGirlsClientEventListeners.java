@@ -7,11 +7,11 @@ import net.minecraftforge.eventbus.api.Event;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.LogicalSide;
 import net.minecraftforge.fml.common.Mod;
-import net.sodiumzh.nautils.mixin.events.client.entity.LivingRendererCheckSitEvent;
 import net.sodiumzh.nff.girls.NFFGirls;
 import net.sodiumzh.nff.girls.entity.INFFGirlsTamed;
 import net.sodiumzh.nff.services.client.gui.screen.NFFTamedGUI;
 import net.sodiumzh.nff.services.entity.ai.NFFTamedMobAIState;
+import net.sodiumzh.nfu.mixin.event.client.entity.LivingRendererCheckSitEvent;
 
 @Mod.EventBusSubscriber(modid = NFFGirls.MOD_ID, value = Dist.CLIENT, bus = Mod.EventBusSubscriber.Bus.FORGE)
 public class NFFGirlsClientEventListeners

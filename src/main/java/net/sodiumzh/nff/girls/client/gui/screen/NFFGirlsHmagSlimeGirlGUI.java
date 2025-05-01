@@ -7,14 +7,14 @@ import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.network.chat.Style;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.player.Inventory;
-import net.sodiumzh.nautils.info.ComponentBuilder;
-import net.sodiumzh.nautils.math.GuiPos;
-import net.sodiumzh.nautils.math.HtmlColors;
-import net.sodiumzh.nautils.math.LinearColor;
-import net.sodiumzh.nautils.statics.NaUtilsInfoStatics;
 import net.sodiumzh.nff.girls.entity.hmag.HmagSlimeGirlEntity;
 import net.sodiumzh.nff.services.entity.taming.INFFTamed;
 import net.sodiumzh.nff.services.inventory.NFFTamedInventoryMenu;
+import net.sodiumzh.nfu.info.ComponentBuilder;
+import net.sodiumzh.nfu.math.GuiPos;
+import net.sodiumzh.nfu.math.HtmlColors;
+import net.sodiumzh.nfu.math.LinearColor;
+import net.sodiumzh.nfu.util.NFUInfoStatics;
 
 public class NFFGirlsHmagSlimeGirlGUI extends NFFGirlsGUIPreset0
 {
@@ -64,7 +64,7 @@ public class NFFGirlsHmagSlimeGirlGUI extends NFFGirlsGUIPreset0
 		LinearColor color = sg.getColorLinear();
 		Vec3i rgb = color.toRGB();
 		String rgbInfo = " (R" + Integer.toString(rgb.getX()) + ", G" + Integer.toString(rgb.getY()) + ", B" + Integer.toString(rgb.getZ()) +")";
-		return NaUtilsInfoStatics.createText(rgbInfo).withStyle(Style.EMPTY.withColor(color.toCode()));
+		return NFUInfoStatics.createText(rgbInfo).withStyle(Style.EMPTY.withColor(color.toCode()));
 	}
 	
 	@Override
@@ -83,12 +83,12 @@ public class NFFGirlsHmagSlimeGirlGUI extends NFFGirlsGUIPreset0
 		String maxHp = Long.toString(Math.round(mob.asMob().getAttributeValue(Attributes.MAX_HEALTH)));
 		String atk = Long.toString(Math.round(mob.asMob().getAttributeValue(Attributes.ATTACK_DAMAGE)));
 		String def = Long.toString(Math.round(mob.asMob().getAttributeValue(Attributes.ARMOR)));
-		Component hpcomp = NaUtilsInfoStatics.createTranslatable("info.nffservices.gui_health")
-				.append(NaUtilsInfoStatics.createText(": " + hp + " / " + maxHp));
-		Component atkcomp = NaUtilsInfoStatics.createTranslatable("info.nffservices.gui_atk")
-				.append(NaUtilsInfoStatics.createText(": " + atk));
-		Component defcomp = NaUtilsInfoStatics.createTranslatable("info.nffservices.gui_armor")
-				.append(NaUtilsInfoStatics.createText(": " + def));
+		Component hpcomp = NFUInfoStatics.createTranslatable("info.nffservices.gui_health")
+				.append(NFUInfoStatics.createText(": " + hp + " / " + maxHp));
+		Component atkcomp = NFUInfoStatics.createTranslatable("info.nffservices.gui_atk")
+				.append(NFUInfoStatics.createText(": " + atk));
+		Component defcomp = NFUInfoStatics.createTranslatable("info.nffservices.gui_armor")
+				.append(NFUInfoStatics.createText(": " + def));
 		Component atkDefComp = ComponentBuilder.create().append(atkcomp).appendText(" | ")
 				.append(defcomp).build();
 		graphics.drawString(font, hpcomp, pos.x, pos.y, color);

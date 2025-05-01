@@ -8,12 +8,12 @@ import net.minecraftforge.event.entity.player.PlayerInteractEvent.EntityInteract
 import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
-import net.sodiumzh.nautils.mixin.events.entity.MobInteractEvent;
-import net.sodiumzh.nautils.statics.NaUtilsInfoStatics;
 import net.sodiumzh.nff.girls.NFFGirls;
 import net.sodiumzh.nff.girls.entity.INFFGirlsTamed;
 import net.sodiumzh.nff.girls.registry.NFFGirlsCapabilities;
 import net.sodiumzh.nff.girls.registry.NFFGirlsItems;
+import net.sodiumzh.nfu.mixin.event.entity.MobInteractEvent;
+import net.sodiumzh.nfu.util.NFUInfoStatics;
 
 @Mod.EventBusSubscriber(modid = NFFGirls.MOD_ID, bus = Mod.EventBusSubscriber.Bus.FORGE)
 public class NFFGirlsTradeEventHandlers
@@ -32,7 +32,7 @@ public class NFFGirlsTradeEventHandlers
 		{
 			INFFGirlsTamed.getBM(event.getTarget()).asMob().getCapability(NFFGirlsCapabilities.CAP_TRADE_HANDLER).ifPresent(cap -> {
 				if (cap.isValidTrader()) {
-					cap.openTradingScreen(event.getEntity(), NaUtilsInfoStatics.createTranslatable("info.nffgirls.open_trade"), 1);
+					cap.openTradingScreen(event.getEntity(), NFUInfoStatics.createTranslatable("info.nffgirls.open_trade"), 1);
 					event.setCanceled(true);
 					event.setCancellationResult(InteractionResult.sidedSuccess(event.getEntity().level().isClientSide()));
 				}

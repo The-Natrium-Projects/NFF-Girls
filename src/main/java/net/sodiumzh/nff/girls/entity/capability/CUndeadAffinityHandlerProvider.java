@@ -1,14 +1,14 @@
 package net.sodiumzh.nff.girls.entity.capability;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.ICapabilitySerializable;
 import net.minecraftforge.common.util.LazyOptional;
 import net.sodiumzh.nff.girls.registry.NFFGirlsCapabilities;
+
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 
 public class CUndeadAffinityHandlerProvider implements ICapabilitySerializable<CompoundTag>
 {

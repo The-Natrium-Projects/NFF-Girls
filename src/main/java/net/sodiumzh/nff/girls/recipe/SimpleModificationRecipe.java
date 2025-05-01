@@ -1,9 +1,6 @@
 package net.sodiumzh.nff.girls.recipe;
 
-import java.util.Optional;
-
 import com.mojang.logging.LogUtils;
-
 import net.minecraft.core.NonNullList;
 import net.minecraft.core.RegistryAccess;
 import net.minecraft.resources.ResourceLocation;
@@ -12,6 +9,8 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.CraftingBookCategory;
 import net.minecraft.world.item.crafting.CustomRecipe;
 import net.minecraft.world.level.Level;
+
+import java.util.Optional;
 
 /**
  * A template for crafting recipes that modifies a given item with a modifier item.

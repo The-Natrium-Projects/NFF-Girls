@@ -8,14 +8,14 @@ import net.minecraft.util.Mth;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
-import net.sodiumzh.nautils.info.ComponentBuilder;
-import net.sodiumzh.nautils.math.GuiPos;
-import net.sodiumzh.nautils.statics.NaUtilsInfoStatics;
 import net.sodiumzh.nff.girls.NFFGirls;
 import net.sodiumzh.nff.girls.entity.INFFGirlsTamed;
 import net.sodiumzh.nff.services.client.gui.screen.NFFTamedGUI;
 import net.sodiumzh.nff.services.entity.taming.INFFTamed;
 import net.sodiumzh.nff.services.inventory.NFFTamedInventoryMenu;
+import net.sodiumzh.nfu.info.ComponentBuilder;
+import net.sodiumzh.nfu.math.GuiPos;
+import net.sodiumzh.nfu.util.NFUInfoStatics;
 
 /** GUI template for all vanilla-undead-mob-like befriended mobs.
 */
@@ -95,7 +95,7 @@ public class NFFGirlsGUIPreset0 extends NFFTamedGUI {
 	
 	protected MutableComponent getDefaultLevelAndExpInfo()
 	{
-		INFFGirlsTamed bm = (INFFGirlsTamed)mob;		
+		INFFGirlsTamed bm = (INFFGirlsTamed)mob;
 		String lv = Integer.toString(bm.getLevelHandler().getExpectedLevel());
 		String exp = Long.toString(bm.getLevelHandler().getExpInThisLevel());
 		String expup = Long.toString(bm.getLevelHandler().getRequiredExpInThisLevel());
@@ -107,8 +107,8 @@ public class NFFGirlsGUIPreset0 extends NFFTamedGUI {
 	{
 		INFFGirlsTamed bm = (INFFGirlsTamed)mob;		
 		String lv = Integer.toString(bm.getLevelHandler().getExpectedLevel());
-		return NaUtilsInfoStatics.createTranslatable("info.nffgirls.gui_level")
-				.append(NaUtilsInfoStatics.createText(": " + lv));	
+		return NFUInfoStatics.createTranslatable("info.nffgirls.gui_level")
+				.append(NFUInfoStatics.createText(": " + lv));
 	}
 	
 	protected MutableComponent getDefaultExpInfo()
@@ -116,8 +116,8 @@ public class NFFGirlsGUIPreset0 extends NFFTamedGUI {
 		INFFGirlsTamed bm = (INFFGirlsTamed)mob;
 		String exp = Long.toString(bm.getLevelHandler().getExpInThisLevel());
 		String expup = Long.toString(bm.getLevelHandler().getRequiredExpInThisLevel());
-		return NaUtilsInfoStatics.createTranslatable("info.nffgirls.gui_exp")
-				.append(NaUtilsInfoStatics.createText(": " + exp + " / " + expup));
+		return NFUInfoStatics.createTranslatable("info.nffgirls.gui_exp")
+				.append(NFUInfoStatics.createText(": " + exp + " / " + expup));
 		
 	}
 	
@@ -126,8 +126,8 @@ public class NFFGirlsGUIPreset0 extends NFFTamedGUI {
 		INFFGirlsTamed bm = (INFFGirlsTamed)mob;	
 		String fav = Integer.toString(Mth.floor(bm.getFavorabilityHandler().getFavorability()));
 		String favmax = Integer.toString(Mth.floor(bm.getFavorabilityHandler().getMaxFavorability()));
-		return NaUtilsInfoStatics.createTranslatable("info.nffgirls.gui_favorability")
-				.append(NaUtilsInfoStatics.createText(": " + fav + " / " + favmax));
+		return NFUInfoStatics.createTranslatable("info.nffgirls.gui_favorability")
+				.append(NFUInfoStatics.createText(": " + fav + " / " + favmax));
 	}
 	
 	@Override

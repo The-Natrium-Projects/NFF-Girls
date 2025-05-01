@@ -1,23 +1,22 @@
 package net.sodiumzh.nff.girls.recipe;
 
-import java.util.HashMap;
-import java.util.Optional;
-import java.util.Random;
-import java.util.function.Supplier;
-
 import com.mojang.logging.LogUtils;
-
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.CraftingBookCategory;
 import net.minecraft.world.item.crafting.RecipeSerializer;
-import net.sodiumzh.nautils.math.HtmlColors;
-import net.sodiumzh.nautils.math.LinearColor;
-import net.sodiumzh.nautils.statics.NaUtilsItemStatics;
-import net.sodiumzh.nautils.statics.NaUtilsTagStatics;
 import net.sodiumzh.nff.girls.registry.NFFGirlsItems;
 import net.sodiumzh.nff.girls.registry.NFFGirlsRecipes;
+import net.sodiumzh.nfu.math.HtmlColors;
+import net.sodiumzh.nfu.math.LinearColor;
+import net.sodiumzh.nfu.util.NFUItemStatics;
+import net.sodiumzh.nfu.util.NFUTagStatics;
+
+import java.util.HashMap;
+import java.util.Optional;
+import java.util.Random;
+import java.util.function.Supplier;
 
 public class MagicalGelStainRecipe extends SimpleModificationRecipe
 {
@@ -86,12 +85,12 @@ public class MagicalGelStainRecipe extends SimpleModificationRecipe
 		{
 			if (key.charAt(0) == '#')
 			{
-				if (NaUtilsTagStatics.hasTag(stack, key.substring(1)))
+				if (NFUTagStatics.hasTag(stack, key.substring(1)))
 					return Optional.of(STAINS.get(key));
 			}
 			else
 			{
-				if (NaUtilsItemStatics.getItem(key) == stack.getItem())
+				if (NFUItemStatics.getItem(key) == stack.getItem())
 					return Optional.of(STAINS.get(key));
 			}
 		}
