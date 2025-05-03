@@ -1,67 +1,53 @@
 package net.sodiumzh.nff.girls.entity;
 
-import java.util.*;
-import java.util.function.Consumer;
-import java.util.function.Predicate;
-
-import javax.annotation.Nullable;
-
-import com.github.alexthe666.citadel.repack.jaad.Play;
-import net.minecraft.core.BlockPos;
-import net.minecraft.nbt.CompoundTag;
-import net.minecraft.nbt.ListTag;
-import net.minecraft.nbt.Tag;
-import net.minecraft.resources.ResourceKey;
-import net.minecraft.server.level.ServerLevel;
-import net.minecraft.world.InteractionHand;
-import net.minecraft.world.InteractionResult;
-import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.level.Level;
-import net.minecraftforge.registries.ForgeRegistries;
-import net.sodiumzh.nautils.capability.CEntityDataCapability;
-import net.sodiumzh.nautils.containers.Tuple3;
-import net.sodiumzh.nautils.mixin.events.entity.MobInteractEvent;
-import net.sodiumzh.nautils.object.NaUtilsMapper;
-import net.sodiumzh.nautils.registries.NaUtilsCaps;
-import net.sodiumzh.nautils.statics.NaUtilsNBTStatics;
-import net.sodiumzh.nff.girls.eventlisteners.NFFGirlsEntityEventListeners;
-import org.apache.commons.lang3.mutable.MutableObject;
-
 import com.mojang.logging.LogUtils;
-
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.eventbus.api.Event;
 import net.minecraftforge.network.PacketDistributor;
-import net.sodiumzh.nautils.annotation.DontCallManually;
-import net.sodiumzh.nautils.annotation.DontOverride;
 import net.sodiumzh.nff.girls.NFFGirls;
 import net.sodiumzh.nff.girls.entity.capability.CNFFGirlsFavorabilityHandler;
 import net.sodiumzh.nff.girls.entity.capability.CNFFGirlsLevelHandler;
 import net.sodiumzh.nff.girls.entity.vanillatrade.CNFFGirlsTradeHandler;
+import net.sodiumzh.nff.girls.eventlistener.NFFGirlsEntityEventListeners;
 import net.sodiumzh.nff.girls.network.ClientboundNFFGirlsMobGeneralSyncPacket;
 import net.sodiumzh.nff.girls.network.NFFGirlsChannels;
 import net.sodiumzh.nff.girls.registry.NFFGirlsCapabilities;
 import net.sodiumzh.nff.girls.registry.NFFGirlsItems;
 import net.sodiumzh.nff.girls.subsystem.baublesystem.NFFGirlsBaubleStatics;
-import net.sodiumzh.nautils.entity.MobApplicableItemTable;
 import net.sodiumzh.nff.services.entity.capability.wrapper.IAttributeMonitor;
 import net.sodiumzh.nff.services.entity.taming.INFFTamed;
 import net.sodiumzh.nff.services.item.NFFMobRespawnerItem;
 import net.sodiumzh.nff.services.item.capability.wrapper.IItemStackMonitor;
+import net.sodiumzh.nfu.annotation.DontCallManually;
+import net.sodiumzh.nfu.annotation.DontOverride;
+import net.sodiumzh.nfu.entity.MobApplicableItemTable;
+import net.sodiumzh.nfu.object.FilteredMapper;
+import org.apache.commons.lang3.mutable.MutableObject;
+
+import javax.annotation.Nullable;
+import java.util.HashMap;
+import java.util.Objects;
+import java.util.Optional;
+import java.util.UUID;
+import java.util.function.Consumer;
+import java.util.function.Predicate;
 
 public interface INFFGirlsTamed extends INFFTamed, IAttributeMonitor, IItemStackMonitor
 {
 
-	public static NaUtilsMapper<Object, INFFGirlsTamed> GETTER = NaUtilsMapper.unconditionalNoVararg(Object.class, INFFGirlsTamed.class, o -> {
+	public static FilteredMapper<Object, INFFGirlsTamed> GETTER = FilteredMapper.unconditionalNoVararg(Object.class, INFFGirlsTamed.class, o -> {
 			if (o == null) return null;
 			if (o instanceof INFFGirlsTamed bm)
 				return bm;
@@ -139,7 +125,7 @@ public interface INFFGirlsTamed extends INFFTamed, IAttributeMonitor, IItemStack
 	public default CNFFGirlsFavorabilityHandler getFavorabilityHandler()
 	{
 		MutableObject<CNFFGirlsFavorabilityHandler> cap = new MutableObject<CNFFGirlsFavorabilityHandler>(null);
-		asMob().getCapability(NFFGirlsCapabilities.CAP_FAVORABILITY_HANDLER).ifPresent((c) -> 
+		asMob().getCapability(NFFGirlsCapabilities.CAP_FAVORABILITY_HANDLER).ifPresent((c) ->
 		{
 			cap.setValue(c);
 		});

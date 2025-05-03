@@ -1,15 +1,7 @@
 package net.sodiumzh.nff.girls.entity.vanillatrade;
 
-import java.util.*;
-import java.util.function.Predicate;
-import java.util.stream.Collector;
-import java.util.stream.Collectors;
-
-import javax.annotation.Nullable;
-
 import com.google.common.collect.Multimap;
 import com.mojang.logging.LogUtils;
-
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
 import net.minecraft.nbt.Tag;
@@ -29,21 +21,23 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.network.PacketDistributor;
 import net.minecraftforge.registries.ForgeRegistries;
-import net.sodiumzh.nautils.capability.SerializableCapabilityProvider;
-import net.sodiumzh.nautils.containers.Tuple2;
-import net.sodiumzh.nautils.containers.Tuple3;
-import net.sodiumzh.nautils.entity.vanillatrade.CVanillaMerchant;
-import net.sodiumzh.nautils.entity.vanillatrade.IVanillaTradeListing;
-import net.sodiumzh.nautils.entity.vanillatrade.VanillaMerchant;
-import net.sodiumzh.nautils.entity.vanillatrade.VanillaTradeListing;
-import net.sodiumzh.nautils.statics.NaUtilsContainerStatics;
-import net.sodiumzh.nautils.statics.NaUtilsMiscStatics;
-import net.sodiumzh.nautils.statics.NaUtilsNBTStatics;
 import net.sodiumzh.nff.girls.entity.INFFGirlsTamed;
 import net.sodiumzh.nff.girls.network.NFFGirlsChannels;
 import net.sodiumzh.nff.girls.registry.NFFGirlsCapabilities;
 import net.sodiumzh.nff.girls.registry.NFFGirlsItems;
 import net.sodiumzh.nff.girls.registry.NFFGirlsTrades;
+import net.sodiumzh.nfu.capability.SerializableCapabilityProvider;
+import net.sodiumzh.nfu.container.Tuple2;
+import net.sodiumzh.nfu.entity.vanillatrade.CVanillaMerchant;
+import net.sodiumzh.nfu.entity.vanillatrade.IVanillaTradeListing;
+import net.sodiumzh.nfu.entity.vanillatrade.VanillaMerchant;
+import net.sodiumzh.nfu.util.NFUContainerStatics;
+import net.sodiumzh.nfu.util.NFUMiscStatics;
+
+import javax.annotation.Nullable;
+import java.util.*;
+import java.util.function.Predicate;
+import java.util.stream.Collectors;
 
 public interface CNFFGirlsTradeHandler extends CVanillaMerchant
 {
@@ -206,7 +200,7 @@ public interface CNFFGirlsTradeHandler extends CVanillaMerchant
 			// Try 16 times, give up if failed and keep it unchanged
 			for (int i = 0; i < 16; ++i)
 			{
-				Set<IVanillaTradeListing> listingPicked = NaUtilsContainerStatics.getWeightedRandomSubset(
+				Set<IVanillaTradeListing> listingPicked = NFUContainerStatics.getWeightedRandomSubset(
 					available.stream().collect(Collectors.toMap(l -> l, IVanillaTradeListing::getSelectionWeight)), 1);
 				if (listingPicked.isEmpty()) return;	// This shouldn't happen
 				IVanillaTradeListing listing = listingPicked.stream().findFirst().orElseThrow();
@@ -513,9 +507,9 @@ public interface CNFFGirlsTradeHandler extends CVanillaMerchant
 	public static CNFFGirlsTradeHandler searchOngoingTrader(Player player, double range)
 	{
 		List<Entity> list = player.level.getEntities(player, player.getBoundingBox().inflate(range)).stream().filter(entity -> 
-			NaUtilsMiscStatics.getValueFromCapability(entity, NFFGirlsCapabilities.CAP_TRADE_HANDLER, CNFFGirlsTradeHandler::getTradingPlayer) == player
+			NFUMiscStatics.getValueFromCapability(entity, NFFGirlsCapabilities.CAP_TRADE_HANDLER, CNFFGirlsTradeHandler::getTradingPlayer) == player
 		).toList();
-		return list.isEmpty() ? null : NaUtilsMiscStatics.getValueFromCapability(list.get(0), NFFGirlsCapabilities.CAP_TRADE_HANDLER, cap -> cap);
+		return list.isEmpty() ? null : NFUMiscStatics.getValueFromCapability(list.get(0), NFFGirlsCapabilities.CAP_TRADE_HANDLER, cap -> cap);
 	}
 	
 }

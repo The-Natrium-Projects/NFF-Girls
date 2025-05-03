@@ -1,23 +1,17 @@
 package net.sodiumzh.nff.girls.entity.ai.goal;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Comparator;
-import java.util.EnumSet;
-import java.util.List;
-import java.util.Random;
-
-import javax.annotation.Nullable;
-
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.entity.ai.goal.Goal;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.phys.AABB;
-import org.apache.commons.lang3.mutable.MutableObject;
-import net.sodiumzh.nautils.statics.NaUtilsEntityStatics;
-import net.sodiumzh.nautils.statics.NaUtilsParticleStatics;
 import net.sodiumzh.nff.services.entity.ai.goal.NFFGoal;
 import net.sodiumzh.nff.services.entity.taming.INFFTamed;
+import net.sodiumzh.nfu.util.NFUEntityStatics;
+import net.sodiumzh.nfu.util.NFUParticleStatics;
+import org.apache.commons.lang3.mutable.MutableObject;
+
+import javax.annotation.Nullable;
+import java.util.*;
 
 /**
  * Goal for locating certain type of blocks nearby
@@ -71,7 +65,7 @@ public class NFFGirlsLocateBlockGoal extends NFFGoal
 		if (blocks.size() == 0)
 			return false;
 		// Existance check
-		AABB range = NaUtilsEntityStatics.getNeighboringArea(mob.asMob(), searchRange);
+		AABB range = NFUEntityStatics.getNeighboringArea(mob.asMob(), searchRange);
 		MutableObject<ArrayList<BlockPos>> acceptedPosWrapper = new MutableObject<>(new ArrayList<BlockPos>(50));
 		BlockPos.betweenClosedStream(range).forEach((BlockPos pos) -> {
 			if (loc.getLocatingBlocks().contains(mob.asMob().level.getBlockState(pos).getBlock()))
@@ -101,7 +95,7 @@ public class NFFGirlsLocateBlockGoal extends NFFGoal
 	@Override
 	public void onStart()
 	{
-		NaUtilsParticleStatics.sendGlintParticlesToEntityDefault(mob.asMob());
+		NFUParticleStatics.sendGlintParticlesToEntityDefault(mob.asMob());
 		endTimestamp = mob.asMob().tickCount + maxDuration;
 		restartTimestamp = endTimestamp + cooldown;
 		loc.onStartLocating();
@@ -117,7 +111,7 @@ public class NFFGirlsLocateBlockGoal extends NFFGoal
 			mob.asMob().getLookControl().setLookAt(targetPos.getX(), targetPos.getY(), targetPos.getZ());
 			if (mob.asMob().tickCount % 5 == 0 && mob.asMob().distanceToSqr(targetPos.getX(), targetPos.getY(), targetPos.getZ()) < 6.25d)
 			{
-				NaUtilsParticleStatics.sendGlintParticlesToEntityDefault(mob.asMob());
+				NFUParticleStatics.sendGlintParticlesToEntityDefault(mob.asMob());
 			}
 		}
 	}

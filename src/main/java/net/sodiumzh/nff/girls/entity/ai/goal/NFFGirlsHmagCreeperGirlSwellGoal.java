@@ -1,7 +1,7 @@
 package net.sodiumzh.nff.girls.entity.ai.goal;
 
 import net.sodiumzh.nff.girls.entity.hmag.HmagCreeperGirlEntity;
-import net.sodiumzh.nff.services.entity.taming.presets.NFFTamedCreeperPreset;
+import net.sodiumzh.nff.services.entity.taming.preset.NFFTamedCreeperPreset;
 
 public class NFFGirlsHmagCreeperGirlSwellGoal extends NFFTamedCreeperPreset.SwellGoal
 {

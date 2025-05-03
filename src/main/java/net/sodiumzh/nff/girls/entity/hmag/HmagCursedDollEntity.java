@@ -1,12 +1,6 @@
 package net.sodiumzh.nff.girls.entity.hmag;
 
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.UUID;
-
-import com.github.mechalopa.hmag.registry.ModEntityTypes;
 import com.github.mechalopa.hmag.world.entity.CursedDollEntity;
-
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.sounds.SoundEvent;
@@ -27,10 +21,6 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
-import net.sodiumzh.nautils.statics.NaUtilsContainerStatics;
-import net.sodiumzh.nautils.statics.NaUtilsEntityStatics;
-import net.sodiumzh.nautils.statics.NaUtilsParticleStatics;
-import net.sodiumzh.nff.girls.NFFGirls;
 import net.sodiumzh.nff.girls.entity.INFFGirlsTamedSunSensitiveMob;
 import net.sodiumzh.nff.girls.entity.ai.goal.NFFGirlsFollowOwnerGoal;
 import net.sodiumzh.nff.girls.entity.ai.goal.target.NFFGirlsNearestHostileToOwnerTargetGoal;
@@ -39,22 +29,27 @@ import net.sodiumzh.nff.girls.entity.ai.goal.target.NFFGirlsOwnerHurtByTargetGoa
 import net.sodiumzh.nff.girls.entity.ai.goal.target.NFFGirlsOwnerHurtTargetGoal;
 import net.sodiumzh.nff.girls.inventory.NFFGirlsHandItemsSixBaublesInventoryMenu;
 import net.sodiumzh.nff.girls.registry.NFFGirlsHealingItems;
-import net.sodiumzh.nff.girls.registry.NFFGirlsItems;
 import net.sodiumzh.nff.girls.sound.NFFGirlsSoundPresets;
 import net.sodiumzh.nff.girls.util.NFFGirlsEntityStatics;
-import net.sodiumzh.nff.services.entity.ai.goal.presets.NFFFleeSunGoal;
-import net.sodiumzh.nff.services.entity.ai.goal.presets.NFFRestrictSunGoal;
-import net.sodiumzh.nff.services.entity.ai.goal.presets.NFFWaterAvoidingRandomStrollGoal;
-import net.sodiumzh.nff.services.entity.ai.goal.presets.NFFZombieAttackGoal;
-import net.sodiumzh.nff.services.entity.ai.goal.presets.target.NFFHurtByTargetGoal;
-import net.sodiumzh.nautils.entity.MobApplicableItemTable;
+import net.sodiumzh.nff.services.entity.ai.goal.preset.NFFFleeSunGoal;
+import net.sodiumzh.nff.services.entity.ai.goal.preset.NFFRestrictSunGoal;
+import net.sodiumzh.nff.services.entity.ai.goal.preset.NFFWaterAvoidingRandomStrollGoal;
+import net.sodiumzh.nff.services.entity.ai.goal.preset.NFFZombieAttackGoal;
+import net.sodiumzh.nff.services.entity.ai.goal.preset.target.NFFHurtByTargetGoal;
 import net.sodiumzh.nff.services.entity.taming.NFFTamedStatics;
 import net.sodiumzh.nff.services.entity.taming.NFFTamingMapping;
 import net.sodiumzh.nff.services.inventory.NFFTamedInventoryMenu;
 import net.sodiumzh.nff.services.inventory.NFFTamedMobInventory;
 import net.sodiumzh.nff.services.inventory.NFFTamedMobInventoryWithHandItems;
+import net.sodiumzh.nfu.entity.MobApplicableItemTable;
+import net.sodiumzh.nfu.util.NFUContainerStatics;
+import net.sodiumzh.nfu.util.NFUEntityStatics;
+import net.sodiumzh.nfu.util.NFUParticleStatics;
 
 import javax.annotation.Nonnull;
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.UUID;
 
 public class HmagCursedDollEntity extends CursedDollEntity implements INFFGirlsTamedSunSensitiveMob {
 
@@ -115,7 +110,7 @@ public class HmagCursedDollEntity extends CursedDollEntity implements INFFGirlsT
 	}
 
 	protected int enhancingCooldown = 0;
-	protected static final HashSet<Item> ENHANCING_ITEMS = NaUtilsContainerStatics.setOf(
+	protected static final HashSet<Item> ENHANCING_ITEMS = NFUContainerStatics.setOf(
 			Items.ORANGE_WOOL, Items.YELLOW_WOOL, Items.RED_WOOL, Items.PURPLE_WOOL,
 			Items.MAGENTA_WOOL, Items.LIGHT_BLUE_WOOL, Items.BLUE_WOOL, Items.PINK_WOOL,
 			Items.CYAN_WOOL, Items.LIME_WOOL, Items.GREEN_WOOL);
@@ -144,7 +139,7 @@ public class HmagCursedDollEntity extends CursedDollEntity implements INFFGirlsT
 		{
 			if (enhancingCooldown > 0)
 			{
-				NaUtilsParticleStatics.sendSmokeParticlesToEntityDefault(this);
+				NFUParticleStatics.sendSmokeParticlesToEntityDefault(this);
 				return true;
 			}
 			else
@@ -152,28 +147,28 @@ public class HmagCursedDollEntity extends CursedDollEntity implements INFFGirlsT
 				if (handItem.is(Items.ORANGE_WOOL))
 					this.addEffect(new MobEffectInstance(MobEffects.FIRE_RESISTANCE, 30 * 20));
 				else if (handItem.is(Items.YELLOW_WOOL))
-					NaUtilsEntityStatics.addEffectSafe(this, MobEffects.GLOWING, 30 * 20);
+					NFUEntityStatics.addEffectSafe(this, MobEffects.GLOWING, 30 * 20);
 				else if (handItem.is(Items.RED_WOOL))
-					NaUtilsEntityStatics.addEffectSafe(this, MobEffects.DAMAGE_BOOST, 30 * 20);
+					NFUEntityStatics.addEffectSafe(this, MobEffects.DAMAGE_BOOST, 30 * 20);
 				else if (handItem.is(Items.PURPLE_WOOL))
-					NaUtilsEntityStatics.addEffectSafe(this, MobEffects.DAMAGE_BOOST, 10 * 20, 1);
+					NFUEntityStatics.addEffectSafe(this, MobEffects.DAMAGE_BOOST, 10 * 20, 1);
 				else if (handItem.is(Items.LIME_WOOL))
-					NaUtilsEntityStatics.addEffectSafe(this, MobEffects.REGENERATION, 30 * 20);
+					NFUEntityStatics.addEffectSafe(this, MobEffects.REGENERATION, 30 * 20);
 				else if (handItem.is(Items.GREEN_WOOL))
-					NaUtilsEntityStatics.addEffectSafe(this, MobEffects.REGENERATION, 10 * 20, 1);
+					NFUEntityStatics.addEffectSafe(this, MobEffects.REGENERATION, 10 * 20, 1);
 				else if (handItem.is(Items.LIGHT_BLUE_WOOL))
-					NaUtilsEntityStatics.addEffectSafe(this, MobEffects.MOVEMENT_SPEED, 30 * 20);
+					NFUEntityStatics.addEffectSafe(this, MobEffects.MOVEMENT_SPEED, 30 * 20);
 				else if (handItem.is(Items.BLUE_WOOL))
-					NaUtilsEntityStatics.addEffectSafe(this, MobEffects.MOVEMENT_SPEED, 10 * 20, 1);
+					NFUEntityStatics.addEffectSafe(this, MobEffects.MOVEMENT_SPEED, 10 * 20, 1);
 				else if (handItem.is(Items.CYAN_WOOL))
 				{
-					NaUtilsEntityStatics.addEffectSafe(this, MobEffects.MOVEMENT_SPEED, 15 * 20, 2);
-					NaUtilsEntityStatics.addEffectSafe(this, MobEffects.WEAKNESS, 15 * 20);
+					NFUEntityStatics.addEffectSafe(this, MobEffects.MOVEMENT_SPEED, 15 * 20, 2);
+					NFUEntityStatics.addEffectSafe(this, MobEffects.WEAKNESS, 15 * 20);
 				}
 				else if (handItem.is(Items.MAGENTA_WOOL))
 				{
-					NaUtilsEntityStatics.addEffectSafe(this, MobEffects.DAMAGE_BOOST, 15 * 20, 2);
-					NaUtilsEntityStatics.addEffectSafe(this, MobEffects.WEAKNESS, 15 * 20);
+					NFUEntityStatics.addEffectSafe(this, MobEffects.DAMAGE_BOOST, 15 * 20, 2);
+					NFUEntityStatics.addEffectSafe(this, MobEffects.WEAKNESS, 15 * 20);
 				}
 				else if (handItem.is(Items.PINK_WOOL))
 				{

@@ -8,10 +8,10 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
-import net.sodiumzh.nautils.statics.NaUtilsEntityStatics;
-import net.sodiumzh.nautils.statics.NaUtilsMiscStatics;
-import net.sodiumzh.nautils.statics.NaUtilsNBTStatics;
 import net.sodiumzh.nff.girls.registry.NFFGirlsCapabilities;
+import net.sodiumzh.nfu.util.NFUEntityStatics;
+import net.sodiumzh.nfu.util.NFUMiscStatics;
+import net.sodiumzh.nfu.util.NFUNBTStatics;
 
 public class XPModifierItem extends Item
 {
@@ -31,7 +31,7 @@ public class XPModifierItem extends Item
 	
 	public int getValue(ItemStack stack)
 	{
-		if (!stack.getOrCreateTag().contains("value", NaUtilsNBTStatics.TAG_INT_ID))
+		if (!stack.getOrCreateTag().contains("value", NFUNBTStatics.TAG_INT_ID))
 			stack.getOrCreateTag().putInt("value", 1);
 		return stack.getOrCreateTag().getInt("value");
 	}
@@ -51,16 +51,16 @@ public class XPModifierItem extends Item
 	    			if (!player.isShiftKeyDown())
 	    			{
 	    				cap.setExp(cap.getExp() + this.getValue(stack));
-	    				NaUtilsMiscStatics.printToScreen("Mob [" + target.getName().getString() + "] EXP +" + this.getValue(stack) + "." , player);
-	    				NaUtilsMiscStatics.printToScreen("Current: Lv " + Integer.toString(cap.getExpectedLevel()) + ", EXP " + Long.toString(cap.getExpInThisLevel()) , player);
-	    				NaUtilsEntityStatics.sendGlintParticlesToLivingDefault(target);
+	    				NFUMiscStatics.printToScreen("Mob [" + target.getName().getString() + "] EXP +" + this.getValue(stack) + "." , player);
+	    				NFUMiscStatics.printToScreen("Current: Lv " + Integer.toString(cap.getExpectedLevel()) + ", EXP " + Long.toString(cap.getExpInThisLevel()) , player);
+	    				NFUEntityStatics.sendGlintParticlesToLivingDefault(target);
 	    			}
 	    			else 
 	    			{
 	    				cap.setExp(Math.max(0, cap.getExp() - this.getValue(stack)));
-	    				NaUtilsMiscStatics.printToScreen("Mob [" + target.getName().getString() + "] EXP -" + this.getValue(stack) + "." , player);
-	    				NaUtilsMiscStatics.printToScreen("Current: Lv " + Integer.toString(cap.getExpectedLevel()) + ", EXP " + Long.toString(cap.getExpInThisLevel()) , player);
-	    				NaUtilsEntityStatics.sendSmokeParticlesToLivingDefault(target);
+	    				NFUMiscStatics.printToScreen("Mob [" + target.getName().getString() + "] EXP -" + this.getValue(stack) + "." , player);
+	    				NFUMiscStatics.printToScreen("Current: Lv " + Integer.toString(cap.getExpectedLevel()) + ", EXP " + Long.toString(cap.getExpInThisLevel()) , player);
+	    				NFUEntityStatics.sendSmokeParticlesToLivingDefault(target);
 	    			}
     			}
     		});
@@ -86,7 +86,7 @@ public class XPModifierItem extends Item
 					this.setValue(player.getItemInHand(hand), this.getValue(player.getItemInHand(hand)) / 4);
     			else this.setValue(player.getItemInHand(hand), 1 << 20 /* 2^20 */);
     		}
-    		NaUtilsMiscStatics.printToScreen("EXP per operation: " + Integer.toString(this.getValue(player.getItemInHand(hand))), player);
+    		NFUMiscStatics.printToScreen("EXP per operation: " + Integer.toString(this.getValue(player.getItemInHand(hand))), player);
     	}
     	return InteractionResultHolder.sidedSuccess(player.getItemInHand(hand), level.isClientSide);
     }

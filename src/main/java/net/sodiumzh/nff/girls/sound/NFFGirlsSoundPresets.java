@@ -1,11 +1,10 @@
 package net.sodiumzh.nff.girls.sound;
 
-import java.util.Random;
-
 import com.github.mechalopa.hmag.registry.ModSoundEvents;
-
 import net.minecraft.sounds.SoundEvent;
 import net.sodiumzh.nff.girls.registry.NFFGirlsConfigs;
+
+import java.util.Random;
 
 public class NFFGirlsSoundPresets
 {

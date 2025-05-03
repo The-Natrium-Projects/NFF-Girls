@@ -11,17 +11,17 @@ import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
-import net.sodiumzh.nautils.compat.ModDependencyFallbackItem;
-import net.sodiumzh.nautils.item.NaUtilsItem;
-import net.sodiumzh.nautils.statics.NaUtilsCompatStatics;
-import net.sodiumzh.nautils.statics.NaUtilsInfoStatics;
 import net.sodiumzh.nff.girls.NFFGirls;
 import net.sodiumzh.nff.girls.NFFGirlsTab;
 import net.sodiumzh.nff.girls.entity.INFFGirlsTamed;
 import net.sodiumzh.nff.girls.item.*;
-import net.sodiumzh.nff.girls.subsystem.baublesystem.baubles.*;
+import net.sodiumzh.nff.girls.subsystem.baublesystem.bauble.*;
 import net.sodiumzh.nff.services.item.MobCatcherItem;
 import net.sodiumzh.nff.services.item.NFFMobRespawnerItem;
+import net.sodiumzh.nfu.compat.ModDependencyFallbackItem;
+import net.sodiumzh.nfu.item.NFUItem;
+import net.sodiumzh.nfu.util.NFUCompatStatics;
+import net.sodiumzh.nfu.util.NFUInfoStatics;
 
 import java.util.function.Supplier;
 
@@ -55,7 +55,7 @@ public class NFFGirlsItems {
 		registerDepending(boolean tab, String key, String dependingModId, Supplier<T> supplier)
 	{
 		Either<RegistryObject<T>, RegistryObject<ModDependencyFallbackItem>> res =
-				NaUtilsCompatStatics.registerModDependentOrElse(ITEMS, key, dependingModId, supplier, () -> {
+				NFUCompatStatics.registerModDependentOrElse(ITEMS, key, dependingModId, supplier, () -> {
 					var prop = new Item.Properties();
 					if (tab) prop.tab(TAB);
 					return new ModDependencyFallbackItem(dependingModId, prop);
@@ -86,72 +86,72 @@ public class NFFGirlsItems {
 	// Baubles
 	// Desc utils
 	public static Supplier<MutableComponent> baubleHPRecovery(double rawValue) {
-		return () -> NaUtilsInfoStatics.createTranslatable("info.nffgirls.bauble.healing_per_second", 
+		return () -> NFUInfoStatics.createTranslatable("info.nffgirls.bauble.healing_per_second",
 				String.format("%.2f", NFFGirlsConfigs.ValueCache.Baubles.BAUBLE_HEALTH_RECOVERY_SCALE * rawValue)).withStyle(ChatFormatting.GRAY); 
 	}
 	public static Supplier<MutableComponent> baubleHPMax(double rawValue) {
-		return () -> NaUtilsInfoStatics.createTranslatable("info.nffgirls.bauble.hpmax", 
+		return () -> NFUInfoStatics.createTranslatable("info.nffgirls.bauble.hpmax",
 			String.format("+%.1f", NFFGirlsConfigs.ValueCache.Baubles.BAUBLE_MAX_HP_BOOSTING_SCALE * rawValue)).withStyle(ChatFormatting.GRAY); 
 	}
 	public static Supplier<MutableComponent> baubleAtk(double rawValue) {
-		return () -> NaUtilsInfoStatics.createTranslatable("info.nffgirls.bauble.atk", 
+		return () -> NFUInfoStatics.createTranslatable("info.nffgirls.bauble.atk",
 				String.format("+%.1f", NFFGirlsConfigs.ValueCache.Baubles.BAUBLE_ATK_BOOSTING_SCALE * rawValue)).withStyle(ChatFormatting.GRAY); 
 	}
 	public static Supplier<MutableComponent> baubleArmor(double rawValue) {
-		return () -> NaUtilsInfoStatics.createTranslatable("info.nffgirls.bauble.armor", 
+		return () -> NFUInfoStatics.createTranslatable("info.nffgirls.bauble.armor",
 				String.format("+%.1f", NFFGirlsConfigs.ValueCache.Baubles.BAUBLE_ARMOR_BOOSTING_SCALE * rawValue)).withStyle(ChatFormatting.GRAY); 
 	}
 
 	// Registry
 	public static final RegistryObject<SoulAmuletBaubleItem> SOUL_AMULET = ITEMS.register("soul_amulet", () -> new SoulAmuletBaubleItem(
 			"nffgirls:soul_amulet", 1, new Item.Properties().rarity(Rarity.UNCOMMON).tab(TAB))
-			.description(NaUtilsInfoStatics.createTranslatable("info.nffgirls.bauble.soul_amulet").withStyle(ChatFormatting.GRAY))
+			.description(NFUInfoStatics.createTranslatable("info.nffgirls.bauble.soul_amulet").withStyle(ChatFormatting.GRAY))
 			.description(baubleHPMax(10.0))
 			.description(baubleAtk(3.0))
-			.description(NaUtilsInfoStatics.createTranslatable("info.nffgirls.bauble.sun_immune").withStyle(ChatFormatting.GRAY)).cast());
+			.description(NFUInfoStatics.createTranslatable("info.nffgirls.bauble.sun_immune").withStyle(ChatFormatting.GRAY)).cast());
 	public static final RegistryObject<SoulAmuletBaubleItem> SOUL_AMULET_II = ITEMS.register("soul_amulet_ii", () -> new SoulAmuletBaubleItem(
 			"nffgirls:soul_amulet", 2, new Item.Properties().rarity(Rarity.RARE).tab(TAB)).alwaysFoil()
-			.description(NaUtilsInfoStatics.createTranslatable("info.nffgirls.bauble.soul_amulet").withStyle(ChatFormatting.GRAY))
+			.description(NFUInfoStatics.createTranslatable("info.nffgirls.bauble.soul_amulet").withStyle(ChatFormatting.GRAY))
 			.description(baubleHPMax(15.0))
 			.description(baubleAtk(5.0))
-			.description(NaUtilsInfoStatics.createTranslatable("info.nffgirls.bauble.speed", "+10%").withStyle(ChatFormatting.GRAY))
-			.description(NaUtilsInfoStatics.createTranslatable("info.nffgirls.bauble.sun_immune").withStyle(ChatFormatting.GRAY)).cast());
+			.description(NFUInfoStatics.createTranslatable("info.nffgirls.bauble.speed", "+10%").withStyle(ChatFormatting.GRAY))
+			.description(NFUInfoStatics.createTranslatable("info.nffgirls.bauble.sun_immune").withStyle(ChatFormatting.GRAY)).cast());
 	public static final RegistryObject<SoulAmuletBaubleItem> SOUL_AMULET_III = ITEMS.register("soul_amulet_iii", () -> new SoulAmuletBaubleItem(
 			"nffgirls:soul_amulet", 3, new Item.Properties().rarity(Rarity.RARE).tab(TAB))
-			.description(NaUtilsInfoStatics.createTranslatable("info.nffgirls.bauble.soul_amulet").withStyle(ChatFormatting.GRAY))
+			.description(NFUInfoStatics.createTranslatable("info.nffgirls.bauble.soul_amulet").withStyle(ChatFormatting.GRAY))
 			.description(baubleHPMax(25.0))
 			.description(baubleAtk(8.0))
-			.description(NaUtilsInfoStatics.createTranslatable("info.nffgirls.bauble.speed", "+15%").withStyle(ChatFormatting.GRAY))
-			.description(NaUtilsInfoStatics.createTranslatable("info.nffgirls.bauble.sun_immune").withStyle(ChatFormatting.GRAY)).cast());
+			.description(NFUInfoStatics.createTranslatable("info.nffgirls.bauble.speed", "+15%").withStyle(ChatFormatting.GRAY))
+			.description(NFUInfoStatics.createTranslatable("info.nffgirls.bauble.sun_immune").withStyle(ChatFormatting.GRAY)).cast());
 	public static final RegistryObject<SoulAmuletBaubleItem> SOUL_AMULET_IV = ITEMS.register("soul_amulet_iv", () -> new SoulAmuletBaubleItem(
 			"nffgirls:soul_amulet", 4, new Item.Properties().rarity(Rarity.EPIC).tab(TAB)).alwaysFoil()
-			.description(NaUtilsInfoStatics.createTranslatable("info.nffgirls.bauble.soul_amulet").withStyle(ChatFormatting.GRAY))
+			.description(NFUInfoStatics.createTranslatable("info.nffgirls.bauble.soul_amulet").withStyle(ChatFormatting.GRAY))
 			.description(baubleHPMax(40.0))
 			.description(baubleAtk(12.0))
-			.description(NaUtilsInfoStatics.createTranslatable("info.nffgirls.bauble.speed", "+20%").withStyle(ChatFormatting.GRAY))
+			.description(NFUInfoStatics.createTranslatable("info.nffgirls.bauble.speed", "+20%").withStyle(ChatFormatting.GRAY))
 			.description(baubleHPRecovery(0.1))
 
-			.description(NaUtilsInfoStatics.createTranslatable("info.nffgirls.bauble.sun_immune").withStyle(ChatFormatting.GRAY)).cast());
+			.description(NFUInfoStatics.createTranslatable("info.nffgirls.bauble.sun_immune").withStyle(ChatFormatting.GRAY)).cast());
 	public static final RegistryObject<CourageAmuletBaubleItem> COURAGE_AMULET = ITEMS.register("courage_amulet", () -> new CourageAmuletBaubleItem(
 			"nffgirls:courage_amulet", 1, new Item.Properties().rarity(Rarity.UNCOMMON).tab(TAB))
-			.description(NaUtilsInfoStatics.createTranslatable("info.nffgirls.bauble.proactive_attack").withStyle(ChatFormatting.GRAY))
+			.description(NFUInfoStatics.createTranslatable("info.nffgirls.bauble.proactive_attack").withStyle(ChatFormatting.GRAY))
 			.description(baubleAtk(4.0))
-			.description(NaUtilsInfoStatics.createTranslatable("info.nffgirls.bauble.speed", "+20%").withStyle(ChatFormatting.GRAY)).cast());
+			.description(NFUInfoStatics.createTranslatable("info.nffgirls.bauble.speed", "+20%").withStyle(ChatFormatting.GRAY)).cast());
 	public static final RegistryObject<CourageAmuletBaubleItem> COURAGE_AMULET_II = ITEMS.register("courage_amulet_ii", () -> new CourageAmuletBaubleItem(
 			"nffgirls:courage_amulet", 2, new Item.Properties().rarity(Rarity.RARE).tab(TAB)).alwaysFoil()
-			.description(NaUtilsInfoStatics.createTranslatable("info.nffgirls.bauble.proactive_attack").withStyle(ChatFormatting.GRAY))
+			.description(NFUInfoStatics.createTranslatable("info.nffgirls.bauble.proactive_attack").withStyle(ChatFormatting.GRAY))
 			.description(baubleAtk(6.0))
-			.description(NaUtilsInfoStatics.createTranslatable("info.nffgirls.bauble.speed", "+30%").withStyle(ChatFormatting.GRAY)).cast());
+			.description(NFUInfoStatics.createTranslatable("info.nffgirls.bauble.speed", "+30%").withStyle(ChatFormatting.GRAY)).cast());
 	public static final RegistryObject<ResistanceAmuletBaubleItem> RESISTANCE_AMULET = ITEMS.register("resistance_amulet", () -> new ResistanceAmuletBaubleItem(
 			"nffgirls:resistance_amulet", 1, new Item.Properties().rarity(Rarity.UNCOMMON).tab(TAB))
 			.description(baubleArmor(4.0))
 			.description(baubleHPMax(15.0))
-			.description(NaUtilsInfoStatics.createTranslatable("info.nffgirls.bauble.sun_immune").withStyle(ChatFormatting.GRAY)).cast());
+			.description(NFUInfoStatics.createTranslatable("info.nffgirls.bauble.sun_immune").withStyle(ChatFormatting.GRAY)).cast());
 	public static final RegistryObject<ResistanceAmuletBaubleItem> RESISTANCE_AMULET_II = ITEMS.register("resistance_amulet_ii", () -> new ResistanceAmuletBaubleItem(
 			"nffgirls:resistance_amulet", 2, new Item.Properties().rarity(Rarity.UNCOMMON).tab(TAB)).alwaysFoil()
 			.description(baubleArmor(6.0))
 			.description(baubleHPMax(25.0))
-			.description(NaUtilsInfoStatics.createTranslatable("info.nffgirls.bauble.sun_immune").withStyle(ChatFormatting.GRAY)).cast());
+			.description(NFUInfoStatics.createTranslatable("info.nffgirls.bauble.sun_immune").withStyle(ChatFormatting.GRAY)).cast());
 	public static final RegistryObject<HealingJadeBaubleItem> HEALING_JADE = ITEMS.register("healing_jade", () -> new HealingJadeBaubleItem(
 			"nffgirls:healing_jade", 1, new Item.Properties().rarity(Rarity.UNCOMMON).tab(TAB))
 			.description(baubleHPRecovery(0.1)).cast());
@@ -165,14 +165,14 @@ public class NFFGirlsItems {
 			.description(baubleHPMax(10.0)).cast());
 	public static final RegistryObject<AquaJadeBaubleItem> AQUA_JADE = ITEMS.register("aqua_jade", () -> new AquaJadeBaubleItem(
 			"nffgirls:aqua_jade", 1, new Item.Properties().rarity(Rarity.UNCOMMON).tab(TAB))
-			.description(NaUtilsInfoStatics.createTranslatable("info.nffgirls.bauble.aqua_jade").withStyle(ChatFormatting.GRAY))
-			.description(NaUtilsInfoStatics.createTranslatable("info.nffgirls.bauble.in_water").withStyle(ChatFormatting.GRAY))
-			.description(NaUtilsInfoStatics.createTranslatable("info.nffgirls.bauble.speed", "4x").withStyle(ChatFormatting.GRAY))
+			.description(NFUInfoStatics.createTranslatable("info.nffgirls.bauble.aqua_jade").withStyle(ChatFormatting.GRAY))
+			.description(NFUInfoStatics.createTranslatable("info.nffgirls.bauble.in_water").withStyle(ChatFormatting.GRAY))
+			.description(NFUInfoStatics.createTranslatable("info.nffgirls.bauble.speed", "4x").withStyle(ChatFormatting.GRAY))
 			.description(baubleHPRecovery(0.25)).cast());
 	public static final RegistryObject<PoisonousThornBaubleItem> POISONOUS_THORN = ITEMS.register("poisonous_thorn", () -> new PoisonousThornBaubleItem(
 			"nffgirls:poisonous_thorn", 1, new Item.Properties().rarity(Rarity.UNCOMMON).tab(TAB))
-			.description(NaUtilsInfoStatics.createTranslatable("info.nffgirls.bauble.poisonous_thorn").withStyle(ChatFormatting.GRAY))
-			.description(NaUtilsInfoStatics.createTranslatable("info.nffgirls.bauble.poisonous_thorn_1").withStyle(ChatFormatting.GRAY)).cast());
+			.description(NFUInfoStatics.createTranslatable("info.nffgirls.bauble.poisonous_thorn").withStyle(ChatFormatting.GRAY))
+			.description(NFUInfoStatics.createTranslatable("info.nffgirls.bauble.poisonous_thorn_1").withStyle(ChatFormatting.GRAY)).cast());
 
 
 	
@@ -219,7 +219,7 @@ public class NFFGirlsItems {
 		.canCatchCondition((m, p) -> (m instanceof INFFGirlsTamed bm && bm.getOwnerUUID().equals(p.getUUID()))));
 
 	// Technical
-	public static final RegistryObject<NaUtilsItem> TAB_ICON = ITEMS.register("tab_icon", () -> new NaUtilsItem(new Item.Properties()));
+	public static final RegistryObject<NFUItem> TAB_ICON = ITEMS.register("tab_icon", () -> new NFUItem(new Item.Properties()));
 	//public static final RegistryObject<Item> GIFT_UNKNOWN_ICON = ITEMS.register("gift_unknown_icon", () -> new Item(new Item.Properties()));
 	//public static final RegistryObject<Item> MOB_PROFILE_ICON = ITEMS.register("mob_profile_icon", () -> new Item(new Item.Properties()));
 	

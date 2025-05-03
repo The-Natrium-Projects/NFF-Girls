@@ -1,12 +1,12 @@
 package net.sodiumzh.nff.girls.entity.capability;
 
-import java.util.HashSet;
-import java.util.UUID;
-
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.IntTag;
 import net.minecraft.world.entity.LivingEntity;
-import net.sodiumzh.nautils.statics.NaUtilsNBTStatics;
+import net.sodiumzh.nfu.util.NFUNBTStatics;
+
+import java.util.HashSet;
+import java.util.UUID;
 
 public class CUndeadMobImpl implements CUndeadAffinityHandler {
 
@@ -41,14 +41,14 @@ public class CUndeadMobImpl implements CUndeadAffinityHandler {
 	public CompoundTag serializeNBT() 
 	{
 		CompoundTag tag = new CompoundTag();
-		NaUtilsNBTStatics.serializeUUIDSet(tag, hatred, "neutral");
+		NFUNBTStatics.serializeUUIDSet(tag, hatred, "neutral");
 		tag.put("forgiving_timers", forgivingTimers);
 		return tag;
 	}
 
 	@Override
 	public void deserializeNBT(CompoundTag nbt) {
-		hatred = NaUtilsNBTStatics.deserializeUUIDSet(nbt, "neutral");
+		hatred = NFUNBTStatics.deserializeUUIDSet(nbt, "neutral");
 		forgivingTimers = nbt.getCompound("forgiving_timers");
 	}
 	

@@ -1,7 +1,5 @@
 package net.sodiumzh.nff.girls.subsystem.baublesystem;
 
-import java.util.function.Function;
-
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.item.ItemStack;
@@ -9,41 +7,17 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
 import net.sodiumzh.nff.girls.NFFGirls;
-import net.sodiumzh.nff.girls.entity.hmag.HmagAlrauneEntity;
-import net.sodiumzh.nff.girls.entity.hmag.HmagBansheeEntity;
-import net.sodiumzh.nff.girls.entity.hmag.HmagCrimsonSlaughtererEntity;
-import net.sodiumzh.nff.girls.entity.hmag.HmagCursedDollEntity;
-import net.sodiumzh.nff.girls.entity.hmag.HmagDodomekiEntity;
-import net.sodiumzh.nff.girls.entity.hmag.HmagDrownedGirlEntity;
-import net.sodiumzh.nff.girls.entity.hmag.HmagDullahanEntity;
-import net.sodiumzh.nff.girls.entity.hmag.HmagEnderExecutorEntity;
-import net.sodiumzh.nff.girls.entity.hmag.HmagGhastlySeekerEntity;
-import net.sodiumzh.nff.girls.entity.hmag.HmagGlaryadEntity;
-import net.sodiumzh.nff.girls.entity.hmag.HmagHarpyEntity;
-import net.sodiumzh.nff.girls.entity.hmag.HmagHornetEntity;
-import net.sodiumzh.nff.girls.entity.hmag.HmagHuskGirlEntity;
-import net.sodiumzh.nff.girls.entity.hmag.HmagImpEntity;
-import net.sodiumzh.nff.girls.entity.hmag.HmagJackFrostEntity;
-import net.sodiumzh.nff.girls.entity.hmag.HmagJiangshiEntity;
-import net.sodiumzh.nff.girls.entity.hmag.HmagKoboldEntity;
-import net.sodiumzh.nff.girls.entity.hmag.HmagMeltyMonsterEntity;
-import net.sodiumzh.nff.girls.entity.hmag.HmagNecroticReaperEntity;
-import net.sodiumzh.nff.girls.entity.hmag.HmagNightwalkerEntity;
-import net.sodiumzh.nff.girls.entity.hmag.HmagRedcapEntity;
-import net.sodiumzh.nff.girls.entity.hmag.HmagSkeletonGirlEntity;
-import net.sodiumzh.nff.girls.entity.hmag.HmagSlimeGirlEntity;
-import net.sodiumzh.nff.girls.entity.hmag.HmagSnowCanineEntity;
-import net.sodiumzh.nff.girls.entity.hmag.HmagStrayGirlEntity;
-import net.sodiumzh.nff.girls.entity.hmag.HmagWitherSkeletonGirlEntity;
-import net.sodiumzh.nff.girls.entity.hmag.HmagZombieGirlEntity;
+import net.sodiumzh.nff.girls.entity.hmag.*;
 import net.sodiumzh.nff.girls.registry.NFFGirlsItems;
-import net.sodiumzh.nff.girls.subsystem.baublesystem.baubles.EnderManHandBlockBaubleBehavior;
-import net.sodiumzh.nff.girls.subsystem.baublesystem.baubles.InsomniaFruitBaubleBehavior;
-import net.sodiumzh.nff.girls.subsystem.baublesystem.baubles.NecroticReaperHandHoeBaubleBehavior;
+import net.sodiumzh.nff.girls.subsystem.baublesystem.bauble.EnderManHandBlockBaubleBehavior;
+import net.sodiumzh.nff.girls.subsystem.baublesystem.bauble.InsomniaFruitBaubleBehavior;
+import net.sodiumzh.nff.girls.subsystem.baublesystem.bauble.NecroticReaperHandHoeBaubleBehavior;
 import net.sodiumzh.nff.services.entity.taming.INFFTamed;
-import net.sodiumzh.nff.services.subsystems.baublesystem.BaubleEquippingCondition;
-import net.sodiumzh.nff.services.subsystems.baublesystem.RegisterBaubleEquippableMobsEvent;
-import net.sodiumzh.nff.services.subsystems.baublesystem.RegisterBaublesEvent;
+import net.sodiumzh.nff.services.subsystem.baublesystem.BaubleEquippingCondition;
+import net.sodiumzh.nff.services.subsystem.baublesystem.RegisterBaubleEquippableMobsEvent;
+import net.sodiumzh.nff.services.subsystem.baublesystem.RegisterBaublesEvent;
+
+import java.util.function.Function;
 
 @EventBusSubscriber(modid = NFFGirls.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class NFFGirlsBaubleRegistrations

@@ -1,11 +1,8 @@
 package net.sodiumzh.nff.girls.entity.projectile;
 
-import java.util.Random;
-
 import com.github.mechalopa.hmag.registry.ModEntityTypes;
 import com.github.mechalopa.hmag.world.entity.MagicalSlimeEntity;
 import com.github.mechalopa.hmag.world.entity.SlimeGirlEntity;
-
 import net.minecraft.core.particles.ItemParticleOption;
 import net.minecraft.core.particles.ParticleOptions;
 import net.minecraft.core.particles.ParticleTypes;
@@ -21,14 +18,16 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.EntityHitResult;
 import net.minecraft.world.phys.HitResult;
-import net.sodiumzh.nautils.math.LinearColor;
-import net.sodiumzh.nautils.math.RndUtil;
-import net.sodiumzh.nautils.statics.NaUtilsEntityStatics;
 import net.sodiumzh.nff.girls.entity.hmag.HmagSlimeGirlEntity;
 import net.sodiumzh.nff.girls.item.MagicalGelColorUtils;
 import net.sodiumzh.nff.girls.registry.NFFGirlsEntityTypes;
 import net.sodiumzh.nff.girls.registry.NFFGirlsItems;
 import net.sodiumzh.nff.girls.registry.NFFGirlsTags;
+import net.sodiumzh.nfu.math.LinearColor;
+import net.sodiumzh.nfu.math.RndUtil;
+import net.sodiumzh.nfu.util.NFUEntityStatics;
+
+import java.util.Random;
 
 public class MagicalGelBallEntity extends ThrowableItemProjectile
 {
@@ -119,7 +118,7 @@ public class MagicalGelBallEntity extends ThrowableItemProjectile
 			else if (!(living instanceof Slime) && !(living instanceof SlimeGirlEntity) && !living.getType().is(NFFGirlsTags.IGNORES_MAGICAL_GEL_SLOWNESS))
 			{
 				result.getEntity().hurt(DamageSource.thrown(this, this.getOwner()), 0);
-				NaUtilsEntityStatics.addEffectSafe(living, new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 30 * 20, 1));
+				NFUEntityStatics.addEffectSafe(living, new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 30 * 20, 1));
 			}
 		}
 		

@@ -2,7 +2,7 @@ package net.sodiumzh.nff.girls.entity.ai.goal;
 
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.item.TridentItem;
-import net.sodiumzh.nff.services.entity.ai.goal.presets.NFFRangedAttackGoal;
+import net.sodiumzh.nff.services.entity.ai.goal.preset.NFFRangedAttackGoal;
 import net.sodiumzh.nff.services.entity.taming.INFFTamed;
 
 public class NFFGirlsHmagDrownedTridentAttackGoal extends NFFRangedAttackGoal {

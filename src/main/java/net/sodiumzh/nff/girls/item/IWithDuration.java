@@ -3,9 +3,9 @@ package net.sodiumzh.nff.girls.item;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.world.item.ItemStack;
-import net.sodiumzh.nautils.annotation.DontOverride;
-import net.sodiumzh.nautils.statics.NaUtilsInfoStatics;
-import net.sodiumzh.nautils.statics.NaUtilsNBTStatics;
+import net.sodiumzh.nfu.annotation.DontOverride;
+import net.sodiumzh.nfu.util.NFUInfoStatics;
+import net.sodiumzh.nfu.util.NFUNBTStatics;
 
 /**
  * Interface of items with a duration but not using the vanilla item damage system, thus cannot be repaired with Mending or regarded as damageable items.
@@ -23,7 +23,7 @@ public interface IWithDuration {
 		{
 			throw new IllegalArgumentException("Wrong item type");
 		}
-		if (!stack.getOrCreateTag().contains("IWithDuration_duration", NaUtilsNBTStatics.TAG_INT_ID))
+		if (!stack.getOrCreateTag().contains("IWithDuration_duration", NFUNBTStatics.TAG_INT_ID))
 		{
 			stack.getOrCreateTag().putInt("IWithDuration_duration", getMaxDuration());
 			return getMaxDuration();
@@ -68,6 +68,6 @@ public interface IWithDuration {
 	
 	public default MutableComponent getDurationDescription(ItemStack stack)
 	{
-		return NaUtilsInfoStatics.createTranslatable("info.nffgirls.item.duration", Integer.toString(getDuration(stack)), Integer.toString(getMaxDuration())).withStyle(ChatFormatting.GRAY);
+		return NFUInfoStatics.createTranslatable("info.nffgirls.item.duration", Integer.toString(getDuration(stack)), Integer.toString(getMaxDuration())).withStyle(ChatFormatting.GRAY);
 	}
 }

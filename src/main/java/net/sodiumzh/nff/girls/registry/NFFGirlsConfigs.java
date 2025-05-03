@@ -3,7 +3,7 @@ package net.sodiumzh.nff.girls.registry;
 import net.minecraftforge.common.ForgeConfigSpec;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.event.config.ModConfigEvent;
-import net.sodiumzh.nff.girls.eventlisteners.NFFGirlsEntityEventListeners;
+import net.sodiumzh.nff.girls.eventlistener.NFFGirlsEntityEventListeners;
 
 public class NFFGirlsConfigs
 {

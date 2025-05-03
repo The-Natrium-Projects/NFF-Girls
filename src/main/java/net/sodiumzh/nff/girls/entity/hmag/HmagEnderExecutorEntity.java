@@ -1,12 +1,8 @@
 package net.sodiumzh.nff.girls.entity.hmag;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-
 import com.github.mechalopa.hmag.ModConfigs;
 import com.github.mechalopa.hmag.client.util.ModClientUtils;
 import com.github.mechalopa.hmag.world.entity.IBeamAttackMob;
-
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
@@ -51,20 +47,20 @@ import net.sodiumzh.nff.girls.inventory.NFFGirlsEnderExecutorInventory;
 import net.sodiumzh.nff.girls.inventory.NFFGirlsHmagEnderExecutorInventoryMenu;
 import net.sodiumzh.nff.girls.registry.NFFGirlsBlocks;
 import net.sodiumzh.nff.girls.registry.NFFGirlsHealingItems;
-import net.sodiumzh.nff.girls.registry.NFFGirlsItems;
 import net.sodiumzh.nff.girls.sound.NFFGirlsSoundPresets;
-import net.sodiumzh.nff.girls.util.NFFGirlsEntityStatics;
 import net.sodiumzh.nff.services.entity.ai.NFFTamedMobAIState;
-import net.sodiumzh.nff.services.entity.ai.goal.presets.NFFWaterAvoidingRandomStrollGoal;
-import net.sodiumzh.nff.services.entity.ai.goal.presets.target.NFFHurtByTargetGoal;
-import net.sodiumzh.nff.services.entity.ai.goal.presets.target.NFFNearestAttackableTargetGoal;
-import net.sodiumzh.nautils.entity.MobApplicableItemTable;
+import net.sodiumzh.nff.services.entity.ai.goal.preset.NFFWaterAvoidingRandomStrollGoal;
+import net.sodiumzh.nff.services.entity.ai.goal.preset.target.NFFHurtByTargetGoal;
+import net.sodiumzh.nff.services.entity.ai.goal.preset.target.NFFNearestAttackableTargetGoal;
 import net.sodiumzh.nff.services.entity.taming.NFFTamedStatics;
 import net.sodiumzh.nff.services.entity.taming.NFFTamingMapping;
-import net.sodiumzh.nff.services.entity.taming.presets.NFFTamedEnderManPreset;
+import net.sodiumzh.nff.services.entity.taming.preset.NFFTamedEnderManPreset;
 import net.sodiumzh.nff.services.inventory.NFFTamedInventoryMenu;
 import net.sodiumzh.nff.services.inventory.NFFTamedMobInventory;
+import net.sodiumzh.nfu.entity.MobApplicableItemTable;
 
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import java.util.List;
 import java.util.Optional;
 import java.util.function.Predicate;
@@ -306,7 +302,7 @@ public class HmagEnderExecutorEntity extends NFFTamedEnderManPreset implements I
 			this.tickUpdateClientBeamAttackTime();
 		}
 		super.aiStep();
-		this.getEntityData().set(DATA_CREEPY, this.getTarget() != null);
+		this.getEntityData().set(NFFTamedEnderManPreset.DATA_CREEPY, this.getTarget() != null);
 	}
 	
 	@Override

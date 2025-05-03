@@ -36,7 +36,7 @@ public class NFFGirlsClientGamePacketHandler
 	}
 	
 	@Deprecated
-	public static void handleLevelHandlerSync(CNFFGirlsLevelHandler.ClientboundSyncPacket packet, ClientGamePacketListener listener) 
+	public static void handleLevelHandlerSync(CNFFGirlsLevelHandler.ClientboundSyncPacket packet, ClientGamePacketListener listener)
 	{
 		@SuppressWarnings("resource")
 		Minecraft mc = Minecraft.getInstance();

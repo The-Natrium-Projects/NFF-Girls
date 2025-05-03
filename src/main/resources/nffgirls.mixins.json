@@ -1,6 +1,6 @@
 {
 	"required": true,
-	"package": "net.sodiumzh.nff.girls.mixins",
+	"package": "net.sodiumzh.nff.girls.mixin",
 	"compatibilityLevel": "JAVA_17",
 	"refmap": "nffgirls.refmap.json",
 	"mixins": [

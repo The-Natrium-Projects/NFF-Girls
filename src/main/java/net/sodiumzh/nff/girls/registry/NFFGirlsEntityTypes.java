@@ -1,7 +1,5 @@
 package net.sodiumzh.nff.girls.registry;
 
-import java.util.function.Function;
-
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
@@ -14,46 +12,17 @@ import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 import net.sodiumzh.nff.girls.NFFGirls;
-import net.sodiumzh.nff.girls.entity.hmag.HmagAlrauneEntity;
-import net.sodiumzh.nff.girls.entity.hmag.HmagBansheeEntity;
-import net.sodiumzh.nff.girls.entity.hmag.HmagCreeperGirlEntity;
-import net.sodiumzh.nff.girls.entity.hmag.HmagCrimsonSlaughtererEntity;
-import net.sodiumzh.nff.girls.entity.hmag.HmagCursedDollEntity;
-import net.sodiumzh.nff.girls.entity.hmag.HmagDodomekiEntity;
-import net.sodiumzh.nff.girls.entity.hmag.HmagDrownedGirlEntity;
-import net.sodiumzh.nff.girls.entity.hmag.HmagDullahanEntity;
-import net.sodiumzh.nff.girls.entity.hmag.HmagEnderExecutorEntity;
-import net.sodiumzh.nff.girls.entity.hmag.HmagGhastlySeekerEntity;
-import net.sodiumzh.nff.girls.entity.hmag.HmagGlaryadEntity;
-import net.sodiumzh.nff.girls.entity.hmag.HmagHarpyEntity;
-import net.sodiumzh.nff.girls.entity.hmag.HmagHornetEntity;
-import net.sodiumzh.nff.girls.entity.hmag.HmagHuskGirlEntity;
-import net.sodiumzh.nff.girls.entity.hmag.HmagImpEntity;
-import net.sodiumzh.nff.girls.entity.hmag.HmagJackFrostEntity;
-import net.sodiumzh.nff.girls.entity.hmag.HmagJiangshiEntity;
-import net.sodiumzh.nff.girls.entity.hmag.HmagKoboldEntity;
-import net.sodiumzh.nff.girls.entity.hmag.HmagMeltyMonsterEntity;
-import net.sodiumzh.nff.girls.entity.hmag.HmagNecroticReaperEntity;
-import net.sodiumzh.nff.girls.entity.hmag.HmagNightwalkerEntity;
-import net.sodiumzh.nff.girls.entity.hmag.HmagRedcapEntity;
-import net.sodiumzh.nff.girls.entity.hmag.HmagSkeletonGirlEntity;
-import net.sodiumzh.nff.girls.entity.hmag.HmagSlimeGirlEntity;
-import net.sodiumzh.nff.girls.entity.hmag.HmagSnowCanineEntity;
-import net.sodiumzh.nff.girls.entity.hmag.HmagStrayGirlEntity;
-import net.sodiumzh.nff.girls.entity.hmag.HmagWitherSkeletonGirlEntity;
-import net.sodiumzh.nff.girls.entity.hmag.HmagZombieGirlEntity;
-import net.sodiumzh.nff.girls.entity.projectile.MagicalGelBallEntity;
-import net.sodiumzh.nff.girls.entity.projectile.NFFGhastFireballEntity;
-import net.sodiumzh.nff.girls.entity.projectile.NFFHmagAlrauneSeedEntity;
-import net.sodiumzh.nff.girls.entity.projectile.NecromancerMagicBulletEntity;
-import net.sodiumzh.nff.girls.entity.projectile.ReinforcedFishingHookEntity;
+import net.sodiumzh.nff.girls.entity.hmag.*;
+import net.sodiumzh.nff.girls.entity.projectile.*;
+
+import java.util.function.Function;
 
 @Mod.EventBusSubscriber(modid = NFFGirls.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class NFFGirlsEntityTypes {
 
 	public static final DeferredRegister<EntityType<?>> ENTITY_TYPES = DeferredRegister.create(ForgeRegistries.ENTITY_TYPES, NFFGirls.MOD_ID);
 	
-	public static final RegistryObject<EntityType<HmagZombieGirlEntity>> HMAG_ZOMBIE_GIRL = 
+	public static final RegistryObject<EntityType<HmagZombieGirlEntity>> HMAG_ZOMBIE_GIRL =
 			ENTITY_TYPES.register("hmag_zombie_girl", () -> EntityType.Builder.of(
 			HmagZombieGirlEntity::new, MobCategory.CREATURE)
 			.sized(0.6F, 1.95F)
@@ -63,7 +32,7 @@ public class NFFGirlsEntityTypes {
 			.noSummon()
 			.build(new ResourceLocation(NFFGirls.MOD_ID, "hmag_zombie_girl").toString()));
 	
-	public static final RegistryObject<EntityType<HmagSkeletonGirlEntity>> HMAG_SKELETON_GIRL = 
+	public static final RegistryObject<EntityType<HmagSkeletonGirlEntity>> HMAG_SKELETON_GIRL =
 			ENTITY_TYPES.register("hmag_skeleton_girl", () -> EntityType.Builder.of(
 			HmagSkeletonGirlEntity::new, MobCategory.CREATURE)
 			.sized(0.6F, 1.99F)
@@ -73,7 +42,7 @@ public class NFFGirlsEntityTypes {
 			.noSummon()
 			.build(new ResourceLocation(NFFGirls.MOD_ID, "hmag_skeleton_girl").toString()));
 
-	public static final RegistryObject<EntityType<HmagHuskGirlEntity>> HMAG_HUSK_GIRL = 
+	public static final RegistryObject<EntityType<HmagHuskGirlEntity>> HMAG_HUSK_GIRL =
 			ENTITY_TYPES.register("hmag_husk_girl", () -> EntityType.Builder.of(
 			HmagHuskGirlEntity::new, MobCategory.CREATURE)
 			.sized(0.6F, 1.95F)
@@ -83,7 +52,7 @@ public class NFFGirlsEntityTypes {
 			.noSummon()
 			.build(new ResourceLocation(NFFGirls.MOD_ID, "hmag_husk_girl").toString()));
 	
-	public static final RegistryObject<EntityType<HmagDrownedGirlEntity>> HMAG_DROWNED_GIRL = 
+	public static final RegistryObject<EntityType<HmagDrownedGirlEntity>> HMAG_DROWNED_GIRL =
 			ENTITY_TYPES.register("hmag_drowned_girl", () -> EntityType.Builder.of(
 			HmagDrownedGirlEntity::new, MobCategory.CREATURE)
 			.sized(0.6F, 1.95F)
@@ -93,7 +62,7 @@ public class NFFGirlsEntityTypes {
 			.noSummon()
 			.build(new ResourceLocation(NFFGirls.MOD_ID, "hmag_drowned_girl").toString()));
 	
-	public static final RegistryObject<EntityType<HmagCreeperGirlEntity>> HMAG_CREEPER_GIRL = 
+	public static final RegistryObject<EntityType<HmagCreeperGirlEntity>> HMAG_CREEPER_GIRL =
 			ENTITY_TYPES.register("hmag_creeper_girl", () -> EntityType.Builder.of(
 			HmagCreeperGirlEntity::new, MobCategory.CREATURE)
 			.sized(0.6F, 1.95F)
@@ -348,7 +317,7 @@ public class NFFGirlsEntityTypes {
 	
 	// Projectiles
 	
-	public static final RegistryObject<EntityType<NecromancerMagicBulletEntity>> NECROMANCER_MAGIC_BULLET = 
+	public static final RegistryObject<EntityType<NecromancerMagicBulletEntity>> NECROMANCER_MAGIC_BULLET =
 			ENTITY_TYPES.register("necromancer_magic_bullet", () -> EntityType.Builder
 			.<NecromancerMagicBulletEntity>of(NecromancerMagicBulletEntity::new, MobCategory.MISC)
 			.sized(0.3215F, 0.3215F)
@@ -358,7 +327,7 @@ public class NFFGirlsEntityTypes {
 			.setCustomClientFactory(NecromancerMagicBulletEntity::new)
 			.build(new ResourceLocation(NFFGirls.MOD_ID, "necromancer_magic_bullet").toString()));
 	
-	public static final RegistryObject<EntityType<NFFGhastFireballEntity>> BEFRIENDED_GHAST_FIREBALL = 
+	public static final RegistryObject<EntityType<NFFGhastFireballEntity>> BEFRIENDED_GHAST_FIREBALL =
 			ENTITY_TYPES.register("befriended_ghast_fireball", () -> EntityType.Builder
 			.<NFFGhastFireballEntity>of(NFFGhastFireballEntity::new, MobCategory.MISC)
 			.sized(1.0F, 1.0F)
@@ -366,7 +335,7 @@ public class NFFGirlsEntityTypes {
 			.updateInterval(10)
 			.build(new ResourceLocation(NFFGirls.MOD_ID, "befriended_ghast_fireball").toString()));
 
-	public static final RegistryObject<EntityType<MagicalGelBallEntity>> MAGICAL_GEL_BALL = 
+	public static final RegistryObject<EntityType<MagicalGelBallEntity>> MAGICAL_GEL_BALL =
 			ENTITY_TYPES.register("magical_gel_ball", () -> EntityType.Builder
 			.<MagicalGelBallEntity>of(MagicalGelBallEntity::new, MobCategory.MISC)
 			.sized(0.25F, 0.25F)		
@@ -374,7 +343,7 @@ public class NFFGirlsEntityTypes {
 			.updateInterval(10)
 			.build(new ResourceLocation(NFFGirls.MOD_ID, "magical_gel_ball").toString()));
 	
-	public static final RegistryObject<EntityType<NFFHmagAlrauneSeedEntity.PoisonSeed>> ALRAUNE_POISON_SEED = 
+	public static final RegistryObject<EntityType<NFFHmagAlrauneSeedEntity.PoisonSeed>> ALRAUNE_POISON_SEED =
 			ENTITY_TYPES.register("hmag_alraune_poison_seed", () -> EntityType.Builder
 			.<NFFHmagAlrauneSeedEntity.PoisonSeed>of(NFFHmagAlrauneSeedEntity.PoisonSeed::new, MobCategory.MISC)
 			.sized(0.25F, 0.25F)
@@ -394,7 +363,7 @@ public class NFFGirlsEntityTypes {
 			.setCustomClientFactory(NFFHmagAlrauneSeedEntity.HealingSeed::new)
 			.build(new ResourceLocation(NFFGirls.MOD_ID, "hmag_alraune_healing_seed").toString()));
 	
-	public static final RegistryObject<EntityType<ReinforcedFishingHookEntity>> REINFORCED_FISHING_HOOK = 
+	public static final RegistryObject<EntityType<ReinforcedFishingHookEntity>> REINFORCED_FISHING_HOOK =
 			ENTITY_TYPES.register("reinforced_fishing_hook", () -> EntityType.Builder
 			.<ReinforcedFishingHookEntity>of(ReinforcedFishingHookEntity::new, MobCategory.MISC)
 			.noSave()

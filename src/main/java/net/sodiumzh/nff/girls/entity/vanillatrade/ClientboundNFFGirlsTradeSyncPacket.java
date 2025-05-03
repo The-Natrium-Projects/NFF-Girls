@@ -1,8 +1,5 @@
 package net.sodiumzh.nff.girls.entity.vanillatrade;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.protocol.Packet;
 import net.minecraft.network.protocol.game.ClientGamePacketListener;
@@ -10,6 +7,9 @@ import net.minecraft.world.item.trading.MerchantOffers;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.sodiumzh.nff.girls.network.NFFGirlsClientGamePacketHandler;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class ClientboundNFFGirlsTradeSyncPacket implements Packet<ClientGamePacketListener>
 {

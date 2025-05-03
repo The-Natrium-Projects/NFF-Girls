@@ -1,7 +1,6 @@
 package net.sodiumzh.nff.girls.item;
 
 import com.github.mechalopa.hmag.registry.ModItems;
-
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Tier;
 

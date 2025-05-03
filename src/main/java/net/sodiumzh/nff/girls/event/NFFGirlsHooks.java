@@ -2,16 +2,15 @@ package net.sodiumzh.nff.girls.event;
 
 import com.github.mechalopa.hmag.world.entity.JackFrostEntity;
 import com.github.mechalopa.hmag.world.entity.MeltyMonsterEntity;
-
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.eventbus.api.Cancelable;
 import net.minecraftforge.eventbus.api.Event;
-import net.sodiumzh.nautils.events.NaUtilsLivingEvent;
-import net.sodiumzh.nff.girls.mixins.NFFGirlsJackFrostEntityMixin;
-import net.sodiumzh.nff.girls.mixins.NFFGirlsMeltyMonsterEntityMixin;
+import net.sodiumzh.nff.girls.mixin.NFFGirlsJackFrostEntityMixin;
+import net.sodiumzh.nff.girls.mixin.NFFGirlsMeltyMonsterEntityMixin;
+import net.sodiumzh.nfu.event.NFULivingEvent;
 
 public class NFFGirlsHooks
 {
@@ -32,11 +31,11 @@ public class NFFGirlsHooks
 		}
 	}
 	
-	/** Fired on Jack o'Frost check melting biome. Implemented via {@link NFFGirlsJackFrostEntityMixin}. 
+	/** Fired on Jack o'Frost check melting biome. Implemented via {@link NFFGirlsJackFrostEntityMixin}.
 	 * If cancelled it will not be regarded as a melting biome.
 	 */
 	@Cancelable
-	public static class JackFrostCheckMeltingBiomeEvent extends NaUtilsLivingEvent<JackFrostEntity>
+	public static class JackFrostCheckMeltingBiomeEvent extends NFULivingEvent<JackFrostEntity>
 	{
 		public JackFrostCheckMeltingBiomeEvent(JackFrostEntity entity) {
 			super(entity);
@@ -46,7 +45,7 @@ public class NFFGirlsHooks
 	/** Fired on Melty Monster setting fire. Implemented via {@link NFFGirlsMeltyMonsterEntityMixin}.
 	 */
 	@Cancelable
-	public static class MeltyMonsterSetFireEvent extends NaUtilsLivingEvent<MeltyMonsterEntity>
+	public static class MeltyMonsterSetFireEvent extends NFULivingEvent<MeltyMonsterEntity>
 	{
 		public final BlockPos blockpos; 
 		public final BlockState blockstate;

@@ -1,7 +1,8 @@
 package net.sodiumzh.nff.girls.subsystem.baublesystem;
 
 import net.minecraft.resources.ResourceLocation;
-import net.sodiumzh.nff.services.subsystems.baublesystem.DedicatedBaubleItem;
+import net.minecraft.world.item.Item;
+import net.sodiumzh.nff.services.subsystem.baublesystem.DedicatedBaubleItem;
 
 public abstract class NFFGirlsDedicatedBaubleItem extends DedicatedBaubleItem
 {
@@ -10,7 +11,7 @@ public abstract class NFFGirlsDedicatedBaubleItem extends DedicatedBaubleItem
 	public final int tier;
 	
 	/** additionalKey uses ResourceLocation format. */
-	public NFFGirlsDedicatedBaubleItem(String additionalKey, int tier, Properties pProperties)
+	public NFFGirlsDedicatedBaubleItem(String additionalKey, int tier, Item.Properties pProperties)
 	{
 		super(pProperties);
 		if (tier <= 0)

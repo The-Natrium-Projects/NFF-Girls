@@ -1,12 +1,9 @@
 package net.sodiumzh.nff.girls.entity.hmag;
 
-import java.util.Arrays;
-
 import com.github.mechalopa.hmag.registry.ModEntityTypes;
 import com.github.mechalopa.hmag.registry.ModItems;
 import com.github.mechalopa.hmag.world.entity.NightwalkerEntity;
 import com.github.mechalopa.hmag.world.entity.projectile.MagicBulletEntity;
-
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.nbt.CompoundTag;
@@ -14,8 +11,6 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.Container;
-import net.minecraft.world.InteractionHand;
-import net.minecraft.world.InteractionResult;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
@@ -31,10 +26,6 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.EntityHitResult;
 import net.minecraftforge.network.PlayMessages;
-import net.sodiumzh.nautils.block.ColoredBlocks;
-import net.sodiumzh.nautils.entity.RepeatableAttributeModifier;
-import net.sodiumzh.nautils.statics.NaUtilsEntityStatics;
-import net.sodiumzh.nautils.statics.NaUtilsMathStatics;
 import net.sodiumzh.nff.girls.NFFGirls;
 import net.sodiumzh.nff.girls.entity.INFFGirlsTamed;
 import net.sodiumzh.nff.girls.entity.ai.goal.NFFGirlsFollowOwnerGoal;
@@ -45,20 +36,24 @@ import net.sodiumzh.nff.girls.inventory.NFFGirlsNightwalkerInventoryMenu;
 import net.sodiumzh.nff.girls.registry.NFFGirlsBlocks;
 import net.sodiumzh.nff.girls.registry.NFFGirlsConfigs;
 import net.sodiumzh.nff.girls.registry.NFFGirlsHealingItems;
-import net.sodiumzh.nff.girls.registry.NFFGirlsItems;
 import net.sodiumzh.nff.girls.sound.NFFGirlsSoundPresets;
 import net.sodiumzh.nff.girls.util.NFFGirlsEntityStatics;
-import net.sodiumzh.nff.services.entity.ai.goal.presets.NFFWaterAvoidingRandomStrollGoal;
-import net.sodiumzh.nff.services.entity.ai.goal.presets.target.NFFHurtByTargetGoal;
-import net.sodiumzh.nff.services.entity.ai.goal.presets.target.NFFOwnerHurtByTargetGoal;
-import net.sodiumzh.nff.services.entity.ai.goal.presets.target.NFFOwnerHurtTargetGoal;
-import net.sodiumzh.nautils.entity.MobApplicableItemTable;
+import net.sodiumzh.nff.services.entity.ai.goal.preset.NFFWaterAvoidingRandomStrollGoal;
+import net.sodiumzh.nff.services.entity.ai.goal.preset.target.NFFHurtByTargetGoal;
+import net.sodiumzh.nff.services.entity.ai.goal.preset.target.NFFOwnerHurtByTargetGoal;
+import net.sodiumzh.nff.services.entity.ai.goal.preset.target.NFFOwnerHurtTargetGoal;
 import net.sodiumzh.nff.services.entity.taming.NFFTamedStatics;
 import net.sodiumzh.nff.services.entity.taming.NFFTamingMapping;
 import net.sodiumzh.nff.services.inventory.NFFTamedInventoryMenu;
 import net.sodiumzh.nff.services.inventory.NFFTamedMobInventory;
+import net.sodiumzh.nfu.block.ColoredBlocks;
+import net.sodiumzh.nfu.entity.MobApplicableItemTable;
+import net.sodiumzh.nfu.entity.RepeatableAttributeModifier;
+import net.sodiumzh.nfu.util.NFUEntityStatics;
+import net.sodiumzh.nfu.util.NFUMathStatics;
 
 import javax.annotation.Nonnull;
+import java.util.Arrays;
 
 public class HmagNightwalkerEntity extends NightwalkerEntity implements INFFGirlsTamed {
 
@@ -295,10 +290,10 @@ public class HmagNightwalkerEntity extends NightwalkerEntity implements INFFGirl
 			super.onHitBlock(result);
 			if (!this.level.isClientSide)
 			{
-				if (!NaUtilsMathStatics.withinManhattanDistance(result.getBlockPos(), this.shouldExpandTransformingRange ? 3 : 2)
+				if (!NFUMathStatics.withinManhattanDistance(result.getBlockPos(), this.shouldExpandTransformingRange ? 3 : 2)
 					.map(pos -> transformBlocks(this.level, pos)).filter(Boolean::booleanValue).toList().isEmpty())
 				{
-					NaUtilsEntityStatics.sendParticlesToEntity(this, ParticleTypes.EXPLOSION, 0, 0, 1, 0);
+					NFUEntityStatics.sendParticlesToEntity(this, ParticleTypes.EXPLOSION, 0, 0, 1, 0);
 					this.level.playSound(null, this, SoundEvents.GENERIC_EXPLODE, this.getSoundSource(), 2.0f, 0.7f);
 				}
 			}
@@ -317,10 +312,10 @@ public class HmagNightwalkerEntity extends NightwalkerEntity implements INFFGirl
 			}
 			if (shouldDealDamage)
 				super.onHitEntity(result);
-			if (!NaUtilsMathStatics.withinManhattanDistance(result.getEntity().getOnPos(), this.shouldExpandTransformingRange ? 3 : 2)
+			if (!NFUMathStatics.withinManhattanDistance(result.getEntity().getOnPos(), this.shouldExpandTransformingRange ? 3 : 2)
 				.map(pos -> transformBlocks(this.level, pos)).filter(Boolean::booleanValue).toList().isEmpty())
 			{
-				NaUtilsEntityStatics.sendParticlesToEntity(this, ParticleTypes.EXPLOSION, 0, 0, 1, 0);
+				NFUEntityStatics.sendParticlesToEntity(this, ParticleTypes.EXPLOSION, 0, 0, 1, 0);
 				this.level.playSound(null, this, SoundEvents.GENERIC_EXPLODE, this.getSoundSource(), 2.0f, 0.7f);
 			}
 

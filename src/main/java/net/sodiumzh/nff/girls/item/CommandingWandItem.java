@@ -14,30 +14,34 @@ import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.entity.EntityTypeTest;
-import net.sodiumzh.nautils.item.NaUtilsItem;
-import net.sodiumzh.nautils.math.RndUtil;
-import net.sodiumzh.nautils.statics.*;
 import net.sodiumzh.nff.girls.entity.INFFGirlsTamed;
 import net.sodiumzh.nff.services.entity.ai.NFFTamedMobAIState;
-import net.sodiumzh.nff.services.entity.ai.goal.presets.INFFFollowOwner;
+import net.sodiumzh.nff.services.entity.ai.goal.preset.INFFFollowOwner;
 import net.sodiumzh.nff.services.entity.taming.INFFTamed;
+import net.sodiumzh.nfu.item.NFUItem;
+import net.sodiumzh.nfu.util.NFUAIStatics;
+import net.sodiumzh.nfu.util.NFUEntityStatics;
+import net.sodiumzh.nfu.util.NFUInfoStatics;
 
 import javax.annotation.Nonnull;
-import java.util.*;
 import java.util.List;
+import java.util.Objects;
+import java.util.Optional;
+import java.util.UUID;
 import java.util.concurrent.atomic.AtomicReference;
 
-public class CommandingWandItem extends NaUtilsItem
+public class CommandingWandItem extends NFUItem
 {
 	private static final UUID EMPTY_UUID = new UUID(0L, 0L);
 
 
-	public CommandingWandItem(Properties pProperties)
+	public CommandingWandItem(Item.Properties pProperties)
 	{
 		super(pProperties);
 	}
@@ -81,34 +85,34 @@ public class CommandingWandItem extends NaUtilsItem
 					if (!context.getPlayer().isShiftKeyDown()) {
 						FindMobResult res = findNext(context.getItemInHand(), sl, context.getPlayer());
 						if (!res.isEnd()) {
-							NaUtilsInfoStatics.printMessageTranslatable(context.getPlayer(),
+							NFUInfoStatics.printMessageTranslatable(context.getPlayer(),
 								"info.nffgirls.item.commanding_wand.mob_search_found", res.location().mobName(),
 								res.location().dimension().location().toString(),
 								res.location().pos().getX(), res.location().pos().getY(), res.location().pos().getZ());
 							if (res.isFirst())
-								NaUtilsInfoStatics.printMessageTranslatable(context.getPlayer(),
+								NFUInfoStatics.printMessageTranslatable(context.getPlayer(),
 									"info.nffgirls.item.commanding_wand.mob_search_summoning_tip");
 						} else {
 							if (context.getItemInHand().getTag().getList("alreadyFound", Tag.TAG_COMPOUND).isEmpty())
-								NaUtilsInfoStatics.printMessageTranslatable(context.getPlayer(),
+								NFUInfoStatics.printMessageTranslatable(context.getPlayer(),
 									"info.nffgirls.item.commanding_wand.mob_search_not_found");
-							else NaUtilsInfoStatics.printMessageTranslatable(context.getPlayer(),
+							else NFUInfoStatics.printMessageTranslatable(context.getPlayer(),
 								"info.nffgirls.item.commanding_wand.mob_search_end");
 						}
 					} else if (context.getPlayer().getOffhandItem().is(ModItems.EVIL_CRYSTAL_FRAGMENT.get())) {
 						Optional<UUID> idOpt = this.getLastFoundIdentifier(context.getItemInHand(), sl);
 						Optional<Mob> mobOpt = this.getLastFoundMob(context.getItemInHand(), sl);
 						if (idOpt.isEmpty()) {
-							NaUtilsInfoStatics.printMessageTranslatable(context.getPlayer(),
+							NFUInfoStatics.printMessageTranslatable(context.getPlayer(),
 								"info.nffgirls.item.commanding_wand.mob_search_summon_no_target");
 						} else if (mobOpt.isEmpty()) {
-							NaUtilsInfoStatics.printMessageTranslatable(context.getPlayer(),
+							NFUInfoStatics.printMessageTranslatable(context.getPlayer(),
 								"info.nffgirls.item.commanding_wand.mob_search_summon_not_found");
 						} else {
 							Mob mob = mobOpt.get();
 							if (this.summonMob(sl, context.getPlayer(), mob)) {
 								context.getPlayer().getOffhandItem().shrink(1);
-								NaUtilsInfoStatics.printMessageTranslatable(context.getPlayer(),
+								NFUInfoStatics.printMessageTranslatable(context.getPlayer(),
 									"info.nffgirls.item.commanding_wand.mob_search_summoned_mob", mob.getName().getString());
 							}
 						}
@@ -145,14 +149,14 @@ public class CommandingWandItem extends NaUtilsItem
 		for (Entity mobEntity : mobs) {
 			if (mobEntity instanceof Mob mob && this.summonMob(level, player, mob)) {
 				res = true;
-				NaUtilsInfoStatics.printMessageTranslatable(player, "info.nffgirls.item.commanding_wand.summoned_mob", mob.getName().getString());
+				NFUInfoStatics.printMessageTranslatable(player, "info.nffgirls.item.commanding_wand.summoned_mob", mob.getName().getString());
 			}
 		}
 		if (res) {
 			level.playSound(player, player.blockPosition(),
 				SoundEvents.BELL_BLOCK, SoundSource.PLAYERS, 2.0F, 1.0F);
 		} else {
-			NaUtilsInfoStatics.printMessageTranslatable(player, "info.nffgirls.item.commanding_wand.summon_failed");
+			NFUInfoStatics.printMessageTranslatable(player, "info.nffgirls.item.commanding_wand.summon_failed");
 		}
 		return res;
 	}
@@ -166,7 +170,7 @@ public class CommandingWandItem extends NaUtilsItem
 		return INFFGirlsTamed.isBMAnd(mob, bm -> {
 			bm.setAIState(NFFTamedMobAIState.FOLLOW, false);
 			List<INFFFollowOwner> followGoals =
-				NaUtilsAIStatics.getGoalsAndPriorities(mob).keySet().stream()
+				NFUAIStatics.getGoalsAndPriorities(mob).keySet().stream()
 					.filter(goal -> goal instanceof INFFFollowOwner follow)
 					.map(goal -> (INFFFollowOwner)goal).toList();
 			if (!followGoals.isEmpty()) followGoals.get(0).teleportToOwner();
@@ -208,7 +212,7 @@ public class CommandingWandItem extends NaUtilsItem
 				.stream().map(NbtUtils::loadUUID).toList();
 		AtomicReference<FindMobResult> found = new AtomicReference<>(FindMobResult.end());
 
-		List<INFFTamed> mobsLoaded = NaUtilsEntityStatics.getEntitiesOnServer(level,
+		List<INFFTamed> mobsLoaded = NFUEntityStatics.getEntitiesOnServer(level,
 			EntityTypeTest.forClass(Mob.class), e -> INFFGirlsTamed.isBMAndOwnedBy(e, player.getUUID()))
 			.stream().map(e -> INFFTamed.get(e).orElse(null)).filter(Objects::nonNull).toList();
 		// Search in levels

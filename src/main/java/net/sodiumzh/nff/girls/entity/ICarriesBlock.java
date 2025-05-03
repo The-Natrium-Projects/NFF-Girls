@@ -1,8 +1,8 @@
 package net.sodiumzh.nff.girls.entity;
 
-import javax.annotation.Nullable;
-
 import net.minecraft.world.level.block.state.BlockState;
+
+import javax.annotation.Nullable;
 
 /**
  * Interface for mobs carrying a block like Enderman.

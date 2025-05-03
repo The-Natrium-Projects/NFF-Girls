@@ -1,14 +1,9 @@
 package net.sodiumzh.nff.girls.entity.hmag;
 
-import java.util.Arrays;
-
 import com.github.mechalopa.hmag.world.entity.GlaryadEntity;
-
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.world.Container;
-import net.minecraft.world.InteractionHand;
-import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.ai.goal.FloatGoal;
 import net.minecraft.world.entity.ai.goal.LookAtPlayerGoal;
@@ -18,7 +13,6 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
-import net.sodiumzh.nautils.statics.NaUtilsReflectionStatics;
 import net.sodiumzh.nff.girls.NFFGirls;
 import net.sodiumzh.nff.girls.entity.INFFGirlsTamed;
 import net.sodiumzh.nff.girls.entity.ai.goal.NFFGirlsFollowOwnerGoal;
@@ -28,16 +22,17 @@ import net.sodiumzh.nff.girls.entity.ai.goal.target.NFFGirlsOwnerHurtByTargetGoa
 import net.sodiumzh.nff.girls.entity.ai.goal.target.NFFGirlsOwnerHurtTargetGoal;
 import net.sodiumzh.nff.girls.inventory.NFFGirlsHmagThreeBaublesInventoryMenu;
 import net.sodiumzh.nff.girls.registry.NFFGirlsHealingItems;
-import net.sodiumzh.nff.girls.registry.NFFGirlsItems;
 import net.sodiumzh.nff.girls.sound.NFFGirlsSoundPresets;
-import net.sodiumzh.nff.girls.util.NFFGirlsEntityStatics;
-import net.sodiumzh.nff.services.entity.ai.goal.presets.NFFMeleeAttackGoal;
-import net.sodiumzh.nff.services.entity.ai.goal.presets.NFFWaterAvoidingRandomStrollGoal;
-import net.sodiumzh.nff.services.entity.ai.goal.presets.target.NFFHurtByTargetGoal;
-import net.sodiumzh.nautils.entity.MobApplicableItemTable;
+import net.sodiumzh.nff.services.entity.ai.goal.preset.NFFMeleeAttackGoal;
+import net.sodiumzh.nff.services.entity.ai.goal.preset.NFFWaterAvoidingRandomStrollGoal;
+import net.sodiumzh.nff.services.entity.ai.goal.preset.target.NFFHurtByTargetGoal;
 import net.sodiumzh.nff.services.entity.taming.NFFTamedStatics;
 import net.sodiumzh.nff.services.inventory.NFFTamedInventoryMenu;
 import net.sodiumzh.nff.services.inventory.NFFTamedMobInventory;
+import net.sodiumzh.nfu.entity.MobApplicableItemTable;
+import net.sodiumzh.nfu.util.NFUReflectionStatics;
+
+import java.util.Arrays;
 
 public class HmagGlaryadEntity extends GlaryadEntity implements INFFGirlsTamed
 {
@@ -73,7 +68,7 @@ public class HmagGlaryadEntity extends GlaryadEntity implements INFFGirlsTamed
 	{
 		if (!this.level.isClientSide)
 			// This blocks alerting others
-			NaUtilsReflectionStatics.forceSet(this, GlaryadEntity.class, "ticksUntilNextAlert", 999);
+			NFUReflectionStatics.forceSet(this, GlaryadEntity.class, "ticksUntilNextAlert", 999);
 		super.aiStep();
 	}
 	

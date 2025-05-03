@@ -8,11 +8,11 @@ import net.minecraft.world.entity.decoration.ArmorStand;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ArmorItem;
 import net.minecraft.world.item.ArmorMaterial;
-import net.sodiumzh.nautils.statics.NaUtilsEntityStatics;
-import net.sodiumzh.nff.girls.blocks.SoulCarpetBlock;
+import net.sodiumzh.nff.girls.block.SoulCarpetBlock;
 import net.sodiumzh.nff.girls.entity.hmag.HmagNecroticReaperEntity;
 import net.sodiumzh.nff.girls.registry.NFFGirlsEffects;
 import net.sodiumzh.nff.girls.registry.NFFGirlsItems;
+import net.sodiumzh.nfu.util.NFUEntityStatics;
 
 public class NecromancerArmorItem extends ArmorItem
 {
@@ -30,11 +30,11 @@ public class NecromancerArmorItem extends ArmorItem
 
 		if (living.getItemBySlot(EquipmentSlot.HEAD).is(NFFGirlsItems.NECROMANCER_HAT.get()))
 		{
-			NaUtilsEntityStatics.addEffectIfNotHaving(living, new MobEffectInstance(MobEffects.DAMAGE_BOOST, 40, 1, true, false));
-			NaUtilsEntityStatics.addEffectIfNotHaving(living, new MobEffectInstance(NFFGirlsEffects.UNDEAD_AFFINITY.get(), 40, 0, true, false));
-			NaUtilsEntityStatics.addEffectIfNotHaving(living, new MobEffectInstance(MobEffects.DIG_SPEED, 40, 1, true, false));
+			NFUEntityStatics.addEffectIfNotHaving(living, new MobEffectInstance(MobEffects.DAMAGE_BOOST, 40, 1, true, false));
+			NFUEntityStatics.addEffectIfNotHaving(living, new MobEffectInstance(NFFGirlsEffects.UNDEAD_AFFINITY.get(), 40, 0, true, false));
+			NFUEntityStatics.addEffectIfNotHaving(living, new MobEffectInstance(MobEffects.DIG_SPEED, 40, 1, true, false));
 			if (!SoulCarpetBlock.isEntityInside(living))
-				NaUtilsEntityStatics.addEffectIfNotHaving(living, new MobEffectInstance(NFFGirlsEffects.NECROMANCER_WITHER.get(), 40, 0, true, false));	
+				NFUEntityStatics.addEffectIfNotHaving(living, new MobEffectInstance(NFFGirlsEffects.NECROMANCER_WITHER.get(), 40, 0, true, false));
 			if (living instanceof Player p)
 			{
 				// Nearby Necrotic Reapers add regeneration
@@ -44,7 +44,7 @@ public class NecromancerArmorItem extends ArmorItem
 					regLvl = 2;
 				if (regLvl >= 0)
 				{
-					NaUtilsEntityStatics.addEffectIfNotHaving(living, new MobEffectInstance(MobEffects.REGENERATION, 80, regLvl, true, false)); 
+					NFUEntityStatics.addEffectIfNotHaving(living, new MobEffectInstance(MobEffects.REGENERATION, 80, regLvl, true, false));
 				}
 			}
 		}	

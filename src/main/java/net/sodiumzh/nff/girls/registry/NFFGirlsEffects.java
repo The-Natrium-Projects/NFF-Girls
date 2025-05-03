@@ -6,9 +6,9 @@ import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 import net.sodiumzh.nff.girls.NFFGirls;
-import net.sodiumzh.nff.girls.effects.EnderProtectionEffect;
-import net.sodiumzh.nff.girls.effects.NecromancerWitherEffect;
-import net.sodiumzh.nff.girls.effects.UndeadAffinityEffect;
+import net.sodiumzh.nff.girls.effect.EnderProtectionEffect;
+import net.sodiumzh.nff.girls.effect.NecromancerWitherEffect;
+import net.sodiumzh.nff.girls.effect.UndeadAffinityEffect;
 
 @Mod.EventBusSubscriber(modid = NFFGirls.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class NFFGirlsEffects {

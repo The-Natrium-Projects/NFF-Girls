@@ -1,11 +1,11 @@
 package net.sodiumzh.nff.girls.entity.capability;
 
-import java.util.HashSet;
-import java.util.UUID;
-
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraftforge.common.util.INBTSerializable;
+
+import java.util.HashSet;
+import java.util.UUID;
 
 public interface CUndeadAffinityHandler extends INBTSerializable<CompoundTag>{
 

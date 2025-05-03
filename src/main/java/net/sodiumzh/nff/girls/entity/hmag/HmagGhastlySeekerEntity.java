@@ -1,16 +1,11 @@
 package net.sodiumzh.nff.girls.entity.hmag;
 
-import java.util.Arrays;
-
 import com.github.mechalopa.hmag.registry.ModItems;
 import com.github.mechalopa.hmag.world.entity.GhastlySeekerEntity;
-
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.world.Container;
-import net.minecraft.world.InteractionHand;
-import net.minecraft.world.InteractionResult;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
@@ -25,7 +20,6 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
-import net.sodiumzh.nautils.statics.NaUtilsReflectionStatics;
 import net.sodiumzh.nff.girls.entity.INFFGirlsTamed;
 import net.sodiumzh.nff.girls.entity.ai.goal.NFFGirlsFlyingFollowOwnerGoal;
 import net.sodiumzh.nff.girls.entity.ai.goal.NFFGirlsHmagFlyingGoal;
@@ -33,27 +27,27 @@ import net.sodiumzh.nff.girls.entity.ai.goal.target.NFFGirlsNearestHostileToOwne
 import net.sodiumzh.nff.girls.entity.ai.goal.target.NFFGirlsNearestHostileToSelfTargetGoal;
 import net.sodiumzh.nff.girls.entity.ai.movecontrol.NFFGirlsHmagFlyingMoveControl;
 import net.sodiumzh.nff.girls.entity.projectile.NFFGhastFireballEntity;
-import net.sodiumzh.nff.girls.eventlisteners.NFFGirlsEntityEventListeners;
+import net.sodiumzh.nff.girls.eventlistener.NFFGirlsEntityEventListeners;
 import net.sodiumzh.nff.girls.inventory.NFFGirlsGhastlySeekerInventoryMenu;
 import net.sodiumzh.nff.girls.registry.NFFGirlsHealingItems;
-import net.sodiumzh.nff.girls.registry.NFFGirlsItems;
 import net.sodiumzh.nff.girls.sound.NFFGirlsSoundPresets;
-import net.sodiumzh.nff.girls.util.NFFGirlsEntityStatics;
 import net.sodiumzh.nff.services.entity.ai.goal.NFFGoal;
-import net.sodiumzh.nff.services.entity.ai.goal.presets.INFFFollowOwner;
-import net.sodiumzh.nff.services.entity.ai.goal.presets.NFFFlyingLandGoal;
-import net.sodiumzh.nff.services.entity.ai.goal.presets.NFFFlyingRandomMoveGoal;
-import net.sodiumzh.nff.services.entity.ai.goal.presets.target.NFFHurtByTargetGoal;
-import net.sodiumzh.nff.services.entity.ai.goal.presets.target.NFFOwnerHurtByTargetGoal;
-import net.sodiumzh.nff.services.entity.ai.goal.presets.target.NFFOwnerHurtTargetGoal;
-import net.sodiumzh.nautils.entity.MobApplicableItemTable;
+import net.sodiumzh.nff.services.entity.ai.goal.preset.INFFFollowOwner;
+import net.sodiumzh.nff.services.entity.ai.goal.preset.NFFFlyingLandGoal;
+import net.sodiumzh.nff.services.entity.ai.goal.preset.NFFFlyingRandomMoveGoal;
+import net.sodiumzh.nff.services.entity.ai.goal.preset.target.NFFHurtByTargetGoal;
+import net.sodiumzh.nff.services.entity.ai.goal.preset.target.NFFOwnerHurtByTargetGoal;
+import net.sodiumzh.nff.services.entity.ai.goal.preset.target.NFFOwnerHurtTargetGoal;
 import net.sodiumzh.nff.services.entity.taming.INFFTamed;
 import net.sodiumzh.nff.services.entity.taming.NFFTamedStatics;
 import net.sodiumzh.nff.services.entity.taming.NFFTamingMapping;
 import net.sodiumzh.nff.services.inventory.NFFTamedInventoryMenu;
 import net.sodiumzh.nff.services.inventory.NFFTamedMobInventory;
+import net.sodiumzh.nfu.entity.MobApplicableItemTable;
+import net.sodiumzh.nfu.util.NFUReflectionStatics;
 
 import javax.annotation.Nonnull;
+import java.util.Arrays;
 
 /**
  * NOT IMPLEMENTED YET
@@ -89,7 +83,7 @@ public class HmagGhastlySeekerEntity extends GhastlySeekerEntity implements INFF
 
 	public void setExplosionPower(int value)
 	{
-		NaUtilsReflectionStatics.forceSet(this, GhastlySeekerEntity.class, "explosionPower", value);
+		NFUReflectionStatics.forceSet(this, GhastlySeekerEntity.class, "explosionPower", value);
 	}
 	
 	/* AI */
@@ -272,7 +266,7 @@ public class HmagGhastlySeekerEntity extends GhastlySeekerEntity implements INFF
 		@Override
 		public void onStop()
 		{
-			NaUtilsReflectionStatics.forceInvoke(parent, GhastlySeekerEntity.class, "setAttackingTime", 
+			NFUReflectionStatics.forceInvoke(parent, GhastlySeekerEntity.class, "setAttackingTime",
 					int.class, -1);
 		}
 
@@ -313,7 +307,7 @@ public class HmagGhastlySeekerEntity extends GhastlySeekerEntity implements INFF
 					Vec3 velocity = target.getBoundingBox().getCenter().subtract(pos).normalize().scale(speed);
 					
 					
-					NFFGhastFireballEntity fireball = new NFFGhastFireballEntity(world, this.parent, velocity.x, velocity.y, velocity.z, this.parent.calculateFireballDamageScale() * this.parent.fireballBaseExplosionPower);					
+					NFFGhastFireballEntity fireball = new NFFGhastFireballEntity(world, this.parent, velocity.x, velocity.y, velocity.z, this.parent.calculateFireballDamageScale() * this.parent.fireballBaseExplosionPower);
 					fireball.setPos(pos);
 					fireball.hitDamage = this.parent.fireballBaseHitDamage * this.parent.calculateFireballDamageScale();
 					if (mob.getAdditionalInventory().getItem(4).is(Items.FIRE_CHARGE))
@@ -334,7 +328,7 @@ public class HmagGhastlySeekerEntity extends GhastlySeekerEntity implements INFF
 			{
 				--this.attackTimer;
 			}
-			NaUtilsReflectionStatics.forceInvoke(parent, GhastlySeekerEntity.class, "setAttackingTime", int.class, this.attackTimer < 0 ? -1 : this.attackTimer);
+			NFUReflectionStatics.forceInvoke(parent, GhastlySeekerEntity.class, "setAttackingTime", int.class, this.attackTimer < 0 ? -1 : this.attackTimer);
 		}
 	}
 

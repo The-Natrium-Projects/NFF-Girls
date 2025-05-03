@@ -1,14 +1,13 @@
 package net.sodiumzh.nff.girls.entity.ai.goal;
 
-import java.util.EnumSet;
-
-import javax.annotation.Nonnull;
-
 import net.minecraft.world.entity.ai.goal.Goal;
 import net.minecraft.world.entity.ai.navigation.PathNavigation;
 import net.minecraft.world.level.LevelReader;
-import net.sodiumzh.nff.services.entity.ai.goal.presets.NFFFollowOwnerGoal;
+import net.sodiumzh.nff.services.entity.ai.goal.preset.NFFFollowOwnerGoal;
 import net.sodiumzh.nff.services.entity.taming.INFFTamed;
+
+import javax.annotation.Nonnull;
+import java.util.EnumSet;
 
 /* Adjusted from vanilla FollowOwnerGoal for TameableAnimal */
 public class NFFGirlsInWaterFollowOwnerGoal extends NFFFollowOwnerGoal {

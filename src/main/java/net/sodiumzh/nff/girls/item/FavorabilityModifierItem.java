@@ -8,14 +8,14 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
-import net.sodiumzh.nautils.item.NaUtilsItem;
-import net.sodiumzh.nautils.statics.NaUtilsMiscStatics;
-import net.sodiumzh.nautils.statics.NaUtilsParticleStatics;
 import net.sodiumzh.nff.girls.registry.NFFGirlsCapabilities;
+import net.sodiumzh.nfu.item.NFUItem;
+import net.sodiumzh.nfu.util.NFUMiscStatics;
+import net.sodiumzh.nfu.util.NFUParticleStatics;
 
 import java.util.Optional;
 
-public class FavorabilityModifierItem extends NaUtilsItem
+public class FavorabilityModifierItem extends NFUItem
 {
 
 	public FavorabilityModifierItem(Properties pProperties)
@@ -55,16 +55,16 @@ public class FavorabilityModifierItem extends NaUtilsItem
 	    			if (!player.isShiftKeyDown())
 	    			{
 	    				cap.addFavorability(this.getValue(player.getItemInHand(hand)));
-	    				NaUtilsMiscStatics.printToScreen(String.format("Mob [%s] favorability + %.0f.", target.getName().getString(), this.getValue(player.getItemInHand(hand))) , player);
-	    				NaUtilsMiscStatics.printToScreen(String.format("Current: %.2f", cap.getFavorability()) , player);
-	    				NaUtilsParticleStatics.sendGlintParticlesToEntityDefault(target);
+	    				NFUMiscStatics.printToScreen(String.format("Mob [%s] favorability + %.0f.", target.getName().getString(), this.getValue(player.getItemInHand(hand))) , player);
+	    				NFUMiscStatics.printToScreen(String.format("Current: %.2f", cap.getFavorability()) , player);
+	    				NFUParticleStatics.sendGlintParticlesToEntityDefault(target);
 	    			}
 	    			else 
 	    			{
 	    				cap.addFavorability(-this.getValue(player.getItemInHand(hand)));
-	    				NaUtilsMiscStatics.printToScreen(String.format("Mob [%s] favorability - %.0f.", target.getName().getString(), this.getValue(player.getItemInHand(hand))) , player);
-	    				NaUtilsMiscStatics.printToScreen(String.format("Current: %.2f", cap.getFavorability()) , player);
-	    				NaUtilsParticleStatics.sendSmokeParticlesToEntityDefault(target);
+	    				NFUMiscStatics.printToScreen(String.format("Mob [%s] favorability - %.0f.", target.getName().getString(), this.getValue(player.getItemInHand(hand))) , player);
+	    				NFUMiscStatics.printToScreen(String.format("Current: %.2f", cap.getFavorability()) , player);
+	    				NFUParticleStatics.sendSmokeParticlesToEntityDefault(target);
 	    			}
     			}
     		});
@@ -79,7 +79,7 @@ public class FavorabilityModifierItem extends NaUtilsItem
     	if (!level.isClientSide)
     	{
     		this.setValue(player.getItemInHand(hand), this.getValue(player.getItemInHand(hand)) < 2f ? 5f : 1f);
-    		NaUtilsMiscStatics.printToScreen(String.format("Favorability per operation: %.0f", this.getValue(player.getItemInHand(hand))), player);
+    		NFUMiscStatics.printToScreen(String.format("Favorability per operation: %.0f", this.getValue(player.getItemInHand(hand))), player);
     	}
     	return InteractionResultHolder.sidedSuccess(player.getItemInHand(hand), level.isClientSide);
     }

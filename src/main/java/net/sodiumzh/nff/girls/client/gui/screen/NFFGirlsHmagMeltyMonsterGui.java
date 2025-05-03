@@ -1,15 +1,14 @@
 package net.sodiumzh.nff.girls.client.gui.screen;
 
 import com.mojang.blaze3d.vertex.PoseStack;
-
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.player.Inventory;
-import net.sodiumzh.nautils.info.ComponentBuilder;
-import net.sodiumzh.nautils.math.GuiPos;
-import net.sodiumzh.nautils.statics.NaUtilsMiscStatics;
 import net.sodiumzh.nff.girls.entity.hmag.HmagMeltyMonsterEntity;
 import net.sodiumzh.nff.services.entity.taming.INFFTamed;
 import net.sodiumzh.nff.services.inventory.NFFTamedInventoryMenu;
+import net.sodiumzh.nfu.info.ComponentBuilder;
+import net.sodiumzh.nfu.math.GuiPos;
+import net.sodiumzh.nfu.util.NFUMiscStatics;
 
 public class NFFGirlsHmagMeltyMonsterGui extends NFFGirlsGuiPreset0 {
 	
@@ -48,8 +47,8 @@ public class NFFGirlsHmagMeltyMonsterGui extends NFFGirlsGuiPreset0 {
 	public void addStaminaInfo(PoseStack poseStack, GuiPos position, int color, int textRowWidth)
 	{
 		Component staminaComp = ComponentBuilder.create().appendTranslatable("info.nffgirls.gui_melty_monster_stamina")
-				.appendText(": ").appendText(Integer.toString(NaUtilsMiscStatics.cast(mob, HmagMeltyMonsterEntity.class).getStamina())).appendText(" / ")
-				.appendText(Integer.toString(NaUtilsMiscStatics.cast(mob, HmagMeltyMonsterEntity.class).getMaxStamina())).build();
+				.appendText(": ").appendText(Integer.toString(NFUMiscStatics.cast(mob, HmagMeltyMonsterEntity.class).getStamina())).appendText(" / ")
+				.appendText(Integer.toString(NFUMiscStatics.cast(mob, HmagMeltyMonsterEntity.class).getMaxStamina())).build();
 		font.draw(poseStack, staminaComp, position.x, position.y, color);
 	}
 	

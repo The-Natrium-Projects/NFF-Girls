@@ -1,7 +1,6 @@
 package net.sodiumzh.nff.girls.util;
 
 import com.mojang.logging.LogUtils;
-
 import net.minecraft.core.NonNullList;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.tags.ItemTags;
@@ -11,13 +10,13 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
-import net.sodiumzh.nautils.statics.NaUtilsEntityStatics;
-import net.sodiumzh.nautils.statics.NaUtilsReflectionStatics;
 import net.sodiumzh.nff.girls.entity.INFFGirlsTamed;
 import net.sodiumzh.nff.services.entity.ai.NFFTamedMobAIState;
 import net.sodiumzh.nff.services.entity.taming.INFFTamed;
 import net.sodiumzh.nff.services.entity.taming.INFFTamedSunSensitiveMob;
 import net.sodiumzh.nff.services.entity.taming.NFFTamedStatics;
+import net.sodiumzh.nfu.util.NFUEntityStatics;
+import net.sodiumzh.nfu.util.NFUReflectionStatics;
 
 public class NFFGirlsEntityStatics
 {
@@ -67,10 +66,10 @@ public class NFFGirlsEntityStatics
 		switch (slot.getType())
 		{
 		case HAND:
-			slotList = NaUtilsReflectionStatics.forceGet(mob, Mob.class, "f_21350_").cast();	// Mob.handItems
+			slotList = NFUReflectionStatics.forceGet(mob, Mob.class, "f_21350_").cast();	// Mob.handItems
 			break;
 		case ARMOR:
-			slotList = NaUtilsReflectionStatics.forceGet(mob, Mob.class, "f_21351_").cast();	// Mob.armorItems
+			slotList = NFUReflectionStatics.forceGet(mob, Mob.class, "f_21351_").cast();	// Mob.armorItems
 		}
 		if (slotList != null)
 			slotList.set(slot.getIndex(), item);
@@ -96,7 +95,7 @@ public class NFFGirlsEntityStatics
 
 	public static void sendCriticalParticlesToLivingDefault(LivingEntity entity, float heightOffset, int amount)
 	{
-		NaUtilsEntityStatics.sendParticlesToEntity(entity, ParticleTypes.CRIT, entity.getBbHeight() - 0.2 + heightOffset, 0.5d, amount, 0.1d);
+		NFUEntityStatics.sendParticlesToEntity(entity, ParticleTypes.CRIT, entity.getBbHeight() - 0.2 + heightOffset, 0.5d, amount, 0.1d);
 	}
 	
 	/**

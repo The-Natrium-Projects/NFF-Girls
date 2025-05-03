@@ -1,9 +1,6 @@
 package net.sodiumzh.nff.girls.entity.ai.goal;
 
-import java.util.EnumSet;
-
 import com.github.mechalopa.hmag.world.entity.AbstractFlyingMonsterEntity;
-
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.LivingEntity;
@@ -11,15 +8,17 @@ import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.ai.goal.Goal;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.phys.Vec3;
-import net.sodiumzh.nautils.statics.NaUtilsMathStatics;
-import net.sodiumzh.nautils.statics.NaUtilsLevelStatics;
 import net.sodiumzh.nff.girls.entity.capability.CNFFGirlsFavorabilityHandler;
 import net.sodiumzh.nff.services.entity.ai.NFFTamedMobAIState;
 import net.sodiumzh.nff.services.entity.ai.goal.NFFGoal;
 import net.sodiumzh.nff.services.entity.ai.goal.NFFMoveGoal;
 import net.sodiumzh.nff.services.entity.ai.goal.NFFTargetGoal;
-import net.sodiumzh.nff.services.entity.ai.goal.presets.INFFFollowOwner;
+import net.sodiumzh.nff.services.entity.ai.goal.preset.INFFFollowOwner;
 import net.sodiumzh.nff.services.entity.taming.INFFTamed;
+import net.sodiumzh.nfu.util.NFULevelStatics;
+import net.sodiumzh.nfu.util.NFUMathStatics;
+
+import java.util.EnumSet;
 
 /* Ported from HMaG-AbstractFlyingMonsterEntity (Mechalopa)
  */
@@ -121,7 +120,7 @@ public interface NFFGirlsHmagFlyingGoal
 
 			this.attackTime = Math.max(this.attackTime - 1, 0);
 			attacker.getLookControl().setLookAt(livingentity, 30.0F, 30.0F);
-			double d0 = NaUtilsMathStatics.getBoxSurfaceDistSqr(attacker.getBoundingBox(), livingentity.getBoundingBox());
+			double d0 = NFUMathStatics.getBoxSurfaceDistSqr(attacker.getBoundingBox(), livingentity.getBoundingBox());
 			double d1 = this.getAttackMaxSurfaceDistSqr(livingentity);
 
 			if (d0 <= d1 && this.attackTime <= 0)
@@ -238,13 +237,13 @@ public interface NFFGirlsHmagFlyingGoal
 			if (heightLimit <= 0)
 				return blockpos1;
 			// No height limit if it's above the void
-			else if (NaUtilsLevelStatics.getHeightToGround(blockpos1, getFlying()) == -1)
+			else if (NFULevelStatics.getHeightToGround(blockpos1, getFlying()) == -1)
 				return blockpos1;
-			else if (NaUtilsLevelStatics.getHeightToGround(blockpos1, getFlying()) > heightLimit)
+			else if (NFULevelStatics.getHeightToGround(blockpos1, getFlying()) > heightLimit)
 			{
 				// If it's already too high, fly to the height limit first
 				int it = 32;
-				while (NaUtilsLevelStatics.getHeightToGround(blockpos1, getFlying()) > heightLimit)
+				while (NFULevelStatics.getHeightToGround(blockpos1, getFlying()) > heightLimit)
 				{
 					blockpos1 = blockpos1.below();
 					it--;
@@ -255,7 +254,7 @@ public interface NFFGirlsHmagFlyingGoal
 				if (it <= 0)
 				{
 					blockpos1 = new BlockPos(blockpos);
-					while (NaUtilsLevelStatics.getHeightToGround(blockpos1, getFlying()) > heightLimit)
+					while (NFULevelStatics.getHeightToGround(blockpos1, getFlying()) > heightLimit)
 						blockpos1 = blockpos1.below();
 				}
 				return blockpos1;
@@ -263,7 +262,7 @@ public interface NFFGirlsHmagFlyingGoal
 			else
 			{
 				int it = 32;	// To avoid potential infinite loop 				
-				while (NaUtilsLevelStatics.getHeightToGround(blockpos1, getFlying()) > heightLimit)
+				while (NFULevelStatics.getHeightToGround(blockpos1, getFlying()) > heightLimit)
 				{
 					// Search until an acceptable
 					blockpos1 = blockpos.offset(
@@ -275,7 +274,7 @@ public interface NFFGirlsHmagFlyingGoal
 						break;
 				}
 				// If failed, find below to get an acceptable position
-				while (NaUtilsLevelStatics.getHeightToGround(blockpos1, getFlying()) > heightLimit)
+				while (NFULevelStatics.getHeightToGround(blockpos1, getFlying()) > heightLimit)
 					blockpos1 = blockpos1.below();
 				return blockpos1;
 			}
@@ -297,7 +296,7 @@ public interface NFFGirlsHmagFlyingGoal
 			{
 				BlockPos blockpos1 = getWantedPosition();
 				
-				if (shouldAvoidSun.test(mob) && NaUtilsLevelStatics.isUnderSun(blockpos1, mob.asMob()))
+				if (shouldAvoidSun.test(mob) && NFULevelStatics.isUnderSun(blockpos1, mob.asMob()))
 					continue;
 				
 				if (flyingentity.level.isEmptyBlock(blockpos1))

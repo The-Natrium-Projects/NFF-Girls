@@ -8,13 +8,12 @@ import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.entity.Mob;
-import net.sodiumzh.nautils.entity.MobApplicableItemTable;
-import net.sodiumzh.nautils.math.RandomSelection;
-import net.sodiumzh.nautils.math.RangedRandomDouble;
-import net.sodiumzh.nautils.registries.NaUtilsFunctions;
+import net.sodiumzh.nfu.entity.MobApplicableItemTable;
+import net.sodiumzh.nfu.math.RandomSelection;
+import net.sodiumzh.nfu.math.RangedRandomDouble;
+import net.sodiumzh.nfu.registry.NFUFunctions;
 
 import java.util.function.Function;
-import java.util.function.Supplier;
 
 public class NFFGirlsDataReaders {
 
@@ -49,7 +48,7 @@ public class NFFGirlsDataReaders {
                     }
                     else if (amountGetterJson != null)
                     {
-                        getter = mob -> NaUtilsFunctions.invoke(new ResourceLocation(amountGetterJson.getAsString()), mob).castTo(Double.class).doubleValue();
+                        getter = mob -> NFUFunctions.invoke(new ResourceLocation(amountGetterJson.getAsString()), mob).castTo(Double.class).doubleValue();
                     }
                     else {
                         LogUtils.getLogger().warn(String.format("Reading MobApplicableItemTable failed: Missing amount info for %s \"%s\".",
@@ -63,7 +62,7 @@ public class NFFGirlsDataReaders {
                     else if (tag != null)
                         builder.add(TagKey.create(Registry.ITEM_REGISTRY, new ResourceLocation(tag)), getter);
                     else if (predicate != null)
-                        builder.add(stack -> NaUtilsFunctions.invoke(new ResourceLocation(predicate), stack)
+                        builder.add(stack -> NFUFunctions.invoke(new ResourceLocation(predicate), stack)
                                 .castTo(Boolean.class).booleanValue(), getter);
                     else {
                         LogUtils.getLogger().warn("Reading MobApplicableItemTable failed: Missing item info.");

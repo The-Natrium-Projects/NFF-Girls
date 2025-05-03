@@ -1,7 +1,6 @@
 package net.sodiumzh.nff.girls.registry;
 
 import com.google.common.base.Supplier;
-
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.util.LazyLoadedValue;

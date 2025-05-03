@@ -1,7 +1,6 @@
 package net.sodiumzh.nff.girls.entity.ai.movecontrol;
 
 import com.github.mechalopa.hmag.util.ModUtils;
-
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.ai.attributes.Attributes;

@@ -1,8 +1,8 @@
 package net.sodiumzh.nff.girls.entity;
 
 import net.minecraft.world.entity.Mob;
-import net.sodiumzh.nautils.statics.NaUtilsParticleStatics;
 import net.sodiumzh.nff.services.entity.taming.INFFDefaultProgressedTamingProcess;
+import net.sodiumzh.nfu.util.NFUParticleStatics;
 
 public class NFFGirlsTamingRules {
 
@@ -13,7 +13,7 @@ public class NFFGirlsTamingRules {
 
 	public static void tickContinuousProgressLoss(INFFDefaultProgressedTamingProcess<? super Mob> process, Mob mob) {
 		process.addProgressValue(mob, -CONTINUOUS_PROGRESS_LOSS_RATE);
-		NaUtilsParticleStatics.sendSmokeParticlesToEntityDefault(mob);
+		NFUParticleStatics.sendSmokeParticlesToEntityDefault(mob);
 		if (process.getProgressValue(mob).orElse(1d) <= 0d)
 			process.asProcess().interruptAll(mob, true);
 	}
