@@ -3,11 +3,11 @@ package net.sodiumzh.nff.girls.entity.tamingprocesses.hmag;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.player.Player;
-import net.sodiumzh.nautils.entity.anger.MobAngerRules;
 import net.sodiumzh.nff.girls.entity.NFFGirlsTamingRules;
 import net.sodiumzh.nff.girls.registry.NFFGirlsAngerRules;
 import net.sodiumzh.nff.services.entity.capability.CNFFTamable;
 import net.sodiumzh.nff.services.entity.taming.TamingProcessItemGivingProgress;
+import net.sodiumzh.nfu.entity.anger.MobAngerRules;
 
 public class HmagAlrauneTamingProcess extends TamingProcessItemGivingProgress
 {

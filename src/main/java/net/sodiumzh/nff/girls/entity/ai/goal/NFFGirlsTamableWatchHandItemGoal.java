@@ -1,7 +1,5 @@
 package net.sodiumzh.nff.girls.entity.ai.goal;
 
-import java.util.EnumSet;
-
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.ai.goal.Goal;
 import net.minecraft.world.phys.Vec3;
@@ -9,6 +7,8 @@ import net.sodiumzh.nff.girls.entity.tamingprocesses.hmag.NFFGirlsItemDroppingTa
 import net.sodiumzh.nff.services.entity.capability.CNFFTamable;
 import net.sodiumzh.nff.services.entity.taming.NFFTamingMapping;
 import net.sodiumzh.nff.services.registry.NFFCapRegistry;
+
+import java.util.EnumSet;
 
 public class NFFGirlsTamableWatchHandItemGoal extends Goal
 {

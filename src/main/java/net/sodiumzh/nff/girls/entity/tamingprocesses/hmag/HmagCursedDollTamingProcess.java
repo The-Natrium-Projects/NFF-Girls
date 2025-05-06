@@ -9,15 +9,15 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
-import net.sodiumzh.nautils.containers.MapPair;
-import net.sodiumzh.nautils.entity.RepeatableAttributeModifier;
-import net.sodiumzh.nautils.entity.anger.MobAngerRules;
-import net.sodiumzh.nautils.entity.taming.TamingInteractionResult;
-import net.sodiumzh.nautils.statics.NaUtilsContainerStatics;
-import net.sodiumzh.nautils.statics.NaUtilsParticleStatics;
 import net.sodiumzh.nff.girls.entity.NFFGirlsTamingRules;
 import net.sodiumzh.nff.services.entity.capability.CNFFTamable;
 import net.sodiumzh.nff.services.entity.taming.NFFTamingProcess;
+import net.sodiumzh.nfu.container.MapPair;
+import net.sodiumzh.nfu.entity.RepeatableAttributeModifier;
+import net.sodiumzh.nfu.entity.anger.MobAngerRules;
+import net.sodiumzh.nfu.entity.taming.TamingInteractionResult;
+import net.sodiumzh.nfu.util.NFUContainerStatics;
+import net.sodiumzh.nfu.util.NFUParticleStatics;
 import org.apache.commons.lang3.mutable.MutableObject;
 
 import java.util.ArrayList;
@@ -33,7 +33,7 @@ public class HmagCursedDollTamingProcess extends NFFTamingProcess
 
 	protected static final RepeatableAttributeModifier ATK_MOD = new RepeatableAttributeModifier(2.5d, AttributeModifier.Operation.ADDITION);
 	
-	protected static final HashMap<String, Item> WOOL_MAP = NaUtilsContainerStatics.mapOf(
+	protected static final HashMap<String, Item> WOOL_MAP = NFUContainerStatics.mapOf(
 			MapPair.of("white", Items.WHITE_WOOL),
 			MapPair.of("light_gray", Items.LIGHT_GRAY_WOOL),
 			MapPair.of("gray", Items.GRAY_WOOL),
@@ -69,7 +69,7 @@ public class HmagCursedDollTamingProcess extends NFFTamingProcess
 			{
 				if (player.getMainHandItem().is(Items.STRING) || WOOL_MAP_REVERSE.containsKey(player.getMainHandItem().getItem()))
 				{
-					NaUtilsParticleStatics.sendAngryParticlesToEntityDefault(mob);
+					NFUParticleStatics.sendAngryParticlesToEntityDefault(mob);
 					result.setHandled();
 				}
 			}
@@ -78,7 +78,7 @@ public class HmagCursedDollTamingProcess extends NFFTamingProcess
 			{
 				if (WOOL_MAP_REVERSE.containsKey(player.getMainHandItem().getItem()))
 				{
-					NaUtilsParticleStatics.sendSmokeParticlesToEntityDefault(mob);
+					NFUParticleStatics.sendSmokeParticlesToEntityDefault(mob);
 					result.setHandled();
 				}
 			}
@@ -92,12 +92,12 @@ public class HmagCursedDollTamingProcess extends NFFTamingProcess
 						setWool(mob, player, WOOL_MAP_REVERSE.get(player.getMainHandItem().getItem()), true);
 						setPhase(mob, player, true);
 						player.getMainHandItem().shrink(1);
-						NaUtilsParticleStatics.sendGlintParticlesToEntityDefault(mob);
+						NFUParticleStatics.sendGlintParticlesToEntityDefault(mob);
 					}
 					else
 					{
 						// Duplicate color, skip
-						NaUtilsParticleStatics.sendSmokeParticlesToEntityDefault(mob);
+						NFUParticleStatics.sendSmokeParticlesToEntityDefault(mob);
 					}
 					result.setHandled();
 				}
@@ -111,7 +111,7 @@ public class HmagCursedDollTamingProcess extends NFFTamingProcess
 					// Sewed 8 times, succeed
 					if (woolCount(mob, player) >= 8)
 					{
-						NaUtilsParticleStatics.sendHeartParticlesToEntityDefault(mob);
+						NFUParticleStatics.sendHeartParticlesToEntityDefault(mob);
 						ATK_MOD.clear(player, Attributes.ATTACK_DAMAGE);
 						result.setHandled();
 						result.setTamedMob(this.doTaming(player, mob));
@@ -121,7 +121,7 @@ public class HmagCursedDollTamingProcess extends NFFTamingProcess
 					{
 						cap.putPlayerTimer(player, PLAYER_TIMER_KEY_GIVING_COOLDOWN, NFFGirlsTamingRules.COOLDOWN_MIDDLE);
 						setPhase(mob, player, false);
-						NaUtilsParticleStatics.sendGlintParticlesToEntityDefault(mob);
+						NFUParticleStatics.sendGlintParticlesToEntityDefault(mob);
 					}
 				}
 			}
@@ -156,7 +156,7 @@ public class HmagCursedDollTamingProcess extends NFFTamingProcess
 			CNFFTamable.get(mob).getPlayerSpecificNBT(player).ifPresent(nbt -> nbt.remove( key));
 		if (inProcess && !isQuiet)
 		{
-			NaUtilsParticleStatics.sendAngryParticlesToEntityDefault(mob);
+			NFUParticleStatics.sendAngryParticlesToEntityDefault(mob);
 		}
 	}
 
@@ -171,7 +171,7 @@ public class HmagCursedDollTamingProcess extends NFFTamingProcess
 		});
 		if (!nbtPlayers.isEmpty() && !isQuiet)
 		{
-			NaUtilsParticleStatics.sendAngryParticlesToEntityDefault(mob);
+			NFUParticleStatics.sendAngryParticlesToEntityDefault(mob);
 		}
 		return !nbtPlayers.isEmpty();
 	}
@@ -193,7 +193,7 @@ public class HmagCursedDollTamingProcess extends NFFTamingProcess
 	{
 		if (woolCount(mob, player) > 0 && damageGiven > CNFFTamable.get(mob).getDamageThreshold())
 		{
-			String droppedColor = NaUtilsContainerStatics.randomPick(getHoldingWools(mob, player));
+			String droppedColor = NFUContainerStatics.randomPick(getHoldingWools(mob, player));
 			mob.spawnAtLocation(new ItemStack(WOOL_MAP.get(droppedColor)));
 			setWool(mob, player, droppedColor, false);
 			if (isInAnyProcess(mob))

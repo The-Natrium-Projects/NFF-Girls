@@ -1,7 +1,5 @@
 package net.sodiumzh.nff.girls.subsystem.baublesystem;
 
-import java.util.HashMap;
-
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Tuple;
 import net.minecraft.world.item.Item;
@@ -13,6 +11,8 @@ import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
 import net.minecraftforge.fml.event.IModBusEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.sodiumzh.nff.girls.NFFGirls;
+
+import java.util.HashMap;
 
 /**
  * Registry of DWMG additional properties for bauble items.

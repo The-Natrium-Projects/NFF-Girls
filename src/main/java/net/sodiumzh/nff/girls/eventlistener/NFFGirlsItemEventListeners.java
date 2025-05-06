@@ -1,4 +1,4 @@
-package net.sodiumzh.nff.girls.eventlisteners;
+package net.sodiumzh.nff.girls.eventlistener;
 
 import com.github.mechalopa.hmag.registry.ModItems;
 import net.minecraft.nbt.CompoundTag;
@@ -13,8 +13,6 @@ import net.minecraftforge.event.entity.player.EntityItemPickupEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
-import net.sodiumzh.nautils.mixin.events.entity.ItemEntityHurtEvent;
-import net.sodiumzh.nautils.statics.NaUtilsLevelStatics;
 import net.sodiumzh.nff.girls.NFFGirls;
 import net.sodiumzh.nff.girls.entity.INFFGirlsTamed;
 import net.sodiumzh.nff.girls.item.IWithDuration;
@@ -24,6 +22,8 @@ import net.sodiumzh.nff.services.item.NFFMobRespawnerItem;
 import net.sodiumzh.nff.services.item.event.NFFMobRespawnerAfterConstructEvent;
 import net.sodiumzh.nff.services.item.event.NFFMobRespawnerBeforeConstructEvent;
 import net.sodiumzh.nff.services.item.event.NFFMobRespawnerStartRespawnEvent;
+import net.sodiumzh.nfu.mixin.event.entity.ItemEntityHurtEvent;
+import net.sodiumzh.nfu.util.NFULevelStatics;
 
 import java.util.Objects;
 import java.util.UUID;
@@ -148,7 +148,7 @@ public class NFFGirlsItemEventListeners
 			Player player = event.getPlayer();
 			InteractionHand usedHand = event.getHand();
 
-			NaUtilsLevelStatics.eyeTrace(player, 32d).ifPresent(hr -> {
+			NFULevelStatics.eyeTrace(player, 32d).ifPresent(hr -> {
 				if (hr.getType().equals(HitResult.Type.ENTITY)
 						&& hr instanceof EntityHitResult ehr
 						&& INFFGirlsTamed.isBMAnd(ehr.getEntity(), tamed ->

@@ -2,7 +2,6 @@ package net.sodiumzh.nff.girls.client.model;
 
 import com.github.mechalopa.hmag.client.model.AbstractGirlModel;
 import com.github.mechalopa.hmag.client.util.ModClientUtils;
-
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.builders.CubeDeformation;
 import net.minecraft.client.model.geom.builders.LayerDefinition;
@@ -66,7 +65,7 @@ public class NFFGirlsHmagEnderExecutorModel<T extends HmagEnderExecutorEntity> e
 
 	public static MeshDefinition createMesh(CubeDeformation cd) {
 		float f = -14.0F;
-		MeshDefinition md = AbstractGirlModel.createMesh(cd, f);
+		MeshDefinition md = createMesh(cd, f);
 		PartDefinition pd = md.getRoot();
 		PartDefinition rapd = ModClientUtils.addC(pd, cd, "right_arm", 40, 16, 0.0F, -2.0F, -1.0F, 2.0F, 12.0F, 2.0F,
 				-5.0F, 2.0F + f, 0.0F);

@@ -1,16 +1,9 @@
 package net.sodiumzh.nff.girls.item;
 
-import java.util.List;
-import java.util.Optional;
-
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-
 import com.github.mechalopa.hmag.registry.ModEntityTypes;
 import com.github.mechalopa.hmag.world.entity.MagicalSlimeEntity;
 import com.github.mechalopa.hmag.world.entity.SlimeGirlEntity;
 import com.mojang.logging.LogUtils;
-
 import net.minecraft.core.Vec3i;
 import net.minecraft.nbt.ByteTag;
 import net.minecraft.nbt.DoubleTag;
@@ -25,17 +18,20 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
-import net.sodiumzh.nautils.item.NaUtilsItem;
-import net.sodiumzh.nautils.math.HtmlColors;
-import net.sodiumzh.nautils.math.LinearColor;
-import net.sodiumzh.nautils.statics.NaUtilsInfoStatics;
-import net.sodiumzh.nautils.statics.NaUtilsNBTStatics;
-import net.sodiumzh.nautils.math.HtmlColors;
-import net.sodiumzh.nautils.math.LinearColor;
 import net.sodiumzh.nff.girls.entity.hmag.HmagSlimeGirlEntity;
 import net.sodiumzh.nff.girls.registry.NFFGirlsItems;
+import net.sodiumzh.nfu.item.NFUItem;
+import net.sodiumzh.nfu.math.HtmlColors;
+import net.sodiumzh.nfu.math.LinearColor;
+import net.sodiumzh.nfu.util.NFUInfoStatics;
+import net.sodiumzh.nfu.util.NFUNBTStatics;
 
-public class MagicalGelBottleItem extends NaUtilsItem
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+import java.util.List;
+import java.util.Optional;
+
+public class MagicalGelBottleItem extends NFUItem
 {
 
 	public static final LinearColor VANILLA_SLIME_COLOR = LinearColor.fromRGB(100, 172, 81);
@@ -78,11 +74,11 @@ public class MagicalGelBottleItem extends NaUtilsItem
 	protected boolean checkValid(ItemStack stack)
 	{
 		checkStackType(stack);
-		return stack.hasTag() && stack.getTag().contains("amount", NaUtilsNBTStatics.TAG_INT_ID)
-				&& stack.getTag().contains("red", NaUtilsNBTStatics.TAG_DOUBLE_ID)
-				&& stack.getTag().contains("green", NaUtilsNBTStatics.TAG_DOUBLE_ID) 
-				&& stack.getTag().contains("blue", NaUtilsNBTStatics.TAG_DOUBLE_ID)
-				&& stack.getTag().contains("show_color", NaUtilsNBTStatics.TAG_BYTE_ID);
+		return stack.hasTag() && stack.getTag().contains("amount", NFUNBTStatics.TAG_INT_ID)
+				&& stack.getTag().contains("red", NFUNBTStatics.TAG_DOUBLE_ID)
+				&& stack.getTag().contains("green", NFUNBTStatics.TAG_DOUBLE_ID)
+				&& stack.getTag().contains("blue", NFUNBTStatics.TAG_DOUBLE_ID)
+				&& stack.getTag().contains("show_color", NFUNBTStatics.TAG_BYTE_ID);
 	}
 		
 	public int getAmount(ItemStack stack)
@@ -209,7 +205,7 @@ public class MagicalGelBottleItem extends NaUtilsItem
 			if (this.getAmount(player.getItemInHand(usedHand)) <= 0)
 			{
 				player.getItemInHand(usedHand).shrink(1);
-				player.spawnAtLocation(NFFGirlsItems.EMPTY_MAGICAL_GEL_BOTTLE.get().getDefaultInstance()).setNoPickUpDelay();//NaUtilsItemStatics.giveOrDropDefault(player, NFFGirlsItems.EMPTY_MAGICAL_GEL_BOTTLE.get());
+				player.spawnAtLocation(NFFGirlsItems.EMPTY_MAGICAL_GEL_BOTTLE.get().getDefaultInstance()).setNoPickUpDelay();//NFUItemStatics.giveOrDropDefault(player, NFFGirlsItems.EMPTY_MAGICAL_GEL_BOTTLE.get());
 			}
 			// Action type: 0 => no action; 1 => collecting; 2 => staining
 			int action = 0;
@@ -297,20 +293,20 @@ public class MagicalGelBottleItem extends NaUtilsItem
 	public void appendHoverText(ItemStack stack, @Nullable Level level, List<Component> list, TooltipFlag tooltipFlag)
 	{
 		super.appendHoverText(stack, level, list, tooltipFlag);
-		list.add(NaUtilsInfoStatics.createTranslatable("item.nffgirls.magical_gel_bottle.amount", Integer.toString(this.getAmount(stack))));
+		list.add(NFUInfoStatics.createTranslatable("item.nffgirls.magical_gel_bottle.amount", Integer.toString(this.getAmount(stack))));
 		if (this.getShowColor(stack))
 		{
 			Vec3i rgb = getColor(stack).toRGB();
 			String rgbInfo = " (R" + Integer.toString(rgb.getX()) + ", G" + Integer.toString(rgb.getY()) + ", B" + Integer.toString(rgb.getZ()) +")";
-			list.add(NaUtilsInfoStatics.createTranslatable("item.nffgirls.magical_gel_bottle.color")
-					.append(NaUtilsInfoStatics.createTranslatable("color.nffgirls.html." + HtmlColors.getNearestHtmlColor(this.getColor(stack))))
-					.append(NaUtilsInfoStatics.createText(rgbInfo))
+			list.add(NFUInfoStatics.createTranslatable("item.nffgirls.magical_gel_bottle.color")
+					.append(NFUInfoStatics.createTranslatable("color.nffgirls.html." + HtmlColors.getNearestHtmlColor(this.getColor(stack))))
+					.append(NFUInfoStatics.createText(rgbInfo))
 					.withStyle(Style.EMPTY.withColor(this.getColor(stack).toCode())));
 		}
 		else
 		{
-			list.add(NaUtilsInfoStatics.createTranslatable("item.nffgirls.magical_gel_bottle.color_unknown"));
-			list.add(NaUtilsInfoStatics.createTranslatable("item.nffgirls.magical_gel_bottle.check_color"));
+			list.add(NFUInfoStatics.createTranslatable("item.nffgirls.magical_gel_bottle.color_unknown"));
+			list.add(NFUInfoStatics.createTranslatable("item.nffgirls.magical_gel_bottle.check_color"));
 		}
 	}
 }

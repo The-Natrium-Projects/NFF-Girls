@@ -1,11 +1,10 @@
 package net.sodiumzh.nff.girls.client.gui.screen;
 
 import com.mojang.blaze3d.vertex.PoseStack;
-
 import net.minecraft.world.entity.player.Inventory;
-import net.sodiumzh.nautils.math.GuiPos;
 import net.sodiumzh.nff.services.entity.taming.INFFTamed;
 import net.sodiumzh.nff.services.inventory.NFFTamedInventoryMenu;
+import net.sodiumzh.nfu.math.GuiPos;
 
 public class NFFGirlsFourBaublesGUI extends NFFGirlsGUIPreset0 {
 

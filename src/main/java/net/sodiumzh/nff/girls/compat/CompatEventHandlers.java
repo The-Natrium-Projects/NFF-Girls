@@ -52,7 +52,7 @@ public class CompatEventHandlers
 			if (isUsingFAAQuantumCatcherOnOwningMob(player, entity, hand))
 			{
 				Item qcItem = player.getItemInHand(hand).getItem();	// Here the item should be QuantumCatcherItem
-				InteractionResult result = (InteractionResult) NaUtilsReflectionStatics.forceInvokeRetVal(qcItem, (Class<Item>) qcItem.getClass(), "onEntityInteract", 
+				InteractionResult result = (InteractionResult) NFUReflectionStatics.forceInvokeRetVal(qcItem, (Class<Item>) qcItem.getClass(), "onEntityInteract", 
 						ItemStack.class, Player.class, LivingEntity.class, InteractionHand.class, player.getItemInHand(hand), player, entity, hand);
 				if (result.consumesAction())
 				{

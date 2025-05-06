@@ -1,7 +1,7 @@
 package net.sodiumzh.nff.girls.entity.tamingprocesses.hmag;
 
-import net.sodiumzh.nautils.entity.anger.MobAngerRules;
 import net.sodiumzh.nff.girls.registry.NFFGirlsAngerRules;
+import net.sodiumzh.nfu.entity.anger.MobAngerRules;
 
 public class HmagRedcapTamingProcess extends NFFGirlsItemDroppingTamingProcess
 {

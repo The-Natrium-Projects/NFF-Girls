@@ -1,21 +1,12 @@
 package net.sodiumzh.nff.girls.entity.vanillatrade;
 
-import java.util.*;
-import java.util.function.Predicate;
-import java.util.stream.Collector;
-import java.util.stream.Collectors;
-
-import javax.annotation.Nullable;
-
 import com.google.common.collect.Multimap;
 import com.mojang.logging.LogUtils;
-
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
 import net.minecraft.nbt.Tag;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.util.Mth;
-import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.npc.VillagerProfession;
 import net.minecraft.world.entity.npc.VillagerTrades.ItemListing;
 import net.minecraft.world.item.ItemStack;
@@ -25,19 +16,21 @@ import net.minecraft.world.item.trading.MerchantOffers;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.network.PacketDistributor;
 import net.minecraftforge.registries.ForgeRegistries;
-import net.sodiumzh.nautils.capability.SerializableCapabilityProvider;
-import net.sodiumzh.nautils.containers.Tuple2;
-import net.sodiumzh.nautils.containers.Tuple3;
-import net.sodiumzh.nautils.entity.vanillatrade.CVanillaMerchant;
-import net.sodiumzh.nautils.entity.vanillatrade.IVanillaTradeListing;
-import net.sodiumzh.nautils.entity.vanillatrade.VanillaMerchant;
-import net.sodiumzh.nautils.entity.vanillatrade.VanillaTradeListing;
-import net.sodiumzh.nautils.statics.NaUtilsContainerStatics;
-import net.sodiumzh.nautils.statics.NaUtilsNBTStatics;
 import net.sodiumzh.nff.girls.entity.INFFGirlsTamed;
 import net.sodiumzh.nff.girls.network.NFFGirlsChannels;
 import net.sodiumzh.nff.girls.registry.NFFGirlsItems;
 import net.sodiumzh.nff.girls.registry.NFFGirlsTrades;
+import net.sodiumzh.nfu.capability.SerializableCapabilityProvider;
+import net.sodiumzh.nfu.container.Tuple2;
+import net.sodiumzh.nfu.entity.vanillatrade.CVanillaMerchant;
+import net.sodiumzh.nfu.entity.vanillatrade.IVanillaTradeListing;
+import net.sodiumzh.nfu.entity.vanillatrade.VanillaMerchant;
+import net.sodiumzh.nfu.util.NFUContainerStatics;
+
+import javax.annotation.Nullable;
+import java.util.*;
+import java.util.function.Predicate;
+import java.util.stream.Collectors;
 
 public interface CNFFGirlsTradeHandler extends CVanillaMerchant
 {
@@ -148,8 +141,8 @@ public interface CNFFGirlsTradeHandler extends CVanillaMerchant
 
 			//.getListings(INFFGirlsTamed.getBM(this.getMob()).getData().getInitialEntityType()).pickListingForSpecifiedLevels(INFFGirlsTamed.getBM(this.getMob()).getTradeEntryCountEachLevel());
 				/*var trades = DwmgTradeRegistry.getTradesImmutable(this.getMob().getType(), getProfession(), i);
-				Collection<ItemListing> picked = NaUtilsContainerStatics.getRandomSubset
-						(NaUtilsContainerStatics.iterableToSet(trades), Math.min(2, trades.size()));*/
+				Collection<ItemListing> picked = NFUContainerStatics.getRandomSubset
+						(NFUContainerStatics.iterableToSet(trades), Math.min(2, trades.size()));*/
 			if (trades.isEmpty()) return;
 			trades.entries().stream().sorted(Comparator.comparingInt(Map.Entry::getKey)).forEach(entry -> {
 				MerchantOffer offer = entry.getValue().getOffer(getMob(), RND);
@@ -200,7 +193,7 @@ public interface CNFFGirlsTradeHandler extends CVanillaMerchant
 			// Try 16 times, give up if failed and keep it unchanged
 			for (int i = 0; i < 16; ++i)
 			{
-				Set<IVanillaTradeListing> listingPicked = NaUtilsContainerStatics.getWeightedRandomSubset(
+				Set<IVanillaTradeListing> listingPicked = NFUContainerStatics.getWeightedRandomSubset(
 					available.stream().collect(Collectors.toMap(l -> l, IVanillaTradeListing::getSelectionWeight)), 1);
 				if (listingPicked.isEmpty()) return;	// This shouldn't happen
 				IVanillaTradeListing listing = listingPicked.stream().findFirst().orElseThrow();
@@ -333,12 +326,12 @@ public interface CNFFGirlsTradeHandler extends CVanillaMerchant
 				
 				this.restockTimer = this.getBM().getRestockTicks();
 				/*if (getBM().isOwnerInDimension())
-					NaUtilsMiscStatics.printToScreen("Restocked", getBM().getOwner());*/
+					NFUMiscStatics.printToScreen("Restocked", getBM().getOwner());*/
 			}
 			/*if (restockTimer % 200 == 0)
 				if (getBM().isOwnerInDimension())
 			
-			NaUtilsMiscStatics.printToScreen(String.format("Restock time left: %d s", restockTimer / 20) , getBM().getOwner());*/
+			NFUMiscStatics.printToScreen(String.format("Restock time left: %d s", restockTimer / 20) , getBM().getOwner());*/
 			
 			// Update introduction letter entry
 			if (this.tradePoints < this.getPointsPerIntroduction())

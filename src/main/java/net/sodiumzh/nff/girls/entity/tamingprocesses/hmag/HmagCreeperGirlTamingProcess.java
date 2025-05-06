@@ -7,18 +7,17 @@ import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Explosion;
 import net.minecraftforge.fml.common.Mod;
-import net.sodiumzh.nautils.annotation.DontCallManually;
-import net.sodiumzh.nautils.entity.anger.MobAngerRules;
-import net.sodiumzh.nautils.statics.NaUtilsParticleStatics;
 import net.sodiumzh.nff.girls.NFFGirls;
 import net.sodiumzh.nff.girls.entity.NFFGirlsTamingRules;
 import net.sodiumzh.nff.services.entity.capability.CNFFTamable;
 import net.sodiumzh.nff.services.entity.taming.TamingProcessItemGivingProgress;
 import net.sodiumzh.nff.services.registry.NFFCapRegistry;
+import net.sodiumzh.nfu.annotation.DontCallManually;
+import net.sodiumzh.nfu.entity.anger.MobAngerRules;
+import net.sodiumzh.nfu.util.NFUParticleStatics;
 import org.apache.commons.lang3.mutable.MutableObject;
 
 import java.util.Collection;
-import java.util.HashSet;
 
 @Mod.EventBusSubscriber(modid = NFFGirls.MOD_ID, bus = Mod.EventBusSubscriber.Bus.FORGE)
 public class HmagCreeperGirlTamingProcess extends TamingProcessItemGivingProgress
@@ -82,8 +81,8 @@ public class HmagCreeperGirlTamingProcess extends TamingProcessItemGivingProgres
 				else if (tb > 0)
 				{
 					if (tb % 3 == 1 || tb <= 13)
-						NaUtilsParticleStatics.sendGlintParticlesToEntityDefault(cg);
-					NaUtilsParticleStatics.sendSmokeParticlesToEntityDefault(cg);
+						NFUParticleStatics.sendGlintParticlesToEntityDefault(cg);
+					NFUParticleStatics.sendSmokeParticlesToEntityDefault(cg);
 					tamable.getGeneralNBT().putInt(NBT_KEY_FINAL_EXPLOSION_TICKS_BEFORE, tb - 1);
 				}
 				else if (ta > 0)
@@ -97,7 +96,7 @@ public class HmagCreeperGirlTamingProcess extends TamingProcessItemGivingProgres
 				else
 				{
 					this.doTaming(player, mob);
-					NaUtilsParticleStatics.sendHeartParticlesToEntityDefault(mob);
+					NFUParticleStatics.sendHeartParticlesToEntityDefault(mob);
 				}
 			}
 		});
@@ -131,8 +130,8 @@ public class HmagCreeperGirlTamingProcess extends TamingProcessItemGivingProgres
 					mob.setSwellDir(-1);
 					/*if (!isQuiet)
 						for (int i = 0; i < 5; ++i)
-							NaUtilsEntityStatics.sendAngryParticlesToLivingDefault(mob);*/
-					//NaUtilsDebugStatics.debugPrintToScreen("Creeper Girl befriending failed.", player);
+							NFUEntityStatics.sendAngryParticlesToLivingDefault(mob);*/
+					//NFUDebugStatics.debugPrintToScreen("Creeper Girl befriending failed.", player);
 			}	
 		});
 	}
@@ -205,9 +204,9 @@ public class HmagCreeperGirlTamingProcess extends TamingProcessItemGivingProgres
 		if (item.is(ModItems.LIGHTNING_PARTICLE.get()))
 			return rnd < 0.1 ? 0.50 : (rnd < 0.4 ? 0.25 : 0.125);
 		if (item.is(Items.GUNPOWDER))
-			return NaUtilsMathStatics.rndRangedDouble(0.015, 0.03);
+			return NFUMathStatics.rndRangedDouble(0.015, 0.03);
 		else if (item.is(Items.TNT))
-			return NaUtilsMathStatics.rndRangedDouble(0.03, 0.06);
+			return NFUMathStatics.rndRangedDouble(0.03, 0.06);
 		else return 0;
 	}*/
 
@@ -251,7 +250,7 @@ public class HmagCreeperGirlTamingProcess extends TamingProcessItemGivingProgres
 			{
 				impactedMob.setHealth(1.0f);
 				impactedMob.invulnerableTime += 60;
-				NaUtilsParticleStatics.sendGlintParticlesToEntityDefault(impactedMob);
+				NFUParticleStatics.sendGlintParticlesToEntityDefault(impactedMob);
 			}
 		});
 	}

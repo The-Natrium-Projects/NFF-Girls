@@ -12,11 +12,10 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.gameevent.GameEvent;
 import net.minecraft.world.phys.Vec3;
-import net.sodiumzh.nautils.item.NaUtilsBlockItem;
+import net.sodiumzh.nfu.item.NFUBlockItem;
 
-public class EnderberryItem extends NaUtilsBlockItem {
+public class EnderberryItem extends NFUBlockItem {
     public EnderberryItem(Block block, Item.Properties pProperties) {
         super(block, pProperties);
     }

@@ -1,18 +1,16 @@
-package net.sodiumzh.nff.girls.mixins;
-
-import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.injection.At;
+package net.sodiumzh.nff.girls.mixin;
 
 import com.github.mechalopa.hmag.world.entity.JackFrostEntity;
 import com.llamalad7.mixinextras.injector.WrapWithCondition;
-
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraftforge.common.MinecraftForge;
-import net.sodiumzh.nautils.mixin.NaUtilsMixin;
-import net.sodiumzh.nff.girls.eventlisteners.NFFGirlsHooks;
+import net.sodiumzh.nff.girls.eventlistener.NFFGirlsHooks;
+import net.sodiumzh.nfu.mixin.NFUMixin;
+import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.injection.At;
 
 @Mixin(JackFrostEntity.class)
-public class NFFGirlsJackFrostEntityMixin implements NaUtilsMixin<JackFrostEntity>
+public class NFFGirlsJackFrostEntityMixin implements NFUMixin<JackFrostEntity>
 {
 	@WrapWithCondition(method = "aiStep()V", at = @At(value = "INVOKE", 
 			target = "Lcom/github/mechalopa/hmag/world/entity/JackFrostEntity;hurt(Lnet/minecraft/world/damagesource/DamageSource;F)Z"))

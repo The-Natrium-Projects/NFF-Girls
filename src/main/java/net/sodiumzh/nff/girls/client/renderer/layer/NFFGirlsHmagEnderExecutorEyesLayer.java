@@ -2,7 +2,6 @@ package net.sodiumzh.nff.girls.client.renderer.layer;
 
 import com.github.mechalopa.hmag.HMaG;
 import com.github.mechalopa.hmag.client.renderer.layers.EyesLayer2;
-
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.entity.RenderLayerParent;
 import net.minecraft.resources.ResourceLocation;

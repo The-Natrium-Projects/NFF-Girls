@@ -4,8 +4,8 @@ import net.minecraft.world.Container;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
-import net.sodiumzh.nautils.math.GuiPos;
 import net.sodiumzh.nff.services.entity.taming.INFFTamed;
+import net.sodiumzh.nfu.math.GuiPos;
 
 public class HmagEnderExecutorInventoryMenu extends NFFGirlsInventoryMenuPreset0{
 

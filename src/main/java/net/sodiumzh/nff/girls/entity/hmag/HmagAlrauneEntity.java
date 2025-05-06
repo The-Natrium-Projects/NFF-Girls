@@ -1,19 +1,12 @@
 package net.sodiumzh.nff.girls.entity.hmag;
 
-import java.util.Arrays;
-import java.util.Comparator;
-import java.util.List;
-import java.util.function.Supplier;
-
 import com.github.mechalopa.hmag.world.entity.AlrauneEntity;
-
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.Container;
 import net.minecraft.world.InteractionHand;
-import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.goal.FloatGoal;
@@ -30,9 +23,7 @@ import net.sodiumzh.nff.girls.entity.ai.goal.target.NFFGirlsNearestHostileToSelf
 import net.sodiumzh.nff.girls.entity.projectile.NFFGirlsHmagAlrauneSeedEntity;
 import net.sodiumzh.nff.girls.inventory.NFFGirlsThreeBaublesInventoryMenu;
 import net.sodiumzh.nff.girls.registry.NFFGirlsHealingItems;
-import net.sodiumzh.nff.girls.registry.NFFGirlsItems;
 import net.sodiumzh.nff.girls.sound.NFFGirlsSoundPresets;
-import net.sodiumzh.nff.girls.util.NFFGirlsEntityStatics;
 import net.sodiumzh.nff.services.entity.ai.goal.preset.NFFMeleeAttackGoal;
 import net.sodiumzh.nff.services.entity.ai.goal.preset.NFFRangedAttackGoal;
 import net.sodiumzh.nff.services.entity.ai.goal.preset.NFFShootProjectileGoal;
@@ -40,14 +31,18 @@ import net.sodiumzh.nff.services.entity.ai.goal.preset.NFFWaterAvoidingRandomStr
 import net.sodiumzh.nff.services.entity.ai.goal.preset.target.NFFHurtByTargetGoal;
 import net.sodiumzh.nff.services.entity.ai.goal.preset.target.NFFOwnerHurtByTargetGoal;
 import net.sodiumzh.nff.services.entity.ai.goal.preset.target.NFFOwnerHurtTargetGoal;
-import net.sodiumzh.nautils.entity.MobApplicableItemTable;
 import net.sodiumzh.nff.services.entity.taming.INFFTamed;
 import net.sodiumzh.nff.services.entity.taming.NFFTamedStatics;
 import net.sodiumzh.nff.services.entity.taming.NFFTamingMapping;
 import net.sodiumzh.nff.services.inventory.NFFTamedInventoryMenu;
 import net.sodiumzh.nff.services.inventory.NFFTamedMobInventory;
+import net.sodiumzh.nfu.entity.MobApplicableItemTable;
 
 import javax.annotation.Nonnull;
+import java.util.Arrays;
+import java.util.Comparator;
+import java.util.List;
+import java.util.function.Supplier;
 
 public class HmagAlrauneEntity extends AlrauneEntity implements INFFGirlsTamed {
 
@@ -219,7 +214,7 @@ public class HmagAlrauneEntity extends AlrauneEntity implements INFFGirlsTamed {
 /*
 	@Override
 	public HashMap<String, ItemStack> getBaubleSlots() {
-		return NaUtilsContainerStatics.mapOf(
+		return NFUContainerStatics.mapOf(
 				MapPair.of("0", this.getAdditionalInventory().getItem(0)),
 				MapPair.of("1", this.getAdditionalInventory().getItem(1)),
 				MapPair.of("2", this.getAdditionalInventory().getItem(2)));

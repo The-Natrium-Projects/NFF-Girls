@@ -1,11 +1,6 @@
 package net.sodiumzh.nff.girls.item;
 
-import java.util.List;
-
-import javax.annotation.Nullable;
-
 import com.github.mechalopa.hmag.registry.ModItems;
-
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
@@ -19,15 +14,18 @@ import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
-import net.sodiumzh.nautils.item.NaUtilsItem;
-import net.sodiumzh.nautils.statics.NaUtilsInfoStatics;
-import net.sodiumzh.nautils.statics.NaUtilsItemStatics;
+import net.sodiumzh.nfu.item.NFUItem;
+import net.sodiumzh.nfu.util.NFUInfoStatics;
+import net.sodiumzh.nfu.util.NFUItemStatics;
+
+import javax.annotation.Nullable;
+import java.util.List;
 
 @Deprecated
-public class EvilMagnetItem extends NaUtilsItem implements IWithDuration
+public class EvilMagnetItem extends NFUItem implements IWithDuration
 {
 
-	public EvilMagnetItem(Properties pProperties)
+	public EvilMagnetItem(Item.Properties pProperties)
 	{
 		super(pProperties);
 	}
@@ -65,7 +63,7 @@ public class EvilMagnetItem extends NaUtilsItem implements IWithDuration
 				{
 					if (consumeDuration(context.getItemInHand(), 1))
 					{
-						ie.moveTo(blockpos.getX() + 0.5 + NaUtilsMathStatics.rndRangedDouble(-0.2,  0.2), blockpos.getY()+ 1.5, blockpos.getZ() + 0.5 + NaUtilsMathStatics.rndRangedDouble(-0.2,  0.2));
+						ie.moveTo(blockpos.getX() + 0.5 + NFUMathStatics.rndRangedDouble(-0.2,  0.2), blockpos.getY()+ 1.5, blockpos.getZ() + 0.5 + NFUMathStatics.rndRangedDouble(-0.2,  0.2));
 					}
 					else break;
 				}
@@ -82,9 +80,9 @@ public class EvilMagnetItem extends NaUtilsItem implements IWithDuration
 		if (!player.level.isClientSide)
 		{
 			player.getItemInHand(pUsedHand).shrink(1);
-			NaUtilsItemStatics.giveOrDrop(player, new ItemStack(Items.NETHERITE_INGOT, 1));
-			NaUtilsItemStatics.giveOrDrop(player, new ItemStack(ModItems.EVIL_CRYSTAL.get(), 4));
-			NaUtilsItemStatics.giveOrDrop(player, new ItemStack(Items.IRON_INGOT, 2));
+			NFUItemStatics.giveOrDrop(player, new ItemStack(Items.NETHERITE_INGOT, 1));
+			NFUItemStatics.giveOrDrop(player, new ItemStack(ModItems.EVIL_CRYSTAL.get(), 4));
+			NFUItemStatics.giveOrDrop(player, new ItemStack(Items.IRON_INGOT, 2));
 		}
 		return InteractionResultHolder.sidedSuccess(player.getItemInHand(pUsedHand), player.level.isClientSide);
 	}
@@ -102,7 +100,7 @@ public class EvilMagnetItem extends NaUtilsItem implements IWithDuration
 	{
 		super.appendHoverText(stack, level, list, tooltipFlag);
 		//list.add(this.getDurationDescription(stack));
-		list.add(NaUtilsInfoStatics.createText("Deprecated. Right click to uncraft to ingredients."));
+		list.add(NFUInfoStatics.createText("Deprecated. Right click to uncraft to ingredients."));
 	}
 
 	

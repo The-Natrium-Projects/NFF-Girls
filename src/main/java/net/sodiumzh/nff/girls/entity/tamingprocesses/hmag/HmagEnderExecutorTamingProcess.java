@@ -1,6 +1,5 @@
 package net.sodiumzh.nff.girls.entity.tamingprocesses.hmag;
 
-import com.github.mechalopa.hmag.world.entity.EnderExecutorEntity;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.monster.EnderMan;
 import net.minecraft.world.entity.player.Player;
@@ -8,16 +7,16 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.event.entity.EntityTeleportEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
-import net.sodiumzh.nautils.capability.EntityTimerAccessor;
-import net.sodiumzh.nautils.entity.anger.MobAngerRules;
 import net.sodiumzh.nff.girls.NFFGirls;
 import net.sodiumzh.nff.girls.entity.NFFGirlsTamingRules;
-import net.sodiumzh.nff.girls.entity.hmag.HmagEnderExecutorEntity;
 import net.sodiumzh.nff.girls.registry.NFFGirlsAngerRules;
 import net.sodiumzh.nff.girls.registry.NFFGirlsConfigs;
 import net.sodiumzh.nff.services.entity.capability.CNFFTamable;
-import net.sodiumzh.nff.services.entity.taming.*;
+import net.sodiumzh.nff.services.entity.taming.NFFTamingProcess;
+import net.sodiumzh.nff.services.entity.taming.TamingProcessItemGivingProgress;
 import net.sodiumzh.nff.services.entity.taming.preset.NFFTamedEnderManPreset;
+import net.sodiumzh.nfu.capability.EntityTimerAccessor;
+import net.sodiumzh.nfu.entity.anger.MobAngerRules;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Optional;

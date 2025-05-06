@@ -1,7 +1,6 @@
-package net.sodiumzh.nff.girls.subsystem.baublesystem.baubles;
+package net.sodiumzh.nff.girls.subsystem.baublesystem.bauble;
 
 import com.github.mechalopa.hmag.registry.ModItems;
-
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;

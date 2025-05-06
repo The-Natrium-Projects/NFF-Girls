@@ -1,7 +1,7 @@
 package net.sodiumzh.nff.girls.entity.tamingprocesses.hmag;
 
-import net.sodiumzh.nautils.entity.anger.MobAngerRules;
 import net.sodiumzh.nff.girls.registry.NFFGirlsAngerRules;
+import net.sodiumzh.nfu.entity.anger.MobAngerRules;
 
 public class HmagImpTamingProcess extends NFFGirlsItemDroppingTamingProcess
 {
@@ -9,7 +9,7 @@ public class HmagImpTamingProcess extends NFFGirlsItemDroppingTamingProcess
 /*	@SuppressWarnings("unchecked")
 	@Override
 	public Map<String, Supplier<Double>> getDeltaProcMap() {
-		return NaUtilsContainerStatics.<String, Supplier<Double>>mapOf(
+		return NFUContainerStatics.<String, Supplier<Double>>mapOf(
 			MapPair.of("minecraft:apple", () -> RndUtil.rndRangedDouble(0.02, 0.04)),
 			MapPair.of("minecraft:warped_fungus", () -> RndUtil.rndRangedDouble(0.03, 0.05)), 
 			MapPair.of("minecraft:crimson_fungus", () -> RndUtil.rndRangedDouble(0.03, 0.05)), 

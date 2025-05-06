@@ -1,12 +1,7 @@
-package net.sodiumzh.nff.girls.eventlisteners;
-
-import java.util.List;
-
-import javax.annotation.Nullable;
+package net.sodiumzh.nff.girls.eventlistener;
 
 import com.github.mechalopa.hmag.world.entity.JackFrostEntity;
 import com.github.mechalopa.hmag.world.entity.MeltyMonsterEntity;
-
 import net.minecraft.client.gui.screens.inventory.MerchantScreen;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
@@ -22,13 +17,16 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.eventbus.api.Cancelable;
 import net.minecraftforge.eventbus.api.Event;
-import net.sodiumzh.nautils.statics.NaUtilsMiscStatics;
-import net.sodiumzh.nautils.statics.NaUtilsReflectionStatics;
-import net.sodiumzh.nautils.events.NaUtilsLivingEvent;
 import net.sodiumzh.nff.girls.entity.vanillatrade.CNFFGirlsTradeHandler;
-import net.sodiumzh.nff.girls.mixins.NFFGirlsJackFrostEntityMixin;
-import net.sodiumzh.nff.girls.mixins.NFFGirlsMeltyMonsterEntityMixin;
+import net.sodiumzh.nff.girls.mixin.NFFGirlsJackFrostEntityMixin;
+import net.sodiumzh.nff.girls.mixin.NFFGirlsMeltyMonsterEntityMixin;
 import net.sodiumzh.nff.girls.registry.NFFGirlsCapabilities;
+import net.sodiumzh.nfu.event.NFULivingEvent;
+import net.sodiumzh.nfu.util.NFUMiscStatics;
+import net.sodiumzh.nfu.util.NFUReflectionStatics;
+
+import javax.annotation.Nullable;
+import java.util.List;
 
 public class NFFGirlsHooks
 {
@@ -53,7 +51,7 @@ public class NFFGirlsHooks
 	 * If cancelled it will not be regarded as a melting biome.
 	 */
 	@Cancelable
-	public static class JackFrostCheckMeltingBiomeEvent extends NaUtilsLivingEvent<JackFrostEntity>
+	public static class JackFrostCheckMeltingBiomeEvent extends NFULivingEvent<JackFrostEntity>
 	{
 		public JackFrostCheckMeltingBiomeEvent(JackFrostEntity entity) {
 			super(entity);
@@ -63,7 +61,7 @@ public class NFFGirlsHooks
 	/** Fired on Melty Monster setting fire. Implemented via {@link NFFGirlsMeltyMonsterEntityMixin}.
 	 */
 	@Cancelable
-	public static class MeltyMonsterSetFireEvent extends NaUtilsLivingEvent<MeltyMonsterEntity>
+	public static class MeltyMonsterSetFireEvent extends NFULivingEvent<MeltyMonsterEntity>
 	{
 		public final BlockPos blockpos; 
 		public final BlockState blockstate;
@@ -97,9 +95,9 @@ public class NFFGirlsHooks
 		{
 			this.screen = screen;
 			MerchantMenu menu = screen.getMenu();
-			this.tradingMerchant = NaUtilsReflectionStatics.forceGet(menu, MerchantMenu.class, "f_40027_").cast() ;	// trader
+			this.tradingMerchant = NFUReflectionStatics.forceGet(menu, MerchantMenu.class, "f_40027_").cast() ;	// trader
 			this.player = this.tradingMerchant.getTradingPlayer();
-			this.activeOfferIndex = NaUtilsReflectionStatics.forceGet(screen, MerchantScreen.class, "f_99117_").cast();	// shopItem
+			this.activeOfferIndex = NFUReflectionStatics.forceGet(screen, MerchantScreen.class, "f_99117_").cast();	// shopItem
 			this.activeOffer = menu.getOffers().get(activeOfferIndex);
 			this.info = original;
 		}
@@ -131,9 +129,9 @@ public class NFFGirlsHooks
 		public CNFFGirlsTradeHandler searchOngoingDwmgTrader(double range)
 		{
 			List<Entity> list = this.player.level.getEntities(player, player.getBoundingBox().inflate(range)).stream().filter(entity -> 
-				NaUtilsMiscStatics.getValueFromCapability(entity, NFFGirlsCapabilities.CAP_TRADE_HANDLER, CNFFGirlsTradeHandler::getTradingPlayer) == player
+				NFUMiscStatics.getValueFromCapability(entity, NFFGirlsCapabilities.CAP_TRADE_HANDLER, CNFFGirlsTradeHandler::getTradingPlayer) == player
 			).toList();
-			return list.isEmpty() ? null : NaUtilsMiscStatics.getValueFromCapability(list.get(0), NFFGirlsCapabilities.CAP_TRADE_HANDLER, cap -> cap);
+			return list.isEmpty() ? null : NFUMiscStatics.getValueFromCapability(list.get(0), NFFGirlsCapabilities.CAP_TRADE_HANDLER, cap -> cap);
 		}
 	}
 	

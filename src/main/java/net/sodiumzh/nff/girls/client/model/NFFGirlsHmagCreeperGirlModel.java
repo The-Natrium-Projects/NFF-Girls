@@ -3,7 +3,6 @@ package net.sodiumzh.nff.girls.client.model;
 import com.github.mechalopa.hmag.client.model.AbstractAdvancedGirlModel;
 import com.github.mechalopa.hmag.client.model.AbstractGirlModel;
 import com.github.mechalopa.hmag.client.util.ModClientUtils;
-
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.builders.CubeDeformation;
 import net.minecraft.client.model.geom.builders.LayerDefinition;
@@ -25,7 +24,7 @@ public class NFFGirlsHmagCreeperGirlModel<T extends HmagCreeperGirlEntity> exten
 
 	public static MeshDefinition createMesh(CubeDeformation cd)
 	{
-		MeshDefinition md = AbstractAdvancedGirlModel.createMesh(cd, 0.0F);
+		MeshDefinition md = createMesh(cd, 0.0F);
 		PartDefinition pd = md.getRoot();
 		PartDefinition bodypd = pd.getChild("body");
 		ModClientUtils.addC(bodypd, cd, "skirt_1", 0, 38, -3.5F, 0.0F, -2.0F, 7.0F, 1.0F, 4.0F, 0.0F, 11.0F, 0.0F);

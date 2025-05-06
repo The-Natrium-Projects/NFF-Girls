@@ -2,7 +2,6 @@ package net.sodiumzh.nff.girls.client.model;
 
 import com.github.mechalopa.hmag.client.model.GirlArmorModel;
 import com.github.mechalopa.hmag.client.util.ModClientUtils;
-
 import net.minecraft.client.model.HumanoidModel;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.builders.CubeDeformation;

@@ -7,9 +7,9 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.CarpetBlock;
 import net.minecraft.world.level.block.state.BlockState;
-import net.sodiumzh.nautils.statics.NaUtilsEntityStatics;
 import net.sodiumzh.nff.girls.registry.NFFGirlsBlocks;
 import net.sodiumzh.nff.girls.registry.NFFGirlsEffects;
+import net.sodiumzh.nfu.util.NFUEntityStatics;
 
 /**
  * Soul Carpet is a carpet which provides mobs Death Affinity effect on it
@@ -29,7 +29,7 @@ public class SoulCarpetBlock extends CarpetBlock
 		if (!level.isClientSide && entityIn != null && entityIn instanceof LivingEntity)
 		{
 			LivingEntity livingentity = (LivingEntity) entityIn;
-			NaUtilsEntityStatics.addEffectIfNotHaving(livingentity, new MobEffectInstance(NFFGirlsEffects.UNDEAD_AFFINITY.get(), 20, 0, true, true));
+			NFUEntityStatics.addEffectIfNotHaving(livingentity, new MobEffectInstance(NFFGirlsEffects.UNDEAD_AFFINITY.get(), 20, 0, true, true));
 			// If player has <2s Wither I (usually brought by Necromancer's Hat), remove it
 			if (livingentity.hasEffect(NFFGirlsEffects.NECROMANCER_WITHER.get()) 
 					&& livingentity.getEffect(NFFGirlsEffects.NECROMANCER_WITHER.get()).getAmplifier() == 0

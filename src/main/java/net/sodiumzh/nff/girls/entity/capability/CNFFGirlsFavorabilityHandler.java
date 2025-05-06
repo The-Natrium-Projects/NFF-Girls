@@ -1,9 +1,5 @@
 package net.sodiumzh.nff.girls.entity.capability;
 
-import javax.annotation.Nullable;
-
-import org.apache.commons.lang3.mutable.MutableObject;
-
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.FriendlyByteBuf;
@@ -24,6 +20,9 @@ import net.sodiumzh.nff.girls.network.NFFGirlsChannels;
 import net.sodiumzh.nff.girls.network.NFFGirlsClientGamePacketHandler;
 import net.sodiumzh.nff.girls.registry.NFFGirlsCapabilities;
 import net.sodiumzh.nff.services.entity.taming.INFFTamed;
+import org.apache.commons.lang3.mutable.MutableObject;
+
+import javax.annotation.Nullable;
 
 /**
  * Main capability of Favorability system.

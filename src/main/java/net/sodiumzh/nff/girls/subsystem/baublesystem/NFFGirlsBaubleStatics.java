@@ -1,20 +1,19 @@
 package net.sodiumzh.nff.girls.subsystem.baublesystem;
 
-import java.util.Map;
-
-import javax.annotation.Nullable;
-
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.item.ItemStack;
-import net.sodiumzh.nautils.statics.NaUtilsContainerStatics;
 import net.sodiumzh.nff.services.subsystem.baublesystem.BaubleSystem;
-import net.sodiumzh.nautils.containers.MapPair;
+import net.sodiumzh.nfu.container.MapPair;
+import net.sodiumzh.nfu.util.NFUContainerStatics;
+
+import javax.annotation.Nullable;
+import java.util.Map;
 
 public class NFFGirlsBaubleStatics
 {
 	
-	private static final Map<Integer, String> ROMAN_NUMERALS = NaUtilsContainerStatics.mapOf(
+	private static final Map<Integer, String> ROMAN_NUMERALS = NFUContainerStatics.mapOf(
 			MapPair.of(0, "0"),
 			MapPair.of(1, "i"),
 			MapPair.of(2, "ii"),

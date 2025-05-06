@@ -5,20 +5,21 @@ import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
-import net.sodiumzh.nautils.item.NaUtilsItem;
 import net.sodiumzh.nff.girls.client.gui.screen.CitadelBasedMobDictionaryGUI;
+import net.sodiumzh.nfu.item.NFUItem;
 
 // Copied and adjusted from Alex's Mobs book
-public class CitadelBasedMobDictionaryItem extends NaUtilsItem {
+public class CitadelBasedMobDictionaryItem extends NFUItem {
 
     private final ResourceLocation root;
     private final String titleTranslationKey;
     private final String textFileDirectory;
 
-    public CitadelBasedMobDictionaryItem(Properties pProperties,
-          ResourceLocation rootLocation, String titleTranslationKey, String textFileDirectory) {
+    public CitadelBasedMobDictionaryItem(Item.Properties pProperties,
+                                         ResourceLocation rootLocation, String titleTranslationKey, String textFileDirectory) {
         super(pProperties);
         this.root = rootLocation;
         this.titleTranslationKey = titleTranslationKey;

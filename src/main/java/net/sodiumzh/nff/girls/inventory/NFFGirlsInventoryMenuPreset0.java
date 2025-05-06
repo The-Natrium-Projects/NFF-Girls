@@ -1,7 +1,5 @@
 package net.sodiumzh.nff.girls.inventory;
 
-import java.util.function.Predicate;
-
 import net.minecraft.world.Container;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.player.Inventory;
@@ -10,10 +8,12 @@ import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.ArmorItem;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.enchantment.EnchantmentHelper;
-import net.sodiumzh.nautils.math.GuiPos;
 import net.sodiumzh.nff.services.entity.taming.INFFTamed;
 import net.sodiumzh.nff.services.inventory.NFFTamedInventoryMenu;
 import net.sodiumzh.nff.services.subsystem.baublesystem.BaubleSystem;
+import net.sodiumzh.nfu.math.GuiPos;
+
+import java.util.function.Predicate;
 
 /**
  * The inventory menu adapting NFFGirlsGUIPreset0

@@ -9,8 +9,8 @@ import net.minecraft.world.item.FishingRodItem;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
-import net.sodiumzh.nautils.entity.projectile.AbstractFishingHookEntity;
 import net.sodiumzh.nff.girls.registry.NFFGirlsItems;
+import net.sodiumzh.nfu.entity.projectile.AbstractFishingHookEntity;
 
 public class ReinforcedFishingHookEntity extends AbstractFishingHookEntity
 {

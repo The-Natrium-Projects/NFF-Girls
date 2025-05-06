@@ -1,21 +1,21 @@
 package net.sodiumzh.nff.girls.entity.ai.goal;
 
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.List;
-import java.util.Random;
-
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.PathfinderMob;
 import net.minecraft.world.entity.ai.goal.Goal;
 import net.minecraft.world.entity.item.ItemEntity;
-import net.sodiumzh.nautils.statics.NaUtilsEntityStatics;
 import net.sodiumzh.nff.girls.entity.tamingprocesses.hmag.NFFGirlsItemDroppingTamingProcess;
 import net.sodiumzh.nff.services.entity.capability.CNFFTamable;
 import net.sodiumzh.nff.services.entity.taming.NFFTamingMapping;
 import net.sodiumzh.nff.services.registry.NFFCapRegistry;
+import net.sodiumzh.nfu.util.NFUEntityStatics;
+
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.List;
+import java.util.Random;
 
 public class NFFGirlsTamablePickItemGoal extends Goal
 {
@@ -68,7 +68,7 @@ public class NFFGirlsTamablePickItemGoal extends Goal
 	protected List<ItemEntity> getAcceptableItems()
 	{
 		List<ItemEntity> list = new ArrayList<ItemEntity>();
-		mob.level.getEntities(mob, NaUtilsEntityStatics.getNeighboringArea(mob, 8, 2, 8))
+		mob.level.getEntities(mob, NFUEntityStatics.getNeighboringArea(mob, 8, 2, 8))
 		.stream().filter((Entity e) -> {
 			if (e instanceof ItemEntity ie)
 			{

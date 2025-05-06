@@ -1,7 +1,6 @@
 package net.sodiumzh.nff.girls.registry;
 
 import com.github.mechalopa.hmag.HMaG;
-
 import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;

@@ -1,11 +1,6 @@
 package net.sodiumzh.nff.girls.entity.projectile;
 
-import java.util.List;
-
-import javax.annotation.Nonnull;
-
 import com.github.mechalopa.hmag.world.entity.projectile.ModProjectileItemEntity;
-
 import net.minecraft.core.particles.ItemParticleOption;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.world.damagesource.DamageSource;
@@ -25,9 +20,12 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.network.PlayMessages;
 import net.minecraftforge.network.PlayMessages.SpawnEntity;
-import net.sodiumzh.nautils.statics.NaUtilsEntityStatics;
 import net.sodiumzh.nff.girls.registry.NFFGirlsEntityTypes;
 import net.sodiumzh.nff.services.entity.taming.INFFTamed;
+import net.sodiumzh.nfu.util.NFUEntityStatics;
+
+import javax.annotation.Nonnull;
+import java.util.List;
 
 public abstract class NFFGirlsHmagAlrauneSeedEntity extends ModProjectileItemEntity
 {
@@ -262,7 +260,7 @@ public abstract class NFFGirlsHmagAlrauneSeedEntity extends ModProjectileItemEnt
 		@Override
 		protected void applyEffects(LivingEntity target, int ticks) {
 			target.heal(1);
-			NaUtilsEntityStatics.addEffectSafe(target, new MobEffectInstance(MobEffects.REGENERATION, ticks, 0));
+			NFUEntityStatics.addEffectSafe(target, new MobEffectInstance(MobEffects.REGENERATION, ticks, 0));
 		}
 
 		@Override

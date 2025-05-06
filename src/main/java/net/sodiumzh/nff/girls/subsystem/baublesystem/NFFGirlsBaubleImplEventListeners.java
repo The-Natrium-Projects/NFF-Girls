@@ -7,10 +7,10 @@ import net.minecraftforge.event.entity.living.LivingDamageEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
-import net.sodiumzh.nautils.statics.NaUtilsEntityStatics;
 import net.sodiumzh.nff.girls.NFFGirls;
 import net.sodiumzh.nff.girls.entity.hmag.HmagCrimsonSlaughtererEntity;
 import net.sodiumzh.nff.services.subsystem.baublesystem.BaubleSystem;
+import net.sodiumzh.nfu.util.NFUEntityStatics;
 @EventBusSubscriber(modid = NFFGirls.MOD_ID, bus = Mod.EventBusSubscriber.Bus.FORGE)
 public class NFFGirlsBaubleImplEventListeners
 {
@@ -25,9 +25,9 @@ public class NFFGirlsBaubleImplEventListeners
 				if (poisonLevel > 0)
 				{
 					if (poisonLevel > 0)
-						NaUtilsEntityStatics.addEffectSafe(event.getEntityLiving(), MobEffects.POISON, 5 * Math.min(poisonLevel, 3) * 20, Math.min(poisonLevel, 3) - 1);
+						NFUEntityStatics.addEffectSafe(event.getEntityLiving(), MobEffects.POISON, 5 * Math.min(poisonLevel, 3) * 20, Math.min(poisonLevel, 3) - 1);
 					if (mob instanceof HmagCrimsonSlaughtererEntity cs)
-						NaUtilsEntityStatics.addEffectSafe(event.getEntityLiving(), MobEffects.MOVEMENT_SLOWDOWN, (20 + 10 * poisonLevel) * 20, 1);
+						NFUEntityStatics.addEffectSafe(event.getEntityLiving(), MobEffects.MOVEMENT_SLOWDOWN, (20 + 10 * poisonLevel) * 20, 1);
 				}
 			});
 		}

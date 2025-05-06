@@ -8,13 +8,13 @@ import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.block.Blocks;
-import net.sodiumzh.nautils.entity.anger.MobAngerRules;
-import net.sodiumzh.nautils.statics.NaUtilsEntityStatics;
 import net.sodiumzh.nff.girls.entity.NFFGirlsTamingRules;
 import net.sodiumzh.nff.girls.registry.NFFGirlsAngerRules;
 import net.sodiumzh.nff.girls.registry.NFFGirlsTags;
 import net.sodiumzh.nff.services.entity.capability.CNFFTamable;
 import net.sodiumzh.nff.services.entity.taming.TamingProcessItemGivingProgress;
+import net.sodiumzh.nfu.entity.anger.MobAngerRules;
+import net.sodiumzh.nfu.util.NFUEntityStatics;
 
 import java.util.UUID;
 
@@ -47,7 +47,7 @@ public class HmagCrimsonSlaughtererTamingProcess extends TamingProcessItemGiving
 		{
 			if (isOnWarpedBlock(mob))
 			{
-				NaUtilsEntityStatics.addEffectSafe(mob, new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 10));
+				NFUEntityStatics.addEffectSafe(mob, new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 10));
 				if (!mob.getAttribute(Attributes.ATTACK_KNOCKBACK).hasModifier(WARPED_BLOCK_KNOCKBACK))
 					mob.getAttribute(Attributes.ATTACK_KNOCKBACK).addTransientModifier(WARPED_BLOCK_KNOCKBACK);
 			}
@@ -70,7 +70,7 @@ public class HmagCrimsonSlaughtererTamingProcess extends TamingProcessItemGiving
 	
 	public boolean satisfiesShroomlightCondition(Mob mob)
 	{
-		return mob.level.getBlockStates(NaUtilsEntityStatics.getNeighboringArea(mob, 6, 3)).filter(bs -> bs.is(Blocks.SHROOMLIGHT))
+		return mob.level.getBlockStates(NFUEntityStatics.getNeighboringArea(mob, 6, 3)).filter(bs -> bs.is(Blocks.SHROOMLIGHT))
 				.toList().size() >= 16;
 	}
 

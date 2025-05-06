@@ -1,11 +1,8 @@
 package net.sodiumzh.nff.girls.entity.projectile;
 
-import java.util.Random;
-
 import com.github.mechalopa.hmag.registry.ModEntityTypes;
 import com.github.mechalopa.hmag.world.entity.MagicalSlimeEntity;
 import com.github.mechalopa.hmag.world.entity.SlimeGirlEntity;
-
 import net.minecraft.core.particles.ItemParticleOption;
 import net.minecraft.core.particles.ParticleOptions;
 import net.minecraft.core.particles.ParticleTypes;
@@ -21,15 +18,17 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.EntityHitResult;
 import net.minecraft.world.phys.HitResult;
-import net.sodiumzh.nautils.statics.NaUtilsEntityStatics;
-import net.sodiumzh.nautils.statics.NaUtilsReflectionStatics;
-import net.sodiumzh.nautils.statics.NaUtilsMathStatics;
-import net.sodiumzh.nautils.math.LinearColor;
 import net.sodiumzh.nff.girls.entity.hmag.HmagSlimeGirlEntity;
 import net.sodiumzh.nff.girls.item.MagicalGelColorUtils;
 import net.sodiumzh.nff.girls.registry.NFFGirlsEntityTypes;
 import net.sodiumzh.nff.girls.registry.NFFGirlsItems;
 import net.sodiumzh.nff.girls.registry.NFFGirlsTags;
+import net.sodiumzh.nfu.math.LinearColor;
+import net.sodiumzh.nfu.util.NFUEntityStatics;
+import net.sodiumzh.nfu.util.NFUMathStatics;
+import net.sodiumzh.nfu.util.NFUReflectionStatics;
+
+import java.util.Random;
 
 public class MagicalGelBallEntity extends ThrowableItemProjectile
 {
@@ -93,12 +92,12 @@ public class MagicalGelBallEntity extends ThrowableItemProjectile
 	            MagicalSlimeEntity slime = ModEntityTypes.MAGICAL_SLIME.get().create(this.level);
 	            try
 	            {
-	            	NaUtilsReflectionStatics.forceInvoke(slime, MagicalSlimeEntity.class, "setSize", 1);
+	            	NFUReflectionStatics.forceInvoke(slime, MagicalSlimeEntity.class, "setSize", 1);
 	            }
 	            catch (Exception e)
 	            {
 	            	e.printStackTrace();
-	            	NaUtilsReflectionStatics.forceInvoke(slime, Slime.class, "m_7839_", 1);//setSize
+	            	NFUReflectionStatics.forceInvoke(slime, Slime.class, "m_7839_", 1);//setSize
 	            }
 	            
 	            // For vanilla slime, the color is random
@@ -121,14 +120,14 @@ public class MagicalGelBallEntity extends ThrowableItemProjectile
 	            	SlimeGirlEntity.ColorVariant v = MagicalGelColorUtils.closestVariant(sgColorCompl);
 	            	slime.setVariant(v.getId());
 	            }
-	            slime.moveTo(living.getX() + NaUtilsMathStatics.rndRangedDouble(-0.5, 0.5), living.getY() + 0.5D, living.getZ() + NaUtilsMathStatics.rndRangedDouble(-0.5, 0.5), this.random.nextFloat() * 360.0F, 0.0F);
+	            slime.moveTo(living.getX() + NFUMathStatics.rndRangedDouble(-0.5, 0.5), living.getY() + 0.5D, living.getZ() + NFUMathStatics.rndRangedDouble(-0.5, 0.5), this.random.nextFloat() * 360.0F, 0.0F);
 	            this.level.addFreshEntity(slime);
 			}
 			// For other livings (except slime-derived mobs), make a knockback and give 30s slowness II 
 			else if (!(living instanceof Slime) && !(living instanceof SlimeGirlEntity) && !living.getType().is(NFFGirlsTags.IGNORES_MAGICAL_GEL_SLOWNESS))
 			{
 				result.getEntity().hurt(DamageSource.thrown(this, this.getOwner()), 0);
-				NaUtilsEntityStatics.addEffectSafe(living, new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 30 * 20, 1));
+				NFUEntityStatics.addEffectSafe(living, new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 30 * 20, 1));
 			}
 		}
 		

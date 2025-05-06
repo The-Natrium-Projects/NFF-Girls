@@ -2,7 +2,6 @@ package net.sodiumzh.nff.girls.registry;
 
 import com.github.mechalopa.hmag.registry.ModItems;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.server.packs.resources.Resource;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.enchantment.Enchantments;
@@ -11,16 +10,16 @@ import net.minecraftforge.fml.LogicalSide;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
-import net.sodiumzh.nautils.containers.Tuple2;
-import net.sodiumzh.nautils.entity.vanillatrade.VanillaTradeListingCollection;
-import net.sodiumzh.nautils.entity.vanillatrade.VanillaTradeListingCollectionHelper;
-import net.sodiumzh.nautils.entity.vanillatrade.VanillaTradeRegistry;
-import net.sodiumzh.nautils.registries.NaUtilsRegistries;
-import net.sodiumzh.nautils.registries.NaUtilsRegistry;
-import net.sodiumzh.nautils.registries.NaUtilsRegistryGenerateValuesEvent;
-import net.sodiumzh.nautils.registries.RegistryEntryCollection;
-import net.sodiumzh.nautils.statics.NaUtilsDataStatics;
 import net.sodiumzh.nff.girls.NFFGirls;
+import net.sodiumzh.nfu.container.Tuple2;
+import net.sodiumzh.nfu.entity.vanillatrade.VanillaTradeListingCollection;
+import net.sodiumzh.nfu.entity.vanillatrade.VanillaTradeListingCollectionHelper;
+import net.sodiumzh.nfu.entity.vanillatrade.VanillaTradeRegistry;
+import net.sodiumzh.nfu.registry.NFURegistries;
+import net.sodiumzh.nfu.registry.NFURegistry;
+import net.sodiumzh.nfu.registry.NFURegistryEntryCollection;
+import net.sodiumzh.nfu.registry.NFURegistryGenerateValuesEvent;
+import net.sodiumzh.nfu.util.NFUDataStatics;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -31,18 +30,18 @@ public class NFFGirlsTrades
 
 	// REGISTRIES
 	
-	public static RegistryEntryCollection<VanillaTradeRegistry> TRADE_REGISTRIES =
-		RegistryEntryCollection.create(NaUtilsRegistries.VANILLA_TRADE_REGISTRIES, NFFGirls.MOD_ID);
+	public static NFURegistryEntryCollection<VanillaTradeRegistry> TRADE_REGISTRIES =
+		NFURegistryEntryCollection.create(NFURegistries.VANILLA_TRADE_REGISTRIES, NFFGirls.MOD_ID);
 	
-	public static final NaUtilsRegistry.Accessor<VanillaTradeRegistry> TRADE_REGISTRY = 
+	public static final NFURegistry.Accessor<VanillaTradeRegistry> TRADE_REGISTRY =
 		TRADE_REGISTRIES.register("trade_registry", () -> 
 		new VanillaTradeRegistry().readData(new ResourceLocation(NFFGirls.MOD_ID, "trades/trade_registry.json")));
 
 	// COLLECTIONS
 	
 	
-	public static RegistryEntryCollection<VanillaTradeListingCollection<?>> TRADE_COLLECTIONS =
-		RegistryEntryCollection.create(NaUtilsRegistries.VANILLA_TRADE_LISTING_COLLECTIONS, NFFGirls.MOD_ID);
+	public static NFURegistryEntryCollection<VanillaTradeListingCollection<?>> TRADE_COLLECTIONS =
+		NFURegistryEntryCollection.create(NFURegistries.VANILLA_TRADE_LISTING_COLLECTIONS, NFFGirls.MOD_ID);
 	
 	// For all undead mobs
 	//public static final ResourceLocation COMMON_UNDEAD = new ResourceLocation(NFFGirls.MOD_ID, "common_undead");
@@ -57,12 +56,12 @@ public class NFFGirlsTrades
 	// For archer mobs
 	//public static final ResourceLocation COMMON_ARCHER = new ResourceLocation(NFFGirls.MOD_ID, "common_archer");
 
-	/* static final RegistryEntryCollection<VanillaTradeListing> LISTINGS = RegistryEntryCollection.create(NaUtilsRegistries.VANILLA_TRADE_LISTINGS,
+	/* static final RegistryEntryCollection<VanillaTradeListing> LISTINGS = RegistryEntryCollection.create(NFURegistries.VANILLA_TRADE_LISTINGS,
 		NFFGirls.MOD_ID);
 
-	public static NaUtilsRegistry.Accessor<VanillaTradeListing> BUYS_COAL = LISTINGS.register("buys_coal",
+	public static NFURegistry.Accessor<VanillaTradeListing> BUYS_COAL = LISTINGS.register("buys_coal",
 		() -> VanillaTradeListing.exchanges(Items.COAL, 48, 64, NFFGirlsItems.EVIL_GEM.get(), 1, 1).setMaxUses(4));
-	public static NaUtilsRegistry.Accessor<VanillaTradeListing> SELLS_OBSIDIAN = LISTINGS.register("sells_obsidian",
+	public static NFURegistry.Accessor<VanillaTradeListing> SELLS_OBSIDIAN = LISTINGS.register("sells_obsidian",
 		() -> VanillaTradeListing.exchanges(NFFGirlsItems.EVIL_GEM.get(), 1, 1, Items.OBSIDIAN, 6, 10).setMaxUses(4));*/
 
 	private static ItemStack byKey(String key)
@@ -89,7 +88,7 @@ public class NFFGirlsTrades
 		return jsonPath(object.getId());
 	}
 	
-	public static NaUtilsRegistry.Accessor<VanillaTradeListingCollection<?>> COMMON_UNDEAD = TRADE_COLLECTIONS.register(
+	public static NFURegistry.Accessor<VanillaTradeListingCollection<?>> COMMON_UNDEAD = TRADE_COLLECTIONS.register(
 		"common_undead", () -> VanillaTradeListingCollectionHelper.newCollection()
 			.setCurrency(NFFGirlsItems.EVIL_GEM.get())
 			.setRequiredLevel(1)
@@ -119,7 +118,7 @@ public class NFFGirlsTrades
 			.addBuys(Items.TOTEM_OF_UNDYING, 1, 1, 5, 7, 4)
 			.readData(jsonPath("common_undead")).get());
 
-	public static NaUtilsRegistry.Accessor<VanillaTradeListingCollection<?>> COMMON_ICE = TRADE_COLLECTIONS.register(
+	public static NFURegistry.Accessor<VanillaTradeListingCollection<?>> COMMON_ICE = TRADE_COLLECTIONS.register(
 		"common_ice", () -> VanillaTradeListingCollectionHelper.newCollection()
 			.setCurrency(NFFGirlsItems.EVIL_GEM.get())
 			.setRequiredLevel(1)
@@ -132,7 +131,7 @@ public class NFFGirlsTrades
 			.setRequiredLevel(4)
 			.readData(jsonPath("common_ice")).get());
 
-	public static NaUtilsRegistry.Accessor<VanillaTradeListingCollection<?>> COMMON_ARCHER = TRADE_COLLECTIONS.register(
+	public static NFURegistry.Accessor<VanillaTradeListingCollection<?>> COMMON_ARCHER = TRADE_COLLECTIONS.register(
 		"common_archer", () -> VanillaTradeListingCollectionHelper.newCollection()
 			.setCurrency(NFFGirlsItems.EVIL_GEM.get())
 			.setRequiredLevel(1)
@@ -141,7 +140,7 @@ public class NFFGirlsTrades
 			.addBuys(gaiaItem("bag_arrows"), 1, 1, 2, 3, 2)
 			.readData(jsonPath("common_archer")).get());
 
-	public static NaUtilsRegistry.Accessor<VanillaTradeListingCollection<?>> COMMON_EXPLOSIVE = TRADE_COLLECTIONS.register(
+	public static NFURegistry.Accessor<VanillaTradeListingCollection<?>> COMMON_EXPLOSIVE = TRADE_COLLECTIONS.register(
 		"common_explosive", () -> VanillaTradeListingCollectionHelper.newCollection()
 			.setCurrency(NFFGirlsItems.EVIL_GEM.get())
 			.setRequiredLevel(1)
@@ -154,14 +153,14 @@ public class NFFGirlsTrades
 			.readData(jsonPath("common_explosive")).get());
 	
 	// Mob specific part
-	public static NaUtilsRegistry.Accessor<VanillaTradeListingCollection<?>> HMAG_ZOMBIE_GIRL = TRADE_COLLECTIONS.register(
+	public static NFURegistry.Accessor<VanillaTradeListingCollection<?>> HMAG_ZOMBIE_GIRL = TRADE_COLLECTIONS.register(
 		NFFGirlsEntityTypes.HMAG_ZOMBIE_GIRL.getId().getPath(), () -> VanillaTradeListingCollectionHelper.newCollection()
 			.setCurrency(NFFGirlsItems.EVIL_GEM.get())
 			.setRequiredLevel(5)
 			.addSells(64, 64, Items.ZOMBIE_SPAWN_EGG, 1, 1, 1).weight(0.1d)
 			.readData(jsonPath(NFFGirlsEntityTypes.HMAG_ZOMBIE_GIRL)).get());
 
-	public static NaUtilsRegistry.Accessor<VanillaTradeListingCollection<?>> HMAG_HUSK_GIRL = TRADE_COLLECTIONS.register(
+	public static NFURegistry.Accessor<VanillaTradeListingCollection<?>> HMAG_HUSK_GIRL = TRADE_COLLECTIONS.register(
 		NFFGirlsEntityTypes.HMAG_HUSK_GIRL.getId().getPath(), () -> VanillaTradeListingCollectionHelper.newCollection()
 			.setCurrency(NFFGirlsItems.EVIL_GEM.get())
 			.setRequiredLevel(1)
@@ -175,7 +174,7 @@ public class NFFGirlsTrades
 			.addSells(64, 64, Items.HUSK_SPAWN_EGG, 1, 1, 1).weight(0.1d)
 			.readData(jsonPath(NFFGirlsEntityTypes.HMAG_HUSK_GIRL)).get());
 
-	public static NaUtilsRegistry.Accessor<VanillaTradeListingCollection<?>> HMAG_DROWNED_GIRL = TRADE_COLLECTIONS.register(
+	public static NFURegistry.Accessor<VanillaTradeListingCollection<?>> HMAG_DROWNED_GIRL = TRADE_COLLECTIONS.register(
 		NFFGirlsEntityTypes.HMAG_DROWNED_GIRL.getId().getPath(), () -> VanillaTradeListingCollectionHelper.newCollection()
 			.setCurrency(NFFGirlsItems.EVIL_GEM.get())
 			.setRequiredLevel(1)
@@ -200,7 +199,7 @@ public class NFFGirlsTrades
 			.addSells(64, 64, Items.DROWNED_SPAWN_EGG, 1, 1, 1).weight(0.1d)
 			.readData(jsonPath(NFFGirlsEntityTypes.HMAG_DROWNED_GIRL)).get());
 
-	public static NaUtilsRegistry.Accessor<VanillaTradeListingCollection<?>> HMAG_SKELETON_GIRL = TRADE_COLLECTIONS.register(
+	public static NFURegistry.Accessor<VanillaTradeListingCollection<?>> HMAG_SKELETON_GIRL = TRADE_COLLECTIONS.register(
 		NFFGirlsEntityTypes.HMAG_SKELETON_GIRL.getId().getPath(), () -> VanillaTradeListingCollectionHelper.newCollection()
 			.setCurrency(NFFGirlsItems.EVIL_GEM.get())
 			.setRequiredLevel(1)
@@ -219,14 +218,14 @@ public class NFFGirlsTrades
 			.addSells(64, 64, Items.SKELETON_SPAWN_EGG, 1, 1, 1).weight(0.1)
 			.readData(jsonPath(NFFGirlsEntityTypes.HMAG_SKELETON_GIRL)).get());
 
-	public static NaUtilsRegistry.Accessor<VanillaTradeListingCollection<?>> HMAG_STRAY_GIRL = TRADE_COLLECTIONS.register(
+	public static NFURegistry.Accessor<VanillaTradeListingCollection<?>> HMAG_STRAY_GIRL = TRADE_COLLECTIONS.register(
 		NFFGirlsEntityTypes.HMAG_STRAY_GIRL.getId().getPath(), () -> VanillaTradeListingCollectionHelper.newCollection()
 			.setCurrency(NFFGirlsItems.EVIL_GEM.get())
 				.setRequiredLevel(4)
 				.addBuys(gaiaItem("weapon_book_freezing"), 1, 1, 4, 6, 2)
 				.readData(jsonPath(NFFGirlsEntityTypes.HMAG_STRAY_GIRL)).get());
 	
-	public static NaUtilsRegistry.Accessor<VanillaTradeListingCollection<?>> HMAG_WITHER_SKELETON_GIRL = TRADE_COLLECTIONS.register(
+	public static NFURegistry.Accessor<VanillaTradeListingCollection<?>> HMAG_WITHER_SKELETON_GIRL = TRADE_COLLECTIONS.register(
 		NFFGirlsEntityTypes.HMAG_WITHER_SKELETON_GIRL.getId().getPath(), () -> VanillaTradeListingCollectionHelper.newCollection()
 			.setCurrency(NFFGirlsItems.EVIL_GEM.get())
 				.setRequiredLevel(1)
@@ -247,7 +246,7 @@ public class NFFGirlsTrades
 				.addSells(12, 16, ModItems.NETHER_STAR_FRAGMENT.get(), 1, 1, 2)
 				.readData(jsonPath(NFFGirlsEntityTypes.HMAG_WITHER_SKELETON_GIRL)).get());
 
-	public static NaUtilsRegistry.Accessor<VanillaTradeListingCollection<?>> HMAG_CREEPER_GIRL = TRADE_COLLECTIONS.register(
+	public static NFURegistry.Accessor<VanillaTradeListingCollection<?>> HMAG_CREEPER_GIRL = TRADE_COLLECTIONS.register(
 		NFFGirlsEntityTypes.HMAG_CREEPER_GIRL.getId().getPath(), () -> VanillaTradeListingCollectionHelper.newCollection()
 			.setCurrency(NFFGirlsItems.EVIL_GEM.get())
 				.setRequiredLevel(3)
@@ -267,7 +266,7 @@ public class NFFGirlsTrades
 
 				.readData(jsonPath(NFFGirlsEntityTypes.HMAG_CREEPER_GIRL)).get());
 	
-	public static NaUtilsRegistry.Accessor<VanillaTradeListingCollection<?>> HMAG_ENDER_EXECUTOR = TRADE_COLLECTIONS.register(
+	public static NFURegistry.Accessor<VanillaTradeListingCollection<?>> HMAG_ENDER_EXECUTOR = TRADE_COLLECTIONS.register(
 		NFFGirlsEntityTypes.HMAG_ENDER_EXECUTOR.getId().getPath(), () -> VanillaTradeListingCollectionHelper.newCollection()
 			.setCurrency(NFFGirlsItems.EVIL_GEM.get())
 				.setRequiredLevel(1)
@@ -293,7 +292,7 @@ public class NFFGirlsTrades
 				.addBuys(gaiaItem("doll_ender_girl"), 1, 1, 8, 12, 2)
 				.readData(jsonPath(NFFGirlsEntityTypes.HMAG_ENDER_EXECUTOR)).get());
 
-	public static NaUtilsRegistry.Accessor<VanillaTradeListingCollection<?>> HMAG_KOBOLD=  TRADE_COLLECTIONS.register(
+	public static NFURegistry.Accessor<VanillaTradeListingCollection<?>> HMAG_KOBOLD=  TRADE_COLLECTIONS.register(
 		NFFGirlsEntityTypes.HMAG_KOBOLD.getId().getPath(), () -> VanillaTradeListingCollectionHelper.newCollection()
 			.setCurrency(NFFGirlsItems.EVIL_GEM.get())
 				.setRequiredLevel(1)
@@ -327,7 +326,7 @@ public class NFFGirlsTrades
 				.addEnchantsBook(8, 10, Enchantments.BLOCK_EFFICIENCY, 5, 2)
 				.readData(jsonPath(NFFGirlsEntityTypes.HMAG_KOBOLD)).get());
 
-	public static NaUtilsRegistry.Accessor<VanillaTradeListingCollection<?>> HMAG_NECROTIC_REAPER=  TRADE_COLLECTIONS.register(
+	public static NFURegistry.Accessor<VanillaTradeListingCollection<?>> HMAG_NECROTIC_REAPER=  TRADE_COLLECTIONS.register(
 		NFFGirlsEntityTypes.HMAG_NECROTIC_REAPER.getId().getPath(), () -> VanillaTradeListingCollectionHelper.newCollection()
 			.setCurrency(NFFGirlsItems.EVIL_GEM.get())
 				//.linkListings(COMMON_UNDEAD)
@@ -352,7 +351,7 @@ public class NFFGirlsTrades
 
 				.readData(jsonPath(NFFGirlsEntityTypes.HMAG_NECROTIC_REAPER)).get());
 
-	public static NaUtilsRegistry.Accessor<VanillaTradeListingCollection<?>> HMAG_MELTY_MONSTER = TRADE_COLLECTIONS.register(
+	public static NFURegistry.Accessor<VanillaTradeListingCollection<?>> HMAG_MELTY_MONSTER = TRADE_COLLECTIONS.register(
 		NFFGirlsEntityTypes.HMAG_MELTY_MONSTER.getId().getPath(), () -> VanillaTradeListingCollectionHelper.newCollection()
 			.setCurrency(NFFGirlsItems.EVIL_GEM.get())
 				/*.setRequiredLevel(1)
@@ -378,7 +377,7 @@ public class NFFGirlsTrades
 				.addSells(24, 48, byKey("iceandfire:dragonforge_fire_input"), 1, 1, 2)*/
 				.readData(jsonPath(NFFGirlsEntityTypes.HMAG_MELTY_MONSTER)).get());
 
-	public static NaUtilsRegistry.Accessor<VanillaTradeListingCollection<?>> HMAG_CURSED_DOLL = TRADE_COLLECTIONS.register(
+	public static NFURegistry.Accessor<VanillaTradeListingCollection<?>> HMAG_CURSED_DOLL = TRADE_COLLECTIONS.register(
 		NFFGirlsEntityTypes.HMAG_CURSED_DOLL.getId().getPath(), () -> VanillaTradeListingCollectionHelper.newCollection()
 			.setCurrency(NFFGirlsItems.EVIL_GEM.get())
 				/*.setRequiredLevel(1)
@@ -411,7 +410,7 @@ public class NFFGirlsTrades
 				.addSells(16, 32, byKey("iceandfire:pixie_wings"), 1, 1, 2)*/
 			.readData(jsonPath(NFFGirlsEntityTypes.HMAG_CURSED_DOLL)).get());
 
-	public static NaUtilsRegistry.Accessor<VanillaTradeListingCollection<?>> HMAG_JACK_FROST = TRADE_COLLECTIONS.register(
+	public static NFURegistry.Accessor<VanillaTradeListingCollection<?>> HMAG_JACK_FROST = TRADE_COLLECTIONS.register(
 		NFFGirlsEntityTypes.HMAG_JACK_FROST.getId().getPath(), () -> VanillaTradeListingCollectionHelper.newCollection()
 			.setCurrency(NFFGirlsItems.EVIL_GEM.get())
 				/*.setRequiredLevel(1)
@@ -444,7 +443,7 @@ public class NFFGirlsTrades
 */
 				.readData(jsonPath(NFFGirlsEntityTypes.HMAG_JACK_FROST)).get());
 
-	public static NaUtilsRegistry.Accessor<VanillaTradeListingCollection<?>> HMAG_ALRAUNE = TRADE_COLLECTIONS.register(
+	public static NFURegistry.Accessor<VanillaTradeListingCollection<?>> HMAG_ALRAUNE = TRADE_COLLECTIONS.register(
 		NFFGirlsEntityTypes.HMAG_ALRAUNE.getId().getPath(), () -> VanillaTradeListingCollectionHelper.newCollection()
 			.setCurrency(NFFGirlsItems.EVIL_GEM.get())
 				/*.setRequiredLevel(1)
@@ -481,7 +480,7 @@ public class NFFGirlsTrades
 */
 				.readData(jsonPath(NFFGirlsEntityTypes.HMAG_ALRAUNE)).get());
 	
-	public static NaUtilsRegistry.Accessor<VanillaTradeListingCollection<?>> HMAG_BANSHEE = TRADE_COLLECTIONS.register(
+	public static NFURegistry.Accessor<VanillaTradeListingCollection<?>> HMAG_BANSHEE = TRADE_COLLECTIONS.register(
 		NFFGirlsEntityTypes.HMAG_BANSHEE.getId().getPath(), () -> VanillaTradeListingCollectionHelper.newCollection()
 			.setCurrency(NFFGirlsItems.EVIL_GEM.get())
 				/*.setRequiredLevel(1)
@@ -520,7 +519,7 @@ public class NFFGirlsTrades
 */
 				.readData(jsonPath(NFFGirlsEntityTypes.HMAG_BANSHEE)).get());
 
-	public static NaUtilsRegistry.Accessor<VanillaTradeListingCollection<?>> HMAG_HORNET = TRADE_COLLECTIONS.register(
+	public static NFURegistry.Accessor<VanillaTradeListingCollection<?>> HMAG_HORNET = TRADE_COLLECTIONS.register(
 		NFFGirlsEntityTypes.HMAG_HORNET.getId().getPath(), () -> VanillaTradeListingCollectionHelper.newCollection()
 			.setCurrency(NFFGirlsItems.EVIL_GEM.get())
 				/*.setRequiredLevel(1)
@@ -583,7 +582,7 @@ public class NFFGirlsTrades
 */
 				.readData(jsonPath(NFFGirlsEntityTypes.HMAG_HORNET)).get());
 	
-	public static NaUtilsRegistry.Accessor<VanillaTradeListingCollection<?>> HMAG_GHASTLY_SEEKER = TRADE_COLLECTIONS.register(
+	public static NFURegistry.Accessor<VanillaTradeListingCollection<?>> HMAG_GHASTLY_SEEKER = TRADE_COLLECTIONS.register(
 		NFFGirlsEntityTypes.HMAG_GHASTLY_SEEKER.getId().getPath(), () -> VanillaTradeListingCollectionHelper.newCollection()
 			.setCurrency(NFFGirlsItems.EVIL_GEM.get())
 				/*.setRequiredLevel(1)
@@ -615,7 +614,7 @@ public class NFFGirlsTrades
 */
 				.readData(jsonPath(NFFGirlsEntityTypes.HMAG_GHASTLY_SEEKER)).get());
 	
-	public static NaUtilsRegistry.Accessor<VanillaTradeListingCollection<?>> HMAG_REDCAP = TRADE_COLLECTIONS.register(
+	public static NFURegistry.Accessor<VanillaTradeListingCollection<?>> HMAG_REDCAP = TRADE_COLLECTIONS.register(
 		NFFGirlsEntityTypes.HMAG_REDCAP.getId().getPath(), () -> VanillaTradeListingCollectionHelper.newCollection()
 			.setCurrency(NFFGirlsItems.EVIL_GEM.get())
 			.readData(jsonPath(NFFGirlsEntityTypes.HMAG_REDCAP)).get());
@@ -651,7 +650,7 @@ public class NFFGirlsTrades
 
 				.readData(jsonPath(NFFGirlsEntityTypes.)).get());*/
 
-	public static NaUtilsRegistry.Accessor<VanillaTradeListingCollection<?>> HMAG_SLIME_GIRL = TRADE_COLLECTIONS.register(
+	public static NFURegistry.Accessor<VanillaTradeListingCollection<?>> HMAG_SLIME_GIRL = TRADE_COLLECTIONS.register(
 		NFFGirlsEntityTypes.HMAG_SLIME_GIRL.getId().getPath(), () -> VanillaTradeListingCollectionHelper.newCollection()
 			.setCurrency(NFFGirlsItems.EVIL_GEM.get())
 			.readData(jsonPath(NFFGirlsEntityTypes.HMAG_SLIME_GIRL)).get());
@@ -684,7 +683,7 @@ public class NFFGirlsTrades
 
 				.readData(jsonPath(NFFGirlsEntityTypes.)).get());*/
 
-	public static NaUtilsRegistry.Accessor<VanillaTradeListingCollection<?>> HMAG_CRIMSON_SLAUGHTERER= TRADE_COLLECTIONS.register(
+	public static NFURegistry.Accessor<VanillaTradeListingCollection<?>> HMAG_CRIMSON_SLAUGHTERER= TRADE_COLLECTIONS.register(
 		NFFGirlsEntityTypes.HMAG_CRIMSON_SLAUGHTERER.getId().getPath(), () -> VanillaTradeListingCollectionHelper.newCollection()
 			.setCurrency(NFFGirlsItems.EVIL_GEM.get())
 			.readData(jsonPath(NFFGirlsEntityTypes.HMAG_CRIMSON_SLAUGHTERER)).get());
@@ -721,7 +720,7 @@ public class NFFGirlsTrades
 
 				.readData(jsonPath(NFFGirlsEntityTypes.)).get());*/
 
-	public static NaUtilsRegistry.Accessor<VanillaTradeListingCollection<?>> HMAG_SNOW_CANINE= TRADE_COLLECTIONS.register(
+	public static NFURegistry.Accessor<VanillaTradeListingCollection<?>> HMAG_SNOW_CANINE= TRADE_COLLECTIONS.register(
 		NFFGirlsEntityTypes.HMAG_SNOW_CANINE.getId().getPath(), () -> VanillaTradeListingCollectionHelper.newCollection()
 			.setCurrency(NFFGirlsItems.EVIL_GEM.get())
 			.readData(jsonPath(NFFGirlsEntityTypes.HMAG_SNOW_CANINE)).get());
@@ -763,7 +762,7 @@ public class NFFGirlsTrades
 
 				.readData(jsonPath(NFFGirlsEntityTypes.)).get());*/
 
-	public static NaUtilsRegistry.Accessor<VanillaTradeListingCollection<?>> HMAG_HARPY= TRADE_COLLECTIONS.register(
+	public static NFURegistry.Accessor<VanillaTradeListingCollection<?>> HMAG_HARPY= TRADE_COLLECTIONS.register(
 		NFFGirlsEntityTypes.HMAG_HARPY.getId().getPath(), () -> VanillaTradeListingCollectionHelper.newCollection()
 			.setCurrency(NFFGirlsItems.EVIL_GEM.get())
 			.readData(jsonPath(NFFGirlsEntityTypes.HMAG_HARPY)).get());
@@ -798,7 +797,7 @@ public class NFFGirlsTrades
 
 				.readData(jsonPath(NFFGirlsEntityTypes.)).get());*/
 
-	public static NaUtilsRegistry.Accessor<VanillaTradeListingCollection<?>> HMAG_DODOMEKI= TRADE_COLLECTIONS.register(
+	public static NFURegistry.Accessor<VanillaTradeListingCollection<?>> HMAG_DODOMEKI= TRADE_COLLECTIONS.register(
 		NFFGirlsEntityTypes.HMAG_DODOMEKI.getId().getPath(), () -> VanillaTradeListingCollectionHelper.newCollection()
 			.setCurrency(NFFGirlsItems.EVIL_GEM.get())
 			.readData(jsonPath(NFFGirlsEntityTypes.HMAG_DODOMEKI)).get());
@@ -830,7 +829,7 @@ public class NFFGirlsTrades
 
 				.readData(jsonPath(NFFGirlsEntityTypes.)).get());*/
 
-	public static NaUtilsRegistry.Accessor<VanillaTradeListingCollection<?>> HMAG_IMP= TRADE_COLLECTIONS.register(
+	public static NFURegistry.Accessor<VanillaTradeListingCollection<?>> HMAG_IMP= TRADE_COLLECTIONS.register(
 		NFFGirlsEntityTypes.HMAG_IMP.getId().getPath(), () -> VanillaTradeListingCollectionHelper.newCollection()
 			.setCurrency(NFFGirlsItems.EVIL_GEM.get())
 			.readData(jsonPath(NFFGirlsEntityTypes.HMAG_IMP)).get());
@@ -865,7 +864,7 @@ public class NFFGirlsTrades
 
 				.readData(jsonPath(NFFGirlsEntityTypes.)).get());*/
 
-	public static NaUtilsRegistry.Accessor<VanillaTradeListingCollection<?>> HMAG_GLARYAD= TRADE_COLLECTIONS.register(
+	public static NFURegistry.Accessor<VanillaTradeListingCollection<?>> HMAG_GLARYAD= TRADE_COLLECTIONS.register(
 		NFFGirlsEntityTypes.HMAG_GLARYAD.getId().getPath(), () -> VanillaTradeListingCollectionHelper.newCollection()
 			.setCurrency(NFFGirlsItems.EVIL_GEM.get())
 			.readData(jsonPath(NFFGirlsEntityTypes.HMAG_GLARYAD)).get());
@@ -902,7 +901,7 @@ public class NFFGirlsTrades
 
 				.readData(jsonPath(NFFGirlsEntityTypes.)).get());*/
 
-	public static NaUtilsRegistry.Accessor<VanillaTradeListingCollection<?>> HMAG_JIANGSHI= TRADE_COLLECTIONS.register(
+	public static NFURegistry.Accessor<VanillaTradeListingCollection<?>> HMAG_JIANGSHI= TRADE_COLLECTIONS.register(
 		"hmag_jiangshi", () -> VanillaTradeListingCollectionHelper.newCollection()
 			.setCurrency(NFFGirlsItems.EVIL_GEM.get())
 			.readData(jsonPath(new ResourceLocation("nffgirls", "hmag_jiangshi"))).get());
@@ -935,7 +934,7 @@ public class NFFGirlsTrades
 
 				.readData(jsonPath(NFFGirlsEntityTypes.)).get());*/
 
-	public static NaUtilsRegistry.Accessor<VanillaTradeListingCollection<?>> HMAG_NIGHTWALKER= TRADE_COLLECTIONS.register(
+	public static NFURegistry.Accessor<VanillaTradeListingCollection<?>> HMAG_NIGHTWALKER= TRADE_COLLECTIONS.register(
 		"hmag_nightwalker", () -> VanillaTradeListingCollectionHelper.newCollection()
 			.setCurrency(NFFGirlsItems.EVIL_GEM.get())
 			.readData(jsonPath(new ResourceLocation("nffgirls", "hmag_nightwalker"))).get());
@@ -975,9 +974,9 @@ public class NFFGirlsTrades
 			;*/
 
 	@SubscribeEvent
-	public static void readJsonCollections(NaUtilsRegistryGenerateValuesEvent.Server event) {
-		if (event.registry.equals(NaUtilsRegistries.VANILLA_TRADE_LISTING_COLLECTIONS)) {
-			List<ResourceLocation> allKeys = NaUtilsDataStatics.getJsonsUnderPath(LogicalSide.SERVER, "trades")
+	public static void readJsonCollections(NFURegistryGenerateValuesEvent.Server event) {
+		if (event.registry.equals(NFURegistries.VANILLA_TRADE_LISTING_COLLECTIONS)) {
+			List<ResourceLocation> allKeys = NFUDataStatics.getJsonsUnderPath(LogicalSide.SERVER, "trades")
 				.stream()
 				.map(Tuple2::getA)
 				.map(loc -> {
@@ -992,14 +991,14 @@ public class NFFGirlsTrades
 				.filter(key -> !TRADE_COLLECTIONS.hasKey(key))
 				.toList();
 
-			Map<String, RegistryEntryCollection<VanillaTradeListingCollection<?>>> collections = new HashMap<>();
+			Map<String, NFURegistryEntryCollection<VanillaTradeListingCollection<?>>> collections = new HashMap<>();
 			allKeys.stream().map(ResourceLocation::getNamespace).collect(Collectors.toSet())
-				.forEach(key -> collections.put(key, RegistryEntryCollection.create(NaUtilsRegistries.VANILLA_TRADE_LISTING_COLLECTIONS, key)));
+				.forEach(key -> collections.put(key, NFURegistryEntryCollection.create(NFURegistries.VANILLA_TRADE_LISTING_COLLECTIONS, key)));
 			allKeys.forEach((ResourceLocation key) -> collections.get(key.getNamespace()).register(key.getPath(),
 					() -> VanillaTradeListingCollectionHelper.newCollection()
 						.setCurrency(NFFGirlsItems.EVIL_GEM.get())
 						.readData(jsonPath(key)).get()));
-			collections.values().forEach(RegistryEntryCollection::merge);
+			collections.values().forEach(NFURegistryEntryCollection::merge);
 		}
 	}
 

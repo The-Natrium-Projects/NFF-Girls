@@ -1,13 +1,6 @@
 package net.sodiumzh.nff.girls.entity.hmag;
 
-import java.util.Arrays;
-import java.util.Optional;
-import java.util.UUID;
-import java.util.function.Consumer;
-import java.util.function.Predicate;
-
 import com.github.mechalopa.hmag.world.entity.MeltyMonsterEntity;
-
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
@@ -43,14 +36,6 @@ import net.minecraft.world.level.pathfinder.PathComputationType;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.EntityHitResult;
 import net.minecraft.world.phys.Vec3;
-import net.sodiumzh.nautils.statics.NaUtilsEntityStatics;
-import net.sodiumzh.nautils.statics.NaUtilsContainerStatics;
-import net.sodiumzh.nautils.statics.NaUtilsItemStatics;
-import net.sodiumzh.nautils.statics.NaUtilsParticleStatics;
-import net.sodiumzh.nautils.statics.NaUtilsMathStatics;
-import net.sodiumzh.nautils.statics.NaUtilsMathStatics;
-import net.sodiumzh.nautils.entity.ConditionalAttributeModifier;
-import net.sodiumzh.nff.girls.NFFGirls;
 import net.sodiumzh.nff.girls.entity.INFFGirlsTamed;
 import net.sodiumzh.nff.girls.entity.ai.goal.NFFGirlsHmagMeltyMonsterFollowOwnerGoal;
 import net.sodiumzh.nff.girls.entity.ai.goal.NFFGirlsRangedAttackGoal;
@@ -58,22 +43,27 @@ import net.sodiumzh.nff.girls.entity.ai.goal.target.NFFGirlsNearestHostileToOwne
 import net.sodiumzh.nff.girls.entity.ai.goal.target.NFFGirlsNearestHostileToSelfTargetGoal;
 import net.sodiumzh.nff.girls.inventory.HmagMeltyMonsterInventoryMenu;
 import net.sodiumzh.nff.girls.registry.NFFGirlsHealingItems;
-import net.sodiumzh.nff.girls.registry.NFFGirlsItems;
 import net.sodiumzh.nff.girls.sound.NFFGirlsSoundPresets;
-import net.sodiumzh.nff.girls.util.NFFGirlsEntityStatics;
 import net.sodiumzh.nff.services.entity.ai.NFFTamedMobAIState;
 import net.sodiumzh.nff.services.entity.ai.goal.preset.NFFWaterAvoidingRandomStrollGoal;
 import net.sodiumzh.nff.services.entity.ai.goal.preset.target.NFFHurtByTargetGoal;
 import net.sodiumzh.nff.services.entity.ai.goal.preset.target.NFFOwnerHurtByTargetGoal;
 import net.sodiumzh.nff.services.entity.ai.goal.preset.target.NFFOwnerHurtTargetGoal;
-import net.sodiumzh.nautils.entity.MobApplicableItemTable;
 import net.sodiumzh.nff.services.entity.capability.wrapper.ILivingDelayedActions;
 import net.sodiumzh.nff.services.entity.taming.NFFTamedStatics;
 import net.sodiumzh.nff.services.entity.taming.NFFTamingMapping;
 import net.sodiumzh.nff.services.inventory.NFFTamedInventoryMenu;
 import net.sodiumzh.nff.services.inventory.NFFTamedMobInventory;
+import net.sodiumzh.nfu.entity.ConditionalAttributeModifier;
+import net.sodiumzh.nfu.entity.MobApplicableItemTable;
+import net.sodiumzh.nfu.util.*;
 
 import javax.annotation.Nonnull;
+import java.util.Arrays;
+import java.util.Optional;
+import java.util.UUID;
+import java.util.function.Consumer;
+import java.util.function.Predicate;
 
 public class HmagMeltyMonsterEntity extends MeltyMonsterEntity implements INFFGirlsTamed, ILivingDelayedActions {
 
@@ -181,7 +171,7 @@ public class HmagMeltyMonsterEntity extends MeltyMonsterEntity implements INFFGi
 			Runnable action2 = () -> {
 				action1.run();
 				for (int j = 0; j < 3; ++j)
-					action.accept(NaUtilsMathStatics.randomUnitVector().scale(NaUtilsMathStatics.rndRangedDouble(0, 2)));
+					action.accept(NFUMathStatics.randomUnitVector().scale(NFUMathStatics.rndRangedDouble(0, 2)));
 			};
 			action2.run();
 			this.addMultipleDelayedActions(action2, 3, 6, 9, 12);
@@ -192,7 +182,7 @@ public class HmagMeltyMonsterEntity extends MeltyMonsterEntity implements INFFGi
 			Runnable action3 = () -> {
 				action1.run();
 				for (int j = 0; j < 6; ++j)
-					action.accept(NaUtilsMathStatics.randomUnitVector().scale(NaUtilsMathStatics.rndRangedDouble(0, 2)));
+					action.accept(NFUMathStatics.randomUnitVector().scale(NFUMathStatics.rndRangedDouble(0, 2)));
 			};
 			action3.run();
 			this.addMultipleDelayedActions(action3, 3, 6, 9, 12, 15, 18);
@@ -203,10 +193,10 @@ public class HmagMeltyMonsterEntity extends MeltyMonsterEntity implements INFFGi
 			Runnable action4 = () -> {
 				action1.run();
 				for (int j = 0; j < 9; ++j)
-					action.accept(NaUtilsMathStatics.randomUnitVector().scale(NaUtilsMathStatics.rndRangedDouble(0, 3)));
+					action.accept(NFUMathStatics.randomUnitVector().scale(NFUMathStatics.rndRangedDouble(0, 3)));
 			};
 			action4.run();
-			this.addMultipleDelayedActions(action4, NaUtilsContainerStatics.intRangeArray(2, 20, 2));
+			this.addMultipleDelayedActions(action4, NFUContainerStatics.intRangeArray(2, 20, 2));
 			break;
 		}
 		default: 
@@ -269,7 +259,7 @@ public class HmagMeltyMonsterEntity extends MeltyMonsterEntity implements INFFGi
 	{
 		if (this.isOwnerInDimension() && this.getOwner().isInLava() && this.distanceToSqr(this.getOwner()) <= 64d)
 		{
-			NaUtilsEntityStatics.addEffectSafe(this.getOwner(), MobEffects.FIRE_RESISTANCE, 19);
+			NFUEntityStatics.addEffectSafe(this.getOwner(), MobEffects.FIRE_RESISTANCE, 19);
 		}
 		if (this.takingLavaCooldown > 0)
 			this.takingLavaCooldown --;
@@ -332,12 +322,12 @@ public class HmagMeltyMonsterEntity extends MeltyMonsterEntity implements INFFGi
 			if (this.takingLavaCooldown <= 0)
 			{
 				player.getItemInHand(hand).shrink(1);
-				NaUtilsItemStatics.giveOrDrop(player, new ItemStack(Items.LAVA_BUCKET, 1));
+				NFUItemStatics.giveOrDrop(player, new ItemStack(Items.LAVA_BUCKET, 1));
 				this.takingLavaCooldown = 5 * 60 * 20;	// 5 min
 			}
 			else
 			{
-				NaUtilsParticleStatics.sendSmokeParticlesToEntityDefault(this);
+				NFUParticleStatics.sendSmokeParticlesToEntityDefault(this);
 			}
 			return InteractionResult.sidedSuccess(this.level.isClientSide);
 		}
@@ -347,7 +337,7 @@ public class HmagMeltyMonsterEntity extends MeltyMonsterEntity implements INFFGi
 			this.level.playSound(player, this.getX(), this.getY(), this.getZ(), SoundEvents.GENERIC_EXTINGUISH_FIRE,
 					this.getSoundSource(), 1.0F, this.random.nextFloat() * 0.4F + 0.8F);
 			player.getItemInHand(hand).shrink(1);
-			NaUtilsItemStatics.giveOrDrop(player, new ItemStack(Items.BUCKET));
+			NFUItemStatics.giveOrDrop(player, new ItemStack(Items.BUCKET));
 			this.shouldSetFire = false;
 			return InteractionResult.sidedSuccess(this.level.isClientSide);
 		}
@@ -384,12 +374,12 @@ public class HmagMeltyMonsterEntity extends MeltyMonsterEntity implements INFFGi
 						if (this.takingLavaCooldown <= 0)
 						{
 							player.getItemInHand(hand).shrink(1);
-							NaUtilsItemStatics.giveOrDrop(player, new ItemStack(Items.LAVA_BUCKET, 1));
+							NFUItemStatics.giveOrDrop(player, new ItemStack(Items.LAVA_BUCKET, 1));
 							this.takingLavaCooldown = 5 * 60 * 20;	// 5 min
 						}
 						else
 						{
-							NaUtilsParticleStatics.sendSmokeParticlesToEntityDefault(this);
+							NFUParticleStatics.sendSmokeParticlesToEntityDefault(this);
 						}
 					}
 					// Use water bucket to suppress setting fire
@@ -398,7 +388,7 @@ public class HmagMeltyMonsterEntity extends MeltyMonsterEntity implements INFFGi
 						this.level.playSound(player, this.getX(), this.getY(), this.getZ(), SoundEvents.GENERIC_EXTINGUISH_FIRE,
 								this.getSoundSource(), 1.0F, this.random.nextFloat() * 0.4F + 0.8F);
 						player.getItemInHand(hand).shrink(1);
-						NaUtilsItemStatics.giveOrDrop(player, new ItemStack(Items.BUCKET));
+						NFUItemStatics.giveOrDrop(player, new ItemStack(Items.BUCKET));
 						this.shouldSetFire = false;
 					}
 					// Use Flint and Steel to allow setting fire

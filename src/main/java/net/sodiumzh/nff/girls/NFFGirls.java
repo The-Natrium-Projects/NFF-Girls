@@ -1,36 +1,17 @@
 package net.sodiumzh.nff.girls;
 
-import net.minecraftforge.fml.LogicalSide;
-import net.minecraftforge.fml.util.thread.EffectiveSide;
-import net.sodiumzh.nautils.registries.NaUtilsRegistries;
-import net.sodiumzh.nautils.statics.NaUtilsDataStatics;
-import net.sodiumzh.nff.girls.registry.*;
-import org.slf4j.Logger;
-import net.sodiumzh.nff.girls.registry.*;
-import com.mojang.logging.LogUtils;
 
-import net.minecraft.client.Minecraft;
+import com.mojang.logging.LogUtils;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.event.server.ServerStartingEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.config.ModConfig;
-import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
-import net.sodiumzh.nautils.savedata.redirector.SaveDataLocationRedirector;
-import net.sodiumzh.nff.girls.registry.NFFGirlsBlocks;
-import net.sodiumzh.nff.girls.registry.NFFGirlsConfigs;
-import net.sodiumzh.nff.girls.registry.NFFGirlsEffects;
-import net.sodiumzh.nff.girls.registry.NFFGirlsEntityTypes;
-import net.sodiumzh.nff.girls.registry.NFFGirlsItems;
-import net.sodiumzh.nff.girls.registry.NFFGirlsParticleTypes;
-import net.sodiumzh.nff.girls.registry.NFFGirlsPotions;
-import net.sodiumzh.nff.girls.registry.NFFGirlsRecipes;
-import net.sodiumzh.nff.services.NFFServices;
-import net.sodiumzh.nff.services.registry.NFFCapabilityAttachments;
+import net.sodiumzh.nff.girls.registry.*;
+import net.sodiumzh.nfu.savedata.redirector.SaveDataLocationRedirector;
+import org.slf4j.Logger;
 
 @Mod(NFFGirls.MOD_ID)
 public class NFFGirls
@@ -63,7 +44,7 @@ public class NFFGirls
         NFFGirlsParticleTypes.PARTICLE_TYPES.register(modEventBus);
         NFFGirlsPotions.POTIONS.register(modEventBus);
 
-        // NaUtils registries
+        // NFU registries
         NFFGirlsHealingItems.HEALING_ITEMS.merge();
         NFFGirlsFunctions.FUNCTIONS.merge();
         NFFGirlsTrades.TRADE_COLLECTIONS.merge();

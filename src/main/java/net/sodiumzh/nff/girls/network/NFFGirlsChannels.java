@@ -4,9 +4,9 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.network.simple.SimpleChannel;
-import net.sodiumzh.nautils.statics.NaUtilsNetworkStatics;
 import net.sodiumzh.nff.girls.NFFGirls;
 import net.sodiumzh.nff.girls.entity.vanillatrade.ClientboundNFFGirlsTradeSyncPacket;
+import net.sodiumzh.nfu.util.NFUNetworkStatics;
 
 @Mod.EventBusSubscriber(modid = NFFGirls.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class NFFGirlsChannels {
@@ -20,11 +20,11 @@ public class NFFGirlsChannels {
 
     @SuppressWarnings("resource")
 	public static void registerMessage() {
-    	SYNC_CHANNEL = NaUtilsNetworkStatics.newChannel(NFFGirls.MOD_ID, "nffgirls_sync_channel");
+    	SYNC_CHANNEL = NFUNetworkStatics.newChannel(NFFGirls.MOD_ID, "nffgirls_sync_channel");
     	//NetworkHelper.registerDefaultClientGamePacket(nextID(), SYNC_CHANNEL, CNFFGirlsFavorabilityHandler.ClientboundSyncPacket.class);
     	//NetworkHelper.registerDefaultClientGamePacket(nextID(), SYNC_CHANNEL, CNFFGirlsLevelHandler.ClientboundSyncPacket.class);
-    	NaUtilsNetworkStatics.registerDefaultClientGamePacket(nextID(), SYNC_CHANNEL, ClientboundNFFGirlsMobGeneralSyncPacket.class);
-    	NaUtilsNetworkStatics.registerDefaultClientGamePacket(nextID(), SYNC_CHANNEL, ClientboundNFFGirlsTradeSyncPacket.class);
+    	NFUNetworkStatics.registerDefaultClientGamePacket(nextID(), SYNC_CHANNEL, ClientboundNFFGirlsMobGeneralSyncPacket.class);
+    	NFUNetworkStatics.registerDefaultClientGamePacket(nextID(), SYNC_CHANNEL, ClientboundNFFGirlsTradeSyncPacket.class);
     }
     
     @SubscribeEvent

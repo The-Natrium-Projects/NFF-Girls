@@ -1,12 +1,12 @@
 package net.sodiumzh.nff.girls.inventory;
 
-import java.util.function.Predicate;
-
 import net.minecraft.world.Container;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.PickaxeItem;
 import net.sodiumzh.nff.services.entity.taming.INFFTamed;
+
+import java.util.function.Predicate;
 
 public class HmagKoboldInventoryMenu extends NFFGirlsHandItemsTwoBaublesInventoryMenu
 {

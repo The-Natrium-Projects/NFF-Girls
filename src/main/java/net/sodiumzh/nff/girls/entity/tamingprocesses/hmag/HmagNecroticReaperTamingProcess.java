@@ -10,11 +10,6 @@ import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.player.Player;
 import net.minecraftforge.fml.common.Mod;
-import net.sodiumzh.nautils.entity.anger.MobAngerRules;
-import net.sodiumzh.nautils.entity.taming.TamingInteractionResult;
-import net.sodiumzh.nautils.statics.NaUtilsEntityStatics;
-import net.sodiumzh.nautils.statics.NaUtilsMathStatics;
-import net.sodiumzh.nautils.statics.NaUtilsParticleStatics;
 import net.sodiumzh.nff.girls.NFFGirls;
 import net.sodiumzh.nff.girls.block.SoulCarpetBlock;
 import net.sodiumzh.nff.girls.entity.projectile.NecromancerMagicBulletEntity;
@@ -23,9 +18,13 @@ import net.sodiumzh.nff.girls.registry.NFFGirlsItems;
 import net.sodiumzh.nff.services.entity.capability.CNFFTamable;
 import net.sodiumzh.nff.services.entity.taming.NFFTamingProcess;
 import net.sodiumzh.nff.services.registry.NFFCapRegistry;
+import net.sodiumzh.nfu.entity.anger.MobAngerRules;
+import net.sodiumzh.nfu.entity.taming.TamingInteractionResult;
+import net.sodiumzh.nfu.util.NFUEntityStatics;
+import net.sodiumzh.nfu.util.NFUMathStatics;
+import net.sodiumzh.nfu.util.NFUParticleStatics;
 
 import javax.annotation.Nullable;
-import java.util.HashSet;
 
 /**
  * Process mechanism:
@@ -62,8 +61,8 @@ public class HmagNecroticReaperTamingProcess extends NFFTamingProcess
 		if (hits < 0 || hits > 5)
 			throw new RuntimeException("Wrong hit counts. Accepts: 0 ~ 5");
 		if (hits == 0) return;
-		NaUtilsEntityStatics.addEffectSafe(cap.getEntity(), new MobEffectInstance(MobEffects.DAMAGE_BOOST, 5, 2 * hits - 2));
-		NaUtilsEntityStatics.addEffectSafe(cap.getEntity(), new MobEffectInstance(MobEffects.MOVEMENT_SPEED, 5, hits / 2));
+		NFUEntityStatics.addEffectSafe(cap.getEntity(), new MobEffectInstance(MobEffects.DAMAGE_BOOST, 5, 2 * hits - 2));
+		NFUEntityStatics.addEffectSafe(cap.getEntity(), new MobEffectInstance(MobEffects.MOVEMENT_SPEED, 5, hits / 2));
 	}
 
 	@Override
@@ -74,7 +73,7 @@ public class HmagNecroticReaperTamingProcess extends NFFTamingProcess
 		mob.setLastHurtByPlayer(null);
 		mob.setTarget(null);
 		if (!isQuiet)
-			NaUtilsParticleStatics.sendAngryParticlesToEntityDefault(mob);
+			NFUParticleStatics.sendAngryParticlesToEntityDefault(mob);
 	}
 
 	@Override
@@ -119,7 +118,7 @@ public class HmagNecroticReaperTamingProcess extends NFFTamingProcess
 		else if (!SoulCarpetBlock.isEntityInside(mob)) return true;
 		else if (cap.isAngryAt(player))
 		{
-			NaUtilsParticleStatics.sendAngryParticlesToEntityDefault(mob);
+			NFUParticleStatics.sendAngryParticlesToEntityDefault(mob);
 			return true;
 		}
 		// Block if it's passenger
@@ -145,7 +144,7 @@ public class HmagNecroticReaperTamingProcess extends NFFTamingProcess
 		// The last hit, befriend
 		if (hits == 5)
 		{
-			NaUtilsParticleStatics.sendHeartParticlesToEntityDefault(mob);
+			NFUParticleStatics.sendHeartParticlesToEntityDefault(mob);
 			doTaming(player, mob);
 			return true;
 		}
@@ -153,7 +152,7 @@ public class HmagNecroticReaperTamingProcess extends NFFTamingProcess
 		else
 		{
 			cap.getGeneralNBT().putInt(NBT_KEY_HIT_COUNT, hits + 1);
-			NaUtilsParticleStatics.sendGlintParticlesToEntityDefault(mob);
+			NFUParticleStatics.sendGlintParticlesToEntityDefault(mob);
 			return true;
 		}
 	}
@@ -204,7 +203,7 @@ public class HmagNecroticReaperTamingProcess extends NFFTamingProcess
 						cap.getGeneralNBT().putInt(NBT_KEY_HIT_COUNT, hits - 1);
 					if (cap.getGeneralNBT().getInt(NBT_KEY_HIT_COUNT) <= 0)
 						interrupt(player, mob, true);
-					NaUtilsParticleStatics.sendParticlesToEntity(mob, ParticleTypes.ANGRY_VILLAGER, mob.getBbHeight() - 0.2, 0.3d, 1, 1d);
+					NFUParticleStatics.sendParticlesToEntity(mob, ParticleTypes.ANGRY_VILLAGER, mob.getBbHeight() - 0.2, 0.3d, 1, 1d);
 					cap.getGeneralNBT().putInt(TIMER_NO_ATTACK_EXPIRING_TIME, 200);// Reset timer
 				}
 
@@ -216,9 +215,9 @@ public class HmagNecroticReaperTamingProcess extends NFFTamingProcess
 
 			// Send smoke particles during befriending process
 			int hitCount = cap.getGeneralNBT().getInt(NBT_KEY_HIT_COUNT);
-			amountPerTick = hitCount == 0 ? 0 : NaUtilsMathStatics.getFibonacci(Mth.clamp(cap.getGeneralNBT().getInt(NBT_KEY_HIT_COUNT), 1, 5)).orElseThrow();
+			amountPerTick = hitCount == 0 ? 0 : NFUMathStatics.getFibonacci(Mth.clamp(cap.getGeneralNBT().getInt(NBT_KEY_HIT_COUNT), 1, 5)).orElseThrow();
 			if (amountPerTick > 0)
-				NaUtilsParticleStatics.sendParticlesToEntity(
+				NFUParticleStatics.sendParticlesToEntity(
 					mob, ParticleTypes.SMOKE, mob.getBbHeight() - 0.2d, 0.5d, amountPerTick, 0d);			
 		}
 		if (!isAlwaysHostile)
@@ -255,7 +254,7 @@ public class HmagNecroticReaperTamingProcess extends NFFTamingProcess
 				this.interrupt(player, tamable.getEntity(), true);
 				return;
 			}
-			NaUtilsParticleStatics.sendParticlesToEntity(tamable.getEntity(), ParticleTypes.ANGRY_VILLAGER, tamable.getEntity().getBbHeight() - 0.2, 0.3d, 2, 1d);
+			NFUParticleStatics.sendParticlesToEntity(tamable.getEntity(), ParticleTypes.ANGRY_VILLAGER, tamable.getEntity().getBbHeight() - 0.2, 0.3d, 2, 1d);
 			tamable.getGeneralNBT().putInt(TIMER_NO_ATTACK_EXPIRING_TIME, 30 * 20);// Reset timer
 		}
 	}

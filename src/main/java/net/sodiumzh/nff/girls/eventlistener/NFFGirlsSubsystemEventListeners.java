@@ -1,19 +1,19 @@
- package net.sodiumzh.nff.girls.eventlisteners;
+ package net.sodiumzh.nff.girls.eventlistener;
 
-import java.util.UUID;
+ import net.minecraft.world.entity.ai.attributes.AttributeModifier;
+ import net.minecraft.world.entity.ai.attributes.Attributes;
+ import net.minecraftforge.event.entity.living.LivingEvent.LivingUpdateEvent;
+ import net.minecraftforge.eventbus.api.SubscribeEvent;
+ import net.minecraftforge.fml.common.Mod;
+ import net.sodiumzh.nff.girls.NFFGirls;
+ import net.sodiumzh.nff.girls.entity.INFFGirlsTamed;
+ import net.sodiumzh.nff.girls.entity.capability.CNFFGirlsFavorabilityHandler;
+ import net.sodiumzh.nff.girls.entity.capability.CNFFGirlsLevelHandler;
+ import net.sodiumzh.nff.girls.registry.NFFGirlsCapabilities;
+ import net.sodiumzh.nff.girls.registry.NFFGirlsConfigs;
+ import net.sodiumzh.nff.services.entity.capability.CHealingHandler;
 
-import net.minecraft.world.entity.ai.attributes.AttributeModifier;
-import net.minecraft.world.entity.ai.attributes.Attributes;
-import net.minecraftforge.event.entity.living.LivingEvent.LivingUpdateEvent;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.common.Mod;
-import net.sodiumzh.nff.girls.NFFGirls;
-import net.sodiumzh.nff.girls.entity.INFFGirlsTamed;
-import net.sodiumzh.nff.girls.entity.capability.CNFFGirlsFavorabilityHandler;
-import net.sodiumzh.nff.girls.entity.capability.CNFFGirlsLevelHandler;
-import net.sodiumzh.nff.girls.registry.NFFGirlsCapabilities;
-import net.sodiumzh.nff.girls.registry.NFFGirlsConfigs;
-import net.sodiumzh.nff.services.entity.capability.CHealingHandler;
+ import java.util.UUID;
 
 @Mod.EventBusSubscriber(modid = NFFGirls.MOD_ID, bus = Mod.EventBusSubscriber.Bus.FORGE)
 public class NFFGirlsSubsystemEventListeners
@@ -90,7 +90,7 @@ public class NFFGirlsSubsystemEventListeners
 	{
 		if (event.getEntity().tickCount == 20)
 		{
-			event.getEntity().getCapability(NFFGirlsCapabilities.CAP_LEVEL_HANDLER).ifPresent(cap -> 
+			event.getEntity().getCapability(NFFGirlsCapabilities.CAP_LEVEL_HANDLER).ifPresent(cap ->
 			{
 				// This is just a dummy event, not posted
 				onLevelChange(new CNFFGirlsLevelHandler.LevelChangeEvent(cap, cap.getExpectedLevel(), cap.getExpectedLevel()));

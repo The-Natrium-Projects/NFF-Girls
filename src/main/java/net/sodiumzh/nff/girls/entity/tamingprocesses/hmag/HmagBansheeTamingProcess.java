@@ -1,6 +1,5 @@
 package net.sodiumzh.nff.girls.entity.tamingprocesses.hmag;
 
-import com.github.mechalopa.hmag.world.entity.BansheeEntity;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.player.Player;

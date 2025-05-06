@@ -1,4 +1,4 @@
-package net.sodiumzh.nff.girls.subsystem.baublesystem.baubles;
+package net.sodiumzh.nff.girls.subsystem.baublesystem.bauble;
 
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.Mob;

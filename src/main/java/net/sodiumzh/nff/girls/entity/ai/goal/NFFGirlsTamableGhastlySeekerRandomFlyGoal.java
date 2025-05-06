@@ -1,10 +1,6 @@
 package net.sodiumzh.nff.girls.entity.ai.goal;
 
-import java.util.EnumSet;
-import java.util.Random;
-
 import com.github.mechalopa.hmag.world.entity.GhastlySeekerEntity;
-
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.control.MoveControl;
@@ -13,7 +9,10 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
-import net.sodiumzh.nff.girls.eventlisteners.NFFGirlsEntityEventListeners;
+import net.sodiumzh.nff.girls.eventlistener.NFFGirlsEntityEventListeners;
+
+import java.util.EnumSet;
+import java.util.Random;
 
 /**
  * Adjusted from {@code GhastlySeekerEntity$RandomFlyGoal}, mainly for behaviors outside Nether

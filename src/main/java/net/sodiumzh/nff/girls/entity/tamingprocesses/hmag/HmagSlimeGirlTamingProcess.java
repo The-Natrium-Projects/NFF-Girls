@@ -10,12 +10,6 @@ import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.monster.Slime;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
-import net.sodiumzh.nautils.entity.anger.MobAngerRules;
-import net.sodiumzh.nautils.entity.taming.TamingInteractionResult;
-import net.sodiumzh.nautils.math.LinearColor;
-import net.sodiumzh.nautils.statics.NaUtilsMathStatics;
-import net.sodiumzh.nautils.statics.NaUtilsParticleStatics;
-import net.sodiumzh.nautils.statics.NaUtilsReflectionStatics;
 import net.sodiumzh.nff.girls.entity.NFFGirlsTamingRules;
 import net.sodiumzh.nff.girls.item.MagicalGelBottleItem;
 import net.sodiumzh.nff.girls.item.MagicalGelColorUtils;
@@ -24,8 +18,13 @@ import net.sodiumzh.nff.girls.registry.NFFGirlsItems;
 import net.sodiumzh.nff.services.entity.capability.CNFFTamable;
 import net.sodiumzh.nff.services.entity.taming.TamingProcessItemGivingProgress;
 import net.sodiumzh.nff.services.registry.NFFCapRegistry;
+import net.sodiumzh.nfu.entity.anger.MobAngerRules;
+import net.sodiumzh.nfu.entity.taming.TamingInteractionResult;
+import net.sodiumzh.nfu.math.LinearColor;
+import net.sodiumzh.nfu.util.NFUMathStatics;
+import net.sodiumzh.nfu.util.NFUParticleStatics;
+import net.sodiumzh.nfu.util.NFUReflectionStatics;
 
-import java.util.HashSet;
 import java.util.Random;
 
 public class HmagSlimeGirlTamingProcess extends TamingProcessItemGivingProgress
@@ -93,13 +92,13 @@ public class HmagSlimeGirlTamingProcess extends TamingProcessItemGivingProgress
 				// 20 glints at most
 				int amount = (int) (delta / 0.025d) + 1;
 				amount = Mth.clamp(amount, 1, 40);
-				NaUtilsParticleStatics.sendParticlesToEntity(mob, ParticleTypes.HAPPY_VILLAGER, mob.getBbHeight() - 0.2, 0.5d, amount, 1d);
+				NFUParticleStatics.sendParticlesToEntity(mob, ParticleTypes.HAPPY_VILLAGER, mob.getBbHeight() - 0.2, 0.5d, amount, 1d);
 			}
 			else
 			{
 				int amount = (int) ((-delta) / 0.05d) + 1;
 				amount = Mth.clamp(amount, 1, 5);
-				NaUtilsParticleStatics.sendParticlesToEntity(mob, ParticleTypes.ANGRY_VILLAGER, mob.getBbHeight() - 0.2, 0.3d, amount, 1d);
+				NFUParticleStatics.sendParticlesToEntity(mob, ParticleTypes.ANGRY_VILLAGER, mob.getBbHeight() - 0.2, 0.3d, amount, 1d);
 			}
 		}
 		else if (itemGivenCopy.is(NFFGirlsItems.MAGICAL_GEL_BALL.get()))
@@ -109,20 +108,20 @@ public class HmagSlimeGirlTamingProcess extends TamingProcessItemGivingProgress
 	            MagicalSlimeEntity slime = ModEntityTypes.MAGICAL_SLIME.get().create(mob.level);
 	            try
 	            {
-	            	NaUtilsReflectionStatics.forceInvoke(slime, MagicalSlimeEntity.class, "setSize", 1);
+	            	NFUReflectionStatics.forceInvoke(slime, MagicalSlimeEntity.class, "setSize", 1);
 	            }
 	            catch (Exception e)
 	            {
 	            	e.printStackTrace();
-	            	NaUtilsReflectionStatics.forceInvoke(slime, Slime.class, "m_7839_", 1);//setSize
+	            	NFUReflectionStatics.forceInvoke(slime, Slime.class, "m_7839_", 1);//setSize
 	            }
             	LinearColor sgColorCompl = MagicalGelColorUtils.getSlimeColor(sg).getComplementary();
             	SlimeGirlEntity.ColorVariant v = MagicalGelColorUtils.closestVariant(sgColorCompl);
             	slime.setVariant(v.getId());
-            	slime.moveTo(mob.getX() + NaUtilsMathStatics.rndRangedDouble(-0.5, 0.5), mob.getY() + 0.5D, mob.getZ() + NaUtilsMathStatics.rndRangedDouble(-0.5, 0.5), RND.nextFloat() * 360.0F, 0.0F);
+            	slime.moveTo(mob.getX() + NFUMathStatics.rndRangedDouble(-0.5, 0.5), mob.getY() + 0.5D, mob.getZ() + NFUMathStatics.rndRangedDouble(-0.5, 0.5), RND.nextFloat() * 360.0F, 0.0F);
             	mob.level.addFreshEntity(slime);
             }
-			NaUtilsParticleStatics.sendGlintParticlesToEntityDefault(mob);
+			NFUParticleStatics.sendGlintParticlesToEntityDefault(mob);
 		}
 	}
 	
@@ -162,7 +161,7 @@ public class HmagSlimeGirlTamingProcess extends TamingProcessItemGivingProgress
 			return this.getColorDeltaProgress(bottle.getColor(item), MagicalGelColorUtils.getSlimeColor(slime));
 		}
 		else if (item.is(NFFGirlsItems.MAGICAL_GEL_BALL.get()))
-			return NaUtilsMathStatics.rndRangedDouble(0.04d, 0.08d);
+			return NFUMathStatics.rndRangedDouble(0.04d, 0.08d);
 		else return 0d;
 	}
 }

@@ -4,9 +4,9 @@ import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
-import net.sodiumzh.nautils.statics.NaUtilsInfoStatics;
 import net.sodiumzh.nff.services.item.MobCatcherItem;
 import net.sodiumzh.nff.services.item.NFFMobRespawnerItem;
+import net.sodiumzh.nfu.util.NFUInfoStatics;
 
 public class NFFGirlsMobCatcherItem extends MobCatcherItem {
 
@@ -19,7 +19,7 @@ public class NFFGirlsMobCatcherItem extends MobCatcherItem {
         // Prevent usage when inventory is full, to prevent respawner loss
         if (player.getInventory().getFreeSlot() == -1) {
             if (!player.level.isClientSide)
-                NaUtilsInfoStatics.printMessageTranslatable(player, "info.nffgirls.item.mob_catching_failed_inventory_full");
+                NFUInfoStatics.printMessageTranslatable(player, "info.nffgirls.item.mob_catching_failed_inventory_full");
             return InteractionResult.sidedSuccess(player.level.isClientSide);
         }
         return super.interactLivingEntity(player, interactionTarget, usedHand);

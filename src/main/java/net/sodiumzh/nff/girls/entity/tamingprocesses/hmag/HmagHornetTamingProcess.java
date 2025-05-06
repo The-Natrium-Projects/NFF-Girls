@@ -9,11 +9,11 @@ import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.AABB;
-import net.sodiumzh.nautils.entity.anger.MobAngerRules;
 import net.sodiumzh.nff.girls.entity.NFFGirlsTamingRules;
 import net.sodiumzh.nff.girls.registry.NFFGirlsAngerRules;
 import net.sodiumzh.nff.services.entity.capability.CNFFTamable;
 import net.sodiumzh.nff.services.entity.taming.TamingProcessItemGivingProgress;
+import net.sodiumzh.nfu.entity.anger.MobAngerRules;
 
 import java.util.stream.Stream;
 
@@ -40,7 +40,7 @@ public class HmagHornetTamingProcess extends TamingProcessItemGivingProgress
 		// If consumed honey bottle, drop a glass bottle
 		if (!args.isClient() && args.getPlayer().getItemInHand(args.getHand()).getCount() != count && flag)
 		{
-			NaUtilsItemStatics.giveOrDropDefault(args.getPlayer(), Items.GLASS_BOTTLE);
+			NFUItemStatics.giveOrDropDefault(args.getPlayer(), Items.GLASS_BOTTLE);
 		}
 		return res;
 	}*/
