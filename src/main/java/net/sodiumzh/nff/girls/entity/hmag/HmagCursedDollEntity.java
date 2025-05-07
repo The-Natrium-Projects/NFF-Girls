@@ -21,6 +21,7 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
+import net.minecraftforge.fml.LogicalSide;
 import net.sodiumzh.nff.girls.entity.INFFGirlsTamedSunSensitiveMob;
 import net.sodiumzh.nff.girls.entity.ai.goal.NFFGirlsFollowOwnerGoal;
 import net.sodiumzh.nff.girls.entity.ai.goal.target.NFFGirlsNearestHostileToOwnerTargetGoal;
@@ -42,6 +43,7 @@ import net.sodiumzh.nff.services.inventory.NFFTamedInventoryMenu;
 import net.sodiumzh.nff.services.inventory.NFFTamedMobInventory;
 import net.sodiumzh.nff.services.inventory.NFFTamedMobInventoryWithHandItems;
 import net.sodiumzh.nfu.entity.MobApplicableItemTable;
+import net.sodiumzh.nfu.item.ColoredItems;
 import net.sodiumzh.nfu.util.NFUContainerStatics;
 import net.sodiumzh.nfu.util.NFUEntityStatics;
 import net.sodiumzh.nfu.util.NFUParticleStatics;
@@ -132,9 +134,9 @@ public class HmagCursedDollEntity extends CursedDollEntity implements INFFGirlsT
 	 */
 	protected boolean giveEnhancingItems()
 	{
-		if (level().isClientSide)
-			return false;
-		ItemStack handItem = getOwner().getMainHandItem();	
+		ItemStack handItem = getOwner().getMainHandItem();
+		if (this.level().isClientSide)
+			return ColoredItems.WOOL_ITEMS.contains(handItem.getItem());
 		if (ENHANCING_ITEMS.contains(handItem.getItem()))
 		{
 			if (enhancingCooldown > 0)
@@ -193,7 +195,7 @@ public class HmagCursedDollEntity extends CursedDollEntity implements INFFGirlsT
 	}
 
 	@Override
-	public InteractionResult serversideMainHandInteraction(Player player, InteractionHand hand) {
+	public InteractionResult ownerInteraction(Player player, InteractionHand hand, LogicalSide side) {
 		if (giveEnhancingItems())
 			return InteractionResult.sidedSuccess(player.level().isClientSide);
 		return InteractionResult.PASS;

@@ -29,6 +29,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraftforge.fml.LogicalSide;
 import net.sodiumzh.nff.girls.entity.INFFGirlsTamed;
 import net.sodiumzh.nff.girls.entity.ai.goal.NFFGirlsHmagCreeperFollowOwnerGoal;
 import net.sodiumzh.nff.girls.entity.ai.goal.NFFGirlsHmagCreeperGirlExplosionAttackGoal;
@@ -196,32 +197,31 @@ public class HmagCreeperGirlEntity extends NFFTamedCreeperPreset implements INFF
 	}
 
 	@Override
-	public InteractionResult serversideMainHandInteraction(Player player, InteractionHand hand) {
-		if (!player.isShiftKeyDown()) {
-			if (player.getItemInHand(hand).is(Items.FLINT_AND_STEEL)
+	public InteractionResult ownerInteraction(Player player, InteractionHand hand, LogicalSide side) {
+		if (side.isServer()) {
+			if (!player.isShiftKeyDown()) {
+				if (player.getItemInHand(hand).is(Items.FLINT_AND_STEEL)
 					&& this.canIgnite
 					&& (!this.isPowered() || this.getAdditionalInventory().getItem(6).getCount() >= 2)
 					&& this.getSwell() == 0) {
 
-				this.playerIgniteDefault(player, hand);
-				isPlayerIgnited = true;
-				return InteractionResult.sidedSuccess(player.level().isClientSide);
-			}
-		}
-		else {
-			// Power with a lightning particle
-			if (player.getItemInHand(hand).is(ModItems.LIGHTNING_PARTICLE.get()) && !this.isPowered())
-			{
-				this.setPowered(true);
-				player.getItemInHand(hand).shrink(1);
-				return InteractionResult.sidedSuccess(player.level().isClientSide);
-			}
-			// Unpower with empty hand )and get a lightning particle
-			else if (player.getItemInHand(hand).isEmpty() && this.isPowered() && hand.equals(InteractionHand.MAIN_HAND))
-			{
-				this.setPowered(false);
-				this.spawnAtLocation(new ItemStack(ModItems.LIGHTNING_PARTICLE.get(), 1));
-				return InteractionResult.sidedSuccess(player.level().isClientSide);
+					this.playerIgniteDefault(player, hand);
+					isPlayerIgnited = true;
+					return InteractionResult.sidedSuccess(player.level().isClientSide);
+				}
+			} else {
+				// Power with a lightning particle
+				if (player.getItemInHand(hand).is(ModItems.LIGHTNING_PARTICLE.get()) && !this.isPowered()) {
+					this.setPowered(true);
+					player.getItemInHand(hand).shrink(1);
+					return InteractionResult.sidedSuccess(player.level().isClientSide);
+				}
+				// Unpower with empty hand )and get a lightning particle
+				else if (player.getItemInHand(hand).isEmpty() && this.isPowered() && hand.equals(InteractionHand.MAIN_HAND)) {
+					this.setPowered(false);
+					this.spawnAtLocation(new ItemStack(ModItems.LIGHTNING_PARTICLE.get(), 1));
+					return InteractionResult.sidedSuccess(player.level().isClientSide);
+				}
 			}
 		}
 		return InteractionResult.PASS;

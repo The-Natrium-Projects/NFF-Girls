@@ -22,6 +22,7 @@ import net.minecraft.world.entity.projectile.Arrow;
 import net.minecraft.world.item.BowItem;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
+import net.minecraftforge.fml.LogicalSide;
 import net.sodiumzh.nff.girls.entity.INFFGirlsBowShootingMob;
 import net.sodiumzh.nff.girls.entity.INFFGirlsTamedSunSensitiveMob;
 import net.sodiumzh.nff.girls.entity.ai.goal.NFFGirlsBowAttackGoal;
@@ -188,9 +189,10 @@ public class HmagStrayGirlEntity extends StrayGirlEntity implements INFFGirlsTam
 	}
 
 	@Override
-	public InteractionResult serversideMainHandInteraction(Player player, InteractionHand hand)
+	public InteractionResult ownerInteraction(Player player, InteractionHand hand, LogicalSide side)
 	{
-		if (NFFGirlsConfigs.ValueCache.Interaction.ALLOW_REVERSE_CONVERSION
+		if (side.isServer()
+				&& NFFGirlsConfigs.ValueCache.Interaction.ALLOW_REVERSE_CONVERSION
 				&& player.getItemInHand(hand).is(Items.FLINT_AND_STEEL)
 				&& (isFromSkeleton || NFFGirlsConfigs.ValueCache.Interaction.ALL_STRAY_GIRLS_CAN_CONVERT_TO_SKELETONS))
 		{

@@ -23,6 +23,7 @@ import net.minecraft.world.entity.projectile.ThrownTrident;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
+import net.minecraftforge.fml.LogicalSide;
 import net.sodiumzh.nff.girls.entity.INFFGirlsTamedSunSensitiveMob;
 import net.sodiumzh.nff.girls.entity.ai.goal.NFFGirlsFollowOwnerGoal;
 import net.sodiumzh.nff.girls.entity.ai.goal.NFFGirlsTridentAttackGoal;
@@ -122,8 +123,9 @@ public class HmagDrownedGirlEntity extends DrownedGirlEntity implements INFFGirl
 	}
 
 	@Override
-	public InteractionResult serversideMainHandInteraction(Player player, InteractionHand hand) {
-		if (NFFGirlsConfigs.ValueCache.Interaction.ALLOW_REVERSE_CONVERSION
+	public InteractionResult ownerInteraction(Player player, InteractionHand hand, LogicalSide side) {
+		if (side.isServer()
+				&& NFFGirlsConfigs.ValueCache.Interaction.ALLOW_REVERSE_CONVERSION
 				&& player.getItemInHand(hand).is(Items.SPONGE)
 				&& (isFromZombie || NFFGirlsConfigs.ValueCache.Interaction.ALL_DROWNED_GIRLS_CAN_CONVERT_TO_ZOMBIES)) {
 			player.getItemInHand(hand).shrink(1);

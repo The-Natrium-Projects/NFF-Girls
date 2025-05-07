@@ -59,7 +59,6 @@ import net.sodiumzh.nff.girls.registry.*;
 import net.sodiumzh.nff.girls.util.NFFGirlsEntityStatics;
 import net.sodiumzh.nff.services.entity.ai.NFFTamedMobAIState;
 import net.sodiumzh.nff.services.entity.taming.INFFTamed;
-import net.sodiumzh.nff.services.entity.taming.NFFTamedStatics;
 import net.sodiumzh.nff.services.entity.taming.NFFTamingMapping;
 import net.sodiumzh.nff.services.event.entity.NFFMobTamedEvent;
 import net.sodiumzh.nff.services.event.entity.ai.NFFTamedChangeAiStateEvent;
@@ -1067,14 +1066,10 @@ public class NFFGirlsEntityEventListeners
 			// Send msg if trying to interact other people's mob
 			if (!event.getEntity().getUUID().equals(bm.getOwnerUUID())) 
 			{
-				if (bm.getData().getOwnerName() != null) 
-				{
-					NFUMiscStatics.printToScreen(
-							NFUInfoStatics.createTranslatable("info.nffgirls.interact_not_owning", bm.getData().getOwnerName()), event.getEntity());
-				} 
-				else 
-				{
-					NFUMiscStatics.printToScreen(NFUInfoStatics.createTranslatable("info.nffgirls.interact_not_owning_unpresent"), event.getEntity());
+				if (bm.getData().getOwnerName() != null) {
+					NFUInfoStatics.printMessageTranslatable(event.getEntity(), "info.nffgirls.interact_not_owning", bm.getData().getOwnerName());
+				} else {
+					NFUInfoStatics.printMessageTranslatable(event.getEntity(), "info.nffgirls.interact_not_owning_unpresent");
 				}
 			}			
 		}
@@ -1241,42 +1236,24 @@ public class NFFGirlsEntityEventListeners
 
 	@SubscribeEvent
 	public static void onMobInteract(MobInteractEvent event) {
-		INFFGirlsTamed.ifBM(event.getEntity(), tamed -> {
-			if (tamed == null) return;
-			if (tamed.shouldBypassCommonInteractions()) return;
+		if (event.getInteractionResult().consumesAction()) return;
+		INFFGirlsTamed.get(event.getEntity()).ifPresent(tamed -> {
+			if (!event.player.getUUID().equals(tamed.getOwnerUUID()))
+				return;    // This listener only handles owner interaction
 			Player player = event.player;
 			InteractionHand hand = event.hand;
-			if (!player.isShiftKeyDown()) {
-				if (player.getUUID().equals(tamed.getOwnerUUID())) {
-					if (!player.level().isClientSide() && hand == InteractionHand.MAIN_HAND) {
-						InteractionResult res = tamed.serversideMainHandInteraction(player, hand);
-						if (res.consumesAction()) {
-							event.setInteractionResult(InteractionResult.sidedSuccess(player.level().isClientSide()));
-						} else if (tamed.tryApplyHealingItems(player.getItemInHand(hand), player) != InteractionResult.PASS) {
-						} else if (tamed.isCommandingItem(player.getItemInHand(hand))) {
-							tamed.switchAIState();
-						} else return;
-					}
-					event.setInteractionResult(InteractionResult.sidedSuccess(player.level().isClientSide()));
-					return;
-				}
-				return;
-			} else {
-				if (player.getUUID().equals(tamed.getOwnerUUID())) {
-					if (hand == InteractionHand.MAIN_HAND) {
-						if (NFFGirlsEntityStatics.isOnEitherHand(player, NFFGirlsItems.COMMANDING_WAND.get())) {
-							NFFTamedStatics.openBefriendedInventory(player, tamed);
-							event.setInteractionResult(InteractionResult.sidedSuccess(player.level().isClientSide));
-							return;
-						} else {
-							tamed.clientsideMainHandInteraction(player, hand);
-						}
-					}
-					return;
-				}
+			LogicalSide side = tamed.asMob().level().isClientSide() ? LogicalSide.CLIENT : LogicalSide.SERVER;
+			InteractionResult res = InteractionResult.PASS;
+
+			if (!tamed.isReservedInteraction(player, hand, side))
+				res = tamed.ownerInteraction(player, hand, tamed.asMob().level().isClientSide() ? LogicalSide.CLIENT : LogicalSide.SERVER);
+			if (!res.consumesAction() && !tamed.shouldBypassCommonInteractions()) {
+				res = tamed.commonInteractions(player, hand, side);
 			}
+			if (res.consumesAction())
+				event.setInteractionResult(InteractionResult.sidedSuccess(event.getEntity().level().isClientSide()));
+
 		});
-		return;
 	}
 
 }

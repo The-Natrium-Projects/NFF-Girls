@@ -22,7 +22,7 @@ public class NFFGirlsTradeEventHandlers
 	@SubscribeEvent(priority = EventPriority.HIGH)
 	public static void onMobInteract(EntityInteract event)
 	{
-		if (INFFGirlsTamed.isBM(event.getTarget())
+		/*if (INFFGirlsTamed.isBM(event.getTarget())
 				&& !event.getTarget().level().isClientSide()
 				&& INFFGirlsTamed.getBM(event.getTarget()).getOwnerUUID().equals(event.getEntity().getUUID())
 				&& (event.getEntity().getItemInHand(InteractionHand.MAIN_HAND).isEmpty() || event.getEntity().getItemInHand(InteractionHand.MAIN_HAND).is(NFFGirlsItems.EVIL_GEM.get()))
@@ -39,7 +39,7 @@ public class NFFGirlsTradeEventHandlers
 				else event.setCancellationResult(InteractionResult.PASS);
 
 			});
-		}
+		}*/
 	}
 
 	public static void beforeMobInteract(MobInteractEvent event)

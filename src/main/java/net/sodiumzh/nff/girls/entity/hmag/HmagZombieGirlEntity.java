@@ -19,6 +19,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
+import net.minecraftforge.fml.LogicalSide;
 import net.sodiumzh.nff.girls.entity.INFFGirlsTamedSunSensitiveMob;
 import net.sodiumzh.nff.girls.entity.ai.goal.NFFGirlsFollowOwnerGoal;
 import net.sodiumzh.nff.girls.entity.ai.goal.target.NFFGirlsNearestHostileToOwnerTargetGoal;
@@ -112,8 +113,8 @@ public class HmagZombieGirlEntity extends ZombieGirlEntity implements INFFGirlsT
 	}
 
 	@Override
-	public InteractionResult serversideMainHandInteraction(Player player, InteractionHand hand) {
-		if (NFFGirlsConfigs.ValueCache.Interaction.ALLOW_REVERSE_CONVERSION
+	public InteractionResult ownerInteraction(Player player, InteractionHand hand, LogicalSide side) {
+		if (side.isServer() && NFFGirlsConfigs.ValueCache.Interaction.ALLOW_REVERSE_CONVERSION
 				&& player.getItemInHand(hand).is(Items.SPONGE)
 				&& (isFromHusk || NFFGirlsConfigs.ValueCache.Interaction.ALL_ZOMBIE_GIRLS_CAN_CONVERT_TO_HUSKS)) {
 			player.getItemInHand(hand).shrink(1);

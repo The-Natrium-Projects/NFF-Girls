@@ -35,6 +35,7 @@ import net.minecraft.world.level.pathfinder.PathComputationType;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.EntityHitResult;
 import net.minecraft.world.phys.Vec3;
+import net.minecraftforge.fml.LogicalSide;
 import net.sodiumzh.nff.girls.entity.INFFGirlsTamed;
 import net.sodiumzh.nff.girls.entity.ai.goal.NFFGirlsHmagMeltyMonsterFollowOwnerGoal;
 import net.sodiumzh.nff.girls.entity.ai.goal.NFFGirlsRangedAttackGoal;
@@ -315,45 +316,40 @@ public class HmagMeltyMonsterEntity extends MeltyMonsterEntity implements INFFGi
 	protected int takingLavaCooldown = 0;
 
 	@Override
-	public InteractionResult serversideMainHandInteraction(Player player, InteractionHand hand) {
-		if (player.getItemInHand(hand).is(Items.BUCKET))
-		{
-			if (this.takingLavaCooldown <= 0)
-			{
+	public InteractionResult ownerInteraction(Player player, InteractionHand hand, LogicalSide side) {
+		if (side.isServer()) {
+			if (player.getItemInHand(hand).is(Items.BUCKET)) {
+				if (this.takingLavaCooldown <= 0) {
+					player.getItemInHand(hand).shrink(1);
+					NFUItemStatics.giveOrDrop(player, new ItemStack(Items.LAVA_BUCKET, 1));
+					this.takingLavaCooldown = 5 * 60 * 20;    // 5 min
+				} else {
+					NFUParticleStatics.sendSmokeParticlesToEntityDefault(this);
+				}
+				return InteractionResult.sidedSuccess(this.level().isClientSide);
+			}
+			// Use water bucket to suppress setting fire
+			else if (player.getItemInHand(hand).is(Items.WATER_BUCKET) && this.shouldSetFire) {
+				this.level().playSound(player, this.getX(), this.getY(), this.getZ(), SoundEvents.GENERIC_EXTINGUISH_FIRE,
+					this.getSoundSource(), 1.0F, this.random.nextFloat() * 0.4F + 0.8F);
 				player.getItemInHand(hand).shrink(1);
-				NFUItemStatics.giveOrDrop(player, new ItemStack(Items.LAVA_BUCKET, 1));
-				this.takingLavaCooldown = 5 * 60 * 20;	// 5 min
+				NFUItemStatics.giveOrDrop(player, new ItemStack(Items.BUCKET));
+				this.shouldSetFire = false;
+				return InteractionResult.sidedSuccess(this.level().isClientSide);
 			}
-			else
-			{
-				NFUParticleStatics.sendSmokeParticlesToEntityDefault(this);
-			}
-			return InteractionResult.sidedSuccess(this.level().isClientSide);
-		}
-		// Use water bucket to suppress setting fire
-		else if (player.getItemInHand(hand).is(Items.WATER_BUCKET) && this.shouldSetFire)
-		{
-			this.level().playSound(player, this.getX(), this.getY(), this.getZ(), SoundEvents.GENERIC_EXTINGUISH_FIRE,
+			// Use Flint and Steel to allow setting fire
+			else if (player.getItemInHand(hand).is(Items.FLINT_AND_STEEL) && !this.shouldSetFire) {
+				this.level().playSound(player, this.getX(), this.getY(), this.getZ(), SoundEvents.FLINTANDSTEEL_USE,
 					this.getSoundSource(), 1.0F, this.random.nextFloat() * 0.4F + 0.8F);
-			player.getItemInHand(hand).shrink(1);
-			NFUItemStatics.giveOrDrop(player, new ItemStack(Items.BUCKET));
-			this.shouldSetFire = false;
-			return InteractionResult.sidedSuccess(this.level().isClientSide);
-		}
-		// Use Flint and Steel to allow setting fire
-		else if (player.getItemInHand(hand).is(Items.FLINT_AND_STEEL) && !this.shouldSetFire)
-		{
-			this.level().playSound(player, this.getX(), this.getY(), this.getZ(), SoundEvents.FLINTANDSTEEL_USE,
-					this.getSoundSource(), 1.0F, this.random.nextFloat() * 0.4F + 0.8F);
-			if (!this.level().isClientSide)
-			{
-				player.getItemInHand(hand).hurtAndBreak(1, player, (p) ->
-				{
-					p.broadcastBreakEvent(hand);
-				});
+				if (!this.level().isClientSide) {
+					player.getItemInHand(hand).hurtAndBreak(1, player, (p) ->
+					{
+						p.broadcastBreakEvent(hand);
+					});
+				}
+				this.shouldSetFire = true;
+				return InteractionResult.sidedSuccess(this.level().isClientSide);
 			}
-			this.shouldSetFire = true;
-			return InteractionResult.sidedSuccess(this.level().isClientSide);
 		}
 		return InteractionResult.PASS;
 	}

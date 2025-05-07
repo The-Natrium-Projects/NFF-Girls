@@ -6,6 +6,7 @@ import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
@@ -16,6 +17,7 @@ import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.level.GameRules;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.eventbus.api.Event;
+import net.minecraftforge.fml.LogicalSide;
 import net.minecraftforge.network.PacketDistributor;
 import net.sodiumzh.nff.girls.NFFGirls;
 import net.sodiumzh.nff.girls.entity.capability.CNFFGirlsFavorabilityHandler;
@@ -27,21 +29,26 @@ import net.sodiumzh.nff.girls.network.NFFGirlsChannels;
 import net.sodiumzh.nff.girls.registry.NFFGirlsCapabilities;
 import net.sodiumzh.nff.girls.registry.NFFGirlsItems;
 import net.sodiumzh.nff.girls.subsystem.bauble.NFFGirlsBaubleStatics;
+import net.sodiumzh.nff.girls.util.NFFGirlsEntityStatics;
 import net.sodiumzh.nff.services.entity.capability.wrapper.IAttributeMonitor;
 import net.sodiumzh.nff.services.entity.taming.INFFTamed;
+import net.sodiumzh.nff.services.entity.taming.NFFTamedStatics;
 import net.sodiumzh.nff.services.item.NFFMobRespawnerItem;
 import net.sodiumzh.nff.services.item.capability.wrapper.IItemStackMonitor;
 import net.sodiumzh.nfu.annotation.DontCallManually;
 import net.sodiumzh.nfu.annotation.DontOverride;
 import net.sodiumzh.nfu.entity.MobApplicableItemTable;
 import net.sodiumzh.nfu.object.FilteredMapper;
+import net.sodiumzh.nfu.util.NFUInfoStatics;
 import org.apache.commons.lang3.mutable.MutableObject;
+import org.spongepowered.asm.mixin.injection.At;
 
 import javax.annotation.Nullable;
 import java.util.HashMap;
 import java.util.Objects;
 import java.util.Optional;
 import java.util.UUID;
+import java.util.concurrent.atomic.AtomicReference;
 import java.util.function.Consumer;
 import java.util.function.Predicate;
 
@@ -220,25 +227,89 @@ public interface INFFGirlsTamed extends INFFTamed, IAttributeMonitor, IItemStack
 	 */
 	public default boolean shouldBypassCommonInteractions() { return false; }
 
-	public default InteractionResult serversideMainHandInteraction(Player player, InteractionHand hand)
+	public default InteractionResult ownerInteraction(Player player, InteractionHand hand, LogicalSide side)
 	{
 		return InteractionResult.PASS;
 	}
-/*
-	public default InteractionResult serversideOffHandInteraction(Player player, InteractionHand hand)
-	{
+
+	/**
+	 * Common interactions that can be applied to any NFF Girls mobs. Invoked AFTER if the mob's unique interactions
+	 * don't consume, and before {@link Mob#mobInteract}.
+	 */
+	@DontOverride
+	public default InteractionResult commonInteractions(Player player, InteractionHand hand, LogicalSide side) {
+		if (!Objects.equals(this.getOwnerUUID(), player.getUUID())) return InteractionResult.PASS;
+
+		if (hand == InteractionHand.MAIN_HAND) {
+			// Handle AI state and GUI opening
+			if (this.isCommandingItem(player.getItemInHand(InteractionHand.MAIN_HAND)) ||
+				this.isCommandingItem(player.getItemInHand(InteractionHand.OFF_HAND))) {
+
+				if (player.isShiftKeyDown()) {
+					if (side.isClient())
+						NFFTamedStatics.openBefriendedInventory(player, this);
+				} else {
+					if (side.isServer())
+						this.switchAIState();
+				}
+				return InteractionResult.sidedSuccess(side.isClient());
+			}
+			// Handle healing
+			if (this.tryApplyHealingItems(player.getItemInHand(hand), player) != InteractionResult.PASS) {
+				return InteractionResult.sidedSuccess(side.isClient());
+			}
+			// Handle trade
+			if ((player.getItemInHand(InteractionHand.MAIN_HAND).isEmpty() || player.getItemInHand(InteractionHand.MAIN_HAND).is(NFFGirlsItems.EVIL_GEM.get()))
+				&& this.getData().getAttackTarget() == null
+				&& !player.isShiftKeyDown()) {
+				AtomicReference<InteractionResult> res = new AtomicReference<>(InteractionResult.PASS);
+				this.asMob().getCapability(NFFGirlsCapabilities.CAP_TRADE_HANDLER).ifPresent(cap -> {
+					if (cap.isValidTrader()) {
+						cap.openTradingScreen(player, NFUInfoStatics.createTranslatable("info.nffgirls.open_trade"), 1);
+						res.set(InteractionResult.sidedSuccess(side.isClient()));
+					}
+				});
+				if (res.get().consumesAction()) return InteractionResult.sidedSuccess(side.isClient());
+			}
+		}
+
 		return InteractionResult.PASS;
+
+		/*if (player.level().isClientSide()) {
+			if (hand == InteractionHand.MAIN_HAND) {
+				if (NFFGirlsEntityStatics.isOnEitherHand(player, NFFGirlsItems.COMMANDING_WAND.get())) {
+					NFFTamedStatics.openBefriendedInventory(player, target);
+					return InteractionResult.sidedSuccess(player.level().isClientSide);
+				}
+			}
+		} else {
+			if (target.tryApplyHealingItems(player.getItemInHand(hand), player) != InteractionResult.PASS) {
+				return InteractionResult.sidedSuccess(player.level().isClientSide);
+			} else if (target.isCommandingItem(player.getItemInHand(hand))) {
+				target.switchAIState();
+				return InteractionResult.sidedSuccess(player.level().isClientSide);
+			}
+		}
+		return InteractionResult.PASS;*/
 	}
-*/
-	public default InteractionResult clientsideMainHandInteraction(Player player, InteractionHand hand)
-	{
-		return InteractionResult.PASS;
+
+	/**
+	 * Reserved interactions that will skip each mob's unique interactions (in {@code ownerInteraction})
+	 */
+	@DontOverride
+	public default boolean isReservedInteraction( Player player, InteractionHand hand, LogicalSide side) {
+		// For trade
+		if ((player.getItemInHand(InteractionHand.MAIN_HAND).isEmpty()
+			|| player.getItemInHand(InteractionHand.MAIN_HAND).is(NFFGirlsItems.EVIL_GEM.get()))
+			&& !player.isShiftKeyDown())
+			return true;
+		// For ai switching and GUI
+		if ((this.isCommandingItem(player.getItemInHand(InteractionHand.MAIN_HAND))
+			|| this.isCommandingItem(player.getItemInHand(InteractionHand.OFF_HAND))))
+			return true;
+		return false;
 	}
-	/*
-	public default InteractionResult clientsideOffHandInteraction(Player player, InteractionHand hand)
-	{
-		return InteractionResult.PASS;
-	}*/
+
 
 	public default boolean isCommandingItem(ItemStack test)
 	{
