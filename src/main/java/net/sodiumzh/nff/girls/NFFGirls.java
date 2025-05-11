@@ -48,11 +48,12 @@ public class NFFGirls
         NFFGirlsPotions.POTIONS.register(modEventBus);
         NFFGirlsTabs.CREATIVE_TABS.register(modEventBus);
 
-        // NaUtils registries
+        // NFU registries
         NFFGirlsHealingItems.HEALING_ITEMS.merge();
         NFFGirlsFunctions.FUNCTIONS.merge();
         NFFGirlsTrades.TRADE_COLLECTIONS.merge();
         NFFGirlsTrades.TRADE_REGISTRIES.merge();
+        NFFGirlsEntityAttributes.ATTRIBUTE_PROVIDERS.merge();
 
         // Register ourselves for server and other game events we are interested in
         MinecraftForge.EVENT_BUS.register(this);

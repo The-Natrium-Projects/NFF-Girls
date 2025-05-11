@@ -1104,6 +1104,7 @@ public class NFFGirlsEntityEventListeners
 	public static void onBefriended(NFFMobTamedEvent event)
 	{
 		event.mobBefriended.setCustomName(null);
+		INFFTamed.get(event.mobBefriended).ifPresent(tamed -> tamed.setAIState(NFFTamedMobAIState.WAIT, false));
 		if (NFFGirlsConfigs.ValueCache.Misc.REMOVE_HAND_ITEM_ON_TAMING) {
 			INFFGirlsTamed.get(event.mobBefriended).ifPresent(tamed -> {
 				NFFTamedMobInventory inv = tamed.getAdditionalInventory();
