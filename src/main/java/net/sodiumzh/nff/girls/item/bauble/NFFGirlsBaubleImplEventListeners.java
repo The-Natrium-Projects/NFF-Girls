@@ -1,4 +1,4 @@
-package net.sodiumzh.nff.girls.subsystem.bauble;
+package net.sodiumzh.nff.girls.item.bauble;
 
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.effect.MobEffects;
@@ -9,7 +9,7 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
 import net.sodiumzh.nff.girls.NFFGirls;
 import net.sodiumzh.nff.girls.entity.hmag.HmagCrimsonSlaughtererEntity;
-import net.sodiumzh.nff.services.subsystem.bauble.BaubleSystem;
+import net.sodiumzh.nfu.item.bauble.BaubleSystem;
 import net.sodiumzh.nfu.util.NFUEntityStatics;
 @EventBusSubscriber(modid = NFFGirls.MOD_ID, bus = Mod.EventBusSubscriber.Bus.FORGE)
 public class NFFGirlsBaubleImplEventListeners

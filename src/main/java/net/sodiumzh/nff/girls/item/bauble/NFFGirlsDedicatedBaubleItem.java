@@ -1,8 +1,8 @@
-package net.sodiumzh.nff.girls.subsystem.bauble;
+package net.sodiumzh.nff.girls.item.bauble;
 
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
-import net.sodiumzh.nff.services.subsystem.bauble.DedicatedBaubleItem;
+import net.sodiumzh.nfu.item.bauble.DedicatedBaubleItem;
 
 public abstract class NFFGirlsDedicatedBaubleItem extends DedicatedBaubleItem
 {

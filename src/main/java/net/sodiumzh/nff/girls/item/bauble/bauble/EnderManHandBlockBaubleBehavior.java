@@ -1,12 +1,12 @@
-package net.sodiumzh.nff.girls.subsystem.bauble.bauble;
+package net.sodiumzh.nff.girls.item.bauble.bauble;
 
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.item.BlockItem;
-import net.sodiumzh.nff.services.subsystem.bauble.BaubleAttributeModifier;
-import net.sodiumzh.nff.services.subsystem.bauble.BaubleBehavior;
-import net.sodiumzh.nff.services.subsystem.bauble.BaubleEquippingCondition;
-import net.sodiumzh.nff.services.subsystem.bauble.BaubleProcessingArgs;
+import net.sodiumzh.nfu.item.bauble.BaubleAttributeModifier;
+import net.sodiumzh.nfu.item.bauble.BaubleBehavior;
+import net.sodiumzh.nfu.item.bauble.BaubleEquippingCondition;
+import net.sodiumzh.nfu.item.bauble.BaubleProcessingArgs;
 
 public class EnderManHandBlockBaubleBehavior extends BaubleBehavior
 {
@@ -18,13 +18,13 @@ public class EnderManHandBlockBaubleBehavior extends BaubleBehavior
 	}
 	
 	@Override
-	public BaubleAttributeModifier[] getDuplicatableModifiers(BaubleProcessingArgs arg0) {
+	public BaubleAttributeModifier[] getDuplicableModifiers(BaubleProcessingArgs arg0) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public BaubleAttributeModifier[] getNonDuplicatableModifiers(Mob arg0) {
+	public BaubleAttributeModifier[] getNonDuplicableModifiers(Mob arg0) {
 		// TODO Auto-generated method stub
 		return null;
 	}

@@ -1,4 +1,4 @@
-package net.sodiumzh.nff.girls.subsystem.bauble.bauble;
+package net.sodiumzh.nff.girls.item.bauble.bauble;
 
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.Mob;
@@ -8,10 +8,10 @@ import net.minecraft.world.item.HoeItem;
 import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.item.enchantment.Enchantments;
 import net.sodiumzh.nff.girls.entity.hmag.HmagNecroticReaperEntity;
-import net.sodiumzh.nff.services.subsystem.bauble.BaubleAttributeModifier;
-import net.sodiumzh.nff.services.subsystem.bauble.BaubleBehavior;
-import net.sodiumzh.nff.services.subsystem.bauble.BaubleEquippingCondition;
-import net.sodiumzh.nff.services.subsystem.bauble.BaubleProcessingArgs;
+import net.sodiumzh.nfu.item.bauble.BaubleAttributeModifier;
+import net.sodiumzh.nfu.item.bauble.BaubleBehavior;
+import net.sodiumzh.nfu.item.bauble.BaubleEquippingCondition;
+import net.sodiumzh.nfu.item.bauble.BaubleProcessingArgs;
 
 public class NecroticReaperHandHoeBaubleBehavior extends BaubleBehavior
 {
@@ -41,12 +41,12 @@ public class NecroticReaperHandHoeBaubleBehavior extends BaubleBehavior
 	}
 
 	@Override
-	public BaubleAttributeModifier[] getNonDuplicatableModifiers(Mob mob) {
+	public BaubleAttributeModifier[] getNonDuplicableModifiers(Mob mob) {
 		return null;
 	}
 
 	/*@Override
-	public BaubleAttributeModifier[] getDuplicatableModifiers(BaubleProcessingArgs args) {
+	public BaubleAttributeModifier[] getDuplicableModifiers(BaubleProcessingArgs args) {
 		double atk = getHoeAtk(args.baubleItemStack().getItem())
 		return BaubleAttributeModifier.makeModifiers(Attributes.ATTACK_DAMAGE, //getHoeAtk)
 	}*/
@@ -63,7 +63,7 @@ public class NecroticReaperHandHoeBaubleBehavior extends BaubleBehavior
 
 	@SuppressWarnings("deprecation")
 	@Override
-	public BaubleAttributeModifier[] getDuplicatableModifiers(BaubleProcessingArgs args) {
+	public BaubleAttributeModifier[] getDuplicableModifiers(BaubleProcessingArgs args) {
 		int lv = Math.round(((HoeItem)(args.baubleItemStack().getItem())).getTier().getLevel());
 		double atk = (double)getHoeAtk(lv) * (1d + (double)EnchantmentHelper.getItemEnchantmentLevel(Enchantments.BLOCK_EFFICIENCY, args.baubleItemStack()) * 0.1d);
 		return new BaubleAttributeModifier[] {

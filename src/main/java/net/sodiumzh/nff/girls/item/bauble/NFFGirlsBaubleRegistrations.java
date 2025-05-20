@@ -1,4 +1,4 @@
-package net.sodiumzh.nff.girls.subsystem.bauble;
+package net.sodiumzh.nff.girls.item.bauble;
 
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.Mob;
@@ -9,13 +9,13 @@ import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
 import net.sodiumzh.nff.girls.NFFGirls;
 import net.sodiumzh.nff.girls.entity.hmag.*;
 import net.sodiumzh.nff.girls.registry.NFFGirlsItems;
-import net.sodiumzh.nff.girls.subsystem.bauble.bauble.EnderManHandBlockBaubleBehavior;
-import net.sodiumzh.nff.girls.subsystem.bauble.bauble.InsomniaFruitBaubleBehavior;
-import net.sodiumzh.nff.girls.subsystem.bauble.bauble.NecroticReaperHandHoeBaubleBehavior;
+import net.sodiumzh.nff.girls.item.bauble.bauble.EnderManHandBlockBaubleBehavior;
+import net.sodiumzh.nff.girls.item.bauble.bauble.InsomniaFruitBaubleBehavior;
+import net.sodiumzh.nff.girls.item.bauble.bauble.NecroticReaperHandHoeBaubleBehavior;
 import net.sodiumzh.nff.services.entity.taming.INFFTamed;
-import net.sodiumzh.nff.services.subsystem.bauble.BaubleEquippingCondition;
-import net.sodiumzh.nff.services.subsystem.bauble.RegisterBaubleEquippableMobsEvent;
-import net.sodiumzh.nff.services.subsystem.bauble.RegisterBaublesEvent;
+import net.sodiumzh.nfu.item.bauble.BaubleEquippingCondition;
+import net.sodiumzh.nfu.item.bauble.RegisterBaubleEquippableMobsEvent;
+import net.sodiumzh.nfu.item.bauble.RegisterBaublesEvent;
 
 import java.util.function.Function;
 

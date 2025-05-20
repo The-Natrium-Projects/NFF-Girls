@@ -1,12 +1,12 @@
-package net.sodiumzh.nff.girls.subsystem.bauble.bauble;
+package net.sodiumzh.nff.girls.item.bauble.bauble;
 
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.sodiumzh.nff.girls.NFFGirls;
 import net.sodiumzh.nff.girls.registry.NFFGirlsConfigs;
-import net.sodiumzh.nff.girls.subsystem.bauble.NFFGirlsDedicatedBaubleItem;
-import net.sodiumzh.nff.services.subsystem.bauble.BaubleAttributeModifier;
-import net.sodiumzh.nff.services.subsystem.bauble.BaubleProcessingArgs;
+import net.sodiumzh.nff.girls.item.bauble.NFFGirlsDedicatedBaubleItem;
+import net.sodiumzh.nfu.item.bauble.BaubleAttributeModifier;
+import net.sodiumzh.nfu.item.bauble.BaubleProcessingArgs;
 
 public class CourageAmuletBaubleItem extends NFFGirlsDedicatedBaubleItem
 {
@@ -22,7 +22,7 @@ public class CourageAmuletBaubleItem extends NFFGirlsDedicatedBaubleItem
 
 	}
 	@Override
-	public BaubleAttributeModifier[] getDuplicatableModifiers(BaubleProcessingArgs args) {
+	public BaubleAttributeModifier[] getDuplicableModifiers(BaubleProcessingArgs args) {
 		switch (this.tier)
 		{
 		case 1:

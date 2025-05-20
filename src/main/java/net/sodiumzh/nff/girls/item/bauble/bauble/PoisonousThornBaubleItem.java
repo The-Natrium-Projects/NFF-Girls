@@ -1,12 +1,12 @@
-package net.sodiumzh.nff.girls.subsystem.bauble.bauble;
+package net.sodiumzh.nff.girls.item.bauble.bauble;
 
 import net.minecraft.resources.ResourceLocation;
 import net.sodiumzh.nff.girls.NFFGirls;
 import net.sodiumzh.nff.girls.registry.NFFGirlsTags;
-import net.sodiumzh.nff.girls.subsystem.bauble.NFFGirlsDedicatedBaubleItem;
-import net.sodiumzh.nff.services.subsystem.bauble.BaubleAttributeModifier;
-import net.sodiumzh.nff.services.subsystem.bauble.BaubleEquippingCondition;
-import net.sodiumzh.nff.services.subsystem.bauble.BaubleProcessingArgs;
+import net.sodiumzh.nff.girls.item.bauble.NFFGirlsDedicatedBaubleItem;
+import net.sodiumzh.nfu.item.bauble.BaubleAttributeModifier;
+import net.sodiumzh.nfu.item.bauble.BaubleEquippingCondition;
+import net.sodiumzh.nfu.item.bauble.BaubleProcessingArgs;
 
 public class PoisonousThornBaubleItem extends NFFGirlsDedicatedBaubleItem
 {
@@ -21,7 +21,7 @@ public class PoisonousThornBaubleItem extends NFFGirlsDedicatedBaubleItem
 	}
 
 	@Override
-	public BaubleAttributeModifier[] getDuplicatableModifiers(BaubleProcessingArgs args) {
+	public BaubleAttributeModifier[] getDuplicableModifiers(BaubleProcessingArgs args) {
 		return null;
 	}
 

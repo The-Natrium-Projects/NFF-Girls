@@ -1,4 +1,4 @@
-package net.sodiumzh.nff.girls.subsystem.bauble;
+package net.sodiumzh.nff.girls.item.bauble;
 
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Tuple;
