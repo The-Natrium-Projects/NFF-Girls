@@ -28,8 +28,7 @@ import net.sodiumzh.nff.girls.network.ClientboundNFFGirlsMobGeneralSyncPacket;
 import net.sodiumzh.nff.girls.network.NFFGirlsChannels;
 import net.sodiumzh.nff.girls.registry.NFFGirlsCapabilities;
 import net.sodiumzh.nff.girls.registry.NFFGirlsItems;
-import net.sodiumzh.nff.girls.subsystem.bauble.NFFGirlsBaubleStatics;
-import net.sodiumzh.nff.girls.util.NFFGirlsEntityStatics;
+import net.sodiumzh.nff.girls.item.bauble.NFFGirlsBaubleStatics;
 import net.sodiumzh.nff.services.entity.capability.wrapper.IAttributeMonitor;
 import net.sodiumzh.nff.services.entity.taming.INFFTamed;
 import net.sodiumzh.nff.services.entity.taming.NFFTamedStatics;
@@ -41,7 +40,6 @@ import net.sodiumzh.nfu.entity.MobApplicableItemTable;
 import net.sodiumzh.nfu.object.FilteredMapper;
 import net.sodiumzh.nfu.util.NFUInfoStatics;
 import org.apache.commons.lang3.mutable.MutableObject;
-import org.spongepowered.asm.mixin.injection.At;
 
 import javax.annotation.Nullable;
 import java.util.HashMap;
@@ -246,7 +244,7 @@ public interface INFFGirlsTamed extends INFFTamed, IAttributeMonitor, IItemStack
 				this.isCommandingItem(player.getItemInHand(InteractionHand.OFF_HAND))) {
 
 				if (player.isShiftKeyDown()) {
-					if (side.isClient())
+					if (!side.isClient())
 						NFFTamedStatics.openBefriendedInventory(player, this);
 				} else {
 					if (side.isServer())

@@ -10,7 +10,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.sodiumzh.nff.services.entity.taming.INFFTamed;
 import net.sodiumzh.nff.services.inventory.NFFTamedInventoryMenu;
-import net.sodiumzh.nff.services.subsystem.bauble.BaubleSystem;
+import net.sodiumzh.nfu.item.bauble.BaubleSystem;
 import net.sodiumzh.nfu.math.GuiPos;
 
 import java.util.function.Predicate;

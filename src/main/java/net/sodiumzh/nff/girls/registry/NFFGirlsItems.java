@@ -14,7 +14,7 @@ import net.minecraftforge.registries.RegistryObject;
 import net.sodiumzh.nff.girls.NFFGirls;
 import net.sodiumzh.nff.girls.entity.INFFGirlsTamed;
 import net.sodiumzh.nff.girls.item.*;
-import net.sodiumzh.nff.girls.subsystem.bauble.bauble.*;
+import net.sodiumzh.nff.girls.item.bauble.bauble.*;
 import net.sodiumzh.nff.services.item.MobCatcherItem;
 import net.sodiumzh.nff.services.item.NFFMobRespawnerItem;
 import net.sodiumzh.nfu.compat.ModDependencyFallbackItem;
@@ -247,6 +247,7 @@ public class NFFGirlsItems {
 	public static final RegistryObject<XPModifierItem> EXP_MODIFIER = 
 			registerNoTab("exp_modifier", () -> new XPModifierItem(new Item.Properties().rarity(Rarity.EPIC)));
 	public static final RegistryObject<FavorabilityModifierItem> FAVORABILITY_MODIFIER =
+
 			registerNoTab("favorability_modifier", () -> new FavorabilityModifierItem(new Item.Properties().stacksTo(1).rarity(Rarity.EPIC)));
 	/* Item register end */
 
