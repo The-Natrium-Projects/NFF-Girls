@@ -10,7 +10,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.sodiumzh.nff.services.entity.taming.INFFTamed;
 import net.sodiumzh.nff.services.inventory.NFFTamedInventoryMenu;
-import net.sodiumzh.nff.services.subsystem.baublesystem.BaubleSystem;
+import net.sodiumzh.nfu.item.bauble.BaubleSystem;
 import net.sodiumzh.nfu.math.GuiPos;
 
 import java.util.function.Predicate;
@@ -78,8 +78,8 @@ public abstract class NFFGirlsInventoryMenuPreset0 extends NFFTamedInventoryMenu
 		addSlot(new Slot(container, slotIndex, pos.x, pos.y) {
 			@Override
 			public boolean mayPlace(ItemStack stack) {
-				return (stack.getItem() instanceof ArmorItem)
-						&& ((ArmorItem) stack.getItem()).getSlot() == ArmorType
+				return (stack.getItem() instanceof ArmorItem armorItem)
+						&& armorItem.getSlot() == ArmorType
 						&& !EnchantmentHelper.hasBindingCurse(stack)
 						&& !this.hasItem()
 						&& (additionalCondition == null || additionalCondition.test(stack));

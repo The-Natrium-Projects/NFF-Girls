@@ -15,11 +15,13 @@ import net.sodiumzh.nff.girls.NFFGirls;
 import net.sodiumzh.nff.girls.NFFGirlsTab;
 import net.sodiumzh.nff.girls.entity.INFFGirlsTamed;
 import net.sodiumzh.nff.girls.item.*;
-import net.sodiumzh.nff.girls.subsystem.baublesystem.bauble.*;
+import net.sodiumzh.nff.girls.item.bauble.NFFGirlsDedicatedBaubleItem;
+import net.sodiumzh.nff.girls.item.bauble.bauble.*;
 import net.sodiumzh.nff.services.item.MobCatcherItem;
 import net.sodiumzh.nff.services.item.NFFMobRespawnerItem;
 import net.sodiumzh.nfu.compat.ModDependencyFallbackItem;
 import net.sodiumzh.nfu.item.NFUItem;
+import net.sodiumzh.nfu.item.bauble.DedicatedBaubleItem;
 import net.sodiumzh.nfu.util.NFUCompatStatics;
 import net.sodiumzh.nfu.util.NFUInfoStatics;
 

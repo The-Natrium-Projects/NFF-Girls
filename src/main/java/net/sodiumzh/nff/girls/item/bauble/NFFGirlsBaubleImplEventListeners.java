@@ -8,7 +8,7 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
 import net.sodiumzh.nff.girls.NFFGirls;
 import net.sodiumzh.nff.girls.entity.hmag.HmagCrimsonSlaughtererEntity;
-import net.sodiumzh.nff.services.subsystem.baublesystem.BaubleSystem;
+import net.sodiumzh.nfu.item.bauble.BaubleSystem;
 import net.sodiumzh.nfu.util.NFUEntityStatics;
 @EventBusSubscriber(modid = NFFGirls.MOD_ID, bus = EventBusSubscriber.Bus.FORGE)
 public class NFFGirlsBaubleImplEventListeners
