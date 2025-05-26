@@ -9,6 +9,7 @@ import net.minecraft.world.entity.monster.Monster;
 import net.minecraftforge.common.ForgeMod;
 import net.minecraftforge.event.entity.EntityAttributeCreationEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.minecraftforge.fml.common.Mod;
 import net.sodiumzh.nff.girls.NFFGirls;
 import net.sodiumzh.nfu.entity.EntityAttributeProvider;
 import net.sodiumzh.nfu.registry.NFURegistries;
@@ -18,6 +19,7 @@ import net.sodiumzh.nfu.registry.NFURegistryEntryCollection;
 import java.util.HashMap;
 import java.util.function.Supplier;
 
+@Mod.EventBusSubscriber(modid = NFFGirls.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class NFFGirlsEntityAttributes
 {
 
