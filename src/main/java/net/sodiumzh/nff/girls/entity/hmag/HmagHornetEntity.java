@@ -3,6 +3,9 @@ package net.sodiumzh.nff.girls.entity.hmag;
 import com.github.mechalopa.hmag.world.entity.HornetEntity;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
+import net.minecraft.network.syncher.EntityDataAccessor;
+import net.minecraft.network.syncher.EntityDataSerializers;
+import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.world.Container;
 import net.minecraft.world.Difficulty;
@@ -13,12 +16,14 @@ import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.ai.goal.FloatGoal;
+import net.minecraft.world.entity.ai.goal.Goal;
 import net.minecraft.world.entity.ai.goal.LookAtPlayerGoal;
 import net.minecraft.world.entity.ai.goal.RandomLookAroundGoal;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.sodiumzh.nff.girls.NFFGirls;
+import net.sodiumzh.nff.girls.entity.IHoneyCollecting;
 import net.sodiumzh.nff.girls.entity.INFFGirlsTamed;
 import net.sodiumzh.nff.girls.entity.ai.goal.NFFGirlsFlyingFollowOwnerGoal;
 import net.sodiumzh.nff.girls.entity.ai.goal.NFFGirlsHmagFlyingGoal;
@@ -31,8 +36,10 @@ import net.sodiumzh.nff.girls.inventory.NFFGirlsHandItemsTwoBaublesInventoryMenu
 import net.sodiumzh.nff.girls.registry.NFFGirlsHealingItems;
 import net.sodiumzh.nff.girls.sound.NFFGirlsSoundPresets;
 import net.sodiumzh.nff.services.entity.ai.goal.preset.NFFFlyingLandGoal;
+import net.sodiumzh.nff.services.entity.ai.goal.preset.NFFFlyingMoveGoal;
 import net.sodiumzh.nff.services.entity.ai.goal.preset.NFFFlyingRandomMoveGoal;
 import net.sodiumzh.nff.services.entity.ai.goal.preset.target.NFFHurtByTargetGoal;
+import net.sodiumzh.nff.services.entity.taming.INFFTamed;
 import net.sodiumzh.nff.services.entity.taming.NFFTamedStatics;
 import net.sodiumzh.nff.services.entity.taming.NFFTamingMapping;
 import net.sodiumzh.nff.services.inventory.NFFTamedInventoryMenu;
@@ -43,8 +50,14 @@ import net.sodiumzh.nfu.entity.MobApplicableItemTable;
 import javax.annotation.Nonnull;
 import java.util.Arrays;
 
-public class HmagHornetEntity extends HornetEntity implements INFFGirlsTamed
+public class HmagHornetEntity extends HornetEntity implements INFFGirlsTamed, IHoneyCollecting
 {
+
+	private final int HONEY_COLLECTING_COOLDOWN = 5 * 60 * 20;
+	private int currentHoneyCollectingCooldown = HONEY_COLLECTING_COOLDOWN;
+	private EntityDataAccessor<Integer> DATA_HONEY_LEVEL =
+		SynchedEntityData.defineId(HmagHornetEntity.class, EntityDataSerializers.INT);
+
 	public HmagHornetEntity(EntityType<? extends HornetEntity> pEntityType, Level pLevel) {
 		super(pEntityType, pLevel);
 		this.xpReward = 0;
@@ -52,7 +65,13 @@ public class HmagHornetEntity extends HornetEntity implements INFFGirlsTamed
 		Arrays.fill(this.handDropChances, 0);
 		this.moveControl = new NFFGirlsHmagFlyingMoveControl(this);
 	}
-	
+
+	@Override
+	protected void defineSynchedData() {
+		super.defineSynchedData();
+		entityData.define(DATA_HONEY_LEVEL, 0);
+	}
+
 	/* AI */
 
 	@Override
@@ -110,60 +129,35 @@ public class HmagHornetEntity extends HornetEntity implements INFFGirlsTamed
 		}
 		return true;
 	}
-	
+
+
+	@Override
+	public int getCurrentHoneyCollectingCooldown() {
+		return currentHoneyCollectingCooldown;
+	}
+
+	@Override
+	public int getOverallHoneyCollectingCooldown() {
+		return HONEY_COLLECTING_COOLDOWN;
+	}
+
+	public int getHoneyLevel() {
+		return this.entityData.get(DATA_HONEY_LEVEL);
+	}
+
+	@Override
+	public void setHoneyLevel(int val) {
+		this.entityData.set(DATA_HONEY_LEVEL, val);
+	}
+
 	/* Interaction */
 
-	// Map items that can heal the mob and healing values here.
-	// Leave it empty if you don't need healing features.
 	@Override
 	public MobApplicableItemTable getHealingItems()
 	{
 		return NFFGirlsHealingItems.BEE.get();
 	}
 
-	/*@Override
-	public InteractionResult mobInteract(Player player, InteractionHand hand)
-	{
-		if (!player.isShiftKeyDown())
-		{
-			if (player.getUUID().equals(getOwnerUUID())) {
-				if (!player.level.isClientSide()) 
-				{
-					boolean isHoneyBottle = (player.getItemInHand(hand).is(Items.HONEY_BOTTLE));
-					if (this.tryApplyHealingItems(player.getItemInHand(hand), player) != InteractionResult.PASS)
-					{
-						if (isHoneyBottle)
-							NFUItemStatics.giveOrDropDefault(player, Items.GLASS_BOTTLE);
-						return InteractionResult.sidedSuccess(player.level.isClientSide);
-					}
-					// The function above returns PASS when the items are not correct. So when not PASS it should stop here
-					else if (hand == InteractionHand.MAIN_HAND
-							&& NFFGirlsEntityStatics.isOnEitherHand(player, NFFGirlsItems.COMMANDING_WAND.get()))
-					{
-						switchAIState();
-						return InteractionResult.sidedSuccess(player.level.isClientSide);
-					}
-					else return InteractionResult.PASS;
-				}
-				// Interacted
-				return InteractionResult.sidedSuccess(player.level.isClientSide);
-			} 
-			else return InteractionResult.PASS;
-		}
-		
-		else
-		{
-			if (player.getUUID().equals(getOwnerUUID())) {		
-				if (hand == InteractionHand.MAIN_HAND && NFFGirlsEntityStatics.isOnEitherHand(player, NFFGirlsItems.COMMANDING_WAND.get()))
-				{
-					NFFTamedStatics.openBefriendedInventory(player, this);
-					return InteractionResult.sidedSuccess(player.level.isClientSide);
-				}
-			}
-			return InteractionResult.PASS;
-		}
-	}
-*/
 	/* Inventory */
 
 	@Override
@@ -181,8 +175,9 @@ public class HmagHornetEntity extends HornetEntity implements INFFGirlsTamed
 	@Override
 	public void readAdditionalSaveData(CompoundTag nbt) {
 		super.readAdditionalSaveData(nbt);
-		NFFTamedStatics.readBefriendedCommonSaveData(this, nbt);
+		//NFFTamedStatics.readBefriendedCommonSaveData(this, nbt);
 		// Add other data reading here
+
 		setInit();
 	}
 
@@ -193,12 +188,6 @@ public class HmagHornetEntity extends HornetEntity implements INFFGirlsTamed
 	}
 	
 	// ------------------ Misc ------------------ //
-	
-	@Override
-	public String getModId() {
-		return NFFGirls.MOD_ID;
-	}
-
 	@Override
 	@Nonnull
 	public Component getTypeName() {
@@ -210,4 +199,5 @@ public class HmagHornetEntity extends HornetEntity implements INFFGirlsTamed
 	public boolean shouldSitOnWaiting() {
 		return false;
 	}
+
 }
