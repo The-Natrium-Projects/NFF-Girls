@@ -11,9 +11,9 @@ import net.sodiumzh.nfu.item.bauble.BaubleProcessingArgs;
 public class CourageAmuletBaubleItem extends NFFGirlsDedicatedBaubleItem
 {
 
-	public CourageAmuletBaubleItem(String additionalKey, int tier, Properties pProperties)
+	public CourageAmuletBaubleItem(int tier, Properties pProperties)
 	{
-		super(additionalKey, tier, pProperties);
+		super(new ResourceLocation(NFFGirls.MOD_ID, "courage_amulet"), tier, pProperties);
 	}
 
 	@Override
@@ -23,7 +23,7 @@ public class CourageAmuletBaubleItem extends NFFGirlsDedicatedBaubleItem
 	}
 	@Override
 	public BaubleAttributeModifier[] getDuplicableModifiers(BaubleProcessingArgs args) {
-		switch (this.tier)
+		switch (this.getTier())
 		{
 		case 1:
 		{
@@ -42,11 +42,6 @@ public class CourageAmuletBaubleItem extends NFFGirlsDedicatedBaubleItem
 			throw this.unsupportedTier();
 		}
 		}
-	}
-
-	@Override
-	public ResourceLocation getBaubleRegistryKeyUnsuffixed() {
-		return new ResourceLocation(NFFGirls.MOD_ID, "courage_amulet");
 	}
 
 }

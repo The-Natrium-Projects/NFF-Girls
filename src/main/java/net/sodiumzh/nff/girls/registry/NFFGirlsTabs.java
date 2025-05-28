@@ -22,5 +22,10 @@ public class NFFGirlsTabs{
 					if (!NFFGirlsItems.NO_TAB.contains(item))
 						output.accept(item.get());
 				}
+				for (var item: NFFGirlsBaubles.BAUBLE_ITEMS.getEntries())
+				{
+					if (!NFFGirlsItems.NO_TAB.contains(item))
+						output.accept(item.get());
+				}
 			}).build());
 }

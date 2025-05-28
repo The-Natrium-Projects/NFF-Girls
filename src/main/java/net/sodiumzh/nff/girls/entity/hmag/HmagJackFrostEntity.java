@@ -28,6 +28,7 @@ import net.sodiumzh.nff.girls.entity.ai.goal.NFFGirlsRangedAttackGoal;
 import net.sodiumzh.nff.girls.entity.ai.goal.target.NFFGirlsNearestHostileToOwnerTargetGoal;
 import net.sodiumzh.nff.girls.entity.ai.goal.target.NFFGirlsNearestHostileToSelfTargetGoal;
 import net.sodiumzh.nff.girls.inventory.NFFGirlsFourBaublesInventoryMenu;
+import net.sodiumzh.nff.girls.item.bauble.INFFGirlsBauble;
 import net.sodiumzh.nff.girls.registry.NFFGirlsHealingItems;
 import net.sodiumzh.nff.girls.sound.NFFGirlsSoundPresets;
 import net.sodiumzh.nff.girls.item.bauble.NFFGirlsBaubleStatics;
@@ -55,8 +56,7 @@ public class HmagJackFrostEntity extends JackFrostEntity implements INFFGirlsTam
 	@Override
 	public void onInit(UUID playerUUID, Mob from)
 	{
-		this.immuneToHotBiomes.putOptional("resistance_amulet", 
-				jf -> NFFGirlsBaubleStatics.countBaubles(jf, new ResourceLocation("nffgirls:resistance_amulet")) > 0);
+		this.immuneToHotBiomes.putOptional("bauble", INFFGirlsBauble::isEnvironmentImmunized);
 	}
 	
 	/* Initialization */

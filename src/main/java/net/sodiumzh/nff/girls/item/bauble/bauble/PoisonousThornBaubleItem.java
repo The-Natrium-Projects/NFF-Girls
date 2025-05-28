@@ -11,9 +11,9 @@ import net.sodiumzh.nfu.item.bauble.BaubleProcessingArgs;
 public class PoisonousThornBaubleItem extends NFFGirlsDedicatedBaubleItem
 {
 
-	public PoisonousThornBaubleItem(String additionalKey, int tier, Properties pProperties)
+	public PoisonousThornBaubleItem(int tier, Properties pProperties)
 	{
-		super(additionalKey, tier, pProperties);
+		super(new ResourceLocation(NFFGirls.MOD_ID, "poisonous_thorn"), tier, pProperties);
 	}
 
 	@Override
@@ -23,11 +23,6 @@ public class PoisonousThornBaubleItem extends NFFGirlsDedicatedBaubleItem
 	@Override
 	public BaubleAttributeModifier[] getDuplicableModifiers(BaubleProcessingArgs args) {
 		return null;
-	}
-
-	@Override
-	public ResourceLocation getBaubleRegistryKeyUnsuffixed() {
-		return new ResourceLocation(NFFGirls.MOD_ID, "poisonous_thorn");
 	}
 
 	@Override

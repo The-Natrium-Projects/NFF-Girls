@@ -45,7 +45,7 @@ public class NFFGirlsBaubleAdditionalRegistry
 		
 		public void register(NFFGirlsDedicatedBaubleItem item)
 		{
-			NFFGirlsBaubleAdditionalRegistry.REGISTRY.put(item, new Tuple<>(item.additionalKey, item.tier));
+			NFFGirlsBaubleAdditionalRegistry.REGISTRY.put(item, new Tuple<>(item.getCategoryKey(), item.getTier()));
 		}
 	}
 }

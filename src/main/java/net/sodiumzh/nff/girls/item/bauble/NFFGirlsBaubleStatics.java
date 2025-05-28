@@ -9,6 +9,7 @@ import net.sodiumzh.nfu.util.NFUContainerStatics;
 
 import javax.annotation.Nullable;
 import java.util.Map;
+import java.util.function.Predicate;
 
 public class NFFGirlsBaubleStatics
 {
@@ -59,7 +60,15 @@ public class NFFGirlsBaubleStatics
 	{
 		return countBaublesWithTierRange(mob, key, tier, tier + 1);
 	}
-	
+
+	/**
+	 * Count how many bauble of given key the mob has with the exact tier.
+	 */
+	public static int countBaublesWithCondition(Mob mob, Predicate<ItemStack> condition)
+	{
+		return BaubleSystem.getAllSlotItems(mob).values().stream().filter(condition).toList().size();
+	}
+
 	/**
 	 * Count how many bauble of given key the mob has, despite the tier.
 	 */

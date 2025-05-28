@@ -19,15 +19,11 @@ public class NFFGirlsBaubleImplEventListeners
 	{
 		if (event.getSource().getEntity() != null && event.getSource().getEntity() instanceof Mob mob && event.getAmount() >= 0.01)
 		{
-			BaubleSystem.ifCapabilityPresent(mob, () -> 
-			{
+			BaubleSystem.ifCapabilityPresent(mob, () -> {
 				int poisonLevel = NFFGirlsBaubleStatics.countBaubles(mob, new ResourceLocation(NFFGirls.MOD_ID, "poisonous_thorn"));
-				if (poisonLevel > 0)
-				{
-					if (poisonLevel > 0)
-						NFUEntityStatics.addEffectSafe(event.getEntity(), MobEffects.POISON, 5 * Math.min(poisonLevel, 3) * 20, Math.min(poisonLevel, 3) - 1);
-					if (mob instanceof HmagCrimsonSlaughtererEntity cs)
-						NFUEntityStatics.addEffectSafe(event.getEntity(), MobEffects.MOVEMENT_SLOWDOWN, (20 + 10 * poisonLevel) * 20, 1);
+				if (poisonLevel > 0) {
+					NFUEntityStatics.addEffectSafe(event.getEntity(), MobEffects.POISON, 5 * Math.min(poisonLevel, 3) * 20, Math.min(poisonLevel, 3) - 1);
+					NFUEntityStatics.addEffectSafe(event.getEntity(), MobEffects.MOVEMENT_SLOWDOWN, (20 + 10 * poisonLevel) * 20, 1);
 				}
 			});
 		}
