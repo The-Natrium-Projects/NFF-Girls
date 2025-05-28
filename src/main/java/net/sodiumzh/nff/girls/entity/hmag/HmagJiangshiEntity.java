@@ -223,7 +223,7 @@ public class HmagJiangshiEntity extends JiangshiEntity implements INFFGirlsTamed
 		
 		public LeapAtTargetGoal(HmagJiangshiEntity mob)
 		{
-			super(mob, 0.4F, 0.2F, 8.0F, 12);
+			super(mob, 0.4F, 0.2F, 32f, 12);
 			this.mob = mob;
 			jiangshi = (HmagJiangshiEntity)mob;
 		}
@@ -261,7 +261,7 @@ public class HmagJiangshiEntity extends JiangshiEntity implements INFFGirlsTamed
 		
 		public LeapAtOwnerGoal(HmagJiangshiEntity mob)
 		{
-			super(mob, 0.4F, 0.2F, 8.0F, 12);
+			super(mob, 0.4F, 0.2F, 32f, 12);
 			this.mob = mob;
 			jiangshi = (HmagJiangshiEntity)mob;
 		}

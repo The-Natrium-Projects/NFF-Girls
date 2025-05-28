@@ -64,9 +64,9 @@ public class HmagSnowCanineEntity extends SnowCanineEntity implements INFFGirlsT
 	@Override
 	protected void registerGoals() {
 		goalSelector.addGoal(1, new FloatGoal(this));
-		goalSelector.addGoal(2, new NFFLeapAtTargetGoal(this, 0.375F, 0.5F, 5.0F, 8));
+		goalSelector.addGoal(2, new NFFLeapAtTargetGoal(this, 0.375F, 0.5F, 32F, 8));
 		goalSelector.addGoal(3, new NFFMeleeAttackGoal(this, 1.0d, true));
-		goalSelector.addGoal(4, new NFFLeapAtOwnerGoal(this, 0.375F, 0.5F, 5.0F, 8));
+		goalSelector.addGoal(4, new NFFLeapAtOwnerGoal(this, 0.375F, 0.5F, 32F, 8));
 		goalSelector.addGoal(5, new NFFGirlsFollowOwnerGoal(this, 1.0d, 5.0f, 2.0f, false));
 		goalSelector.addGoal(6, new NFFWaterAvoidingRandomStrollGoal(this, 1.0d));
 		goalSelector.addGoal(7, new LookAtPlayerGoal(this, Player.class, 8.0F));
