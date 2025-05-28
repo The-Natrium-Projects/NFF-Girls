@@ -250,7 +250,7 @@ public class HmagSlimeGirlEntity extends SlimeGirlEntity implements INFFGirlsTam
 		
 		public SGLeapAtTargetGoal(HmagSlimeGirlEntity mob)
 		{
-			super(mob, 0.25F, 0.3F, 6.0F, 6);
+			super(mob, 0.25F, 0.3F, 32.0F, 6);
 			this.sg = mob;
 		}
 		
@@ -268,7 +268,7 @@ public class HmagSlimeGirlEntity extends SlimeGirlEntity implements INFFGirlsTam
 		
 		public SGLeapAtOwnerGoal(HmagSlimeGirlEntity mob)
 		{
-			super(mob, 0.25F, 0.3F, 6.0F, 6);
+			super(mob, 0.25F, 0.3F, 32.0F, 6);
 			this.sg = mob;
 		}
 		

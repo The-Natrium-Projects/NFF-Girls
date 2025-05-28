@@ -50,7 +50,7 @@ import net.sodiumzh.nfu.entity.MobApplicableItemTable;
 import javax.annotation.Nonnull;
 import java.util.Arrays;
 
-public class HmagHornetEntity extends HornetEntity implements INFFGirlsTamed, IHoneyCollecting
+public class HmagHornetEntity extends HornetEntity implements INFFGirlsTamed//, IHoneyCollecting
 {
 
 	private final int HONEY_COLLECTING_COOLDOWN = 5 * 60 * 20;
@@ -131,7 +131,7 @@ public class HmagHornetEntity extends HornetEntity implements INFFGirlsTamed, IH
 	}
 
 
-	@Override
+/*	@Override
 	public int getCurrentHoneyCollectingCooldown() {
 		return currentHoneyCollectingCooldown;
 	}
@@ -149,7 +149,7 @@ public class HmagHornetEntity extends HornetEntity implements INFFGirlsTamed, IH
 	public void setHoneyLevel(int val) {
 		this.entityData.set(DATA_HONEY_LEVEL, val);
 	}
-
+*/
 	/* Interaction */
 
 	@Override
