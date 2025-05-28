@@ -42,6 +42,7 @@ import net.sodiumzh.nff.girls.entity.ai.goal.NFFMeltyMonsterFollowOwnerGoal;
 import net.sodiumzh.nff.girls.entity.ai.goal.target.NFFGirlsNearestHostileToOwnerTargetGoal;
 import net.sodiumzh.nff.girls.entity.ai.goal.target.NFFGirlsNearestHostileToSelfTargetGoal;
 import net.sodiumzh.nff.girls.inventory.NFFGirlsHmagMeltyMonsterInventoryMenu;
+import net.sodiumzh.nff.girls.item.bauble.INFFGirlsBauble;
 import net.sodiumzh.nff.girls.registry.NFFGirlsHealingItems;
 import net.sodiumzh.nff.girls.sound.NFFGirlsSoundPresets;
 import net.sodiumzh.nff.services.entity.ai.NFFTamedMobAIState;
@@ -127,7 +128,12 @@ public class HmagMeltyMonsterEntity extends MeltyMonsterEntity implements INFFGi
 	{
 		return Math.min(10000 + this.getLevelHandler().getExpectedLevel() * 1000, 1000000);
 	}
-	
+
+	@Override
+	public boolean isSensitiveToWater() {
+		return !INFFGirlsBauble.isEnvironmentImmunized(this);
+	}
+
 	@Override
 	protected void registerGoals() {
 		goalSelector.addGoal(3, new GoToLavaGoal(this, 1.5D));

@@ -18,8 +18,8 @@ public class NFFGirlsItemTooltips {
         {
             event.getToolTip().add(NFUInfoStatics.createTranslatable("info.nffgirls.bauble.existing_item").withStyle(ChatFormatting.GRAY));
             event.getToolTip().add(NFUInfoStatics.createTranslatable("info.nffgirls.bauble.at_night").withStyle(ChatFormatting.GRAY));
-            event.getToolTip().add(NFFGirlsItems.baubleHPMax(60d).get());
-            event.getToolTip().add(NFFGirlsItems.baubleAtk(8d).get());
+            event.getToolTip().add(NFFGirlsBaubles.baubleHPMax(60d).get());
+            event.getToolTip().add(NFFGirlsBaubles.baubleAtk(8d).get());
         }
     }
 

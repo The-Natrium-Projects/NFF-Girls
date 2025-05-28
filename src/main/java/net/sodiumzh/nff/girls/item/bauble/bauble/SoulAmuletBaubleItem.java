@@ -6,9 +6,10 @@ import net.minecraft.world.entity.MobType;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.sodiumzh.nff.girls.NFFGirls;
 import net.sodiumzh.nff.girls.entity.INFFGirlsTamedSunSensitiveMob;
-import net.sodiumzh.nff.girls.item.bauble.NFFGirlsDedicatedBaubleItem;
+import net.sodiumzh.nff.girls.item.bauble.INFFGirlsBauble;
 import net.sodiumzh.nff.girls.registry.NFFGirlsConfigs;
 import net.sodiumzh.nff.girls.registry.NFFGirlsTags;
+import net.sodiumzh.nff.girls.item.bauble.NFFGirlsDedicatedBaubleItem;
 import net.sodiumzh.nfu.item.bauble.BaubleAttributeModifier;
 import net.sodiumzh.nfu.item.bauble.BaubleEquippingCondition;
 import net.sodiumzh.nfu.item.bauble.BaubleProcessingArgs;
@@ -16,14 +17,15 @@ import net.sodiumzh.nfu.item.bauble.BaubleProcessingArgs;
 public class SoulAmuletBaubleItem extends NFFGirlsDedicatedBaubleItem
 {
 
-	public SoulAmuletBaubleItem(String additionalKey, int tier, Properties pProperties)
+	public SoulAmuletBaubleItem(int tier, Properties pProperties)
 	{
-		super(additionalKey, tier, pProperties);
+		super(new ResourceLocation(NFFGirls.MOD_ID, "soul_amulet"), tier, pProperties);
+		this.addBaubleTag(INFFGirlsBauble.TAG_ENVIRONMENT_IMMUNITY);
 	}
 
 	@Override
-	public BaubleAttributeModifier[] getDuplicatableModifiers(BaubleProcessingArgs arg0) {
-		switch (this.tier)
+	public BaubleAttributeModifier[] getDuplicableModifiers(BaubleProcessingArgs arg0) {
+		switch (this.getTier())
 		{
 		case 1:
 		{
@@ -80,7 +82,7 @@ public class SoulAmuletBaubleItem extends NFFGirlsDedicatedBaubleItem
 
 	@Override
 	public void slotTick(BaubleProcessingArgs arg0) {
-		switch (this.tier)
+		switch (this.getTier())
 		{
 		case 1:
 		case 2:
@@ -98,12 +100,7 @@ public class SoulAmuletBaubleItem extends NFFGirlsDedicatedBaubleItem
 	}
 
 	@Override
-	public ResourceLocation getBaubleRegistryKeyUnsuffixed() {
-		return new ResourceLocation(NFFGirls.MOD_ID, "soul_amulet");
-	}
-
-	@Override
-	public BaubleAttributeModifier[] getNonDuplicatableModifiers(Mob mob) {
+	public BaubleAttributeModifier[] getNonDuplicableModifiers(Mob mob) {
 		return null;
 	}
 

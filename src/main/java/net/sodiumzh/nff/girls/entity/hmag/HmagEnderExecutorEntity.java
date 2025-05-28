@@ -45,6 +45,7 @@ import net.sodiumzh.nff.girls.entity.ai.goal.target.NFFGirlsOwnerHurtByTargetGoa
 import net.sodiumzh.nff.girls.entity.ai.goal.target.NFFGirlsOwnerHurtTargetGoal;
 import net.sodiumzh.nff.girls.inventory.NFFGirlsEnderExecutorInventory;
 import net.sodiumzh.nff.girls.inventory.NFFGirlsHmagEnderExecutorInventoryMenu;
+import net.sodiumzh.nff.girls.item.bauble.INFFGirlsBauble;
 import net.sodiumzh.nff.girls.registry.NFFGirlsBlocks;
 import net.sodiumzh.nff.girls.registry.NFFGirlsHealingItems;
 import net.sodiumzh.nff.girls.sound.NFFGirlsSoundPresets;
@@ -122,6 +123,11 @@ public class HmagEnderExecutorEntity extends NFFTamedEnderManPreset implements I
 	      targetSelector.addGoal(5, new NFFGirlsNearestHostileToSelfTargetGoal(this));
 	      targetSelector.addGoal(6, new NFFGirlsNearestHostileToOwnerTargetGoal(this));
 
+	}
+
+	@Override
+	public boolean isSensitiveToWater() {
+		return !INFFGirlsBauble.isEnvironmentImmunized(this);
 	}
 
 	// Initialization end

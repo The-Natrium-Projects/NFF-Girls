@@ -7,6 +7,8 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
 import net.sodiumzh.nff.girls.NFFGirls;
 import net.sodiumzh.nff.girls.entity.hmag.*;
+import net.sodiumzh.nff.girls.registry.NFFGirlsBaubles;
+import net.sodiumzh.nff.girls.registry.NFFGirlsItems;
 import net.sodiumzh.nff.girls.item.bauble.bauble.EnderManHandBlockBaubleBehavior;
 import net.sodiumzh.nff.girls.item.bauble.bauble.InsomniaFruitBaubleBehavior;
 import net.sodiumzh.nff.girls.item.bauble.bauble.NecroticReaperHandHoeBaubleBehavior;
@@ -25,19 +27,20 @@ public class NFFGirlsBaubleRegistrations
 	@SubscribeEvent
 	public static void nffGirlsBaubleAdditionalRegistration(NFFGirlsBaubleAdditionalRegistry.RegisterEvent event)
 	{
-		event.register(NFFGirlsItems.SOUL_AMULET.get());
-		event.register(NFFGirlsItems.SOUL_AMULET_II.get());
-		event.register(NFFGirlsItems.SOUL_AMULET_III.get());
-		event.register(NFFGirlsItems.SOUL_AMULET_IV.get());
-		event.register(NFFGirlsItems.RESISTANCE_AMULET.get());
-		event.register(NFFGirlsItems.RESISTANCE_AMULET_II.get());
-		event.register(NFFGirlsItems.COURAGE_AMULET.get());
-		event.register(NFFGirlsItems.COURAGE_AMULET_II.get());
-		event.register(NFFGirlsItems.HEALING_JADE.get());
-		event.register(NFFGirlsItems.LIFE_JADE.get());
-		event.register(NFFGirlsItems.LIFE_JADE_II.get());
-		event.register(NFFGirlsItems.AQUA_JADE.get());
-		event.register(NFFGirlsItems.POISONOUS_THORN.get());
+		event.register(NFFGirlsBaubles.SOUL_AMULET.get());
+		event.register(NFFGirlsBaubles.SOUL_AMULET_II.get());
+		event.register(NFFGirlsBaubles.SOUL_AMULET_III.get());
+		event.register(NFFGirlsBaubles.SOUL_AMULET_IV.get());
+		event.register(NFFGirlsBaubles.RESISTANCE_AMULET.get());
+		event.register(NFFGirlsBaubles.RESISTANCE_AMULET_II.get());
+		event.register(NFFGirlsBaubles.RESISTANCE_GEM.get());
+		event.register(NFFGirlsBaubles.COURAGE_AMULET.get());
+		event.register(NFFGirlsBaubles.COURAGE_AMULET_II.get());
+		event.register(NFFGirlsBaubles.HEALING_JADE.get());
+		event.register(NFFGirlsBaubles.LIFE_JADE.get());
+		event.register(NFFGirlsBaubles.LIFE_JADE_II.get());
+		event.register(NFFGirlsBaubles.AQUA_JADE.get());
+		event.register(NFFGirlsBaubles.POISONOUS_THORN.get());
 	}
 	
 	public static Function<Mob, ItemStack> accessMobAdditionalInventory(int position)
@@ -91,22 +94,23 @@ public class NFFGirlsBaubleRegistrations
 	@SubscribeEvent
 	public static void baubleRegistration(RegisterBaublesEvent event)
 	{
-		event.register(NFFGirlsItems.SOUL_AMULET.get());
-		event.register(NFFGirlsItems.SOUL_AMULET_II.get());
-		event.register(NFFGirlsItems.SOUL_AMULET_III.get());
-		event.register(NFFGirlsItems.SOUL_AMULET_IV.get());
-		event.register(new InsomniaFruitBaubleBehavior(new ResourceLocation("nffgirls:insomnia_fruit"), BaubleEquippingCondition.always()));
-		event.register(NFFGirlsItems.RESISTANCE_AMULET.get());
-		event.register(NFFGirlsItems.RESISTANCE_AMULET_II.get());
-		event.register(NFFGirlsItems.COURAGE_AMULET.get());
-		event.register(NFFGirlsItems.COURAGE_AMULET_II.get());
-		event.register(NFFGirlsItems.HEALING_JADE.get());
-		event.register(NFFGirlsItems.LIFE_JADE.get());
-		event.register(NFFGirlsItems.LIFE_JADE_II.get());
-		event.register(NFFGirlsItems.AQUA_JADE.get());
-		event.register(NFFGirlsItems.POISONOUS_THORN.get());
-		event.register(new NecroticReaperHandHoeBaubleBehavior(new ResourceLocation("nffgirls:necrotic_reaper_hoe")));
-		event.register(new EnderManHandBlockBaubleBehavior(new ResourceLocation("nffgirls:enderman_hand_block")));
+		event.register(NFFGirlsBaubles.SOUL_AMULET.get());
+		event.register(NFFGirlsBaubles.SOUL_AMULET_II.get());
+		event.register(NFFGirlsBaubles.SOUL_AMULET_III.get());
+		event.register(NFFGirlsBaubles.SOUL_AMULET_IV.get());
+		event.register(new InsomniaFruitBaubleBehavior(new ResourceLocation(NFFGirls.MOD_ID, "insomnia_fruit"), BaubleEquippingCondition.always()));
+		event.register(NFFGirlsBaubles.RESISTANCE_AMULET.get());
+		event.register(NFFGirlsBaubles.RESISTANCE_AMULET_II.get());
+		event.register(NFFGirlsBaubles.RESISTANCE_GEM.get());
+		event.register(NFFGirlsBaubles.COURAGE_AMULET.get());
+		event.register(NFFGirlsBaubles.COURAGE_AMULET_II.get());
+		event.register(NFFGirlsBaubles.HEALING_JADE.get());
+		event.register(NFFGirlsBaubles.LIFE_JADE.get());
+		event.register(NFFGirlsBaubles.LIFE_JADE_II.get());
+		event.register(NFFGirlsBaubles.AQUA_JADE.get());
+		event.register(NFFGirlsBaubles.POISONOUS_THORN.get());
+		event.register(new NecroticReaperHandHoeBaubleBehavior(new ResourceLocation(NFFGirls.MOD_ID, "necrotic_reaper_hoe")));
+		event.register(new EnderManHandBlockBaubleBehavior(new ResourceLocation(NFFGirls.MOD_ID, "enderman_hand_block")));
 	}
 	/*
 	public static void modifyBaubleEquippable(ModifyBaubleEquippableMobsEvent event)
