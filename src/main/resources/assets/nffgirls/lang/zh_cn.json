@@ -30,6 +30,7 @@
   "item.nffgirls.soul_amulet_ii": "灵魂护符 II",
   "item.nffgirls.soul_amulet_iii": "灵魂护符 III",
   "item.nffgirls.soul_amulet_iv": "灵魂护符 IV",
+  "item.nffgirls.resistance_gem": "抗性宝石",
   "item.nffgirls.resistance_amulet": "抵抗护符",
   "item.nffgirls.resistance_amulet_ii": "抵抗护符 II",
   
@@ -125,8 +126,8 @@
   "info.nffgirls.bauble.speed": "移动速度 %1$s",
   "info.nffgirls.bauble.healing_per_second": "每秒回复 %1$s 生命",
   "info.nffgirls.bauble.in_water": "在水中时：",
-  "info.nffgirls.bauble.sun_immune": "不会在太阳下着火",
-  "info.nffgirls.bauble.proactive_attack": "主动攻击敌对生物",
+  "info.nffgirls.bauble.environment_immunity": "提供环境伤害保护",
+  "info.nffgirls.bauble.active_attack": "主动攻击敌对生物",
   "info.nffgirls.bauble.soul_amulet": "亡灵生物可装备",
   "info.nffgirls.bauble.aqua_jade": "溺尸娘可装备",
   "info.nffgirls.bauble.poisonous_thorn": "节肢生物可装备",

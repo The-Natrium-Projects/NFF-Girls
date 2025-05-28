@@ -1,0 +1,7 @@
+{
+  "desc": "Mobs with this tag can equip Aqua Jade.",
+  "replace" : false,
+  "values" : [
+    "nffgirls:hmag_drowned_girl"
+  ]
+}

@@ -50,6 +50,8 @@ public class NFFGirlsTags
 			NFFGirls.MOD_ID, "can_equip_poisonous_thorn");
 	public static final TagKey<EntityType<?>> NEUTRAL_ON_HIGH_PROGRESS = NFUTagStatics.createEntityTypeTag(
 		NFFGirls.MOD_ID, "neutral_on_high_progress");
+	public static final TagKey<EntityType<?>> AQUATIC_MOB = NFUTagStatics.createEntityTypeTag(
+		NFFGirls.MOD_ID, "aquatic_mob");
 	/*
 	protected static TagKey<Block> blockTag(String name)
 	{

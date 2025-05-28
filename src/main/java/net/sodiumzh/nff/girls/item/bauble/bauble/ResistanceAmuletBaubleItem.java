@@ -4,18 +4,16 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.sodiumzh.nff.girls.NFFGirls;
-import net.sodiumzh.nff.girls.item.bauble.NFFGirlsDedicatedBaubleItem;
+import net.sodiumzh.nff.girls.item.bauble.INFFGirlsBauble;
 import net.sodiumzh.nff.girls.registry.NFFGirlsConfigs;
-import net.sodiumzh.nff.services.subsystem.baublesystem.BaubleAttributeModifier;
-import net.sodiumzh.nff.services.subsystem.baublesystem.BaubleEquippingCondition;
-import net.sodiumzh.nff.services.subsystem.baublesystem.BaubleProcessingArgs;
 
 public class ResistanceAmuletBaubleItem extends NFFGirlsDedicatedBaubleItem
 {
 	
-	public ResistanceAmuletBaubleItem(String additionalKey, int tier, Properties pProperties)
+	public ResistanceAmuletBaubleItem(int tier, Properties pProperties)
 	{
-		super(additionalKey, tier, pProperties);
+		super(new ResourceLocation(NFFGirls.MOD_ID, "resistance_amulet"), tier, pProperties);
+		this.addBaubleTag(INFFGirlsBauble.TAG_ENVIRONMENT_IMMUNITY);
 	}
 
 	@Override
@@ -41,13 +39,13 @@ public class ResistanceAmuletBaubleItem extends NFFGirlsDedicatedBaubleItem
 	}
 
 	@Override
-	public BaubleAttributeModifier[] getNonDuplicatableModifiers(Mob mob) {
+	public BaubleAttributeModifier[] getNonDuplicableModifiers(Mob mob) {
 		return null;
 	}
 
 	@Override
-	public BaubleAttributeModifier[] getDuplicatableModifiers(BaubleProcessingArgs args) {
-		switch (this.tier)
+	public BaubleAttributeModifier[] getDuplicableModifiers(BaubleProcessingArgs args) {
+		switch (this.getTier())
 		{
 		case 1:
 		{
@@ -75,11 +73,6 @@ public class ResistanceAmuletBaubleItem extends NFFGirlsDedicatedBaubleItem
 			throw this.unsupportedTier();
 		}
 		}
-	}
-
-	@Override
-	public ResourceLocation getBaubleRegistryKeyUnsuffixed() {
-		return new ResourceLocation(NFFGirls.MOD_ID, "resistance_amulet");
 	}
 
 }

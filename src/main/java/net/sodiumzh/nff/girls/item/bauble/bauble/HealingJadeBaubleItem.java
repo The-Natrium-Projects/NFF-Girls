@@ -10,9 +10,9 @@ import net.sodiumzh.nff.services.subsystem.baublesystem.BaubleProcessingArgs;
 public class HealingJadeBaubleItem extends NFFGirlsDedicatedBaubleItem
 {
 
-	public HealingJadeBaubleItem(String additionalKey, int tier, Properties pProperties)
+	public HealingJadeBaubleItem(int tier, Properties pProperties)
 	{
-		super(additionalKey, tier, pProperties);
+		super(new ResourceLocation(NFFGirls.MOD_ID, "healing_jade"), tier, pProperties);
 	}
 
 	@Override
@@ -23,12 +23,6 @@ public class HealingJadeBaubleItem extends NFFGirlsDedicatedBaubleItem
 	@Override
 	public BaubleAttributeModifier[] getDuplicatableModifiers(BaubleProcessingArgs args) {
 		return null;
-	}
-
-	@Override
-	public ResourceLocation getBaubleRegistryKeyUnsuffixed() {
-		// TODO Auto-generated method stub
-		return new ResourceLocation(NFFGirls.MOD_ID, "healing_jade");
 	}
 
 }

@@ -39,6 +39,7 @@ public class NFFGirls
         NFFGirlsEffects.EFFECTS.register(modEventBus);
         NFFGirlsBlocks.BLOCKS.register(modEventBus);
         NFFGirlsItems.ITEMS.register(modEventBus);
+        NFFGirlsBaubles.BAUBLE_ITEMS.register(modEventBus);
         NFFGirlsEntityTypes.ENTITY_TYPES.register(modEventBus);
         NFFGirlsRecipes.RECIPES.register(modEventBus);
         NFFGirlsParticleTypes.PARTICLE_TYPES.register(modEventBus);

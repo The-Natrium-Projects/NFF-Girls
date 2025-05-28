@@ -2,21 +2,26 @@ package net.sodiumzh.nff.girls.item.bauble;
 
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
-import net.sodiumzh.nff.services.subsystem.baublesystem.DedicatedBaubleItem;
 
-public abstract class NFFGirlsDedicatedBaubleItem extends DedicatedBaubleItem
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.function.Predicate;
+
+public abstract class NFFGirlsDedicatedBaubleItem extends DedicatedBaubleItem implements INFFGirlsBauble
 {
 
-	public final ResourceLocation additionalKey;
-	public final int tier;
+	private ResourceLocation categoryKey;
+	private int tier;
+	private Map<String, Predicate<Integer>> tags = new HashMap<>();
 	
 	/** additionalKey uses ResourceLocation format. */
-	public NFFGirlsDedicatedBaubleItem(String additionalKey, int tier, Item.Properties pProperties)
+	public NFFGirlsDedicatedBaubleItem(ResourceLocation categoryKey, int tier, Item.Properties pProperties)
 	{
 		super(pProperties);
 		if (tier <= 0)
 			throw new IllegalArgumentException("NFFGirlsDedicatedBaubleItem tier must be positive (not supporting 0).");
-		this.additionalKey = new ResourceLocation(additionalKey);
+		this.categoryKey = categoryKey;
 		this.tier = tier;
 	}
 
@@ -24,27 +29,49 @@ public abstract class NFFGirlsDedicatedBaubleItem extends DedicatedBaubleItem
 	{
 		if (tier == 1)
 			return "";
-		return "_" + (tier > 10 ? Integer.toString(tier) : NFFGirlsBaubleStatics.getRomanNumeral(tier, false));
+		return "_" + NFUMathStatics.intToRoman(tier).toLowerCase();
 	}
 	
 	@Override
 	public final ResourceLocation getBaubleRegistryKey()
 	{
-		ResourceLocation unsuffixed = getBaubleRegistryKeyUnsuffixed();
+		ResourceLocation unsuffixed = getCategoryKey();
 		return new ResourceLocation(unsuffixed.getNamespace(), unsuffixed.getPath() + getTierSuffix());
 	}
 	
-	/**
-	 * Bauble registry key, no suffix. (Will be auto-added)
-	 */
-	public abstract ResourceLocation getBaubleRegistryKeyUnsuffixed();
-	
-	/**
-	 * Create an exception that this item's tier is not supported. Needs to manually throw.
-	 */
-	protected UnsupportedOperationException unsupportedTier()
-	{
-		return new UnsupportedOperationException("Unsupported bauble tier ( " +  Integer.toString(this.tier) + ").");
+	public final ResourceLocation getCategoryKey() {
+		return this.categoryKey;
 	}
-	
+
+	@Override
+	public final int getTier() {
+		return this.tier;
+	}
+
+	public NFFGirlsDedicatedBaubleItem setCategoryKey(ResourceLocation categoryKey) {
+		this.categoryKey = categoryKey;
+		return this;
+	}
+
+	@Override
+	public final List<String> getBaubleTags() {
+		return tags.entrySet().stream().filter(entry -> entry.getValue().test(this.getTier()))
+			.map(Map.Entry::getKey).toList();
+	}
+
+	public NFFGirlsDedicatedBaubleItem addBaubleTag(String tag, Predicate<Integer> tierCondition) {
+		this.tags.put(tag, tierCondition);
+		return this;
+	}
+
+	public NFFGirlsDedicatedBaubleItem addBaubleTag(String tag) {
+		return this.addBaubleTag(tag, i -> true);
+	}
+
+	public NFFGirlsDedicatedBaubleItem addBaubleTags(String... tags) {
+		for (String tag: tags) {
+			this.tags.put(tag, i -> true);
+		}
+		return this;
+	}
 }

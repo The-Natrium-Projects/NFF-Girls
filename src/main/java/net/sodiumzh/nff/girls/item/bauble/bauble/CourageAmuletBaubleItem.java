@@ -3,17 +3,14 @@ package net.sodiumzh.nff.girls.item.bauble.bauble;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.sodiumzh.nff.girls.NFFGirls;
-import net.sodiumzh.nff.girls.item.bauble.NFFGirlsDedicatedBaubleItem;
 import net.sodiumzh.nff.girls.registry.NFFGirlsConfigs;
-import net.sodiumzh.nff.services.subsystem.baublesystem.BaubleAttributeModifier;
-import net.sodiumzh.nff.services.subsystem.baublesystem.BaubleProcessingArgs;
 
 public class CourageAmuletBaubleItem extends NFFGirlsDedicatedBaubleItem
 {
 
-	public CourageAmuletBaubleItem(String additionalKey, int tier, Properties pProperties)
+	public CourageAmuletBaubleItem(int tier, Properties pProperties)
 	{
-		super(additionalKey, tier, pProperties);
+		super(new ResourceLocation(NFFGirls.MOD_ID, "courage_amulet"), tier, pProperties);
 	}
 
 	@Override
@@ -22,8 +19,8 @@ public class CourageAmuletBaubleItem extends NFFGirlsDedicatedBaubleItem
 
 	}
 	@Override
-	public BaubleAttributeModifier[] getDuplicatableModifiers(BaubleProcessingArgs args) {
-		switch (this.tier)
+	public BaubleAttributeModifier[] getDuplicableModifiers(BaubleProcessingArgs args) {
+		switch (this.getTier())
 		{
 		case 1:
 		{
@@ -42,11 +39,6 @@ public class CourageAmuletBaubleItem extends NFFGirlsDedicatedBaubleItem
 			throw this.unsupportedTier();
 		}
 		}
-	}
-
-	@Override
-	public ResourceLocation getBaubleRegistryKeyUnsuffixed() {
-		return new ResourceLocation(NFFGirls.MOD_ID, "courage_amulet");
 	}
 
 }
