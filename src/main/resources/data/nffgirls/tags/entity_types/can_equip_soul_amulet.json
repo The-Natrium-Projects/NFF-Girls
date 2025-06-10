@@ -2,6 +2,6 @@
 	"desc": "Mobs with this tag will be allowed to equip bauble 'Soul Amulet', no matter if they're undead or sun-sensitive.",
   	"replace" : false,
  	"values" : [
-  	  "nffgirls:hmag_ghastly_seeker"
+		"nffgirls:hmag_ghastly_seeker"
 	 ]
 }

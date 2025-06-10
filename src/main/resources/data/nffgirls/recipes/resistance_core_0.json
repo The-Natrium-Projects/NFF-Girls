@@ -18,7 +18,7 @@
     },
 
     "D":{
-      "item": "hmag:ancient_stone"
+      "item": "minecraft:amethyst_shard"
     },
 
     "E":{
@@ -28,7 +28,7 @@
   },
 
   "result":{
-    "item": "nffgirls:resistance_gem",
+    "item": "nffgirls:resistance_core",
     "count": 1
   }
 }

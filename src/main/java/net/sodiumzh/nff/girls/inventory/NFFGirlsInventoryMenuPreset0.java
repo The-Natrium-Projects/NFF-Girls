@@ -10,7 +10,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.sodiumzh.nff.services.entity.taming.INFFTamed;
 import net.sodiumzh.nff.services.inventory.NFFTamedInventoryMenu;
-import net.sodiumzh.nfu.item.bauble.BaubleSystem;
+import net.sodiumzh.nfu.item.bauble.NFUBaubleAPI;
 import net.sodiumzh.nfu.math.GuiPos;
 
 import java.util.function.Predicate;
@@ -141,7 +141,7 @@ public abstract class NFFGirlsInventoryMenuPreset0 extends NFFTamedInventoryMenu
 			@Override
 			public boolean mayPlace(ItemStack stack) {
 				//return BaubleHandler.shouldBaubleSlotAccept(stack, this, mob, key);
-				return BaubleSystem.canEquipOn(stack, mob.asMob(), key);
+				return NFUBaubleAPI.canEquipOn(stack, mob.asMob(), key);
 			}			
 			@Override
 			public int getMaxStackSize() {
@@ -156,7 +156,7 @@ public abstract class NFFGirlsInventoryMenuPreset0 extends NFFTamedInventoryMenu
 			@Override
 			public boolean mayPlace(ItemStack stack) {
 				//return BaubleHandler.shouldBaubleSlotAccept(stack, this, mob, key);
-				return BaubleSystem.canEquipOn(stack, mob.asMob(), key) && additionalCondition.test(stack);
+				return NFUBaubleAPI.canEquipOn(stack, mob.asMob(), key) && additionalCondition.test(stack);
 			}			
 			@Override
 			public int getMaxStackSize() {

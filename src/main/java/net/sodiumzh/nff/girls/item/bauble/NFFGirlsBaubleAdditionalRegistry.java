@@ -21,7 +21,7 @@ import java.util.HashMap;
 public class NFFGirlsBaubleAdditionalRegistry
 {
 	// ResourceLocation key, tier
-	private static final HashMap<Item, Tuple<ResourceLocation, Integer>> REGISTRY = new HashMap<>();
+	private static final HashMap<INFFGirlsBauble, Tuple<ResourceLocation, Integer>> REGISTRY = new HashMap<>();
 
 	@SubscribeEvent
 	public static void fireRegisterEvent(FMLCommonSetupEvent event)
@@ -31,19 +31,19 @@ public class NFFGirlsBaubleAdditionalRegistry
 		});
 	}
 	
-	public static HashMap<Item, Tuple<ResourceLocation, Integer>> getRegistry()
+	public static HashMap<INFFGirlsBauble, Tuple<ResourceLocation, Integer>> getRegistry()
 	{
 		return REGISTRY;
 	}
 	
 	public static class RegisterEvent extends Event implements IModBusEvent
 	{
-		public void register(Item item, ResourceLocation key, Integer tier)
+		public void register(INFFGirlsBauble item, ResourceLocation key, Integer tier)
 		{
 			NFFGirlsBaubleAdditionalRegistry.REGISTRY.put(item, new Tuple<>(key, tier));
 		}
 		
-		public void register(NFFGirlsDedicatedBaubleItem item)
+		public void register(INFFGirlsBauble item)
 		{
 			NFFGirlsBaubleAdditionalRegistry.REGISTRY.put(item, new Tuple<>(item.getCategoryKey(), item.getTier()));
 		}

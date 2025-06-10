@@ -3,7 +3,7 @@ package net.sodiumzh.nff.girls.item.bauble;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.item.ItemStack;
-import net.sodiumzh.nfu.item.bauble.BaubleSystem;
+import net.sodiumzh.nfu.item.bauble.NFUBaubleAPI;
 import net.sodiumzh.nfu.container.MapPair;
 import net.sodiumzh.nfu.util.NFUContainerStatics;
 
@@ -13,7 +13,8 @@ import java.util.function.Predicate;
 
 public class NFFGirlsBaubleStatics
 {
-	
+
+	@Deprecated
 	private static final Map<Integer, String> ROMAN_NUMERALS = NFUContainerStatics.mapOf(
 			MapPair.of(0, "0"),
 			MapPair.of(1, "i"),
@@ -33,7 +34,7 @@ public class NFFGirlsBaubleStatics
 	 */
 	public static int countBaublesWithTierRange(Mob mob, ResourceLocation key, int minTier, int maxTierExcluding)
 	{
-		var equipped = BaubleSystem.getAllSlotItems(mob).values();
+		var equipped = NFUBaubleAPI.getAllSlotItems(mob).values();
 		int count = 0;
 		for (ItemStack stack: equipped)
 		{
@@ -66,7 +67,7 @@ public class NFFGirlsBaubleStatics
 	 */
 	public static int countBaublesWithCondition(Mob mob, Predicate<ItemStack> condition)
 	{
-		return BaubleSystem.getAllSlotItems(mob).values().stream().filter(condition).toList().size();
+		return NFUBaubleAPI.getAllSlotItems(mob).values().stream().filter(condition).toList().size();
 	}
 
 	/**

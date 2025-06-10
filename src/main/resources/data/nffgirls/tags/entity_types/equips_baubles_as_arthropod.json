@@ -1,0 +1,9 @@
+{
+  "desc": "Mobs with this tag can equip baubles like arthropod.",
+  "replace": false,
+  "values" : [
+    "#nffgirls:can_equip_poisonous_thorn",
+    "nffgirls:hmag_hornet",
+    "nffgirls:hmag_crimson_slaughterer"
+  ]
+}

@@ -35,6 +35,7 @@ public class NFFGirlsTags
 	public static final TagKey<Item> USES_VANILLA_ARROWS = NFUTagStatics.createItemTag(
 			NFFGirls.MOD_ID, "uses_vanilla_arrows");
 
+
 	public static final TagKey<EntityType<?>> IGNORES_UNDEAD_AFFINITY = NFUTagStatics.createEntityTypeTag(
 			NFFGirls.MOD_ID, "ignores_undead_affinity");
 	public static final TagKey<EntityType<?>> IGNORES_MAGICAL_GEL_SLOWNESS = NFUTagStatics.createEntityTypeTag(
@@ -43,28 +44,22 @@ public class NFFGirlsTags
 			NFFGirls.MOD_ID, "uses_fortune_as_looting");
 	public static final TagKey<EntityType<?>> AFFECTED_BY_UNDEAD_AFFINITY = NFUTagStatics.createEntityTypeTag(
 			NFFGirls.MOD_ID, "affected_by_undead_affinity");
+	@Deprecated
 	public static final TagKey<EntityType<?>> CAN_EQUIP_SOUL_AMULET = NFUTagStatics.createEntityTypeTag(
 			NFFGirls.MOD_ID, "can_equip_soul_amulet");
+	public static final TagKey<EntityType<?>> EQUIPS_BAUBLES_AS_UNDEAD = NFUTagStatics.createEntityTypeTag(
+		NFFGirls.MOD_ID, "equips_baubles_as_undead");
+	public static final TagKey<EntityType<?>> EQUIPS_BAUBLES_AS_SUN_SENSITIVE = NFUTagStatics.createEntityTypeTag(
+		NFFGirls.MOD_ID, "equips_baubles_as_sun_sensitive");
+	@Deprecated
 	public static final TagKey<EntityType<?>> CAN_EQUIP_POISONOUS_THORN = NFUTagStatics.createEntityTypeTag(
 			NFFGirls.MOD_ID, "can_equip_poisonous_thorn");
+	public static final TagKey<EntityType<?>> EQUIPS_BAUBLES_AS_ARTHROPOD = NFUTagStatics.createEntityTypeTag(
+		NFFGirls.MOD_ID, "equips_baubles_as_arthropod");
 	public static final TagKey<EntityType<?>> NEUTRAL_ON_HIGH_PROGRESS = NFUTagStatics.createEntityTypeTag(
 		NFFGirls.MOD_ID, "neutral_on_high_progress");
 	public static final TagKey<EntityType<?>> AQUATIC_MOB = NFUTagStatics.createEntityTypeTag(
 		NFFGirls.MOD_ID, "aquatic_mob");
-	/*
-	protected static TagKey<Block> blockTag(String name)
-	{
-		return TagKey.create(Registries.BLOCK, new ResourceLocation(NFFGirls.MOD_ID, name));
-	}
-	
-	protected static TagKey<Item> itemTag(String name)
-	{
-		return TagKey.create(Registries.ITEM, new ResourceLocation(NFFGirls.MOD_ID, name));
-	}
-	
-	protected static TagKey<EntityType<?>> entityTag(String name)
-	{
-		return TagKey.create(Registry.ENTITY_TYPE_REGISTRY, new ResourceLocation(NFFGirls.MOD_ID, name));
-	}*/
+
 	
 }

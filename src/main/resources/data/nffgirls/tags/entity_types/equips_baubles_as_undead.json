@@ -1,0 +1,8 @@
+{
+  "desc": "Mobs with this tag can equip baubles like undead.",
+  "replace": false,
+  "values" : [
+    "#nffgirls:can_equip_soul_amulet",
+    "nffgirls:hmag_ghastly_seeker"
+  ]
+}

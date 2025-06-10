@@ -30,7 +30,7 @@
   "item.nffgirls.soul_amulet_ii": "灵魂护符 II",
   "item.nffgirls.soul_amulet_iii": "灵魂护符 III",
   "item.nffgirls.soul_amulet_iv": "灵魂护符 IV",
-  "item.nffgirls.resistance_gem": "抗性宝石",
+  "item.nffgirls.resistance_core": "抗性宝石",
   "item.nffgirls.resistance_amulet": "抵抗护符",
   "item.nffgirls.resistance_amulet_ii": "抵抗护符 II",
   
@@ -120,6 +120,16 @@
   "info.nffgirls.item.commanding_wand.mob_search_summoned_mob": "召唤了%1$s",
   "info.nffgirls.item.mob_catching_failed_inventory_full": "收纳失败：物品栏已满",
 
+  "attribute.name.nffgirls.looting_level": "抢夺等级",
+  "attribute.name.nffgirls.water_aspect": "水属性附加",
+  "attribute.name.nffgirls.anti_undead": "亡灵特攻",
+  "attribute.name.nffgirls.anti_arthropod": "节肢特攻",
+  "attribute.name.nffgirls.anti_aquatic": "水生特攻",
+  "attribute.name.nffgirls.critical_rate": "暴击率",
+  "attribute.name.nffgirls.persistent_healing": "持续恢复",
+  "attribute.name.nffgirls.poison_aspect": "毒附加",
+  "attribute.name.nffgirls.wither_aspect": "凋零附加",
+
   "info.nffgirls.bauble.hpmax": "生命最大值 %1$s", 
   "info.nffgirls.bauble.atk": "攻击 %1$s",
   "info.nffgirls.bauble.armor": "护甲 %1$s",
@@ -147,6 +157,16 @@
   "info.nffgirls.introduction_written": "%1$s签署了交易介绍信。",
   "info.nffgirls.book.tamable": "一场特殊的邂逅？",
   "death.attack.necromancer_wither": "%1$s没能承受住死灵巫术的诅咒",
+
+  "tooltip.nffgirls.bauble.when_in_water": "在水中时：",
+  "tooltip.nffgirls.bauble.when_at_night": "在晚上时：",
+  "tooltip.nffgirls.bauble.active_attack": "主动攻击敌对生物",
+  "tooltip.nffgirls.bauble.for_undead": "亡灵生物可装备",
+  "tooltip.nffgirls.bauble.for_arthropod": "节肢生物可装备",
+  "tooltip.nffgirls.bauble.for_aquatic": "水生生物可装备",
+  "tooltip.nffgirls.bauble.unrepeatable": "（不可重复生效）",
+  "tooltip.nffgirls.bauble.environment_immunity": "提供环境伤害保护",
+  "tooltip.nffgirls.bauble.existing_item": "也可用作生物饰品",
 
   "desc.nffgirls.item.commanding_wand": "右键你的NFF Girls生物切换AI\nShift+右键你的NFF Girls生物打开GUI面板\n右键钟以集合16格内的NFF Girls生物\n右键灵魂粉尘块以查找NFF Girls生物坐标",
   "desc.nffgirls.item.combat_commanding_wand": "右键你的NFF Girls生物选定，然后右键其他对象以指示你的生物攻击这个对象\nShift+右键你的NFF Girls生物以指示其停止攻击\nShift+右键敌人使你周围的NFF Girls生物集火攻击",

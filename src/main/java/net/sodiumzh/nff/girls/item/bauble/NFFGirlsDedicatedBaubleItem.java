@@ -16,7 +16,7 @@ public abstract class NFFGirlsDedicatedBaubleItem extends DedicatedBaubleItem im
 	private ResourceLocation categoryKey;
 	private int tier;
 	private Map<String, Predicate<Integer>> tags = new HashMap<>();
-	
+
 	/** additionalKey uses ResourceLocation format. */
 	public NFFGirlsDedicatedBaubleItem(ResourceLocation categoryKey, int tier, Item.Properties pProperties)
 	{
@@ -33,14 +33,26 @@ public abstract class NFFGirlsDedicatedBaubleItem extends DedicatedBaubleItem im
 			return "";
 		return "_" + NFUMathStatics.intToRoman(tier).toLowerCase();
 	}
-	
+
+	public static String getTierSuffix(int tier)
+	{
+		if (tier == 1)
+			return "";
+		return "_" + NFUMathStatics.intToRoman(tier).toLowerCase();
+	}
+
 	@Override
 	public final ResourceLocation getBaubleRegistryKey()
 	{
 		ResourceLocation unsuffixed = getCategoryKey();
 		return new ResourceLocation(unsuffixed.getNamespace(), unsuffixed.getPath() + getTierSuffix());
 	}
-	
+
+	public static ResourceLocation getBaubleRegistryKey(ResourceLocation categoryKey, int tier)
+	{
+		return new ResourceLocation(categoryKey.getNamespace(), categoryKey.getPath() + getTierSuffix(tier));
+	}
+
 	public final ResourceLocation getCategoryKey() {
 		return this.categoryKey;
 	}
@@ -76,4 +88,5 @@ public abstract class NFFGirlsDedicatedBaubleItem extends DedicatedBaubleItem im
 		}
 		return this;
 	}
+
 }
