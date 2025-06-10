@@ -3,6 +3,7 @@ package net.sodiumzh.nff.girls.eventlistener;
 import com.github.mechalopa.hmag.HMaG;
 import com.github.mechalopa.hmag.registry.ModEntityTypes;
 import com.github.mechalopa.hmag.registry.ModItems;
+import com.github.mechalopa.hmag.util.ModTags;
 import com.github.mechalopa.hmag.world.entity.EnderExecutorEntity;
 import com.github.mechalopa.hmag.world.entity.GhastlySeekerEntity;
 import com.github.mechalopa.hmag.world.entity.NightwalkerEntity;
@@ -11,6 +12,7 @@ import com.mojang.logging.LogUtils;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.tags.DamageTypeTags;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
@@ -19,6 +21,7 @@ import net.minecraft.world.damagesource.DamageTypes;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.*;
+import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.goal.WrappedGoal;
 import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
@@ -42,6 +45,7 @@ import net.minecraftforge.event.entity.living.*;
 import net.minecraftforge.event.entity.living.LivingEvent.LivingTickEvent;
 import net.minecraftforge.event.entity.player.AttackEntityEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent.EntityInteract;
+import net.minecraftforge.eventbus.api.Event;
 import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.LogicalSide;
@@ -71,11 +75,13 @@ import net.sodiumzh.nff.services.item.NFFMobOwnershipTransfererItem;
 import net.sodiumzh.nff.services.item.NFFMobRespawnerItem;
 import net.sodiumzh.nff.services.registry.NFFCapRegistry;
 import net.sodiumzh.nfu.block.ColoredBlocks;
+import net.sodiumzh.nfu.entity.RepeatableAttributeModifier;
 import net.sodiumzh.nfu.entity.taming.ITamingProcessWithProgress;
 import net.sodiumzh.nfu.mixin.event.entity.*;
 import net.sodiumzh.nfu.util.*;
 import org.apache.commons.lang3.mutable.MutableObject;
 
+import javax.swing.text.html.Option;
 import java.util.List;
 import java.util.Optional;
 import java.util.function.Predicate;
@@ -90,6 +96,9 @@ public class NFFGirlsEntityEventListeners
 		{EquipmentSlot.HEAD};
 	private static final EquipmentSlot[] ARMOR_AND_HANDS =
 		{EquipmentSlot.MAINHAND, EquipmentSlot.OFFHAND, EquipmentSlot.HEAD, EquipmentSlot.CHEST, EquipmentSlot.LEGS, EquipmentSlot.FEET};
+
+	private static final RepeatableAttributeModifier ENCHANTMENT_LOOTING_LEVEL
+		= new RepeatableAttributeModifier(1d, AttributeModifier.Operation.ADDITION);
 
 	@SuppressWarnings("unused")
 	@SubscribeEvent
@@ -613,14 +622,33 @@ public class NFFGirlsEntityEventListeners
 					}
 				}
 			}
+			// Update looting level
+			INFFGirlsTamed.get(event.getEntity()).ifPresent(tamed -> {
+				if (tamed.asMob().getAttributes().hasAttribute(NFFGirlsEntityAttributes.LOOTING_LEVEL.get())) {
+					int lootingLevel = 0;
+					if (tamed.asMob().getType().is(NFFGirlsTags.USES_FORTUNE_AS_LOOTING)) {
+						lootingLevel = Math.max(lootingLevel, tamed.asMob().getItemBySlot(EquipmentSlot.MAINHAND).getEnchantmentLevel(Enchantments.BLOCK_FORTUNE));
+					}
+					ENCHANTMENT_LOOTING_LEVEL.apply(tamed.asMob(), NFFGirlsEntityAttributes.LOOTING_LEVEL.get(), lootingLevel);
+				}
+				else {
+					NFUDebugStatics.errorOnce(tamed.getClass(), "NFF Girls mob missing looting level attribute.");
+				}
+			});
+
 			// In Combat Commanding Wand it will manually set target, which may cause the mob to keep attacking
 			// after the target dies. Fix it here
-			INFFGirlsTamed.ifBM(event.getEntity(), tamed -> {
+			INFFGirlsTamed.get(event.getEntity()).ifPresent(tamed -> {
 				if (tamed.asMob().getTarget() != null && !tamed.asMob().getTarget().isAlive())
 					tamed.asMob().setTarget(null);
 			});
-			// Record mob location
 
+			// Handle persistent healing
+			INFFGirlsTamed.get(event.getEntity()).ifPresent(tamed -> {
+				if (tamed.asMob().getAttributeValue(NFFGirlsEntityAttributes.PERSISTENT_HEALING_PER_SECOND.get()) > 1e-12) {
+					tamed.asMob().heal((float) (tamed.asMob().getAttributeValue(NFFGirlsEntityAttributes.PERSISTENT_HEALING_PER_SECOND.get()) / 20f));
+				}
+			});
 		}
 	}
 	
@@ -683,29 +711,20 @@ public class NFFGirlsEntityEventListeners
 	 * Actions before checking if mob is killed by player
 	 */
 	@SubscribeEvent
-	public static void onGetLootLevel(LootingLevelEvent event)
+	public static void onGetLootingLevel(LootingLevelEvent event)
 	{
-		if (event.getDamageSource() != null
-			&& event.getDamageSource().getEntity() != null
-			&& event.getDamageSource().getEntity() instanceof INFFGirlsTamed bm)
-		{
-			/** After this, vanilla will use LivingEntity#lastHurtByPlayerTime to check if it's killed by player
-			 * so force set this to make it drop player-kill loot */
-			NFUReflectionStatics.forceSet(event.getEntity(), LivingEntity.class, "f_20889_",  1);	// LivingEntity.lastHurtByPlayerTime
-			/** For mobs with tag "use_fortune_as_looting", Fortune enchantment is applied in place of Looting */
-			if (bm.asMob().getType().is(NFFGirlsTags.USES_FORTUNE_AS_LOOTING) && !bm.asMob().getItemBySlot(EquipmentSlot.MAINHAND).isEmpty())
-			{
-				event.setLootingLevel(Math.max(bm.asMob().getItemBySlot(EquipmentSlot.MAINHAND).getEnchantmentLevel(Enchantments.BLOCK_FORTUNE), 
-						bm.asMob().getItemBySlot(EquipmentSlot.MAINHAND).getEnchantmentLevel(Enchantments.MOB_LOOTING)));
-			}
-		}
+		if (event.getDamageSource() != null)
+			INFFGirlsTamed.get(event.getDamageSource().getEntity()).ifPresent(tamed -> {
+				if (tamed.asMob().getAttributes().hasAttribute(NFFGirlsEntityAttributes.LOOTING_LEVEL.get()))
+					event.setLootingLevel(event.getLootingLevel() + (int)Math.round(tamed.asMob().getAttribute(NFFGirlsEntityAttributes.LOOTING_LEVEL.get()).getValue()));
+			});
 	}
 	
 	
 	@SubscribeEvent
 	public static void onDropExp(LivingExperienceDropEvent event)
 	{
-		// When a mob is killed by a befriended mob, it don't drop exp orbs, but directly add exp to the mob.
+		// When a mob is killed by a befriended mob, it doesn't drop exp orbs, but directly add exp to the mob.
 		if (event.getEntity().getLastHurtByMob() != null 
 				&& event.getEntity().getLastHurtByMob() instanceof INFFGirlsTamed bm)
 		{
@@ -789,30 +808,33 @@ public class NFFGirlsEntityEventListeners
 	@SubscribeEvent
 	public static void onLivingDamage(LivingDamageEvent event)
 	{
-		if (!event.getEntity().level().isClientSide && event.getEntity() instanceof Mob mob && !event.isCanceled())
+		if (!event.getEntity().level().isClientSide
+			&& !event.isCanceled()
+			&& event.getSource().getEntity() instanceof LivingEntity source)
 		{
-			if (event.getSource().getEntity() != null && event.getSource().getEntity() instanceof LivingEntity source)
-			{
+			// Handle attributes
+			//INFFGirlsTamed.get(source).ifPresent(tamed ->);
 
-				
-				// Favorbility change
+			// Handle favorability
+			if (event.getEntity() instanceof Mob mob)
+			{
 				// On player attack a mob attacking the BM
-				if (source instanceof Player player 
-						&& mob.getTarget() != null
-						&& mob.getTarget() instanceof INFFGirlsTamed bm
-						&& bm.asMob().isAlive()
-						&& bm.getOwner() == player)
+				if (source instanceof Player player
+						&& INFFGirlsTamed.get(mob.getTarget()).filter(tamed ->
+							tamed.asMob().isAlive() && tamed.getOwner() == player).isPresent())
 				{
-					bm.getFavorabilityHandler().addFavorability(event.getAmount() / 50f);
+					INFFGirlsTamed.get(mob.getTarget()).ifPresent(bm ->
+						bm.getFavorabilityHandler().addFavorability(event.getAmount() / 50f));
 				}
 				// On BM attack a mob attacking the player
-				if (source instanceof INFFGirlsTamed bm
+				if (INFFGirlsTamed.get(source).isPresent()
 						&& mob.getTarget() != null
 						&& mob.getTarget() instanceof Player player
-						&& bm.asMob().isAlive()
-						&& bm.getOwner() == player)
+						&& source.isAlive()
+						&& INFFGirlsTamed.get(source).filter(tamed -> tamed.getOwner() == player).isPresent())
 				{
-					bm.getFavorabilityHandler().addFavorability(event.getAmount() / 100f);
+					INFFGirlsTamed.get(source).ifPresent(tamed ->
+						tamed.getFavorabilityHandler().addFavorability(event.getAmount() / 100f));
 				}
 				// If owner attacked friendly mob, lose favorability depending on damage; no lost if < 0.5
 				if (event.getSource().getEntity() != null
@@ -839,7 +861,41 @@ public class NFFGirlsEntityEventListeners
 			}
 		}
 	}
-	
+
+	@SubscribeEvent(priority = EventPriority.LOWEST)
+	public static void handleAttributesOnFinalizingDamage(LivingDamageEvent event) {
+		if (event.isCanceled()) return;
+		Optional.ofNullable(event.getSource().getEntity()).flatMap(INFFGirlsTamed::get).ifPresent(tm -> {
+			double boostingRate = 1.0d;
+			// Handle debuff attachment
+			int poisonAspect = (int) Math.round(event.getEntity().getAttributeValue(NFFGirlsEntityAttributes.POISON_ASPECT.get()));
+			if (poisonAspect > 0) {
+				NFUEntityStatics.addEffectSafe(event.getEntity(), MobEffects.POISON, 100 + poisonAspect * 40, poisonAspect - 1);
+				NFUEntityStatics.addEffectSafe(event.getEntity(), MobEffects.MOVEMENT_SLOWDOWN, 100 + poisonAspect * 40, (poisonAspect + 2) / 2);
+			}
+			int witherAspect = (int) Math.round(event.getEntity().getAttributeValue(NFFGirlsEntityAttributes.WITHER_ASPECT.get()));
+			if (poisonAspect > 0) {
+				NFUEntityStatics.addEffectSafe(event.getEntity(), MobEffects.WITHER, 100 + witherAspect * 20, poisonAspect - 1);
+			}
+			// Handle Anti-Type damage boosts
+			if (event.getEntity().getMobType().equals(MobType.UNDEAD))
+				boostingRate += tm.asMob().getAttributeValue(NFFGirlsEntityAttributes.ANTI_UNDEAD.get());
+			if (event.getEntity().getMobType().equals(MobType.ARTHROPOD))
+				boostingRate += tm.asMob().getAttributeValue(NFFGirlsEntityAttributes.ANTI_ARTHROPOD.get());
+			if (event.getEntity() instanceof Mob mob && mob.isSensitiveToWater())
+				boostingRate += tm.asMob().getAttributeValue(NFFGirlsEntityAttributes.WATER_ASPECT.get());
+			// Handle critical
+			if (tm.asMob().getRandom().nextDouble() < tm.asMob().getAttributeValue(NFFGirlsEntityAttributes.CRITICAL_RATE.get())) {
+				NFUParticleStatics.sendParticlesToEntity(event.getEntity(),
+					ParticleTypes.CRIT, (double)event.getEntity().getBbHeight() - 0.2D, 0.3D, 10, 1.0);
+				event.getEntity().level().playSound(null, event.getEntity().blockPosition(),
+					SoundEvents.PLAYER_ATTACK_CRIT, SoundSource.NEUTRAL);
+				boostingRate *= 1.5d;
+			}
+			event.setAmount((float) (event.getAmount() * boostingRate));
+		});
+	}
+
 	@SuppressWarnings("resource")
 	@SubscribeEvent
 	public static void onEntityJoinLevel(EntityJoinLevelEvent event)
@@ -1186,7 +1242,7 @@ public class NFFGirlsEntityEventListeners
 		else return false;
 	}
 	
-	// SODIUM'S UTILITIES MIXIN EVENTS BELOW //
+	// NFU MIXIN EVENTS BELOW //
 	
 	@SubscribeEvent
 	public static void onItemEntityHurt(ItemEntityHurtEvent event)
@@ -1257,4 +1313,11 @@ public class NFFGirlsEntityEventListeners
 		});
 	}
 
+	// Account NFF Girls mob kill as owner kill
+	public static void onCheckPlayerKill(LootCheckPlayerKillEvent event) {
+		if (event.damageSource != null)
+			INFFGirlsTamed.get(event.damageSource.getEntity()).ifPresent(tamed -> {
+				event.setResult(Event.Result.ALLOW);
+			});
+	}
 }
