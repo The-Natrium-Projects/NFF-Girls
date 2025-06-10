@@ -974,7 +974,7 @@ public class NFFGirlsTrades
 			;*/
 
 	@SubscribeEvent
-	public static void readJsonCollections(NFURegistryGenerateValuesEvent.Server event) {
+	public static void readJsonCollections(NFURegistryGenerateValuesEvent.ServerBefore event) {
 		if (event.registry.equals(NFURegistries.VANILLA_TRADE_LISTING_COLLECTIONS)) {
 			List<ResourceLocation> allKeys = NFUDataStatics.getJsonsUnderPath(LogicalSide.SERVER, "trades")
 				.stream()
