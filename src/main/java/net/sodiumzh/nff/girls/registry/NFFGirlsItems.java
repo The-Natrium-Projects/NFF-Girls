@@ -14,7 +14,6 @@ import net.minecraftforge.registries.RegistryObject;
 import net.sodiumzh.nff.girls.NFFGirls;
 import net.sodiumzh.nff.girls.entity.INFFGirlsTamed;
 import net.sodiumzh.nff.girls.item.*;
-import net.sodiumzh.nff.girls.item.bauble.bauble.*;
 import net.sodiumzh.nff.services.item.MobCatcherItem;
 import net.sodiumzh.nff.services.item.NFFMobRespawnerItem;
 import net.sodiumzh.nfu.compat.ModDependencyFallbackItem;

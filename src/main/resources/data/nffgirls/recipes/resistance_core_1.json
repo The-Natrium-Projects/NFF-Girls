@@ -18,7 +18,7 @@
     },
 
     "D":{
-      "tag": "forge:gems/diamond"
+      "tag": "forge:gems/emerald"
     },
 
     "E":{
@@ -28,7 +28,7 @@
   },
 
   "result":{
-    "item": "nffgirls:resistance_gem",
+    "item": "nffgirls:resistance_core",
     "count": 1
   }
 }

@@ -1,6 +1,7 @@
 package net.sodiumzh.nff.girls.entity;
 
 import com.mojang.logging.LogUtils;
+import it.unimi.dsi.fastutil.ints.Int2ObjectMap;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionHand;
@@ -21,6 +22,7 @@ import net.sodiumzh.nff.girls.entity.capability.CNFFGirlsFavorabilityHandler;
 import net.sodiumzh.nff.girls.entity.capability.CNFFGirlsLevelHandler;
 import net.sodiumzh.nff.girls.entity.vanillatrade.CNFFGirlsTradeHandler;
 import net.sodiumzh.nff.girls.eventlistener.NFFGirlsEntityEventListeners;
+import net.sodiumzh.nff.girls.item.bauble.INFFGirlsBauble;
 import net.sodiumzh.nff.girls.network.ClientboundNFFGirlsMobGeneralSyncPacket;
 import net.sodiumzh.nff.girls.network.NFFGirlsChannels;
 import net.sodiumzh.nff.girls.registry.NFFGirlsCapabilities;
@@ -33,14 +35,13 @@ import net.sodiumzh.nff.services.item.capability.wrapper.IItemStackMonitor;
 import net.sodiumzh.nfu.annotation.DontCallManually;
 import net.sodiumzh.nfu.annotation.DontOverride;
 import net.sodiumzh.nfu.entity.MobApplicableItemTable;
+import net.sodiumzh.nfu.item.bauble.NFUBaubleAPI;
 import net.sodiumzh.nfu.object.FilteredMapper;
 import org.apache.commons.lang3.mutable.MutableObject;
 
 import javax.annotation.Nullable;
-import java.util.HashMap;
-import java.util.Objects;
-import java.util.Optional;
-import java.util.UUID;
+import java.util.*;
+import java.util.concurrent.atomic.AtomicReference;
 import java.util.function.Consumer;
 import java.util.function.Predicate;
 
@@ -330,19 +331,23 @@ public interface INFFGirlsTamed extends INFFTamed, IAttributeMonitor, IItemStack
 	// ===================== NFFGirls gamerules related ===================
 	
 	/**
-	 * True if this mob should proactively attack mobs hostile to itself.
+	 * True if this mob should actively attack mobs hostile to itself.
 	 */
 	public default boolean shouldAttackMobsHostileToSelf()
 	{
-		return NFFGirlsBaubleStatics.countBaubles(this.asMob(), new ResourceLocation(NFFGirls.MOD_ID, "courage_amulet")) > 0;
+		return NFUBaubleAPI.getAllSlotItems(this.asMob()).values().stream()
+			.map(i -> INFFGirlsBauble.asBauble(i.getItem())).reduce(new ArrayList<>(), (a, b) -> { a.addAll(b); return a;})
+			.stream().anyMatch(b -> b.hasBaubleTag(INFFGirlsBauble.TAG_ACTIVE_ATTACK_1) || b.hasBaubleTag(INFFGirlsBauble.TAG_ACTIVE_ATTACK_2));
 	}
 	
 	/**
-	 * True if this mob should proactively attack mobs hostile to its owner.
+	 * True if this mob should actively attack mobs hostile to its owner.
 	 */
 	public default boolean shouldAttackMobsHostileToOwner()
 	{
-		return NFFGirlsBaubleStatics.countBaublesWithMinTier(this.asMob(), new ResourceLocation(NFFGirls.MOD_ID, "courage_amulet"), 2) > 0;
+		return NFUBaubleAPI.getAllSlotItems(this.asMob()).values().stream()
+			.map(i -> INFFGirlsBauble.asBauble(i.getItem())).reduce(new ArrayList<>(), (a, b) -> { a.addAll(b); return a;})
+			.stream().anyMatch(b -> b.hasBaubleTag(INFFGirlsBauble.TAG_ACTIVE_ATTACK_2));
 	}
 	
 	// ===== Network =========== //
