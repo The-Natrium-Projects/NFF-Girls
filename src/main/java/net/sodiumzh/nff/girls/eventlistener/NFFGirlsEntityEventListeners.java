@@ -859,14 +859,14 @@ public class NFFGirlsEntityEventListeners
 		Optional.ofNullable(event.getSource().getEntity()).flatMap(INFFGirlsTamed::get).ifPresent(tm -> {
 			double boostingRate = 1.0d;
 			// Handle debuff attachment
-			int poisonAspect = (int) Math.round(event.getEntity().getAttributeValue(NFFGirlsEntityAttributes.POISON_ASPECT.get()));
-			if (poisonAspect > 0) {
-				NFUEntityStatics.addEffectSafe(event.getEntity(), MobEffects.POISON, 100 + poisonAspect * 40, poisonAspect - 1);
-				NFUEntityStatics.addEffectSafe(event.getEntity(), MobEffects.MOVEMENT_SLOWDOWN, 100 + poisonAspect * 40, (poisonAspect + 2) / 2);
+			double poisonAspect = tm.asMob().getAttributeValue(NFFGirlsEntityAttributes.POISON_ASPECT.get());
+			if (poisonAspect > 0d) {
+				NFUEntityStatics.addEffectSafe(event.getEntity(), MobEffects.POISON, (int)Math.round(100d + poisonAspect * 40d), ((int)poisonAspect) - 1);
+				NFUEntityStatics.addEffectSafe(event.getEntity(), MobEffects.MOVEMENT_SLOWDOWN, (int)Math.round(100d + poisonAspect * 40d), (((int)poisonAspect) + 2) / 2);
 			}
-			int witherAspect = (int) Math.round(event.getEntity().getAttributeValue(NFFGirlsEntityAttributes.WITHER_ASPECT.get()));
-			if (poisonAspect > 0) {
-				NFUEntityStatics.addEffectSafe(event.getEntity(), MobEffects.WITHER, 100 + witherAspect * 20, poisonAspect - 1);
+			double witherAspect = tm.asMob().getAttributeValue(NFFGirlsEntityAttributes.WITHER_ASPECT.get());
+			if (witherAspect > 0d) {
+				NFUEntityStatics.addEffectSafe(event.getEntity(), MobEffects.WITHER, (int) Math.round(100d + witherAspect * 20d), ((int)witherAspect) - 1);
 			}
 			// Handle Anti-Type damage boosts
 			if (event.getEntity().getMobType().equals(MobType.UNDEAD))

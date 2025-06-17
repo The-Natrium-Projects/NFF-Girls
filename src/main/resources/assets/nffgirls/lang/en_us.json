@@ -20,13 +20,23 @@
   "item.nffgirls.combat_commanding_wand": "Combat Commanding Wand",
 
   "item.nffgirls.poisonous_thorn": "Poisonous Thorn",
+
+  "item.nffgirls.crude_amulet": "Crude Amulet",
+  "item.nffgirls.refined_amulet": "Refined Amulet",
   "item.nffgirls.soul_amulet": "Soul Amulet",
   "item.nffgirls.soul_amulet_ii": "Soul Amulet II",
   "item.nffgirls.soul_amulet_iii": "Soul Amulet III",
   "item.nffgirls.soul_amulet_iv": "Soul Amulet IV",
   "item.nffgirls.resistance_core": "Resistance Core",
-  "item.nffgirls.resistance_amulet": "Amulet of Resistance",
-  "item.nffgirls.resistance_amulet_ii": "Amulet of Resistance II",
+  "item.nffgirls.resistance_amulet": "Resistance Amulet",
+  "item.nffgirls.resistance_amulet_ii": "Resistance Amulet II",
+  "item.nffgirls.resistance_amulet_iii": "Resistance Amulet III",
+  "item.nffgirls.corrupted_amulet": "Corrupted Amulet",
+  "item.nffgirls.corrupted_amulet_ii": "Corrupted Amulet II",
+  "item.nffgirls.wither_amulet": "Wither Amulet",
+  "item.nffgirls.wither_amulet_ii": "Wither Amulet II",
+  "item.nffgirls.wither_amulet_iii": "Wither Amulet III",
+
   "item.nffgirls.courage_amulet": "Amulet of Courage",
   "item.nffgirls.courage_amulet_ii": "Amulet of Courage II",
   "item.nffgirls.healing_jade": "Healing Jade",
@@ -142,6 +152,7 @@
 
   "info.nffgirls.bauble": "Bauble",
   "info.nffgirls.bauble.existing_item": "Also applicable as a mob bauble",
+
   "info.nffgirls.bauble.at_night": "When at night:",
   "info.nffgirls.open_trade": "Trade",
   "info.nffgirls.trade_level_not_satisfied": "This offer requires Level %1$d.",
@@ -310,9 +321,12 @@
   "tooltip.nffgirls.bauble.for_undead": "For undead mobs",
   "tooltip.nffgirls.bauble.for_arthropod": "For arthropod mobs",
   "tooltip.nffgirls.bauble.for_aquatic": "For aquatic mobs",
+  "tooltip.nffgirls.bauble.for_nether": "For Nether mobs",
   "tooltip.nffgirls.bauble.unrepeatable": " (Not repeatable)",
   "tooltip.nffgirls.bauble.environment_immunity": "Providing environment damage protection",
+  "tooltip.nffgirls.bauble.dedicated_item": "Mob Bauble",
   "tooltip.nffgirls.bauble.existing_item": "Also applicable as a mob bauble",
+  "tooltip.nffgirls.bauble.rarity_tier": "Rarity tier %1$d",
 
   "desc.nffgirls.item.commanding_wand": "Right click your mob to switch the AI\nShift+Right click an NFF mob to open the GUI\nRight click a Bell to gather NFF mobs within 16 blocks\nRight click a Soul Powder Block to find current locations of the mobs",
   "desc.nffgirls.item.combat_commanding_wand": "Right click an NFF mob to select, and then right click an enemy to make your mob attack it\nShift+Right click your mob to make it stop attacking\nShift+Right click an enemy to make all your mobs around attack it together",
