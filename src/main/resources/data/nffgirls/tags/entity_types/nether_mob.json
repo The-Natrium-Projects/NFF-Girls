@@ -1,0 +1,11 @@
+{
+  "desc": "Mobs with this tag can equip baubles for nether mobs.",
+  "replace" : false,
+  "values" : [
+    "nffgirls:hmag_imp",
+    "nffgirls:hmag_crimson_slaughterer",
+    "nffgirls:hmag_ghastly_seeker",
+    "nffgirls:hmag_wither_skeleton_girl",
+    "nffgirls:hmag_melty_monster"
+  ]
+}

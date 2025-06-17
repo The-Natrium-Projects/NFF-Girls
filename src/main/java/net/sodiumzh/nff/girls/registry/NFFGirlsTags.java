@@ -60,5 +60,7 @@ public class NFFGirlsTags
 		NFFGirls.MOD_ID, "neutral_on_high_progress");
 	public static final TagKey<EntityType<?>> AQUATIC_MOB = NFUTagStatics.createEntityTypeTag(
 		NFFGirls.MOD_ID, "aquatic_mob");
+	public static final TagKey<EntityType<?>> NETHER_MOB = NFUTagStatics.createEntityTypeTag(
+		NFFGirls.MOD_ID, "nether_mob");
 	
 }
