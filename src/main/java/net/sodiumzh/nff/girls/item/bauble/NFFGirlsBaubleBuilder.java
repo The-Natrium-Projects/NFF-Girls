@@ -1,5 +1,6 @@
 package net.sodiumzh.nff.girls.item.bauble;
 
+import com.mojang.datafixers.kinds.IdF;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
@@ -9,6 +10,7 @@ import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -18,6 +20,7 @@ import net.sodiumzh.nff.girls.NFFGirls;
 import net.sodiumzh.nff.girls.registry.NFFGirlsConfigs;
 import net.sodiumzh.nfu.container.Tuple2;
 import net.sodiumzh.nfu.container.Tuple3;
+import net.sodiumzh.nfu.function.ChainableUnaryOperator;
 import net.sodiumzh.nfu.function.ModifiableSupplier;
 import net.sodiumzh.nfu.info.ComponentBuilder;
 import net.sodiumzh.nfu.item.bauble.BaubleAttributeModifier;
@@ -49,6 +52,7 @@ public class NFFGirlsBaubleBuilder {
     private final Validatable<Map<BaubleAttributeModifier, Predicate<? super Mob>>> unrepeatableModifiers
         = new Validatable<>(new HashMap<>());
     private final List<String> tags = new ArrayList<>();
+    private BiFunction<ItemStack, MutableComponent, MutableComponent> nameStyle = (i, c) -> c;
     // Built bauble reference after building. Null before building.
     @Nullable
     private IBuiltBauble builtBauble = null;
@@ -188,12 +192,30 @@ public class NFFGirlsBaubleBuilder {
     private static final Supplier<MutableComponent> DEFAULT_UNREPEATABLE_TIP = () ->
         NFUInfoStatics.createTranslatable("tooltip.nffgirls.bauble.unrepeatable").withStyle(ChatFormatting.GRAY);
     private static final Supplier<MutableComponent> ENVIRONMENT_IMMUNITY_TOOLTIP = () ->
-        NFUInfoStatics.createTranslatable("tooltip.nffgirls.bauble.environment_immunity").withStyle(ChatFormatting.GRAY);
+        NFUInfoStatics.createTranslatable("tooltip.nffgirls.bauble.environment_immunity").withStyle(ChatFormatting.WHITE);
 
     private boolean isEnvironmentImmunityTooltipManuallyAdded = false;
-
     @Nullable
     private Component equippingConditionTooltip = null;
+
+    public NFFGirlsBaubleBuilder setNameStyle(BiFunction<ItemStack, MutableComponent, MutableComponent> style) {
+        this.nameStyle = style;
+        return this;
+    }
+
+    public NFFGirlsBaubleBuilder setNameStyle(BiConsumer<ItemStack, MutableComponent> style) {
+        return setNameStyle((i, c) -> {
+            style.accept(i, c);
+            return c;
+        });
+    }
+
+    public NFFGirlsBaubleBuilder setNameStyle(Consumer<MutableComponent> style) {
+        return setNameStyle((i, c) -> {
+            style.accept(c);
+            return c;
+        });
+    }
 
     public NFFGirlsBaubleBuilder addRepeatableModifierTooltips(@Nullable Supplier<Predicate<? extends Mob>> conditionFilter, Consumer<ModifierTooltipInfo> format) {
         DecimalFormat df = new DecimalFormat("#.##");
@@ -328,21 +350,26 @@ public class NFFGirlsBaubleBuilder {
      */
     public static class ModifierTooltipInfo implements Supplier<MutableComponent> {
 
-        private static final Consumer<MutableComponent> DEFAULT_ATTRIBUTE_FORMAT
-            = c -> c.withStyle(ChatFormatting.GRAY);
+        private static final BiConsumer<MutableComponent, ModifierTooltipInfo> DEFAULT_ATTRIBUTE_FORMAT
+            = (c, i) -> c.withStyle(ChatFormatting.WHITE);
+        private static final BiConsumer<MutableComponent, ModifierTooltipInfo> DEFAULT_AMOUNT_FORMAT
+             = (c, i) -> {
+            if (i.amount > 0) c.withStyle(ChatFormatting.BLUE);
+            else if (i.amount < 0) c.withStyle(ChatFormatting.RED);
+            else c.withStyle(ChatFormatting.WHITE);
+        };
 
         private final Attribute attr;
         private final double amount;
         private AttributeModifier.Operation op;
-        private Consumer<MutableComponent> attributeFormat = DEFAULT_ATTRIBUTE_FORMAT;
-        private Consumer<MutableComponent> operatorFormat = DEFAULT_ATTRIBUTE_FORMAT;
-        private Consumer<MutableComponent> amountFormat = DEFAULT_ATTRIBUTE_FORMAT;
-        private Consumer<MutableComponent> percentFormat = DEFAULT_ATTRIBUTE_FORMAT;
+        public BiConsumer<MutableComponent, ModifierTooltipInfo> attributeFormat = DEFAULT_ATTRIBUTE_FORMAT;
+        public BiConsumer<MutableComponent, ModifierTooltipInfo> operatorFormat = DEFAULT_AMOUNT_FORMAT;
+        public BiConsumer<MutableComponent, ModifierTooltipInfo> amountFormat = DEFAULT_AMOUNT_FORMAT;
+        public BiConsumer<MutableComponent, ModifierTooltipInfo> percentFormat = DEFAULT_AMOUNT_FORMAT;
         @Nullable
         private ModifiableSupplier<MutableComponent> additionAtStart = null;
         @Nullable
         private ModifiableSupplier<MutableComponent> additionAtEnd = null;
-
 
         public ModifierTooltipInfo(Attribute attr, double amount, AttributeModifier.Operation op) {
             this.attr = attr;
@@ -350,7 +377,7 @@ public class NFFGirlsBaubleBuilder {
             this.op = op;
         }
 
-        public ModifierTooltipInfo format(@Nonnull Consumer<MutableComponent> formatting) {
+        public ModifierTooltipInfo format(@Nonnull BiConsumer<MutableComponent, ModifierTooltipInfo> formatting) {
             this.attributeFormat = formatting;
             this.operatorFormat = formatting;
             this.amountFormat = formatting;
@@ -358,22 +385,22 @@ public class NFFGirlsBaubleBuilder {
             return this;
         }
 
-        public ModifierTooltipInfo attributeFormat(@Nonnull Consumer<MutableComponent> formatting) {
+        public ModifierTooltipInfo attributeFormat(@Nonnull BiConsumer<MutableComponent, ModifierTooltipInfo> formatting) {
             this.attributeFormat = formatting;
             return this;
         }
 
-        public ModifierTooltipInfo operatorFormat(@Nonnull Consumer<MutableComponent> formatting) {
+        public ModifierTooltipInfo operatorFormat(@Nonnull BiConsumer<MutableComponent, ModifierTooltipInfo> formatting) {
             this.operatorFormat = formatting;
             return this;
         }
 
-        public ModifierTooltipInfo amountFormat(@Nonnull Consumer<MutableComponent> formatting) {
+        public ModifierTooltipInfo amountFormat(@Nonnull BiConsumer<MutableComponent, ModifierTooltipInfo> formatting) {
             this.amountFormat = formatting;
             return this;
         }
 
-        public ModifierTooltipInfo percentFormat(@Nonnull Consumer<MutableComponent> formatting) {
+        public ModifierTooltipInfo percentFormat(@Nonnull BiConsumer<MutableComponent, ModifierTooltipInfo> formatting) {
             this.percentFormat = formatting;
             return this;
         }
@@ -396,7 +423,7 @@ public class NFFGirlsBaubleBuilder {
         public MutableComponent get() {
             if (Math.abs(amount) < 1e-12d) return null;
             MutableComponent attributeComponent = NFUInfoStatics.createTranslatable("attribute.name." + ForgeRegistries.ATTRIBUTES.getKey(attr).getPath()).withStyle(ChatFormatting.GRAY);
-            attributeFormat.accept(attributeComponent);
+            attributeFormat.accept(attributeComponent, this);
             String operatorStr;
             String amountStr;
             String percentageStr = "";
@@ -430,9 +457,9 @@ public class NFFGirlsBaubleBuilder {
             MutableComponent operatorComponent = NFUInfoStatics.createText(operatorStr).withStyle(ChatFormatting.GRAY);
             MutableComponent amountComponent = NFUInfoStatics.createText(amountStr).withStyle(ChatFormatting.GRAY);
             MutableComponent percentageComponent = NFUInfoStatics.createText(percentageStr).withStyle(ChatFormatting.GRAY);
-            this.operatorFormat.accept(operatorComponent);
-            this.amountFormat.accept(amountComponent);
-            this.percentFormat.accept(percentageComponent);
+            this.operatorFormat.accept(operatorComponent, this);
+            this.amountFormat.accept(amountComponent, this);
+            this.percentFormat.accept(percentageComponent, this);
 
             ComponentBuilder builder = ComponentBuilder.create()
                 .append(attributeComponent).appendText(" ")
@@ -453,8 +480,8 @@ public class NFFGirlsBaubleBuilder {
         @Nullable
         private ComponentBuilder fixedPart = null;
         private Supplier<Supplier<MutableComponent>> gettingMethod = this::getDefaultComponentSupplier;
-        private Consumer<ModifierTooltipInfo> modifierFormatter = m -> m.format(c -> c.withStyle(ChatFormatting.GRAY));
-        private Consumer<MutableComponent> fixedFormatter = c -> c.withStyle(ChatFormatting.GRAY);
+        private Consumer<ModifierTooltipInfo> modifierFormatter = null;
+        private Consumer<MutableComponent> fixedFormatter = null;
 
 
         private TooltipInfo(@Nonnull Supplier<BaubleAttributeModifier> modifierAccessor) {
@@ -536,13 +563,15 @@ public class NFFGirlsBaubleBuilder {
                     BaubleAttributeModifier modifier = modifierAccessor.get();
                     ModifierTooltipInfo modifierInfo = new ModifierTooltipInfo(modifier.getAttribute(),
                         modifier.getAmount(), modifier.getOperation());
-                    modifierFormatter.accept(modifierInfo);
+                    if (modifierFormatter != null)
+                        modifierFormatter.accept(modifierInfo);
                     builder.append(modifierInfo.get());
                 }
                 if (fixedPart != null)
                     builder.append(fixedPart.build());
                 MutableComponent res = builder.build();
-                fixedFormatter.accept(res);
+                if (fixedFormatter != null)
+                    fixedFormatter.accept(res);
                 return res;
             };
         }
@@ -558,8 +587,6 @@ public class NFFGirlsBaubleBuilder {
         public Optional<ComponentBuilder> getFixedPartBuilder() {
             return Optional.ofNullable(this.fixedPart);
         }
-
-
     }
 
     // Building
@@ -567,7 +594,7 @@ public class NFFGirlsBaubleBuilder {
     public NFFGirlsDedicatedBaubleItem buildAsBaubleItem(ResourceLocation key, int tier, Item.Properties properties, boolean autoRegister) {
         BuiltItem res = new BuiltItem(key, tier, this, properties);
         if (autoRegister)
-            NFFGirlsBaubles.BAUBLE_REGISTRY.register(NFFGirlsDedicatedBaubleItem.getBaubleRegistryKey(key, tier), () -> res);
+            NFFGirlsBaubles.BAUBLE_REGISTRY.registerIfAbsent(NFFGirlsDedicatedBaubleItem.getBaubleRegistryKey(key, tier), () -> res);
         this.builtBauble = res;
         return res;
     }
@@ -579,7 +606,7 @@ public class NFFGirlsBaubleBuilder {
     public NFFGirlsBaubleBehavior buildAsBaubleBehavior(ResourceLocation categoryKey, int tier, Item item, boolean autoRegister) {
         BuiltBehavior res = new BuiltBehavior(this, item, categoryKey, tier);
         if (autoRegister)
-            NFFGirlsBaubles.BAUBLE_REGISTRY.register(NFFGirlsBaubleBehavior.getBaubleRegistryKey(categoryKey, tier), () -> res);
+            NFFGirlsBaubles.BAUBLE_REGISTRY.registerIfAbsent(NFFGirlsBaubleBehavior.getBaubleRegistryKey(categoryKey, tier), () -> res);
         this.builtBauble = res;
         return res;
     }
@@ -589,6 +616,7 @@ public class NFFGirlsBaubleBuilder {
     }
 
     private static interface IBuiltBauble extends INFFGirlsBauble {
+
         void onValidate();
         NFFGirlsBaubleBuilder getBuilder();
         default void validate() {
@@ -607,7 +635,10 @@ public class NFFGirlsBaubleBuilder {
                 this.addBaubleTag(INFFGirlsBauble.TAG_ENVIRONMENT_IMMUNITY);
             }
             builder.tags.forEach(this::addBaubleTag);
+            this.setNameStyle(builder.nameStyle);
         }
+
+
 
         @Override
         public void slotTick(BaubleProcessingArgs baubleProcessingArgs) {
@@ -639,6 +670,7 @@ public class NFFGirlsBaubleBuilder {
 
         @Override
         public void onValidate() {
+            this.description(() -> NFUInfoStatics.createTranslatable("tooltip.nffgirls.bauble.dedicated_item"));
             builder.tooltips.get().forEach(this::description);
             if (builder.environmentImmune && !builder.isEnvironmentImmunityTooltipManuallyAdded)
                 this.description(ENVIRONMENT_IMMUNITY_TOOLTIP);
@@ -697,9 +729,10 @@ public class NFFGirlsBaubleBuilder {
 
         @Override
         public void onValidate() {
+            this.addTooltip(() -> NFUInfoStatics.createTranslatable("tooltip.nffgirls.bauble.existing_item"));
             builder.tooltips.get().forEach(this::addTooltip);
             if (builder.environmentImmune && !builder.isEnvironmentImmunityTooltipManuallyAdded)
-                this.addTooltip(() -> NFUInfoStatics.createTranslatable("tooltip.nffgirls.bauble.environment_immunity").withStyle(ChatFormatting.GRAY));
+                this.addTooltip(() -> NFUInfoStatics.createTranslatable("tooltip.nffgirls.bauble.environment_immunity").withStyle(ChatFormatting.WHITE));
         }
 
         @Override
