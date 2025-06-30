@@ -1,6 +1,5 @@
 package net.sodiumzh.nff.girls.item.bauble;
 
-import com.mojang.datafixers.kinds.IdF;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
@@ -18,16 +17,18 @@ import net.minecraftforge.fml.event.config.ModConfigEvent;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.sodiumzh.nff.girls.NFFGirls;
 import net.sodiumzh.nff.girls.registry.NFFGirlsConfigs;
-import net.sodiumzh.nfu.container.Tuple2;
-import net.sodiumzh.nfu.container.Tuple3;
-import net.sodiumzh.nfu.function.ChainableUnaryOperator;
 import net.sodiumzh.nfu.function.ModifiableSupplier;
+import net.sodiumzh.nfu.function.RegistrablePredicate;
 import net.sodiumzh.nfu.info.ComponentBuilder;
 import net.sodiumzh.nfu.item.bauble.BaubleAttributeModifier;
 import net.sodiumzh.nfu.item.bauble.BaubleEquippingCondition;
+import net.sodiumzh.nfu.item.bauble.BaubleEquippingConditions;
 import net.sodiumzh.nfu.item.bauble.BaubleProcessingArgs;
 import net.sodiumzh.nfu.object.LimitedMutable;
 import net.sodiumzh.nfu.object.Validatable;
+import net.sodiumzh.nfu.registry.NFURegistries;
+import net.sodiumzh.nfu.registry.NFURegistry;
+import net.sodiumzh.nfu.registry.NFURegistryEntryCollection;
 import net.sodiumzh.nfu.util.NFUDebugStatics;
 import net.sodiumzh.nfu.util.NFUInfoStatics;
 import org.jetbrains.annotations.Nullable;
@@ -38,17 +39,27 @@ import java.text.DecimalFormat;
 import java.util.*;
 import java.util.function.*;
 
+/**
+ * A utility for declaration of baubles on construction.
+ */
 @Mod.EventBusSubscriber(modid = NFFGirls.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class NFFGirlsBaubleBuilder {
 
-    public static final Predicate<Mob> NO_CONDITION = mob -> true;
+    public static NFURegistryEntryCollection<RegistrablePredicate<?>> EQUIPPING_CONDITION_PRESETS
+        = NFURegistryEntryCollection.create(NFURegistries.PREDICATES, NFFGirls.MOD_ID);
+
+    public static final NFURegistry.Accessor<RegistrablePredicate<Mob>> NO_CONDITION =
+        EQUIPPING_CONDITION_PRESETS.register("bauble_no_condition", () ->
+            new RegistrablePredicate<>("nffgirls_bauble_no_condition", mob -> true));
 
     private final Map<Supplier<BaubleAttributeModifier>, Predicate<? super Mob>> repeatableModifierSuppliers
         = new HashMap<>();
     private final Map<Supplier<BaubleAttributeModifier>, Predicate<? super Mob>> unrepeatableModifierSuppliers
         = new HashMap<>();
+    // Only for tooltips. Use suppliers for making effects.
     private final Validatable<Map<BaubleAttributeModifier, Predicate<? super Mob>>> repeatableModifiers
         = new Validatable<>(new HashMap<>());
+    // Only for tooltips. Use suppliers for making effects.
     private final Validatable<Map<BaubleAttributeModifier, Predicate<? super Mob>>> unrepeatableModifiers
         = new Validatable<>(new HashMap<>());
     private final List<String> tags = new ArrayList<>();
@@ -61,42 +72,68 @@ public class NFFGirlsBaubleBuilder {
 
     private boolean environmentImmune = false;
     private Consumer<BaubleProcessingArgs> onTick = args -> {};
-    private BaubleEquippingCondition equippingCondition = BaubleEquippingCondition.always();
+    private BaubleEquippingCondition equippingCondition = BaubleEquippingConditions.CONDITION_ALWAYS.get();
 
-    private static BaubleAttributeModifier getModifierFromProperties(Attribute attribute, double amount, AttributeModifier.Operation operation) {
-        if (!operation.equals(AttributeModifier.Operation.ADDITION))
-            return new BaubleAttributeModifier(attribute, amount, operation);
+    private static BaubleAttributeModifier getModifierFromProperties(Attribute attribute, double amount, AttributeModifier.Operation operation, @Nullable Predicate<? super Mob> condition, @Nullable ResourceLocation id) {
         double actualAmount = amount;
-        if (attribute.equals(Attributes.MAX_HEALTH))
-            actualAmount *= NFFGirlsConfigs.ValueCache.Baubles.BAUBLE_HEALTH_RECOVERY_SCALE;
-        else if (attribute.equals(Attributes.ATTACK_DAMAGE))
-            actualAmount *= NFFGirlsConfigs.ValueCache.Baubles.BAUBLE_ATK_BOOSTING_SCALE;
-        else if (attribute.equals(Attributes.ARMOR))
-            actualAmount *= NFFGirlsConfigs.ValueCache.Baubles.BAUBLE_ARMOR_BOOSTING_SCALE;
-        else if (attribute.equals(NFFGirlsEntityAttributes.PERSISTENT_HEALING_PER_SECOND.get()))
-            actualAmount *= NFFGirlsConfigs.ValueCache.Baubles.BAUBLE_HEALTH_RECOVERY_SCALE;
-        return new BaubleAttributeModifier(attribute, actualAmount, operation);
+        if (operation.equals(AttributeModifier.Operation.ADDITION)) {
+            if (attribute.equals(Attributes.MAX_HEALTH))
+                actualAmount *= NFFGirlsConfigs.ValueCache.Baubles.BAUBLE_HEALTH_RECOVERY_SCALE;
+            else if (attribute.equals(Attributes.ATTACK_DAMAGE))
+                actualAmount *= NFFGirlsConfigs.ValueCache.Baubles.BAUBLE_ATK_BOOSTING_SCALE;
+            else if (attribute.equals(Attributes.ARMOR))
+                actualAmount *= NFFGirlsConfigs.ValueCache.Baubles.BAUBLE_ARMOR_BOOSTING_SCALE;
+            else if (attribute.equals(NFFGirlsEntityAttributes.PERSISTENT_HEALING.get()))
+                actualAmount *= NFFGirlsConfigs.ValueCache.Baubles.BAUBLE_HEALTH_RECOVERY_SCALE;
+        }
+        BaubleAttributeModifier res = new BaubleAttributeModifier(attribute, actualAmount, operation);
+        Predicate<? super Mob> cond1 = condition == null ? NO_CONDITION.get() : condition;
+        res.setAdditionalCondition(args -> cond1.test(args.user()));
+        if (id != null)
+            res.setAdditionalID(id);
+        return res;
     }
 
-    public NFFGirlsBaubleBuilder repeatable(Attribute attr, double amount, AttributeModifier.Operation operation, Predicate<? super Mob> condition) {
+    public NFFGirlsBaubleBuilder repeatable(Attribute attr, double amount, AttributeModifier.Operation operation, @Nullable Predicate<? super Mob> condition, @Nullable ResourceLocation id) {
         if (this.validated.get()) {
             NFUDebugStatics.errorOnce("Builder has been validated, no more modification. Skipped.");
         }
-        repeatableModifierSuppliers.put(() -> getModifierFromProperties(attr, amount, operation), condition);
+        Predicate<? super Mob> cond1 = condition != null ? condition : NO_CONDITION.get();
+        repeatableModifierSuppliers.put(() -> getModifierFromProperties(attr, amount, operation, cond1, id), cond1);
         return this;
+    }
+
+    public NFFGirlsBaubleBuilder repeatable(Attribute attr, double amount, AttributeModifier.Operation operation, @Nullable Predicate<? super Mob> condition) {
+        return repeatable(attr, amount, operation, condition, null);
+    }
+
+    public NFFGirlsBaubleBuilder repeatable(Attribute attr, double amount, AttributeModifier.Operation operation, @Nullable ResourceLocation id) {
+        return repeatable(attr, amount, operation, null, id);
     }
 
     public NFFGirlsBaubleBuilder repeatable(Attribute attr, double amount, AttributeModifier.Operation operation) {
-        return repeatable(attr, amount, operation, NO_CONDITION);
+        return repeatable(attr, amount, operation, null, null);
     }
 
-    public NFFGirlsBaubleBuilder unrepeatable(Attribute attr, double amount, AttributeModifier.Operation operation, Predicate<? super Mob> condition) {
-        unrepeatableModifierSuppliers.put(() -> getModifierFromProperties(attr, amount, operation), condition);
+    public NFFGirlsBaubleBuilder unrepeatable(Attribute attr, double amount, AttributeModifier.Operation operation, Predicate<? super Mob> condition, @Nullable ResourceLocation id) {
+        if (this.validated.get()) {
+            NFUDebugStatics.errorOnce("Builder has been validated, no more modification. Skipped.");
+        }
+        Predicate<? super Mob> cond1 = condition != null ? condition : NO_CONDITION.get();
+        unrepeatableModifierSuppliers.put(() -> getModifierFromProperties(attr, amount, operation, cond1, id), cond1);
         return this;
     }
 
+    public NFFGirlsBaubleBuilder unrepeatable(Attribute attr, double amount, AttributeModifier.Operation operation, @Nullable Predicate<? super Mob> condition) {
+        return unrepeatable(attr, amount, operation, condition, null);
+    }
+
+    public NFFGirlsBaubleBuilder unrepeatable(Attribute attr, double amount, AttributeModifier.Operation operation, @Nullable ResourceLocation id) {
+        return unrepeatable(attr, amount, operation, null, id);
+    }
+
     public NFFGirlsBaubleBuilder unrepeatable(Attribute attr, double amount, AttributeModifier.Operation operation) {
-        return unrepeatable(attr, amount, operation, NO_CONDITION);
+        return unrepeatable(attr, amount, operation, null, null);
     }
 
     public NFFGirlsBaubleBuilder environmentResistance() {
@@ -105,17 +142,13 @@ public class NFFGirlsBaubleBuilder {
     }
 
     public NFFGirlsBaubleBuilder equippingCondition(@Nullable BaubleEquippingCondition condition, @Nullable Component info) {
-        this.equippingCondition = Optional.ofNullable(condition).orElse(BaubleEquippingCondition.always());
+        this.equippingCondition = Optional.ofNullable(condition).orElse(BaubleEquippingConditions.CONDITION_ALWAYS.get());
         this.equippingConditionTooltip = info;
         return this;
     }
 
     public NFFGirlsBaubleBuilder equippingCondition(@Nullable BaubleEquippingCondition condition) {
-        return equippingCondition(condition, null);
-    }
-
-    public NFFGirlsBaubleBuilder equippingCondition(@Nonnull Tuple2<BaubleEquippingCondition, Component> conditionAndInfo) {
-        return equippingCondition(conditionAndInfo.getA(), conditionAndInfo.getB());
+        return equippingCondition(condition, Optional.ofNullable(condition).map(BaubleEquippingCondition::getTranslation).orElse(null));
     }
 
     public NFFGirlsBaubleBuilder onTick(Consumer<BaubleProcessingArgs> action) {
@@ -166,13 +199,17 @@ public class NFFGirlsBaubleBuilder {
 
     private final ModifiableSupplier<List<TooltipInfo>> tooltipsSupplier = new ModifiableSupplier<>(ArrayList::new);
     private final Validatable<List<Supplier<? extends Component>>> tooltips = new Validatable<>(new ArrayList<>());
-    private static final Comparator<Attribute> COMPARING_ATTRIBUTE = (o1, o2) -> {
+    private static final Comparator<BaubleAttributeModifier> COMPARING_ATTRIBUTE = (m1, m2) -> {
+        if (m1.getAmount() * m2.getAmount() < 0)
+            return m1.getAmount() < 0 ? 1 : -1;
         List<Attribute> reserved = List.of(Attributes.MAX_HEALTH, Attributes.ATTACK_DAMAGE,
             Attributes.ARMOR, NFFGirlsEntityAttributes.CRITICAL_RATE.get(),
             NFFGirlsEntityAttributes.ANTI_UNDEAD.get(), NFFGirlsEntityAttributes.ANTI_ARTHROPOD.get(),
             NFFGirlsEntityAttributes.WATER_ASPECT.get(), Attributes.MOVEMENT_SPEED,
-            NFFGirlsEntityAttributes.PERSISTENT_HEALING_PER_SECOND.get(),
+            NFFGirlsEntityAttributes.PERSISTENT_HEALING.get(),
             NFFGirlsEntityAttributes.LOOTING_LEVEL.get());
+        Attribute o1 = m1.getAttribute();
+        Attribute o2 = m2.getAttribute();
         if (reserved.contains(o1) && reserved.contains(o2))
             return Integer.compare(reserved.indexOf(o1), reserved.indexOf(o2));
         else if (reserved.contains(o1)) return -1;
@@ -194,9 +231,59 @@ public class NFFGirlsBaubleBuilder {
     private static final Supplier<MutableComponent> ENVIRONMENT_IMMUNITY_TOOLTIP = () ->
         NFUInfoStatics.createTranslatable("tooltip.nffgirls.bauble.environment_immunity").withStyle(ChatFormatting.WHITE);
 
+    private static final List<UnaryOperator<MutableComponent>> RARITY_FORMATS = List.of(
+        m -> m.withStyle(ChatFormatting.WHITE),
+        m -> m.withStyle(ChatFormatting.YELLOW),
+        m -> m.withStyle(ChatFormatting.GREEN),
+        m -> m.withStyle(ChatFormatting.LIGHT_PURPLE),
+        m -> m.withStyle(ChatFormatting.BLUE),
+        m -> m.withStyle(ChatFormatting.GOLD),
+        m -> m.withStyle(ChatFormatting.RED),
+        m -> m.withStyle(ChatFormatting.AQUA),
+        m -> m.withStyle(ChatFormatting.DARK_PURPLE));
+
+    private boolean showRarityTier = true;
+    private boolean useRarityTierNameColor = true;
+
+    // Rarity tier to display. -1 = no display.
+    private int rarityTier = -1;
+
     private boolean isEnvironmentImmunityTooltipManuallyAdded = false;
     @Nullable
     private Component equippingConditionTooltip = null;
+
+    public NFFGirlsBaubleBuilder setRarityTier(int value) {
+        if (value < 0) rarityTier = -1;
+        else rarityTier = value;
+        return this;
+    }
+
+    public int getRarityTier() {
+        return rarityTier;
+    }
+
+    public NFFGirlsBaubleBuilder setShowRarityTier(boolean value) {
+        this.showRarityTier = value;
+        return this;
+    }
+
+    /**
+     * Set if this item should set the name color from rarity tier. Note: this only takes effect on dedicated items.
+     */
+    public NFFGirlsBaubleBuilder setUseRarityTierNameColor(boolean value) {
+        this.useRarityTierNameColor = value;
+        return this;
+    }
+
+    private Optional<UnaryOperator<MutableComponent>> getRarityTierFormat() {
+        return rarityTier < 0 ? Optional.empty() :
+            Optional.ofNullable(RARITY_FORMATS.get(Math.min(RARITY_FORMATS.size() - 1, rarityTier)));
+    }
+
+    private Optional<MutableComponent> getRarityTierDesc() {
+        return getRarityTierFormat().map(format ->
+            format.apply(NFUInfoStatics.createTranslatable("tooltip.nffgirls.bauble.rarity_tier", rarityTier)));
+    }
 
     public NFFGirlsBaubleBuilder setNameStyle(BiFunction<ItemStack, MutableComponent, MutableComponent> style) {
         this.nameStyle = style;
@@ -217,20 +304,20 @@ public class NFFGirlsBaubleBuilder {
         });
     }
 
-    public NFFGirlsBaubleBuilder addRepeatableModifierTooltips(@Nullable Supplier<Predicate<? extends Mob>> conditionFilter, Consumer<ModifierTooltipInfo> format) {
+    public NFFGirlsBaubleBuilder addRepeatableModifierTooltips(@Nullable Supplier<Predicate<? super Mob>> conditionFilter, Consumer<ModifierTooltipInfo> format) {
         DecimalFormat df = new DecimalFormat("#.##");
         df.setDecimalSeparatorAlwaysShown(false);
         tooltipsSupplier.modify(list -> {
             list.addAll(this.repeatableModifiers.get().entrySet().stream()
                 .filter(e -> conditionFilter == null || conditionFilter.get() == null || conditionFilter.get().equals(e.getValue()))
-                .sorted(Comparator.comparing(e -> e.getKey().getAttribute(), COMPARING_ATTRIBUTE))
+                .sorted(Map.Entry.comparingByKey(COMPARING_ATTRIBUTE))
                 .map(e -> TooltipInfo.ofAttribute(e::getKey).modifierFormatter(format))
                 .toList());
         });
         return this;
     }
 
-    public NFFGirlsBaubleBuilder addRepeatableModifierTooltips(@Nullable Supplier<Predicate<? extends Mob>> conditionFilter) {
+    public NFFGirlsBaubleBuilder addRepeatableModifierTooltips(@Nullable Supplier<Predicate<? super Mob>> conditionFilter) {
         return addRepeatableModifierTooltips(conditionFilter, m -> {});
     }
 
@@ -238,13 +325,17 @@ public class NFFGirlsBaubleBuilder {
         return addRepeatableModifierTooltips(null);
     }
 
-    public NFFGirlsBaubleBuilder addUnrepeatableModifierTooltips(@Nullable Supplier<Predicate<? extends Mob>> conditionFilter, Consumer<ModifierTooltipInfo> format, boolean showUnrepeatableTooltip) {
+    public NFFGirlsBaubleBuilder addRepeatableModifierTooltipsUnconditional() {
+        return addRepeatableModifierTooltips(NO_CONDITION::get);
+    }
+
+    public NFFGirlsBaubleBuilder addUnrepeatableModifierTooltips(@Nullable Supplier<Predicate<? super Mob>> conditionFilter, Consumer<ModifierTooltipInfo> format, boolean showUnrepeatableTooltip) {
         DecimalFormat df = new DecimalFormat("#.##");
         df.setDecimalSeparatorAlwaysShown(false);
         tooltipsSupplier.modify(list -> {
             list.addAll(this.unrepeatableModifiers.get().entrySet().stream()
                 .filter(e -> conditionFilter == null || conditionFilter.get() == null || conditionFilter.get().equals(e.getValue()))
-                .sorted(Comparator.comparing(e -> e.getKey().getAttribute(), COMPARING_ATTRIBUTE))
+                .sorted(Map.Entry.comparingByKey(COMPARING_ATTRIBUTE))
                 .map(e -> {
                     TooltipInfo tooltipInfo = TooltipInfo.ofAttribute(e::getKey).modifierFormatter(format);
                     if (showUnrepeatableTooltip) tooltipInfo.append(DEFAULT_UNREPEATABLE_TIP.get());
@@ -254,15 +345,15 @@ public class NFFGirlsBaubleBuilder {
         return this;
     }
 
-    public NFFGirlsBaubleBuilder addUnrepeatableModifierTooltips(@Nullable Supplier<Predicate<? extends Mob>> conditionFilter, Consumer<ModifierTooltipInfo> format) {
+    public NFFGirlsBaubleBuilder addUnrepeatableModifierTooltips(@Nullable Supplier<Predicate<? super Mob>> conditionFilter, Consumer<ModifierTooltipInfo> format) {
         return addUnrepeatableModifierTooltips(conditionFilter, format, true);
     }
 
-    public NFFGirlsBaubleBuilder addUnrepeatableModifierTooltips(@Nullable Supplier<Predicate<? extends Mob>> conditionFilter, boolean showUnrepeatableTooltip) {
+    public NFFGirlsBaubleBuilder addUnrepeatableModifierTooltips(@Nullable Supplier<Predicate<? super Mob>> conditionFilter, boolean showUnrepeatableTooltip) {
         return addUnrepeatableModifierTooltips(conditionFilter, c -> {}, showUnrepeatableTooltip);
     }
 
-        public NFFGirlsBaubleBuilder addUnrepeatableModifierTooltips(@Nullable Supplier<Predicate<? extends Mob>> conditionFilter) {
+    public NFFGirlsBaubleBuilder addUnrepeatableModifierTooltips(@Nullable Supplier<Predicate<? super Mob>> conditionFilter) {
         return addUnrepeatableModifierTooltips(conditionFilter, c -> {});
     }
 
@@ -270,37 +361,31 @@ public class NFFGirlsBaubleBuilder {
         return addUnrepeatableModifierTooltips(null);
     }
 
-    public NFFGirlsBaubleBuilder addAllTooltips(@Nullable Supplier<Predicate<? super Mob>> conditionFilter,
-                                                Consumer<ModifierTooltipInfo> format, boolean showUnrepeatableTip) {
-        DecimalFormat df = new DecimalFormat("#.##");
-        df.setDecimalSeparatorAlwaysShown(false);
-        tooltipsSupplier.modify(list -> {
-            var allModifiers = (List<Tuple3<BaubleAttributeModifier, Predicate<Mob>, Boolean>>)
-                new ArrayList<>(this.unrepeatableModifiers.get().entrySet().stream().map(e -> Tuple3.of(e.getKey(), (Predicate<Mob>)e.getValue(), false)).toList());
-            allModifiers.addAll(this.repeatableModifiers.get().entrySet().stream().map(e -> Tuple3.of(e.getKey(), (Predicate<Mob>)e.getValue(), true)).toList());
-            list.addAll(allModifiers.stream()
-                .filter(e -> conditionFilter == null || conditionFilter.equals(e.b))
-                .sorted(Comparator.comparing(e -> e.a.getAttribute(), COMPARING_ATTRIBUTE))
-                .map(e -> {
-                    TooltipInfo tooltipInfo = TooltipInfo.ofAttribute(() -> e.a).modifierFormatter(format);
-                    if (!e.c && showUnrepeatableTip)
-                        tooltipInfo.append(DEFAULT_UNREPEATABLE_TIP.get());
-                    return tooltipInfo;
-                }).toList());
-        });
+    public NFFGirlsBaubleBuilder addUnrepeatableModifierTooltipsUnconditional() {
+        return addUnrepeatableModifierTooltips(NO_CONDITION::get);
+    }
+
+    public NFFGirlsBaubleBuilder addAllModifierTooltips(@Nullable Supplier<Predicate<? super Mob>> conditionFilter,
+                                                        Consumer<ModifierTooltipInfo> format, boolean showUnrepeatableTip) {
+        this.addRepeatableModifierTooltips(conditionFilter, format);
+        this.addUnrepeatableModifierTooltips(conditionFilter, format, showUnrepeatableTip);
         return this;
     }
 
-    public NFFGirlsBaubleBuilder addAllTooltips(@Nullable Supplier<Predicate<? super Mob>> conditionFilter, Consumer<ModifierTooltipInfo> format) {
-        return addAllTooltips(conditionFilter, format, true);
+    public NFFGirlsBaubleBuilder addAllModifierTooltips(@Nullable Supplier<Predicate<? super Mob>> conditionFilter, Consumer<ModifierTooltipInfo> format) {
+        return addAllModifierTooltips(conditionFilter, format, true);
     }
 
-    public NFFGirlsBaubleBuilder addAllTooltips(@Nullable Supplier<Predicate<? super Mob>> conditionFilter) {
-        return addAllTooltips(conditionFilter, c -> {});
+    public NFFGirlsBaubleBuilder addAllModifierTooltips(@Nullable Supplier<Predicate<? super Mob>> conditionFilter) {
+        return addAllModifierTooltips(conditionFilter, c -> {});
     }
 
-    public NFFGirlsBaubleBuilder addAllTooltips() {
-        return addAllTooltips(null);
+    public NFFGirlsBaubleBuilder addAllModifierTooltips() {
+        return addAllModifierTooltips(null);
+    }
+
+    public NFFGirlsBaubleBuilder addAllModifierTooltipsUnconditional() {
+        return addAllModifierTooltips(NO_CONDITION::get);
     }
 
     public NFFGirlsBaubleBuilder addEquippingConditionTooltip() {
@@ -433,12 +518,25 @@ public class NFFGirlsBaubleBuilder {
             String operation = "";
 
             if (op.equals(AttributeModifier.Operation.ADDITION)) {
-                if (amount > 0) {
-                    operatorStr = "+";
-                    amountStr = df.format(amount);
-                } else {
-                    operatorStr = "-";
-                    amountStr = df.format(-amount);
+                if (NFFGirlsEntityAttributes.isRateAttribute(attr)) {
+                    if (amount < 0) {
+                        operatorStr = "-";
+                        amountStr = df.format(-amount * 100d);
+                        percentageStr = "%";
+                    } else {
+                        operatorStr = "+";
+                        amountStr = df.format(amount * 100d);
+                        percentageStr = "%";
+                    }
+                }
+                else {
+                    if (amount > 0) {
+                        operatorStr = "+";
+                        amountStr = df.format(amount);
+                    } else {
+                        operatorStr = "-";
+                        amountStr = df.format(-amount);
+                    }
                 }
             } else {
                 if (amount < 0) {
@@ -450,8 +548,8 @@ public class NFFGirlsBaubleBuilder {
                     amountStr = df.format(amount * 100d);
                     percentageStr = "%";
                 } else {
-                    operatorStr = "*";
-                    amountStr = df.format(amount + 1d);
+                    operatorStr = "";
+                    amountStr = df.format(amount + 1d) + "x";
                 }
             }
             MutableComponent operatorComponent = NFUInfoStatics.createText(operatorStr).withStyle(ChatFormatting.GRAY);
@@ -638,8 +736,6 @@ public class NFFGirlsBaubleBuilder {
             this.setNameStyle(builder.nameStyle);
         }
 
-
-
         @Override
         public void slotTick(BaubleProcessingArgs baubleProcessingArgs) {
             if (!builder.isValidated()) throw new IllegalStateException("NFFGirlsBaubleBuilder: Item calling before builder validation.");
@@ -648,32 +744,36 @@ public class NFFGirlsBaubleBuilder {
 
         @Nullable
         @Override
-        public BaubleAttributeModifier[] getDuplicableModifiers(BaubleProcessingArgs baubleProcessingArgs) {
+        public BaubleAttributeModifier[] getRepeatableModifiers(BaubleProcessingArgs baubleProcessingArgs) {
             if (!builder.isValidated()) throw new IllegalStateException("NFFGirlsBaubleBuilder: Item calling before builder validation.");
-            return builder.repeatableModifiers.get().entrySet().stream().filter(entry -> entry.getValue().test(baubleProcessingArgs.user()))
-                .map(Map.Entry::getKey).toArray(BaubleAttributeModifier[]::new);
+            return builder.repeatableModifierSuppliers.keySet().stream()
+                .map(Supplier::get).toArray(BaubleAttributeModifier[]::new);
         }
 
         @Nullable
         @Override
-        public BaubleAttributeModifier[] getNonDuplicableModifiers(Mob mob) {
+        public BaubleAttributeModifier[] getUnrepeatableModifiers(Mob mob) {
             if (!builder.isValidated()) throw new IllegalStateException("NFFGirlsBaubleBuilder: Item calling before builder validation.");
-            return builder.unrepeatableModifiers.get().entrySet().stream().filter(entry -> entry.getValue().test(mob))
-                .map(Map.Entry::getKey).toArray(BaubleAttributeModifier[]::new);
+            return builder.unrepeatableModifierSuppliers.keySet().stream()
+                .map(Supplier::get).toArray(BaubleAttributeModifier[]::new);
         }
 
         @Nonnull
         @Override
         public BaubleEquippingCondition getEquippingCondition() {
-            return Optional.ofNullable(builder.equippingCondition).orElse(BaubleEquippingCondition.always());
+            return Optional.ofNullable(builder.equippingCondition).orElse(BaubleEquippingConditions.CONDITION_ALWAYS.get());
         }
 
         @Override
         public void onValidate() {
             this.description(() -> NFUInfoStatics.createTranslatable("tooltip.nffgirls.bauble.dedicated_item"));
+            if (builder.showRarityTier)
+                builder.getRarityTierDesc().ifPresent(this::description);
             builder.tooltips.get().forEach(this::description);
             if (builder.environmentImmune && !builder.isEnvironmentImmunityTooltipManuallyAdded)
                 this.description(ENVIRONMENT_IMMUNITY_TOOLTIP);
+            if (builder.useRarityTierNameColor)
+                builder.getRarityTierFormat().ifPresent(this::setNameStyle);
         }
 
         @Override
@@ -713,23 +813,23 @@ public class NFFGirlsBaubleBuilder {
 
         @Nullable
         @Override
-        public BaubleAttributeModifier[] getDuplicableModifiers(BaubleProcessingArgs baubleProcessingArgs) {
-            return builder.repeatableModifiers.get().entrySet().stream()
-                .filter(entry -> entry.getValue().test(baubleProcessingArgs.user()))
-                .map(Map.Entry::getKey).toArray(BaubleAttributeModifier[]::new);
+        public BaubleAttributeModifier[] getRepeatableModifiers(BaubleProcessingArgs baubleProcessingArgs) {
+            return builder.repeatableModifierSuppliers.keySet().stream()
+                .map(Supplier::get).toArray(BaubleAttributeModifier[]::new);
         }
 
         @Nullable
         @Override
-        public BaubleAttributeModifier[] getNonDuplicableModifiers(Mob mob) {
-            return builder.unrepeatableModifiers.get().entrySet().stream()
-                .filter(entry -> entry.getValue().test(mob))
-                .map(Map.Entry::getKey).toArray(BaubleAttributeModifier[]::new);
+        public BaubleAttributeModifier[] getUnrepeatableModifiers(Mob mob) {
+            return builder.unrepeatableModifierSuppliers.keySet().stream()
+                .map(Supplier::get).toArray(BaubleAttributeModifier[]::new);
         }
 
         @Override
         public void onValidate() {
             this.addTooltip(() -> NFUInfoStatics.createTranslatable("tooltip.nffgirls.bauble.existing_item"));
+            if (builder.showRarityTier)
+                builder.getRarityTierDesc().ifPresent(m -> this.addTooltip(() -> m));
             builder.tooltips.get().forEach(this::addTooltip);
             if (builder.environmentImmune && !builder.isEnvironmentImmunityTooltipManuallyAdded)
                 this.addTooltip(() -> NFUInfoStatics.createTranslatable("tooltip.nffgirls.bauble.environment_immunity").withStyle(ChatFormatting.WHITE));

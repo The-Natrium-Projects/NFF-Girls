@@ -16,7 +16,7 @@ public class MagicalGelSeperateRecipe extends SimpleModificationRecipe
 
 	@Override
 	public RecipeSerializer<?> getSerializer() {
-		return NFFGirlsRecipes.MAGICAL_GEL_SEPERATE.get();
+		return NFFGirlsRecipes.MAGICAL_GEL_SEPARATE.get();
 	}
 
 	@Override

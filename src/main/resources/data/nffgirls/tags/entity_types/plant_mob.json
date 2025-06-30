@@ -1,0 +1,12 @@
+{
+  "desc": "Mobs with this tag can equip plant-specific baubles.",
+  "replace" : false,
+  "values" : [
+    {"id": "minecraft:creaking", "required": false},
+    {"id": "minecraft:creaking_transient", "required": false},
+    "hmag:alraune",
+    "hmag:glaryad",
+    "nffgirls:hmag_alraune",
+    "nffgirls:hmag_glaryad"
+  ]
+}

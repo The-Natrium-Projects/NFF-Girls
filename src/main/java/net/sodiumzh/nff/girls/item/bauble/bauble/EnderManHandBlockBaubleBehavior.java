@@ -18,13 +18,13 @@ public class EnderManHandBlockBaubleBehavior extends BaubleBehavior
 	}
 	
 	@Override
-	public BaubleAttributeModifier[] getDuplicatableModifiers(BaubleProcessingArgs arg0) {
+	public BaubleAttributeModifier[] getRepeatableModifiers(BaubleProcessingArgs arg0) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public BaubleAttributeModifier[] getNonDuplicatableModifiers(Mob arg0) {
+	public BaubleAttributeModifier[] getUnrepeatableModifiers(Mob arg0) {
 		// TODO Auto-generated method stub
 		return null;
 	}

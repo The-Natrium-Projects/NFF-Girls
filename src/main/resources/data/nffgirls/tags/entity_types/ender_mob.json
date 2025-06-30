@@ -1,0 +1,13 @@
+{
+  "desc": "Mobs with this tag can equip baubles for ender mobs.",
+  "replace" : false,
+  "values" : [
+    "minecraft:enderman",
+    "minecraft:endermite",
+    "minecraft:ender_dragon",
+    "minecraft:shulker",
+    "hmag:ender_executor",
+    "hmag:monolith",
+    "nffgirls:hmag_ender_executor"
+  ]
+}

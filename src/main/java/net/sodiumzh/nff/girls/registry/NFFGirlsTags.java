@@ -63,5 +63,9 @@ public class NFFGirlsTags
 		NFFGirls.MOD_ID, "aquatic_mob");
 	public static final TagKey<EntityType<?>> NETHER_MOB = NFUTagStatics.createEntityTypeTag(
 		NFFGirls.MOD_ID, "nether_mob");
+	public static final TagKey<EntityType<?>> PLANT_MOB = NFUTagStatics.createEntityTypeTag(
+		NFFGirls.MOD_ID, "plant_mob");
+	public static final TagKey<EntityType<?>> ENDER_MOB = NFUTagStatics.createEntityTypeTag(
+		NFFGirls.MOD_ID, "ender_mob");
 	
 }
