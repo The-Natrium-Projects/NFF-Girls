@@ -2,10 +2,28 @@
   "desc": "Mobs with this tag can equip baubles for nether mobs.",
   "replace" : false,
   "values" : [
+    "minecraft:strider",
+    "minecraft:piglin",
+    "minecraft:piglin_brute",
+    "minecraft:hoglin",
+    "minecraft:zoglin",
+    "minecraft:zombified_piglin",
+    "minecraft:magma_cube",
+    "minecraft:ghast",
+    "minecraft:blaze",
+    "minecraft:wither_skeleton",
+    "minecraft:wither",
+    "hmag:imp",
+    "hmag:crimson_slaughterer",
+    "hmag:melty_monster",
+    "hmag:wither_skeleton_girl",
+    "hmag:ghastly_seeker",
     "nffgirls:hmag_imp",
     "nffgirls:hmag_crimson_slaughterer",
     "nffgirls:hmag_ghastly_seeker",
     "nffgirls:hmag_wither_skeleton_girl",
-    "nffgirls:hmag_melty_monster"
+    "nffgirls:hmag_melty_monster",
+    {"id": "grimoireofgaia:succubus", "required": false},
+    {"id": "grimoireofgaia:wither_cow", "required": false}
   ]
 }

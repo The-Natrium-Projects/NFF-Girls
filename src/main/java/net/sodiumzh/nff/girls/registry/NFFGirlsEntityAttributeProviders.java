@@ -1,16 +1,10 @@
 package net.sodiumzh.nff.girls.registry;
 
-import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.entity.ai.attributes.Attributes;
-import net.minecraft.world.entity.ai.attributes.RangedAttribute;
-import net.minecraft.world.entity.monster.EnderMan;
 import net.minecraftforge.common.ForgeMod;
 import net.minecraftforge.event.entity.EntityAttributeCreationEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.registries.DeferredRegister;
-import net.minecraftforge.registries.ForgeRegistries;
-import net.minecraftforge.registries.RegistryObject;
 import net.sodiumzh.nff.girls.NFFGirls;
 import net.sodiumzh.nfu.entity.EntityAttributeProvider;
 import net.sodiumzh.nfu.registry.NFURegistries;
@@ -32,9 +26,12 @@ public class NFFGirlsEntityAttributeProviders
 			.add(NFFGirlsEntityAttributes.ANTI_ARTHROPOD.get(), 0d)
 			.add(NFFGirlsEntityAttributes.ANTI_AQUATIC.get(), 0d)
 			.add(NFFGirlsEntityAttributes.CRITICAL_RATE.get(), 0d)
-			.add(NFFGirlsEntityAttributes.PERSISTENT_HEALING_PER_SECOND.get(), 0d)
+			.add(NFFGirlsEntityAttributes.PERSISTENT_HEALING.get(), 0d)
+			.add(NFFGirlsEntityAttributes.PERSISTENT_RANGED_HEALING.get(), 0d)
 			.add(NFFGirlsEntityAttributes.POISON_ASPECT.get(), 0d)
-			.add(NFFGirlsEntityAttributes.WITHER_ASPECT.get(), 0d));
+			.add(NFFGirlsEntityAttributes.WITHER_ASPECT.get(), 0d)
+			.add(NFFGirlsEntityAttributes.HEALTH_ABSORPTION.get(), 0d)
+			.add(NFFGirlsEntityAttributes.XP_GAIN_RATE.get(), 1d));
 
 	public static final NFURegistry.Accessor<EntityAttributeProvider> HMAG_ZOMBIE_GIRL =
 		ATTRIBUTE_PROVIDERS.register("zombie_girl", () -> NFFGIRLS_DEFAULT_ATTRIBUTES.get()

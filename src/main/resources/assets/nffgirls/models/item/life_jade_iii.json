@@ -2,6 +2,6 @@
 	"parent": "item/generated",
 	"textures": {
 		"layer0": "nffgirls:item/life_jade",
-		"layer1": "nffgirls:item/bauble_tier_ii"
+		"layer1": "nffgirls:item/bauble_tier_iii"
 	}
 }

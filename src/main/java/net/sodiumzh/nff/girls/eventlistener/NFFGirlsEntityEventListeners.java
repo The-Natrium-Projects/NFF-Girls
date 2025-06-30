@@ -3,7 +3,6 @@ package net.sodiumzh.nff.girls.eventlistener;
 import com.github.mechalopa.hmag.HMaG;
 import com.github.mechalopa.hmag.registry.ModEntityTypes;
 import com.github.mechalopa.hmag.registry.ModItems;
-import com.github.mechalopa.hmag.util.ModTags;
 import com.github.mechalopa.hmag.world.entity.EnderExecutorEntity;
 import com.github.mechalopa.hmag.world.entity.GhastlySeekerEntity;
 import com.github.mechalopa.hmag.world.entity.NightwalkerEntity;
@@ -38,6 +37,7 @@ import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.entity.EntityTypeTest;
 import net.minecraft.world.phys.*;
 import net.minecraftforge.event.entity.*;
 import net.minecraftforge.event.entity.living.*;
@@ -54,6 +54,7 @@ import net.sodiumzh.nff.girls.effect.NecromancerWitherEffect;
 import net.sodiumzh.nff.girls.entity.INFFGirlsTamed;
 import net.sodiumzh.nff.girls.entity.ai.goal.NFFGirlsTamableGhastlySeekerRandomFlyGoal;
 import net.sodiumzh.nff.girls.entity.hmag.*;
+import net.sodiumzh.nff.girls.entity.projectile.MobileParticleSourceEntity;
 import net.sodiumzh.nff.girls.entity.projectile.NecromancerMagicBulletEntity;
 import net.sodiumzh.nff.girls.entity.tamingprocess.hmag.HmagCreeperGirlTamingProcess;
 import net.sodiumzh.nff.girls.entity.tamingprocess.hmag.HmagJiangshiTamingProcess;
@@ -82,7 +83,7 @@ import net.sodiumzh.nfu.mixin.event.entity.*;
 import net.sodiumzh.nfu.util.*;
 import org.apache.commons.lang3.mutable.MutableObject;
 
-import javax.swing.text.html.Option;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.function.Predicate;
@@ -638,8 +639,34 @@ public class NFFGirlsEntityEventListeners
 
 			// Handle persistent healing
 			INFFGirlsTamed.get(event.getEntity()).ifPresent(tamed -> {
-				if (tamed.asMob().getAttributeValue(NFFGirlsEntityAttributes.PERSISTENT_HEALING_PER_SECOND.get()) > 1e-12) {
-					tamed.asMob().heal((float) (tamed.asMob().getAttributeValue(NFFGirlsEntityAttributes.PERSISTENT_HEALING_PER_SECOND.get()) / 20f));
+				if (tamed.asMob().getAttributeValue(NFFGirlsEntityAttributes.PERSISTENT_HEALING.get()) > 1e-12) {
+					tamed.asMob().heal((float) (tamed.asMob().getAttributeValue(NFFGirlsEntityAttributes.PERSISTENT_HEALING.get()) / 20f));
+				}
+				if (tamed.asMob().getAttributeValue(NFFGirlsEntityAttributes.PERSISTENT_RANGED_HEALING.get()) > 1e-12) {
+					List<LivingEntity> toSendParticles = new ArrayList<>();
+					tamed.asMob().level().getEntities(EntityTypeTest.forClass(LivingEntity.class),
+						tamed.asMob().getBoundingBox().inflate(8, 4, 8),
+							e -> NFFTamedStatics.isLivingAlliedToBM(tamed, e)
+							// Apply to a round area
+							&& (e.getX() - tamed.asMob().getX()) * (e.getX() - tamed.asMob().getX()) + (e.getY() - tamed.asMob().getY()) * (e.getY() - tamed.asMob().getY()) < 64d)
+						.stream().filter(e -> !e.equals(tamed.asMob()))
+						.forEach(e -> {
+								float oldHP = e.getHealth();
+								e.heal((float) (tamed.asMob().getAttributeValue(NFFGirlsEntityAttributes.PERSISTENT_RANGED_HEALING.get()) / 20d));
+								if (e.getHealth() > oldHP)
+									toSendParticles.add(e);
+						});
+					if (tamed.asMob().tickCount % 200 == 0) {
+						for (LivingEntity e: toSendParticles) {
+							MobileParticleSourceEntity particleSource =
+								new MobileParticleSourceEntity(tamed.asMob().level(), e::getEyePosition)
+									.setParticleType(ParticleTypes.HAPPY_VILLAGER)
+									.particlesPerTick(2)
+									.setSpeed(10d);
+							particleSource.setPos(tamed.asMob().getEyePosition());
+							e.level().addFreshEntity(particleSource);
+						}
+					}
 				}
 			});
 		}
@@ -721,8 +748,9 @@ public class NFFGirlsEntityEventListeners
 		if (event.getEntity().getLastHurtByMob() != null 
 				&& event.getEntity().getLastHurtByMob() instanceof INFFGirlsTamed bm)
 		{
-			int exp = event.getOriginalExperience();
-			exp = (int)handleMending(exp, bm.asMob());
+			long exp = event.getOriginalExperience();
+			exp = Math.round((double)exp * bm.asMob().getAttributeValue(NFFGirlsEntityAttributes.XP_GAIN_RATE.get()));
+			exp = handleMending(exp, bm.asMob());
 			bm.getLevelHandler().addExp(exp);
 			event.setCanceled(true);
 		}
@@ -862,13 +890,13 @@ public class NFFGirlsEntityEventListeners
 			double boostingRate = 1.0d;
 			// Handle debuff attachment
 			double poisonAspect = tm.asMob().getAttributeValue(NFFGirlsEntityAttributes.POISON_ASPECT.get());
-			if (poisonAspect > 0d) {
-				NFUEntityStatics.addEffectSafe(event.getEntity(), MobEffects.POISON, (int)Math.round(100d + poisonAspect * 40d), ((int)poisonAspect) - 1);
+			if (poisonAspect >= 0.5d && !NFFTamedStatics.isLivingAlliedToBM(tm, event.getEntity())) {
+				NFUEntityStatics.addEffectSafe(event.getEntity(), MobEffects.POISON, (int)Math.round(100d + poisonAspect * 40d), Math.max(0, (int) (Math.round(poisonAspect - 1) / 3)));
 				NFUEntityStatics.addEffectSafe(event.getEntity(), MobEffects.MOVEMENT_SLOWDOWN, (int)Math.round(100d + poisonAspect * 40d), (((int)poisonAspect) + 2) / 2);
 			}
 			double witherAspect = tm.asMob().getAttributeValue(NFFGirlsEntityAttributes.WITHER_ASPECT.get());
-			if (witherAspect > 0d) {
-				NFUEntityStatics.addEffectSafe(event.getEntity(), MobEffects.WITHER, (int) Math.round(100d + witherAspect * 20d), ((int)witherAspect) - 1);
+			if (witherAspect >= 0.5d && !NFFTamedStatics.isLivingAlliedToBM(tm, event.getEntity())) {
+				NFUEntityStatics.addEffectSafe(event.getEntity(), MobEffects.WITHER, (int) Math.round(100d + witherAspect * 20d), Math.max(0, (int) (Math.round(witherAspect - 1) / 3)));
 			}
 			// Handle Anti-Type damage boosts
 			if (event.getEntity().getMobType().equals(MobType.UNDEAD))
@@ -1328,10 +1356,22 @@ public class NFFGirlsEntityEventListeners
 	}
 
 	// Account NFF Girls mob kill as owner kill
+	@SubscribeEvent
 	public static void onCheckPlayerKill(LootCheckPlayerKillEvent event) {
 		if (event.damageSource != null)
 			INFFGirlsTamed.get(event.damageSource.getEntity()).ifPresent(tamed -> {
 				event.setResult(Event.Result.ALLOW);
 			});
 	}
+
+	// Handle health absorption
+	@SubscribeEvent
+	public static void onDamageTaken(LivingEntityDamageTakenEvent event) {
+		INFFGirlsTamed.get(event.getDamageSource().getEntity()).ifPresent(t -> {
+			float absorbRate = (float) t.asMob().getAttributeValue(NFFGirlsEntityAttributes.HEALTH_ABSORPTION.get());
+			if (absorbRate >= 1e-9f && !NFFTamedStatics.isLivingAlliedToBM(t, event.getEntity()))
+				t.asMob().heal(absorbRate * event.getAmount());
+		});
+	}
+
 }

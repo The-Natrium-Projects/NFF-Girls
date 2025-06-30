@@ -2,14 +2,15 @@ package net.sodiumzh.nff.girls.registry;
 
 import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.entity.ai.attributes.RangedAttribute;
-import net.minecraftforge.event.entity.living.LivingEvent;
-import net.minecraftforge.event.entity.living.LootingLevelEvent;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 import net.sodiumzh.nff.girls.NFFGirls;
 import net.sodiumzh.nff.girls.eventlistener.NFFGirlsEntityEventListeners;
-import org.w3c.dom.ranges.Range;
+import org.spongepowered.asm.mixin.injection.At;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Attributes to handle NFF-Girls-only mob mechanics. Note: these attributes only work on NFF-Girls mobs but not other
@@ -64,8 +65,14 @@ public class NFFGirlsEntityAttributes {
     /**
      * Mob will be healed my this amount each second.
      */
-    public static final RegistryObject<Attribute> PERSISTENT_HEALING_PER_SECOND = ATTRIBUTES.register("nffgirls.persistent_healing",
+    public static final RegistryObject<Attribute> PERSISTENT_HEALING = ATTRIBUTES.register("nffgirls.persistent_healing",
         () -> new RangedAttribute("nffgirls.persistent_healing", 0d, 0d, 1024d));
+
+    /**
+     * Mob will persistently heal allies around it of this amount each second.
+     */
+    public static final RegistryObject<Attribute> PERSISTENT_RANGED_HEALING = ATTRIBUTES.register("nffgirls.persistent_ranged_healing",
+        () -> new RangedAttribute("nffgirls.persistent_ranged_healing", 0d, 0d, 1024d));
 
     /**
      * Mob will cause poison and slowness when hitting the enemy if having this attribute.
@@ -79,4 +86,17 @@ public class NFFGirlsEntityAttributes {
     public static final RegistryObject<Attribute> WITHER_ASPECT = ATTRIBUTES.register("nffgirls.wither_aspect",
         () -> new RangedAttribute("nffgirls.wither_aspect", 0d, 0d, 1024d));
 
+    public static final RegistryObject<Attribute> HEALTH_ABSORPTION = ATTRIBUTES.register("nffgirls.health_absorption",
+        () -> new RangedAttribute("nffgirls.health_absorption", 0d, 0d , 1d));
+
+    public static final RegistryObject<Attribute> XP_GAIN_RATE = ATTRIBUTES.register("nffgirls.xp_gain_rate",
+        () -> new RangedAttribute("nffgirls.xp_gain_rate", 1d, 0d, 1024d));
+
+    public static List<RegistryObject<Attribute>> RATE_ATTRIBUTES = new ArrayList<>(List.of(
+        WATER_ASPECT, ANTI_AQUATIC, ANTI_ARTHROPOD, ANTI_UNDEAD, CRITICAL_RATE, HEALTH_ABSORPTION, XP_GAIN_RATE
+    ));
+
+    public static boolean isRateAttribute(Attribute test) {
+        return RATE_ATTRIBUTES.stream().anyMatch(a -> a.get().equals(test));
+    }
 }

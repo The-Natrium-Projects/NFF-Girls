@@ -23,7 +23,7 @@ public class NFFGirlsEntityStatics
 	
 	/**
 	 * Check if a befriended mob is not waiting.
-	 * If it's not a befriended mob, return always true.
+	 * If it's not a befriended mob, return always false.
 	 */
 	public static boolean isNotWaiting(LivingEntity living)
 	{
@@ -31,7 +31,7 @@ public class NFFGirlsEntityStatics
 	}
 	
 	/**
-	 * Check if a mob isn't wearing/holding any golden items
+	 * Check if a mob isn't wearing/holding any golden items.
 	 * For piglin hostility
 	 */
 	public static boolean isNotWearingGold(LivingEntity living)
