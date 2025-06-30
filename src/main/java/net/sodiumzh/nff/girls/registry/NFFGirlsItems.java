@@ -143,6 +143,7 @@ public class NFFGirlsItems {
 	public static final RegistryObject<NFFMobRespawnerItem> MOB_RESPAWNER = registerNoTab("mob_respawner", () -> new NFFGirlsRespawnerItem(new Item.Properties()).setRetainBefriendedMobInventory(false)
 		.setRetainBefriendedMobInventory(false).noDefaultInstance(false).cast());
 	public static final RegistryObject<NFFMobRespawnerItem> MOB_STORAGE_POD = registerNoTab("mob_storage_pod", () -> new NFFGirlsRespawnerItem(new Item.Properties())
+		.setGiveCommandUsesDefaultInstance()
 		.redirectDefaultInstance(new ResourceLocation(NFFGirls.MOD_ID, "empty_mob_storage_pod")).cast());
 	public static final RegistryObject<MobCatcherItem> EMPTY_MOB_STORAGE_POD = register("empty_mob_storage_pod", () -> new NFFGirlsMobCatcherItem(new Item.Properties(), MOB_STORAGE_POD.get())
 		.canCatchCondition((m, p) -> (m instanceof INFFGirlsTamed bm && bm.getOwnerUUID().equals(p.getUUID()))));

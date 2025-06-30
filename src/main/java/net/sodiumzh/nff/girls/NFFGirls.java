@@ -1,6 +1,5 @@
 package net.sodiumzh.nff.girls;
 
-import com.mojang.logging.LogUtils;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.eventbus.api.IEventBus;
@@ -8,9 +7,9 @@ import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.config.ModConfig;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
+import net.sodiumzh.nff.girls.item.bauble.NFFGirlsBaubleBuilder;
 import net.sodiumzh.nff.girls.registry.*;
 import net.sodiumzh.nfu.savedata.redirector.SaveDataLocationRedirector;
-import org.slf4j.Logger;
 
 @Mod(NFFGirls.MOD_ID)
 public class NFFGirls
@@ -47,7 +46,10 @@ public class NFFGirls
         NFFGirlsTrades.TRADE_COLLECTIONS.merge();
         NFFGirlsTrades.TRADE_REGISTRIES.merge();
         NFFGirlsBaubles.BAUBLES.merge();
+        NFFGirlsBaubles.BAUBLE_EFFECT_CONDITIONS.merge();
+        NFFGirlsBaubles.BAUBLE_EQUIPPING_CONDITIONS.merge();
         NFFGirlsEntityAttributeProviders.ATTRIBUTE_PROVIDERS.merge();
+        NFFGirlsBaubleBuilder.EQUIPPING_CONDITION_PRESETS.merge();
 
         // Register ourselves for server and other game events we are interested in
         MinecraftForge.EVENT_BUS.register(this);

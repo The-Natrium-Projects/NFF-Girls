@@ -41,12 +41,12 @@ public class NecroticReaperHandHoeBaubleBehavior extends BaubleBehavior
 	}
 
 	@Override
-	public BaubleAttributeModifier[] getNonDuplicableModifiers(Mob mob) {
+	public BaubleAttributeModifier[] getUnrepeatableModifiers(Mob mob) {
 		return null;
 	}
 
 	/*@Override
-	public BaubleAttributeModifier[] getDuplicableModifiers(BaubleProcessingArgs args) {
+	public BaubleAttributeModifier[] getRepeatableModifiers(BaubleProcessingArgs args) {
 		double atk = getHoeAtk(args.baubleItemStack().getItem())
 		return BaubleAttributeModifier.makeModifiers(Attributes.ATTACK_DAMAGE, //getHoeAtk)
 	}*/
@@ -63,7 +63,7 @@ public class NecroticReaperHandHoeBaubleBehavior extends BaubleBehavior
 
 	@SuppressWarnings("deprecation")
 	@Override
-	public BaubleAttributeModifier[] getDuplicableModifiers(BaubleProcessingArgs args) {
+	public BaubleAttributeModifier[] getRepeatableModifiers(BaubleProcessingArgs args) {
 		int lv = Math.round(((HoeItem)(args.baubleItemStack().getItem())).getTier().getLevel());
 		double atk = (double)getHoeAtk(lv) * (1d + (double)EnchantmentHelper.getItemEnchantmentLevel(Enchantments.BLOCK_EFFICIENCY, args.baubleItemStack()) * 0.1d);
 		return new BaubleAttributeModifier[] {

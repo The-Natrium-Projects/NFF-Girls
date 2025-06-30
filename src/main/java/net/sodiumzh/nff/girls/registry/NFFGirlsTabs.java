@@ -22,10 +22,17 @@ public class NFFGirlsTabs{
 					if (!NFFGirlsItems.NO_TAB.contains(item))
 						output.accept(item.get());
 				}
-				for (var item: NFFGirlsBaubles.BAUBLE_ITEMS.getEntries())
-				{
-					if (!NFFGirlsItems.NO_TAB.contains(item))
-						output.accept(item.get());
-				}
 			}).build());
+
+	public static final RegistryObject<CreativeModeTab> TAB_BAUBLE = CREATIVE_TABS.register("tab_bauble", () -> CreativeModeTab.builder()
+		.title(NFUInfoStatics.createTranslatable("item_group.nffgirls_bauble_tab"))
+		.icon(() -> NFFGirlsBaubles.HEALING_JADE.get().getDefaultInstance())
+		.displayItems((features, output) ->
+		{
+			for (var item: NFFGirlsBaubles.BAUBLE_ITEMS.getEntries())
+			{
+				if (!NFFGirlsItems.NO_TAB.contains(item))
+					output.accept(item.get());
+			}
+		}).build());
 }

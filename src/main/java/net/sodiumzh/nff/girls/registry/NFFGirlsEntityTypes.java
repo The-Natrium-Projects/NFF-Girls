@@ -362,7 +362,14 @@ public class NFFGirlsEntityTypes {
 			.updateInterval(5)
 			.build(new ResourceLocation(NFFGirls.MOD_ID, "reinforced_fishing_hook").toString()));
 
-	
+	public static final RegistryObject<EntityType<MobileParticleSourceEntity>> MOBILE_PARTICLE_SOURCE =
+		ENTITY_TYPES.register("mobile_particle_source", () -> EntityType.Builder
+			.<MobileParticleSourceEntity>of(MobileParticleSourceEntity::new, MobCategory.MISC)
+			.noSave()
+			.noSummon()
+			.sized(0.1f, 0.1f)
+			.updateInterval(1)
+			.build(new ResourceLocation(NFFGirls.MOD_ID, "mobile_particle_source").toString()));
 	
 	
 	// ========== Utilities ============ //

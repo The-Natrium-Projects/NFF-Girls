@@ -68,6 +68,7 @@ public class NFFGirlsClientSetupEventListeners
         event.registerEntityRenderer(NFFGirlsEntityTypes.ALRAUNE_POISON_SEED.get(), ModThrownItemRenderer::new);
         event.registerEntityRenderer(NFFGirlsEntityTypes.ALRAUNE_HEALING_SEED.get(), ModThrownItemRenderer::new);
         event.registerEntityRenderer(NFFGirlsEntityTypes.REINFORCED_FISHING_HOOK.get(), FishingHookRenderer::new);
+        event.registerEntityRenderer(NFFGirlsEntityTypes.MOBILE_PARTICLE_SOURCE.get(), ThrownItemRenderer::new);
     }
 
     public static void onRegisterParticleProvider(RegisterParticleProvidersEvent event)
