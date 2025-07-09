@@ -13,7 +13,7 @@ import net.sodiumzh.nff.services.entity.ai.NFFTamedMobAIState;
 import net.sodiumzh.nff.services.entity.ai.goal.NFFGoal;
 import net.sodiumzh.nff.services.entity.ai.goal.NFFMoveGoal;
 import net.sodiumzh.nff.services.entity.ai.goal.NFFTargetGoal;
-import net.sodiumzh.nff.services.entity.ai.goal.preset.INFFFollowOwner;
+import net.sodiumzh.nff.services.entity.ai.goal.preset.INFFFollowOwnerGoal;
 import net.sodiumzh.nff.services.entity.taming.INFFTamed;
 import net.sodiumzh.nfu.util.NFULevelStatics;
 import net.sodiumzh.nfu.util.NFUMathStatics;
@@ -314,7 +314,7 @@ public interface NFFGirlsHmagFlyingGoal
 		}	
 	}
 	
-	public static class FollowOwnerGoal extends MoveRandomGoal implements NFFGirlsHmagFlyingGoal, INFFFollowOwner
+	public static class FollowOwnerGoal extends MoveRandomGoal implements NFFGirlsHmagFlyingGoal, INFFFollowOwnerGoal
 	{
 		public double teleportDistance = 12d;
 		public double noFollowOnCombatDistance = 6d;

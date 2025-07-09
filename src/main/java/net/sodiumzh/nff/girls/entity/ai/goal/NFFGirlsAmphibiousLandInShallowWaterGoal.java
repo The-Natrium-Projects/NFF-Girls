@@ -29,9 +29,4 @@ public class NFFGirlsAmphibiousLandInShallowWaterGoal extends NFFMoveGoal {
             && !mob.onGround();
     }
 
-    public void tick() {
-        this.getMob().asMob()
-    }
-
-
 }
