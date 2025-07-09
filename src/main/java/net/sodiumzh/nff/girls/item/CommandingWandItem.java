@@ -22,7 +22,7 @@ import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.entity.EntityTypeTest;
 import net.sodiumzh.nff.girls.entity.INFFGirlsTamed;
 import net.sodiumzh.nff.services.entity.ai.NFFTamedMobAIState;
-import net.sodiumzh.nff.services.entity.ai.goal.preset.INFFFollowOwner;
+import net.sodiumzh.nff.services.entity.ai.goal.preset.INFFFollowOwnerGoal;
 import net.sodiumzh.nff.services.entity.taming.INFFTamed;
 import net.sodiumzh.nfu.item.NFUItem;
 import net.sodiumzh.nfu.util.NFUAIStatics;
@@ -169,10 +169,10 @@ public class CommandingWandItem extends NFUItem
 		mob.setTarget(null);
 		return INFFGirlsTamed.isBMAnd(mob, bm -> {
 			bm.setAIState(NFFTamedMobAIState.FOLLOW, false);
-			List<INFFFollowOwner> followGoals =
+			List<INFFFollowOwnerGoal> followGoals =
 				NFUAIStatics.getGoalsAndPriorities(mob).keySet().stream()
-					.filter(goal -> goal instanceof INFFFollowOwner follow)
-					.map(goal -> (INFFFollowOwner)goal).toList();
+					.filter(goal -> goal instanceof INFFFollowOwnerGoal follow)
+					.map(goal -> (INFFFollowOwnerGoal)goal).toList();
 			if (!followGoals.isEmpty()) followGoals.get(0).teleportToOwner();
 			return true;
 		});

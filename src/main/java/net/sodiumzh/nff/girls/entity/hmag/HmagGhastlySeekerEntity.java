@@ -32,7 +32,7 @@ import net.sodiumzh.nff.girls.inventory.NFFGirlsHmagGhastlySeekerInventoryMenu;
 import net.sodiumzh.nff.girls.registry.NFFGirlsHealingItems;
 import net.sodiumzh.nff.girls.sound.NFFGirlsSoundPresets;
 import net.sodiumzh.nff.services.entity.ai.goal.NFFGoal;
-import net.sodiumzh.nff.services.entity.ai.goal.preset.INFFFollowOwner;
+import net.sodiumzh.nff.services.entity.ai.goal.preset.INFFFollowOwnerGoal;
 import net.sodiumzh.nff.services.entity.ai.goal.preset.NFFFlyingLandGoal;
 import net.sodiumzh.nff.services.entity.ai.goal.preset.NFFFlyingRandomMoveGoal;
 import net.sodiumzh.nff.services.entity.ai.goal.preset.target.NFFHurtByTargetGoal;
@@ -332,7 +332,7 @@ public class HmagGhastlySeekerEntity extends GhastlySeekerEntity implements INFF
 		}
 	}
 
-	public static class FollowOwnerGoal extends NFFGirlsFlyingFollowOwnerGoal implements INFFFollowOwner
+	public static class FollowOwnerGoal extends NFFGirlsFlyingFollowOwnerGoal implements INFFFollowOwnerGoal
 	{
 
 		public FollowOwnerGoal(INFFTamed mob)

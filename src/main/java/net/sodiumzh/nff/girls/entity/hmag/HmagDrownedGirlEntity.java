@@ -4,6 +4,9 @@ import com.github.mechalopa.hmag.world.entity.DrownedGirlEntity;
 import net.minecraft.nbt.ByteTag;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
+import net.minecraft.network.syncher.EntityDataAccessor;
+import net.minecraft.network.syncher.EntityDataSerializers;
+import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.Container;
@@ -25,7 +28,6 @@ import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.fml.LogicalSide;
 import net.sodiumzh.nff.girls.entity.INFFGirlsTamedSunSensitiveMob;
-import net.sodiumzh.nff.girls.entity.ai.goal.NFFGirlsFollowOwnerGoal;
 import net.sodiumzh.nff.girls.entity.ai.goal.NFFGirlsTridentAttackGoal;
 import net.sodiumzh.nff.girls.entity.ai.goal.target.NFFGirlsNearestHostileToOwnerTargetGoal;
 import net.sodiumzh.nff.girls.entity.ai.goal.target.NFFGirlsNearestHostileToSelfTargetGoal;
@@ -46,6 +48,7 @@ import net.sodiumzh.nff.services.inventory.NFFTamedInventoryMenu;
 import net.sodiumzh.nff.services.inventory.NFFTamedMobInventory;
 import net.sodiumzh.nff.services.inventory.NFFTamedMobInventoryWithEquipment;
 import net.sodiumzh.nfu.entity.MobApplicableItemTable;
+import net.sodiumzh.nfu.util.NFULevelStatics;
 
 import javax.annotation.Nonnull;
 import java.util.Arrays;
@@ -61,7 +64,6 @@ public class HmagDrownedGirlEntity extends DrownedGirlEntity implements INFFGirl
 		this.xpReward = 0;
 		Arrays.fill(this.armorDropChances, 0);
 		Arrays.fill(this.handDropChances, 0);
-
 	}
 	
 	/* AI */
@@ -73,7 +75,7 @@ public class HmagDrownedGirlEntity extends DrownedGirlEntity implements INFFGirl
 		goalSelector.addGoal(2, new NFFFleeSunGoal(this, 1));
 		goalSelector.addGoal(3, new NFFGirlsTridentAttackGoal(this, 1.0D, 40, 10.0F));
 		goalSelector.addGoal(3, new NFFZombieAttackGoal(this, 1.0D, false));
-		goalSelector.addGoal(4, new NFFGirlsFollowOwnerGoal(this, 1.0d, 5.0f, 2.0f, false).amphibious()
+		goalSelector.addGoal(4, new NFFAmphibiousGoals.FollowOwnerGoal(this, 1.0d, 5.0f, 2.0f, false, 2).amphibious()
 				.avoidSunCondition(NFFGirlsEntityStatics::isSunSensitive));
 		goalSelector.addGoal(5, new NFFAmphibiousGoals.GoToBeachGoal(this, 1.0D));
 		goalSelector.addGoal(6, new NFFAmphibiousGoals.SwimUpGoal(this, 1.0D, this.level().getSeaLevel()));
@@ -86,19 +88,24 @@ public class HmagDrownedGirlEntity extends DrownedGirlEntity implements INFFGirl
 		targetSelector.addGoal(3, new NFFGirlsOwnerHurtTargetGoal(this));
 		targetSelector.addGoal(5, new NFFGirlsNearestHostileToSelfTargetGoal(this));
 		targetSelector.addGoal(6, new NFFGirlsNearestHostileToOwnerTargetGoal(this));
-
 	}
-	
+
+	@Override
+	public void updateSwimming() {
+		if (NFULevelStatics.getWaterDepth(this.blockPosition(), this) > 2)
+			this.switchNav(true);
+		else this.switchNav(false);
+	}
+
 	@Override
 	public void tick()
 	{
-		// This affects Drowned::wantsToSwim(),
-		// if searching-for-land is false and it doesn't have a target
-		// the drowned cannot swim
+		// This is for short-circuit Drowned::wantsToSwim(),
+		// and whether to swim is controlled by updateSwimming() override
 		setSearchingForLand(true);
 		super.tick();
 	}
-	
+
 	/* Combat */
 
 	@Override
@@ -304,6 +311,5 @@ public class HmagDrownedGirlEntity extends DrownedGirlEntity implements INFFGirl
 		EntityType<?> typeBefore = NFFTamingMapping.getTypeBefore(this);
 		return typeBefore != null ? typeBefore.getDescription() : super.getTypeName();
 	}
-
 
 }
