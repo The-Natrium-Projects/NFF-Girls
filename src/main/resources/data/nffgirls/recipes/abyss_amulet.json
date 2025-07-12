@@ -1,0 +1,41 @@
+{
+  "type": "minecraft:crafting_shaped",
+
+  "pattern":
+  [
+    "HCE",
+    "TBC",
+    "NTP"
+  ],
+
+  "key":{
+    "B":{
+      "item": "nffgirls:corrupted_amulet_ii"
+    },
+    "H":{
+      "tag": "nffgirls:undead_heads"
+    },
+    "P": {
+      "item": "hmag:ender_plasm"
+    },
+    "E":{
+      "item": "hmag:evil_crystal"
+    },
+    "T": {
+      "item": "hmag:swamper_tentacle"
+    },
+    "N": {
+      "item": "minecraft:nether_star"
+    },
+    "C": {
+      "item": "hmag:crimson_cuticula"
+    }
+
+
+  },
+
+  "result":{
+    "item": "nffgirls:abyss_amulet",
+    "count": 1
+  }
+}

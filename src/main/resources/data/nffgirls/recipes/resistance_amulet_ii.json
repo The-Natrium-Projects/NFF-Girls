@@ -1,15 +1,24 @@
 {
-  "type": "minecraft:smithing_transform",
-  "base": {
-    "item": "nffgirls:resistance_amulet"
-  },
-  "addition": {
-    "item": "minecraft:netherite_ingot"
-  },
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "nffgirls:resistance_amulet"
+    },
+    {
+      "item": "minecraft:netherite_scrap"
+    },
+    {
+      "item": "hmag:evil_crystal"
+    },
+    {
+      "item": "hmag:burning_core"
+    },
+    {
+      "item": "minecraft:turtle_helmet"
+    }
+  ],
   "result": {
-    "item": "nffgirls:resistance_amulet_ii"
-  },
-  "template": {
-    "item": "hmag:evil_crystal_upgrade_smithing_template"
+    "item": "nffgirls:resistance_amulet_ii",
+    "count": 1
   }
 }

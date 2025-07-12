@@ -1,0 +1,27 @@
+{
+	"type": "minecraft:crafting_shapeless",
+	"ingredients": [
+		{
+			"item": "nffgirls:refined_badge"
+		},
+		{
+			"item": "hmag:evil_crystal_fragment"
+		},
+		{
+			"item": "hmag:evil_crystal_fragment"
+		},
+		{
+			"item": "minecraft:magma_cream"
+		},
+		{
+			"item": "minecraft:blaze_rod"
+		},
+		{
+			"item": "hmag:exp_berry"
+		}
+	],
+	"result": {
+		"item": "nffgirls:courage_badge",
+		"count": 1
+	}
+}

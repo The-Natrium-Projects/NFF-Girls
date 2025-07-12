@@ -2,23 +2,23 @@
   "type": "minecraft:crafting_shapeless",
   "ingredients": [
     {
-      "item": "nffgirls:soul_amulet_iii"
+      "item": "nffgirls:abyss_amulet"
     },
     {
-      "tag": "forge:ingots/netherite"
-    },
-    {
-      "item": "hmag:dyssomnia_skin"
+      "item": "minecraft:dragon_head"
     },
     {
       "item": "minecraft:echo_shard"
+    },
+    {
+      "item": "minecraft:music_disc_11"
     },
     {
       "item": "minecraft:disc_fragment_5"
     }
   ],
   "result": {
-    "item": "nffgirls:soul_amulet_iv",
+    "item": "nffgirls:abyss_amulet_ii",
     "count": 1
   }
 }

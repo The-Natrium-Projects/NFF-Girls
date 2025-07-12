@@ -1,15 +1,21 @@
 {
-  "type": "minecraft:smithing_transform",
-  "base": {
-    "item": "nffgirls:life_jade"
-  },
-  "addition": {
-    "item": "minecraft:enchanted_golden_apple"
-  },
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "nffgirls:life_jade"
+    },
+    {
+      "item": "minecraft:totem_of_undying"
+    },
+    {
+      "item": "hmag:cubic_nucleus"
+    },
+    {
+      "item": "hmag:lich_cloth"
+    }
+  ],
   "result": {
-    "item": "nffgirls:life_jade_ii"
-  },
-  "template": {
-    "item": "hmag:evil_crystal_upgrade_smithing_template"
+    "item": "nffgirls:life_jade_ii",
+    "count": 1
   }
 }

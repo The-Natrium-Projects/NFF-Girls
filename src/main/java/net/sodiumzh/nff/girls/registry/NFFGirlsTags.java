@@ -31,6 +31,14 @@ public class NFFGirlsTags
 	public static final TagKey<Item> HMAG_BERRIES = NFUTagStatics.createItemTag(NFFGirls.MOD_ID, "hmag_berries");
 	public static final TagKey<Item> SOUL_CLOTH_INGREDIENTS = NFUTagStatics.createItemTag(
 			NFFGirls.MOD_ID, "soul_cloth_ingredients");
+	public static final TagKey<Item> BAUBLE_INGREDIENT_GEM_FRAGMENTS = NFUTagStatics.createItemTag(
+		NFFGirls.MOD_ID, "bauble_ingredient_gem_fragments");
+	public static final TagKey<Item> BAUBLE_INGREDIENT_GEMS = NFUTagStatics.createItemTag(
+		NFFGirls.MOD_ID, "bauble_ingredient_gems");
+	public static final TagKey<Item> UNDEAD_HEADS = NFUTagStatics.createItemTag(
+		NFFGirls.MOD_ID, "undead_heads");
+
+
 	/** Bow-shooting mobs shoot vanilla arrows instead of custom arrows when using bow items with this tag. */
 	public static final TagKey<Item> USES_VANILLA_ARROWS = NFUTagStatics.createItemTag(
 			NFFGirls.MOD_ID, "uses_vanilla_arrows");

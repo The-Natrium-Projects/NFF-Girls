@@ -1,0 +1,31 @@
+{
+  "type": "minecraft:crafting_shaped",
+
+  "pattern":
+  [
+    " E ",
+    "OBE",
+    "GO "
+  ],
+
+  "key":{
+    "B": {
+      "item": "nffgirls:crude_badge"
+    },
+    "E":{
+      "item": "hmag:evil_crystal_fragment"
+    },
+    "G": {
+      "tag": "nffgirls:bauble_ingredient_gems"
+    },
+    "O": {
+      "tag": "forge:ingots/gold"
+    }
+
+  },
+
+  "result":{
+    "item": "nffgirls:refined_badge",
+    "count": 1
+  }
+}

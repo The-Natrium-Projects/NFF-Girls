@@ -1,0 +1,39 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "nffgirls:natures_rage"
+    },
+    {
+      "item": "hmag:evil_crystal"
+    },
+    {
+      "item": "hmag:evil_crystal"
+    },
+    {
+      "item": "hmag:evil_crystal"
+    },
+    {
+      "item": "minecraft:nether_star"
+    },
+    {
+      "item": "hmag:mysterious_petal"
+    },
+    {
+      "item": "hmag:ogre_horn"
+    },
+    {
+      "item": "hmag:ender_plasm"
+    },
+    {
+      "item": "minecraft:dragon_breath"
+    }
+
+
+
+  ],
+  "result": {
+    "item": "nffgirls:natures_rage_ii",
+    "count": 1
+  }
+}

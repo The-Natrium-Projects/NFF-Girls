@@ -1,0 +1,30 @@
+{
+	"type": "minecraft:crafting_shapeless",
+	"ingredients": [
+		{
+			"item": "nffgirls:evil_jade_ii"
+		},
+		{
+			"item": "hmag:evil_crystal"
+		},
+		{
+			"item": "hmag:evil_crystal"
+		},
+		{
+			"item": "hmag:dyssomnia_skin"
+		},
+		{
+			"item": "nffgirls:enderberry"
+		},
+		{
+			"item": "hmag:ender_plasm"
+		},
+		{
+			"item": "minecraft:nether_star"
+		}
+	],
+	"result": {
+		"item": "nffgirls:evil_jade_iii",
+		"count": 1
+	}
+}

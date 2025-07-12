@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "nffgirls:treasure_hunter_badge_ii"
+    },
+    {
+      "item": "hmag:greedy_crystal"
+    },
+    {
+      "item": "minecraft:echo_shard"
+    },
+    {
+      "item": "minecraft:dragon_head"
+    },
+    {
+      "item": "minecraft:elytra"
+    }
+  ],
+  "result": {
+    "item": "nffgirls:treasure_hunter_badge_iii",
+    "count": 1
+  }
+}

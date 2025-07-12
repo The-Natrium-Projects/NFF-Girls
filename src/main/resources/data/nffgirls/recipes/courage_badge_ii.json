@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "nffgirls:courage_badge"
+    },
+    {
+      "item": "hmag:evil_crystal"
+    },
+    {
+      "item": "hmag:iron_spear"
+    },
+    {
+      "item": "hmag:sharp_fang"
+    }
+  ],
+  "result": {
+    "item": "nffgirls:courage_badge_ii",
+    "count": 1
+  }
+}

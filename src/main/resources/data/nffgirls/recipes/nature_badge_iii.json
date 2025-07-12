@@ -1,0 +1,26 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "nffgirls:nature_badge_ii"
+    },
+    {
+      "item": "hmag:evil_crystal"
+    },
+    {
+      "item": "hmag:mysterious_petal"
+    },
+    {
+      "item": "hmag:randomberry"
+    },
+    {
+      "item": "hmag:exp_berry"
+    }
+
+
+  ],
+  "result": {
+    "item": "nffgirls:nature_badge_iii",
+    "count": 1
+  }
+}

@@ -1,0 +1,28 @@
+{
+  "type": "minecraft:crafting_shaped",
+
+  "pattern":
+  [
+    " IS",
+    "IGI",
+    " I "
+  ],
+
+  "key":{
+
+    "S":{
+      "item": "minecraft:string"
+    },
+    "I": {
+      "tag": "forge:ingots/iron"
+    },
+    "G": {
+      "tag": "nffgirls:bauble_ingredient_gems"
+    }
+  },
+
+  "result":{
+    "item": "nffgirls:crude_amulet",
+    "count": 1
+  }
+}

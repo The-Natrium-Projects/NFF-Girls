@@ -1,0 +1,27 @@
+{
+	"type": "minecraft:crafting_shapeless",
+	"ingredients": [
+		{
+			"item": "nffgirls:evil_jade"
+		},
+		{
+			"item": "hmag:evil_crystal"
+		},
+		{
+			"item": "hmag:evil_crystal"
+		},
+		{
+			"tag": "nffgirls:undead_heads"
+		},
+		{
+			"item": "hmag:lich_cloth"
+		},
+		{
+			"item": "nffgirls:death_crystal"
+		}
+	],
+	"result": {
+		"item": "nffgirls:evil_jade_ii",
+		"count": 1
+	}
+}

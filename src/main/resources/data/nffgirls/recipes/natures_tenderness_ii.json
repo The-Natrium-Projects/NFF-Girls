@@ -1,0 +1,39 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "nffgirls:natures_tenderness"
+    },
+    {
+      "item": "hmag:evil_crystal"
+    },
+    {
+      "item": "hmag:evil_crystal"
+    },
+    {
+      "item": "hmag:evil_crystal"
+    },
+    {
+      "item": "minecraft:nether_star"
+    },
+    {
+      "item": "hmag:mysterious_petal"
+    },
+    {
+      "item": "hmag:cubic_nucleus"
+    },
+    {
+      "item": "hmag:ender_plasm"
+    },
+    {
+      "item": "minecraft:totem_of_undying"
+    }
+
+
+
+  ],
+  "result": {
+    "item": "nffgirls:natures_tenderness_ii",
+    "count": 1
+  }
+}

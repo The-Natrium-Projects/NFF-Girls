@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "minecraft:quartz"
+    },
+    {
+      "item": "hmag:evil_crystal_fragment"
+    },
+    {
+      "item": "hmag:evil_crystal_fragment"
+    },
+    {
+      "tag": "nffgirls:bauble_ingredient_gems"
+    },
+    {
+      "tag": "nffgirls:bauble_ingredient_gems"
+    }
+  ],
+  "result": {
+    "item": "nffgirls:jade_material",
+    "count": 1
+  }
+}

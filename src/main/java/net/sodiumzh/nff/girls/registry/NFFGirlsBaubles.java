@@ -547,13 +547,13 @@ public class NFFGirlsBaubles {
         .addAllModifierTooltips()
         .buildAsBaubleItem(new ResourceLocation(NFFGirls.MOD_ID, "raw_jade"), 1, new Item.Properties().rarity(Rarity.UNCOMMON)));
 
-    public static final RegistryObject<NFFGirlsDedicatedBaubleItem> PALE_JADE = BAUBLE_ITEMS.register("pale_jade", () -> new NFFGirlsBaubleBuilder()
+    public static final RegistryObject<NFFGirlsDedicatedBaubleItem> BURNISHED_JADE = BAUBLE_ITEMS.register("burnished_jade", () -> new NFFGirlsBaubleBuilder()
         .repeatable(Attributes.MAX_HEALTH, 5d, AttributeModifier.Operation.ADDITION)
         .repeatable(Attributes.ARMOR, 1d, AttributeModifier.Operation.ADDITION)
         .repeatable(Attributes.MOVEMENT_SPEED, 0.1d, AttributeModifier.Operation.MULTIPLY_BASE)
         .setRarityTier(1)
         .addAllModifierTooltips()
-        .buildAsBaubleItem(new ResourceLocation(NFFGirls.MOD_ID, "pale_jade"), 1, new Item.Properties().rarity(Rarity.UNCOMMON)));
+        .buildAsBaubleItem(new ResourceLocation(NFFGirls.MOD_ID, "burnished_jade"), 1, new Item.Properties().rarity(Rarity.UNCOMMON)));
 
     public static final RegistryObject<NFFGirlsDedicatedBaubleItem> HOLY_JADE = BAUBLE_ITEMS.register("holy_jade", () -> new NFFGirlsBaubleBuilder()
         .equippingCondition(CONDITION_NOT_UNDEAD.get())
@@ -744,7 +744,7 @@ public class NFFGirlsBaubles {
         .setRarityTier(6)
         .addAllModifierTooltips()
         .buildAsBaubleItem(new ResourceLocation(NFFGirls.MOD_ID, "evil_jade"), 3, new Item.Properties()));
-
+/*
     public static final RegistryObject<NFFGirlsDedicatedBaubleItem> DECAY_JADE = BAUBLE_ITEMS.register("decay_jade", () -> new NFFGirlsBaubleBuilder()
         .repeatable(NFFGirlsEntityAttributes.WITHER_ASPECT.get(), 2d, AttributeModifier.Operation.ADDITION)
         .repeatable(NFFGirlsEntityAttributes.POISON_ASPECT.get(), 2d, AttributeModifier.Operation.ADDITION)
@@ -775,7 +775,7 @@ public class NFFGirlsBaubles {
         .addAllModifierTooltips()
         .buildAsBaubleItem(new ResourceLocation(NFFGirls.MOD_ID, "decay_jade"), 3, new Item.Properties()));
 
-
+*/
     // Misc
     public static final RegistryObject<NFFGirlsDedicatedBaubleItem> RESISTANCE_CORE = BAUBLE_ITEMS.register("resistance_core", () -> new NFFGirlsBaubleBuilder()
         .environmentResistance()
@@ -790,6 +790,11 @@ public class NFFGirlsBaubles {
         .addTooltipTranslatable("tooltip.nffgirls.bauble.at_night")
         .addAllModifierTooltips()
         .buildAsBaubleBehavior(new ResourceLocation(NFFGirls.MOD_ID, "insomnia_fruit"), 1, ModItems.INSOMNIA_FRUIT.get(), false));
+
+    // Ingredients
+
+    public static final RegistryObject<Item> JADE_MATERIAL = BAUBLE_ITEMS.register("jade_material", () -> new Item(new Item.Properties()));
+
 
    /* static {
         BAUBLE_REGISTRY.register()

@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:smelting",
+  "ingredient": {
+    "item": "nffgirls:jade_material"
+  },
+  "result": "nffgirls:raw_jade",
+  "experience": 44.8,
+  "cookingtime": 12800
+}

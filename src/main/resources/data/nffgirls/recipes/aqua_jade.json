@@ -1,25 +1,21 @@
 {
-	"type": "minecraft:crafting_shaped",
-	
-	"pattern": 
-	[ 
-	" N ",
-	"NJN",
-	" N "	
-	],
-	
-	"key":{ 
-	
-		"N":{
-		"item": "minecraft:nautilus_shell"
+	"type": "minecraft:crafting_shapeless",
+	"ingredients": [
+		{
+			"item": "nffgirls:healing_jade"
 		},
-		
-		"J":{ 
-		"item": "nffgirls:healing_jade"
-		}		
-	},
-	
-	"result":{ 
+		{
+			"item": "minecraft:nautilus_shell"
+		},
+		{
+			"item": "minecraft:sea_lantern"
+		},
+		{
+			"item": "minecraft:pufferfish"
+		}
+
+	],
+	"result": {
 		"item": "nffgirls:aqua_jade",
 		"count": 1
 	}
