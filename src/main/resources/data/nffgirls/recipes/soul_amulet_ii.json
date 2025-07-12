@@ -1,12 +1,24 @@
 {
-  "type": "minecraft:smithing",
-  "base": {
-    "item": "nffgirls:soul_amulet"
-  },
-  "addition": {
-    "item": "minecraft:zombie_head"
-  },
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "nffgirls:soul_amulet"
+    },
+    {
+      "item": "minecraft:ghast_tear"
+    },
+    {
+      "item": "hmag:lich_cloth"
+    },
+    {
+      "item": "hmag:evil_crystal"
+    },
+    {
+      "tag": "nffgirls:undead_heads"
+    }
+  ],
   "result": {
-    "item": "nffgirls:soul_amulet_ii"
+    "item": "nffgirls:soul_amulet_ii",
+    "count": 1
   }
 }

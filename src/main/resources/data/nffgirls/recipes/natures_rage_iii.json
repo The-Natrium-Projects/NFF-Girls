@@ -1,0 +1,30 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "nffgirls:natures_rage_ii"
+    },
+    {
+      "item": "hmag:evil_crystal_block"
+    },
+    {
+      "item": "minecraft:echo_shard"
+    },
+    {
+      "item": "hmag:nemesis_blade"
+    },
+    {
+      "item": "minecraft:heart_of_the_sea"
+    },
+    {
+      "item": "minecraft:dragon_head"
+    },
+    {
+      "tag": "forge:ingots/netherite"
+    }
+  ],
+  "result": {
+    "item": "nffgirls:natures_rage_iii",
+    "count": 1
+  }
+}

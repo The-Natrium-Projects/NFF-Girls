@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "nffgirls:courage_badge_ii"
+    },
+    {
+      "item": "minecraft:rabbit_foot"
+    },
+    {
+      "item": "minecraft:glistering_melon_slice"
+    },
+    {
+      "item": "hmag:golden_tropical_fish"
+    }
+  ],
+  "result": {
+    "item": "nffgirls:treasure_hunter_badge",
+    "count": 1
+  }
+}

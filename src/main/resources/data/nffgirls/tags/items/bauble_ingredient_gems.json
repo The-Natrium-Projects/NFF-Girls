@@ -1,0 +1,11 @@
+{
+  "replace" : false,
+  "values" : [
+    "#forge:gems/diamond",
+    "#forge:gems/emerald",
+    "#forge:gems/amethyst",
+    "#forge:storage_blocks/lapis",
+    "hmag:ender_plasm",
+    "hmag:ancient_stone"
+  ]
+}

@@ -2,23 +2,26 @@
   "type": "minecraft:crafting_shapeless",
   "ingredients": [
     {
-      "item": "nffgirls:soul_amulet_ii"
+      "item": "nffgirls:holy_jade_ii"
     },
     {
       "item": "minecraft:nether_star"
     },
     {
+      "item": "hmag:lightning_particle"
+    },
+    {
       "item": "hmag:evil_crystal"
     },
     {
-      "item": "hmag:lich_cloth"
+      "item": "minecraft:dragon_breath"
     },
     {
-      "item": "nffgirls:death_crystal"
+      "item": "hmag:ender_plasm"
     }
   ],
   "result": {
-    "item": "nffgirls:soul_amulet_iii",
+    "item": "nffgirls:holy_jade_iii",
     "count": 1
   }
 }

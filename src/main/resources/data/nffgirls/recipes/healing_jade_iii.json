@@ -1,0 +1,24 @@
+{
+	"type": "minecraft:crafting_shapeless",
+	"ingredients": [
+		{
+			"item": "nffgirls:healing_jade_ii"
+		},
+		{
+			"item": "hmag:cubic_nucleus"
+		},
+		{
+			"item": "hmag:mysterious_petal"
+		},
+		{
+			"item": "nffgirls:magical_gel_ball"
+		},
+		{
+			"item": "minecraft:dragon_breath"
+		}
+	],
+	"result": {
+		"item": "nffgirls:healing_jade_iii",
+		"count": 1
+	}
+}

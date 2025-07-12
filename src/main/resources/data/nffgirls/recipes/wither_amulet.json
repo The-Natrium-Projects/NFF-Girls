@@ -1,0 +1,33 @@
+{
+  "type": "minecraft:crafting_shaped",
+
+  "pattern":
+  [
+    " CE",
+    "NBC",
+    "HN "
+  ],
+
+  "key":{
+    "B":{
+      "item": "nffgirls:corrupted_amulet_ii"
+    },
+    "C":{
+      "item": "hmag:lich_cloth"
+    },
+    "N":{
+      "item": "hmag:necrofiber"
+    },
+    "E":{
+      "item": "hmag:evil_crystal"
+    },
+    "H": {
+      "item": "minecraft:wither_skeleton_skull"
+    }
+  },
+
+  "result":{
+    "item": "nffgirls:wither_amulet",
+    "count": 1
+  }
+}

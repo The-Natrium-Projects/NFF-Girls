@@ -1,0 +1,27 @@
+{
+	"type": "minecraft:crafting_shapeless",
+	"ingredients": [
+		{
+			"item": "nffgirls:poison_jade_ii"
+		},
+		{
+			"item": "hmag:crimson_cuticula"
+		},
+		{
+			"item": "hmag:dyssomnia_skin"
+		},
+		{
+			"item": "hmag:mysterious_petal"
+		},
+		{
+			"item": "hmag:evil_crystal"
+		},
+		{
+			"item": "minecraft:dragon_breath"
+		}
+	],
+	"result": {
+		"item": "nffgirls:poison_jade_iii",
+		"count": 1
+	}
+}

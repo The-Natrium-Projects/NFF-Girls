@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "nffgirls:raw_jade"
+    },
+    {
+      "item": "hmag:evil_crystal_fragment"
+    },
+    {
+      "tag": "forge:gems/diamond"
+    },
+    {
+      "tag": "nffgirls:bauble_ingredient_gems"
+    },
+    {
+      "item": "minecraft:obsidian"
+    }
+  ],
+  "result": {
+    "item": "nffgirls:burnished_jade",
+    "count": 1
+  }
+}

@@ -1,0 +1,33 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "nffgirls:nature_badge_iii"
+    },
+    {
+      "item": "hmag:evil_crystal"
+    },
+    {
+      "item": "hmag:evil_crystal"
+    },
+    {
+      "item": "minecraft:chorus_flower"
+    },
+    {
+      "item": "hmag:mysterious_petal"
+    },
+    {
+      "item": "hmag:ender_plasm"
+    },
+    {
+      "item": "hmag:lightning_particle"
+    }
+
+
+
+  ],
+  "result": {
+    "item": "nffgirls:nature_badge_iv",
+    "count": 1
+  }
+}

@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "nffgirls:burnished_jade"
+    },
+    {
+      "item": "hmag:purification_cloth"
+    },
+    {
+      "item": "hmag:cureberry"
+    },
+    {
+      "item": "hmag:golden_tropical_fish"
+    },
+    {
+      "item": "minecraft:golden_carrot"
+    }
+  ],
+  "result": {
+    "item": "nffgirls:holy_jade",
+    "count": 1
+  }
+}

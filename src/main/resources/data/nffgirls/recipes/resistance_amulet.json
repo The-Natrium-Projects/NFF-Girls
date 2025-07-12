@@ -3,27 +3,26 @@
 	
 	"pattern": 
 	[ 
-	"ORO",
-	"RCR",
-	"ODO"
+	" GR",
+	"OBG",
+	"CO "
 	],
 	
-	"key":{ 
-	
+	"key":{
 		"R":{
 		"item": "hmag:reinforcing_chain"
 		},
-		
-		"O":{
-		"item": "minecraft:obsidian"
+		"G":{
+		"tag": "nffgirls:bauble_ingredient_gems"
 		},
-		
-		"D":{ 
-		"tag": "forge:gems/diamond"
+		"B":{
+		"item": "nffgirls:refined_amulet"
 		},
-		
 		"C":{
 		"item": "nffgirls:resistance_core"
+		},
+		"O":{
+		"item": "minecraft:obsidian"
 		}
 		
 	},

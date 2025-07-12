@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "nffgirls:resistance_amulet_ii"
+    },
+    {
+      "tag": "forge:ingots/netherite"
+    },
+    {
+      "item": "hmag:multiplex_reinforcing_chain"
+    },
+    {
+      "item": "hmag:burning_core"
+    },
+    {
+      "item": "hmag:lightning_particle"
+    }
+  ],
+  "result": {
+    "item": "nffgirls:resistance_amulet_iii",
+    "count": 1
+  }
+}

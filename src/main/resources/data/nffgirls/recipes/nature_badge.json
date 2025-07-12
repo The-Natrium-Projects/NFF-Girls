@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "nffgirls:refined_badge"
+    },
+    {
+      "item": "minecraft:spore_blossom"
+    },
+    {
+      "item": "minecraft:golden_carrot"
+    }
+  ],
+  "result": {
+    "item": "nffgirls:nature_badge",
+    "count": 1
+  }
+}
