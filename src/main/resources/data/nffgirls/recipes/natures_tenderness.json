@@ -2,23 +2,29 @@
   "type": "minecraft:crafting_shapeless",
   "ingredients": [
     {
-      "item": "nffgirls:healing_jade"
+      "item": "nffgirls:nature_badge_iii"
     },
     {
-      "item": "hmag:soul_powder_block"
+      "item": "nffgirls:healing_jade_ii"
     },
     {
       "item": "hmag:evil_crystal"
     },
     {
-      "item": "minecraft:glow_berries"
+      "item": "minecraft:chorus_flower"
     },
     {
       "item": "hmag:mysterious_petal"
+    },
+    {
+      "item": "hmag:ender_plasm"
     }
+
+
+
   ],
   "result": {
-    "item": "nffgirls:life_jade",
+    "item": "nffgirls:natures_tenderness",
     "count": 1
   }
 }

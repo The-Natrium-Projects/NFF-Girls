@@ -2,23 +2,23 @@
   "type": "minecraft:crafting_shapeless",
   "ingredients": [
     {
-      "item": "nffgirls:soul_amulet_ii"
+      "item": "nffgirls:wither_amulet_ii"
     },
     {
       "item": "minecraft:nether_star"
     },
     {
-      "item": "hmag:evil_crystal"
+      "item": "minecraft:echo_shard"
     },
     {
-      "item": "hmag:lich_cloth"
+      "tag": "forge:ingots/netherite"
     },
     {
-      "item": "nffgirls:death_crystal"
+      "item": "hmag:dyssomnia_skin"
     }
   ],
   "result": {
-    "item": "nffgirls:soul_amulet_iii",
+    "item": "nffgirls:wither_amulet_iii",
     "count": 1
   }
 }

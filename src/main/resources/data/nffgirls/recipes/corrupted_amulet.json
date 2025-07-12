@@ -1,0 +1,30 @@
+{
+  "type": "minecraft:crafting_shaped",
+
+  "pattern":
+  [
+    "ERP",
+    "RBR",
+    "ERE"
+  ],
+
+  "key":{
+    "B":{
+      "item": "nffgirls:crude_amulet"
+    },
+    "R":{
+      "item": "minecraft:wither_rose"
+    },
+    "E":{
+      "item": "minecraft:fermented_spider_eye"
+    },
+    "P":{
+      "item": "minecraft:blaze_powder"
+    }
+  },
+
+  "result":{
+    "item": "nffgirls:corrupted_amulet",
+    "count": 1
+  }
+}

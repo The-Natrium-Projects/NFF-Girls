@@ -3,29 +3,30 @@
 	
 	"pattern": 
 	[ 
-	" PF",
-	"PCP",
-	"IP "	
+	"SNF",
+	"EBN",
+	"CES"
 	],
 	
-	"key":{ 
-	
-		"F":{ 
-		"item": "hmag:necrofiber"
+	"key":{
+		"F":{
+			"item": "hmag:necrofiber"
 		},
-		
-		"C":{ 
-		"item": "minecraft:netherite_scrap"
+		"N":{
+			"tag": "forge:nuggets/netherite_scrap"
 		},
-		
-		"P":{ 
-		"item": "nffgirls:death_crystal_powder"
+		"E":{
+			"item": "hmag:evil_crystal_fragment"
 		},
-		
-		"I":{ 
-		"item": "hmag:lightning_particle"
+		"B":{
+			"item": "nffgirls:refined_amulet"
+		},
+		"S": {
+			"item": "hmag:soul_powder"
+		},
+		"C": {
+			"item": "nffgirls:resistance_core"
 		}
-		
 	},
 	
 	"result":{ 

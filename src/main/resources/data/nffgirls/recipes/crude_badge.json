@@ -1,0 +1,27 @@
+{
+  "type": "minecraft:crafting_shaped",
+
+  "pattern":
+  [
+    " I",
+    "EGE",
+    " I"
+  ],
+
+  "key":{
+    "I":{
+      "tag": "forge:ingots/iron"
+    },
+    "E":{
+      "item": "hmag:evil_crystal_fragment"
+    },
+    "G": {
+      "tag": "nffgirls:bauble_ingredient_gems"
+    }
+  },
+
+  "result":{
+    "item": "nffgirls:crude_badge",
+    "count": 1
+  }
+}

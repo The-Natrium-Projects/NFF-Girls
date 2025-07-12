@@ -1,0 +1,26 @@
+{
+	"type": "minecraft:crafting_shapeless",
+	"ingredients": [
+		{
+			"item": "nffgirls:burnished_jade"
+		},
+		{
+			"item": "minecraft:fermented_spider_eye"
+		},
+		{
+			"item": "minecraft:pufferfish"
+		},
+		{
+			"item": "minecraft:nether_wart"
+		},
+		{
+			"item": "hmag:bat_wing"
+		}
+
+
+	],
+	"result": {
+		"item": "nffgirls:poison_jade",
+		"count": 1
+	}
+}

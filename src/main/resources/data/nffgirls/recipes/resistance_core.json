@@ -3,8 +3,8 @@
 
   "pattern":
   [
-    "IGI",
-    "EDE"
+    "IAI",
+    "EGE"
   ],
 
   "key":{
@@ -13,12 +13,12 @@
       "tag": "forge:ingots/iron"
     },
 
-    "G":{
+    "A":{
       "item": "minecraft:golden_apple"
     },
 
-    "D":{
-      "tag": "forge:gems/emerald"
+    "G":{
+      "tag": "nffgirls:bauble_ingredient_gems"
     },
 
     "E":{

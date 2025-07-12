@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "nffgirls:courage_badge_ii"
+    },
+    {
+      "item": "hmag:evil_crystal"
+    },
+    {
+      "item": "hmag:ogre_horn"
+    },
+    {
+      "item": "hmag:lightning_particle"
+    },
+    {
+      "item": "minecraft:nether_star"
+    }
+  ],
+  "result": {
+    "item": "nffgirls:courage_badge_iii",
+    "count": 1
+  }
+}

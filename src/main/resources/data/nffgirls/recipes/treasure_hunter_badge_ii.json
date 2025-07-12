@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "nffgirls:treasure_hunter_badge"
+    },
+    {
+      "item": "hmag:greedy_crystal"
+    },
+    {
+      "item": "minecraft:totem_of_undying"
+    }
+  ],
+  "result": {
+    "item": "nffgirls:treasure_hunter_badge_ii",
+    "count": 1
+  }
+}

@@ -1,29 +1,17 @@
 {
-	"type": "minecraft:crafting_shaped",
-	
-	"pattern": 
-	[ 
-	"EC ",
-	"PEE"	
-	],
-	
-	"key":{ 
-	
-		"E":{
-		"item": "hmag:evil_crystal"
+	"type": "minecraft:crafting_shapeless",
+	"ingredients": [
+		{
+			"item": "nffgirls:burnished_jade"
 		},
-		
-		"C":{ 
-		"item": "hmag:cubic_nucleus"
+		{
+			"item": "minecraft:golden_apple"
 		},
-
-		"P":{ 
-		"item": "hmag:purification_cloth"
+		{
+			"item": "minecraft:glistering_melon_slice"
 		}
-		
-	},
-	
-	"result":{ 
+	],
+	"result": {
 		"item": "nffgirls:healing_jade",
 		"count": 1
 	}

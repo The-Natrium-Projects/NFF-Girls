@@ -1,0 +1,22 @@
+{
+	"type": "minecraft:crafting_shapeless",
+	"ingredients": [
+		{
+			"item": "nffgirls:aqua_jade_ii"
+		},
+		{
+			"item": "minecraft:conduit"
+		},
+		{
+			"item": "minecraft:nether_star"
+		},
+		{
+			"item": "hmag:evil_crystal"
+		}
+
+	],
+	"result": {
+		"item": "nffgirls:aqua_jade_iii",
+		"count": 1
+	}
+}

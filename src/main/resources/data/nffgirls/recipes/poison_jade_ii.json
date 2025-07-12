@@ -1,0 +1,28 @@
+{
+	"type": "minecraft:crafting_shapeless",
+	"ingredients": [
+		{
+			"item": "nffgirls:poison_jade"
+		},
+		{
+			"item": "hmag:crimson_cuticula"
+		},
+		{
+			"item": "hmag:lich_cloth"
+		},
+		{
+			"item": "hmag:sharp_fang"
+		},
+		{
+			"item": "hmag:necrofiber"
+		},
+		{
+			"item": "hmag:evil_crystal"
+		}
+
+	],
+	"result": {
+		"item": "nffgirls:poison_jade_ii",
+		"count": 1
+	}
+}

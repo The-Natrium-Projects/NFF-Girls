@@ -2,23 +2,29 @@
   "type": "minecraft:crafting_shapeless",
   "ingredients": [
     {
-      "item": "nffgirls:healing_jade"
+      "item": "nffgirls:holy_jade"
     },
     {
-      "item": "hmag:soul_powder_block"
+      "item": "hmag:purification_cloth"
     },
     {
       "item": "hmag:evil_crystal"
     },
     {
-      "item": "minecraft:glow_berries"
+      "item": "hmag:randomberry"
+    },
+    {
+      "item": "hmag:exp_berry"
+    },
+    {
+      "item": "hmag:cubic_nucleus"
     },
     {
       "item": "hmag:mysterious_petal"
     }
   ],
   "result": {
-    "item": "nffgirls:life_jade",
+    "item": "nffgirls:holy_jade_ii",
     "count": 1
   }
 }
