@@ -1,9 +1,16 @@
 package net.sodiumzh.nff.girls.entity.hmag;
 
 import com.github.mechalopa.hmag.world.entity.ImpEntity;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.particles.ParticleOptions;
+import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.nbt.ListTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.sounds.SoundEvent;
+import net.minecraft.sounds.SoundSource;
+import net.minecraft.tags.TagKey;
+import net.minecraft.util.Tuple;
 import net.minecraft.world.Container;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.ai.goal.FloatGoal;
@@ -21,10 +28,12 @@ import net.sodiumzh.nff.girls.entity.ai.goal.NFFGirlsFollowOwnerGoal;
 import net.sodiumzh.nff.girls.entity.ai.goal.NFFGirlsLocateBlockGoal;
 import net.sodiumzh.nff.girls.entity.ai.goal.target.NFFGirlsNearestHostileToOwnerTargetGoal;
 import net.sodiumzh.nff.girls.entity.ai.goal.target.NFFGirlsNearestHostileToSelfTargetGoal;
+import net.sodiumzh.nff.girls.entity.projectile.MobileParticleSourceEntity;
 import net.sodiumzh.nff.girls.inventory.NFFGirlsHmagImpInventoryMenu;
 import net.sodiumzh.nff.girls.registry.NFFGirlsHealingItems;
 import net.sodiumzh.nff.girls.registry.NFFGirlsItems;
 import net.sodiumzh.nff.girls.sound.NFFGirlsSoundPresets;
+import net.sodiumzh.nff.services.entity.ai.NFFTamedMobAIState;
 import net.sodiumzh.nff.services.entity.ai.goal.preset.NFFMeleeAttackGoal;
 import net.sodiumzh.nff.services.entity.ai.goal.preset.NFFWaterAvoidingRandomStrollGoal;
 import net.sodiumzh.nff.services.entity.ai.goal.preset.target.NFFHurtByTargetGoal;
@@ -35,16 +44,30 @@ import net.sodiumzh.nff.services.entity.taming.NFFTamingMapping;
 import net.sodiumzh.nff.services.inventory.NFFTamedInventoryMenu;
 import net.sodiumzh.nff.services.inventory.NFFTamedMobInventory;
 import net.sodiumzh.nff.services.inventory.NFFTamedMobInventoryWithHandItems;
+import net.sodiumzh.nfu.entity.ManualTimer;
 import net.sodiumzh.nfu.entity.MobApplicableItemTable;
+import net.sodiumzh.nfu.network.NFUDataSerializers;
 import net.sodiumzh.nfu.util.NFUContainerStatics;
+import net.sodiumzh.nfu.util.NFULevelStatics;
 import net.sodiumzh.nfu.util.NFUTagStatics;
 
 import javax.annotation.Nonnull;
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.List;
 
-public class HmagImpEntity extends ImpEntity implements INFFGirlsTamed, IBlockLocator
+public class HmagImpEntity extends ImpEntity implements INFFGirlsTamed//, IBlockLocator
 {
+
+	private ManualTimer<BlockPos> locatedBlocks = new ManualTimer<BlockPos>().setSerializable((BlockPos pos) -> {
+		return pos.getX() + "," + pos.getY() + "," + pos.getZ();
+		}, str -> {
+			String[] split = str.split(",");
+			return new BlockPos(Integer.parseInt(split[0]), Integer.parseInt(split[1]), Integer.parseInt(split[2]));
+		});
+	private int locatingBlockRemainingCooldown = 0;
+	private static final int LOCATING_BLOCK_COOLDOWN = 30 * 20;
+
 
 	/* Initialization */
 
@@ -61,7 +84,7 @@ public class HmagImpEntity extends ImpEntity implements INFFGirlsTamed, IBlockLo
 	protected void registerGoals() {
 		goalSelector.addGoal(1, new FloatGoal(this));
 		goalSelector.addGoal(3, new NFFMeleeAttackGoal(this, 1.0d, true));
-		goalSelector.addGoal(3, new NFFGirlsLocateBlockGoal(this, 6d));
+		//goalSelector.addGoal(3, new NFFGirlsLocateBlockGoal(this, 6d));
 		goalSelector.addGoal(4, new NFFGirlsFollowOwnerGoal(this, 1.0d, 5.0f, 2.0f, false));
 		goalSelector.addGoal(5, new NFFWaterAvoidingRandomStrollGoal(this, 1.0d));
 		goalSelector.addGoal(6, new LookAtPlayerGoal(this, Player.class, 8.0F));
@@ -84,43 +107,6 @@ public class HmagImpEntity extends ImpEntity implements INFFGirlsTamed, IBlockLo
 		return NFFGirlsHealingItems.GENERAL_HUMANOID_0.get();
 	}
 
-	/*@Override
-	public InteractionResult mobInteract(Player player, InteractionHand hand)
-	{
-		if (player.getUUID().equals(getOwnerUUID())) {
-			// For normal interaction
-			if (!player.isShiftKeyDown())
-			{
-				if (!player.level.isClientSide()) 
-				{
-					if (this.tryApplyHealingItems(player.getItemInHand(hand)) != InteractionResult.PASS)
-						return InteractionResult.sidedSuccess(player.level.isClientSide);
-					// The function above returns PASS when the items are not correct. So when not PASS it should stop here
-					else if (hand == InteractionHand.MAIN_HAND && NFFGirlsEntityStatics.isOnEitherHand(player, NFFGirlsItems.COMMANDING_WAND.get()))
-					{
-						switchAIState();
-					}
-					// Here it's main hand but no interaction. Return pass to enable off hand interaction.
-					else return InteractionResult.PASS;
-				}
-				// Interacted
-				return InteractionResult.sidedSuccess(player.level.isClientSide);
-			}
-			// For interaction with shift key down
-			else
-			{
-				// Open inventory and GUI
-				if (hand == InteractionHand.MAIN_HAND && NFFGirlsEntityStatics.isOnEitherHand(player, NFFGirlsItems.COMMANDING_WAND.get()))
-				{
-					NFFTamedStatics.openBefriendedInventory(player, this);
-					return InteractionResult.sidedSuccess(player.level.isClientSide);
-				}
-			}
-		} 
-		// Always pass when not owning this mob
-		return InteractionResult.PASS;
-	}
-	*/
 	/* Inventory */
 
 	@Override
@@ -133,9 +119,51 @@ public class HmagImpEntity extends ImpEntity implements INFFGirlsTamed, IBlockLo
 		return new NFFGirlsHmagImpInventoryMenu(containerId, playerInventory, container, this);
 	}
 
-	// IBlockLocator interface
+	// block locating related
+
+	private static final TagKey<Item> NETHERITE_SCRAP_NUGGETS =
+		NFUTagStatics.createItemTag("forge", "nuggets/netherite_scrap");
+	private static final TagKey<Block> NETHERITE_SCRAP_ORES =
+		NFUTagStatics.createBlockTag("forge", "ores/netherite_scrap");
+
+	private void updateLocatingBlocks() {
+		if (this.locatingBlockRemainingCooldown > 0)
+			this.locatingBlockRemainingCooldown--;
+		else this.locatingBlockRemainingCooldown = 0;
+		this.locatedBlocks.update();
+		if (this.locatingBlockRemainingCooldown > 0) return;
+		if (!this.getAIState().equals(NFFTamedMobAIState.FOLLOW)) return;	// Only locate on following
+		if (!this.getAdditionalInventory().getItem(0).is(NFFGirlsItems.NETHERITE_FORK.get()))
+			return;
+
+		if (this.getAdditionalInventory().getItem(1).is(NETHERITE_SCRAP_NUGGETS)) {
+			List<BlockPos> ores = NFULevelStatics.getSphericalBlockStates(this.level(), this.blockPosition(), 8,
+				(pos, bs) -> bs.is(NETHERITE_SCRAP_ORES) && !this.locatedBlocks.hasTimer(pos))
+				.map(Tuple::getA).toList();
+			if (!ores.isEmpty()) {
+				BlockPos targetPos = ores.get(this.random.nextInt(ores.size()));
+				MobileParticleSourceEntity particleSource = new MobileParticleSourceEntity(this.level(), targetPos::getCenter)
+					.setParticleType(ParticleTypes.HAPPY_VILLAGER).particlesPerTick(3).setSpeed(0.5d)
+					.setMaxLifetime(40 * 20).setStartingPos(this.getEyePosition());
+				this.level().addFreshEntity(particleSource);
+				this.locatedBlocks.addTimer(targetPos, 300 * 20);	// Add 300s cooldown to prevent repeatedly locating the same block
+				this.locatingBlockRemainingCooldown = LOCATING_BLOCK_COOLDOWN;
+				this.getAdditionalInventory().getItem(1).shrink(1);
+				this.getAdditionalInventory().syncToMob(this);
+				this.level().playSound(this, this.blockPosition(), this.getAmbientSound(),
+					SoundSource.PLAYERS, this.getSoundVolume() * 1.5f, this.getVoicePitch() * 1.5f);
+			}
+		}
+	}
 
 	@Override
+	protected void customServerAiStep() {
+		super.customServerAiStep();
+		if (!this.level().isClientSide())
+			this.updateLocatingBlocks();
+	}
+
+	/*@Override
 	public Collection<Block> getLocatingBlocks() {
 		if (!this.getAdditionalInventory().getItem(0).is(NFFGirlsItems.NETHERITE_FORK.get()))
 			return NFUContainerStatics.listOf();
@@ -157,13 +185,23 @@ public class HmagImpEntity extends ImpEntity implements INFFGirlsTamed, IBlockLo
 		this.getAdditionalInventory().getItem(1).shrink(1);
 		this.updateFromInventory();
 	}
-	
+*/
 	/* Save and Load */
+
+	@Override
+	public void addAdditionalSaveData(CompoundTag nbt) {
+		super.addAdditionalSaveData(nbt);
+		nbt.put("locatedBlocks", this.locatedBlocks.serialize());
+		nbt.putInt("locatingCooldown", this.locatingBlockRemainingCooldown);
+	}
 
 	@Override
 	public void readAdditionalSaveData(CompoundTag nbt) {
 		super.readAdditionalSaveData(nbt);
-		NFFTamedStatics.readBefriendedCommonSaveData(this, nbt);
+		if (nbt.contains("locatedBlocks"))
+			this.locatedBlocks.deserialize(nbt.getCompound("locatedBlocks"));
+		if (nbt.contains("locatingCooldown"))
+			this.locatingBlockRemainingCooldown = nbt.getInt("locatingCooldown");
 		setInit();
 	}
 /*

@@ -66,6 +66,11 @@ public class MobileParticleSourceEntity extends Entity implements ItemSupplier {
         return maxLifetime;
     }
 
+    public MobileParticleSourceEntity setMaxLifetime(int value) {
+        this.maxLifetime = value;
+        return this;
+    }
+
     public MobileParticleSourceEntity particlesPerTick(int val) {
         this.getEntityData().set(PARTICLES_PER_TICK, val);
         this.getEntityData().set(TICKS_PER_PARTICLE, 0);
@@ -118,6 +123,11 @@ public class MobileParticleSourceEntity extends Entity implements ItemSupplier {
     public Vec3 getCurrentTargetPos() {
         this.updateTargetPos();
         return this.getEntityData().get(TARGET_POS);
+    }
+
+    public MobileParticleSourceEntity setStartingPos(Vec3 pos) {
+        this.setPos(pos);
+        return this;
     }
 
     public MobileParticleSourceEntity setTargetPos(Supplier<Vec3> getter) {

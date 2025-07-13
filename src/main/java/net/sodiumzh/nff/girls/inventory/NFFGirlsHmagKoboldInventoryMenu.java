@@ -21,11 +21,6 @@ public class NFFGirlsHmagKoboldInventoryMenu extends NFFGirlsHandItemsTwoBaubles
 	{
 		return l -> l.getItem() instanceof PickaxeItem;
 	}
-	
-	@Override
-	protected int getOffHandMaxAmount()
-	{
-		return 1;
-	}
+
 	
 }
