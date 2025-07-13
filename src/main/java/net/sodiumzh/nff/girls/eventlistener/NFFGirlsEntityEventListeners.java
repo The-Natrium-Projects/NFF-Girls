@@ -225,7 +225,9 @@ public class NFFGirlsEntityEventListeners
 			{
 				if (tamable.getTamingProcess() instanceof HmagCreeperGirlTamingProcess process) {
 					process.handleFinalExplosionKillingOtherTamedMob(srcMob, event.getMob().asMob());
-					event.setCanceled(true);
+					if (event.getMob().asMob().getHealth() < 0.00001f) {
+						event.setCanceled(true);
+					}
 				}
 			});
 			if (event.isCanceled())
