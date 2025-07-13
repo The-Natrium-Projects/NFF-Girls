@@ -12,10 +12,5 @@ public class HmagImpInventoryMenu extends NFFGirlsHandItemsTwoBaublesInventoryMe
 		super(containerId, playerInventory, container, mob);
 	}
 
-	@Override
-	protected int getOffHandMaxAmount()
-	{
-		return 1;
-	}
 	
 }
