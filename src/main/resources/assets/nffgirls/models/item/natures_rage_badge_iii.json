@@ -1,0 +1,7 @@
+{
+  "parent": "item/generated",
+  "textures": {
+    "layer0": "nffgirls:item/natures_rage_badge",
+    "layer1": "nffgirls:item/bauble_tier_iii"
+  }
+}

@@ -18,6 +18,7 @@ import net.sodiumzh.nfu.util.NFUParticleStatics;
 import org.apache.commons.lang3.mutable.MutableObject;
 
 import java.util.Collection;
+import java.util.concurrent.atomic.AtomicReference;
 
 @Mod.EventBusSubscriber(modid = NFFGirls.MOD_ID, bus = Mod.EventBusSubscriber.Bus.FORGE)
 public class HmagCreeperGirlTamingProcess extends TamingProcessItemGivingProgress
@@ -248,17 +249,21 @@ public class HmagCreeperGirlTamingProcess extends TamingProcessItemGivingProgres
 	}
 
 	@DontCallManually
-	public void handleFinalExplosionKillingOtherTamedMob(Mob thisMob, Mob impactedMob) {
+	public boolean handleFinalExplosionKillingOtherTamedMob(Mob thisMob, Mob impactedMob) {
 		// NFF tamed mobs won't be killed by CreeperGirl's "final explosion".
 		// They leave 1 health and get invulnerable for 3s,
 		// preventing them to be killed by falling down after blew up by the explosion.
+		// Return if the death is prevented.
+		AtomicReference<Boolean> res = new AtomicReference<>(false);
 		CNFFTamable.getOptional(thisMob).ifPresent(tamable -> {
 			if (tamable.getGeneralNBT().contains("final_explosion_player", 11))
 			{
 				impactedMob.setHealth(1.0f);
 				impactedMob.invulnerableTime += 60;
 				NFUParticleStatics.sendGlintParticlesToEntityDefault(impactedMob);
+				res.set(true);
 			}
 		});
+		return res.get();
 	}
 }

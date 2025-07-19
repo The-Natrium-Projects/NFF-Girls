@@ -1,7 +1,0 @@
-{
-	"parent": "item/generated",
-	"textures": {
-		"layer0": "nffgirls:item/aqua_jade",
-		"layer1": "nffgirls:item/bauble_tier_i"
-	}
-}

@@ -31,7 +31,8 @@ public class NFFGirlsEntityAttributeProviders
 			.add(NFFGirlsEntityAttributes.POISON_ASPECT.get(), 0d)
 			.add(NFFGirlsEntityAttributes.WITHER_ASPECT.get(), 0d)
 			.add(NFFGirlsEntityAttributes.HEALTH_ABSORPTION.get(), 0d)
-			.add(NFFGirlsEntityAttributes.XP_GAIN_RATE.get(), 1d));
+			.add(NFFGirlsEntityAttributes.XP_GAIN_RATE.get(), 1d)
+			.add(Attributes.LUCK, 0d));
 
 	public static final NFURegistry.Accessor<EntityAttributeProvider> HMAG_ZOMBIE_GIRL =
 		ATTRIBUTE_PROVIDERS.register("zombie_girl", () -> NFFGIRLS_DEFAULT_ATTRIBUTES.get()
