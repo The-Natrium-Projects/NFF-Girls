@@ -59,13 +59,22 @@ public class NFFGirls
     private static void redirectSaveDataLocations()
     {
 		SaveDataLocationRedirector.get().redirectNamespace(MOD_ID_LEGACY, MOD_ID)
-		.redirectEntityCapability(new ResourceLocation(NFFGirls.MOD_ID_LEGACY, NFFGirlsCapabilityAttachment.KEY_FAVORABILITY_LEGACY), new ResourceLocation(NFFGirls.MOD_ID, NFFGirlsCapabilityAttachment.KEY_FAVORABILITY))
-		.redirectEntityCapability(new ResourceLocation(NFFGirls.MOD_ID_LEGACY, NFFGirlsCapabilityAttachment.KEY_TRADE_LEGACY), new ResourceLocation(NFFGirls.MOD_ID, NFFGirlsCapabilityAttachment.KEY_TRADE))
-		.redirectEntityCapability(new ResourceLocation(NFFGirls.MOD_ID_LEGACY, NFFGirlsCapabilityAttachment.KEY_UNDEAD_AFFINITY_HANDLER_LEGACY), new ResourceLocation(NFFGirls.MOD_ID, NFFGirlsCapabilityAttachment.KEY_UNDEAD_AFFINITY_HANDLER))
-		.redirectEntityCapability(new ResourceLocation(NFFGirls.MOD_ID_LEGACY, NFFGirlsCapabilityAttachment.KEY_XP_LEVEL_LEGACY), new ResourceLocation(NFFGirls.MOD_ID, NFFGirlsCapabilityAttachment.KEY_XP_LEVEL))
-        .redirectItem(new ResourceLocation(MOD_ID, "poisonous_thorn"), new ResourceLocation(MOD_ID, "poison_jade"))
-        .redirectItem(new ResourceLocation(MOD_ID, "courage_amulet"), new ResourceLocation(MOD_ID, "courage_badge"))
-        .redirectItem(new ResourceLocation(MOD_ID, "courage_amulet_ii"), new ResourceLocation(MOD_ID, "courage_badge_ii"));
+            // Below: since 0.x.26
+            .redirectEntityCapability(new ResourceLocation(NFFGirls.MOD_ID_LEGACY, NFFGirlsCapabilityAttachment.KEY_FAVORABILITY_LEGACY), new ResourceLocation(NFFGirls.MOD_ID, NFFGirlsCapabilityAttachment.KEY_FAVORABILITY))
+            .redirectEntityCapability(new ResourceLocation(NFFGirls.MOD_ID_LEGACY, NFFGirlsCapabilityAttachment.KEY_TRADE_LEGACY), new ResourceLocation(NFFGirls.MOD_ID, NFFGirlsCapabilityAttachment.KEY_TRADE))
+            .redirectEntityCapability(new ResourceLocation(NFFGirls.MOD_ID_LEGACY, NFFGirlsCapabilityAttachment.KEY_UNDEAD_AFFINITY_HANDLER_LEGACY), new ResourceLocation(NFFGirls.MOD_ID, NFFGirlsCapabilityAttachment.KEY_UNDEAD_AFFINITY_HANDLER))
+            .redirectEntityCapability(new ResourceLocation(NFFGirls.MOD_ID_LEGACY, NFFGirlsCapabilityAttachment.KEY_XP_LEVEL_LEGACY), new ResourceLocation(NFFGirls.MOD_ID, NFFGirlsCapabilityAttachment.KEY_XP_LEVEL))
+            // Below: since 0.x.30
+            .redirectItem(new ResourceLocation(MOD_ID, "poisonous_thorn"), new ResourceLocation(MOD_ID, "poison_jade"))
+            .redirectItem(new ResourceLocation(MOD_ID, "courage_amulet"), new ResourceLocation(MOD_ID, "courage_badge"))
+            .redirectItem(new ResourceLocation(MOD_ID, "courage_amulet_ii"), new ResourceLocation(MOD_ID, "courage_badge_ii"))
+            .redirectItem(new ResourceLocation(MOD_ID, "natures_tenderness"), new ResourceLocation(MOD_ID, "natures_tenderness_badge"))
+            .redirectItem(new ResourceLocation(MOD_ID, "natures_tenderness_ii"), new ResourceLocation(MOD_ID, "natures_tenderness_badge_ii"))
+            .redirectItem(new ResourceLocation(MOD_ID, "natures_tenderness_iii"), new ResourceLocation(MOD_ID, "natures_tenderness_badge_iii"))
+            .redirectItem(new ResourceLocation(MOD_ID, "natures_rage"), new ResourceLocation(MOD_ID, "natures_rage_badge"))
+            .redirectItem(new ResourceLocation(MOD_ID, "natures_rage_ii"), new ResourceLocation(MOD_ID, "natures_rage_badge_ii"))
+            .redirectItem(new ResourceLocation(MOD_ID, "natures_rage_iii"), new ResourceLocation(MOD_ID, "natures_rage_badge_iii"));
+
     }
 
 }

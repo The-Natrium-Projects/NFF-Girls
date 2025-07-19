@@ -1,6 +1,6 @@
 {
 	"parent": "item/generated",
 	"textures": {
-		"layer0": "nffgirls:item/poisonous_thorn"
+		"layer0": "nffgirls:item/jade_material"
 	}
 }

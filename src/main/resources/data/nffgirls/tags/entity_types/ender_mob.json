@@ -8,6 +8,10 @@
     "minecraft:shulker",
     "hmag:ender_executor",
     "hmag:monolith",
-    "nffgirls:hmag_ender_executor"
+    "nffgirls:hmag_ender_executor",
+    {"id": "grimoireofgaia:ender_dragon_girl", "required": false},
+    {"id": "grimoireofgaia:ender_eye", "required": false},
+    {"id": "grimoireofgaia:ender_girl", "required": false},
+    {"id": "grimoireofgaia:behender", "required": false}
   ]
 }

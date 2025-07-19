@@ -1,8 +1,9 @@
+
 {
   "type": "minecraft:crafting_shapeless",
   "ingredients": [
     {
-      "item": "nffgirls:natures_rage_ii"
+      "item": "nffgirls:natures_tenderness_badge_ii"
     },
     {
       "item": "hmag:evil_crystal_block"
@@ -11,20 +12,24 @@
       "item": "minecraft:echo_shard"
     },
     {
-      "item": "hmag:nemesis_blade"
+      "item": "hmag:insomnia_fruit"
     },
     {
-      "item": "minecraft:heart_of_the_sea"
+      "item": "minecraft:totem_of_undying"
     },
     {
-      "item": "minecraft:dragon_head"
+      "item": "minecraft:totem_of_undying"
     },
     {
       "tag": "forge:ingots/netherite"
     }
+
+
+
+
   ],
   "result": {
-    "item": "nffgirls:natures_rage_iii",
+    "item": "nffgirls:natures_tenderness_badge_iii",
     "count": 1
   }
 }

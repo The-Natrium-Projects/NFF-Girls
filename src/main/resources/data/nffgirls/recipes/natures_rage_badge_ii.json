@@ -2,7 +2,7 @@
   "type": "minecraft:crafting_shapeless",
   "ingredients": [
     {
-      "item": "nffgirls:natures_tenderness"
+      "item": "nffgirls:natures_rage_badge"
     },
     {
       "item": "hmag:evil_crystal"
@@ -20,20 +20,20 @@
       "item": "hmag:mysterious_petal"
     },
     {
-      "item": "hmag:cubic_nucleus"
+      "item": "hmag:ogre_horn"
     },
     {
       "item": "hmag:ender_plasm"
     },
     {
-      "item": "minecraft:totem_of_undying"
+      "item": "minecraft:dragon_breath"
     }
 
 
 
   ],
   "result": {
-    "item": "nffgirls:natures_tenderness_ii",
+    "item": "nffgirls:natures_rage_badge_ii",
     "count": 1
   }
 }

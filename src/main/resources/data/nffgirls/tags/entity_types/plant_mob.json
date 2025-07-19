@@ -7,6 +7,9 @@
     "hmag:alraune",
     "hmag:glaryad",
     "nffgirls:hmag_alraune",
-    "nffgirls:hmag_glaryad"
+    "nffgirls:hmag_glaryad",
+    {"id": "grimoireofgaia:spriggan", "required": false},
+    {"id": "grimoireofgaia:dryad", "required": false},
+    {"id": "grimoireofgaia:mandragora", "required": false}
   ]
 }

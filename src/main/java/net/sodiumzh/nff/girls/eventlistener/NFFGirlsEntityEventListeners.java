@@ -56,9 +56,9 @@ import net.sodiumzh.nff.services.entity.taming.INFFTamed;
 import net.sodiumzh.nff.services.entity.taming.NFFTamedStatics;
 import net.sodiumzh.nff.services.entity.taming.NFFTamingMapping;
 import net.sodiumzh.nff.services.event.entity.NFFMobTamedEvent;
-import net.sodiumzh.nff.services.event.entity.ServerEntityTickEvent;
+import net.sodiumzh.nff.services.event.entity.NFFTamedDeathEvent;
 import net.sodiumzh.nff.services.event.entity.ai.NFFTamedChangeAiStateEvent;
-import net.sodiumzh.nff.services.eventlistener.NFFTamedDeathEvent;
+import net.sodiumzh.nff.services.eventlistener.ServerEntityTickEvent;
 import net.sodiumzh.nff.services.inventory.NFFTamedMobInventory;
 import net.sodiumzh.nff.services.inventory.NFFTamedMobInventoryWithEquipment;
 import net.sodiumzh.nff.services.inventory.NFFTamedMobInventoryWithHandItems;
@@ -223,10 +223,8 @@ public class NFFGirlsEntityEventListeners
 			srcMob.getCapability(NFFCapRegistry.CAP_BEFRIENDABLE_MOB).ifPresent((tamable) ->
 			{
 				if (tamable.getTamingProcess() instanceof HmagCreeperGirlTamingProcess process) {
-					process.handleFinalExplosionKillingOtherTamedMob(srcMob, event.getMob().asMob());
-					if (event.getMob().asMob().getHealth() < 0.00001f) {
+					if (process.handleFinalExplosionKillingOtherTamedMob(srcMob, event.getMob().asMob()))
 						event.setCanceled(true);
-					}
 				}
 			});
 			if (event.isCanceled())

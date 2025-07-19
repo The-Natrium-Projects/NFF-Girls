@@ -1,0 +1,7 @@
+{
+  "parent": "item/generated",
+  "textures": {
+    "layer0": "nffgirls:item/corrupted_amulet",
+    "layer1": "nffgirls:item/bauble_tier_ii"
+  }
+}
