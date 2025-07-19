@@ -1,5 +1,21 @@
 # Change Log
 
+### 0.x.30
+
+Added a lot of baubles.
+
+Added some attributes related to baubles.
+
+Remade ore-locating feature of Kobold and Imp. Now they will generate a green particle stream instead of moving to the ore.
+
+Fixed Creeper Girl not being able to charge/uncharge by interactions.
+
+Fixed Harpy, Snow Canine, Slime Girl and Jiangshi not jumping when chasing the attack target.
+
+Fixed Drowned Girl being stuck in one-block-deep water.
+
+Fixed mobs not generating respawners when killed by the explosion of non-friended Creeper Girls.
+
 ### 0.2.29.2
 
 Modified Mob Dictionary to match 0.2.29 features.

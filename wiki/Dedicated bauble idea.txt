@@ -1,0 +1,38 @@
+HMaG
+Zombie Girl - (Undead heart) Bauble that gives you +1 Strength.
+Husk Girl - (Sun Dried Heart) Bauble that gives you immunity to hunger.
+Drowned Girl - (Water logged Heart) Bauble that give water breathing (similar to a turtle shell cap).
+Skeleton Girl - (Old Quiver) Bauble that has a chance to not consume an arrow when firing.
+Stray Girl - (Ice Arrow) Bauble that applies Slowness I when hitting mobs.
+Wither Skeleton Girl - (Black/Wither Rose) Bauble that gives +1 power and applies wither when hitting mobs.
+Alraune - (Alraune Flower) Bauble that replicates it's own abilities. A leaf/flower that gives immunity to nausa and poison; and while in water gives regen.
+Melty Monster - (Melty Core) Bauble that gives some of Melty's abilities, gives immunity to fire, additionally when im lava allows you to move through it like water.
+Kobold - (Lucky Rock) Bauble that gives the luck of a Kobold, gives a chance of giving ore when mining normal rocks and gives a +1 level to fortune.
+Ender Executor - (Special Eye) Bauble that gives you the immunity to the Ender Rage effect while also appling it to hit entities and allows you to look at endermen without angering them.
+Creeper Girl - (Creeper Girl Hood) Bauble that makes creepers (including Creeper Girls and excluding the Creep) Neutral and give blast resistence. 
+Cursed Doll - (Tiny Doll) Baulbe that gives immunity to falling damage and gives +.5 step height.
+Jack o' Frost - (Eternal Snowball) Bauble that gives frost walker enchant, allows you to travel on powdered snow and gives the snowball .5 hearts of damage.
+Banshee - (A Purple Rose) Bauble that gives applies blindness to mobs hit and temporary Creative flight, this will recharge over time.
+Hornet - (Poison tip) Bauble that gives poision on hit and reach (able to hit further away).
+Dullahan - (Dullahan Head) Bauble that gives +1 Protection and Strenght II
+Ghastly Seeker - (Ghast Tears of Joy) Bauble that Makes Ghasts and other Ghastly seekers Neuteral, Additionally when in the Nether you have creative flight and gives a change for any slain mob to drop ghast tears.
+Redcap - (Red Cap) Bauble that gives a stacking damage buff when killing a hostile mob, additionally gives haste when chopping wood.
+Slime Girl (Slime Core) Bauble that gives regen III and jump boost
+Crimson Slaughterer (Crimson Heart) Bauble that gives +1 sharpness, +1 power, +1 projectile resistance, +1 toughness, allows to climb wall like a spider, additionally doubles all xp.
+Snow Canine (Warm Tuft of Fur) - Bauble that gives +1 knockback and +1 looting when killing sheep or chikens, additionally you do not fall in powdered snow.
+Harpy (Harpy Downy) - Bauble that gives Slow fall and gives +.5 step height.
+Necrostalker (Necrotic Heart) - Bauble that gives Haste, +1 sweeping edge, and life steal (healing a portion of damage dealt)
+Dodomeki (Dodomeki eye) - Bauble that gives reach (able to hit further away), and +1 looting
+Imp (Hellish lunch box) - Bauble that gives hunger regen (hunger refills over time) additionally when killing another Imp guarantees a bottle o' enchanting drop.
+Glaryad (Glaryad Flower) - Bauble that gives the ablilty of when hitting a mob (excluding Glaryad) all other nearby Glaryads (such as zombie piglin's) become hostile, additionally gives regen when in water.
+Jiangshi (talisman) - Bauble that gives jump boost, +1 knockback, and applies poision when hitting a mob.
+Nightwalker (Night Core) - Bauble that gives you +1 power, and night vision. (Will occasionally speed up audio and increase the pitch).
+
+GoG
+Dryad (Dryad Flower) - Bauble that causes the bonemeal effect around you occasionally.
+Spriggan (Living Branch) - Bauble that upon taking damage will turn you invisible for a short time.
+Succubus (Succubi's Brew) - Bauble that gives life steal (healing a portion of damage dealt) additionally will cause any breedable mob nearby to enter a breeding state.
+Banshee (A Pink Rose) - Bauble that gives Haste and temporary Creative flight, this will recharge over time.
+Dullahan (Dullahan Armor) - Bauble that gives +2 Protection, +2 Projectile Protection, and Knockback resistence.
+Mummy Girl (Ancient Wraps) - Bauble that gives regen III when hit, has a cooldown.
+Harpy (Harpy Feather) - Bauble that gives Haste and Slow fall.
