@@ -5,15 +5,16 @@
   [
     " I",
     "EGE",
-    " I"
+    " I "
   ],
 
   "key":{
-    "I":{
-      "tag": "forge:ingots/iron"
-    },
+
     "E":{
       "item": "hmag:evil_crystal_fragment"
+    },
+    "I": {
+      "tag": "forge:ingots/iron"
     },
     "G": {
       "tag": "nffgirls:bauble_ingredient_gems"

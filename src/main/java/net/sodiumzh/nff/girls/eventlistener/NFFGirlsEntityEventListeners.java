@@ -52,6 +52,7 @@ import net.sodiumzh.nff.girls.item.NecromancerArmorItem;
 import net.sodiumzh.nff.girls.registry.*;
 import net.sodiumzh.nff.girls.util.NFFGirlsEntityStatics;
 import net.sodiumzh.nff.services.entity.ai.NFFTamedMobAIState;
+import net.sodiumzh.nff.services.entity.capability.CNFFTamable;
 import net.sodiumzh.nff.services.entity.taming.INFFTamed;
 import net.sodiumzh.nff.services.entity.taming.NFFTamedStatics;
 import net.sodiumzh.nff.services.entity.taming.NFFTamingMapping;
@@ -1153,6 +1154,7 @@ public class NFFGirlsEntityEventListeners
 	public static void onBefriended(NFFMobTamedEvent event)
 	{
 		event.mobBefriended.setCustomName(null);
+		INFFTamed.get(event.mobBefriended).ifPresent(tamed -> tamed.setAIState(NFFTamedMobAIState.FOLLOW, false));
 		if (NFFGirlsConfigs.ValueCache.Misc.REMOVE_HAND_ITEM_ON_TAMING) {
 			INFFGirlsTamed.get(event.mobBefriended).ifPresent(tamed -> {
 				NFFTamedMobInventory inv = tamed.getAdditionalInventory();
@@ -1241,10 +1243,20 @@ public class NFFGirlsEntityEventListeners
 	{
 		if (event.getEntityItem().getItem().getItem() instanceof NFFMobRespawnerItem item)
 			event.setCanceled(true);
-		if (event.damageSource.getEntity() != null && event.damageSource.getEntity() instanceof INFFGirlsTamed mob)
-			event.setCanceled(true);
+		/*if (INFFGirlsTamed.get(event.damageSource.getEntity()).isPresent() || INFFGirlsTamed.get(event.damageSource.getDirectEntity()).isPresent())
+			event.setCanceled(true);*/
 	}
-	
+
+	@SubscribeEvent
+	public static void onItemEntityOutOfWorld(ItemEntityOutOfWorldEvent event) {
+		if (event.getEntity().getItem().getItem() instanceof NFFMobRespawnerItem item) {
+			Vec3 v = event.getEntity().position();
+			event.getEntity().setPos(v.x, event.getEntity().level().getSeaLevel(), v.z);
+			event.getEntity().setNoGravity(true);
+			event.setCanceled(true);
+		}
+	}
+
 	@SubscribeEvent
 	public static void onSweepHurt(LivingEntitySweepHurtEvent event)
 	{
