@@ -135,7 +135,7 @@ public class HmagNecroticReaperTamingProcess extends NFFTamingProcess
 		cap.getGeneralNBT().putUUID(NBT_KEY_ONGOING_PLAYER_UUID, player.getUUID());
 
 		// The first hit, add player info
-		if (hits == 0)
+		if (hits == 0 || !cap.hasTimer(TIMER_NO_ATTACK_EXPIRING_TIME)/* 0.2.30.2 fixed a missing-timer issue. Port the old mob */)
 		{
 			// After 10s without attacking player, interrupt
 			cap.setTimer(TIMER_NO_ATTACK_EXPIRING_TIME, 30 * 20);
@@ -244,18 +244,20 @@ public class HmagNecroticReaperTamingProcess extends NFFTamingProcess
 	@Override
 	public void onGeneralTimerExpire(Mob mob, String key) {
 		CNFFTamable tamable = CNFFTamable.get(mob);
-		if (tamable.getGeneralNBT().hasUUID(NBT_KEY_ONGOING_PLAYER_UUID)) return;
-		Player player = tamable.getEntity().level().getPlayerByUUID(tamable.getGeneralNBT().getUUID(NBT_KEY_ONGOING_PLAYER_UUID));
-		if (player == null || !player.isCreative() && tamable.getGeneralNBT().getInt(NBT_KEY_HIT_COUNT) > 0)
-		{
-			int hits = tamable.getGeneralNBT().getInt(NBT_KEY_HIT_COUNT);
-			tamable.getGeneralNBT().putInt(NBT_KEY_HIT_COUNT, hits - 1);
-			if (tamable.getGeneralNBT().getInt(NBT_KEY_HIT_COUNT) <= 0) {
-				this.interrupt(player, tamable.getEntity(), true);
-				return;
+		if (tamable.getGeneralNBT().hasUUID(NBT_KEY_ONGOING_PLAYER_UUID)) {
+			Player player = tamable.getEntity().level().getPlayerByUUID(tamable.getGeneralNBT().getUUID(NBT_KEY_ONGOING_PLAYER_UUID));
+			if (player == null || !player.isCreative() && tamable.getGeneralNBT().getInt(NBT_KEY_HIT_COUNT) > 0) {
+				int hits = tamable.getGeneralNBT().getInt(NBT_KEY_HIT_COUNT);
+				tamable.getGeneralNBT().putInt(NBT_KEY_HIT_COUNT, hits - 1);
+				if (tamable.getGeneralNBT().getInt(NBT_KEY_HIT_COUNT) <= 0) {
+					this.interrupt(player, tamable.getEntity(), true);
+					return;
+				}
+				NFUParticleStatics.sendParticlesToEntity(tamable.getEntity(), ParticleTypes.ANGRY_VILLAGER, tamable.getEntity().getBbHeight() - 0.2, 0.3d, 2, 1d);
 			}
-			NFUParticleStatics.sendParticlesToEntity(tamable.getEntity(), ParticleTypes.ANGRY_VILLAGER, tamable.getEntity().getBbHeight() - 0.2, 0.3d, 2, 1d);
 			tamable.getGeneralNBT().putInt(TIMER_NO_ATTACK_EXPIRING_TIME, 30 * 20);// Reset timer
+		} else {
+			this.interruptAll(mob, false);
 		}
 	}
 }

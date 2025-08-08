@@ -30,8 +30,19 @@ public class NFFGirlsAngerRules {
 	public static final NFURegistry.Accessor<MobAngerRules> ATTACKER_AND_MINOR_ATTACKING
 			= ANGER_RULES.register("attacker_and_minor_attacking" ,
 			() -> new MobAngerRules()
-					.forReason(MobAngerReason.ATTACKING.get())
+					.forReason(MobAngerReason.ATTACKED.get())
 					.forReason(MobAngerReason.HIT.get(), 30 * 20)
 					.forReason(MobAngerReason.ATTACKING.get(), 30 * 20)
 					.end());
+
+	/**
+	 * The mob will have major anger for 5 min to which damaged it,
+	 * and have minor anger of 30s to which attacked it but not dealt damage.
+	 */
+	public static final NFURegistry.Accessor<MobAngerRules> ATTACKER_AND_MINOR_HIT
+		= ANGER_RULES.register("attacker_and_minor_hit" ,
+		() -> new MobAngerRules()
+			.forReason(MobAngerReason.ATTACKED.get())
+			.forReason(MobAngerReason.HIT.get(), 30 * 20)
+			.end());
 }

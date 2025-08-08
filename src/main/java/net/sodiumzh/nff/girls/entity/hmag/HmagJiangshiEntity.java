@@ -231,7 +231,7 @@ public class HmagJiangshiEntity extends JiangshiEntity implements INFFGirlsTamed
 		@Override
 		public boolean checkCanUse()
 		{
-			return super.canUse() && this.mob.asMob().hasLineOfSight(this.mob.asMob().getTarget());
+			return super.checkCanUse() && this.mob.asMob().hasLineOfSight(this.mob.asMob().getTarget());
 		}
 
 		@Override
@@ -266,11 +266,11 @@ public class HmagJiangshiEntity extends JiangshiEntity implements INFFGirlsTamed
 			jiangshi = (HmagJiangshiEntity)mob;
 		}
 
-		@Override
+		/*@Override
 		public boolean checkCanUse()
 		{
 			return super.checkCanUse() && this.mob.asMob().getTarget() != null && this.mob.asMob().hasLineOfSight(this.mob.asMob().getTarget());
-		}
+		}*/
 
 		@Override
 		public void onStart()

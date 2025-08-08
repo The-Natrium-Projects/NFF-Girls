@@ -55,8 +55,8 @@ public class HmagHornetEntity extends HornetEntity implements INFFGirlsTamed//, 
 
 	private final int HONEY_COLLECTING_COOLDOWN = 5 * 60 * 20;
 	private int currentHoneyCollectingCooldown = HONEY_COLLECTING_COOLDOWN;
-	private EntityDataAccessor<Integer> DATA_HONEY_LEVEL =
-		SynchedEntityData.defineId(HmagHornetEntity.class, EntityDataSerializers.INT);
+	/*private EntityDataAccessor<Integer> DATA_HONEY_LEVEL =
+		SynchedEntityData.defineId(HmagHornetEntity.class, EntityDataSerializers.INT);*/
 
 	public HmagHornetEntity(EntityType<? extends HornetEntity> pEntityType, Level pLevel) {
 		super(pEntityType, pLevel);
@@ -69,7 +69,7 @@ public class HmagHornetEntity extends HornetEntity implements INFFGirlsTamed//, 
 	@Override
 	protected void defineSynchedData() {
 		super.defineSynchedData();
-		entityData.define(DATA_HONEY_LEVEL, 0);
+		//entityData.define(DATA_HONEY_LEVEL, 0);
 	}
 
 	/* AI */

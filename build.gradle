@@ -143,7 +143,7 @@ repositories {
     // If you have mod jar dependencies in ./libs, you can declare them as a repository like so.
     // See https://docs.gradle.org/current/userguide/declaring_repositories.html#sub:flat_dir_resolver
     flatDir {
-        //dir 'libs'
+        dir 'libs'
         dir '../NFF-Services/build/libs'
     }
     	
@@ -194,9 +194,9 @@ dependencies {
 	
     implementation fg.deobf("curse.maven:jade-324717:4986594")
     //implementation fg.deobf("blank:iconrenderer-1.20.1:1.2.0")
-    implementation fg.deobf("curse.maven:selene-499980:6611244")
-    implementation fg.deobf("curse.maven:targetdummy-225738:6608233")
-    
+    //implementation fg.deobf("curse.maven:selene-499980:6815733")
+    //implementation fg.deobf("curse.maven:targetdummy-225738:6826548")
+
     implementation fg.deobf("curse.maven:hmag-537613:5391571")
 	implementation fg.deobf("curse.maven:twilightforest-227639:4755494")
     implementation fg.deobf("curse.maven:citadel-331936:5633260")

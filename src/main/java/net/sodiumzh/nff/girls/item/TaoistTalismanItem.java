@@ -33,7 +33,7 @@ public class TaoistTalismanItem extends NFUItem
 			{
 				js.getCapability(NFFCapRegistry.CAP_BEFRIENDABLE_MOB).ifPresent(cap ->
 				{
-					if (handler.applyTalisman(js));
+					if (handler.applyTalisman(js))
 					{
 						player.getItemInHand(usedHand).shrink(1);
 						interacted.setValue(true);
