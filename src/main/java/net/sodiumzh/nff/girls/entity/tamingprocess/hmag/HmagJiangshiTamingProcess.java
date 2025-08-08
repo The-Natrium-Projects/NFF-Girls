@@ -213,7 +213,8 @@ public class HmagJiangshiTamingProcess extends NFFTamingProcess
 			CNFFTamable.get(mob).getGeneralNBT().putUUID(NBT_KEY_ONGOING_PLAYER, player.getUUID());
 			return true;
 		}
-		else return false;
+		// Prevent damage and effects during the friending process
+		else return this.isInAnyProcess(mob);
 	}
 	
 	
@@ -300,8 +301,12 @@ public class HmagJiangshiTamingProcess extends NFFTamingProcess
 			CNFFTamable.get(mob).setTimer(TIMER_KEY_FREEZE_COOLDOWN, 15 * 20);
 		}
 		else if (key.equals(TIMER_KEY_PEACH_SWORD)) {
-			this.progressDecrease(mob);
-			CNFFTamable.get(mob).setTimer(TIMER_KEY_PEACH_SWORD, 60 * 20);
+			if (this.isInAnyProcess(mob) && getProgressLevel(mob) > 1) {
+				this.progressDecrease(mob);
+				CNFFTamable.get(mob).setTimer(TIMER_KEY_PEACH_SWORD, 60 * 20);
+			} else {
+				this.interruptAll(mob, true);
+			}
 		}
 	}
 
