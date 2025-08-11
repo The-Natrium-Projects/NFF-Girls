@@ -1,5 +1,29 @@
 # Change Log
 
+### 0.2.30.4
+
+Now mobs will be following instead of waiting after being friended.
+
+Fixed Crude Badge missing recipe.
+
+Fixed some mobs not getting angry when attacked during the friending process.
+
+Fixed guidebook missing some contents.
+
+### 0.2.30.3
+
+Fixed crash on Jiangshi following owner.
+
+### 0.2.30.2
+
+Fixed Necrostalkers not reducing the progress after 30s without attacking, and related crashes.
+
+Fixed Taoist Talisman still consuming when failing to apply onto Jiangshi.
+
+### 0.2.30.1
+
+Fixed Hornet vanishing and not being friendable, and related crashes.
+
 ### 0.x.30
 
 Added a lot of baubles.
