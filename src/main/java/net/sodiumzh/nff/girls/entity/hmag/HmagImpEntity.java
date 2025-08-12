@@ -21,6 +21,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.phys.Vec3;
 import net.sodiumzh.nff.girls.NFFGirls;
 import net.sodiumzh.nff.girls.entity.INFFGirlsTamed;
 import net.sodiumzh.nff.girls.entity.ai.goal.IBlockLocator;
@@ -137,20 +138,20 @@ public class HmagImpEntity extends ImpEntity implements INFFGirlsTamed//, IBlock
 			return;
 
 		if (this.getAdditionalInventory().getItem(1).is(NETHERITE_SCRAP_NUGGETS)) {
-			List<BlockPos> ores = NFULevelStatics.getSphericalBlockStates(this.level(), this.blockPosition(), 8,
+			List<BlockPos> ores = NFULevelStatics.getSphericalBlockStates(this.level, this.blockPosition(), 8,
 				(pos, bs) -> bs.is(NETHERITE_SCRAP_ORES) && !this.locatedBlocks.hasTimer(pos))
 				.map(Tuple::getA).toList();
 			if (!ores.isEmpty()) {
 				BlockPos targetPos = ores.get(this.random.nextInt(ores.size()));
-				MobileParticleSourceEntity particleSource = new MobileParticleSourceEntity(this.level(), targetPos::getCenter)
+				MobileParticleSourceEntity particleSource = new MobileParticleSourceEntity(this.level, () -> Vec3.atCenterOf(targetPos))
 					.setParticleType(ParticleTypes.HAPPY_VILLAGER).particlesPerTick(3).setSpeed(0.5d)
 					.setMaxLifetime(40 * 20).setStartingPos(this.getEyePosition());
-				this.level().addFreshEntity(particleSource);
+				this.level.addFreshEntity(particleSource);
 				this.locatedBlocks.addTimer(targetPos, 300 * 20);	// Add 300s cooldown to prevent repeatedly locating the same block
 				this.locatingBlockRemainingCooldown = LOCATING_BLOCK_COOLDOWN;
 				this.getAdditionalInventory().getItem(1).shrink(1);
 				this.getAdditionalInventory().syncToMob(this);
-				this.level().playSound(this, this.blockPosition(), this.getAmbientSound(),
+				this.level.playSound(this.getOwner(), this.blockPosition(), this.getAmbientSound(),
 					SoundSource.PLAYERS, this.getSoundVolume() * 1.5f, this.getVoicePitch() * 1.5f);
 			}
 		}
@@ -159,7 +160,7 @@ public class HmagImpEntity extends ImpEntity implements INFFGirlsTamed//, IBlock
 	@Override
 	protected void customServerAiStep() {
 		super.customServerAiStep();
-		if (!this.level().isClientSide())
+		if (!this.level.isClientSide())
 			this.updateLocatingBlocks();
 	}
 

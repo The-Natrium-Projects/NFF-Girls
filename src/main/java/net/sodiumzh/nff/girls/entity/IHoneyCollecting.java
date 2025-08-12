@@ -59,11 +59,11 @@ public interface IHoneyCollecting {
             if (collecting.shouldFlyBack()) return false;
             if (collecting.getMaxHoneyLevel() > 0 && collecting.getHoneyLevel() >= collecting.getMaxHoneyLevel()) return false;
             if (collecting.getCurrentHoneyCollectingCooldown() > 0) return false;
-            Level level = mob.asMob().level();
+            Level level = mob.asMob().level;
             targetBlockState = BlockPos.betweenClosedStream(mob.asMob().getBoundingBox().inflate(15d, 15d, 7d))
                 .filter(pos -> level.getBlockState(pos).getBlock() instanceof FlowerBlock)
-                .map(pos -> Tuple2.of(new BlockPos(pos.getX(), pos.getY(), pos.getZ()), mob.asMob().level().getBlockState(pos)))
-                .filter(tp -> mob.asMob().level().clip(new ClipContext(
+                .map(pos -> Tuple2.of(new BlockPos(pos.getX(), pos.getY(), pos.getZ()), mob.asMob().level.getBlockState(pos)))
+                .filter(tp -> mob.asMob().level.clip(new ClipContext(
                     mob.asMob().position(), new Vec3(tp.getA().getX(), tp.getA().getY(), tp.getA().getZ()),
                     ClipContext.Block.COLLIDER, ClipContext.Fluid.NONE, mob.asMob())).getType() == HitResult.Type.MISS)
                 .min(Comparator.comparingDouble(tp -> tp.getA().distSqr(mob.asMob().blockPosition())))

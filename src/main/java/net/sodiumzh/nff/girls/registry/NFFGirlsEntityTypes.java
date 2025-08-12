@@ -302,19 +302,6 @@ public class NFFGirlsEntityTypes {
 			.setUpdateInterval(3)
 			.setShouldReceiveVelocityUpdates(false));
 
-	
-	// ================================================================================================= //
-	@SubscribeEvent
-	public static void onAttributeCreate(EntityAttributeCreationEvent event) {	
-		
-		NFFGirlsEntityAttributes.REGISTRY.forEach((type, supplier) -> 
-		{
-			event.put(type, supplier.get().build());
-		});
-	
-	}
-	// ================================================================================================= //
-	
 	// Projectiles
 	
 	public static final RegistryObject<EntityType<NecromancerMagicBulletEntity>> NECROMANCER_MAGIC_BULLET =

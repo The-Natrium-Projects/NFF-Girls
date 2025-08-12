@@ -22,11 +22,11 @@ public class NFFGirlsAmphibiousLandInShallowWaterGoal extends NFFMoveGoal {
     public boolean checkCanUse() {
         Mob mob = this.getMob().asMob();
         if (!mob.isInWater()) return false;
-        BlockState block = mob.level().getBlockState(mob.blockPosition());
-        BlockState below = mob.level().getBlockState(mob.blockPosition().below());
+        BlockState block = mob.level.getBlockState(mob.blockPosition());
+        BlockState below = mob.level.getBlockState(mob.blockPosition().below());
         return (block.is(Blocks.WATER) || block.getValue(BlockStateProperties.WATERLOGGED))
-            && below.entityCanStandOn(mob.level(), mob.blockPosition().below(), mob)
-            && !mob.onGround();
+            && below.entityCanStandOn(mob.level, mob.blockPosition().below(), mob)
+            && !mob.isOnGround();
     }
 
 }
