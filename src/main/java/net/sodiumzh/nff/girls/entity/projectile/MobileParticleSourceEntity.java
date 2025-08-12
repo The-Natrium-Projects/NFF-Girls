@@ -4,22 +4,23 @@ import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.core.particles.ParticleOptions;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.protocol.Packet;
+import net.minecraft.network.protocol.game.ClientboundAddEntityPacket;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializer;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.MoverType;
 import net.minecraft.world.entity.projectile.ItemSupplier;
-import net.minecraft.world.entity.projectile.Projectile;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
 import net.sodiumzh.nff.girls.registry.NFFGirlsEntityTypes;
 import net.sodiumzh.nfu.registry.NFUEntityDataSerializers;
 import net.sodiumzh.nfu.util.NFUParticleStatics;
-import org.joml.Vector3f;
 
 import java.util.function.Supplier;
 
@@ -141,7 +142,7 @@ public class MobileParticleSourceEntity extends Entity implements ItemSupplier {
     }
 
     public void updateTargetPos() {
-        if (!this.level().isClientSide)
+        if (!this.level.isClientSide)
             this.getEntityData().set(TARGET_POS, targetPosGetter.get());
     }
 
@@ -169,7 +170,7 @@ public class MobileParticleSourceEntity extends Entity implements ItemSupplier {
     @Override
     public void tick() {
         super.tick();
-        if (!this.level().isClientSide) {
+        if (!this.level.isClientSide) {
             if (remainingLifetime <= 0) {
                 this.discard();
                 return;
@@ -191,7 +192,7 @@ public class MobileParticleSourceEntity extends Entity implements ItemSupplier {
             this.setDeltaMovement(currentTargetPos.subtract(this.position()).normalize().scale(speed / 20d));
             this.move(MoverType.SELF, this.getDeltaMovement());
         }
-        if (this.isAlive() && this.level() instanceof ClientLevel)
+        if (this.isAlive() && this.level instanceof ClientLevel)
             NFUParticleStatics.sendParticlesToEntity(this, this.getParticleType(), Vec3.ZERO, posRndScale,
                 getParticleAmountThisTick(), speed);
     }
@@ -204,6 +205,11 @@ public class MobileParticleSourceEntity extends Entity implements ItemSupplier {
     @Override
     protected void addAdditionalSaveData(CompoundTag pCompound) {
 
+    }
+
+    @Override
+    public Packet<?> getAddEntityPacket() {
+        return new ClientboundAddEntityPacket(this);
     }
 
     @Override

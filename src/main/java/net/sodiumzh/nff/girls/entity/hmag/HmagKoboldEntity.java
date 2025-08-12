@@ -24,6 +24,7 @@ import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.tags.ITag;
 import net.minecraftforge.registries.tags.ITagManager;
@@ -33,6 +34,8 @@ import net.sodiumzh.nff.girls.entity.ai.goal.NFFGirlsFollowOwnerGoal;
 import net.sodiumzh.nff.girls.entity.ai.goal.NFFGirlsLocateBlockGoal;
 import net.sodiumzh.nff.girls.entity.ai.goal.target.NFFGirlsNearestHostileToOwnerTargetGoal;
 import net.sodiumzh.nff.girls.entity.ai.goal.target.NFFGirlsNearestHostileToSelfTargetGoal;
+import net.sodiumzh.nff.girls.entity.projectile.MobileParticleSourceEntity;
+import net.sodiumzh.nff.girls.inventory.NFFGirlsHmagKoboldInventoryMenu;
 import net.sodiumzh.nff.girls.registry.NFFGirlsHealingItems;
 import net.sodiumzh.nff.girls.sound.NFFGirlsSoundPresets;
 import net.sodiumzh.nff.services.entity.ai.NFFTamedMobAIState;
@@ -162,20 +165,20 @@ public class HmagKoboldEntity extends KoboldEntity implements INFFGirlsTamed
 		List<Block> locatableBlocks = getLocatableBlocks(this.getAdditionalInventory().getItem(1));
 		if (locatableBlocks.isEmpty()) return;
 
-		List<BlockPos> ores = NFULevelStatics.getSphericalBlockStates(this.level(), this.blockPosition(), 8,
+		List<BlockPos> ores = NFULevelStatics.getSphericalBlockStates(this.level, this.blockPosition(), 8,
 				(pos, bs) -> locatableBlocks.contains(bs.getBlock()) && !this.locatedBlocks.hasTimer(pos))
 			.map(Tuple::getA).toList();
 		if (!ores.isEmpty()) {
 			BlockPos targetPos = ores.get(this.random.nextInt(ores.size()));
-			MobileParticleSourceEntity particleSource = new MobileParticleSourceEntity(this.level(), targetPos::getCenter)
+			MobileParticleSourceEntity particleSource = new MobileParticleSourceEntity(this.level, () -> Vec3.atCenterOf(targetPos))
 				.setParticleType(ParticleTypes.HAPPY_VILLAGER).particlesPerTick(3).setSpeed(0.5d)
 				.setMaxLifetime(40 * 20).setStartingPos(this.getEyePosition());
-			this.level().addFreshEntity(particleSource);
+			this.level.addFreshEntity(particleSource);
 			this.locatedBlocks.addTimer(targetPos, 300 * 20);	// Add 120s cooldown to prevent repeatedly locating the same block
 			this.locatingBlockRemainingCooldown = LOCATING_BLOCK_COOLDOWN;
 			this.getAdditionalInventory().getItem(1).shrink(1);
 			this.getAdditionalInventory().syncToMob(this);
-			this.level().playSound(this, this.blockPosition(), this.getAmbientSound(),
+			this.level.playSound(this.getOwner(), this.blockPosition(), this.getAmbientSound(),
 				SoundSource.PLAYERS, this.getSoundVolume() * 1.5f, this.getVoicePitch() * 1.5f);
 		}
 	}
@@ -183,7 +186,7 @@ public class HmagKoboldEntity extends KoboldEntity implements INFFGirlsTamed
 	@Override
 	protected void customServerAiStep() {
 		super.customServerAiStep();
-		if (!this.level().isClientSide())
+		if (!this.level.isClientSide())
 			this.updateLocatingBlocks();
 	}
 

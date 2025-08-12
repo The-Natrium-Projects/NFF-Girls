@@ -52,7 +52,6 @@ import net.sodiumzh.nff.girls.item.NecromancerArmorItem;
 import net.sodiumzh.nff.girls.registry.*;
 import net.sodiumzh.nff.girls.util.NFFGirlsEntityStatics;
 import net.sodiumzh.nff.services.entity.ai.NFFTamedMobAIState;
-import net.sodiumzh.nff.services.entity.capability.CNFFTamable;
 import net.sodiumzh.nff.services.entity.taming.INFFTamed;
 import net.sodiumzh.nff.services.entity.taming.NFFTamedStatics;
 import net.sodiumzh.nff.services.entity.taming.NFFTamingMapping;
@@ -634,7 +633,7 @@ public class NFFGirlsEntityEventListeners
 				}
 				if (tamed.asMob().getAttributeValue(NFFGirlsEntityAttributes.PERSISTENT_RANGED_HEALING.get()) > 1e-12) {
 					List<LivingEntity> toSendParticles = new ArrayList<>();
-					tamed.asMob().level().getEntities(EntityTypeTest.forClass(LivingEntity.class),
+					tamed.asMob().level.getEntities(EntityTypeTest.forClass(LivingEntity.class),
 						tamed.asMob().getBoundingBox().inflate(8, 4, 8),
 							e -> NFFTamedStatics.isLivingAlliedToBM(tamed, e)
 							// Apply to a round area
@@ -649,12 +648,12 @@ public class NFFGirlsEntityEventListeners
 					if (tamed.asMob().tickCount % 200 == 0) {
 						for (LivingEntity e: toSendParticles) {
 							MobileParticleSourceEntity particleSource =
-								new MobileParticleSourceEntity(tamed.asMob().level(), e::getEyePosition)
+								new MobileParticleSourceEntity(tamed.asMob().level, e::getEyePosition)
 									.setParticleType(ParticleTypes.HAPPY_VILLAGER)
 									.particlesPerTick(2)
 									.setSpeed(10d);
 							particleSource.setPos(tamed.asMob().getEyePosition());
-							e.level().addFreshEntity(particleSource);
+							e.level.addFreshEntity(particleSource);
 						}
 					}
 				}
@@ -901,8 +900,8 @@ public class NFFGirlsEntityEventListeners
 			if (tm.asMob().getRandom().nextDouble() < tm.asMob().getAttributeValue(NFFGirlsEntityAttributes.CRITICAL_RATE.get())) {
 				NFUParticleStatics.sendParticlesToEntity(event.getEntity(),
 					ParticleTypes.CRIT, (double)event.getEntity().getBbHeight() - 0.2D, 0.3D, 10, 1.0);
-				event.getEntity().level().playSound(null, event.getEntity().blockPosition(),
-					SoundEvents.PLAYER_ATTACK_CRIT, SoundSource.NEUTRAL);
+				event.getEntity().level.playSound(tm.getOwner(), event.getEntity().blockPosition(),
+					SoundEvents.PLAYER_ATTACK_CRIT, SoundSource.PLAYERS, 1.0F, 1.0F);
 				boostingRate *= 1.5d;
 			}
 			event.setAmount((float) (event.getAmount() * boostingRate));
@@ -1251,7 +1250,7 @@ public class NFFGirlsEntityEventListeners
 	public static void onItemEntityOutOfWorld(ItemEntityOutOfWorldEvent event) {
 		if (event.getEntity().getItem().getItem() instanceof NFFMobRespawnerItem item) {
 			Vec3 v = event.getEntity().position();
-			event.getEntity().setPos(v.x, event.getEntity().level().getSeaLevel(), v.z);
+			event.getEntity().setPos(v.x, event.getEntity().level.getSeaLevel(), v.z);
 			event.getEntity().setNoGravity(true);
 			event.setCanceled(true);
 		}

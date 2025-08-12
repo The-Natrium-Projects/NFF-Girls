@@ -1,4 +1,5 @@
 package net.sodiumzh.nff.girls.registry;
+package net.sodiumzh.nff.girls.registry;
 
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.EntityType;
@@ -294,18 +295,7 @@ public class NFFGirlsEntityTypes {
 			.setTrackingRange(8)
 			.setUpdateInterval(3)
 			.setShouldReceiveVelocityUpdates(false));
-	
-	// ================================================================================================= //
-	@SubscribeEvent
-	public static void onAttributeCreate(EntityAttributeCreationEvent event) {	
-		
-		NFFGirlsEntityAttributes.REGISTRY.forEach((type, supplier) -> 
-		{
-			event.put(type, supplier.get().build());
-		});
-	}
-	// ================================================================================================= //
-	
+
 	// Projectiles
 	
 	public static final RegistryObject<EntityType<NecromancerMagicBulletEntity>> NECROMANCER_MAGIC_BULLET =
