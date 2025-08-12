@@ -27,7 +27,7 @@ base {
 
 jarJar.enable()
 tasks.named('jarJar') {
-	archiveClassifier = ''
+	archiveClassifier = 'full'
 }
 compileJava.options.encoding = 'UTF-8'
 java {
@@ -238,7 +238,7 @@ tasks.named('processResources', ProcessResources).configure {
 
 // Example for how to get properties into the manifest for reading at runtime.
 tasks.named('jar', Jar).configure {
-	archiveClassifier = 'slim'
+	archiveClassifier = ''
     manifest {
         attributes([
                 'Specification-Title'     : mod_id,
