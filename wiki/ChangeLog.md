@@ -4,6 +4,10 @@
 
 Fixed tamed animals attacking NFF mobs.
 
+Fixed standalone server crash on generating particles.
+
+Fixed `nffservices:passive_to_nff_mobs` tag making the mob passive to all mobs.
+
 Fixed crash or item not consuming on trading on the standalone server.
 
 ### 0.2.30.4
