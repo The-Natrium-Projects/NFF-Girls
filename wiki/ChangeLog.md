@@ -1,5 +1,11 @@
 # Change Log
 
+### 0.2.30.5
+
+Fixed tamed animals attacking NFF mobs.
+
+Fixed crash or item not consuming on trading on the standalone server.
+
 ### 0.2.30.4
 
 Now mobs will be following instead of waiting after being friended.
