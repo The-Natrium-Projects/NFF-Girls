@@ -11,6 +11,7 @@ import net.minecraft.world.entity.npc.VillagerProfession;
 import net.minecraft.world.entity.npc.VillagerTrades.ItemListing;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.item.trading.Merchant;
 import net.minecraft.world.item.trading.MerchantOffer;
 import net.minecraft.world.item.trading.MerchantOffers;
 import net.minecraftforge.common.capabilities.Capability;
@@ -489,5 +490,19 @@ public interface CNFFGirlsTradeHandler extends CVanillaMerchant
 		}
 		
 	}
-	
+
+	/**
+	 * Search for merchant using {@code CNFFGirlsTradeHandler} that's trading with the player around the mob.
+	 * If not found (not existing or not using {@code CNFFGirlsTradeHandler} e.g. vanilla villager), returns null.
+	 */
+	@OnlyIn(Dist.CLIENT)
+	@Nullable
+	public static CNFFGirlsTradeHandler searchOngoingTrader(Player player, double range)
+	{
+		List<Entity> list = player.level.getEntities(player, player.getBoundingBox().inflate(range)).stream().filter(e ->
+			e.getCapability(NFFGirlsCapabilities.CAP_TRADE_HANDLER).resolve()
+				.map(Merchant::getTradingPlayer).filter(p -> p.equals(player)).isPresent()
+		).toList();
+		return list.isEmpty() ? null : list.get(0).getCapability(NFFGirlsCapabilities.CAP_TRADE_HANDLER).resolve().orElse(null);
+	}
 }

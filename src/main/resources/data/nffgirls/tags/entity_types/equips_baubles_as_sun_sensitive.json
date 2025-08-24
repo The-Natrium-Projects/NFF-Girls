@@ -2,5 +2,7 @@
   "desc": "Mobs with this tag can equip baubles like sun-sensitive mobs.",
   "replace": false,
   "values" : [
+    "nffgirls:hmag_dodomeki",
+    "nffgirls:hmag_dullahan"
   ]
 }
