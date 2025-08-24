@@ -1,5 +1,11 @@
 # Change Log
 
+### 0.2.30.6
+
+Fixed crash on villager trade.
+
+Fixed Dullahan and Dodomeki failing to equip Soul Amulet.
+
 ### 0.2.30.5
 
 Fixed tamed animals attacking NFF mobs.
