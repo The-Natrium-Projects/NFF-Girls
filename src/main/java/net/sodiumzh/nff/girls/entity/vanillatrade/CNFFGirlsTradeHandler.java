@@ -14,6 +14,7 @@ import net.minecraft.world.entity.npc.VillagerTrades.ItemListing;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.item.trading.Merchant;
 import net.minecraft.world.item.trading.MerchantOffer;
 import net.minecraft.world.item.trading.MerchantOffers;
 import net.minecraftforge.api.distmarker.Dist;
@@ -506,10 +507,11 @@ public interface CNFFGirlsTradeHandler extends CVanillaMerchant
 	@Nullable
 	public static CNFFGirlsTradeHandler searchOngoingTrader(Player player, double range)
 	{
-		List<Entity> list = player.level.getEntities(player, player.getBoundingBox().inflate(range)).stream().filter(entity -> 
-			NFUMiscStatics.getValueFromCapability(entity, NFFGirlsCapabilities.CAP_TRADE_HANDLER, CNFFGirlsTradeHandler::getTradingPlayer) == player
+		List<Entity> list = player.level.getEntities(player, player.getBoundingBox().inflate(range)).stream().filter(e ->
+			e.getCapability(NFFGirlsCapabilities.CAP_TRADE_HANDLER).resolve()
+				.map(Merchant::getTradingPlayer).filter(p -> p.equals(player)).isPresent()
 		).toList();
-		return list.isEmpty() ? null : NFUMiscStatics.getValueFromCapability(list.get(0), NFFGirlsCapabilities.CAP_TRADE_HANDLER, cap -> cap);
+		return list.isEmpty() ? null : list.get(0).getCapability(NFFGirlsCapabilities.CAP_TRADE_HANDLER).resolve().orElse(null);
 	}
 	
 }
