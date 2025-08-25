@@ -24,9 +24,9 @@ import net.sodiumzh.nff.girls.entity.ai.goal.target.NFFGirlsNearestHostileToSelf
 import net.sodiumzh.nff.girls.entity.ai.goal.target.NFFGirlsOwnerHurtByTargetGoal;
 import net.sodiumzh.nff.girls.entity.ai.goal.target.NFFGirlsOwnerHurtTargetGoal;
 import net.sodiumzh.nff.girls.inventory.NFFGirlsFourBaublesInventoryMenu;
+import net.sodiumzh.nff.girls.item.bauble.NFFGirlsBaubleStatics;
 import net.sodiumzh.nff.girls.registry.NFFGirlsHealingItems;
 import net.sodiumzh.nff.girls.sound.NFFGirlsSoundPresets;
-import net.sodiumzh.nff.girls.subsystem.baublesystem.NFFGirlsBaubleStatics;
 import net.sodiumzh.nff.services.entity.ai.goal.preset.NFFMeleeAttackGoal;
 import net.sodiumzh.nff.services.entity.ai.goal.preset.NFFWaterAvoidingRandomStrollGoal;
 import net.sodiumzh.nff.services.entity.ai.goal.preset.target.NFFHurtByTargetGoal;
@@ -82,8 +82,8 @@ public class HmagCrimsonSlaughtererEntity extends CrimsonSlaughtererEntity imple
 				/*NFUEntityStatics.addEffectSafe(living, MobEffects.MOVEMENT_SLOWDOWN, (20 + 10 * poisonLevel) * 20, poisonLevel == 0 ? 0 : 1);
 				if (poisonLevel > 0)
 					NFUEntityStatics.addEffectSafe(living, MobEffects.POISON, 5 * Math.min(poisonLevel, 3) * 20, Math.min(poisonLevel, 3) - 1);*/
-				int thornCount = NFFGirlsBaubleStatics.countBaubles(this, new ResourceLocation(NFFGirls.MOD_ID, "poisonous_thorn"));
-				NFUEntityStatics.addEffectSafe(living, MobEffects.MOVEMENT_SLOWDOWN, (20 + 10 * thornCount) * 20, thornCount == 0 ? 0 : 1);
+				//int thornCount = NFFGirlsBaubleStatics.countBaubles(this, new ResourceLocation(NFFGirls.MOD_ID, "poisonous_thorn"));
+				//NFUEntityStatics.addEffectSafe(living, MobEffects.MOVEMENT_SLOWDOWN, (20 + 10 * thornCount) * 20, thornCount == 0 ? 0 : 1);
 				// Poison is handled in bauble impl event listener
 			}
 

@@ -278,8 +278,6 @@ public class NFFGirlsEntityAttributeProviders
 		event.put(NFFGirlsEntityTypes.HMAG_REDCAP.get(), NFFGirlsEntityAttributeProviders.HMAG_REDCAP.get().get().build());
 		event.put(NFFGirlsEntityTypes.HMAG_JACK_FROST.get(), NFFGirlsEntityAttributeProviders.HMAG_JACK_FROST.get().get().build());
 		event.put(NFFGirlsEntityTypes.HMAG_MELTY_MONSTER.get(), NFFGirlsEntityAttributeProviders.HMAG_MELTY_MONSTER.get().get().build());
-		event.put(NFFGirlsEntityTypes.HMAG_JIANGSHI.get(), NFFGirlsEntityAttributeProviders.HMAG_JIANGSHI.get().get().build());
-		event.put(NFFGirlsEntityTypes.HMAG_NIGHTWALKER.get(), NFFGirlsEntityAttributeProviders.HMAG_NIGHTWALKER.get().get().build());
 	}
 
 

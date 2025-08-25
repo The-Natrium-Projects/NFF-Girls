@@ -1,5 +1,4 @@
 package net.sodiumzh.nff.girls.registry;
-package net.sodiumzh.nff.girls.registry;
 
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.EntityType;

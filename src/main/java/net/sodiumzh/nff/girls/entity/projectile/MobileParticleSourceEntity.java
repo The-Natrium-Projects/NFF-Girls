@@ -42,7 +42,7 @@ public class MobileParticleSourceEntity extends Entity implements ItemSupplier {
     private double speed = 1;
     private Supplier<Vec3> targetPosGetter = () -> new Vec3(0d, 0d, 0d);
     private static final EntityDataAccessor<Vec3> TARGET_POS =
-        SynchedEntityData.defineId(MobileParticleSourceEntity.class, NFUEntityDataSerializers.VEC3.get());
+        SynchedEntityData.defineId(MobileParticleSourceEntity.class, NFUEntityDataSerializers.VEC3);
     private static final EntityDataAccessor<ParticleOptions> PARTICLE_TYPE =
         SynchedEntityData.defineId(MobileParticleSourceEntity.class, EntityDataSerializers.PARTICLE);
 

@@ -41,6 +41,8 @@ import net.sodiumzh.nff.girls.entity.ai.goal.NFFGirlsHmagMeltyMonsterFollowOwner
 import net.sodiumzh.nff.girls.entity.ai.goal.NFFGirlsRangedAttackGoal;
 import net.sodiumzh.nff.girls.entity.ai.goal.target.NFFGirlsNearestHostileToOwnerTargetGoal;
 import net.sodiumzh.nff.girls.entity.ai.goal.target.NFFGirlsNearestHostileToSelfTargetGoal;
+import net.sodiumzh.nff.girls.inventory.HmagMeltyMonsterInventoryMenu;
+import net.sodiumzh.nff.girls.item.bauble.INFFGirlsBauble;
 import net.sodiumzh.nff.girls.registry.NFFGirlsHealingItems;
 import net.sodiumzh.nff.girls.sound.NFFGirlsSoundPresets;
 import net.sodiumzh.nff.services.entity.ai.NFFTamedMobAIState;

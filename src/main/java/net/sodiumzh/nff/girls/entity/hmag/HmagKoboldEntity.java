@@ -35,7 +35,7 @@ import net.sodiumzh.nff.girls.entity.ai.goal.NFFGirlsLocateBlockGoal;
 import net.sodiumzh.nff.girls.entity.ai.goal.target.NFFGirlsNearestHostileToOwnerTargetGoal;
 import net.sodiumzh.nff.girls.entity.ai.goal.target.NFFGirlsNearestHostileToSelfTargetGoal;
 import net.sodiumzh.nff.girls.entity.projectile.MobileParticleSourceEntity;
-import net.sodiumzh.nff.girls.inventory.NFFGirlsHmagKoboldInventoryMenu;
+import net.sodiumzh.nff.girls.inventory.HmagKoboldInventoryMenu;
 import net.sodiumzh.nff.girls.registry.NFFGirlsHealingItems;
 import net.sodiumzh.nff.girls.sound.NFFGirlsSoundPresets;
 import net.sodiumzh.nff.services.entity.ai.NFFTamedMobAIState;

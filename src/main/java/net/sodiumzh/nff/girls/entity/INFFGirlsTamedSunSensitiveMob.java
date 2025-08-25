@@ -5,7 +5,6 @@ import net.minecraft.world.entity.EquipmentSlot;
 import net.sodiumzh.nff.girls.NFFGirls;
 import net.sodiumzh.nff.girls.item.bauble.INFFGirlsBauble;
 import net.sodiumzh.nff.girls.registry.NFFGirlsItems;
-import net.sodiumzh.nff.girls.subsystem.baublesystem.NFFGirlsBaubleStatics;
 import net.sodiumzh.nff.services.entity.taming.INFFTamedSunSensitiveMob;
 
 public interface INFFGirlsTamedSunSensitiveMob extends INFFGirlsTamed, INFFTamedSunSensitiveMob

@@ -95,7 +95,6 @@ public class NFFGirlsItems {
 	@Deprecated
 	public static final RegistryObject<EvilMagnetItem> EVIL_MAGNET = register("evil_magnet", () -> new EvilMagnetItem(new Item.Properties().stacksTo(1).tab(TAB))
 			.descTranslatable("info.nffgirls.item.deprecated_recover_ingredients").cast());
-	public static final RegistryObject<SwordItem> PEACH_WOOD_SWORD = register("peach_wood_sword", () -> new PeachWoodSwordItem(Tiers.WOOD, 0, -2.4F, (new Item.Properties()).rarity(Rarity.UNCOMMON).tab(TAB)));
 	public static final RegistryObject<ReinforcedFishingRodItem> REINFORCED_FISHING_ROD = register("reinforced_fishing_rod", () -> new ReinforcedFishingRodItem(new Item.Properties().durability(256).tab(TAB)));
 	
 	// Utility items
@@ -104,7 +103,6 @@ public class NFFGirlsItems {
 	public static final RegistryObject<MagicalGelBallItem> MAGICAL_GEL_BALL = register("magical_gel_ball", () -> new MagicalGelBallItem(new Item.Properties().tab(TAB)));
 	public static final RegistryObject<MagicalGelBottleItem> MAGICAL_GEL_BOTTLE = register("magical_gel_bottle", () -> new MagicalGelBottleItem(new Item.Properties())
 		.redirectDefaultInstance(EMPTY_MAGICAL_GEL_BOTTLE).setGiveCommandUsesDefaultInstance().cast());
-	public static final RegistryObject<TaoistTalismanItem> TAOIST_TALISMAN = register("taoist_talisman", () -> new TaoistTalismanItem(new Item.Properties().tab(TAB)));
 	public static final RegistryObject<TradeIntroductionLetterItem> TRADE_INTRODUCTION_LETTER = register("trade_introduction_letter",
 			() -> new TradeIntroductionLetterItem(new Item.Properties().stacksTo(1).rarity(Rarity.UNCOMMON)));
 	

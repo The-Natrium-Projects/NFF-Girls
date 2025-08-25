@@ -876,13 +876,11 @@ public class NFFGirlsBaubles {
         registerWithContinuousSlotSequence(event, HmagHornetEntity.class, 2, 4);
         registerWithContinuousSlotSequence(event, HmagImpEntity.class, 2, 4);
         registerWithContinuousSlotSequence(event, HmagJackFrostEntity.class, 0, 4);
-        registerWithContinuousSlotSequence(event, HmagJiangshiEntity.class, 3, 7);
         registerWithContinuousSlotSequence(event, HmagKoboldEntity.class, 2, 4);
         registerWithContinuousSlotSequence(event, HmagMeltyMonsterEntity.class, 0, 4);
         registerWithContinuousSlotSequence(event, HmagNecroticReaperEntity.class, 2, 6)
             .addSpecialSlot("main_hand", accessMobAdditionalInventory(0)).addSpecialSlotItem("nffgirls:necrotic_reaper_hoe")
             .addSpecialSlot("off_hand", accessMobAdditionalInventory(1)).addSpecialSlotItem("nffgirls:necrotic_reaper_hoe");
-        registerWithContinuousSlotSequence(event, HmagNightwalkerEntity.class, 0, 4);
         registerWithContinuousSlotSequence(event, HmagRedcapEntity.class, 6, 7);
         registerWithContinuousSlotSequence(event, HmagSlimeGirlEntity.class, 0, 4);
         registerWithContinuousSlotSequence(event, HmagSnowCanineEntity.class, 0, 4);

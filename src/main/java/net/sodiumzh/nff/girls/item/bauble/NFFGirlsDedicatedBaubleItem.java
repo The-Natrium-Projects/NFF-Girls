@@ -2,6 +2,8 @@ package net.sodiumzh.nff.girls.item.bauble;
 
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
+import net.sodiumzh.nfu.item.bauble.DedicatedBaubleItem;
+import net.sodiumzh.nfu.util.NFUMathStatics;
 
 import java.util.HashMap;
 import java.util.List;

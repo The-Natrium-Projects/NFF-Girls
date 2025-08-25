@@ -10,9 +10,6 @@ import net.sodiumzh.nff.girls.NFFGirls;
 import net.sodiumzh.nff.girls.entity.hmag.*;
 import net.sodiumzh.nff.girls.registry.NFFGirlsBaubles;
 import net.sodiumzh.nff.services.entity.taming.INFFTamed;
-import net.sodiumzh.nff.services.subsystem.baublesystem.BaubleEquippingCondition;
-import net.sodiumzh.nff.services.subsystem.baublesystem.RegisterBaubleEquippableMobsEvent;
-import net.sodiumzh.nff.services.subsystem.baublesystem.RegisterBaublesEvent;
 
 import java.util.function.Function;
 
