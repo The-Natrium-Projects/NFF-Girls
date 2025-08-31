@@ -5,10 +5,16 @@
       "item": "nffgirls:treasure_hunter_badge_ii"
     },
     {
-      "item": "hmag:greedy_crystal"
+      "item": "hmag:evil_crystal_block"
     },
     {
-      "item": "minecraft:echo_shard"
+      "tag": "forge:ingots/netherite"
+    },
+    {
+      "tag": "forge:ingots/netherite"
+    },
+    {
+      "item": "minecraft:diamond_block"
     },
     {
       "item": "minecraft:dragon_head"
