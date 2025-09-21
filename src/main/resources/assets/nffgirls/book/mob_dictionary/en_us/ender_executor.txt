@@ -2,7 +2,7 @@
 <NEWLINE>
 <NEWLINE>
 <NEWLINE>
-The Ender Executor spawns occasionally in place of the Creeper in the Overworld. It's rare in the Overworld and the
+The Ender Executor spawns occasionally in place of the Ender Man in the. They are rare in the Overworld and the
 Nether, but common in the End.
 <NEWLINE>
 It's health and attack attributes are much higher than the Ender Man. It spawns with a Stone Sword, and other
