@@ -1,0 +1,87 @@
+[
+  {
+    "level": 1,
+    "type": "buy",
+    "item": "minecraft:kelp",
+    "amount": [56, 64],
+    "price": 1,
+    "maxUses": 4
+  },
+  {
+    "level": 1,
+    "type": "buy",
+    "item": "minecraft:sea_pickle",
+    "amount": [42, 48],
+    "price": 1,
+    "maxUses": 4
+  },
+  {
+    "level": 2,
+    "type": "buy",
+    "item": "minecraft:cod",
+    "amount": [36, 48],
+    "price": 1,
+    "maxUses": 4
+  },
+  {
+    "level": 2,
+    "type": "buy",
+    "item": "minecraft:salmon",
+    "amount": [36, 48],
+    "price": 1,
+    "maxUses": 4
+  },
+  {
+    "level": 2,
+    "type": "buy",
+    "item": "minecraft:tropical_fish",
+    "amount": [32, 40],
+    "price": 1,
+    "maxUses": 4
+  },
+  {
+    "level": 4,
+    "type": "sell",
+    "item": "minecraft:nautilus_shell",
+    "amount": 1,
+    "price": 1,
+    "maxUses": 4
+  },
+  {
+    "level": 4,
+    "type": "buy",
+    "item": "minecraft:prismarine_crystals",
+    "amount": [12, 16],
+    "price": 1,
+    "maxUses": 2
+  },
+  {
+    "level": 4,
+    "type": "buy",
+    "item": "minecraft:prismarine_shard",
+    "amount": [12, 16],
+    "price": 1,
+    "maxUses": 2
+  },
+
+
+  {
+    "comment": "============================== Compat below =============================="
+  },
+  {
+    "level": 4,
+    "type": "buy",
+    "item": "grimoireofgaia:shiny_pearl",
+    "amount": [6, 10],
+    "price": 1,
+    "maxUses": 2
+  },
+  {
+    "level": 4,
+    "type": "buy",
+    "item": "iceandfire:seaserpent_skull",
+    "amount": 1,
+    "price": [3, 4],
+    "maxUses": 1
+  }
+]

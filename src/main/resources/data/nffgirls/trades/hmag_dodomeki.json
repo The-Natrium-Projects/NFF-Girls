@@ -1,0 +1,173 @@
+[
+  {
+    "level": 1,
+    "type": "buy",
+    "item": "minecraft:gold_ingot",
+    "amount": [24, 32],
+    "price": 1,
+    "maxUses": 4
+  },
+  {
+    "level": 1,
+    "type": "buy",
+    "item": "minecraft:emerald",
+    "amount": [36, 48],
+    "price": 1,
+    "maxUses": 4
+  },
+  {
+    "level": 1,
+    "type": "buy",
+    "item": "minecraft:diamond",
+    "amount": [10, 12],
+    "price": 1,
+    "maxUses": 4
+  },
+  
+  {
+    "level": 2,
+    "type": "sell",
+    "item": "minecraft:experience_bottle",
+    "amount": [3, 5],
+    "price": 1,
+    "maxUses": 4
+  },
+  {
+    "level": 2,
+    "type": "sell",
+    "item": "nffgirls:death_crystal_powder",
+    "amount": 1,
+    "price": [3, 5],
+    "maxUses": 4
+  },
+  {
+    "level": 3,
+    "type": "buy",
+    "item": "hmag:soul_apple",
+    "amount": [4, 6],
+    "price": 1,
+    "maxUses": 2
+  },
+  {
+    "level": 3,
+    "type": "sell",
+    "item": "hmag:lich_cloth",
+    "amount": 1,
+    "price": 1,
+    "maxUses": 4
+  },
+  {
+    "level": 3,
+    "type": "sell",
+    "item": "hmag:necrofiber",
+    "amount": 1,
+    "price": 1,
+    "maxUses": 4
+  },
+  {
+    "level": 4,
+    "type": "buy",
+    "item": "nffgirls:soul_cake_slice",
+    "amount": [2, 3],
+    "price": 1,
+    "maxUses": 2
+  },
+  {
+    "level": 5,
+    "type": "sell",
+    "item": "minecraft:netherite_ingot",
+    "amount": 1,
+    "price": [12, 16],
+    "maxUses": 2
+  },
+  {
+    "level": 5,
+    "type": "registry",
+    "key": "nffgirls:sells_fortune_crystal",
+    "weight": 0.15
+  },
+  {
+    "level": 5,
+    "type": "registry",
+    "key": "nffgirls:sells_fortune_crystal_plus",
+    "weight": 0.05
+  },
+  {
+    "level": 5,
+    "type": "registry",
+    "key": "nffgirls:sells_greedy_crystal",
+    "weight": 0.15
+  },
+  {
+    "level": 5,
+    "type": "registry",
+    "key": "nffgirls:sells_greedy_crystal_plus",
+    "weight": 0.05
+  },
+  {
+    "level": 5,
+    "type": "sell",
+    "item": "minecraft:totem_of_undying",
+    "amount": 1,
+    "price": [12, 18],
+    "maxUses": 1
+  },
+  {
+    "level": 5,
+    "type": "sell",
+    "item": "minecraft:enchanted_golden_apple",
+    "amount": 1,
+    "price": [20, 26],
+    "maxUses": 1
+  },
+  {
+    "level": 5,
+    "type": "enchantmentBook",
+    "enchantment": {
+		"key": "minecraft:looting",
+		"level": 3
+		},
+    "price": [24, 32],
+    "maxUses": 2
+  },
+  {
+    "level": 5,
+    "type": "enchantmentBook",
+    "enchantment": {
+		"key": "minecraft:fortune",
+		"level": 3
+		},
+    "price": [24, 32],
+    "maxUses": 2
+  },
+
+  {
+    "comment": "============================== Compat below =============================="
+  },
+
+  {
+    "level": 1,
+    "type": "buy",
+    "item": "iceandfire:silver_ingot",
+    "amount": [36, 48],
+    "price": 1,
+    "maxUses": 4
+  },
+  {
+    "level": 1,
+    "type": "buy",
+    "item": "iceandfire:sapphire_gem",
+    "amount": [32, 42],
+    "price": 1,
+    "maxUses": 4
+  },
+  
+  {
+    "level": 2,
+    "type": "buy",
+    "item": "grimoireofgaia:shiny_pearl",
+    "amount": [6, 10],
+    "price": 1,
+    "maxUses": 4
+  }
+]

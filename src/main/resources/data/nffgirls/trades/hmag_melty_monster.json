@@ -1,0 +1,162 @@
+[
+  {
+    "level": 1,
+    "type": "buy",
+    "item": "minecraft:coal",
+    "amount": [56, 64],
+    "price": 1,
+    "maxUses": 4
+  },
+  {
+    "level": 1,
+    "type": "buy",
+    "item": "minecraft:blaze_powder",
+    "amount": [32, 42],
+    "price": 1,
+    "maxUses": 4
+  },
+  {
+    "level": 1,
+    "type": "buy",
+    "item": "minecraft:magma_block",
+    "amount": [48, 64],
+    "price": 1,
+    "maxUses": 4
+  },
+  {
+    "level": 2,
+    "type": "buy",
+    "item": "minecraft:magma_cream",
+    "amount": [32, 40],
+    "price": 1,
+    "maxUses": 4
+  },
+  {
+    "level": 2,
+    "type": "buy",
+    "item": "minecraft:fire_charge",
+    "amount": [24, 36],
+    "price": 1,
+    "maxUses": 4
+  },
+  
+  {
+    "level": 3,
+    "type": "buy",
+    "item": "hmag:fire_bottle",
+    "amount": [6, 10],
+    "price": 1,
+    "maxUses": 2
+  },
+  {
+    "level": 3,
+    "type": "sell",
+    "item": "hmag:burning_core",
+    "amount": 1,
+    "price": 1,
+    "maxUses": 2
+  },
+  {
+    "level": 4,
+    "type": "sell",
+    "item": "hmag:evil_flame",
+    "amount": 2,
+    "price": 1,
+    "maxUses": 4
+  },
+  {
+    "level": 4,
+    "type": "enchantmentBook",
+    "enchantment": {
+		"key": "minecraft:flame",
+		"level": 1
+		},
+    "price": [5, 7],
+    "maxUses": 2
+  },
+
+  {
+    "level": 5,
+    "type": "enchantmentBook",
+    "enchantment": {
+		"key": "minecraft:fire_aspect",
+		"level": 2
+		},
+    "price": [6, 8],
+    "maxUses": 2
+  },
+  {
+    "level": 5,
+    "type": "enchantmentBook",
+    "enchantment": {
+		"key": "minecraft:fire_protection",
+		"level": 4
+		},
+    "price": [16, 24],
+    "maxUses": 2
+  },
+
+  {
+    "comment": "============================== Compat below =============================="
+  },
+
+  {
+    "level": 2,
+    "type": "buy",
+    "item": "grimoireofgaia:fireshard",
+    "amount": [8, 12],
+    "price": 1,
+    "maxUses": 4
+  },
+  {
+    "level": 2,
+    "type": "buy",
+    "item": "iceandfire:fire_lily",
+    "amount": [3, 5],
+    "price": 1,
+    "maxUses": 4
+  },
+  {
+    "level": 3,
+    "type": "buy",
+    "item": "iceandfire:fire_dragon_blood",
+    "amount": [4, 6],
+    "price": 1,
+    "maxUses": 4
+  },
+  
+  {
+    "level": 4,
+    "type": "buy",
+    "item": "iceandfire:fire_dragon_heart",
+    "amount": 1,
+    "price": [2, 4],
+    "maxUses": 2
+  },
+  {
+    "level": 4,
+    "type": "buy",
+    "item": "grimoireofgaia:fan_fire",
+    "amount": 1,
+    "price": [3, 5],
+    "maxUses": 1
+  },
+  {
+    "level": 4,
+    "type": "sell",
+    "item": "twilightforest:fiery_ingot",
+    "amount": 1,
+    "price": 1,
+    "maxUses": 2
+  },
+  
+  {
+    "level": 5,
+    "type": "sell",
+    "item": "iceandfire:dragonforge_fire_input",
+    "amount": 1,
+    "price": [48, 64],
+    "maxUses": 1,
+    "weight": 0.2
+  }
+]

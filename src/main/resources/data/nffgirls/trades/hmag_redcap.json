@@ -1,0 +1,205 @@
+[
+  {
+    "level": 1,
+    "type": "buy",
+    "item": "minecraft:spider_eye",
+    "amount": [36, 48],
+    "price": 1,
+    "maxUses": 4
+  },
+  {
+    "level": 1,
+    "type": "buy",
+    "item": "minecraft:red_dye",
+    "amount": [56, 64],
+    "price": 1,
+    "maxUses": 4
+  },
+  {
+    "level": 1,
+    "type": "buy",
+    "item": "minecraft:redstone",
+    "amount": [56, 64],
+    "price": 1,
+    "maxUses": 4
+  },
+  {
+    "level": 1,
+    "type": "buy",
+    "item": "minecraft:red_mushroom",
+    "amount": [48, 56],
+    "price": 1,
+    "maxUses": 4
+  },
+  
+  {
+    "level": 2,
+    "type": "buy",
+    "item": "minecraft:beetroot",
+    "amount": [56, 64],
+    "price": 1,
+    "maxUses": 4
+  },
+  {
+    "level": 2,
+    "type": "buy",
+    "item": "minecraft:sweet_berries",
+    "amount": [32, 48],
+    "price": 1,
+    "maxUses": 4
+  },
+  {
+    "level": 2,
+    "type": "buy",
+    "item": "minecraft:apple",
+    "amount": [32, 48],
+    "price": 1,
+    "maxUses": 4
+  },
+  {
+    "level": 2,
+    "type": "buy",
+    "item": "minecraft:melon_slice",
+    "amount": [56, 64],
+    "price": 1,
+    "maxUses": 4
+  },
+  
+  {
+    "level": 3,
+    "type": "buy",
+    "item": "minecraft:crimson_fungus",
+    "amount": [36, 48],
+    "price": 1,
+    "maxUses": 4
+  },
+  {
+    "level": 3,
+    "type": "buy",
+    "item": "minecraft:nether_wart",
+    "amount": [48, 56],
+    "price": 1,
+    "maxUses": 4
+  },
+  {
+    "level": 3,
+    "type": "buy",
+    "item": "minecraft:weeping_vines",
+    "amount": [56, 64],
+    "price": 1,
+    "maxUses": 4
+  },
+  {
+    "level": 3,
+    "type": "buy",
+    "item": "minecraft:fire_coral",
+    "amount": [18, 24],
+    "price": 1,
+    "maxUses": 4
+  },
+  
+  {
+    "level": 4,
+    "type": "sell",
+    "item": "hmag:evil_flame",
+    "amount": 2,
+    "price": 1,
+    "maxUses": 2
+  },
+  {
+    "level": 4,
+    "type": "buy",
+    "item": "hmag:cureberry",
+    "amount": [6, 8],
+    "price": 1,
+    "maxUses": 2
+  },
+  {
+    "level": 5,
+    "type": "sell",
+    "item": "minecraft:netherite_upgrade_smithing_template",
+    "amount": 1,
+    "price": [10, 16],
+    "maxUses": 2
+  },
+  {
+    "level": 5,
+    "type": "enchantmentBook",
+    "enchantment": {
+		"key": "minecraft:mending",
+		"level": 1
+		},
+    "price": [24, 36],
+    "maxUses": 4
+  },
+
+  {
+    "comment": "============================== Compat below =============================="
+  },
+
+  {
+    "level": 4,
+    "type": "buy",
+    "item": "alexsmobs:blood_sac",
+    "amount": [6, 8],
+    "price": 1,
+    "maxUses": 2
+  },
+  {
+    "level": 4,
+    "type": "buy",
+    "item": "iceandfire:dragonscales_red",
+    "amount": [8, 12],
+    "price": 1,
+    "maxUses": 2
+  },
+  {
+    "level": 4,
+    "type": "buy",
+    "item": "iceandfire:sea_serpent_scales_red",
+    "amount": [8, 12],
+    "price": 1,
+    "maxUses": 2
+  },
+  {
+    "level": 4,
+    "type": "buy",
+    "item": "grimoireofgaia:deco_garden_gnome",
+    "amount": 1,
+    "price": [4, 6],
+    "maxUses": 1
+  },
+  
+  {
+    "level": 5,
+    "type": "sell",
+    "item": "iceandfire:dragonegg_red",
+    "amount": 1,
+    "price": [48, 64],
+    "maxUses": 1
+  },
+  {
+    "level": 5,
+    "type": "sell",
+    "item": "grimoireofgaia:premium_monster_feed",
+    "amount": 1,
+    "price": [4, 6],
+    "maxUses": 8
+  },
+  {
+    "level": 5,
+    "type": "sell",
+    "item": "twilightforest:moonworm_queen",
+    "amount": 1,
+    "price": [32, 48],
+    "maxUses": 1
+  },
+  {
+    "level": 5,
+    "type": "sell",
+    "item": "alexsmobs:dimensional_carver",
+    "amount": 1,
+    "price": [56, 64],
+    "maxUses": 1
+  }
+]

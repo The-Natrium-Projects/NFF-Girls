@@ -1,0 +1,190 @@
+[
+  {
+    "level": 1,
+    "type": "buy",
+    "item": "minecraft:nether_wart",
+    "amount": [32, 48],
+    "price": 1,
+    "maxUses": 4
+  },
+  {
+    "level": 1,
+    "type": "buy",
+    "item": "minecraft:lapis_lazuli",
+    "amount": [44, 56],
+    "price": 1,
+    "maxUses": 4
+  },
+  
+  {
+    "level": 2,
+    "type": "buy",
+    "item": "minecraft:amethyst_shard",
+    "amount": [24, 36],
+    "price": 1,
+    "maxUses": 4
+  },
+  {
+    "level": 2,
+    "type": "buy",
+    "item": "minecraft:pumpkin_pie",
+    "amount": [12, 16],
+    "price": 1,
+    "maxUses": 2
+  },
+  {
+    "level": 2,
+    "type": "sell",
+    "item": "minecraft:diamond",
+    "amount": 1,
+    "price": 1,
+    "maxUses": 4
+  },
+  
+  {
+    "level": 3,
+    "type": "buy",
+    "item": "hmag:lemon_pie",
+    "amount": [8, 12],
+    "price": 1,
+    "maxUses": 2
+  },
+
+  {
+    "level": 4,
+    "type": "sell",
+    "item": "hmag:purification_cloth",
+    "amount": 2,
+    "price": 1,
+    "maxUses": 2
+  },
+  
+  {
+    "level": 5,
+    "type": "sell",
+    "item": "hmag:fortune_crystal",
+    "amount": 1,
+    "price": [36, 48],
+    "maxUses": 1,
+    "weight": 0.3
+  },
+  {
+    "level": 5,
+    "type": "sell",
+    "item": "minecraft:enchanted_golden_apple",
+    "amount": 1,
+    "price": [6, 8],
+    "maxUses": 2
+  },
+  {
+    "level": 5,
+    "type": "sell",
+    "item": "hmag:fortune_crystal_plus",
+    "amount": 1,
+    "price": [64, 64],
+    "maxUses": 1,
+    "weight": 0.1
+  },
+  {
+    "level": 5,
+    "type": "enchantmentBook",
+    "enchantment": {
+      "key": "minecraft:frost_walker",
+      "level": 2
+    },
+    "price": [24, 36],
+    "maxUses": 2
+  },
+  {
+    "level": 5,
+    "type": "enchantmentBook",
+    "enchantment": {
+		"key": "minecraft:mending",
+		"level": 1
+		},
+    "price": [24, 36],
+    "maxUses": 2
+  },
+
+  {
+    "comment": "============================== Compat below =============================="
+  },
+
+  {
+    "level": 2,
+    "type": "buy",
+    "item": "grimoireofgaia:fur",
+    "amount": [12, 16],
+    "price": 1,
+    "maxUses": 2
+  },
+  
+  {
+    "level": 3,
+    "type": "buy",
+    "item": "iceandfire:frosty_lily",
+    "amount": [3, 5],
+    "price": 1,
+    "maxUses": 4
+  },
+  {
+    "level": 3,
+    "type": "sell",
+    "item": "twilightforest:aurora_block",
+    "amount": [10, 16],
+    "price": 1,
+    "maxUses": 4
+  },
+
+  {
+    "level": 4,
+    "type": "buy",
+    "item": "alexsmobs:froststalker_horn",
+    "amount": [3, 5],
+    "price": 1,
+    "maxUses": 2
+  },
+  {
+    "level": 4,
+    "type": "buy",
+    "item": "twilightforest:alpha_yeti_fur",
+    "amount": [6, 8],
+    "price": 1,
+    "maxUses": 2
+  },
+  {
+    "level": 4,
+    "type": "sell",
+    "item": "twilightforest:ice_sword",
+    "amount": 1,
+    "price": [16, 22],
+    "maxUses": 1
+  },
+  
+  {
+    "level": 5,
+    "type": "buy",
+    "item": "grimoireofgaia:fan_ice",
+    "amount": 1,
+    "price": [3, 5],
+    "maxUses": 1
+  },
+  {
+    "level": 5,
+    "type": "sell",
+    "item": "iceandfire:dragonforge_ice_input",
+    "amount": 1,
+    "price": [48, 64],
+    "maxUses": 1,
+    "weight": 0.2
+  },
+  {
+    "level": 5,
+    "type": "sell",
+    "item": "iceandfire:dread_queen_sword",
+    "amount": 1,
+    "price": [64, 64],
+    "maxUses": 1,
+    "weight": 0.1
+  }
+]

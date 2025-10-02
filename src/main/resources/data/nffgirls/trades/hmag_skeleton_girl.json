@@ -1,50 +1,95 @@
 [
   {
-    "action": "settings",
-    "level": 1
-  },
-  {
-    "action": "buy",
-    "item": "alexsmobs:fish_bones",
-    "amount": [24, 36],
+    "level": 2,
+    "type": "buy",
+    "item": "minecraft:amethyst_shard",
+    "amount": [18, 32],
     "price": 1,
     "maxUses": 4
   },
   {
-    "action": "settings",
-    "level": 3
+    "level": 2,
+    "type": "sell",
+    "item": "minecraft:emerald",
+    "amount": [6, 10],
+    "price": 1,
+    "maxUses": 4
   },
   {
-    "action": "buy",
+    "level": 3,
+    "type": "sell",
+    "item": "minecraft:experience_bottle",
+    "amount": [2, 3],
+    "price": 1,
+    "maxUses": 2
+  },
+  {
+    "level": 3,
+    "type": "sell",
+    "item": "hmag:orge_horn",
+    "amount": 1,
+    "price": 1,
+    "maxUses": 2
+  },
+  {
+    "level": 4,
+    "type": "sell",
+    "item": "hmag:evil_thorn",
+    "amount": 1,
+    "price": [4, 6],
+    "maxUses": 4
+  },
+  {
+    "level": 5,
+    "type": "enchantmentBook",
+    "enchantment": {
+		"key": "minecraft:projectile_protection",
+		"level": 4
+		},
+    "price": [8, 10],
+    "maxUses": 2
+  },
+  {
+    "level": 5,
+    "type": "sell",
+    "item": "minecraft:skeleton_spawn_egg",
+    "amount": 1,
+    "price": [64, 64],
+    "maxUses": 1,
+    "weight": 0.1
+  },
+
+  {
+    "comment": "============================== Compat below =============================="
+  },
+
+  {
+    "level": 3,
+    "type": "buy",
     "item": "alexsmobs:centipede_leg",
-    "amount": [4, 7],
+    "amount": [6, 10],
     "price": 1,
-    "maxUses": 4
+    "maxUses": 2
   },
   {
-    "action": "settings",
-    "level": 4
-  },
-  {
-    "action": "buy",
+    "level": 4,
+    "type": "buy",
     "item": "alexsmobs:rocky_shell",
     "amount": [2, 3],
     "price": 1,
-    "maxUses": 4
+    "maxUses": 2
   },
   {
-    "action": "buy",
+    "level": 4,
+    "type": "sell",
     "item": "iceandfire:troll_tusk",
-    "amount": [4, 6],
-    "price": 1,
-    "maxUses": 4
+    "amount": 1,
+    "price": [2, 3],
+    "maxUses": 2
   },
   {
-    "action": "settings",
-    "level": 5
-  },
-  {
-    "action": "sell",
+    "level": 5,
+    "type": "sell",
     "item": "twilightforest:triple_bow",
     "amount": 1,
     "price": [40, 48],

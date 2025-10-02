@@ -1,0 +1,95 @@
+[
+  {
+    "level": 1,
+    "type": "buy",
+    "item": "minecraft:mutton",
+    "amount": [30, 36],
+    "price": 1,
+    "maxUses": 4
+  },
+  {
+    "level": 1,
+    "type": "buy",
+    "item": "minecraft:chicken",
+    "amount": [30, 36],
+    "price": 1,
+    "maxUses": 4
+  },
+  {
+    "level": 1,
+    "type": "buy",
+    "item": "minecraft:rabbit",
+    "amount": [30, 36],
+    "price": 1,
+    "maxUses": 4
+  },
+  {
+    "level": 2,
+    "type": "buy",
+    "item": "minecraft:beef",
+    "amount": [24, 32],
+    "price": 1,
+    "maxUses": 4
+  },
+  {
+    "level": 2,
+    "type": "buy",
+    "item": "minecraft:porkchop",
+    "amount": [24, 32],
+    "price": 1,
+    "maxUses": 4
+  },
+  {
+    "level": 3,
+    "type": "buy",
+    "item": "hmag:savagefang_meat",
+    "amount": [6, 10],
+    "price": 1,
+    "maxUses": 4
+  },
+  {
+    "level": 3,
+    "type": "buy",
+    "item": "hmag:ravager_meat",
+    "amount": [6, 10],
+    "price": 1,
+    "maxUses": 4
+  },
+
+  {
+    "comment": "============================== Compat below =============================="
+  },
+
+  {
+    "level": 2,
+    "type": "buy",
+    "item": "alexsmobs:moose_ribs",
+    "amount": [20, 28],
+    "price": 1,
+    "maxUses": 4
+  },
+  {
+    "level": 2,
+    "type": "buy",
+    "item": "alexsmobs:kangaroo_meat",
+    "amount": [20, 28],
+    "price": 1,
+    "maxUses": 4
+  },
+  {
+    "level": 2,
+    "type": "buy",
+    "item": "twilightforest:raw_venison",
+    "amount": [24, 32],
+    "price": 1,
+    "maxUses": 4
+  },
+  {
+    "level": 3,
+    "type": "buy",
+    "item": "twilightforest:raw_meef",
+    "amount": [16, 24],
+    "price": 1,
+    "maxUses": 4
+  }
+]

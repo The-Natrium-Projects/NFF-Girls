@@ -1,0 +1,72 @@
+[
+  {
+    "level": 1,
+    "type": "buy",
+    "item": "minecraft:nether_wart",
+    "amount": [56, 64],
+    "price": 1,
+    "maxUses": 2
+  },
+  {
+    "level": 2,
+    "type": "buy",
+    "item": "minecraft:nether_brick",
+    "amount": [56, 64],
+    "price": 1,
+    "maxUses": 2
+  },
+  {
+    "level": 2,
+    "type": "buy",
+    "item": "minecraft:soul_sand",
+    "amount": [56, 64],
+    "price": 1,
+    "maxUses": 2
+  },
+  {
+    "level": 2,
+    "type": "buy",
+    "item": "minecraft:soul_soil",
+    "amount": [56, 64],
+    "price": 1,
+    "maxUses": 2
+  },
+  {
+    "level": 4,
+    "type": "sell",
+    "item": "hmag:nether_star_fragment",
+    "amount": 1,
+    "price": [12, 16],
+    "maxUses": 3,
+    "weight": 0.5
+  },
+
+  {
+    "comment": "============================== Compat below =============================="
+  },
+
+  {
+    "level": 3,
+    "type": "buy",
+    "item": "alexsmobs:bone_serpent_tooth",
+    "amount": [6, 10],
+    "price": 1,
+    "maxUses": 4
+  },
+  {
+    "level": 3,
+    "type": "buy",
+    "item": "grimoireofgaia:stone_coal",
+    "amount": [6, 8],
+    "price": 1,
+    "maxUses": 4
+  },
+  {
+    "level": 4,
+    "type": "sell",
+    "item": "grimoireofgaia:nether_wart_jam",
+    "amount": [3, 5],
+    "price": 1,
+    "maxUses": 4
+  }
+]

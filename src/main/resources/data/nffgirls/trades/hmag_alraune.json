@@ -1,0 +1,145 @@
+[
+  {
+    "level": 1,
+    "type": "buy",
+    "item": "minecraft:wheat_seeds",
+    "amount": [56, 64],
+    "price": 1,
+    "maxUses": 4
+  },
+  {
+    "level": 1,
+    "type": "buy",
+    "item": "minecraft:beetroot_seeds",
+    "amount": [56, 64],
+    "price": 1,
+    "maxUses": 4
+  },
+  {
+    "level": 1,
+    "type": "buy",
+    "item": "minecraft:pumpkin_seeds",
+    "amount": [48, 56],
+    "price": 1,
+    "maxUses": 4
+  },
+  {
+    "level": 1,
+    "type": "buy",
+    "item": "minecraft:melon_seeds",
+    "amount": [48, 56],
+    "price": 1,
+    "maxUses": 4
+  },
+  {
+    "level": 2,
+    "type": "buy",
+    "item": "minecraft:sweet_berries",
+    "amount": [40, 48],
+    "price": 1,
+    "maxUses": 4
+  },
+  {
+    "level": 2,
+    "type": "buy",
+    "item": "minecraft:cocoa_beans",
+    "amount": [40, 48],
+    "price": 1,
+    "maxUses": 4
+  },
+  {
+    "level": 4,
+    "type": "sell",
+    "item": "hmag:evil_thorn",
+    "amount": 2,
+    "price": 1,
+    "maxUses": 2
+  },
+  {
+    "level": 5,
+    "type": "sell",
+    "item": "minecraft:torch_flower",
+    "amount": 1,
+    "price": [2, 3],
+    "maxUses": 1
+  },
+  {
+    "level": 5,
+    "type": "registry",
+    "key": "nffgirls:sells_greedy_crystal",
+    "weight": 0.3
+  },
+  {
+    "level": 5,
+    "type": "registry",
+    "key": "nffgirls:sells_greedy_crystal_plus",
+    "weight": 0.1
+  },
+  {
+    "level": 5,
+    "type": "enchantmentBook",
+    "enchantment": {
+		  "key": "hmag:health_boost",
+		  "level": 5
+		},
+    "price": [24, 32],
+    "maxUses": 1,
+    "weight": 0.5
+  },
+
+  {
+    "comment": "============================== Compat below =============================="
+  },
+
+  {
+    "level": 3,
+    "type": "buy",
+    "item": ["iceandfire:pixie_jar_0", "iceandfire:pixie_jar_1", "iceandfire:pixie_jar_2", 
+      "iceandfire:pixie_jar_3", "iceandfire:pixie_jar_4"],
+    "amount": 1,
+    "price": [2, 3],
+    "maxUses": 1,
+    "weight": 0.5
+  },
+  {
+    "level": 4,
+    "type": "buy",
+    "item": "grimoireofgaia:mandrake",
+    "amount": [2, 3],
+    "price": 1,
+    "maxUses": 2
+  },
+  {
+    "level": 4,
+    "type": "sell",
+    "item": "alexsmobs:mungal_spores",
+    "amount": 1,
+    "price": [8, 12],
+    "maxUses": 2
+  },
+  
+  {
+    "level": 5,
+    "type": "buy",
+    "item": "grimoireofgaia:doll_dryad",
+    "amount": 1,
+    "price": [4, 6],
+    "maxUses": 1
+  },
+  {
+    "level": 5,
+    "type": "sell",
+    "item": "twilightforest:magic_beans",
+    "amount": 1,
+    "price": [32, 48],
+    "maxUses": 1
+  },
+  {
+    "level": 5,
+    "type": "sell",
+    "item": "twilightforest:charm_of_life_2",
+    "amount": 1,
+    "price": [30, 36],
+    "maxUses": 1
+  }
+]
