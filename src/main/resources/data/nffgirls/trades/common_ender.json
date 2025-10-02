@@ -1,0 +1,39 @@
+[
+  {
+    "level": 2,
+    "type": "buy",
+    "item": "minecraft:ender_pearl",
+    "amount": [12, 16],
+    "price": 1,
+    "maxUses": 2
+  },
+  {
+    "level": 3,
+    "type": "buy",
+    "item": "minecraft:ender_eye",
+    "amount": [12, 16],
+    "price": 1,
+    "maxUses": 2
+  },
+  {
+    "level": 4,
+    "type": "buy",
+    "item": "minecraft:dragon_breath",
+    "amount": [6, 10],
+    "price": 1,
+    "maxUses": 2
+  },
+
+  {
+    "comment": "============================== Compat below =============================="
+  },
+
+  {
+    "level": 2,
+    "type": "buy",
+    "item": "alexsmobs:cosmic_cod",
+    "amount": [24, 32],
+    "price": 1,
+    "maxUses": 4
+  }
+]

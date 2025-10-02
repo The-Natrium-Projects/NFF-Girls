@@ -1,0 +1,42 @@
+[
+  {
+    "key": "sells_greedy_crystal",
+    "level": 5,
+    "type": "sell",
+    "item": "hmag:greedy_crystal",
+    "amount": 1,
+    "price": [36, 48],
+    "maxUses": 1,
+    "weight": 0.3
+  },
+  {
+    "key": "sells_fortune_crystal",
+    "level": 5,
+    "type": "sell",
+    "item": "hmag:fortune_crystal",
+    "amount": 1,
+    "price": [36, 48],
+    "maxUses": 1,
+    "weight": 0.3
+  },
+  {
+    "key": "sells_greedy_crystal_plus",
+    "level": 5,
+    "type": "sell",
+    "item": "hmag:greedy_crystal_plus",
+    "amount": 1,
+    "price": 64,
+    "maxUses": 1,
+    "weight": 0.1
+  },
+  {
+    "key": "sells_fortune_crystal_plus",
+    "level": 5,
+    "type": "sell",
+    "item": "hmag:fortune_crystal_plus",
+    "amount": 1,
+    "price": 64,
+    "maxUses": 1,
+    "weight": 0.1
+  }
+]

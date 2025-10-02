@@ -1,0 +1,193 @@
+[
+  {
+    "level": 1,
+    "type": "buy",
+    "item": "minecraft:gold_ingot",
+    "amount": [24, 32],
+    "price": 1,
+    "maxUses": 4
+  },
+  {
+    "level": 1,
+    "type": "buy",
+    "item": "minecraft:netherrack",
+    "amount": [56, 64],
+    "price": 1,
+    "maxUses": 4
+  },
+  {
+    "level": 1,
+    "type": "buy",
+    "item": "minecraft:quartz",
+    "amount": [56, 64],
+    "price": 1,
+    "maxUses": 4
+  },
+  {
+    "level": 1,
+    "type": "buy",
+    "item": "minecraft:glowstone_dust",
+    "amount": [56, 64],
+    "price": 1,
+    "maxUses": 4
+  },
+  
+  {
+    "level": 2,
+    "type": "buy",
+    "item": "minecraft:crimson_nylium",
+    "amount": [56, 64],
+    "price": 1,
+    "maxUses": 4
+  },
+  {
+    "level": 2,
+    "type": "buy",
+    "item": "minecraft:crimson_stew",
+    "amount": [56, 64],
+    "price": 1,
+    "maxUses": 4
+  },
+  {
+    "level": 2,
+    "type": "buy",
+    "item": "minecraft:crimson_roots",
+    "amount": [56, 64],
+    "price": 1,
+    "maxUses": 4
+  },
+  {
+    "level": 2,
+    "type": "buy",
+    "item": "minecraft:crimson_fungus",
+    "amount": [56, 64],
+    "price": 1,
+    "maxUses": 4
+  },
+  {
+    "level": 2,
+    "type": "buy",
+    "item": "minecraft:weeping_vines",
+    "amount": [56, 64],
+    "price": 1,
+    "maxUses": 4
+  },
+  
+  {
+    "level": 3,
+    "type": "sell",
+    "item": "hmag:crimson_cuticula",
+    "amount": 1,
+    "price": 1,
+    "maxUses": 4
+  },
+  {
+    "level": 3,
+    "type": "sell",
+    "item": "hmag:evil_thorn",
+    "amount": 2,
+    "price": 1,
+    "maxUses": 4
+  },
+
+  {
+    "level": 4,
+    "type": "sell",
+    "item": "hmag:crimson_bow",
+    "amount": 1,
+    "price": [4, 7],
+    "maxUses": 1
+  },
+  {
+    "level": 4,
+    "type": "sell",
+    "item": "hmag:evil_arrow",
+    "amount": [12, 16],
+    "price": 1,
+    "maxUses": 4
+  },
+  {
+    "level": 5,
+    "type": "registry",
+    "key": "nffgirls:sells_greedy_crystal",
+    "weight": 0.3
+  },
+  {
+    "level": 5,
+    "type": "registry",
+    "key": "nffgirls:sells_greedy_crystal_plus",
+    "weight": 0.1
+  },
+  {
+    "level": 5,
+    "type": "enchantmentBook",
+    "enchantment": {
+		"key": "minecraft:thorns",
+		"level": 3
+		},
+    "price": [24, 32],
+    "maxUses": 2
+  },
+
+  {
+    "comment": "============================== Compat below =============================="
+  },
+
+  {
+    "level": 3,
+    "type": "buy",
+    "item": "alexsmobs:mosquito_larva",
+    "amount": [8, 12],
+    "price": 1,
+    "maxUses": 2
+  },
+  {
+    "level": 3,
+    "type": "buy",
+    "item": "byg:crimson_berry_pie",
+    "amount": [8, 12],
+    "price": 1,
+    "maxUses": 2
+  },
+  {
+    "level": 4,
+    "type": "buy",
+    "item": ["iceandfire:fire_dragon_blood", "iceandfire:ice_dragon_blood", "iceandfire:lightning_dragon_blood"],
+    "amount": [4, 6],
+    "price": 1,
+    "maxUses": 2
+  },
+  {
+    "level": 4,
+    "type": "sell",
+    "item": "twilightforest:fiery_blood",
+    "amount": 1,
+    "price": 1,
+    "maxUses": 2
+  },
+  {
+    "level": 4,
+    "type": "sell",
+    "item": "alexsmobs:blood_sprayer",
+    "amount": 1,
+    "price": [3, 5],
+    "maxUses": 1
+  },
+  
+  {
+    "level": 5,
+    "type": "sell",
+    "item": "alexsmobs:hemolymph_blaster",
+    "amount": 1,
+    "price": [32, 40],
+    "maxUses": 1
+  },
+  {
+    "level": 5,
+    "type": "sell",
+    "item": "twilightforest:lifedrain_scepter",
+    "amount": 1,
+    "price": [56, 64],
+    "maxUses": 1
+  }
+]

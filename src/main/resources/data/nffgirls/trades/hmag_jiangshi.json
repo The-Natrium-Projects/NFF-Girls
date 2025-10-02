@@ -1,0 +1,171 @@
+[
+  {
+    "level": 1,
+    "type": "buy",
+    "item": "minecraft:lily_pad",
+    "amount": [48, 56],
+    "price": 1,
+    "maxUses": 4
+  },
+  {
+    "level": 1,
+    "type": "buy",
+    "item": "minecraft:mangrove_roots",
+    "amount": [32, 36],
+    "price": 1,
+    "maxUses": 4
+  },
+  {
+    "level": 1,
+    "type": "buy",
+    "item": "minecraft:bamboo",
+    "amount": [56, 64],
+    "price": 1,
+    "maxUses": 4
+  },
+  {
+    "level": 1,
+    "type": "buy",
+    "item": "minecraft:blue_orchid",
+    "amount": [32, 36],
+    "price": 1,
+    "maxUses": 4
+  },
+  
+  {
+    "level": 2,
+    "type": "buy",
+    "item": "minecraft:candle",
+    "amount": [12, 16],
+    "price": 1,
+    "maxUses": 4
+  },
+  {
+    "level": 2,
+    "type": "buy",
+    "item": "minecraft:copper_ingot",
+    "amount": [48, 56],
+    "price": 1,
+    "maxUses": 4
+  },
+
+  {
+    "level": 3,
+    "type": "buy",
+    "item": "minecraft:bell",
+    "amount": 1,
+    "price": [2, 3],
+    "maxUses": 1
+  },
+  {
+    "level": 3,
+    "type": "sell",
+    "item": "hmag:lich_cloth",
+    "amount": 1,
+    "price": 1,
+    "maxUses": 2
+  },
+
+  {
+    "level": 4,
+    "type": "buy",
+    "item": "nffgirls:peach_wood_sword",
+    "amount": 1,
+    "price": [2, 4],
+    "maxUses": 1
+  },
+  {
+    "level": 4,
+    "type": "buy",
+    "item": "nffgirls:taoist_talisman",
+    "amount": [3, 4],
+    "price": 1,
+    "maxUses": 2
+  },
+  {
+    "level": 4,
+    "type": "sell",
+    "item": "hmag:sharp_fang",
+    "amount": 1,
+    "price": 1,
+    "maxUses": 4
+  },
+  {
+    "level": 4,
+    "type": "sell",
+    "item": "hmag:lightning_particle",
+    "amount": 1,
+    "price": 1,
+    "maxUses": 2
+  },
+
+  {
+    "level": 5,
+    "type": "enchantmentBook",
+    "enchantment": {
+		"key": "minecraft:smite",
+		"level": 5
+		},
+    "price": [16, 24],
+    "maxUses": 2
+  },
+  {
+    "level": 5,
+    "type": "enchantmentBook",
+    "enchantment": {
+		"key": "minecraft:channeling",
+		"level": 1
+		},
+    "price": [8, 12],
+    "maxUses": 2
+  },
+
+  {
+    "comment": "============================== Compat below =============================="
+  },
+
+  {
+    "level": 2,
+    "type": "buy",
+    "item": "iceandfire:lightning_lily",
+    "amount": [3, 5],
+    "price": 1,
+    "maxUses": 4
+  },
+
+  {
+    "level": 3,
+    "type": "buy",
+    "item": "iceandfire:lightning_dragon_blood",
+    "amount": [4, 6],
+    "price": 1,
+    "maxUses": 4
+  },
+  
+  {
+    "level": 4,
+    "type": "buy",
+    "item": "iceandfire:lightning_dragon_heart",
+    "amount": 1,
+    "price": [2, 4],
+    "maxUses": 2
+  },
+  {
+    "level": 4,
+    "type": "buy",
+    "item": "alexsmobs:unsettling_kimono",
+    "amount": 1,
+    "price": [4, 6],
+    "maxUses": 1
+  },
+  
+  {
+    "level": 5,
+    "type": "sell",
+    "item": "iceandfire:dragonforge_lightning_input",
+    "amount": 1,
+    "price": [48, 64],
+    "maxUses": 1,
+    "weight": 0.2
+  }
+]

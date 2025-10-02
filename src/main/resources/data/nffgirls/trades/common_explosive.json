@@ -1,23 +1,62 @@
 [
   {
-    "action": "settings",
-    "level": 1
-  },
-  {
-    "action": "buy",
-    "item": "byg:anthracite",
-    "amount": [28, 36],
+    "level": 1,
+    "type": "buy",
+    "item": "minecraft:gunpowder",
+    "amount": [36, 48],
     "price": 1,
     "maxUses": 4
   },
   {
-    "action": "settings",
-    "level": 2
+    "level": 1,
+    "type": "buy",
+    "item": "minecraft:charcoal",
+    "amount": [56, 64],
+    "price": 1,
+    "maxUses": 4
   },
   {
-    "action": "buy",
+    "level": 2,
+    "type": "buy",
+    "item": "minecraft:tnt",
+    "amount": [7, 10],
+    "price": 1,
+    "maxUses": 2
+  },
+  {
+    "level": 4,
+    "type": "buy",
+    "item": "minecraft:end_crystal",
+    "amount": [4, 6],
+    "price": 1,
+    "maxUses": 2
+  },
+
+  {
+    "comment": "============================== Compat below =============================="
+  },
+
+  {
+    "level": 1,
+    "type": "buy",
+    "item": "byg:anthracite",
+    "amount": [32, 46],
+    "price": 1,
+    "maxUses": 4
+  },
+  {
+    "level": 1,
+    "type": "buy",
+    "item": "byg:anthracite",
+    "amount": [32, 46],
+    "price": 1,
+    "maxUses": 4
+  },
+  {
+    "level": 2,
+    "type": "buy",
     "item": "byg:brim_powder",
-    "amount": [36, 48],
+    "amount": [42, 56],
     "price": 1,
     "maxUses": 4
   }
