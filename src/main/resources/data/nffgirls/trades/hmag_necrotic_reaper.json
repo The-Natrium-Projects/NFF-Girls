@@ -61,7 +61,7 @@
     "item": "hmag:reinforcing_chain",
     "amount": 2,
     "price": 1,
-    "maxUses": 4
+    "maxUses": 2
   },
   {
     "level": 4,
@@ -69,7 +69,7 @@
     "item": "hmag:dyssomnia_skin",
     "amount": 1,
     "price": 1,
-    "maxUses": 4
+    "maxUses": 2
   },
   
   {

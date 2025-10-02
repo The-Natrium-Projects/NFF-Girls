@@ -72,7 +72,7 @@
     "level": 4,
     "type": "buy",
     "item": "grimoireofgaia:shiny_pearl",
-    "amount": [6, 10],
+    "amount": [10, 16],
     "price": 1,
     "maxUses": 2
   },

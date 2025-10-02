@@ -27,9 +27,9 @@
     "level": 4,
     "type": "sell",
     "item": "hmag:reinforcing_chain",
-    "amount": 1,
+    "amount": 2,
     "price": 1,
-    "maxUses": 4
+    "maxUses": 2
   },
   {
     "level": 5,

@@ -46,7 +46,7 @@
     "item": "hmag:sharp_fang",
     "amount": 1,
     "price": 1,
-    "maxUses": 4
+    "maxUses": 2
   },
   {
     "level": 3,
@@ -54,7 +54,7 @@
     "item": "hmag:orge_horn",
     "amount": 1,
     "price": 1,
-    "maxUses": 4
+    "maxUses": 2
   },
   
   {
@@ -63,7 +63,7 @@
     "item": "hmag:reinforcing_chain",
     "amount": 2,
     "price": 1,
-    "maxUses": 4
+    "maxUses": 2
   },
   {
     "level": 4,
@@ -71,7 +71,7 @@
     "item": "hmag:repulsion_gadget",
     "amount": 2,
     "price": 1,
-    "maxUses": 4
+    "maxUses": 2
   },
 
   {

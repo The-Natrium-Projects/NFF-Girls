@@ -56,7 +56,7 @@
     "amount": 1,
     "price": [24, 32],
     "maxUses": 2,
-    "weight": 1
+    "weight": 0.3
   },
   {
     "level": 4,
