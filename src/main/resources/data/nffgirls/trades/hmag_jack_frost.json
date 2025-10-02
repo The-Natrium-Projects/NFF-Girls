@@ -74,7 +74,7 @@
     "item": "minecraft:enchanted_golden_apple",
     "amount": 1,
     "price": [6, 8],
-    "maxUses": 2
+    "maxUses": 1
   },
   {
     "level": 5,
@@ -148,7 +148,7 @@
     "level": 4,
     "type": "buy",
     "item": "twilightforest:alpha_yeti_fur",
-    "amount": [6, 8],
+    "amount": [2, 3],
     "price": 1,
     "maxUses": 2
   },
@@ -185,6 +185,6 @@
     "amount": 1,
     "price": [64, 64],
     "maxUses": 1,
-    "weight": 0.1
+    "weight": 0.05
   }
 ]

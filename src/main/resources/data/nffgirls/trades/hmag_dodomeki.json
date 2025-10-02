@@ -54,7 +54,7 @@
     "item": "hmag:lich_cloth",
     "amount": 1,
     "price": 1,
-    "maxUses": 4
+    "maxUses": 2
   },
   {
     "level": 3,
@@ -62,7 +62,7 @@
     "item": "hmag:necrofiber",
     "amount": 1,
     "price": 1,
-    "maxUses": 4
+    "maxUses": 2
   },
   {
     "level": 4,
@@ -117,7 +117,7 @@
     "type": "sell",
     "item": "minecraft:enchanted_golden_apple",
     "amount": 1,
-    "price": [20, 26],
+    "price": [6, 8],
     "maxUses": 1
   },
   {

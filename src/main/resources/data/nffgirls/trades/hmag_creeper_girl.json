@@ -87,8 +87,8 @@
     "type": "sell",
     "item": "hmag:lightning_particle",
     "amount": 1,
-    "price": [12, 14],
-    "maxUses": 4
+    "price": 1,
+    "maxUses": 2
   },
   {
     "level": 5,

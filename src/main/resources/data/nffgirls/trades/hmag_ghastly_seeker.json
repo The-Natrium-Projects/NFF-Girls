@@ -45,7 +45,7 @@
     "item": "hmag:evil_flame",
     "amount": 2,
     "price": 1,
-    "maxUses": 4
+    "maxUses": 2
   },
   {
     "level": 4,
@@ -53,14 +53,14 @@
     "item": "hmag:repulsion_gadget",
     "amount": 2,
     "price": 1,
-    "maxUses": 4
+    "maxUses": 2
   },
   {
     "level": 5,
     "type": "sell",
     "item": "hmag:nemesis_blade",
     "amount": 1,
-    "price": [64, 64],
+    "price": [48, 56],
     "maxUses": 1
   },
 

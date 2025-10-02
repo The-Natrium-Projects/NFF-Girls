@@ -23,15 +23,6 @@
     "price": 1,
     "maxUses": 4
   },
-  
-  {
-    "level": 2,
-    "type": "buy",
-    "item": "minecraft:shield",
-    "amount": 1,
-    "price": [1, 2],
-    "maxUses": 2
-  },
   {
     "level": 2,
     "type": "buy",
@@ -70,7 +61,7 @@
     "type": "sell",
     "item": "hmag:orge_horn",
     "amount": 1,
-    "price": [8, 10],
+    "price": 1,
     "maxUses": 2
   },
 
@@ -94,17 +85,17 @@
     "level": 4,
     "type": "sell",
     "item": "hmag:reinforcing_chain",
-    "amount": 1,
-    "price": [8, 10],
-    "maxUses": 4
+    "amount": 2,
+    "price": 1,
+    "maxUses": 2
   },
   {
     "level": 4,
     "type": "sell",
     "item": "hmag:ancient_stone",
-    "amount": 1,
-    "price": [8, 10],
-    "maxUses": 4
+    "amount": 2,
+    "price": 1,
+    "maxUses": 2
   },
   
   {
@@ -132,17 +123,6 @@
 		},
     "price": [28, 38],
     "maxUses": 2
-  },
-  {
-    "level": 5,
-    "type": "enchantmentBook",
-    "enchantment": {
-		"key": "minecraft:protection",
-		"level": 8
-		},
-    "price": [64, 64],
-    "maxUses": 1,
-    "weight": 0.1
   },
 
   {
@@ -188,14 +168,6 @@
     "item": "twilightforest:knightmetal_shield",
     "amount": 1,
     "price": [2, 4],
-    "maxUses": 1
-  },
-  {
-    "level": 4,
-    "type": "buy",
-    "item": "grimoireofgaia:misc_giga_gear",
-    "amount": 1,
-    "price": [3, 5],
     "maxUses": 1
   },
   {
