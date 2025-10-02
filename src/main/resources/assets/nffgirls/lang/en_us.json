@@ -104,6 +104,7 @@
   "item.nffgirls.trade_introduction_letter": "Trade Introduction Letter",
   
   "item.nffgirls.befriending_progress_probe": "Befriending Progress Probe (Debug)",
+  "item.nffgirls.attacking_strategy_list": "Attacking Strategy List",
 
   "item.minecraft.potion.effect.nffgirls.undead_affinity": "Potion of Undead Affinity",
   "item.minecraft.potion.effect.nffgirls.undead_affinity_long": "Potion of Undead Affinity",
@@ -226,6 +227,12 @@
   "info.nffgirls.item.commanding_wand.mob_search_summon_not_found": "Summoning failed. Try getting closer to the location and summon again.",
   "info.nffgirls.item.commanding_wand.mob_search_summoned_mob": "Summoned %1$s.",
   "info.nffgirls.item.mob_catching_failed_inventory_full": "Storage failed - inventory is full.",
+  "info.nffgirls.attacking_strategy.specified": "Specified the attacking strategy for %1$s.",
+  "info.nffgirls.attacking_strategy.copied": "Copied the attacking strategy from %1$s",
+  "info.nffgirls.attacking_strategy.not_attacking_removed": "%1$s removed from the no-attacking list.",
+  "info.nffgirls.attacking_strategy.not_attacking_added": "%1$s added to the no-attacking list.",
+  "info.nffgirls.attacking_strategy.active_attacking_removed": "%1$s removed from the actively-attacking list.",
+  "info.nffgirls.attacking_strategy.active_attacking_added": "%1$s added to the actively-attacking list.",
 
   "info.nffgirls.bauble": "Bauble",
   "info.nffgirls.bauble.existing_item": "Also applicable as a mob bauble",
@@ -413,6 +420,15 @@
   "tooltip.nffgirls.bauble.for_ender": "For Ender mobs",
   "tooltip.nffgirls.bauble.for_nether_and_ender": "For Nether and Ender mobs",
   "tooltip.nffgirls.bauble.not_undead": "Not equippable on undead mobs",
+
+  "tooltip.nffgirls.attacking_strategy.add_active_attacking": "Right click a mob to record its type on the actively-attacking list. Click again to remove.",
+  "tooltip.nffgirls.attacking_strategy.add_not_attacking": "Shift+Right click a mob to record its type on the no-attacking list. Shift-Click again to remove.",
+  "tooltip.nffgirls.attacking_strategy.specify_to": "Right click your NFF mob to specify the attacking strategy",
+  "tooltip.nffgirls.attacking_strategy.copy_from": "Shift+Right click your NFF mob with an empty list to record its attacking strategy",
+  "tooltip.nffgirls.attacking_strategy.crafting": "Craft to clear the content. Craft with an empty list to duplicate the content.",
+  "tooltip.nffgirls.attacking_strategy.active_attacking_types": "Actively attacks: ",
+  "tooltip.nffgirls.attacking_strategy.not_attacking_types": "Do not attack: ",
+  "tooltip.nffgirls.attacking_strategy.typename_separator": ", ",
 
   "desc.nffgirls.item.commanding_wand": "Right click your mob to switch the AI\nShift+Right click an NFF mob to open the GUI\nRight click a Bell to gather NFF mobs within 16 blocks\nRight click a Soul Powder Block to find current locations of the mobs",
   "desc.nffgirls.item.combat_commanding_wand": "Right click an NFF mob to select, and then right click an enemy to make your mob attack it\nShift+Right click your mob to make it stop attacking\nShift+Right click an enemy to make all your mobs around attack it together",

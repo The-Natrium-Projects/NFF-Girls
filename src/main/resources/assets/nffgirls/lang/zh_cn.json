@@ -102,6 +102,7 @@
   "item.nffgirls.evil_gem": "邪恶宝石",
   "item.nffgirls.trade_introduction_letter": "交易介绍信",
   "item.nffgirls.mob_dictionary": "HMaG生物图鉴 - By NFF: Girls",
+  "item.nffgirls.attacking_strategy_list": "攻击策略表",
 
   "item.minecraft.potion.effect.nffgirls.undead_affinity": "亡灵亲和药水",
   "item.minecraft.potion.effect.nffgirls.undead_affinity_long": "亡灵亲和药水",
@@ -198,6 +199,12 @@
   "info.nffgirls.item.commanding_wand.mob_search_summon_not_found": "召唤失败。请走到离目标位置更近的地方重试。",
   "info.nffgirls.item.commanding_wand.mob_search_summoned_mob": "召唤了%1$s",
   "info.nffgirls.item.mob_catching_failed_inventory_full": "收纳失败：物品栏已满",
+  "info.nffgirls.attacking_strategy.specified": "指定了%1$s的攻击策略.",
+  "info.nffgirls.attacking_strategy.copied": "记录了%1$s的攻击策略",
+  "info.nffgirls.attacking_strategy.not_attacking_removed": "将%1$s移除出了禁止攻击列表",
+  "info.nffgirls.attacking_strategy.not_attacking_added": "将%1$s加入了禁止攻击列表",
+  "info.nffgirls.attacking_strategy.active_attacking_removed": "将%1$s移除出了主动攻击列表",
+  "info.nffgirls.attacking_strategy.active_attacking_added": "将%1$s加入主动攻击列表",
 
   "attribute.name.nffgirls.looting_level": "抢夺等级",
   "attribute.name.nffgirls.water_aspect": "水属性附加",
@@ -263,6 +270,15 @@
   "tooltip.nffgirls.bauble.dedicated_item": "生物饰品",
   "tooltip.nffgirls.bauble.existing_item": "也可用作生物饰品",
   "tooltip.nffgirls.bauble.rarity_tier": "稀有度品级 %1$d",
+
+  "tooltip.nffgirls.attacking_strategy.add_active_attacking": "右键一个生物以将其类型加入主动攻击列表。再次右键移除。",
+  "tooltip.nffgirls.attacking_strategy.add_not_attacking": "Shift+右键一个生物以将其类型加入禁止攻击列表。再次Shift+右键移除。",
+  "tooltip.nffgirls.attacking_strategy.specify_to": "右键自己的NFF生物以指定其攻击策略",
+  "tooltip.nffgirls.attacking_strategy.copy_from": "用空列表Shift+右键自己的NFF生物以复制其攻击策略",
+  "tooltip.nffgirls.attacking_strategy.crafting": "合成以清空其内容。与一个空列表一起合成以复制内容。",
+  "tooltip.nffgirls.attacking_strategy.active_attacking_types": "主动攻击：",
+  "tooltip.nffgirls.attacking_strategy.not_attacking_types": "禁止攻击：",
+  "tooltip.nffgirls.attacking_strategy.typename_separator": "、",
 
   "desc.nffgirls.item.commanding_wand": "右键你的NFF Girls生物切换AI\nShift+右键你的NFF Girls生物打开GUI面板\n右键钟以集合16格内的NFF Girls生物\n右键灵魂粉尘块以查找NFF Girls生物坐标",
   "desc.nffgirls.item.combat_commanding_wand": "右键你的NFF Girls生物选定，然后右键其他对象以指示你的生物攻击这个对象\nShift+右键你的NFF Girls生物以指示其停止攻击\nShift+右键敌人使你周围的NFF Girls生物集火攻击",
