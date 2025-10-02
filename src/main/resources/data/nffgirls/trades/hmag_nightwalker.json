@@ -1,0 +1,116 @@
+[
+  {
+    "level": 1,
+    "type": "buy",
+    "item": "minecraft:terracotta",
+    "amount": [42, 56],
+    "price": 1,
+    "maxUses": 4
+  },
+  {
+    "level": 1,
+    "type": "buy",
+    "item": "minecraft:bricks",
+    "amount": [48, 56],
+    "price": 1,
+    "maxUses": 4
+  },
+  {
+    "level": 1,
+    "type": "buy",
+    "item": "minecraft:nether_bricks",
+    "amount": [48, 56],
+    "price": 1,
+    "maxUses": 4
+  },
+  
+  {
+    "level": 2,
+    "type": "sell",
+    "item": "minecraft:raw_copper_block",
+    "amount": [3, 4],
+    "price": 1,
+    "maxUses": 1
+  },
+  {
+    "level": 2,
+    "type": "sell",
+    "item": "minecraft:raw_iron_block",
+    "amount": [2, 3],
+    "price": 1,
+    "maxUses": 1
+  },
+  {
+    "level": 2,
+    "type": "sell",
+    "item": "minecraft:raw_gold_block",
+    "amount": [2, 3],
+    "price": 1,
+    "maxUses": 1
+  },
+  
+  {
+    "level": 3,
+    "type": "buy",
+    "item": ["minecraft:white_glazed_terracotta", "minecraft:gray_glazed_terracotta", "minecraft:light_gray_glazed_terracotta", "minecraft:black_glazed_terracotta",
+      "minecraft:red_glazed_terracotta", "minecraft:green_glazed_terracotta", "minecraft:blue_glazed_terracotta", "minecraft:yellow_glazed_terracotta"],
+    "amount": [18, 24],
+    "price": 1,
+    "maxUses": 4
+  },
+  {
+    "level": 3,
+    "type": "buy",
+    "item": ["minecraft:cyan_glazed_terracotta", "minecraft:purple_glazed_terracotta", "minecraft:light_blue_glazed_terracotta", "minecraft:orange_glazed_terracotta",
+      "minecraft:magenta_glazed_terracotta", "minecraft:lime_glazed_terracotta", "minecraft:pink_glazed_terracotta", "minecraft:brown_glazed_terracotta"],
+    "amount": [18, 24],
+    "price": 1,
+    "maxUses": 4
+  },
+
+  {
+    "level": 4,
+    "type": "sell",
+    "item": "nffgirls:luminous_terracotta",
+    "amount": [4, 6],
+    "price": 1,
+    "maxUses": 2
+  },
+  {
+    "level": 4,
+    "type": "sell",
+    "item": "hmag:repulsion_gadget",
+    "amount": 2,
+    "price": 1,
+    "maxUses": 4
+  },
+  {
+    "level": 5,
+    "type": "sell",
+    "item": "hmag:netherite_scrap_block",
+    "amount": 1,
+    "price": [36, 48],
+    "maxUses": 1
+  },
+  {
+    "level": 5,
+    "type": "sell",
+    "item": "hmag:ancient_stone_block",
+    "amount": 1,
+    "price": 2,
+    "maxUses": 1
+  },
+
+  {
+    "comment": "============================== Compat below =============================="
+  },
+
+  {
+    "level": 4,
+    "type": "buy",
+    "item": "alexsmobs:straddlite",
+    "amount": [6, 8],
+    "price": 1,
+    "maxUses": 2
+  }
+]

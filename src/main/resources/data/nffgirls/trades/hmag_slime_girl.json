@@ -1,0 +1,188 @@
+[
+  {
+    "level": 1,
+    "type": "buy",
+    "item": ["minecraft:white_dye", "minecraft:gray_dye", "minecraft:light_gray_dye", "minecraft:black_dye",
+      "minecraft:red_dye", "minecraft:green_dye", "minecraft:blue_dye", "minecraft:yellow_dye"],
+    "amount": [48, 64],
+    "price": 1,
+    "maxUses": 4
+  },
+  {
+    "level": 1,
+    "type": "buy",
+    "item": ["minecraft:cyan_dye", "minecraft:purple_dye", "minecraft:light_blue_dye", "minecraft:orange_dye",
+      "minecraft:magenta_dye", "minecraft:lime_dye", "minecraft:pink_dye", "minecraft:brown_dye"],
+    "amount": [48, 64],
+    "price": 1,
+    "maxUses": 4
+  },
+  
+  {
+    "level": 2,
+    "type": "buy",
+    "item": "minecraft:slime_ball",
+    "amount": [48, 64],
+    "price": 1,
+    "maxUses": 4
+  },
+  {
+    "level": 2,
+    "type": "buy",
+    "item": "minecraft:honey_block",
+    "amount": [3, 5],
+    "price": 1,
+    "maxUses": 4
+  },
+
+  {
+    "level": 3,
+    "type": "buy",
+    "item": "hmag:swampy_stew",
+    "amount": 1,
+    "price": 1,
+    "maxUses": 2
+  },
+  {
+    "level": 3,
+    "type": "buy",
+    "item": "minecraft:magma_cream",
+    "amount": [32, 40],
+    "price": 1,
+    "maxUses": 1
+  },
+  {
+    "level": 3,
+    "type": "sell",
+    "item": ["hmag:exp_berry", "hmag:randomberry"],
+    "amount": 2,
+    "price": 1,
+    "maxUses": 2
+  },
+  {
+    "level": 3,
+    "type": "sell",
+    "item": "hmag:cureberry",
+    "amount": [2, 3],
+    "price": 1,
+    "maxUses": 4
+  },
+
+  {
+    "level": 4,
+    "type": "buy",
+    "item": "nffgirls:magical_gel_ball",
+    "amount": 2,
+    "price": 1,
+    "maxUses": 2
+  },
+  {
+    "level": 4,
+    "type": "sell",
+    "item": "hmag:cubic_nucleus",
+    "amount": 1,
+    "price": 1,
+    "maxUses": 4
+  },
+  
+  {
+    "level": 5,
+    "type": "sell",
+    "item": "hmag:fortune_crystal",
+    "amount": 1,
+    "price": [36, 48],
+    "maxUses": 2,
+    "weight": 0.3
+  },
+  {
+    "level": 5,
+    "type": "sell",
+    "item": "hmag:fortune_crystal_plus",
+    "amount": 1,
+    "price": [64, 64],
+    "maxUses": 1,
+    "weight": 0.1
+  },
+  {
+    "level": 5,
+    "type": "enchantmentBook",
+    "enchantment": {
+		"key": "minecraft:projectile_protection",
+		"level": 4
+		},
+    "price": [16, 22],
+    "maxUses": 2
+  },
+  {
+    "level": 5,
+    "type": "sell",
+    "item": "minecraft:slime_spawn_egg",
+    "amount": 1,
+    "price": [64, 64],
+    "maxUses": 1,
+    "weight": 0.1
+  },
+
+  {
+    "comment": "============================== Compat below =============================="
+  },
+
+  {
+    "level": 3,
+    "type": "buy",
+    "item": "iceandfire:myrmex_desert_resin",
+    "amount": [8, 12],
+    "price": 1,
+    "maxUses": 2
+  },
+  {
+    "level": 3,
+    "type": "buy",
+    "item": "iceandfire:myrmex_jungle_resin",
+    "amount": [8, 12],
+    "price": 1,
+    "maxUses": 2
+  },
+  
+  {
+    "level": 4,
+    "type": "buy",
+    "item": "alexsmobs:komodo_spit",
+    "amount": [4, 6],
+    "price": 1,
+    "maxUses": 2
+  },
+  {
+    "level": 4,
+    "type": "buy",
+    "item": "alexsmobs:banana_slug_slime",
+    "amount": [4, 6],
+    "price": 1,
+    "maxUses": 2
+  },
+  {
+    "level": 4,
+    "type": "buy",
+    "item": "grimoireofgaia:doll_slime_girl",
+    "amount": 1,
+    "price": [4, 6],
+    "maxUses": 1
+  },
+  {
+    "level": 4,
+    "type": "sell",
+    "item": "alexsmobs:rainbow_jelly",
+    "amount": 1,
+    "price": [3, 6],
+    "maxUses": 2
+  },
+
+  {
+    "level": 5,
+    "type": "sell",
+    "item": "alexsmobs:mimicream",
+    "amount": 1,
+    "price": [2, 3],
+    "maxUses": 4
+  }
+]

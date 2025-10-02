@@ -1,0 +1,175 @@
+[
+  {
+    "level": 1,
+    "type": "buy",
+    "item": "minecraft:sunflower",
+    "amount": [32, 36],
+    "price": 1,
+    "maxUses": 4
+  },
+  {
+    "level": 1,
+    "type": "buy",
+    "item": "minecraft:rose_bush",
+    "amount": [32, 36],
+    "price": 1,
+    "maxUses": 4
+  },
+  {
+    "level": 1,
+    "type": "buy",
+    "item": "minecraft:peony",
+    "amount": [32, 36],
+    "price": 1,
+    "maxUses": 4
+  },
+  {
+    "level": 1,
+    "type": "buy",
+    "item": "minecraft:lilac",
+    "amount": [32, 36],
+    "price": 1,
+    "maxUses": 4
+  },
+  
+  {
+    "level": 2,
+    "type": "buy",
+    "item": "minecraft:spider_eye",
+    "amount": [36, 48],
+    "price": 1,
+    "maxUses": 4
+  },
+  {
+    "level": 2,
+    "type": "buy",
+    "item": "minecraft:bone_meal",
+    "amount": [56, 64],
+    "price": 1,
+    "maxUses": 2
+  },
+  {
+    "level": 2,
+    "type": "buy",
+    "item": "minecraft:sugar",
+    "amount": [56, 64],
+    "price": 1,
+    "maxUses": 2
+  },
+  {
+    "level": 2,
+    "type": "buy",
+    "item": "minecraft:beetroot",
+    "amount": [56, 64],
+    "price": 1,
+    "maxUses": 2
+  },
+  
+  {
+    "level": 3,
+    "type": "sell",
+    "item": "hmag:iron_spear",
+    "amount": 1,
+    "price": [2, 3],
+    "maxUses": 1
+  },
+  {
+    "level": 3,
+    "type": "sell",
+    "item": "minecraft:honeycomb",
+    "amount": [4, 6],
+    "price": 1,
+    "maxUses": 2
+  },
+  {
+    "level": 3,
+    "type": "sell",
+    "item": "minecraft:honey_bottle",
+    "amount": [4, 6],
+    "price": 1,
+    "maxUses": 2
+  },
+  
+  {
+    "level": 4,
+    "type": "sell",
+    "item": "minecraft:bee_nest",
+    "amount": 1,
+    "price": [4, 6],
+    "maxUses": 2
+  },
+  {
+    "level": 4,
+    "type": "sell",
+    "item": "hmag:mysterious_petal",
+    "amount": 1,
+    "price": 1,
+    "maxUses": 4
+  },
+  {
+    "level": 4,
+    "type": "sell",
+    "item": "hmag:evil_thorn",
+    "amount": 2,
+    "price": 1,
+    "maxUses": 4
+  },
+  
+  {
+    "level": 5,
+    "type": "sell",
+    "item": "hmag:insomnia_fruit",
+    "amount": 1,
+    "price": [40, 48],
+    "maxUses": 1
+  },
+  {
+    "level": 5,
+    "type": "enchantmentBook",
+    "enchantment": {
+		"key": "minecraft:thorns",
+		"level": 3
+		},
+    "price": [6, 10],
+    "maxUses": 2
+  },
+
+  {
+    "comment": "============================== Compat below =============================="
+  },
+
+  {
+    "level": 3,
+    "type": "buy",
+    "item": "twilightforest:steeleaf",
+    "amount": [6, 10],
+    "price": 1,
+    "maxUses": 2
+  },
+  
+  {
+    "level": 4,
+    "type": "buy",
+    "item": "grimoireofgaia:weapon_book_nature",
+    "amount": 1,
+    "price": [4, 6],
+    "maxUses": 1
+  },
+  
+  {
+    "level": 5,
+    "type": "sell",
+    "item": "alexsmobs:poison_bottle",
+    "amount": [2, 3],
+    "price": 1,
+    "maxUses": 2
+  },
+  {
+    "level": 5,
+    "type": "buy",
+    "item": "iceandfire:hydra_fang",
+    "amount": 1,
+    "price": 1,
+    "maxUses": 4
+  }
+]

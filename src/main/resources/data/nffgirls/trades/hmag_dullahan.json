@@ -1,0 +1,234 @@
+[
+  {
+    "level": 1,
+    "type": "buy",
+    "item": "minecraft:iron_ingot",
+    "amount": [42, 52],
+    "price": 1,
+    "maxUses": 4
+  },
+  {
+    "level": 1,
+    "type": "buy",
+    "item": "minecraft:brick",
+    "amount": [48, 56],
+    "price": 1,
+    "maxUses": 4
+  },
+  {
+    "level": 1,
+    "type": "buy",
+    "item": "minecraft:nether_brick",
+    "amount": [36, 48],
+    "price": 1,
+    "maxUses": 4
+  },
+  
+  {
+    "level": 2,
+    "type": "buy",
+    "item": "minecraft:shield",
+    "amount": 1,
+    "price": [1, 2],
+    "maxUses": 2
+  },
+  {
+    "level": 2,
+    "type": "buy",
+    "item": "minecraft:obsidian",
+    "amount": [32, 36],
+    "price": 1,
+    "maxUses": 4
+  },
+  {
+    "level": 2,
+    "type": "buy",
+    "item": "minecraft:end_stone",
+    "amount": [56, 64],
+    "price": 1,
+    "maxUses": 4
+  },
+  {
+    "level": 2,
+    "type": "sell",
+    "item": "minecraft:crying_obsidian",
+    "amount": 1,
+    "price": [2, 3],
+    "maxUses": 4
+  },
+  
+  {
+    "level": 3,
+    "type": "sell",
+    "item": "hmag:netherite_nugget",
+    "amount": 1,
+    "price": [2, 3],
+    "maxUses": 2
+  },
+  {
+    "level": 3,
+    "type": "sell",
+    "item": "hmag:orge_horn",
+    "amount": 1,
+    "price": [8, 10],
+    "maxUses": 2
+  },
+
+  {
+    "level": 4,
+    "type": "buy",
+    "item": "hmag:fortress_shield",
+    "amount": 1,
+    "price": [3, 5],
+    "maxUses": 1
+  },
+  {
+    "level": 4,
+    "type": "buy",
+    "item": "hmag:ancient_shield",
+    "amount": 1,
+    "price": [2, 4],
+    "maxUses": 1
+  },
+  {
+    "level": 4,
+    "type": "sell",
+    "item": "hmag:reinforcing_chain",
+    "amount": 1,
+    "price": [8, 10],
+    "maxUses": 4
+  },
+  {
+    "level": 4,
+    "type": "sell",
+    "item": "hmag:ancient_stone",
+    "amount": 1,
+    "price": [8, 10],
+    "maxUses": 4
+  },
+  
+  {
+    "level": 5,
+    "type": "sell",
+    "item": "minecraft:totem_of_undying",
+    "amount": 1,
+    "price": [16, 24],
+    "maxUses": 1
+  },
+  {
+    "level": 5,
+    "type": "sell",
+    "item": "hmag:multiplex_reinforcing_chain",
+    "amount": 1,
+    "price": [5, 7],
+    "maxUses": 1
+  },
+  {
+    "level": 5,
+    "type": "enchantmentBook",
+    "enchantment": {
+		"key": "minecraft:protection",
+		"level": 4
+		},
+    "price": [28, 38],
+    "maxUses": 2
+  },
+  {
+    "level": 5,
+    "type": "enchantmentBook",
+    "enchantment": {
+		"key": "minecraft:protection",
+		"level": 8
+		},
+    "price": [64, 64],
+    "maxUses": 1,
+    "weight": 0.1
+  },
+
+  {
+    "comment": "============================== Compat below =============================="
+  },
+
+  {
+    "level": 3,
+    "type": "buy",
+    "item": "alexsmobs:spiked_scute",
+    "amount": [2, 4],
+    "price": 1,
+    "maxUses": 2
+  },
+  {
+    "level": 3,
+    "type": "buy",
+    "item": "alexsmobs:crocodile_scute",
+    "amount": [6, 8],
+    "price": 1,
+    "maxUses": 2
+  },
+  {
+    "level": 3,
+    "type": "buy",
+    "item": "alexsmobs:straddlite",
+    "amount": [6, 8],
+    "price": 1,
+    "maxUses": 2
+  },
+  {
+    "level": 3,
+    "type": "buy",
+    "item": "twilightforest:knightmetal_ingot",
+    "amount": [8, 12],
+    "price": 1,
+    "maxUses": 2
+  },
+
+  {
+    "level": 4,
+    "type": "buy",
+    "item": "twilightforest:knightmetal_shield",
+    "amount": 1,
+    "price": [2, 4],
+    "maxUses": 1
+  },
+  {
+    "level": 4,
+    "type": "buy",
+    "item": "grimoireofgaia:misc_giga_gear",
+    "amount": 1,
+    "price": [3, 5],
+    "maxUses": 1
+  },
+  {
+    "level": 4,
+    "type": "buy",
+    "item": "grimoireofgaia:weapon_book_metal",
+    "amount": 1,
+    "price": [2, 3],
+    "maxUses": 1
+  },
+  
+  {
+    "level": 5,
+    "type": "buy",
+    "item": "grimoireofgaia:doll_dullahan",
+    "amount": 1,
+    "price": [4, 6],
+    "maxUses": 1
+  },
+  {
+    "level": 5,
+    "type": "sell",
+    "item": "iceandfire:hippogryph_sword",
+    "amount": 1,
+    "price": [32, 42],
+    "maxUses": 1
+  },
+  {
+    "level": 5,
+    "type": "sell",
+    "item": "grimoireofgaia:weapon_book_buff",
+    "amount": 1,
+    "price": [36, 48],
+    "maxUses": 1
+  }
+]

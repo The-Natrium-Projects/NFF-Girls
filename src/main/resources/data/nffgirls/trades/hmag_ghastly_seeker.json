@@ -1,0 +1,127 @@
+[
+  {
+    "level": 2,
+    "type": "buy",
+    "item": "minecraft:fire_charge",
+    "amount": [24, 36],
+    "price": 1,
+    "maxUses": 4
+  },
+  {
+    "level": 2,
+    "type": "sell",
+    "item": "minecraft:ghast_tear",
+    "amount": [2, 3],
+    "price": 1,
+    "maxUses": 2
+  },
+  {
+    "level": 3,
+    "type": "buy",
+    "item": "hmag:fire_bottle",
+    "amount": [6, 10],
+    "price": 1,
+    "maxUses": 2
+  },
+  {
+    "level": 3,
+    "type": "sell",
+    "item": "hmag:soul_cloth",
+    "amount": 1,
+    "price": 1,
+    "maxUses": 2
+  },
+  {
+    "level": 4,
+    "type": "buy",
+    "item": "hmag:blasting_bottle",
+    "amount": [4, 6],
+    "price": 1,
+    "maxUses": 2
+  },
+  {
+    "level": 4,
+    "type": "sell",
+    "item": "hmag:evil_flame",
+    "amount": 2,
+    "price": 1,
+    "maxUses": 4
+  },
+  {
+    "level": 4,
+    "type": "sell",
+    "item": "hmag:repulsion_gadget",
+    "amount": 2,
+    "price": 1,
+    "maxUses": 4
+  },
+  {
+    "level": 5,
+    "type": "sell",
+    "item": "hmag:nemesis_blade",
+    "amount": 1,
+    "price": [64, 64],
+    "maxUses": 1
+  },
+
+  {
+    "comment": "============================== Compat below =============================="
+  },
+
+  {
+    "level": 2,
+    "type": "sell",
+    "item": "twilightforest:experiment_115",
+    "amount": [3, 5],
+    "price": 1,
+    "maxUses": 2
+  },
+  {
+    "level": 3,
+    "type": "buy",
+    "item": "iceandfire:ectoplasm",
+    "amount": [4, 6],
+    "price": 1,
+    "maxUses": 2
+  },
+  {
+    "level": 3,
+    "type": "sell",
+    "item": "twilightforest:carminite",
+    "amount": 1,
+    "price": 1,
+    "maxUses": 2
+  },
+  {
+    "level": 4,
+    "type": "buy",
+    "item": "grimoireofgaia:soulfire",
+    "amount": [3, 4],
+    "price": 1,
+    "maxUses": 2
+  },
+  {
+    "level": 4,
+    "type": "sell",
+    "item": "alexsmobs:soul_heart",
+    "amount": 1,
+    "price": [18, 24],
+    "maxUses": 1
+  },
+  {
+    "level": 4,
+    "type": "sell",
+    "item": "twilightforest:fiery_tears",
+    "amount": 1,
+    "price": 1,
+    "maxUses": 2
+  },
+  {
+    "level": 5,
+    "type": "buy",
+    "item": "twilightforest:ur_ghast_trophy",
+    "amount": 1,
+    "price": [6, 8],
+    "maxUses": 2
+  }
+]

@@ -1,74 +1,193 @@
 [
   {
-    "action": "settings",
-    "level": 1
+    "level": 1,
+    "type": "buy",
+    "item": "minecraft:flint",
+    "amount": [40, 48],
+    "price": 1,
+    "maxUses": 4
   },
   {
-    "action": "buy",
+    "level": 2,
+    "type": "buy",
+    "item": "minecraft:rabbit_hide",
+    "amount": [30, 36],
+    "price": 1,
+    "maxUses": 4
+  },
+  {
+    "level": 2,
+    "type": "buy",
+    "item": "minecraft:gold_ingot",
+    "amount": [24, 32],
+    "price": 1,
+    "maxUses": 4
+  },
+  {
+    "level": 2,
+    "type": "sell",
+    "item": "minecraft:emerald",
+    "amount": [6, 10],
+    "price": 1,
+    "maxUses": 4
+  },
+  {
+    "level": 3,
+    "type": "buy",
+    "item": "minecraft:hay_block",
+    "amount": [6, 8],
+    "price": 1,
+    "maxUses": 2
+  },
+  {
+    "level": 3,
+    "type": "sell",
+    "item": "minecraft:rabbit_foot",
+    "amount": 1,
+    "price": 1,
+    "maxUses": 2
+  },
+  {
+    "level": 3,
+    "type": "sell",
+    "item": "hmag:lich_cloth",
+    "amount": 1,
+    "price": 1,
+    "maxUses": 2
+  },
+  {
+    "level": 4,
+    "type": "sell",
+    "item": "hmag:repulsion_gadget",
+    "amount": 1,
+    "price": 1,
+    "maxUses": 4
+  },
+  {
+    "level": 5,
+    "type": "convert",
+    "item": "minecraft:sand",
+    "result": "hmag:thorn_sand",
+    "amount": 8,
+    "price": 1,
+    "maxUses": 2,
+    "weight": 0.25
+  },
+  {
+    "level": 5,
+    "type": "convert",
+    "item": "minecraft:sand",
+    "result": "hmag:poison_sand",
+    "amount": 8,
+    "price": 1,
+    "maxUses": 2,
+    "weight": 0.25
+  },
+  {
+    "level": 5,
+    "type": "convert",
+    "item": "minecraft:soul_sand",
+    "result": "hmag:wither_sand",
+    "amount": 8,
+    "price": 1,
+    "maxUses": 2,
+    "weight": 0.25
+  },
+  {
+    "level": 5,
+    "type": "convert",
+    "item": "minecraft:soul_sand",
+    "result": "hmag:healing_sand",
+    "amount": 8,
+    "price": 1,
+    "maxUses": 2,
+    "weight": 0.25
+  },
+  {
+    "level": 5,
+    "type": "sell",
+    "item": "minecraft:husk_spawn_egg",
+    "amount": 1,
+    "price": [64, 64],
+    "maxUses": 1,
+    "weight": 0.1
+  },
+
+  {
+    "comment": "============================== Compat below =============================="
+  },
+
+  {
+    "level": 1,
+    "type": "buy",
     "item": "byg:aloe_vera",
     "amount": [24, 32],
     "price": 1,
     "maxUses": 4
   },
   {
-    "action": "buy",
+    "level": 1,
+    "type": "buy",
     "item": "byg:baobab_fruit",
-    "amount": [48, 64],
+    "amount": [48, 54],
     "price": 1,
     "maxUses": 4
   },
   {
-    "action": "settings",
-    "level": 3
-  },
-  {
-    "action": "buy",
+    "level": 3,
+    "type": "buy",
     "item": "alexsmobs:rattlesnake_rattle",
-    "amount": [4, 6],
+    "amount": [6, 8],
     "price": 1,
-    "maxUses": 4
-  },
-  {
-    "action": "buy",
-    "item": "alexsmobs:tarantura_hawk_wing_fragment",
-    "amount": [4, 6],
-    "price": 1,
-    "maxUses": 4
-  },
-  {
-    "action": "settings",
-    "level": 4
-  },
-  {
-    "action": "buy",
-    "item": "iceandfire:myrmex_desert_chitin",
-    "amount": [4, 8],
-    "price": 1,
-    "maxUses": 4
-  },
-  {
-    "action": "sell",
-    "item": "alexsmobs:guster_eye",
-    "amount": 1,
-    "price": [6, 12],
     "maxUses": 2
   },
   {
-    "action": "settings",
-    "level": 5
+    "level": 3,
+    "type": "buy",
+    "item": "alexsmobs:tarantura_hawk_wing_fragment",
+    "amount": [3, 5],
+    "price": 1,
+    "maxUses": 2
   },
   {
-    "action": "sell",
-    "item": "twilightforest:crumble_horn",
+    "level": 4,
+    "type": "buy",
+    "item": "grimoireofgaia:weapon_book_hunger",
     "amount": 1,
-    "price": [32, 46],
+    "price": [4, 6],
     "maxUses": 1
   },
   {
-    "action": "sell",
-    "item": "iceandfire:deathworm_tounge",
+    "level": 4,
+    "type": "buy",
+    "item": "iceandfire:myrmex_desert_chitin",
+    "amount": [4, 6],
+    "price": 1,
+    "maxUses": 2
+  },
+  {
+    "level": 4,
+    "type": "buy",
+    "item": "alexsmobs:guster_eye",
+    "amount": [2, 3],
+    "price": 1,
+    "maxUses": 1
+  },
+  {
+    "level": 5,
+    "type": "sell",
+    "item": "twilightforest:crumble_horn",
     "amount": 1,
-    "price": [16, 24],
+    "price": [36, 48],
+    "maxUses": 1,
+    "weight": 0.25
+  },
+  {
+    "level": 5,
+    "type": "sell",
+    "item": "iceandfire:deathworn_tounge",
+    "amount": 1,
+    "price": [18, 26],
     "maxUses": 1
   }
 ]

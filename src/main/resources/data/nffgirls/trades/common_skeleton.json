@@ -2,17 +2,17 @@
   {
     "level": 2,
     "type": "buy",
-    "item": "minecraft:arrow",
-    "amount": [56, 64],
+    "item": "minecraft:bone",
+    "amount": [48, 60],
     "price": 1,
     "maxUses": 2
   },
   {
-    "level": 2,
+    "level": 4,
     "type": "buy",
-    "item": "minecraft:spyglass",
+    "item": "minecraft:skeleton_skull",
     "amount": 1,
-    "price": 1,
+    "price": [3, 5],
     "maxUses": 1
   },
 
@@ -21,19 +21,19 @@
   },
 
   {
-    "level": 4,
+    "level": 1,
     "type": "buy",
-    "item": "iceandfire:dragonbone_arrow",
-    "amount": [12, 16],
+    "item": "alexsmobs:fish_bones",
+    "amount": [8, 12],
     "price": 1,
     "maxUses": 2
   },
   {
     "level": 4,
-    "type": "buy",
-    "item": "grimoireofgaia:bag_arrow",
-    "amount": 1,
-    "price": [2, 3],
-    "maxUses": 2
+    "type": "sell",
+    "item": "iceandfire:dragon_bone",
+    "amount": 2,
+    "price": 1,
+    "maxUses": 4
   }
 ]

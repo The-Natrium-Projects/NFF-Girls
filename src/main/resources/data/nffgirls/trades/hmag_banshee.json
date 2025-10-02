@@ -1,0 +1,168 @@
+[
+  {
+    "level": 1,
+    "type": "buy",
+    "item": ["minecraft:allium", "minecraft:red_tulip", "minecraft:orange_tulip",
+      "minecraft:white_tulip", "minecraft:pink_tulip"],
+    "amount": [28, 36],
+    "price": 1,
+    "maxUses": 4
+  },
+  {
+    "level": 1,
+    "type": "buy",
+    "item": ["minecraft:poppy", "minecraft:dandelion", "minecraft:lily_of_the_valley",
+      "minecraft:azure_bluet", "minecraft:blue_orchid"],
+    "amount": [28, 36],
+    "price": 1,
+    "maxUses": 4
+  },
+  {
+    "level": 2,
+    "type": "buy",
+    "item": "minecraft:wither_rose",
+    "amount": [10, 16],
+    "price": 1,
+    "maxUses": 4
+  },
+  {
+    "level": 3,
+    "type": "sell",
+    "item": "minecraft:ghast_tear",
+    "amount": 2,
+    "price": 1,
+    "maxUses": 2
+  },
+  {
+    "level": 3,
+    "type": "sell",
+    "item": "minecraft:glow_ink_sac",
+    "amount": [2, 3],
+    "price": 1,
+    "maxUses": 2
+  },
+  {
+    "level": 3,
+    "type": "sell",
+    "item": "minecraft:phantom_membrane",
+    "amount": [1, 2],
+    "price": 1,
+    "maxUses": 2
+  },
+  {
+    "level": 4,
+    "type": "sell",
+    "item": "minecraft:budding_amethyst",
+    "amount": 1,
+    "price": [24, 32],
+    "maxUses": 2,
+    "weight": 1
+  },
+  {
+    "level": 4,
+    "type": "sell",
+    "item": "hmag:purification_cloth",
+    "amount": 2,
+    "price": 1,
+    "maxUses": 2
+  },
+  {
+    "level": 5,
+    "type": "sell",
+    "item": "hmag:insomnia_fruit",
+    "amount": 1,
+    "price": [40, 48],
+    "maxUses": 1
+  },
+  {
+    "level": 5,
+    "type": "sell",
+    "item": "minecraft:sculk_catalyst",
+    "amount": 1,
+    "price": 1,
+    "maxUses": 2
+  },
+  {
+    "level": 5,
+    "type": "registry",
+    "key": "nffgirls:sells_fortune_crystal",
+    "weight": 0.3
+  },
+  {
+    "level": 5,
+    "type": "registry",
+    "key": "nffgirls:sells_fortune_crystal_plus",
+    "weight": 0.1
+  },
+
+  {
+    "comment": "============================== Compat below =============================="
+  },
+
+  {
+    "level": 2,
+    "type": "buy",
+    "item": "alexsmobs:acacia_blossom",
+    "amount": [12, 24],
+    "price": 1,
+    "maxUses": 4
+  },
+  
+  {
+    "level": 3,
+    "type": "buy",
+    "item": "iceandfire:ectoplasm",
+    "amount": [4, 6],
+    "price": 1,
+    "maxUses": 2
+  },
+  {
+    "level": 3,
+    "type": "buy",
+    "item": "iceandfire:pixie_dust",
+    "amount": [4, 6],
+    "price": 1,
+    "maxUses": 2
+  },
+  
+  {
+    "level": 4,
+    "type": "buy",
+    "item": "grimoireofgaia:soulfire",
+    "amount": [3, 4],
+    "price": 1,
+    "maxUses": 2
+  },
+  {
+    "level": 4,
+    "type": "buy",
+    "item": "grimoireofgaia:weapon_book_nightmare",
+    "amount": 1,
+    "price": [4, 6],
+    "maxUses": 1
+  },
+  {
+    "level": 4,
+    "type": "sell",
+    "item": "alexsmobs:soul_heart",
+    "amount": 1,
+    "price": [18, 24],
+    "maxUses": 1
+  },
+  {
+    "level": 5,
+    "type": "sell",
+    "item": "twilightforest:glass_sword",
+    "amount": 1,
+    "price": [6, 10],
+    "maxUses": 4
+  },
+  {
+    "level": 5,
+    "type": "sell",
+    "item": "iceandfire:ghost_sword",
+    "amount": 1,
+    "price": [32, 48],
+    "maxUses": 1
+  }
+]

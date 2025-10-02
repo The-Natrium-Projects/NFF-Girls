@@ -1,0 +1,72 @@
+[
+  {
+    "level": 1,
+    "type": "sell",
+    "item": "minecraft:red_mushroom",
+    "amount": [16, 22],
+    "price": 1,
+    "maxUses": 4
+  },
+  {
+    "level": 1,
+    "type": "sell",
+    "item": "minecraft:brown_mushroom",
+    "amount": [16, 22],
+    "price": 1,
+    "maxUses": 4
+  },
+  {
+    "level": 2,
+    "type": "buy",
+    "item": "minecraft:rotten_flesh",
+    "amount": [56, 64],
+    "price": 1,
+    "maxUses": 2
+  },
+  {
+    "level": 2,
+    "type": "buy",
+    "item": "minecraft:fermented_spider_eye",
+    "amount": [24, 36],
+    "price": 1,
+    "maxUses": 4
+  },
+  {
+    "level": 2,
+    "type": "buy",
+    "item": "minecraft:iron_ingot",
+    "amount": [42, 52],
+    "price": 1,
+    "maxUses": 4
+  },
+  {
+    "level": 4,
+    "type": "buy",
+    "item": "minecraft:zombie_head",
+    "amount": 1,
+    "price": 1,
+    "maxUses": 1
+  },
+
+  {
+    "comment": "============================== Compat below =============================="
+  },
+
+  {
+    "level": 3,
+    "type": "buy",
+    "item": "grimoireofgaia:rotten_heart",
+    "amount": [3, 5],
+    "price": 1,
+    "maxUses": 2
+  },
+  {
+    "level": 5,
+    "type": "sell",
+    "item": "twilightforest:zombie_scepter",
+    "amount": 1,
+    "price": [32, 46],
+    "maxUses": 1,
+    "weight": 0.5
+  }
+]

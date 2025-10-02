@@ -1,0 +1,46 @@
+[
+  {
+    "level": 4,
+    "type": "sell",
+    "item": "hmag:exp_berry",
+    "amount": [2, 3],
+    "price": 1,
+    "maxUses": 4
+  },
+  {
+    "level": 4,
+    "type": "sell",
+    "item": "hmag:randomberry",
+    "amount": [2, 3],
+    "price": 1,
+    "maxUses": 4
+  },
+  {
+    "level": 4,
+    "type": "sell",
+    "item": "hmag:cureberry",
+    "amount": [2, 3],
+    "price": 1,
+    "maxUses": 4
+  },
+  {
+    "level": 4,
+    "type": "sell",
+    "item": "hmag:mysterious_petal",
+    "amount": 1,
+    "price": 1,
+    "maxUses": 4
+  },
+  {
+    "comment": "============================== Compat below =============================="
+  },
+
+  {
+    "level": 2,
+    "type": "buy",
+    "item": "twilightforest:torchberries",
+    "amount": [32, 48],
+    "price": 1,
+    "maxUses": 2
+  }
+]

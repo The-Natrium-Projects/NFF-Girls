@@ -1,0 +1,213 @@
+[
+  {
+    "level": 1,
+    "type": "buy",
+    "item": "minecraft:feather",
+    "amount": [56, 64],
+    "price": 1,
+    "maxUses": 4
+  },
+  {
+    "level": 1,
+    "type": "buy",
+    "item": "minecraft:string",
+    "amount": [56, 64],
+    "price": 1,
+    "maxUses": 4
+  },
+  {
+    "level": 1,
+    "type": "buy",
+    "item": "minecraft:paper",
+    "amount": [56, 64],
+    "price": 1,
+    "maxUses": 4
+  },
+  
+  {
+    "level": 2,
+    "type": "buy",
+    "item": ["minecraft:white_wool", "minecraft:gray_wool", "minecraft:light_gray_wool", "minecraft:black_wool",
+      "minecraft:red_wool", "minecraft:green_wool", "minecraft:blue_wool", "minecraft:yellow_wool"],
+    "amount": [32, 42],
+    "price": 1,
+    "maxUses": 4
+  },
+  {
+    "level": 2,
+    "type": "buy",
+    "item": ["minecraft:cyan_wool", "minecraft:purple_wool", "minecraft:light_blue_wool", "minecraft:orange_wool",
+      "minecraft:magenta_wool", "minecraft:lime_wool", "minecraft:pink_wool", "minecraft:brown_wool"],
+    "amount": [32, 42],
+    "price": 1,
+    "maxUses": 4
+  },
+  {
+    "level": 2,
+    "type": "buy",
+    "item": "minecraft:amethyst_shard",
+    "amount": [32, 42],
+    "price": 1,
+    "maxUses": 4
+  },
+  {
+    "level": 2,
+    "type": "buy",
+    "item": "hmag:soul_powder",
+    "amount": [24, 32],
+    "price": 1,
+    "maxUses": 4
+  },
+  {
+    "level": 2,
+    "type": "sell",
+    "item": "minecraft:phantom_membrane",
+    "amount": [1, 2],
+    "price": 1,
+    "maxUses": 2
+  },
+  
+  {
+    "level": 3,
+    "type": "buy",
+    "item": "minecraft:cake",
+    "amount": 1,
+    "price": 1,
+    "maxUses": 1
+  },
+  {
+    "level": 3,
+    "type": "buy",
+    "item": "hmag:honeyed_apple",
+    "amount": [6, 8],
+    "price": 1,
+    "maxUses": 2
+  },
+  {
+    "level": 3,
+    "type": "buy",
+    "item": "hmag:honeyed_lemon",
+    "amount": [4, 6],
+    "price": 1,
+    "maxUses": 2
+  },
+  {
+    "level": 3,
+    "type": "sell",
+    "item": "nffgirls:soul_cloth",
+    "amount": 1,
+    "price": 1,
+    "maxUses": 2
+  },
+  
+  {
+    "level": 4,
+    "type": "buy",
+    "item": "minecraft:written_book",
+    "amount": 1,
+    "price": 1,
+    "maxUses": 1
+  },
+  {
+    "level": 4,
+    "type": "sell",
+    "item": "hmag:repulsion_gadget",
+    "amount": 2,
+    "price": 1,
+    "maxUses": 4
+  },
+  {
+    "level": 4,
+    "type": "sell",
+    "item": "hmag:purification_cloth",
+    "amount": 2,
+    "price": 1,
+    "maxUses": 2
+  },
+  {
+    "level": 5,
+    "type": "registry",
+    "key": "nffgirls:sells_fortune_crystal",
+    "weight": 0.3
+  },
+  {
+    "level": 5,
+    "type": "registry",
+    "key": "nffgirls:sells_fortune_crystal_plus",
+    "weight": 0.1
+  },
+  {
+    "level": 5,
+    "type": "enchantmentBook",
+    "enchantment": {
+		"key": "minecraft:mending",
+		"level": 1
+		},
+    "price": [24, 36],
+    "maxUses": 2
+  },
+
+  {
+    "comment": "============================== Compat below =============================="
+  },
+
+  {
+    "level": 2,
+    "type": "buy",
+    "item": "alexsmobs:fedora",
+    "amount": 1,
+    "price": [2, 4],
+    "maxUses": 1
+  },
+  
+  {
+    "level": 3,
+    "type": "buy",
+    "item": "grimoireofgaia:honeydew",
+    "amount": [6, 8],
+    "price": 1,
+    "maxUses": 2
+  },
+  
+  {
+    "level": 4,
+    "type": "buy",
+    "item": "twilightforest:magic_map_focus",
+    "amount": [4, 6],
+    "price": 1,
+    "maxUses": 1
+  },
+  {
+    "level": 4,
+    "type": "buy",
+    "item": "iceandfire:pixie_dust",
+    "amount": [4, 6],
+    "price": 1,
+    "maxUses": 2
+  },
+  {
+    "level": 4,
+    "type": "sell",
+    "item": "grimoireofgaia:book_of_memory",
+    "amount": 1,
+    "price": [12, 16],
+    "maxUses": 2
+  },
+  
+  {
+    "level": 5,
+    "type": "sell",
+    "item": "twilightforest:peacock_feather_fan",
+    "amount": 1,
+    "price": [32, 40],
+    "maxUses": 1
+  },
+  {
+    "level": 5,
+    "type": "sell",
+    "item": "iceandfire:pixie_wings",
+    "amount": 1,
+    "price": [32, 48],
+    "maxUses": 1
+  }
+]

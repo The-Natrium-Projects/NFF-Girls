@@ -1,0 +1,200 @@
+[
+  {
+    "level": 1,
+    "type": "buy",
+    "item": "minecraft:porkchop",
+    "amount": [48, 56],
+    "price": 1,
+    "maxUses": 1
+  },
+  {
+    "level": 1,
+    "type": "buy",
+    "item": "minecraft:mutton",
+    "amount": [48, 56],
+    "price": 1,
+    "maxUses": 4
+  },
+  {
+    "level": 1,
+    "type": "buy",
+    "item": "minecraft:beef",
+    "amount": [48, 56],
+    "price": 1,
+    "maxUses": 4
+  },
+  
+  {
+    "level": 2,
+    "type": "buy",
+    "item": "minecraft:leather",
+    "amount": [42, 48],
+    "price": 1,
+    "maxUses": 4
+  },
+  {
+    "level": 2,
+    "type": "buy",
+    "item": "minecraft:bone",
+    "amount": [56, 64],
+    "price": 1,
+    "maxUses": 4
+  },
+  {
+    "level": 2,
+    "type": "sell",
+    "item": "hmag:sharp_fang",
+    "amount": 1,
+    "price": 1,
+    "maxUses": 4
+  },
+  {
+    "level": 3,
+    "type": "sell",
+    "item": "hmag:orge_horn",
+    "amount": 1,
+    "price": 1,
+    "maxUses": 4
+  },
+  
+  {
+    "level": 4,
+    "type": "sell",
+    "item": "hmag:reinforcing_chain",
+    "amount": 2,
+    "price": 1,
+    "maxUses": 4
+  },
+  {
+    "level": 4,
+    "type": "sell",
+    "item": "hmag:repulsion_gadget",
+    "amount": 2,
+    "price": 1,
+    "maxUses": 4
+  },
+
+  {
+    "level": 5,
+    "type": "sell",
+    "item": "hmag:multiplex_reinforcing_chain",
+    "amount": 1,
+    "price": [5, 7],
+    "maxUses": 1
+  },
+  {
+    "level": 5,
+    "type": "sell",
+    "item": "hmag:greedy_crystal",
+    "amount": 1,
+    "price": [36, 48],
+    "maxUses": 2
+  },
+  {
+    "level": 5,
+    "type": "sell",
+    "item": "hmag:greedy_crystal_plus",
+    "amount": 1,
+    "price": [64, 64],
+    "maxUses": 1,
+    "weight": 0.1
+  },
+  {
+    "level": 5,
+    "type": "enchantmentBook",
+    "enchantment": {
+		"key": "minecraft:looting",
+		"level": 3
+		},
+    "price": [12, 16],
+    "maxUses": 2
+  },
+  {
+    "level": 5,
+    "type": "enchantmentBook",
+    "enchantment": {
+		"key": "hmag:health_boost",
+		"level": 5
+		},
+    "price": [24, 32],
+    "maxUses": 1,
+    "weight": 0.5
+  },
+
+  {
+    "comment": "============================== Compat below =============================="
+  },
+
+  {
+    "level": 2,
+    "type": "buy",
+    "item": "iceandfire:dragonbone",
+    "amount": [8, 12],
+    "price": 1,
+    "maxUses": 2
+  },
+  {
+    "level": 2,
+    "type": "buy",
+    "item": "grimoireofgaia:fur",
+    "amount": [12, 16],
+    "price": 1,
+    "maxUses": 2
+  },
+  {
+    "level": 3,
+    "type": "buy",
+    "item": ["alexsmobs:serrated_shark_tooth", "alexsmobs:cachalot_whale_tooth"],
+    "amount": [4, 6],
+    "price": 1,
+    "maxUses": 2
+  },
+  {
+    "level": 3,
+    "type": "buy",
+    "item": "alexsmobs:shark_tooth",
+    "amount": [6, 8],
+    "price": 1,
+    "maxUses": 2
+  },
+  {
+    "level": 3,
+    "type": "buy",
+    "item": "iceandfire:sea_serpent_fang",
+    "amount": [6, 8],
+    "price": 1,
+    "maxUses": 2
+  },
+  {
+    "level": 4,
+    "type": "buy",
+    "item": ["iceandfire:fire_dragon_flesh", "iceandfire:ice_dragon_flesh", "iceandfire:lightning_dragon_flesh"],
+    "amount": [6, 8],
+    "price": 1,
+    "maxUses": 2
+  },
+  {
+    "level": 4,
+    "type": "buy",
+    "item": "grimoireofgaia:weapon_book_battle",
+    "amount": 1,
+    "price": [4, 6],
+    "maxUses": 1
+  },
+  {
+    "level": 4,
+    "type": "buy",
+    "item": "iceandfire:troll_tusk",
+    "amount": [2, 3],
+    "price": 1,
+    "maxUses": 2
+  },
+  {
+    "level": 5,
+    "type": "buy",
+    "item": "twilightforest:diamond_minotaur_axe",
+    "amount": 1,
+    "price": [6, 8],
+    "maxUses": 1
+  }
+]

@@ -1,0 +1,166 @@
+[
+  {
+    "level": 1,
+    "type": "buy",
+    "item": "minecraft:azalea_leaves",
+    "amount": [48, 56],
+    "price": 1,
+    "maxUses": 4
+  },
+  {
+    "level": 1,
+    "type": "buy",
+    "item": "minecraft:moss_block",
+    "amount": [56, 64],
+    "price": 1,
+    "maxUses": 4
+  },
+  {
+    "level": 1,
+    "type": "buy",
+    "item": "minecraft:azalea",
+    "amount": [36, 42],
+    "price": 1,
+    "maxUses": 4
+  },
+  {
+    "level": 1,
+    "type": "buy",
+    "item": "minecraft:small_dripleaf",
+    "amount": [24, 36],
+    "price": 1,
+    "maxUses": 4
+  },
+  {
+    "level": 2,
+    "type": "buy",
+    "item": "minecraft:flowering_azalea_leaves",
+    "amount": [36, 48],
+    "price": 1,
+    "maxUses": 4
+  },
+  {
+    "level": 2,
+    "type": "buy",
+    "item": "minecraft:glow_berries",
+    "amount": [24, 32],
+    "price": 1,
+    "maxUses": 4
+  },
+  {
+    "level": 2,
+    "type": "buy",
+    "item": "minecraft:flowering_azalea",
+    "amount": [24, 36],
+    "price": 1,
+    "maxUses": 4
+  },
+  {
+    "level": 2,
+    "type": "buy",
+    "item": "minecraft:big_dripleaf",
+    "amount": [24, 36],
+    "price": 1,
+    "maxUses": 4
+  },
+  {
+    "level": 3,
+    "type": "buy",
+    "item": "minecraft:hanging_roots",
+    "amount": [32, 48],
+    "price": 1,
+    "maxUses": 4
+  },
+  {
+    "level": 3,
+    "type": "sell",
+    "item": "minecraft:pointed_dripstone",
+    "amount": [4, 6],
+    "price": 1,
+    "maxUses": 2
+  },
+  {
+    "level": 5,
+    "type": "sell",
+    "item": "minecraft:torch_flower",
+    "amount": 1,
+    "price": [2, 3],
+    "maxUses": 1
+  },
+  {
+    "level": 5,
+    "type": "enchantmentBook",
+    "enchantment": {
+		"key": "minecraft:unbreaking",
+		"level": 3
+		},
+    "price": [6, 8],
+    "maxUses": 2
+  },
+  {
+    "level": 5,
+    "type": "enchantmentBook",
+    "enchantment": {
+		"key": "hmag:health_boost",
+		"level": 5
+		},
+    "price": [24, 32],
+    "maxUses": 1,
+    "weight": 0.5
+  },
+
+  {
+    "comment": "============================== Compat below =============================="
+  },
+
+  {
+    "level": 3,
+    "type": "buy",
+    "item": "grimoireofgaia:taproot",
+    "amount": [18, 26],
+    "price": 1,
+    "maxUses": 4
+  },
+  {
+    "level": 3,
+    "type": "buy",
+    "item": "twilightforest:liveroot",
+    "amount": [28, 36],
+    "price": 1,
+    "maxUses": 4
+  },
+  {
+    "level": 3,
+    "type": "buy",
+    "item": "twilightforest:steeleaf_ingot",
+    "amount": [10, 12],
+    "price": 1,
+    "maxUses": 2
+  },
+
+  {
+    "level": 4,
+    "type": "buy",
+    "item": "grimoireofgaia:mandrake",
+    "amount": 1,
+    "price": [2, 3],
+    "maxUses": 1
+  },
+  
+  {
+    "level": 5,
+    "type": "buy",
+    "item": "grimoireofgaia:deco_mandragora_pot",
+    "amount": 1,
+    "price": [4, 6],
+    "maxUses": 1
+  },
+  {
+    "level": 5,
+    "type": "buy",
+    "item": "alexsmobs:potted_flutter",
+    "amount": 1,
+    "price": [3, 5],
+    "maxUses": 2
+  }
+]
