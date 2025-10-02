@@ -17,8 +17,7 @@ import net.minecraft.world.level.Level;
 import net.sodiumzh.nff.girls.NFFGirls;
 import net.sodiumzh.nff.girls.entity.INFFGirlsTamed;
 import net.sodiumzh.nff.girls.entity.ai.goal.NFFGirlsFollowOwnerGoal;
-import net.sodiumzh.nff.girls.entity.ai.goal.target.NFFGirlsNearestHostileToOwnerTargetGoal;
-import net.sodiumzh.nff.girls.entity.ai.goal.target.NFFGirlsNearestHostileToSelfTargetGoal;
+import net.sodiumzh.nff.girls.entity.ai.goal.target.*;
 import net.sodiumzh.nff.girls.entity.projectile.NFFHmagAlrauneSeedEntity;
 import net.sodiumzh.nff.girls.inventory.NFFGirlsHmagThreeBaublesInventoryMenu;
 import net.sodiumzh.nff.girls.registry.NFFGirlsHealingItems;
@@ -66,11 +65,14 @@ public class HmagAlrauneEntity extends AlrauneEntity implements INFFGirlsTamed {
 		goalSelector.addGoal(6, new NFFWaterAvoidingRandomStrollGoal(this, 1.0d));
 		goalSelector.addGoal(7, new LookAtPlayerGoal(this, Player.class, 8.0F));
 		goalSelector.addGoal(8, new RandomLookAroundGoal(this));
-		targetSelector.addGoal(1, new NFFOwnerHurtByTargetGoal(this));
+		targetSelector.addGoal(1, new NFFGirlsOwnerHurtByTargetGoal(this));
 		targetSelector.addGoal(2, new NFFHurtByTargetGoal(this));
-		targetSelector.addGoal(3, new NFFOwnerHurtTargetGoal(this));
+		targetSelector.addGoal(3, new NFFGirlsOwnerHurtTargetGoal(this));
 		targetSelector.addGoal(5, new NFFGirlsNearestHostileToSelfTargetGoal(this));
 		targetSelector.addGoal(6, new NFFGirlsNearestHostileToOwnerTargetGoal(this));
+		targetSelector.addGoal(7, new NFFGirlsNearestPotentiallyHostileToSelfTargetGoal(this));
+		targetSelector.addGoal(8, new NFFGirlsNearestPotentiallyHostileToOwnerTargetGoal(this));
+		targetSelector.addGoal(9, new NFFGirlsAttackingStrategyTargetGoal(this));
 	}
 	
 	@Override
@@ -118,11 +120,11 @@ public class HmagAlrauneEntity extends AlrauneEntity implements INFFGirlsTamed {
 
 	// Map items that can heal the mob and healing values here.
 	// Leave it empty if you don't need healing features.
-	@Override
+	/*@Override
 	public MobApplicableItemTable getHealingItems()
 	{
 		return NFFGirlsHealingItems.PLANT.get();
-	}
+	}*/
 	
 	/*@Override
 	public InteractionResult mobInteract(Player player, InteractionHand hand)

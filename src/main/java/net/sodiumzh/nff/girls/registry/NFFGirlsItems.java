@@ -2,8 +2,6 @@ package net.sodiumzh.nff.girls.registry;
 
 import com.github.mechalopa.hmag.world.item.ModSwordItem;
 import com.mojang.datafixers.util.Either;
-import net.minecraft.ChatFormatting;
-import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.item.*;
@@ -18,7 +16,6 @@ import net.sodiumzh.nff.services.item.MobCatcherItem;
 import net.sodiumzh.nff.services.item.NFFMobRespawnerItem;
 import net.sodiumzh.nfu.compat.ModDependencyFallbackItem;
 import net.sodiumzh.nfu.util.NFUCompatStatics;
-import net.sodiumzh.nfu.util.NFUInfoStatics;
 
 import java.util.HashSet;
 import java.util.function.Supplier;
@@ -107,7 +104,9 @@ public class NFFGirlsItems {
 	public static final RegistryObject<TaoistTalismanItem> TAOIST_TALISMAN = register("taoist_talisman", () -> new TaoistTalismanItem(new Item.Properties().tab(TAB)));
 	public static final RegistryObject<TradeIntroductionLetterItem> TRADE_INTRODUCTION_LETTER = register("trade_introduction_letter",
 			() -> new TradeIntroductionLetterItem(new Item.Properties().stacksTo(1).rarity(Rarity.UNCOMMON)));
-	
+	public static final RegistryObject<AttackingStrategyListItem> ATTACKING_STRATEGY_LIST = register("attacking_strategy_list", () ->
+		new AttackingStrategyListItem(new Item.Properties()).foilCondition(stack -> !AttackingStrategyListItem.getStrategy(stack).isEmpty()).cast());
+
 	// Misc
 	public static final RegistryObject<NFFMobRespawnerItem> MOB_RESPAWNER = register("mob_respawner", () -> new NFFGirlsRespawnerItem(new Item.Properties()).setRetainBefriendedMobInventory(false)
 		.setRetainBefriendedMobInventory(false).noDefaultInstance(false).cast());

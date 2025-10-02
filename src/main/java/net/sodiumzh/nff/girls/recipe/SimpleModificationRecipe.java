@@ -13,8 +13,9 @@ import java.util.Optional;
 /**
  * A template for crafting recipes that modifies a given item with a modifier item.
  * For example, repairing an equipment item with an ingredient item.
+ * <p>After crafting, the modifier item will be consumed, the result item will be produced,
+ * and the subject item will become another item (i.e. modified) and be left as the remaining.
  */
-
 public abstract class SimpleModificationRecipe extends CustomRecipe
 {
 
@@ -45,7 +46,7 @@ public abstract class SimpleModificationRecipe extends CustomRecipe
 	
 	/**
 	 * If true, it will check if an item stack is ambiguous i.e. can be both subject and modifier, and exclude the case. 
-	 * Otherwise the role will be always regarded as the subject.
+	 * Otherwise, the role will always be regarded as the subject.
 	 */
 	public boolean checkAmbiguity()
 	{

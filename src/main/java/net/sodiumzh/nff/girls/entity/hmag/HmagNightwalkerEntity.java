@@ -33,6 +33,8 @@ import net.sodiumzh.nff.girls.entity.ai.goal.NFFGirlsRangedAttackGoal;
 import net.sodiumzh.nff.girls.entity.ai.goal.target.NFFGirlsNearestHostileToOwnerTargetGoal;
 import net.sodiumzh.nff.girls.entity.ai.goal.target.NFFGirlsNearestHostileToSelfTargetGoal;
 import net.sodiumzh.nff.girls.inventory.NFFGirlsNightwalkerInventoryMenu;
+import net.sodiumzh.nff.girls.entity.ai.goal.target.*;
+import net.sodiumzh.nff.girls.inventory.NFFGirlsHmagNightwalkerInventoryMenu;
 import net.sodiumzh.nff.girls.registry.NFFGirlsBlocks;
 import net.sodiumzh.nff.girls.registry.NFFGirlsConfigs;
 import net.sodiumzh.nff.girls.registry.NFFGirlsHealingItems;
@@ -86,11 +88,14 @@ public class HmagNightwalkerEntity extends NightwalkerEntity implements INFFGirl
 		goalSelector.addGoal(6, new NFFWaterAvoidingRandomStrollGoal(this, 1.0d));
 		goalSelector.addGoal(7, new LookAtPlayerGoal(this, Player.class, 8.0F));
 		goalSelector.addGoal(8, new RandomLookAroundGoal(this));
-		targetSelector.addGoal(1, new NFFOwnerHurtByTargetGoal(this));
+		targetSelector.addGoal(1, new NFFGirlsOwnerHurtByTargetGoal(this));
 		targetSelector.addGoal(2, new NFFHurtByTargetGoal(this));
-		targetSelector.addGoal(3, new NFFOwnerHurtTargetGoal(this));
+		targetSelector.addGoal(3, new NFFGirlsOwnerHurtTargetGoal(this));
 		targetSelector.addGoal(5, new NFFGirlsNearestHostileToSelfTargetGoal(this));
 		targetSelector.addGoal(6, new NFFGirlsNearestHostileToOwnerTargetGoal(this));
+		targetSelector.addGoal(7, new NFFGirlsNearestPotentiallyHostileToSelfTargetGoal(this));
+		targetSelector.addGoal(8, new NFFGirlsNearestPotentiallyHostileToOwnerTargetGoal(this));
+		targetSelector.addGoal(9, new NFFGirlsAttackingStrategyTargetGoal(this));
 	}
 	
 	
@@ -135,12 +140,12 @@ public class HmagNightwalkerEntity extends NightwalkerEntity implements INFFGirl
 
 	// Map items that can heal the mob and healing values here.
 	// Leave it empty if you don't need healing features.
-	@Override
+	/*@Override
 	public MobApplicableItemTable getHealingItems()
 	{
 		return NFFGirlsHealingItems.CLAY_DOLL.get();
 	}
-
+*/
 	/*@Override
 	public InteractionResult mobInteract(Player player, InteractionHand hand)
 	{

@@ -8,17 +8,12 @@ import java.util.function.Predicate;
 public class NFFGirlsNearestHostileToSelfTargetGoal extends NFFNearestUnfriendlyMobTargetGoal
 {
 
-	public NFFGirlsNearestHostileToSelfTargetGoal(INFFGirlsTamed pMob, Predicate<Mob> condition)
+	public NFFGirlsNearestHostileToSelfTargetGoal(INFFGirlsTamed pMob)
 	{		
 		super(pMob, true, true);
-		stateConditions(bm -> bm instanceof INFFGirlsTamed dbm && dbm.shouldAttackMobsHostileToSelf());
-		//targetOfTargetCondition(living -> living instanceof Mob && ((Mob)living).getTarget() == pMob.asMob());
+		stateConditions(bm -> INFFGirlsTamed.get(bm).filter(INFFGirlsTamed::shouldAttackMobsHostileToSelf).isPresent());
+		targetOfTargetConditions(living -> living != null && living.equals(pMob.asMob()));
 		allowAllStatesExceptWait();
-	}
-	
-	public NFFGirlsNearestHostileToSelfTargetGoal(INFFGirlsTamed pMob)
-	{
-		this(pMob, l -> true);
 	}
 
 }

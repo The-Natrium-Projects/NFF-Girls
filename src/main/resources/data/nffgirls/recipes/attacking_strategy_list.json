@@ -1,0 +1,22 @@
+{
+	"type": "minecraft:crafting_shapeless",
+	"ingredients": [
+		{
+			"item": "minecraft:paper"
+		},
+		{
+			"item": "minecraft:feather"
+		},
+		{
+			"tag": "forge:ingots/iron"
+		},
+		{
+			"item": "hmag:evil_crystal_fragment"
+		}
+
+	],
+	"result": {
+		"item": "nffgirls:attacking_strategy_list",
+		"count": 1
+	}
+}
