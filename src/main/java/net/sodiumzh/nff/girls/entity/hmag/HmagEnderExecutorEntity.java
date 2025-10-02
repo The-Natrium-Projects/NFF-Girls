@@ -40,10 +40,7 @@ import net.sodiumzh.nff.girls.block.EnderberryBushBlock;
 import net.sodiumzh.nff.girls.entity.ICarriesBlock;
 import net.sodiumzh.nff.girls.entity.INFFGirlsTamed;
 import net.sodiumzh.nff.girls.entity.ai.goal.NFFGirlsFollowOwnerGoal;
-import net.sodiumzh.nff.girls.entity.ai.goal.target.NFFGirlsNearestHostileToOwnerTargetGoal;
-import net.sodiumzh.nff.girls.entity.ai.goal.target.NFFGirlsNearestHostileToSelfTargetGoal;
-import net.sodiumzh.nff.girls.entity.ai.goal.target.NFFGirlsOwnerHurtByTargetGoal;
-import net.sodiumzh.nff.girls.entity.ai.goal.target.NFFGirlsOwnerHurtTargetGoal;
+import net.sodiumzh.nff.girls.entity.ai.goal.target.*;
 import net.sodiumzh.nff.girls.inventory.NFFGirlsHmagEnderExecutorInventory;
 import net.sodiumzh.nff.girls.inventory.NFFGirlsHmagEnderExecutorInventoryMenu;
 import net.sodiumzh.nff.girls.item.bauble.INFFGirlsBauble;
@@ -117,12 +114,15 @@ public class HmagEnderExecutorEntity extends NFFTamedEnderManPreset implements I
 	      this.goalSelector.addGoal(8, new RandomLookAroundGoal(this));
 	      this.goalSelector.addGoal(10, new NFFTamedEnderManPreset.LeaveBlockGoal(this));
 	      this.goalSelector.addGoal(11, new NFFTamedEnderManPreset.TakeBlockGoal(this));
-	      this.targetSelector.addGoal(1, new NFFGirlsOwnerHurtByTargetGoal(this));
-	      this.targetSelector.addGoal(2, new NFFNearestAttackableTargetGoal<Endermite>(this, Endermite.class, true, false).allowAllStates().asGoal());
-	      this.targetSelector.addGoal(3, new NFFHurtByTargetGoal(this));
-	      this.targetSelector.addGoal(4, new NFFGirlsOwnerHurtTargetGoal(this));
-	      targetSelector.addGoal(5, new NFFGirlsNearestHostileToSelfTargetGoal(this));
-	      targetSelector.addGoal(6, new NFFGirlsNearestHostileToOwnerTargetGoal(this));
+	      this.targetSelector.addGoal(2, new NFFNearestAttackableTargetGoal<>(this, Endermite.class, true, false).allowAllStates().asGoal());
+		targetSelector.addGoal(1, new NFFGirlsOwnerHurtByTargetGoal(this));
+		targetSelector.addGoal(2, new NFFHurtByTargetGoal(this));
+		targetSelector.addGoal(3, new NFFGirlsOwnerHurtTargetGoal(this));
+		targetSelector.addGoal(5, new NFFGirlsNearestHostileToSelfTargetGoal(this));
+		targetSelector.addGoal(6, new NFFGirlsNearestHostileToOwnerTargetGoal(this));
+		targetSelector.addGoal(7, new NFFGirlsNearestPotentiallyHostileToSelfTargetGoal(this));
+		targetSelector.addGoal(8, new NFFGirlsNearestPotentiallyHostileToOwnerTargetGoal(this));
+		targetSelector.addGoal(9, new NFFGirlsAttackingStrategyTargetGoal(this));
 
 	}
 
@@ -135,11 +135,11 @@ public class HmagEnderExecutorEntity extends NFFTamedEnderManPreset implements I
 
 	// Interaction
 	
-	@Override
+	/*@Override
 	public MobApplicableItemTable getHealingItems()
 	{
 		return NFFGirlsHealingItems.ENDERMAN.get();
-	}
+	}*/
 	
 	/*@Override
 	public InteractionResult mobInteract(Player player, InteractionHand hand)

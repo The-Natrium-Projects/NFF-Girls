@@ -93,7 +93,7 @@ public class HmagNecroticReaperTamingProcess extends NFFTamingProcess
 
 	@Override
 	public MobAngerRules getAngerRules() {
-		return NFFGirlsAngerRules.DEFAULT.get();
+		return MobAngerRules.NO_ANGER.get();
 	}
 
 	/**

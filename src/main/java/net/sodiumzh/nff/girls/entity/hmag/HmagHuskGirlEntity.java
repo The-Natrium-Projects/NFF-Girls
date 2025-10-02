@@ -15,10 +15,7 @@ import net.minecraft.world.level.Level;
 import net.sodiumzh.nff.girls.NFFGirls;
 import net.sodiumzh.nff.girls.entity.INFFGirlsTamed;
 import net.sodiumzh.nff.girls.entity.ai.goal.NFFGirlsFollowOwnerGoal;
-import net.sodiumzh.nff.girls.entity.ai.goal.target.NFFGirlsNearestHostileToOwnerTargetGoal;
-import net.sodiumzh.nff.girls.entity.ai.goal.target.NFFGirlsNearestHostileToSelfTargetGoal;
-import net.sodiumzh.nff.girls.entity.ai.goal.target.NFFGirlsOwnerHurtByTargetGoal;
-import net.sodiumzh.nff.girls.entity.ai.goal.target.NFFGirlsOwnerHurtTargetGoal;
+import net.sodiumzh.nff.girls.entity.ai.goal.target.*;
 import net.sodiumzh.nff.girls.inventory.NFFGirlsEquipmentTwoBaublesInventoryMenu;
 import net.sodiumzh.nff.girls.registry.NFFGirlsConfigs;
 import net.sodiumzh.nff.girls.registry.NFFGirlsEntityTypes;
@@ -70,16 +67,19 @@ public class HmagHuskGirlEntity extends HuskGirlEntity implements INFFGirlsTamed
 		targetSelector.addGoal(3, new NFFGirlsOwnerHurtTargetGoal(this));
 		targetSelector.addGoal(5, new NFFGirlsNearestHostileToSelfTargetGoal(this));
 		targetSelector.addGoal(6, new NFFGirlsNearestHostileToOwnerTargetGoal(this));
+		targetSelector.addGoal(7, new NFFGirlsNearestPotentiallyHostileToSelfTargetGoal(this));
+		targetSelector.addGoal(8, new NFFGirlsNearestPotentiallyHostileToOwnerTargetGoal(this));
+		targetSelector.addGoal(9, new NFFGirlsAttackingStrategyTargetGoal(this));
 
 	}
 
 	/* Interaction */
 
-	@Override
+	/*@Override
 	public MobApplicableItemTable getHealingItems()
 	{
 		return NFFGirlsHealingItems.UNDEAD.get();
-	}
+	}*/
 	
 	/*@Override
 	public InteractionResult mobInteract(Player player, InteractionHand hand)

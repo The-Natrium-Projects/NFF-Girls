@@ -1,12 +1,11 @@
 package net.sodiumzh.nff.girls.entity;
 
 import com.mojang.logging.LogUtils;
-import it.unimi.dsi.fastutil.ints.Int2ObjectMap;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
@@ -20,7 +19,7 @@ import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.eventbus.api.Event;
 import net.minecraftforge.fml.LogicalSide;
 import net.minecraftforge.network.PacketDistributor;
-import net.sodiumzh.nff.girls.NFFGirls;
+import net.sodiumzh.nff.girls.entity.ai.NFFGirlsAttackingStrategy;
 import net.sodiumzh.nff.girls.entity.capability.CNFFGirlsFavorabilityHandler;
 import net.sodiumzh.nff.girls.entity.capability.CNFFGirlsLevelHandler;
 import net.sodiumzh.nff.girls.entity.vanillatrade.CNFFGirlsTradeHandler;
@@ -29,8 +28,8 @@ import net.sodiumzh.nff.girls.item.bauble.INFFGirlsBauble;
 import net.sodiumzh.nff.girls.network.ClientboundNFFGirlsMobGeneralSyncPacket;
 import net.sodiumzh.nff.girls.network.NFFGirlsChannels;
 import net.sodiumzh.nff.girls.registry.NFFGirlsCapabilities;
+import net.sodiumzh.nff.girls.registry.NFFGirlsHealingItemMappings;
 import net.sodiumzh.nff.girls.registry.NFFGirlsItems;
-import net.sodiumzh.nff.girls.item.bauble.NFFGirlsBaubleStatics;
 import net.sodiumzh.nff.services.entity.capability.wrapper.IAttributeMonitor;
 import net.sodiumzh.nff.services.entity.taming.INFFTamed;
 import net.sodiumzh.nff.services.entity.taming.NFFTamedStatics;
@@ -347,7 +346,9 @@ public interface INFFGirlsTamed extends INFFTamed, IAttributeMonitor, IItemStack
 	}
 
 	@Override
-	public MobApplicableItemTable getHealingItems();
+	public default MobApplicableItemTable getHealingItems() {
+		return NFFGirlsHealingItemMappings.get(this.asMob().getType()).orElse(MobApplicableItemTable.EMPTY);
+	}
 
 	// === IItemStackMonitor interface
 	
@@ -405,7 +406,7 @@ public interface INFFGirlsTamed extends INFFTamed, IAttributeMonitor, IItemStack
 	{
 		return NFUBaubleAPI.getAllSlotItems(this.asMob()).values().stream()
 			.map(i -> INFFGirlsBauble.asBauble(i.getItem())).reduce(new ArrayList<>(), (a, b) -> { a.addAll(b); return a;})
-			.stream().anyMatch(b -> b.hasBaubleTag(INFFGirlsBauble.TAG_ACTIVE_ATTACK_1) || b.hasBaubleTag(INFFGirlsBauble.TAG_ACTIVE_ATTACK_2));
+			.stream().anyMatch(b -> b.hasBaubleTag(INFFGirlsBauble.TAG_ACTIVE_ATTACK));
 	}
 	
 	/**
@@ -415,7 +416,7 @@ public interface INFFGirlsTamed extends INFFTamed, IAttributeMonitor, IItemStack
 	{
 		return NFUBaubleAPI.getAllSlotItems(this.asMob()).values().stream()
 			.map(i -> INFFGirlsBauble.asBauble(i.getItem())).reduce(new ArrayList<>(), (a, b) -> { a.addAll(b); return a;})
-			.stream().anyMatch(b -> b.hasBaubleTag(INFFGirlsBauble.TAG_ACTIVE_ATTACK_2));
+			.stream().anyMatch(b -> b.hasBaubleTag(INFFGirlsBauble.TAG_ACTIVE_ATTACK));
 	}
 	
 	// ===== Network =========== //
@@ -445,7 +446,32 @@ public interface INFFGirlsTamed extends INFFTamed, IAttributeMonitor, IItemStack
 		return map;
 	}
 
-	// CLIENT ONLY
+	// ATTACKING STRATEGY RELATED //
+
+	public default NFFGirlsAttackingStrategy getAttackingStrategy() {
+		return NFFGirlsAttackingStrategy.fromNBT(this.getData().getAdditionalNBT().getCompound("attackingStrategy"));
+	}
+
+	public default void setAttackingStrategy(NFFGirlsAttackingStrategy strategy) {
+		this.getData().getAdditionalNBT().put("attackingStrategy", strategy.toNBT());
+	}
+
+	/**
+	 * The mob will actively attack the listed mobs ignoring the attacking strategy.
+	 */
+	public default EntityType<?>[] activelyAttacksIgnoringStrategy() {
+		return new EntityType[]{};
+	}
+
+	/**
+	 * The mob will not attack the listed mobs ignoring the attacking strategy.
+	 */
+	public default EntityType<?>[] notAttacksIgnoringStrategy() {
+		return new EntityType[]{this.asMob().getType()};
+	}
+
+	// CLIENT ONLY //
+
 	public default boolean shouldSitOnWaiting() {
 		return true;
 	}

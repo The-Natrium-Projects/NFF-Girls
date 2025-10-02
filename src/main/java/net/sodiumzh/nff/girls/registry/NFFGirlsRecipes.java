@@ -6,6 +6,7 @@ import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 import net.sodiumzh.nff.girls.NFFGirls;
+import net.sodiumzh.nff.girls.recipe.AttackingStrategyListDuplicationRecipe;
 import net.sodiumzh.nff.girls.recipe.MagicalGelEnchantRecipe;
 import net.sodiumzh.nff.girls.recipe.MagicalGelSeperateRecipe;
 import net.sodiumzh.nff.girls.recipe.MagicalGelStainRecipe;
@@ -17,4 +18,5 @@ public class NFFGirlsRecipes
 	public static final RegistryObject<RecipeSerializer<?>> MAGICAL_GEL_STAIN = RECIPES.register("magical_gel_stain", () -> new SimpleCraftingRecipeSerializer<>(MagicalGelStainRecipe::new));
 	public static final RegistryObject<RecipeSerializer<?>> MAGICAL_GEL_SEPARATE = RECIPES.register("magical_gel_separate", () -> new SimpleCraftingRecipeSerializer<>(MagicalGelSeperateRecipe::new));
 	public static final RegistryObject<RecipeSerializer<?>> MAGICAL_GEL_ENCHANT = RECIPES.register("magical_gel_enchant", () -> new SimpleCraftingRecipeSerializer<>(MagicalGelEnchantRecipe::new));
+	public static final RegistryObject<RecipeSerializer<?>> ATTACKING_STRATEGY_LIST_DUPLICATE = RECIPES.register("attacking_strategy_list_duplicate", () -> new SimpleCraftingRecipeSerializer<>(AttackingStrategyListDuplicationRecipe::new));
 }

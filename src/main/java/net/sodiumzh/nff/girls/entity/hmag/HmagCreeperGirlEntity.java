@@ -34,8 +34,7 @@ import net.sodiumzh.nff.girls.entity.INFFGirlsTamed;
 import net.sodiumzh.nff.girls.entity.ai.goal.NFFGirlsHmagCreeperFollowOwnerGoal;
 import net.sodiumzh.nff.girls.entity.ai.goal.NFFGirlsHmagCreeperGirlExplosionAttackGoal;
 import net.sodiumzh.nff.girls.entity.ai.goal.NFFGirlsHmagCreeperGirlMeleeAttackGoal;
-import net.sodiumzh.nff.girls.entity.ai.goal.target.NFFGirlsOwnerHurtByTargetGoal;
-import net.sodiumzh.nff.girls.entity.ai.goal.target.NFFGirlsOwnerHurtTargetGoal;
+import net.sodiumzh.nff.girls.entity.ai.goal.target.*;
 import net.sodiumzh.nff.girls.inventory.NFFGirlsCreeperInventoryMenu;
 import net.sodiumzh.nff.girls.registry.NFFGirlsHealingItems;
 import net.sodiumzh.nff.girls.sound.NFFGirlsSoundPresets;
@@ -94,9 +93,14 @@ public class HmagCreeperGirlEntity extends NFFTamedCreeperPreset implements INFF
 		this.goalSelector.addGoal(6, new NFFWaterAvoidingRandomStrollGoal(this, 0.8D));
 		this.goalSelector.addGoal(7, new LookAtPlayerGoal(this, Player.class, 8.0F));
 		this.goalSelector.addGoal(7, new RandomLookAroundGoal(this));
-		this.targetSelector.addGoal(1, new NFFGirlsOwnerHurtByTargetGoal(this));
-		this.targetSelector.addGoal(2, new NFFHurtByTargetGoal(this));
-		this.targetSelector.addGoal(3, new NFFGirlsOwnerHurtTargetGoal(this));
+		targetSelector.addGoal(1, new NFFGirlsOwnerHurtByTargetGoal(this));
+		targetSelector.addGoal(2, new NFFHurtByTargetGoal(this));
+		targetSelector.addGoal(3, new NFFGirlsOwnerHurtTargetGoal(this));
+		targetSelector.addGoal(5, new NFFGirlsNearestHostileToSelfTargetGoal(this));
+		targetSelector.addGoal(6, new NFFGirlsNearestHostileToOwnerTargetGoal(this));
+		targetSelector.addGoal(7, new NFFGirlsNearestPotentiallyHostileToSelfTargetGoal(this));
+		targetSelector.addGoal(8, new NFFGirlsNearestPotentiallyHostileToOwnerTargetGoal(this));
+		targetSelector.addGoal(9, new NFFGirlsAttackingStrategyTargetGoal(this));
 	}
 	
 	@Override
@@ -190,11 +194,11 @@ public class HmagCreeperGirlEntity extends NFFTamedCreeperPreset implements INFF
 	
 	/* Interaction */
 	
-	@Override
+	/*@Override
 	public MobApplicableItemTable getHealingItems()
 	{
 		return NFFGirlsHealingItems.CREEPER.get();
-	}
+	}*/
 
 	@Override
 	public InteractionResult ownerInteraction(Player player, InteractionHand hand, LogicalSide side) {

@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "nffgirls:attacking_strategy_list"
+    }
+
+  ],
+  "result": {
+    "item": "nffgirls:attacking_strategy_list",
+    "count": 1
+  }
+}
