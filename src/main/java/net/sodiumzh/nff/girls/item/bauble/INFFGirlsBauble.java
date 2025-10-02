@@ -16,8 +16,7 @@ import java.util.Optional;
 public interface INFFGirlsBauble extends IBaubleRegistryEntry {
 
     public static final String TAG_ENVIRONMENT_IMMUNITY = "environment_immunity";
-    public static final String TAG_ACTIVE_ATTACK_1 = "active_attack_1";
-    public static final String TAG_ACTIVE_ATTACK_2 = "active_attack_2";
+    public static final String TAG_ACTIVE_ATTACK = "active_attack";
 
     /**
      * Get the "category key" of the bauble. E.g. For Soul Amulets of all tiers, the key
