@@ -104,7 +104,7 @@
     "item": "hmag:mysterious_petal",
     "amount": 1,
     "price": 1,
-    "maxUses": 4
+    "maxUses": 2
   },
   {
     "level": 4,
@@ -112,7 +112,7 @@
     "item": "hmag:evil_thorn",
     "amount": 2,
     "price": 1,
-    "maxUses": 4
+    "maxUses": 2
   },
   
   {

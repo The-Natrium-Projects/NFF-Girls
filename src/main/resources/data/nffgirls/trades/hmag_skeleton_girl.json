@@ -35,8 +35,8 @@
     "level": 4,
     "type": "sell",
     "item": "hmag:evil_thorn",
-    "amount": 1,
-    "price": [4, 6],
+    "amount": 2,
+    "price": 1,
     "maxUses": 4
   },
   {
