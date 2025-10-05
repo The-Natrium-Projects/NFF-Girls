@@ -74,6 +74,14 @@
     "maxUses": 2
   },
   {
+    "level": 3,
+    "type": "sell",
+    "item": "hmag:ender_plasm",
+    "amount": 1,
+    "price": 1,
+    "maxUses": 2
+  },
+  {
     "level": 4,
     "type": "buy",
     "item": "nffgirls:ender_pie",
