@@ -144,6 +144,7 @@ repositories {
     // See https://docs.gradle.org/current/userguide/declaring_repositories.html#sub:flat_dir_resolver
     flatDir {
         dir 'libs'
+        dir '../NFU-Library/build/libs'
         dir '../NFF-Services/build/libs'
     }
     	
@@ -182,6 +183,7 @@ dependencies {
     compileOnly fg.deobf("mezz.jei:jei-${minecraft_version}-common-api:${jei_version}")
     compileOnly fg.deobf("mezz.jei:jei-${minecraft_version}-forge-api:${jei_version}")
     runtimeOnly fg.deobf("mezz.jei:jei-${minecraft_version}-forge:${jei_version}")
+    implementation fg.deobf("blank:nfulib-${minecraft_version}:${nfu_version}")
 	implementation fg.deobf("blank:nffservices-${minecraft_version}:${services_version}")
     //implementation fg.deobf("blank:iconrenderer-${minecraft_version}:1.2.0")
     //implementation fg.deobf("blank:mobbottle-${minecraft_version}:0.2")
@@ -191,8 +193,12 @@ dependencies {
 	jarJar(group: 'net.sodiumzh', name: 'nffservices', version: "[${minecraft_version}-${services_version},)"){
 		jarJar.pin(it, "${minecraft_version}-${services_version}")
 	}
-	
+    jarJar(group: 'net.sodiumzh', name: 'nfulib', version: "[${minecraft_version}-${nfu_version},)"){
+        jarJar.pin(it, "${minecraft_version}-${nfu_version}")
+    }
+    implementation fg.deobf("curse.maven:just-enough-resources-jer-240630:5057220")
     implementation fg.deobf("curse.maven:jade-324717:4986594")
+    implementation fg.deobf("curse.maven:gog4-228948:5678610")
     //implementation fg.deobf("blank:iconrenderer-1.20.1:1.2.0")
     //implementation fg.deobf("curse.maven:selene-499980:6815733")
     //implementation fg.deobf("curse.maven:targetdummy-225738:6826548")
@@ -203,6 +209,7 @@ dependencies {
 	//implementation fg.deobf("curse.maven:gog4-228948:4683680")
     implementation fg.deobf("curse.maven:ice-and-fire-dragons-264231:5633453")
     implementation fg.deobf("curse.maven:touhou-little-maid-355044:6120178")
+    //implementation fg.deobf("curse.maven:the-bumblezone-forge-362479:6960926")
     // For more info:
     // http://www.gradle.org/docs/current/userguide/artifact_dependencies_tutorial.html
     // http://www.gradle.org/docs/current/userguide/dependency_management.html
@@ -219,7 +226,7 @@ tasks.named('processResources', ProcessResources).configure {
             loader_version_range: loader_version_range,
             mod_id: mod_id, mod_name: mod_name, mod_license: mod_license, mod_version: mod_version,
             mod_authors: mod_authors, mod_description: mod_description, services_version_range: services_version_range,
-            hmag_version_range: hmag_version_range
+            hmag_version_range: hmag_version_range, nfu_version_range: nfu_version_range
     ]
     inputs.properties replaceProperties
 

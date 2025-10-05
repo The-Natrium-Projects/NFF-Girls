@@ -25,7 +25,14 @@ description='''Enjoy your Minecraft days with monster girls!'''
     versionRange="${minecraft_version_range}"
     ordering="NONE"
     side="BOTH"
-    
+
+[[dependencies.${mod_id}]]
+    modId="nfulib"
+    mandatory=true
+    versionRange="${nfu_version_range}"
+    ordering="NONE"
+    side="BOTH"
+
 [[dependencies.${mod_id}]]
     modId="nffservices"
     mandatory=true
