@@ -328,7 +328,10 @@ public interface INFFGirlsTamed extends INFFTamed, IAttributeMonitor, IItemStack
 	{
 		return 128;
 	}
-	
+
+	public default int[] getXpLevelRequirementsEachMerchantLevel() {
+		return CNFFGirlsTradeHandler.LEVEL_REQUIREMENTS;
+	}
 	
 	// ===================== NFFGirls gamerules related ===================
 	

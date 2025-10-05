@@ -247,6 +247,7 @@
   "info.nffgirls.introduction_letter_invalid": "Not signed",
   "info.nffgirls.introduction_unavailable": "Required points: %2$d; current points: %1$d",
   "info.nffgirls.introduction_written": "%1$s signed on the Trade Introduction Letter.",
+  "info.nffgirls.jei.trade_title": "NFF: Girls - Trading",
   "death.attack.necromancer_wither": "%1$s failed to bear the curse of necromancy.",
 
   "tooltip.nffgirls.bauble.in_water": "When in water: ",
