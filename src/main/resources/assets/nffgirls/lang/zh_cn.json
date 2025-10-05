@@ -250,7 +250,9 @@
   "info.nffgirls.introduction_unavailable": "需求点数：%2$d；当前点数：%1$d",
   "info.nffgirls.introduction_written": "%1$s签署了交易介绍信。",
   "info.nffgirls.book.tamable": "一场特殊的邂逅？",
+  "info.nffgirls.jei.trade_title": "NFF: Girls - 交易",
   "death.attack.necromancer_wither": "%1$s没能承受住死灵巫术的诅咒",
+
 
   "tooltip.nffgirls.bauble.in_water": "在水中时：",
   "tooltip.nffgirls.bauble.at_night": "在晚上时：",
