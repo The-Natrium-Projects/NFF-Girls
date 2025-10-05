@@ -8,11 +8,19 @@ import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.entity.Mob;
+import net.minecraft.world.item.ItemStack;
+import net.sodiumzh.nff.girls.registry.NFFGirlsItems;
 import net.sodiumzh.nfu.entity.MobApplicableItemTable;
+import net.sodiumzh.nfu.entity.vanillatrade.VanillaTradeListing;
+import net.sodiumzh.nfu.entity.vanillatrade.VanillaTradeListingCollectionHelper;
 import net.sodiumzh.nfu.math.RandomSelection;
 import net.sodiumzh.nfu.math.RangedRandomDouble;
 import net.sodiumzh.nfu.registry.NFUFunctions;
+import net.sodiumzh.nfu.util.NFUDataStatics;
 
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Optional;
 import java.util.function.Function;
 
 public class NFFGirlsDataReaders {
@@ -109,6 +117,28 @@ public class NFFGirlsDataReaders {
             }
         }
     }
+
+    public static Map<ResourceLocation, VanillaTradeListing> readTradeListings(String namespace, JsonArray from) {
+        Map<ResourceLocation, VanillaTradeListing> res = new HashMap<>();
+        from.asList().stream().filter(JsonElement::isJsonObject).map(JsonElement::getAsJsonObject)
+            .forEach(jo -> {
+                try {
+                    String key = NFUDataStatics.getOptionalString(jo, "key").orElse(null);
+                    if (key == null) return;
+                    if (key.contains(":")) {
+                        String[] split = key.split(":");
+                        key = split[split.length - 1];
+                    }
+                    String key1 = key;
+                    VanillaTradeListingCollectionHelper.readListing(jo, NFFGirlsItems.EVIL_GEM.get().getDefaultInstance(),
+                            false, 0.5d, 1)
+                        .ifPresent(listing -> res.put(new ResourceLocation(namespace, key1), listing));
+                } catch (RuntimeException ignore) {}
+            });
+        return res;
+    }
+
+
 
 }
 

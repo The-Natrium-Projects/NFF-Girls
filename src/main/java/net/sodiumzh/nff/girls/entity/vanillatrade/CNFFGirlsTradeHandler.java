@@ -30,6 +30,7 @@ import net.sodiumzh.nfu.capability.SerializableCapabilityProvider;
 import net.sodiumzh.nfu.container.Tuple2;
 import net.sodiumzh.nfu.entity.vanillatrade.CVanillaMerchant;
 import net.sodiumzh.nfu.entity.vanillatrade.IVanillaTradeListing;
+import net.sodiumzh.nfu.entity.vanillatrade.ScaledVanillaTradeListing;
 import net.sodiumzh.nfu.entity.vanillatrade.VanillaMerchant;
 import net.sodiumzh.nfu.util.NFUContainerStatics;
 
@@ -41,7 +42,7 @@ import java.util.stream.Collectors;
 public interface CNFFGirlsTradeHandler extends CVanillaMerchant
 {
 	public static final int[] LEVEL_REQUIREMENTS = {0, 5, 15, 30, 45};
-	public static final int[] OFFER_COUNT_FOR_LEVEL = {2, 2, 2, 2, 2};
+	public static final int[] OFFER_COUNT_FOR_LEVEL = {2, 2, 2, 2, 1};
 	public static final ItemListing INTRODUCTION = (e, rnd) -> 
 	{
 		ItemStack res = new ItemStack(NFFGirlsItems.TRADE_INTRODUCTION_LETTER.get());
@@ -140,15 +141,11 @@ public interface CNFFGirlsTradeHandler extends CVanillaMerchant
 			if (!this.isValidTrader()) return;
 			this.getOffersRaw().clear();
 			this.getMeta().clear();
-			Multimap<Integer, IVanillaTradeListing> trades =
+			Multimap<Integer, ScaledVanillaTradeListing> trades =
 					NFFGirlsTrades.TRADE_REGISTRY.get().collect()
 						.get(ForgeRegistries.ENTITIES.getKey(this.getMob().getType()), VillagerProfession.NONE)
 						.pickListingForSpecifiedLevels(this.getBM().getTradeEntryCountEachLevel());
 
-			//.getListings(INFFGirlsTamed.getBM(this.getMob()).getData().getInitialEntityType()).pickListingForSpecifiedLevels(INFFGirlsTamed.getBM(this.getMob()).getTradeEntryCountEachLevel());
-				/*var trades = DwmgTradeRegistry.getTradesImmutable(this.getMob().getType(), getProfession(), i);
-				Collection<ItemListing> picked = NFUContainerStatics.getRandomSubset
-						(NFUContainerStatics.iterableToSet(trades), Math.min(2, trades.size()));*/
 			if (trades.isEmpty()) return;
 			trades.entries().stream().sorted(Comparator.comparingInt(Map.Entry::getKey)).forEach(entry -> {
 				MerchantOffer offer = entry.getValue().getOffer(getMob(), RND);
@@ -171,8 +168,9 @@ public interface CNFFGirlsTradeHandler extends CVanillaMerchant
 		{
 			// Don't allow to regenerate at the introduction letter entry
 			if (index < 0 || index >= this.getOffersRaw().size() - 1) throw new IllegalArgumentException();
-			Set<IVanillaTradeListing> available = NFFGirlsTrades.TRADE_REGISTRY.get().collect().
+			Set<ScaledVanillaTradeListing> available = NFFGirlsTrades.TRADE_REGISTRY.get().collect().
 				get(ForgeRegistries.ENTITIES.getKey(INFFGirlsTamed.getBM(this.getMob()).getData().getInitialEntityType()), VillagerProfession.NONE)
+
 				.forLevel(this.getMeta(index).requiredMerchantLevel);
 			if (available.isEmpty()) return;
 			int merchantLevel = this.getMeta(index).requiredMerchantLevel;
@@ -217,9 +215,10 @@ public interface CNFFGirlsTradeHandler extends CVanillaMerchant
 		public int getMerchantLevel() {
 			if (this.getMob() instanceof INFFGirlsTamed bm)
 			{
-				for (int i = LEVEL_REQUIREMENTS.length; i > 0; --i)
+				int[] levelRequirements = bm.getXpLevelRequirementsEachMerchantLevel();
+				for (int i = levelRequirements.length; i > 0; --i)
 				{
-					if (bm.getXpLevel() >= LEVEL_REQUIREMENTS[i - 1])
+					if (bm.getXpLevel() >= levelRequirements[i - 1])
 						return i;
 				}
 				return 1;
