@@ -1,14 +1,20 @@
-package net.sodiumzh.nff.girls.jei;
+package net.sodiumzh.nff.girls.jei.item;
 
 import com.google.common.collect.Multimap;
-import mezz.jei.api.recipe.category.extensions.IRecipeCategoryExtension;
+import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
-import net.minecraft.world.item.ItemStack;
+import net.minecraftforge.registries.ForgeRegistries;
+import net.sodiumzh.nff.girls.jei.trade.NFFGirlsTradeJeiRecord;
 import net.sodiumzh.nfu.entity.MobApplicableItemTable;
 import net.sodiumzh.nfu.object.Validatable;
 
 import java.util.List;
+import java.util.Objects;
 
+/**
+ * Represents a MobApplicableItemTable (MAIT).
+ */
 public class MobApplicableItemTableJeiRecord {
 
     private final List<EntryRecord> entries;
@@ -29,6 +35,9 @@ public class MobApplicableItemTableJeiRecord {
         return entries;
     }
 
+    /**
+     * Represents an element of a MAIT.
+     */
     public static class EntryRecord {
         private List<Item> applicableItems;
         private MobApplicableItemTable.OutputGetter outputGetter;
@@ -52,6 +61,14 @@ public class MobApplicableItemTableJeiRecord {
         public MobApplicableItemTable.OutputGetter getOutputGetter() {
             return outputGetter;
         }
+
+        public void writeBuf(FriendlyByteBuf buf) {
+            List<ResourceLocation> itemKeys = applicableItems.stream().map(ForgeRegistries.ITEMS::getKey)
+                    .filter(Objects::nonNull).toList();
+            buf.writeCollection(itemKeys, FriendlyByteBuf::writeResourceLocation);
+
+        }
+
 
     }
 

@@ -5,28 +5,24 @@ import com.google.common.collect.Multimap;
 import net.minecraft.client.Minecraft;
 import net.minecraft.network.protocol.PacketUtils;
 import net.minecraft.network.protocol.game.ClientGamePacketListener;
-import net.minecraft.network.protocol.game.ServerGamePacketListener;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.server.network.ServerGamePacketListenerImpl;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.level.Level;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.api.distmarker.OnlyIn;
-import net.minecraftforge.event.OnDatapackSyncEvent;
 import net.minecraftforge.fml.ModList;
 import net.minecraftforge.registries.ForgeRegistries;
+import net.sodiumzh.nff.girls.jei.item.MobApplicableItemTableJeiRecord;
+import net.sodiumzh.nff.girls.jei.trade.ClientboundNFFGirlsJeiDataSyncPacket;
+import net.sodiumzh.nff.girls.jei.trade.NFFGirlsTradeJeiRecord;
+import net.sodiumzh.nff.girls.jei.trade.ServerboundNFFGirlsJeiDataSyncRequestPacket;
 import net.sodiumzh.nff.girls.network.NFFGirlsChannels;
 import net.sodiumzh.nff.girls.registry.NFFGirlsTrades;
 import net.sodiumzh.nfu.container.Tuple2;
 import net.sodiumzh.nfu.entity.vanillatrade.VanillaTradeListing;
 import net.sodiumzh.nfu.entity.vanillatrade.VanillaTradeRegistry;
 import net.sodiumzh.nfu.object.Validatable;
-import net.sodiumzh.nfu.registry.NFURegistryGenerateValuesEvent;
 import net.sodiumzh.nfu.util.NFUNetworkStatics;
 
 import java.util.Map;
-import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -42,6 +38,10 @@ public class NFFGirlsJeiStatics {
         ALL_TRADE_ENTRIES = ThreadLocal.withInitial(Validatable::new);
 
     // Static methods //
+
+    public static Map<ResourceLocation, MobApplicableItemTableJeiRecord> gatherMAIT() {
+        for ()
+    }
 
     public static Map<EntityType<?>, Multimap<Integer, NFFGirlsTradeJeiRecord>> gatherTradeEntries() {
         Set<ResourceLocation> availableKeys = NFFGirlsTrades.TRADE_REGISTRY.get()
