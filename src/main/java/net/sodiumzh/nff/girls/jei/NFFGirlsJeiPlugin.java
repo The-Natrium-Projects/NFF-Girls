@@ -7,6 +7,7 @@ import mezz.jei.api.registration.IRecipeCategoryRegistration;
 import mezz.jei.api.registration.IRecipeRegistration;
 import net.minecraft.resources.ResourceLocation;
 import net.sodiumzh.nff.girls.NFFGirls;
+import net.sodiumzh.nff.girls.jei.trade.NFFGirlsTradeJeiInfo;
 
 import javax.annotation.Nonnull;
 

@@ -16,6 +16,7 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 import net.sodiumzh.nff.girls.NFFGirls;
+import net.sodiumzh.nff.girls.jei.trade.NFFGirlsTradeJeiInfo;
 import net.sodiumzh.nfu.container.Tuple3;
 import net.sodiumzh.nfu.math.GuiPos;
 import net.sodiumzh.nfu.util.NFUInfoStatics;
