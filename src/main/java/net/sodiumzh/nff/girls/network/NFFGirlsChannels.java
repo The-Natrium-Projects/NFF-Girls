@@ -6,8 +6,8 @@ import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.network.simple.SimpleChannel;
 import net.sodiumzh.nff.girls.NFFGirls;
 import net.sodiumzh.nff.girls.entity.vanillatrade.ClientboundNFFGirlsTradeSyncPacket;
-import net.sodiumzh.nff.girls.jei.ClientboundNFFGirlsJeiDataSyncPacket;
-import net.sodiumzh.nff.girls.jei.ServerboundNFFGirlsJeiDataSyncRequestPacket;
+import net.sodiumzh.nff.girls.jei.trade.ClientboundNFFGirlsJeiDataSyncPacket;
+import net.sodiumzh.nff.girls.jei.trade.ServerboundNFFGirlsJeiDataSyncRequestPacket;
 import net.sodiumzh.nfu.util.NFUNetworkStatics;
 
 @Mod.EventBusSubscriber(modid = NFFGirls.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD)

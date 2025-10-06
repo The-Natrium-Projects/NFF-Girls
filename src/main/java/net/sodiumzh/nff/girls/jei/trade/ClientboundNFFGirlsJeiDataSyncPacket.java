@@ -1,4 +1,4 @@
-package net.sodiumzh.nff.girls.jei;
+package net.sodiumzh.nff.girls.jei.trade;
 
 import com.google.common.collect.Multimap;
 import net.minecraft.network.FriendlyByteBuf;
@@ -7,6 +7,7 @@ import net.minecraft.network.protocol.game.ClientGamePacketListener;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.EntityType;
 import net.minecraftforge.registries.ForgeRegistries;
+import net.sodiumzh.nff.girls.jei.NFFGirlsJeiStatics;
 import net.sodiumzh.nfu.util.NFUNetworkStatics;
 
 import java.util.Map;

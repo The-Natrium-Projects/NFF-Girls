@@ -1,4 +1,4 @@
-package net.sodiumzh.nff.girls.jei;
+package net.sodiumzh.nff.girls.jei.trade;
 
 import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Multimap;
@@ -14,11 +14,11 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.sodiumzh.nff.girls.NFFGirls;
 import net.sodiumzh.nff.girls.entity.INFFGirlsTamed;
 import net.sodiumzh.nff.girls.entity.vanillatrade.CNFFGirlsTradeHandler;
+import net.sodiumzh.nff.girls.jei.NFFGirlsJeiStatics;
 import net.sodiumzh.nfu.client.NFUGUIStatics;
 import net.sodiumzh.nfu.container.Tuple2;
 import net.sodiumzh.nfu.container.Tuple3;
@@ -34,7 +34,6 @@ import javax.annotation.Nullable;
 import java.util.AbstractMap;
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.IntStream;
 
 /**
  * Representing a page of NFF Trade tab, i.e. trades of a specific mob.

@@ -1,13 +1,11 @@
 package net.sodiumzh.nff.girls.jei;
 
 import net.minecraftforge.event.OnDatapackSyncEvent;
-import net.minecraftforge.event.TickEvent;
-import net.minecraftforge.event.entity.EntityJoinLevelEvent;
-import net.minecraftforge.event.level.LevelEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.ModList;
 import net.minecraftforge.fml.common.Mod;
 import net.sodiumzh.nff.girls.NFFGirls;
+import net.sodiumzh.nff.girls.jei.trade.ClientboundNFFGirlsJeiDataSyncPacket;
 import net.sodiumzh.nff.girls.network.NFFGirlsChannels;
 import net.sodiumzh.nfu.registry.NFURegistries;
 import net.sodiumzh.nfu.registry.NFURegistryGenerateValuesEvent;

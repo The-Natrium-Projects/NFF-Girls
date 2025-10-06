@@ -1,4 +1,4 @@
-package net.sodiumzh.nff.girls.jei;
+package net.sodiumzh.nff.girls.jei.trade;
 
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.protocol.Packet;

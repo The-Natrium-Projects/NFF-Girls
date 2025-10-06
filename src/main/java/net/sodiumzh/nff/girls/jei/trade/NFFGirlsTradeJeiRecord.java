@@ -1,12 +1,10 @@
-package net.sodiumzh.nff.girls.jei;
+package net.sodiumzh.nff.girls.jei.trade;
 
-import mezz.jei.api.recipe.category.extensions.IRecipeCategoryExtension;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.world.item.ItemStack;
 import net.sodiumzh.nfu.container.Tuple3;
 import net.sodiumzh.nfu.entity.vanillatrade.VanillaTradeListing;
 import net.sodiumzh.nfu.entity.vanillatrade.VanillaTradeListingEnchanted;
-import net.sodiumzh.nfu.util.NFUNetworkStatics;
 
 import java.util.ArrayList;
 import java.util.List;
