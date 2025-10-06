@@ -8,16 +8,21 @@ import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.entity.Mob;
-import net.minecraft.world.item.ItemStack;
 import net.sodiumzh.nff.girls.registry.NFFGirlsItems;
+import net.sodiumzh.nfu.annotation.DontCallManually;
 import net.sodiumzh.nfu.entity.MobApplicableItemTable;
 import net.sodiumzh.nfu.entity.vanillatrade.VanillaTradeListing;
 import net.sodiumzh.nfu.entity.vanillatrade.VanillaTradeListingCollectionHelper;
+import net.sodiumzh.nfu.function.RegistrableFunction;
+import net.sodiumzh.nfu.function.RegistrablePredicate;
 import net.sodiumzh.nfu.math.RandomSelection;
 import net.sodiumzh.nfu.math.RangedRandomDouble;
 import net.sodiumzh.nfu.registry.NFUFunctions;
+import net.sodiumzh.nfu.registry.NFURegistries;
 import net.sodiumzh.nfu.util.NFUDataStatics;
+import org.checkerframework.checker.units.qual.A;
 
+import javax.swing.text.html.Option;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
@@ -33,6 +38,8 @@ public class NFFGirlsDataReaders {
                 try {
                     if (!element.isJsonObject()) continue; // This skips some random stuff like string descriptions.
                     JsonObject obj = element.getAsJsonObject();
+
+                    // Get item info
                     JsonElement itemJson = obj.get("item");
                     String item = itemJson != null ? obj.get("item").getAsString() : null;
                     String tag = item != null ? null : obj.get("tag").getAsString();
@@ -42,21 +49,22 @@ public class NFFGirlsDataReaders {
                         continue;
                     }
 
-                    /**
+                    // Get output info
+                    /*
                      * Format of "amount":
                      * <p>[double] or [double, double] or [double, double, double]: {@link RangedRandomDouble#fromArrayRepresentation(double[])};
                      * <p>[double, [double, double], [double, double], ...]: {@link RandomSelection<Double>}, the first value is fallback value, and other pairs are [value, probability].
-                     *
                      */
                     JsonElement amountJson = obj.get("amount");
                     JsonElement amountGetterJson = obj.get("amount_getter");
-                    Function<Mob, Double> getter = null;
+                    MobApplicableItemTable.DoubleValueProvider provider = null;
                     if (amountJson != null) {
-                        getter = parseAmount(amountJson);
+                        provider = parseDoubleProvider(amountJson);
                     }
                     else if (amountGetterJson != null)
                     {
-                        getter = mob -> NFUFunctions.invoke(new ResourceLocation(amountGetterJson.getAsString()), mob).castTo(Double.class).doubleValue();
+                        provider = MobApplicableItemTable.DoubleValueProvider.functionKey(new ResourceLocation(amountGetterJson.getAsString()));
+                        if (!provider.isValid()) provider = null
                     }
                     else {
                         LogUtils.getLogger().warn(String.format("Reading MobApplicableItemTable failed: Missing amount info for %s \"%s\".",
@@ -87,15 +95,14 @@ public class NFFGirlsDataReaders {
         }
     }
 
-    private static Function<Mob, Double> parseAmount(JsonElement e)
+    private static MobApplicableItemTable.DoubleValueProvider parseDoubleProvider(JsonElement e)
     {
         JsonArray array = e.getAsJsonArray();
         switch (array.size())
         {
             case 0: throw new IllegalArgumentException("Illegal array size 0");
             case 1: {
-                RangedRandomDouble supplier = RangedRandomDouble.fromArrayRepresentation(new double[]{array.get(0).getAsDouble()});
-                return mob -> supplier.get();
+                return MobApplicableItemTable.DoubleValueProvider.singleNumber(array.get(0).getAsDouble());
             }
             default: {
                 if (array.get(1).isJsonArray()) // For RandomSelection<Double>
@@ -103,14 +110,14 @@ public class NFFGirlsDataReaders {
                     RandomSelection<Double> selection = new RandomSelection<>(array.get(0).getAsDouble());
                     for (int i = 1; i < array.size(); ++i)
                         selection.add(array.get(i).getAsJsonArray().get(0).getAsDouble(), array.get(i).getAsJsonArray().get(1).getAsDouble());
-                    return mob -> selection.select(mob.getRandom());
+                    return MobApplicableItemTable.DoubleValueProvider.randomSelection(selection);
                 }
                 else {  // For RangedRandomDouble
                     double[] doubleArray = new double[array.size()];
                     for (int i = 0; i < array.size(); ++i)
                         doubleArray[i] = array.get(i).getAsDouble();
                     RangedRandomDouble supplier = RangedRandomDouble.fromArrayRepresentation(doubleArray);
-                    return mob -> supplier.get();
+                    return MobApplicableItemTable.DoubleValueProvider.range(supplier);
                 }
             }
         }
@@ -135,7 +142,6 @@ public class NFFGirlsDataReaders {
             });
         return res;
     }
-
 
 
 }
