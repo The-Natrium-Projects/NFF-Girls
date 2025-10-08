@@ -24,6 +24,10 @@ public class NFFGirlsHealingItemMappings {
         return Optional.ofNullable(TABLE.get(type));
     }
 
+    public static void put(EntityType<?> type, MobApplicableItemTable table) {
+        TABLE.put(type, table);
+    }
+
     @SubscribeEvent
     public static void register(FMLCommonSetupEvent event) {
         TABLE.put(NFFGirlsEntityTypes.HMAG_ALRAUNE.get(), NFFGirlsHealingItems.PLANT.get());

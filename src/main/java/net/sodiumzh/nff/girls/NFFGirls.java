@@ -27,6 +27,8 @@ public class NFFGirls
 
         // Init NFU registries
         NFFGirlsBaubles.init();
+        NFFGirlsHealingItems.init();
+        NFFGirlsFriendingItems.init();
 
         // Set up registries
         NFFGirlsEffects.EFFECTS.register(modEventBus);
@@ -39,8 +41,8 @@ public class NFFGirls
         NFFGirlsPotions.POTIONS.register(modEventBus);
         NFFGirlsEntityAttributes.ATTRIBUTES.register(modEventBus);
 
-        // NaUtils registries
-        NFFGirlsHealingItems.HEALING_ITEMS.merge();
+        // NFU registries
+        NFFGirlsHealingItems.HEALING_ITEMS_COLLECTION.merge();
         NFFGirlsFunctions.FUNCTIONS.merge();
         NFFGirlsTrades.TRADE_COLLECTIONS.merge();
         NFFGirlsTrades.TRADE_REGISTRIES.merge();
