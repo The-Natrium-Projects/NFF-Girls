@@ -38,7 +38,7 @@ import java.util.Optional;
 /**
  * Representing a page of NFF Trade tab, i.e. trades of a specific mob.
  */
-public class NFFGirlsTradeJeiInfo implements IRecipeCategoryExtension {
+public class NFFGirlsTradeJeiMobEntry implements IRecipeCategoryExtension {
 
     public static final ResourceLocation TEXTURE_PATH = new ResourceLocation(NFFGirls.MOD_ID, "textures/gui/trade_jei_screen.png");
     public static final GuiPos TEXTURE_SIZE = new GuiPos(256, 256);
@@ -51,7 +51,7 @@ public class NFFGirlsTradeJeiInfo implements IRecipeCategoryExtension {
     @Nullable
     private IFocus<ItemStack> focus = null;
 
-    public NFFGirlsTradeJeiInfo(EntityType<?> entityType) {
+    public NFFGirlsTradeJeiMobEntry(EntityType<?> entityType) {
         this.entityType = entityType;
     }
 
@@ -68,7 +68,7 @@ public class NFFGirlsTradeJeiInfo implements IRecipeCategoryExtension {
                 else Optional.ofNullable(mc.player).ifPresent(NFFGirlsJeiStatics::requestJeiDataSync);
             }
         } catch (RuntimeException e) {
-            NFUDebugStatics.errorOnce(NFFGirlsTradeJeiInfo.class, "Initialization error for type "
+            NFUDebugStatics.errorOnce(NFFGirlsTradeJeiMobEntry.class, "Initialization error for type "
                 + entityType.getDescriptionId() + "\n" + e.getMessage());
         }
     }

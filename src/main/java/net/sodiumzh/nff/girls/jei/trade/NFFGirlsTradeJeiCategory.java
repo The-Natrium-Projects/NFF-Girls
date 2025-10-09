@@ -1,4 +1,4 @@
-package net.sodiumzh.nff.girls.jei;
+package net.sodiumzh.nff.girls.jei.trade;
 
 import com.google.common.collect.Multimap;
 import mezz.jei.api.constants.VanillaTypes;
@@ -16,7 +16,7 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 import net.sodiumzh.nff.girls.NFFGirls;
-import net.sodiumzh.nff.girls.jei.trade.NFFGirlsTradeJeiInfo;
+import net.sodiumzh.nff.girls.jei.NFFGirlsJeiPlugin;
 import net.sodiumzh.nfu.container.Tuple3;
 import net.sodiumzh.nfu.math.GuiPos;
 import net.sodiumzh.nfu.util.NFUInfoStatics;
@@ -29,7 +29,7 @@ import java.util.Optional;
 /**
  * NFF: Girls Trade tab.
  */
-public class NFFGirlsTradeJeiCategory implements IRecipeCategory<NFFGirlsTradeJeiInfo> {
+public class NFFGirlsTradeJeiCategory implements IRecipeCategory<NFFGirlsTradeJeiMobEntry> {
 
     private final IDrawable defaultBackground;
     @Nullable
@@ -51,7 +51,7 @@ public class NFFGirlsTradeJeiCategory implements IRecipeCategory<NFFGirlsTradeJe
     }
 
     @Override
-    public RecipeType<NFFGirlsTradeJeiInfo> getRecipeType() {
+    public RecipeType<NFFGirlsTradeJeiMobEntry> getRecipeType() {
         return NFFGirlsJeiPlugin.TRADES;
     }
 
@@ -78,16 +78,16 @@ public class NFFGirlsTradeJeiCategory implements IRecipeCategory<NFFGirlsTradeJe
         return this.icon;
     }
 
-    public void draw(NFFGirlsTradeJeiInfo recipe, @Nonnull IRecipeSlotsView recipeSlotsView, @Nonnull GuiGraphics guiGraphics, double mouseX, double mouseY) {
+    public void draw(NFFGirlsTradeJeiMobEntry recipe, @Nonnull IRecipeSlotsView recipeSlotsView, @Nonnull GuiGraphics guiGraphics, double mouseX, double mouseY) {
         recipe.drawInfo(this.getBackground().getWidth(), this.getBackground().getHeight(), guiGraphics, mouseX, mouseY);
     }
 
-    public @Nonnull List<Component> getTooltipStrings(NFFGirlsTradeJeiInfo recipe, @Nonnull IRecipeSlotsView recipeSlotsView, double mouseX, double mouseY) {
+    public @Nonnull List<Component> getTooltipStrings(NFFGirlsTradeJeiMobEntry recipe, @Nonnull IRecipeSlotsView recipeSlotsView, double mouseX, double mouseY) {
         return recipe.getTooltipStrings(mouseX, mouseY);
     }
 
     @Override
-    public void setRecipe(IRecipeLayoutBuilder builder, NFFGirlsTradeJeiInfo recipe, IFocusGroup focuses) {
+    public void setRecipe(IRecipeLayoutBuilder builder, NFFGirlsTradeJeiMobEntry recipe, IFocusGroup focuses) {
         recipe.tryInitialize();
         IFocus<ItemStack> focus = focuses.getFocuses(VanillaTypes.ITEM_STACK).findFirst().orElse(null);
         recipe.setFocus(focus);
