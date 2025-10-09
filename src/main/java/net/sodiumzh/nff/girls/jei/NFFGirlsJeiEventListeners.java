@@ -5,7 +5,6 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.ModList;
 import net.minecraftforge.fml.common.Mod;
 import net.sodiumzh.nff.girls.NFFGirls;
-import net.sodiumzh.nff.girls.jei.trade.ClientboundNFFGirlsJeiDataSyncPacket;
 import net.sodiumzh.nff.girls.network.NFFGirlsChannels;
 import net.sodiumzh.nfu.registry.NFURegistries;
 import net.sodiumzh.nfu.registry.NFURegistryGenerateValuesEvent;
@@ -23,6 +22,8 @@ public class NFFGirlsJeiEventListeners {
         // ServerboundNFFGirlsJeiDataSyncRequestPacket)
         if (event.registry.equals(NFURegistries.VANILLA_TRADE_REGISTRIES))
         {
+            NFFGirlsJeiStatics.ALL_HEALING_ITEM_TABLES.get().setAndValidate(NFFGirlsJeiStatics.gatherHealing());
+            NFFGirlsJeiStatics.ALL_FRIENDING_ITEM_TABLES.get().setAndValidate(NFFGirlsJeiStatics.gatherFriending());
             NFFGirlsJeiStatics.ALL_TRADE_ENTRIES.get().setAndValidate(NFFGirlsJeiStatics.gatherTradeEntries());
         }
     }
@@ -31,6 +32,10 @@ public class NFFGirlsJeiEventListeners {
     public static void syncJeiData(OnDatapackSyncEvent event) {
         if (!ModList.get().isLoaded("jei")) return;
         // An issue report said the entries might not be initialized here. Make a check before sending.
+        if (!NFFGirlsJeiStatics.ALL_HEALING_ITEM_TABLES.get().isValidated())
+            NFFGirlsJeiStatics.ALL_HEALING_ITEM_TABLES.get().setAndValidate(NFFGirlsJeiStatics.gatherHealing());
+        if (!NFFGirlsJeiStatics.ALL_FRIENDING_ITEM_TABLES.get().isValidated())
+            NFFGirlsJeiStatics.ALL_FRIENDING_ITEM_TABLES.get().setAndValidate(NFFGirlsJeiStatics.gatherFriending());
         if (!NFFGirlsJeiStatics.ALL_TRADE_ENTRIES.get().isValidated())
             NFFGirlsJeiStatics.ALL_TRADE_ENTRIES.get().setAndValidate(NFFGirlsJeiStatics.gatherTradeEntries());
 
