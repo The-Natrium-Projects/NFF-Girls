@@ -7,7 +7,6 @@ import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.MobType;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
-import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Rarity;
@@ -40,8 +39,6 @@ import java.util.function.Function;
 @Mod.EventBusSubscriber(modid = NFFGirls.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class NFFGirlsBaubles {
 
-    private static CreativeModeTab TAB = NFFGirlsTabs.BAUBLE_TAB;
-    
     // Just for loading this class
     public static void init(){}
 
@@ -100,13 +97,13 @@ public class NFFGirlsBaubles {
     public static final NFURegistry.Accessor<BaubleEquippingCondition> CONDITION_NETHER_AND_ENDER =  BAUBLE_EQUIPPING_CONDITIONS.register("nether_and_ender", () ->
         CONDITION_NETHER.get().or(CONDITION_ENDER.get()).setTranslation("tooltip.nffgirls.bauble.for_nether_and_ender"));
 
-    public static final NFURegistry.Accessor<RegistrablePredicate<Mob>> EFFECT_CONDITION_IN_WATER = BAUBLE_EFFECT_CONDITIONS.register("in_water", () ->
-        new RegistrablePredicate<>("in_water", Entity::isInWaterOrBubble).setTranslation("tooltip.nffgirls.bauble.in_water").cast());
+    public static final NFURegistry.Accessor<RegistrablePredicate<Entity>> EFFECT_CONDITION_IN_WATER = BAUBLE_EFFECT_CONDITIONS.register("in_water", () ->
+        new RegistrablePredicate<>(Entity.class, "in_water", Entity::isInWaterOrBubble).setTranslation("tooltip.nffgirls.bauble.in_water").cast());
     public static final NFURegistry.Accessor<RegistrablePredicate<Mob>> EFFECT_CONDITION_AT_NIGHT = BAUBLE_EFFECT_CONDITIONS.register("at_night", () ->
-        new RegistrablePredicate<>("at_night", (Mob m) -> m.level.isNight()).setTranslation("tooltip.nffgirls.bauble.at_night"));
+        new RegistrablePredicate<>(Mob.class, "at_night", (Mob m) -> m.level().isNight()).setTranslation("tooltip.nffgirls.bauble.at_night"));
 
-    public static final NFURegistry.Accessor<RegistrablePredicate<Mob>> EFFECT_CONDITION_IN_WATER_OR_RAIN = BAUBLE_EFFECT_CONDITIONS.register("in_water_or_rain", () ->
-        new RegistrablePredicate<>("in_water_or_rain", Entity::isInWaterRainOrBubble).setTranslation("tooltip.nffgirls.bauble.in_water_or_rain").cast());
+    public static final NFURegistry.Accessor<RegistrablePredicate<Entity>> EFFECT_CONDITION_IN_WATER_OR_RAIN = BAUBLE_EFFECT_CONDITIONS.register("in_water_or_rain", () ->
+        new RegistrablePredicate<>(Entity.class, "in_water_or_rain", Entity::isInWaterRainOrBubble).setTranslation("tooltip.nffgirls.bauble.in_water_or_rain").cast());
 
     // =========== AMULETS ============ //
 
@@ -115,7 +112,7 @@ public class NFFGirlsBaubles {
         .repeatable(Attributes.ARMOR, 1d, AttributeModifier.Operation.ADDITION)
         .setRarityTier(0)
         .addAllModifierTooltips()
-        .buildAsBaubleItem(new ResourceLocation(NFFGirls.MOD_ID, "crude_amulet"), 1, new Item.Properties().tab(TAB)));
+        .buildAsBaubleItem(new ResourceLocation(NFFGirls.MOD_ID, "crude_amulet"), 1, new Item.Properties()));
 
     public static final RegistryObject<NFFGirlsDedicatedBaubleItem> REFINED_AMULET = BAUBLE_ITEMS.register("refined_amulet", () -> new NFFGirlsBaubleBuilder()
         .repeatable(Attributes.MAX_HEALTH, 5d, AttributeModifier.Operation.ADDITION)
@@ -123,7 +120,7 @@ public class NFFGirlsBaubles {
         .repeatable(Attributes.ATTACK_DAMAGE, 1d, AttributeModifier.Operation.ADDITION)
         .setRarityTier(1)
         .addAllModifierTooltips()
-        .buildAsBaubleItem(new ResourceLocation(NFFGirls.MOD_ID, "refined_amulet"), 1, new Item.Properties().tab(TAB)));
+        .buildAsBaubleItem(new ResourceLocation(NFFGirls.MOD_ID, "refined_amulet"), 1, new Item.Properties()));
 
     public static final RegistryObject<NFFGirlsDedicatedBaubleItem> SOUL_AMULET = BAUBLE_ITEMS.register("soul_amulet", () -> new NFFGirlsBaubleBuilder()
         .equippingCondition(CONDITION_UNDEAD.get())
@@ -133,7 +130,7 @@ public class NFFGirlsBaubles {
         .setRarityTier(2)
         .addEquippingConditionTooltip()
         .addAllModifierTooltips()
-        .buildAsBaubleItem(new ResourceLocation(NFFGirls.MOD_ID, "soul_amulet"), 1, new Item.Properties().tab(TAB)));
+        .buildAsBaubleItem(new ResourceLocation(NFFGirls.MOD_ID, "soul_amulet"), 1, new Item.Properties()));
 
     public static final RegistryObject<NFFGirlsDedicatedBaubleItem> SOUL_AMULET_II = BAUBLE_ITEMS.register("soul_amulet_ii", () -> new NFFGirlsBaubleBuilder()
         .equippingCondition(CONDITION_UNDEAD.get())
@@ -146,7 +143,7 @@ public class NFFGirlsBaubles {
         .setRarityTier(3)
         .addEquippingConditionTooltip()
         .addAllModifierTooltips()
-        .buildAsBaubleItem(new ResourceLocation(NFFGirls.MOD_ID, "soul_amulet"), 2, new Item.Properties().tab(TAB)));
+        .buildAsBaubleItem(new ResourceLocation(NFFGirls.MOD_ID, "soul_amulet"), 2, new Item.Properties()));
 
     public static final RegistryObject<NFFGirlsDedicatedBaubleItem> SOUL_AMULET_III = BAUBLE_ITEMS.register("soul_amulet_iii", () -> new NFFGirlsBaubleBuilder()
         .equippingCondition(CONDITION_UNDEAD.get())
@@ -159,7 +156,7 @@ public class NFFGirlsBaubles {
         .setRarityTier(4)
         .addEquippingConditionTooltip()
         .addAllModifierTooltips()
-        .buildAsBaubleItem(new ResourceLocation(NFFGirls.MOD_ID, "soul_amulet"), 3, new Item.Properties().tab(TAB))
+        .buildAsBaubleItem(new ResourceLocation(NFFGirls.MOD_ID, "soul_amulet"), 3, new Item.Properties())
         .alwaysFoil().cast());
 
     public static final RegistryObject<NFFGirlsDedicatedBaubleItem> SOUL_AMULET_IV = BAUBLE_ITEMS.register("soul_amulet_iv", () -> new NFFGirlsBaubleBuilder()
@@ -176,7 +173,7 @@ public class NFFGirlsBaubles {
         .addEquippingConditionTooltip()
         .addRepeatableModifierTooltips()
         .addUnrepeatableModifierTooltips()
-        .buildAsBaubleItem(new ResourceLocation(NFFGirls.MOD_ID, "soul_amulet"), 4, new Item.Properties().tab(TAB))
+        .buildAsBaubleItem(new ResourceLocation(NFFGirls.MOD_ID, "soul_amulet"), 4, new Item.Properties())
         .alwaysFoil().cast());
 
 
@@ -188,7 +185,7 @@ public class NFFGirlsBaubles {
         .environmentResistance()
         .setRarityTier(2)
         .addAllModifierTooltips()
-        .buildAsBaubleItem(new ResourceLocation(NFFGirls.MOD_ID, "resistance_amulet"), 1, new Item.Properties().tab(TAB)));
+        .buildAsBaubleItem(new ResourceLocation(NFFGirls.MOD_ID, "resistance_amulet"), 1, new Item.Properties()));
 
     public static final RegistryObject<NFFGirlsDedicatedBaubleItem> RESISTANCE_AMULET_II = BAUBLE_ITEMS.register("resistance_amulet_ii", () -> new NFFGirlsBaubleBuilder()
         .repeatable(Attributes.ARMOR, 6.0d, AttributeModifier.Operation.ADDITION)
@@ -197,7 +194,7 @@ public class NFFGirlsBaubles {
         .environmentResistance()
         .setRarityTier(3)
         .addAllModifierTooltips()
-        .buildAsBaubleItem(new ResourceLocation(NFFGirls.MOD_ID, "resistance_amulet"), 2, new Item.Properties().tab(TAB)));
+        .buildAsBaubleItem(new ResourceLocation(NFFGirls.MOD_ID, "resistance_amulet"), 2, new Item.Properties()));
 
     public static final RegistryObject<NFFGirlsDedicatedBaubleItem> RESISTANCE_AMULET_III = BAUBLE_ITEMS.register("resistance_amulet_iii", () -> new NFFGirlsBaubleBuilder()
         .repeatable(Attributes.ARMOR, 8.0d, AttributeModifier.Operation.ADDITION)
@@ -206,7 +203,7 @@ public class NFFGirlsBaubles {
         .environmentResistance()
         .setRarityTier(4)
         .addAllModifierTooltips()
-        .buildAsBaubleItem(new ResourceLocation(NFFGirls.MOD_ID, "resistance_amulet"), 3, new Item.Properties().tab(TAB))
+        .buildAsBaubleItem(new ResourceLocation(NFFGirls.MOD_ID, "resistance_amulet"), 3, new Item.Properties())
         .alwaysFoil().cast());
 
     public static final RegistryObject<NFFGirlsDedicatedBaubleItem> CORRUPTED_AMULET
@@ -214,7 +211,7 @@ public class NFFGirlsBaubles {
         .repeatable(NFFGirlsEntityAttributes.WITHER_ASPECT.get(), 1.0d, AttributeModifier.Operation.ADDITION)
         .setRarityTier(2)
         .addAllModifierTooltips()
-        .buildAsBaubleItem(new ResourceLocation(NFFGirls.MOD_ID, "corrupted_amulet"), 1, new Item.Properties().tab(TAB)));
+        .buildAsBaubleItem(new ResourceLocation(NFFGirls.MOD_ID, "corrupted_amulet"), 1, new Item.Properties()));
 
     public static final RegistryObject<NFFGirlsDedicatedBaubleItem> CORRUPTED_AMULET_II
         = BAUBLE_ITEMS.register("corrupted_amulet_ii", () -> new NFFGirlsBaubleBuilder()
@@ -222,7 +219,7 @@ public class NFFGirlsBaubles {
         .repeatable(Attributes.ATTACK_DAMAGE, 2.0d, AttributeModifier.Operation.ADDITION)
         .setRarityTier(2)
         .addAllModifierTooltips()
-        .buildAsBaubleItem(new ResourceLocation(NFFGirls.MOD_ID, "corrupted_amulet"), 2, new Item.Properties().tab(TAB)));
+        .buildAsBaubleItem(new ResourceLocation(NFFGirls.MOD_ID, "corrupted_amulet"), 2, new Item.Properties()));
 
     public static final RegistryObject<NFFGirlsDedicatedBaubleItem> WITHER_AMULET
         = BAUBLE_ITEMS.register("wither_amulet", () -> new NFFGirlsBaubleBuilder()
@@ -232,7 +229,7 @@ public class NFFGirlsBaubles {
         .setRarityTier(3)
         .addEquippingConditionTooltip()
         .addAllModifierTooltips()
-        .buildAsBaubleItem(new ResourceLocation(NFFGirls.MOD_ID, "wither_amulet"), 1, new Item.Properties().tab(TAB)));
+        .buildAsBaubleItem(new ResourceLocation(NFFGirls.MOD_ID, "wither_amulet"), 1, new Item.Properties()));
 
     public static final RegistryObject<NFFGirlsDedicatedBaubleItem> WITHER_AMULET_II
         = BAUBLE_ITEMS.register("wither_amulet_ii", () -> new NFFGirlsBaubleBuilder()
@@ -243,7 +240,7 @@ public class NFFGirlsBaubles {
         .setRarityTier(5)
         .addEquippingConditionTooltip()
         .addAllModifierTooltips()
-        .buildAsBaubleItem(new ResourceLocation(NFFGirls.MOD_ID, "wither_amulet"), 2, new Item.Properties().tab(TAB)));
+        .buildAsBaubleItem(new ResourceLocation(NFFGirls.MOD_ID, "wither_amulet"), 2, new Item.Properties()));
 
     public static final RegistryObject<NFFGirlsDedicatedBaubleItem> WITHER_AMULET_III
         = BAUBLE_ITEMS.register("wither_amulet_iii", () -> new NFFGirlsBaubleBuilder()
@@ -254,7 +251,7 @@ public class NFFGirlsBaubles {
         .setRarityTier(6)
         .addEquippingConditionTooltip()
         .addAllModifierTooltips()
-        .buildAsBaubleItem(new ResourceLocation(NFFGirls.MOD_ID, "wither_amulet"), 3, new Item.Properties().tab(TAB))
+        .buildAsBaubleItem(new ResourceLocation(NFFGirls.MOD_ID, "wither_amulet"), 3, new Item.Properties())
         .alwaysFoil().cast());
 
     public static final RegistryObject<NFFGirlsDedicatedBaubleItem> ABYSS_AMULET
@@ -271,7 +268,7 @@ public class NFFGirlsBaubles {
         .setRarityTier(5)
         .addEquippingConditionTooltip()
         .addAllModifierTooltips()
-        .buildAsBaubleItem(new ResourceLocation(NFFGirls.MOD_ID, "abyss_amulet"), 1, new Item.Properties().tab(TAB)));
+        .buildAsBaubleItem(new ResourceLocation(NFFGirls.MOD_ID, "abyss_amulet"), 1, new Item.Properties()));
 
     public static final RegistryObject<NFFGirlsDedicatedBaubleItem> ABYSS_AMULET_II
         = BAUBLE_ITEMS.register("abyss_amulet_ii", () -> new NFFGirlsBaubleBuilder()
@@ -288,7 +285,7 @@ public class NFFGirlsBaubles {
         .setRarityTier(7)
         .addEquippingConditionTooltip()
         .addAllModifierTooltips()
-        .buildAsBaubleItem(new ResourceLocation(NFFGirls.MOD_ID, "abyss_amulet"), 2, new Item.Properties().tab(TAB))
+        .buildAsBaubleItem(new ResourceLocation(NFFGirls.MOD_ID, "abyss_amulet"), 2, new Item.Properties())
         .alwaysFoil().cast());
 
     // =========== BADGE =========== //
@@ -298,7 +295,7 @@ public class NFFGirlsBaubles {
         .repeatable(Attributes.ATTACK_DAMAGE, 1.0d, AttributeModifier.Operation.ADDITION)
         .setRarityTier(0)
         .addAllModifierTooltips()
-        .buildAsBaubleItem(new ResourceLocation(NFFGirls.MOD_ID, "crude_badge"), 1, new Item.Properties().tab(TAB)));
+        .buildAsBaubleItem(new ResourceLocation(NFFGirls.MOD_ID, "crude_badge"), 1, new Item.Properties()));
 
     public static final RegistryObject<NFFGirlsDedicatedBaubleItem> REFINED_BADGE
         = BAUBLE_ITEMS.register("refined_badge", () -> new NFFGirlsBaubleBuilder()
@@ -306,7 +303,7 @@ public class NFFGirlsBaubles {
         .repeatable(Attributes.ATTACK_DAMAGE, 2d, AttributeModifier.Operation.ADDITION)
         .setRarityTier(1)
         .addAllModifierTooltips()
-        .buildAsBaubleItem(new ResourceLocation(NFFGirls.MOD_ID, "refined_badge"), 1, new Item.Properties().tab(TAB)));
+        .buildAsBaubleItem(new ResourceLocation(NFFGirls.MOD_ID, "refined_badge"), 1, new Item.Properties()));
 
     public static final RegistryObject<NFFGirlsDedicatedBaubleItem> COURAGE_BADGE = BAUBLE_ITEMS.register("courage_badge", () -> new NFFGirlsBaubleBuilder()
         .repeatable(Attributes.ATTACK_DAMAGE, 4.0d, AttributeModifier.Operation.ADDITION)
@@ -316,7 +313,7 @@ public class NFFGirlsBaubles {
         .setRarityTier(2)
         .addTooltipTranslatable("tooltip.nffgirls.bauble.active_attack")
         .addAllModifierTooltips()
-        .buildAsBaubleItem(new ResourceLocation(NFFGirls.MOD_ID, "courage_badge"), 1, new Item.Properties().tab(TAB)));
+        .buildAsBaubleItem(new ResourceLocation(NFFGirls.MOD_ID, "courage_badge"), 1, new Item.Properties()));
 
     public static final RegistryObject<NFFGirlsDedicatedBaubleItem> COURAGE_BADGE_II = BAUBLE_ITEMS.register("courage_badge_ii", () -> new NFFGirlsBaubleBuilder()
         .repeatable(Attributes.ATTACK_DAMAGE, 6.0d, AttributeModifier.Operation.ADDITION)
@@ -326,7 +323,7 @@ public class NFFGirlsBaubles {
         .setRarityTier(3)
         .addTooltipTranslatable("tooltip.nffgirls.bauble.active_attack")
         .addAllModifierTooltips()
-        .buildAsBaubleItem(new ResourceLocation(NFFGirls.MOD_ID, "courage_badge"), 2, new Item.Properties().tab(TAB)));
+        .buildAsBaubleItem(new ResourceLocation(NFFGirls.MOD_ID, "courage_badge"), 2, new Item.Properties()));
 
     public static final RegistryObject<NFFGirlsDedicatedBaubleItem> COURAGE_BADGE_III = BAUBLE_ITEMS.register("courage_badge_iii", () -> new NFFGirlsBaubleBuilder()
         .repeatable(Attributes.ATTACK_DAMAGE, 9d, AttributeModifier.Operation.ADDITION)
@@ -337,7 +334,7 @@ public class NFFGirlsBaubles {
         .setRarityTier(5)
         .addTooltipTranslatable("tooltip.nffgirls.bauble.active_attack")
         .addAllModifierTooltips()
-        .buildAsBaubleItem(new ResourceLocation(NFFGirls.MOD_ID, "courage_badge"), 3, new Item.Properties().tab(TAB))
+        .buildAsBaubleItem(new ResourceLocation(NFFGirls.MOD_ID, "courage_badge"), 3, new Item.Properties())
         .alwaysFoil().cast());
 
     public static final RegistryObject<NFFGirlsDedicatedBaubleItem> TREASURE_HUNTER_BADGE = BAUBLE_ITEMS.register("treasure_hunter_badge", () -> new NFFGirlsBaubleBuilder()
@@ -349,7 +346,7 @@ public class NFFGirlsBaubles {
         .setRarityTier(3)
         .addTooltipTranslatable("tooltip.nffgirls.bauble.active_attack")
         .addAllModifierTooltips()
-        .buildAsBaubleItem(new ResourceLocation(NFFGirls.MOD_ID, "treasure_hunter_badge"), 1, new Item.Properties().tab(TAB)));
+        .buildAsBaubleItem(new ResourceLocation(NFFGirls.MOD_ID, "treasure_hunter_badge"), 1, new Item.Properties()));
 
     public static final RegistryObject<NFFGirlsDedicatedBaubleItem> TREASURE_HUNTER_BADGE_II = BAUBLE_ITEMS.register("treasure_hunter_badge_ii", () -> new NFFGirlsBaubleBuilder()
         .repeatable(ForgeMod.STEP_HEIGHT_ADDITION.get(), 0.5d, AttributeModifier.Operation.ADDITION)
@@ -361,7 +358,7 @@ public class NFFGirlsBaubles {
         .setRarityTier(5)
         .addTooltipTranslatable("tooltip.nffgirls.bauble.active_attack")
         .addAllModifierTooltips()
-        .buildAsBaubleItem(new ResourceLocation(NFFGirls.MOD_ID, "treasure_hunter_badge"), 2, new Item.Properties().tab(TAB)));
+        .buildAsBaubleItem(new ResourceLocation(NFFGirls.MOD_ID, "treasure_hunter_badge"), 2, new Item.Properties()));
 
     public static final RegistryObject<NFFGirlsDedicatedBaubleItem> TREASURE_HUNTER_BADGE_III = BAUBLE_ITEMS.register("treasure_hunter_badge_iii", () -> new NFFGirlsBaubleBuilder()
         .repeatable(ForgeMod.STEP_HEIGHT_ADDITION.get(), 1d, AttributeModifier.Operation.ADDITION)
@@ -373,7 +370,7 @@ public class NFFGirlsBaubles {
         .setRarityTier(7)
         .addTooltipTranslatable("tooltip.nffgirls.bauble.active_attack")
         .addAllModifierTooltips()
-        .buildAsBaubleItem(new ResourceLocation(NFFGirls.MOD_ID, "treasure_hunter_badge"), 3, new Item.Properties().tab(TAB))
+        .buildAsBaubleItem(new ResourceLocation(NFFGirls.MOD_ID, "treasure_hunter_badge"), 3, new Item.Properties())
         .alwaysFoil().cast());
 
     public static final RegistryObject<NFFGirlsDedicatedBaubleItem> NATURE_BADGE = BAUBLE_ITEMS.register("nature_badge", () -> new NFFGirlsBaubleBuilder()
@@ -387,7 +384,7 @@ public class NFFGirlsBaubles {
         .addAllModifierTooltips(NFFGirlsBaubleBuilder.NO_CONDITION::get)
         .addTooltip(EFFECT_CONDITION_IN_WATER_OR_RAIN.get().getTranslation())
         .addAllModifierTooltips(EFFECT_CONDITION_IN_WATER_OR_RAIN::get)
-        .buildAsBaubleItem(new ResourceLocation(NFFGirls.MOD_ID, "nature_badge"), 1, new Item.Properties().tab(TAB)));
+        .buildAsBaubleItem(new ResourceLocation(NFFGirls.MOD_ID, "nature_badge"), 1, new Item.Properties()));
 
     public static final RegistryObject<NFFGirlsDedicatedBaubleItem> NATURE_BADGE_II = BAUBLE_ITEMS.register("nature_badge_ii", () -> new NFFGirlsBaubleBuilder()
         .equippingCondition(CONDITION_PLANT.get())
@@ -401,7 +398,7 @@ public class NFFGirlsBaubles {
         .addAllModifierTooltips(NFFGirlsBaubleBuilder.NO_CONDITION::get)
         .addTooltip(EFFECT_CONDITION_IN_WATER_OR_RAIN.get().getTranslation())
         .addAllModifierTooltips(EFFECT_CONDITION_IN_WATER_OR_RAIN::get)
-        .buildAsBaubleItem(new ResourceLocation(NFFGirls.MOD_ID, "nature_badge"), 2, new Item.Properties().tab(TAB)));
+        .buildAsBaubleItem(new ResourceLocation(NFFGirls.MOD_ID, "nature_badge"), 2, new Item.Properties()));
 
     public static final RegistryObject<NFFGirlsDedicatedBaubleItem> NATURE_BADGE_III = BAUBLE_ITEMS.register("nature_badge_iii", () -> new NFFGirlsBaubleBuilder()
         .equippingCondition(CONDITION_PLANT.get())
@@ -416,7 +413,7 @@ public class NFFGirlsBaubles {
         .addAllModifierTooltips(NFFGirlsBaubleBuilder.NO_CONDITION::get)
         .addTooltip(EFFECT_CONDITION_IN_WATER_OR_RAIN.get().getTranslation())
         .addAllModifierTooltips(EFFECT_CONDITION_IN_WATER_OR_RAIN::get)
-        .buildAsBaubleItem(new ResourceLocation(NFFGirls.MOD_ID, "nature_badge"), 3, new Item.Properties().tab(TAB))
+        .buildAsBaubleItem(new ResourceLocation(NFFGirls.MOD_ID, "nature_badge"), 3, new Item.Properties())
         .alwaysFoil().cast());
 
     public static final RegistryObject<NFFGirlsDedicatedBaubleItem> NATURE_BADGE_IV = BAUBLE_ITEMS.register("nature_badge_iv", () -> new NFFGirlsBaubleBuilder()
@@ -433,7 +430,7 @@ public class NFFGirlsBaubles {
         .addAllModifierTooltips(NFFGirlsBaubleBuilder.NO_CONDITION::get)
         .addTooltip(EFFECT_CONDITION_IN_WATER_OR_RAIN.get().getTranslation())
         .addAllModifierTooltips(EFFECT_CONDITION_IN_WATER_OR_RAIN::get)
-        .buildAsBaubleItem(new ResourceLocation(NFFGirls.MOD_ID, "nature_badge"), 4, new Item.Properties().tab(TAB))
+        .buildAsBaubleItem(new ResourceLocation(NFFGirls.MOD_ID, "nature_badge"), 4, new Item.Properties())
         .alwaysFoil().cast());
 
     public static final RegistryObject<NFFGirlsDedicatedBaubleItem> NATURE_BADGE_V = BAUBLE_ITEMS.register("nature_badge_v", () -> new NFFGirlsBaubleBuilder()
@@ -452,7 +449,7 @@ public class NFFGirlsBaubles {
         .addAllModifierTooltips(NFFGirlsBaubleBuilder.NO_CONDITION::get)
         .addTooltip(EFFECT_CONDITION_IN_WATER_OR_RAIN.get().getTranslation())
         .addAllModifierTooltips(EFFECT_CONDITION_IN_WATER_OR_RAIN::get)
-        .buildAsBaubleItem(new ResourceLocation(NFFGirls.MOD_ID, "nature_badge"), 5, new Item.Properties().tab(TAB))
+        .buildAsBaubleItem(new ResourceLocation(NFFGirls.MOD_ID, "nature_badge"), 5, new Item.Properties())
         .alwaysFoil().cast());
 
     public static final RegistryObject<NFFGirlsDedicatedBaubleItem> NATURES_TENDERNESS_BADGE = BAUBLE_ITEMS.register("natures_tenderness_badge", () -> new NFFGirlsBaubleBuilder()
@@ -467,7 +464,7 @@ public class NFFGirlsBaubles {
         .addAllModifierTooltips(NFFGirlsBaubleBuilder.NO_CONDITION::get)
         .addTooltip(EFFECT_CONDITION_IN_WATER_OR_RAIN.get().getTranslation())
         .addAllModifierTooltips(EFFECT_CONDITION_IN_WATER_OR_RAIN::get)
-        .buildAsBaubleItem(new ResourceLocation(NFFGirls.MOD_ID, "natures_tenderness_badge"), 1, new Item.Properties().tab(TAB)));
+        .buildAsBaubleItem(new ResourceLocation(NFFGirls.MOD_ID, "natures_tenderness_badge"), 1, new Item.Properties()));
 
     public static final RegistryObject<NFFGirlsDedicatedBaubleItem> NATURES_TENDERNESS_BADGE_II = BAUBLE_ITEMS.register("natures_tenderness_badge_ii", () -> new NFFGirlsBaubleBuilder()
         .equippingCondition(CONDITION_PLANT.get())
@@ -483,7 +480,7 @@ public class NFFGirlsBaubles {
         .addAllModifierTooltips(NFFGirlsBaubleBuilder.NO_CONDITION::get)
         .addTooltip(EFFECT_CONDITION_IN_WATER_OR_RAIN.get().getTranslation())
         .addAllModifierTooltips(EFFECT_CONDITION_IN_WATER_OR_RAIN::get)
-        .buildAsBaubleItem(new ResourceLocation(NFFGirls.MOD_ID, "natures_tenderness_badge"), 2, new Item.Properties().tab(TAB))
+        .buildAsBaubleItem(new ResourceLocation(NFFGirls.MOD_ID, "natures_tenderness_badge"), 2, new Item.Properties())
         .alwaysFoil().cast());
 
     public static final RegistryObject<NFFGirlsDedicatedBaubleItem> NATURES_TENDERNESS_BADGE_III = BAUBLE_ITEMS.register("natures_tenderness_badge_iii", () -> new NFFGirlsBaubleBuilder()
@@ -502,7 +499,7 @@ public class NFFGirlsBaubles {
         .addAllModifierTooltips(NFFGirlsBaubleBuilder.NO_CONDITION::get)
         .addTooltip(EFFECT_CONDITION_IN_WATER_OR_RAIN.get().getTranslation())
         .addAllModifierTooltips(EFFECT_CONDITION_IN_WATER_OR_RAIN::get)
-        .buildAsBaubleItem(new ResourceLocation(NFFGirls.MOD_ID, "natures_tenderness_badge"), 3, new Item.Properties().tab(TAB))
+        .buildAsBaubleItem(new ResourceLocation(NFFGirls.MOD_ID, "natures_tenderness_badge"), 3, new Item.Properties())
         .alwaysFoil().cast());
 
     public static final RegistryObject<NFFGirlsDedicatedBaubleItem> NATURES_RAGE_BADGE = BAUBLE_ITEMS.register("natures_rage_badge", () -> new NFFGirlsBaubleBuilder()
@@ -518,7 +515,7 @@ public class NFFGirlsBaubles {
         .addAllModifierTooltips(NFFGirlsBaubleBuilder.NO_CONDITION::get)
         .addTooltip(EFFECT_CONDITION_IN_WATER_OR_RAIN.get().getTranslation())
         .addAllModifierTooltips(EFFECT_CONDITION_IN_WATER_OR_RAIN::get)
-        .buildAsBaubleItem(new ResourceLocation(NFFGirls.MOD_ID, "natures_rage_badge"), 1, new Item.Properties().tab(TAB)));
+        .buildAsBaubleItem(new ResourceLocation(NFFGirls.MOD_ID, "natures_rage_badge"), 1, new Item.Properties()));
 
     public static final RegistryObject<NFFGirlsDedicatedBaubleItem> NATURES_RAGE_BADGE_II = BAUBLE_ITEMS.register("natures_rage_badge_ii", () -> new NFFGirlsBaubleBuilder()
         .equippingCondition(CONDITION_PLANT.get())
@@ -533,7 +530,7 @@ public class NFFGirlsBaubles {
         .addAllModifierTooltips(NFFGirlsBaubleBuilder.NO_CONDITION::get)
         .addTooltip(EFFECT_CONDITION_IN_WATER_OR_RAIN.get().getTranslation())
         .addAllModifierTooltips(EFFECT_CONDITION_IN_WATER_OR_RAIN::get)
-        .buildAsBaubleItem(new ResourceLocation(NFFGirls.MOD_ID, "natures_rage_badge"), 2, new Item.Properties().tab(TAB))
+        .buildAsBaubleItem(new ResourceLocation(NFFGirls.MOD_ID, "natures_rage_badge"), 2, new Item.Properties())
         .alwaysFoil().cast());
 
     public static final RegistryObject<NFFGirlsDedicatedBaubleItem> NATURES_RAGE_BADGE_III = BAUBLE_ITEMS.register("natures_rage_badge_iii", () -> new NFFGirlsBaubleBuilder()
@@ -552,7 +549,7 @@ public class NFFGirlsBaubles {
         .addAllModifierTooltips(NFFGirlsBaubleBuilder.NO_CONDITION::get)
         .addTooltip(EFFECT_CONDITION_IN_WATER_OR_RAIN.get().getTranslation())
         .addAllModifierTooltips(EFFECT_CONDITION_IN_WATER_OR_RAIN::get)
-        .buildAsBaubleItem(new ResourceLocation(NFFGirls.MOD_ID, "natures_rage_badge"), 3, new Item.Properties().tab(TAB))
+        .buildAsBaubleItem(new ResourceLocation(NFFGirls.MOD_ID, "natures_rage_badge"), 3, new Item.Properties())
         .alwaysFoil().cast());
 
     // =========== JADE ============ //
@@ -562,7 +559,7 @@ public class NFFGirlsBaubles {
         .repeatable(Attributes.MOVEMENT_SPEED, 0.1d, AttributeModifier.Operation.MULTIPLY_BASE)
         .setRarityTier(0)
         .addAllModifierTooltips()
-        .buildAsBaubleItem(new ResourceLocation(NFFGirls.MOD_ID, "raw_jade"), 1, new Item.Properties().tab(TAB)));
+        .buildAsBaubleItem(new ResourceLocation(NFFGirls.MOD_ID, "raw_jade"), 1, new Item.Properties()));
 
     public static final RegistryObject<NFFGirlsDedicatedBaubleItem> BURNISHED_JADE = BAUBLE_ITEMS.register("burnished_jade", () -> new NFFGirlsBaubleBuilder()
         .repeatable(Attributes.MAX_HEALTH, 5d, AttributeModifier.Operation.ADDITION)
@@ -570,7 +567,7 @@ public class NFFGirlsBaubles {
         .repeatable(Attributes.MOVEMENT_SPEED, 0.1d, AttributeModifier.Operation.MULTIPLY_BASE)
         .setRarityTier(1)
         .addAllModifierTooltips()
-        .buildAsBaubleItem(new ResourceLocation(NFFGirls.MOD_ID, "burnished_jade"), 1, new Item.Properties().tab(TAB)));
+        .buildAsBaubleItem(new ResourceLocation(NFFGirls.MOD_ID, "burnished_jade"), 1, new Item.Properties()));
 
     public static final RegistryObject<NFFGirlsDedicatedBaubleItem> HOLY_JADE = BAUBLE_ITEMS.register("holy_jade", () -> new NFFGirlsBaubleBuilder()
         .equippingCondition(CONDITION_NOT_UNDEAD.get())
@@ -579,7 +576,7 @@ public class NFFGirlsBaubles {
         .setRarityTier(2)
         .addEquippingConditionTooltip()
         .addAllModifierTooltips()
-        .buildAsBaubleItem(new ResourceLocation(NFFGirls.MOD_ID, "holy_jade"), 1, new Item.Properties().tab(TAB)));
+        .buildAsBaubleItem(new ResourceLocation(NFFGirls.MOD_ID, "holy_jade"), 1, new Item.Properties()));
 
     public static final RegistryObject<NFFGirlsDedicatedBaubleItem> HOLY_JADE_II = BAUBLE_ITEMS.register("holy_jade_ii", () -> new NFFGirlsBaubleBuilder()
         .equippingCondition(CONDITION_NOT_UNDEAD.get())
@@ -591,7 +588,7 @@ public class NFFGirlsBaubles {
         .setRarityTier(3)
         .addEquippingConditionTooltip()
         .addAllModifierTooltips()
-        .buildAsBaubleItem(new ResourceLocation(NFFGirls.MOD_ID, "holy_jade"), 2, new Item.Properties().tab(TAB)));
+        .buildAsBaubleItem(new ResourceLocation(NFFGirls.MOD_ID, "holy_jade"), 2, new Item.Properties()));
 
     public static final RegistryObject<NFFGirlsDedicatedBaubleItem> HOLY_JADE_III = BAUBLE_ITEMS.register("holy_jade_iii", () -> new NFFGirlsBaubleBuilder()
         .equippingCondition(CONDITION_NOT_UNDEAD.get())
@@ -604,27 +601,27 @@ public class NFFGirlsBaubles {
         .setRarityTier(5)
         .addEquippingConditionTooltip()
         .addAllModifierTooltips()
-        .buildAsBaubleItem(new ResourceLocation(NFFGirls.MOD_ID, "holy_jade"), 3, new Item.Properties().tab(TAB))
+        .buildAsBaubleItem(new ResourceLocation(NFFGirls.MOD_ID, "holy_jade"), 3, new Item.Properties())
         .alwaysFoil().cast());
 
     public static final RegistryObject<NFFGirlsDedicatedBaubleItem> HEALING_JADE = BAUBLE_ITEMS.register("healing_jade", () -> new NFFGirlsBaubleBuilder()
         .repeatable(NFFGirlsEntityAttributes.PERSISTENT_HEALING.get(), 0.1d, AttributeModifier.Operation.ADDITION)
         .setRarityTier(1)
         .addAllModifierTooltips()
-        .buildAsBaubleItem(new ResourceLocation(NFFGirls.MOD_ID, "healing_jade"), 1, new Item.Properties().tab(TAB)));
+        .buildAsBaubleItem(new ResourceLocation(NFFGirls.MOD_ID, "healing_jade"), 1, new Item.Properties()));
 
     public static final RegistryObject<NFFGirlsDedicatedBaubleItem> HEALING_JADE_II = BAUBLE_ITEMS.register("healing_jade_ii", () -> new NFFGirlsBaubleBuilder()
         .repeatable(NFFGirlsEntityAttributes.PERSISTENT_HEALING.get(), 0.2d, AttributeModifier.Operation.ADDITION)
         .setRarityTier(2)
         .addAllModifierTooltips()
-        .buildAsBaubleItem(new ResourceLocation(NFFGirls.MOD_ID, "healing_jade"), 2, new Item.Properties().tab(TAB)));
+        .buildAsBaubleItem(new ResourceLocation(NFFGirls.MOD_ID, "healing_jade"), 2, new Item.Properties()));
 
     public static final RegistryObject<NFFGirlsDedicatedBaubleItem> HEALING_JADE_III = BAUBLE_ITEMS.register("healing_jade_iii", () -> new NFFGirlsBaubleBuilder()
         .repeatable(NFFGirlsEntityAttributes.PERSISTENT_HEALING.get(), 0.25d, AttributeModifier.Operation.ADDITION)
         .repeatable(NFFGirlsEntityAttributes.HEALTH_ABSORPTION.get(), 0.1d, AttributeModifier.Operation.ADDITION)
         .setRarityTier(4)
         .addAllModifierTooltips()
-        .buildAsBaubleItem(new ResourceLocation(NFFGirls.MOD_ID, "healing_jade"), 3, new Item.Properties().tab(TAB))
+        .buildAsBaubleItem(new ResourceLocation(NFFGirls.MOD_ID, "healing_jade"), 3, new Item.Properties())
         .alwaysFoil().cast());
 
     public static final RegistryObject<NFFGirlsDedicatedBaubleItem> LIFE_JADE = BAUBLE_ITEMS.register("life_jade", () -> new NFFGirlsBaubleBuilder()
@@ -633,7 +630,7 @@ public class NFFGirlsBaubles {
         .setRarityTier(2)
         .environmentResistance()
         .addAllModifierTooltips()
-        .buildAsBaubleItem(new ResourceLocation(NFFGirls.MOD_ID, "life_jade"), 1, new Item.Properties().tab(TAB)));
+        .buildAsBaubleItem(new ResourceLocation(NFFGirls.MOD_ID, "life_jade"), 1, new Item.Properties()));
 
     public static final RegistryObject<NFFGirlsDedicatedBaubleItem> LIFE_JADE_II = BAUBLE_ITEMS.register("life_jade_ii", () -> new NFFGirlsBaubleBuilder()
         .repeatable(NFFGirlsEntityAttributes.PERSISTENT_HEALING.get(), 0.2d, AttributeModifier.Operation.ADDITION)
@@ -641,7 +638,7 @@ public class NFFGirlsBaubles {
         .environmentResistance()
         .setRarityTier(3)
         .addAllModifierTooltips()
-        .buildAsBaubleItem(new ResourceLocation(NFFGirls.MOD_ID, "life_jade"), 2, new Item.Properties().tab(TAB)));
+        .buildAsBaubleItem(new ResourceLocation(NFFGirls.MOD_ID, "life_jade"), 2, new Item.Properties()));
 
     public static final RegistryObject<NFFGirlsDedicatedBaubleItem> LIFE_JADE_III = BAUBLE_ITEMS.register("life_jade_iii", () -> new NFFGirlsBaubleBuilder()
         .repeatable(NFFGirlsEntityAttributes.PERSISTENT_HEALING.get(), 0.25d, AttributeModifier.Operation.ADDITION)
@@ -650,7 +647,7 @@ public class NFFGirlsBaubles {
         .environmentResistance()
         .setRarityTier(5)
         .addAllModifierTooltips()
-        .buildAsBaubleItem(new ResourceLocation(NFFGirls.MOD_ID, "life_jade"), 3, new Item.Properties().tab(TAB))
+        .buildAsBaubleItem(new ResourceLocation(NFFGirls.MOD_ID, "life_jade"), 3, new Item.Properties())
         .alwaysFoil().cast());
 
     public static final RegistryObject<NFFGirlsDedicatedBaubleItem> AQUA_JADE = BAUBLE_ITEMS.register("aqua_jade", () -> new NFFGirlsBaubleBuilder()
@@ -665,7 +662,7 @@ public class NFFGirlsBaubles {
         .environmentResistance()
         .addTooltipTranslatable("tooltip.nffgirls.bauble.in_water")
         .addAllModifierTooltips(EFFECT_CONDITION_IN_WATER::get)
-        .buildAsBaubleItem(new ResourceLocation(NFFGirls.MOD_ID, "aqua_jade"), 1, new Item.Properties().tab(TAB)));
+        .buildAsBaubleItem(new ResourceLocation(NFFGirls.MOD_ID, "aqua_jade"), 1, new Item.Properties()));
 
     public static final RegistryObject<NFFGirlsDedicatedBaubleItem> AQUA_JADE_II = BAUBLE_ITEMS.register("aqua_jade_ii", () -> new NFFGirlsBaubleBuilder()
         .equippingCondition(CONDITION_AQUATIC.get())
@@ -681,7 +678,7 @@ public class NFFGirlsBaubles {
         .environmentResistance()
         .addTooltipTranslatable("tooltip.nffgirls.bauble.in_water")
         .addAllModifierTooltips(EFFECT_CONDITION_IN_WATER::get)
-        .buildAsBaubleItem(new ResourceLocation(NFFGirls.MOD_ID, "aqua_jade"), 2, new Item.Properties().tab(TAB)));
+        .buildAsBaubleItem(new ResourceLocation(NFFGirls.MOD_ID, "aqua_jade"), 2, new Item.Properties()));
 
     public static final RegistryObject<NFFGirlsDedicatedBaubleItem> AQUA_JADE_III = BAUBLE_ITEMS.register("aqua_jade_iii", () -> new NFFGirlsBaubleBuilder()
         .equippingCondition(CONDITION_AQUATIC.get())
@@ -697,7 +694,7 @@ public class NFFGirlsBaubles {
         .environmentResistance()
         .addTooltipTranslatable("tooltip.nffgirls.bauble.in_water")
         .addAllModifierTooltips(EFFECT_CONDITION_IN_WATER::get)
-        .buildAsBaubleItem(new ResourceLocation(NFFGirls.MOD_ID, "aqua_jade"), 3, new Item.Properties().tab(TAB))
+        .buildAsBaubleItem(new ResourceLocation(NFFGirls.MOD_ID, "aqua_jade"), 3, new Item.Properties())
         .alwaysFoil().cast());
 
     public static final RegistryObject<NFFGirlsDedicatedBaubleItem> POISON_JADE = BAUBLE_ITEMS.register("poison_jade", () -> new NFFGirlsBaubleBuilder()
@@ -706,7 +703,7 @@ public class NFFGirlsBaubles {
         .setRarityTier(1)
         .addEquippingConditionTooltip()
         .addAllModifierTooltips()
-        .buildAsBaubleItem(new ResourceLocation(NFFGirls.MOD_ID, "poison_jade"), 1, new Item.Properties().tab(TAB)));
+        .buildAsBaubleItem(new ResourceLocation(NFFGirls.MOD_ID, "poison_jade"), 1, new Item.Properties()));
 
     public static final RegistryObject<NFFGirlsDedicatedBaubleItem> POISON_JADE_II = BAUBLE_ITEMS.register("poison_jade_ii", () -> new NFFGirlsBaubleBuilder()
         .equippingCondition(CONDITION_ARTHROPOD_AND_PLANT.get())
@@ -715,7 +712,7 @@ public class NFFGirlsBaubles {
         .setRarityTier(2)
         .addEquippingConditionTooltip()
         .addAllModifierTooltips()
-        .buildAsBaubleItem(new ResourceLocation(NFFGirls.MOD_ID, "poison_jade"), 2, new Item.Properties().tab(TAB)));
+        .buildAsBaubleItem(new ResourceLocation(NFFGirls.MOD_ID, "poison_jade"), 2, new Item.Properties()));
 
     public static final RegistryObject<NFFGirlsDedicatedBaubleItem> POISON_JADE_III = BAUBLE_ITEMS.register("poison_jade_iii", () -> new NFFGirlsBaubleBuilder()
         .equippingCondition(CONDITION_ARTHROPOD_AND_PLANT.get())
@@ -725,7 +722,7 @@ public class NFFGirlsBaubles {
         .setRarityTier(3)
         .addEquippingConditionTooltip()
         .addAllModifierTooltips()
-        .buildAsBaubleItem(new ResourceLocation(NFFGirls.MOD_ID, "poison_jade"), 3, new Item.Properties().tab(TAB))
+        .buildAsBaubleItem(new ResourceLocation(NFFGirls.MOD_ID, "poison_jade"), 3, new Item.Properties())
         .alwaysFoil().cast());
 
     public static final RegistryObject<NFFGirlsDedicatedBaubleItem> POISON_JADE_IV = BAUBLE_ITEMS.register("poison_jade_iv", () -> new NFFGirlsBaubleBuilder()
@@ -737,7 +734,7 @@ public class NFFGirlsBaubles {
         .setRarityTier(5)
         .addEquippingConditionTooltip()
         .addAllModifierTooltips()
-        .buildAsBaubleItem(new ResourceLocation(NFFGirls.MOD_ID, "poison_jade"), 4, new Item.Properties().tab(TAB))
+        .buildAsBaubleItem(new ResourceLocation(NFFGirls.MOD_ID, "poison_jade"), 4, new Item.Properties())
         .alwaysFoil().cast());
 
     public static final RegistryObject<NFFGirlsDedicatedBaubleItem> EVIL_JADE = BAUBLE_ITEMS.register("evil_jade", () -> new NFFGirlsBaubleBuilder()
@@ -746,7 +743,7 @@ public class NFFGirlsBaubles {
         .repeatable(NFFGirlsEntityAttributes.CRITICAL_RATE.get(), 0.1d, AttributeModifier.Operation.ADDITION)
         .setRarityTier(3)
         .addAllModifierTooltips()
-        .buildAsBaubleItem(new ResourceLocation(NFFGirls.MOD_ID, "evil_jade"), 1, new Item.Properties().tab(TAB)));
+        .buildAsBaubleItem(new ResourceLocation(NFFGirls.MOD_ID, "evil_jade"), 1, new Item.Properties()));
 
     public static final RegistryObject<NFFGirlsDedicatedBaubleItem> EVIL_JADE_II = BAUBLE_ITEMS.register("evil_jade_ii", () -> new NFFGirlsBaubleBuilder()
         .repeatable(NFFGirlsEntityAttributes.POISON_ASPECT.get(), 1.5d, AttributeModifier.Operation.ADDITION)
@@ -755,7 +752,7 @@ public class NFFGirlsBaubles {
         .repeatable(NFFGirlsEntityAttributes.CRITICAL_RATE.get(), 0.15d, AttributeModifier.Operation.ADDITION)
         .setRarityTier(4)
         .addAllModifierTooltips()
-        .buildAsBaubleItem(new ResourceLocation(NFFGirls.MOD_ID, "evil_jade"), 2, new Item.Properties().tab(TAB)));
+        .buildAsBaubleItem(new ResourceLocation(NFFGirls.MOD_ID, "evil_jade"), 2, new Item.Properties()));
 
     public static final RegistryObject<NFFGirlsDedicatedBaubleItem> EVIL_JADE_III = BAUBLE_ITEMS.register("evil_jade_iii", () -> new NFFGirlsBaubleBuilder()
         .repeatable(NFFGirlsEntityAttributes.POISON_ASPECT.get(), 2.5d, AttributeModifier.Operation.ADDITION)
@@ -766,7 +763,7 @@ public class NFFGirlsBaubles {
         .repeatable(NFFGirlsEntityAttributes.XP_GAIN_RATE.get(), 0.15d, AttributeModifier.Operation.ADDITION)
         .setRarityTier(6)
         .addAllModifierTooltips()
-        .buildAsBaubleItem(new ResourceLocation(NFFGirls.MOD_ID, "evil_jade"), 3, new Item.Properties().tab(TAB))
+        .buildAsBaubleItem(new ResourceLocation(NFFGirls.MOD_ID, "evil_jade"), 3, new Item.Properties())
         .alwaysFoil().cast());
 /*
     public static final RegistryObject<NFFGirlsDedicatedBaubleItem> DECAY_JADE = BAUBLE_ITEMS.register("decay_jade", () -> new NFFGirlsBaubleBuilder()
@@ -777,7 +774,7 @@ public class NFFGirlsBaubles {
         .repeatable(Attributes.MOVEMENT_SPEED, -0.1d, AttributeModifier.Operation.MULTIPLY_BASE)
         .setRarityTier(3)
         .addAllModifierTooltips()
-        .buildAsBaubleItem(new ResourceLocation(NFFGirls.MOD_ID, "decay_jade"), 1, new Item.Properties().tab(TAB)));
+        .buildAsBaubleItem(new ResourceLocation(NFFGirls.MOD_ID, "decay_jade"), 1, new Item.Properties()));
 
     public static final RegistryObject<NFFGirlsDedicatedBaubleItem> DECAY_JADE_II = BAUBLE_ITEMS.register("decay_jade_ii", () -> new NFFGirlsBaubleBuilder()
         .repeatable(NFFGirlsEntityAttributes.WITHER_ASPECT.get(), 4d, AttributeModifier.Operation.ADDITION)
@@ -787,7 +784,7 @@ public class NFFGirlsBaubles {
         .repeatable(Attributes.MOVEMENT_SPEED, -0.1d, AttributeModifier.Operation.MULTIPLY_BASE)
         .setRarityTier(4)
         .addAllModifierTooltips()
-        .buildAsBaubleItem(new ResourceLocation(NFFGirls.MOD_ID, "decay_jade"), 2, new Item.Properties().tab(TAB)));
+        .buildAsBaubleItem(new ResourceLocation(NFFGirls.MOD_ID, "decay_jade"), 2, new Item.Properties()));
 
     public static final RegistryObject<NFFGirlsDedicatedBaubleItem> DECAY_JADE_III = BAUBLE_ITEMS.register("decay_jade_iii", () -> new NFFGirlsBaubleBuilder()
         .repeatable(NFFGirlsEntityAttributes.WITHER_ASPECT.get(), 6d, AttributeModifier.Operation.ADDITION)
@@ -797,14 +794,14 @@ public class NFFGirlsBaubles {
         .repeatable(Attributes.MOVEMENT_SPEED, -0.1d, AttributeModifier.Operation.MULTIPLY_BASE)
         .setRarityTier(6)
         .addAllModifierTooltips()
-        .buildAsBaubleItem(new ResourceLocation(NFFGirls.MOD_ID, "decay_jade"), 3, new Item.Properties().tab(TAB)));
+        .buildAsBaubleItem(new ResourceLocation(NFFGirls.MOD_ID, "decay_jade"), 3, new Item.Properties()));
 
 */
     // Misc
     public static final RegistryObject<NFFGirlsDedicatedBaubleItem> RESISTANCE_CORE = BAUBLE_ITEMS.register("resistance_core", () -> new NFFGirlsBaubleBuilder()
         .environmentResistance()
         .setRarityTier(0)
-        .buildAsBaubleItem(new ResourceLocation(NFFGirls.MOD_ID, "resistance_core"), 1, new Item.Properties().tab(TAB)));
+        .buildAsBaubleItem(new ResourceLocation(NFFGirls.MOD_ID, "resistance_core"), 1, new Item.Properties()));
 
     public static final NFURegistry.Accessor<NFFGirlsBaubleBehavior> INSOMNIA_FRUIT =
         BAUBLES.register("insomnia_fruit", () -> new NFFGirlsBaubleBuilder()
@@ -817,7 +814,7 @@ public class NFFGirlsBaubles {
 
     // Ingredients
 
-    public static final RegistryObject<Item> JADE_MATERIAL = BAUBLE_ITEMS.register("jade_material", () -> new Item(new Item.Properties().tab(TAB)));
+    public static final RegistryObject<Item> JADE_MATERIAL = BAUBLE_ITEMS.register("jade_material", () -> new Item(new Item.Properties()));
 
 
    /* static {

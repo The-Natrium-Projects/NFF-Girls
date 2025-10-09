@@ -1,6 +1,7 @@
 package net.sodiumzh.nff.girls.registry;
 
 import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.Mob;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
@@ -14,9 +15,9 @@ import java.util.Optional;
 @Mod.EventBusSubscriber(bus = Mod.EventBusSubscriber.Bus.MOD, modid = NFFGirls.MOD_ID)
 public class NFFGirlsHealingItemMappings {
 
-    private static final Map<EntityType<?>, MobApplicableItemTable> TABLE = new HashMap<>();
+    private static final Map<EntityType<? extends Mob>, MobApplicableItemTable> TABLE = new HashMap<>();
 
-    public static Map<EntityType<?>, MobApplicableItemTable> getTable() {
+    public static Map<EntityType<? extends Mob>, MobApplicableItemTable> getTable() {
         return TABLE;
     }
 
@@ -24,7 +25,7 @@ public class NFFGirlsHealingItemMappings {
         return Optional.ofNullable(TABLE.get(type));
     }
 
-    public static void put(EntityType<?> type, MobApplicableItemTable table) {
+    public static void put(EntityType<? extends Mob> type, MobApplicableItemTable table) {
         TABLE.put(type, table);
     }
 
