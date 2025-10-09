@@ -4,10 +4,14 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.mojang.logging.LogUtils;
-import net.minecraft.core.Registry;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.entity.Mob;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
+import net.minecraftforge.registries.ForgeRegistries;
+import net.sodiumzh.nff.girls.registry.NFFGirlsHealingItems;
 import net.sodiumzh.nff.girls.registry.NFFGirlsItems;
 import net.sodiumzh.nfu.annotation.DontCallManually;
 import net.sodiumzh.nfu.entity.MobApplicableItemTable;
@@ -17,6 +21,7 @@ import net.sodiumzh.nfu.function.RegistrableFunction;
 import net.sodiumzh.nfu.function.RegistrablePredicate;
 import net.sodiumzh.nfu.math.RandomSelection;
 import net.sodiumzh.nfu.math.RangedRandomDouble;
+import net.sodiumzh.nfu.math.RangedRandomInt;
 import net.sodiumzh.nfu.registry.NFUFunctions;
 import net.sodiumzh.nfu.registry.NFURegistries;
 import net.sodiumzh.nfu.util.NFUDataStatics;
@@ -24,6 +29,7 @@ import org.checkerframework.checker.units.qual.A;
 
 import javax.swing.text.html.Option;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import java.util.function.Function;
@@ -39,15 +45,16 @@ public class NFFGirlsDataReaders {
                     if (!element.isJsonObject()) continue; // This skips some random stuff like string descriptions.
                     JsonObject obj = element.getAsJsonObject();
 
-                    // Get item info
-                    JsonElement itemJson = obj.get("item");
-                    String item = itemJson != null ? obj.get("item").getAsString() : null;
-                    String tag = item != null ? null : obj.get("tag").getAsString();
-                    String predicate = (item == null && tag == null) ? obj.get("item_predicate").getAsString() : null;
-                    if (item == null && tag == null && predicate == null) {
-                        LogUtils.getLogger().warn("Reading MobApplicableItemTable failed: Missing item info.");
+                    // Get criteria
+                    MobApplicableItemTable.ItemStackCriteria criteria = MobApplicableItemTable.ItemStackCriteria.create();
+                    criteria.addItems(NFUDataStatics.getOptionalList(obj, "item", JsonElement::getAsString));
+                    criteria.addItems(NFUDataStatics.getOptionalList(obj, "items", JsonElement::getAsString));
+                    criteria.addTags(NFUDataStatics.getOptionalList(obj, "tag", JsonElement::getAsString));
+                    criteria.addTags(NFUDataStatics.getOptionalList(obj, "tags", JsonElement::getAsString));
+                    NFUDataStatics.getOptional(obj, "item_predicate", elem ->
+                        new ResourceLocation(elem.getAsString())).ifPresent(criteria::setRegistrablePredicate);
+                    if (criteria.getAllUsableItems().isEmpty())
                         continue;
-                    }
 
                     // Get output info
                     /*
@@ -55,38 +62,21 @@ public class NFFGirlsDataReaders {
                      * <p>[double] or [double, double] or [double, double, double]: {@link RangedRandomDouble#fromArrayRepresentation(double[])};
                      * <p>[double, [double, double], [double, double], ...]: {@link RandomSelection<Double>}, the first value is fallback value, and other pairs are [value, probability].
                      */
-                    JsonElement amountJson = obj.get("amount");
-                    JsonElement amountGetterJson = obj.get("amount_getter");
-                    MobApplicableItemTable.DoubleValueProvider provider = null;
-                    if (amountJson != null) {
-                        provider = parseDoubleProvider(amountJson);
-                    }
-                    else if (amountGetterJson != null)
-                    {
-                        provider = MobApplicableItemTable.DoubleValueProvider.functionKey(new ResourceLocation(amountGetterJson.getAsString()));
-                        if (!provider.isValid()) provider = null
-                    }
-                    else {
-                        LogUtils.getLogger().warn(String.format("Reading MobApplicableItemTable failed: Missing amount info for %s \"%s\".",
-                                item != null ? "item" : tag != null ? "tag" : "item predicate",
-                                item != null ? item : tag != null ? tag : predicate));
+                    //JsonElement amountJson = obj.get("amount");
+                    //JsonElement amountGetterJson = obj.get("amount_getter");
+                    MobApplicableItemTable.DoubleValueProvider amountProvider =
+                        NFUDataStatics.getOptional(obj, "amount", j -> j).map(NFFGirlsDataReaders::parseDoubleProvider).orElseGet(() ->
+                            NFUDataStatics.getOptionalString(obj, "amount_getter").map(str -> MobApplicableItemTable.DoubleValueProvider.functionKey(new ResourceLocation(str)))
+                                .orElse(MobApplicableItemTable.DoubleValueProvider.INVALID));
+                    MobApplicableItemTable.IntValueProvider cooldown =
+                        NFUDataStatics.getOptionalInt(obj, "cooldown")
+                            .map(MobApplicableItemTable.IntValueProvider::singleNumber)
+                            .filter(MobApplicableItemTable.IntValueProvider::isValid)
+                            .orElse(MobApplicableItemTable.IntValueProvider.singleNumber(NFFGirlsHealingItems.DEFAULT_COOLDOWN));
+                    if (!amountProvider.isValid())
                         continue;
-                    }
-
-                    if (item != null)
-                        builder.add(new ResourceLocation(item), getter);
-                    else if (tag != null)
-                        builder.add(TagKey.create(Registry.ITEM_REGISTRY, new ResourceLocation(tag)), getter);
-                    else if (predicate != null)
-                        builder.add(stack -> NFUFunctions.invoke(new ResourceLocation(predicate), stack)
-                                .castTo(Boolean.class).booleanValue(), getter);
-                    else {
-                        LogUtils.getLogger().warn("Reading MobApplicableItemTable failed: Missing item info.");
-                    }
-
-                    if (element.getAsJsonObject().has("consume")
-                        && !element.getAsJsonObject().get("consume").getAsBoolean())
-                        builder.noConsume();
+                    boolean consume = NFUDataStatics.getOptional(obj, "consume", JsonElement::getAsBoolean).orElse(true);
+                    builder.add(criteria, new MobApplicableItemTable.OutcomeProvider(amountProvider, cooldown).setNoConsume(!consume));
                 }
                 catch (RuntimeException e) {
                     e.printStackTrace();
