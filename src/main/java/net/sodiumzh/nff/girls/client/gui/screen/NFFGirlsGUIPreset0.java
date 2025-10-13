@@ -144,7 +144,7 @@ public class NFFGirlsGUIPreset0 extends NFFTamedGUI {
 		addAttributeInfo(graphics, position, 0x404040, 11);
 	}
 	
-	/** Below are texture-specific, must using gui_preset_0.png */
+	/* Below are texture-specific, must using gui_preset_0.png */
 	
 	protected GuiPos screenSize()
 	{

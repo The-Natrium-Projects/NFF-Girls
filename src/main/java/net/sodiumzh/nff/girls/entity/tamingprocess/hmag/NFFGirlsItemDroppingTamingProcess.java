@@ -22,6 +22,7 @@ import net.sodiumzh.nfu.capability.EntityTimerAccessor;
 import net.sodiumzh.nfu.entity.MobApplicableItemTable;
 import net.sodiumzh.nfu.entity.taming.ITamingProcess;
 import net.sodiumzh.nfu.entity.taming.TamingInteractionResult;
+import net.sodiumzh.nfu.mixin.event.entity.EntityStartBaseTickEvent;
 import net.sodiumzh.nfu.mixin.event.entity.EntityTickEvent;
 import net.sodiumzh.nfu.registry.NFUCapabilities;
 import net.sodiumzh.nfu.util.NFUItemStatics;
@@ -319,7 +320,7 @@ public abstract class NFFGirlsItemDroppingTamingProcess extends NFFTamingProcess
 	{
 		var table = this.getItemGivingTableOverride();
 		if (table != null)
-			return table.get().getOutput(mob, item) != null;
+			return table.get().getOutcome(mob, item).isPresent();
 		else return this.getItemDeltaProgress().containsKey(item.getItem());
 	}
 
@@ -328,8 +329,8 @@ public abstract class NFFGirlsItemDroppingTamingProcess extends NFFTamingProcess
 		var table = this.getItemGivingTableOverride();
 		if (table != null)
 		{
-			var output = table.get().getOutput(mob, item);
-			return output != null ? output.amount() : 0d;
+			var output = table.get().getOutcome(mob, item);
+			return output.map(MobApplicableItemTable.Outcome::amount).orElse(0d);
 		}
 		else {
 			var map = this.getItemDeltaProgress();
@@ -383,7 +384,7 @@ public abstract class NFFGirlsItemDroppingTamingProcess extends NFFTamingProcess
 	}
 
 	@SubscribeEvent
-	public static void tickItemEntityPickingCooldown(EntityTickEvent event)
+	public static void tickItemEntityPickingCooldown(EntityStartBaseTickEvent event)
 	{
 		if (event.getEntity() instanceof ItemEntity ie && !ie.level().isClientSide)
 		{

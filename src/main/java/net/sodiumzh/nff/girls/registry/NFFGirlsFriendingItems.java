@@ -4,7 +4,6 @@ import net.minecraft.resources.ResourceLocation;
 import net.sodiumzh.nff.girls.NFFGirls;
 import net.sodiumzh.nff.girls.data.NFFGirlsDataReaders;
 import net.sodiumzh.nfu.entity.MobApplicableItemTable;
-import net.sodiumzh.nfu.registry.NFURegistries;
 import net.sodiumzh.nfu.registry.NFURegistry;
 import net.sodiumzh.nfu.registry.NFURegistryEntryCollection;
 
@@ -12,11 +11,14 @@ public class NFFGirlsFriendingItems {
     // For loading registry
     public static void init() {}
 
-    public static final NFURegistry<MobApplicableItemTable> FRIENDING_ITEMS =
-        new NFURegistry<>(new ResourceLocation(NFFGirls.MOD_ID, "friending_items"));
+    public static final NFURegistry<MobApplicableItemTable> REGISTRY =
+        new NFURegistry<MobApplicableItemTable>(new ResourceLocation(NFFGirls.MOD_ID, "friending_items"))
+            .setShouldGenerateOnServerSetup()
+            .setUnavailableBefore(NFURegistry.SetupPhase.SERVER_SETUP)
+            .setSide(NFURegistry.AvailableSide.SERVER);
 
     public static final NFURegistryEntryCollection<MobApplicableItemTable> FRIENDING_ITEM_COLLECTION =
-        NFURegistryEntryCollection.create(FRIENDING_ITEMS, NFFGirls.MOD_ID);
+        NFURegistryEntryCollection.create(REGISTRY, NFFGirls.MOD_ID);
 
     // For Alraune
     public static final NFURegistry.Accessor<MobApplicableItemTable> PLANT_A =
@@ -25,7 +27,7 @@ public class NFFGirlsFriendingItems {
             .build());
     // For Glaryad
     public static final NFURegistry.Accessor<MobApplicableItemTable> PLANT_B =
-        FRIENDING_ITEM_COLLECTION.register("plant_a", () -> MobApplicableItemTable.builder()
+        FRIENDING_ITEM_COLLECTION.register("plant_b", () -> MobApplicableItemTable.builder()
             .readData(new ResourceLocation(NFFGirls.MOD_ID, "friending/plant_b.json"), NFFGirlsDataReaders::readMobApplicableItemTable)
             .build());
     // For Zombie Girls etc.

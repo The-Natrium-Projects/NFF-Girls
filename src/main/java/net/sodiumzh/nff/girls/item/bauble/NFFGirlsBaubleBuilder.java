@@ -50,7 +50,7 @@ public class NFFGirlsBaubleBuilder {
 
     public static final NFURegistry.Accessor<RegistrablePredicate<Mob>> NO_CONDITION =
         EQUIPPING_CONDITION_PRESETS.register("bauble_no_condition", () ->
-            new RegistrablePredicate<>("nffgirls_bauble_no_condition", mob -> true));
+            new RegistrablePredicate<>(Mob.class, "nffgirls_bauble_no_condition", mob -> true));
 
     private final Map<Supplier<BaubleAttributeModifier>, Predicate<? super Mob>> repeatableModifierSuppliers
         = new HashMap<>();

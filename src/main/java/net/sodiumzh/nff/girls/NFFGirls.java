@@ -44,7 +44,9 @@ public class NFFGirls
 
         // NFU registries
         NFFGirlsHealingItems.HEALING_ITEMS_COLLECTION.merge();
+        NFFGirlsFriendingItems.FRIENDING_ITEM_COLLECTION.merge();
         NFFGirlsFunctions.FUNCTIONS.merge();
+        NFFGirlsPredicates.PREDICATES.merge();
         NFFGirlsTrades.TRADE_COLLECTIONS.merge();
         NFFGirlsTrades.TRADE_REGISTRIES.merge();
         NFFGirlsBaubles.BAUBLES.merge();
