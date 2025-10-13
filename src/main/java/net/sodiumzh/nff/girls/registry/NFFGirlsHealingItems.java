@@ -4,7 +4,6 @@ import net.minecraft.resources.ResourceLocation;
 import net.sodiumzh.nff.girls.NFFGirls;
 import net.sodiumzh.nff.girls.data.NFFGirlsDataReaders;
 import net.sodiumzh.nfu.entity.MobApplicableItemTable;
-import net.sodiumzh.nfu.registry.NFURegistries;
 import net.sodiumzh.nfu.registry.NFURegistry;
 import net.sodiumzh.nfu.registry.NFURegistryEntryCollection;
 
@@ -15,11 +14,14 @@ public class NFFGirlsHealingItems
 
     public static final int DEFAULT_COOLDOWN = 40;
 
-    public static final NFURegistry<MobApplicableItemTable> HEALING_ITEMS =
-        new NFURegistry<>(new ResourceLocation(NFFGirls.MOD_ID, "items"));
+    public static final NFURegistry<MobApplicableItemTable> REGISTRY =
+        new NFURegistry<MobApplicableItemTable>(new ResourceLocation(NFFGirls.MOD_ID, "healing_items"))
+            .setShouldGenerateOnServerSetup()
+            .setUnavailableBefore(NFURegistry.SetupPhase.SERVER_SETUP)
+            .setSide(NFURegistry.AvailableSide.SERVER);
 
     public static final NFURegistryEntryCollection<MobApplicableItemTable> HEALING_ITEMS_COLLECTION =
-        NFURegistryEntryCollection.create(HEALING_ITEMS, NFFGirls.MOD_ID);
+        NFURegistryEntryCollection.create(REGISTRY, NFFGirls.MOD_ID);
 
     public static final NFURegistry.Accessor<MobApplicableItemTable> NONE =
         HEALING_ITEMS_COLLECTION.register("none", () -> MobApplicableItemTable.builder().build());
