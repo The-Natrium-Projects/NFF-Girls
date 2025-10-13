@@ -3,13 +3,12 @@ package net.sodiumzh.nff.girls.jei.trade;
 import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Multimap;
 import com.google.common.collect.Multimaps;
-import jeresources.util.Font;
-import jeresources.util.RenderHelper;
 import mezz.jei.api.recipe.IFocus;
 import mezz.jei.api.recipe.RecipeIngredientRole;
 import mezz.jei.api.recipe.category.extensions.IRecipeCategoryExtension;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.screens.inventory.InventoryScreen;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
@@ -93,9 +92,10 @@ public class NFFGirlsTradeJeiMobEntry implements IRecipeCategoryExtension {
             new GuiPos(0, 0), new GuiPos(162, 120), TEXTURE_SIZE);
         // Draw entity
         entityAndEntries.getA().map(e -> NFUMiscStatics.cast(e, LivingEntity.class)).ifPresent(e ->
-            RenderHelper.renderEntity(guiGraphics, 33, 116,
-                e.getBbHeight() > 2d ? 68d / e.getBbHeight() : 34d,
-                38.0 - mouseX, 80.0 - mouseY, e));
+            InventoryScreen.renderEntityInInventoryFollowsMouse(guiGraphics, 33, 116,
+                (int)(e.getBbHeight() > 2 ? 68d / e.getBbHeight() : 34d),
+                (float) (38.0 - mouseX), (float) (80.0 - mouseY), e)
+        );
         // Draw item frames and arrows
         int y0 = Math.max(0, 5 + getBgHeight(merchantLevels.size()) / 2 - 11 * merchantLevels.size());
         for (int i = 0; i < merchantLevels.size(); ++i) {
@@ -111,11 +111,12 @@ public class NFFGirlsTradeJeiMobEntry implements IRecipeCategoryExtension {
         }
         // Draw level tips
         for (int i = 0; i < merchantLevels.size(); ++i) {
-            Font.normal.print(guiGraphics, "lv. " + levelRequirements[merchantLevels.get(i) - 1], 66, y0 + 5 + i * 22);
+            guiGraphics.drawString(Minecraft.getInstance().font, "lv. " + levelRequirements[merchantLevels.get(i) - 1], 66, y0 + 5 + i * 22, 8, false);
+
         };
         // Draw mob name
-        Font.normal.print(guiGraphics, entityAndEntries.getA().map(Entity::getName)
-            .orElseGet(() -> NFUInfoStatics.createText("")).getVisualOrderText(), 5, 5);
+        guiGraphics.drawString(Minecraft.getInstance().font, entityAndEntries.getA().map(Entity::getName)
+            .orElseGet(() -> NFUInfoStatics.createText("")).getVisualOrderText(), 5, 5, 8, false);
     }
 
     public Optional<IFocus<ItemStack>> getFocus() {

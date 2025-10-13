@@ -17,17 +17,17 @@ import java.util.*;
 import java.util.stream.DoubleStream;
 
 /**
- * Represents a MobApplicableItemTable (MAIT).
+ * Represents a MobApplicableItemTable.
  */
 public class MobApplicableItemTableJeiRecord {
 
-    private final List<EntryRecord> entries;
+    private final List<EntryRecord> entries = new ArrayList<>();
 
     public static final Validatable<Multimap<Integer, NFFGirlsTradeJeiRecord>> ALL_ENTRIES =
         new Validatable<>(null);
 
     private MobApplicableItemTableJeiRecord(List<EntryRecord> entries) {
-        this.entries = entries;
+        this.entries.addAll(entries);
     }
 
     public static MobApplicableItemTableJeiRecord fromTable(MobApplicableItemTable source) {
@@ -48,7 +48,7 @@ public class MobApplicableItemTableJeiRecord {
     }
 
     public static MobApplicableItemTableJeiRecord readBuf(FriendlyByteBuf buf) {
-        return new new MobApplicableItemTableJeiRecord(buf.readList(EntryRecord::readBuf));
+        return new MobApplicableItemTableJeiRecord(buf.readList(EntryRecord::readBuf));
     }
 
     /**
@@ -87,7 +87,7 @@ public class MobApplicableItemTableJeiRecord {
             }
             else return Optional.empty();   // Skip unparseable entries
             // Parse cooldown
-            if (outcomeProvider.getAmountProvider().getAsSingleNumber().isPresent()) {
+            if (outcomeProvider.getCooldownProvider().getAsSingleNumber().isPresent()) {
                 res.cooldown = outcomeProvider.getCooldownProvider().getAsSingleNumber().orElseThrow();
             }
             else return Optional.empty();   // NFF: Girls doesn't allow variable cooldown

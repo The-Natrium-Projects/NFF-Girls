@@ -250,9 +250,15 @@
   "info.nffgirls.introduction_unavailable": "需求点数：%2$d；当前点数：%1$d",
   "info.nffgirls.introduction_written": "%1$s签署了交易介绍信。",
   "info.nffgirls.book.tamable": "一场特殊的邂逅？",
-  "info.nffgirls.jei.trade_title": "NFF: Girls - 交易",
   "death.attack.necromancer_wither": "%1$s没能承受住死灵巫术的诅咒",
 
+  "jei.nffgirls.trade_title": "NFF: Girls - 交易",
+  "jei.nffgirls.healing_item_title": "NFF: Girls - 治疗用物品",
+  "jei.nffgirls.friending_item_title": "NFF: Girls - 友好化用物品",
+  "jei.nffgirls.cooldown": "冷却时间: %1$s秒",
+  "jei.nffgirls.amount_getter.mob_max_health": "完全回复",
+  "jei.nffgirls.no_consume": "不消耗",
+  "jei.nffgirls.amount_expectation": "（平均%1$s）",
 
   "tooltip.nffgirls.bauble.in_water": "在水中时：",
   "tooltip.nffgirls.bauble.at_night": "在晚上时：",

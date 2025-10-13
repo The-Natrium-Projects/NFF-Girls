@@ -8,25 +8,23 @@ import java.util.UUID;
 
 public class ServerboundNFFGirlsJeiDataSyncRequestPacket implements Packet<ServerGamePacketListener> {
 
-    public final UUID playerID;
+    public final int playerID;
 
-    public ServerboundNFFGirlsJeiDataSyncRequestPacket(UUID playerID) {
+    public ServerboundNFFGirlsJeiDataSyncRequestPacket(int playerID) {
         this.playerID = playerID;
     }
 
     public ServerboundNFFGirlsJeiDataSyncRequestPacket(FriendlyByteBuf pBuffer) {
-        this.playerID = pBuffer.readUUID();
+        this.playerID = pBuffer.readInt();
     }
 
     @Override
     public void write(FriendlyByteBuf pBuffer) {
-        pBuffer.writeUUID(playerID);
+        pBuffer.writeInt(playerID);
     }
-
-
 
     @Override
     public void handle(ServerGamePacketListener pHandler) {
-
+        NFFGirlsJeiStatics.syncJeiData(this.playerID, pHandler);
     }
 }
