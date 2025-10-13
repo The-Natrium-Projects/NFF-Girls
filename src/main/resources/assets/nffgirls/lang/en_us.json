@@ -254,6 +254,16 @@
 
   "death.attack.necromancer_wither": "%1$s failed to bear the curse of necromancy.",
 
+  "jei.nffgirls.trade_title": "NFF: Girls - Trading",
+  "jei.nffgirls.healing_item_title": "NFF: Girls - Items for Healing",
+  "jei.nffgirls.friending_item_title": "NFF: Girls - Items for Friending",
+  "jei.nffgirls.cooldown": "Cooling time: %1$s s",
+  "jei.nffgirls.amount_getter.mob_max_health": "To max",
+  "jei.nffgirls.no_consume": "Not consuming",
+  "jei.nffgirls.amount_expectation": " (Average: %1$s)",
+  "jei.nffgirls.friending_not_including_all": "Only mobs using standard item-giving friending processes are listed here. See guide book for all friendable mobs.",
+
+
   "tooltip.nffgirls.bauble.in_water": "When in water: ",
   "tooltip.nffgirls.bauble.in_water_or_rain": "When in water or rain: ",
   "tooltip.nffgirls.bauble.at_night": "When at night: ",

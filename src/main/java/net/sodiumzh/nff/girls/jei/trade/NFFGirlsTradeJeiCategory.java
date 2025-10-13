@@ -46,7 +46,7 @@ public class NFFGirlsTradeJeiCategory implements IRecipeCategory<NFFGirlsTradeJe
             0, 0, 16, 16)
             .setTextureSize(16, 16)
             .build();
-        this.localizedName = NFUInfoStatics.createTranslatable("info.nffgirls.jei.trade_title");
+        this.localizedName = NFUInfoStatics.createTranslatable("jei.nffgirls.trade_title");
         this.guiHelper = helper;
     }
 
