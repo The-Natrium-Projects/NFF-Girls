@@ -1,5 +1,6 @@
 package net.sodiumzh.nff.girls.entity.hmag;
 
+import com.github.mechalopa.hmag.world.entity.AbstractFlyingMonsterEntity;
 import com.github.mechalopa.hmag.world.entity.HornetEntity;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
@@ -25,6 +26,7 @@ import net.minecraft.world.level.Level;
 import net.sodiumzh.nff.girls.NFFGirls;
 import net.sodiumzh.nff.girls.entity.IHoneyCollecting;
 import net.sodiumzh.nff.girls.entity.INFFGirlsTamed;
+import net.sodiumzh.nff.girls.entity.ai.INFFGirlsFlyingMob;
 import net.sodiumzh.nff.girls.entity.ai.goal.NFFGirlsFlyingFollowOwnerGoal;
 import net.sodiumzh.nff.girls.entity.ai.goal.NFFGirlsHmagFlyingGoal;
 import net.sodiumzh.nff.girls.entity.ai.goal.target.*;
@@ -47,7 +49,7 @@ import net.sodiumzh.nfu.entity.MobApplicableItemTable;
 import javax.annotation.Nonnull;
 import java.util.Arrays;
 
-public class HmagHornetEntity extends HornetEntity implements INFFGirlsTamed//, IHoneyCollecting
+public class HmagHornetEntity extends HornetEntity implements INFFGirlsTamed, INFFGirlsFlyingMob//, IHoneyCollecting
 {
 
 	private final int HONEY_COLLECTING_COOLDOWN = 5 * 60 * 20;
@@ -60,7 +62,7 @@ public class HmagHornetEntity extends HornetEntity implements INFFGirlsTamed//, 
 		this.xpReward = 0;
 		Arrays.fill(this.armorDropChances, 0);
 		Arrays.fill(this.handDropChances, 0);
-		this.moveControl = new NFFGirlsHmagFlyingMoveControl(this);
+		this.moveControl = new INFFGirlsFlyingMob.MoveControl(this);
 	}
 
 	@Override
