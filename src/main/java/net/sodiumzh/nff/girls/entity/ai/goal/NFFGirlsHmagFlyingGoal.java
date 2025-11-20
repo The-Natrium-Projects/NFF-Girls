@@ -1,13 +1,14 @@
 package net.sodiumzh.nff.girls.entity.ai.goal;
 
-import com.github.mechalopa.hmag.world.entity.AbstractFlyingMonsterEntity;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Mob;
+import net.minecraft.world.entity.PathfinderMob;
 import net.minecraft.world.entity.ai.goal.Goal;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.phys.Vec3;
+import net.sodiumzh.nff.girls.entity.ai.INFFGirlsFlyingMob;
 import net.sodiumzh.nff.girls.entity.capability.CNFFGirlsFavorabilityHandler;
 import net.sodiumzh.nff.services.entity.ai.NFFTamedMobAIState;
 import net.sodiumzh.nff.services.entity.ai.goal.NFFGoal;
@@ -25,15 +26,15 @@ import java.util.EnumSet;
 public interface NFFGirlsHmagFlyingGoal
 {
 	
-	public default AbstractFlyingMonsterEntity getFlying()
+	public default INFFGirlsFlyingMob getFlying()
 	{
 		if (this instanceof NFFGoal g)
-			return (AbstractFlyingMonsterEntity)(g.getMob());
+			return (INFFGirlsFlyingMob)(g.getMob());
 		else if (this instanceof NFFTargetGoal g)
-			return (AbstractFlyingMonsterEntity)(g.getMob());
+			return (INFFGirlsFlyingMob)(g.getMob());
 		throw new UnsupportedOperationException("NFFGirlsHmagFlyingGoal is only for NFFGoal and NFFTargetGoal.");
 	}
-	
+
 	public static class ChargeAttackGoal extends NFFGoal implements NFFGirlsHmagFlyingGoal
 	{
 		protected final double moveSpeed;
@@ -67,14 +68,13 @@ public interface NFFGirlsHmagFlyingGoal
 		{
 			if (isDisabled())
 				return false;
-			if (mob.isOwnerPresent() && mob.getAIState() == NFFTamedMobAIState.FOLLOW && mob.asMob().distanceToSqr(mob.getOwner()) > forceFollowDistance * forceFollowDistance)
+			if (getMob().isOwnerInDimension() && mob.getAIState() == NFFTamedMobAIState.FOLLOW && mob.asMob().distanceToSqr(mob.getOwner()) > forceFollowDistance * forceFollowDistance)
 				return false;
-			if (getFlying().getTarget() != null 
-					&& !getFlying().getMoveControl().hasWanted() 
-					&& getFlying().getRandom().nextInt(this.chance) == 0
-					)
+			if (getMob().asMob().getTarget() != null
+					&& !getMob().asMob().getMoveControl().hasWanted()
+					&& getMob().asMob().getRandom().nextInt(this.chance) == 0)
 			{
-				return getFlying().distanceToSqr(getFlying().getTarget()) > this.attackRadius;
+				return getMob().asMob().distanceToSqr(getMob().asMob().getTarget()) > this.attackRadius;
 			}
 			else
 			{
@@ -87,57 +87,63 @@ public interface NFFGirlsHmagFlyingGoal
 		{
 			if (isDisabled())
 				return false;
-			return getFlying().getMoveControl().hasWanted() 
-					&& getFlying().isCharging() 
-					&& getFlying().getTarget() != null 
-					&& getFlying().getTarget().isAlive();
+			return this.getMob().asMob().getMoveControl().hasWanted()
+					&& this.getFlying().isCharging()
+					&& this.getMob().asMob().getTarget() != null
+					&& this.getMob().asMob().getTarget().isAlive();
 		}
 
 		@Override
 		public void onStart()
 		{
-			LivingEntity livingentity = getFlying().getTarget();
-
-			if (getFlying().hasLineOfSight(livingentity) || getFlying().getAttackPhase() != 0)
+			LivingEntity livingentity = getMob().asMob().getTarget();
+			if (livingentity == null) return;
+			if (this.getMob().asMob().hasLineOfSight(livingentity) || getFlying().getAttackPhase() != 0)
 			{
 				Vec3 vec3 = livingentity.position();
-				getFlying().getMoveControl().setWantedPosition(vec3.x, vec3.y - 1.5D, vec3.z, this.moveSpeed);
-				getFlying().setAttackPhase(2);
+				this.getFlying().setAttackPhase(2);
+				if (this.getMob().asMob() instanceof PathfinderMob pm) {
+					pm.getNavigation().moveTo(vec3.x, vec3.y - 1.5D, vec3.z, this.moveSpeed);
+				} else {
+					this.getMob().asMob().getMoveControl().setWantedPosition(vec3.x, vec3.y - 1.5D, vec3.z, this.moveSpeed);
+				}
+
 			}
 		}
 
 		@Override
 		public void onStop()
 		{
-			getFlying().setAttackPhase((getFlying().getTarget() != null && getFlying().getTarget().isAlive()) ? 1 : 0);
+			this.getFlying().setAttackPhase((this.getMob().asMob().getTarget() != null && this.getMob().asMob().getTarget().isAlive()) ? 1 : 0);
 		}
 
 		@Override
 		public void onTick()
 		{
-			AbstractFlyingMonsterEntity attacker = getFlying();
-			LivingEntity livingentity = attacker.getTarget();
+			INFFGirlsFlyingMob attacker = this.getFlying();
+			Mob mob = this.getMob().asMob();
+			LivingEntity target = mob.getTarget();
 
 			this.attackTime = Math.max(this.attackTime - 1, 0);
-			attacker.getLookControl().setLookAt(livingentity, 30.0F, 30.0F);
-			double d0 = NFUMathStatics.getBoxSurfaceDistSqr(attacker.getBoundingBox(), livingentity.getBoundingBox());
-			double d1 = this.getAttackMaxSurfaceDistSqr(livingentity);
+			mob.getLookControl().setLookAt(target, 30.0F, 30.0F);
+			double d0 = NFUMathStatics.getBoxSurfaceDistSqr(mob.getBoundingBox(), target.getBoundingBox());
+			double d1 = this.getAttackMaxSurfaceDistSqr(target);
 
 			if (d0 <= d1 && this.attackTime <= 0)
 			{
 				this.attackTime = 20;
-				attacker.swing(InteractionHand.MAIN_HAND);
-				attacker.doHurtTarget(livingentity);
+				mob.swing(InteractionHand.MAIN_HAND);
+				mob.doHurtTarget(target);
 				attacker.setAttackPhase(1);
 			}
 			else
 			{
-				if (attacker.hasLineOfSight(livingentity))
+				if (mob.hasLineOfSight(target))
 				{
 					if (d0 < this.attackRadius + 15.0F)
 					{
-						Vec3 vec3 = livingentity.getEyePosition();
-						attacker.getMoveControl().setWantedPosition(vec3.x, vec3.y - 0.75D, vec3.z, this.moveSpeed);
+						Vec3 vec3 = target.getEyePosition();
+						mob.getMoveControl().setWantedPosition(vec3.x, vec3.y - 0.75D, vec3.z, this.moveSpeed);
 						/*
 						Vec3 attackerPos = attacker.position();
 						Vec3 targetPos = livingentity.position();
@@ -148,7 +154,7 @@ public interface NFFGirlsHmagFlyingGoal
 						attacker.getMoveControl().setWantedPosition(actualPos.x, actualPos.y, actualPos.z, this.moveSpeed);*/
 					}
 				}
-				else if (attacker.getRandom().nextInt(16) == 0)
+				else if (mob.getRandom().nextInt(16) == 0)
 				{
 					attacker.setAttackPhase(0);
 				}
@@ -158,7 +164,7 @@ public interface NFFGirlsHmagFlyingGoal
 		@Deprecated
 		protected double getAttackReachSqr(LivingEntity attackTarget)
 		{
-			return getFlying().getBbWidth() * 2.0F * getFlying().getBbWidth() * 2.0F + attackTarget.getBbWidth();
+			return this.getMob().asMob().getBbWidth() * 2.0F * this.getMob().asMob().getBbWidth() * 2.0F + attackTarget.getBbWidth();
 		}
 		
 		protected double getAttackMaxSurfaceDistSqr(LivingEntity target)
@@ -208,7 +214,7 @@ public interface NFFGirlsHmagFlyingGoal
 		{
 			if (isDisabled())
 				return false;		
-			return !getFlying().getMoveControl().hasWanted() && getFlying().getRandom().nextInt(this.chance) == 0;
+			return !this.getMob().asMob().getMoveControl().hasWanted() && this.getMob().asMob().getRandom().nextInt(this.chance) == 0;
 		}
 
 		@Override
@@ -220,7 +226,7 @@ public interface NFFGirlsHmagFlyingGoal
 		@Override
 		public void onStart()
 		{
-			if (!(getFlying().getTarget() != null && getFlying().getTarget().isAlive()))
+			if (!(this.getMob().asMob().getTarget() != null && this.getMob().asMob().getTarget().isAlive()))
 			{
 				getFlying().setAttackPhase(0);
 			}
@@ -229,21 +235,21 @@ public interface NFFGirlsHmagFlyingGoal
 		
 		protected BlockPos getWantedPosition()
 		{
-			BlockPos blockpos = getFlying().blockPosition();
+			BlockPos blockpos = this.getMob().asMob().blockPosition();
 			BlockPos blockpos1 = blockpos.offset(
-					getFlying().getRandom().nextInt(this.width * 2 + 1) - this.width,
-					getFlying().getRandom().nextInt(this.height * 2 + 1) - this.height,
-					getFlying().getRandom().nextInt(this.width * 2 + 1) - this.width);
+				this.getMob().asMob().getRandom().nextInt(this.width * 2 + 1) - this.width,
+				this.getMob().asMob().getRandom().nextInt(this.height * 2 + 1) - this.height,
+				this.getMob().asMob().getRandom().nextInt(this.width * 2 + 1) - this.width);
 			if (heightLimit <= 0)
 				return blockpos1;
 			// No height limit if it's above the void
-			else if (NFULevelStatics.getHeightToGround(blockpos1, getFlying()) == -1)
+			else if (NFULevelStatics.getHeightToGround(blockpos1, this.getMob().asMob()) == -1)
 				return blockpos1;
-			else if (NFULevelStatics.getHeightToGround(blockpos1, getFlying()) > heightLimit)
+			else if (NFULevelStatics.getHeightToGround(blockpos1, this.getMob().asMob()) > heightLimit)
 			{
 				// If it's already too high, fly to the height limit first
 				int it = 32;
-				while (NFULevelStatics.getHeightToGround(blockpos1, getFlying()) > heightLimit)
+				while (NFULevelStatics.getHeightToGround(blockpos1, this.getMob().asMob()) > heightLimit)
 				{
 					blockpos1 = blockpos1.below();
 					it--;
@@ -254,7 +260,7 @@ public interface NFFGirlsHmagFlyingGoal
 				if (it <= 0)
 				{
 					blockpos1 = new BlockPos(blockpos);
-					while (NFULevelStatics.getHeightToGround(blockpos1, getFlying()) > heightLimit)
+					while (NFULevelStatics.getHeightToGround(blockpos1, this.getMob().asMob()) > heightLimit)
 						blockpos1 = blockpos1.below();
 				}
 				return blockpos1;
@@ -262,19 +268,19 @@ public interface NFFGirlsHmagFlyingGoal
 			else
 			{
 				int it = 32;	// To avoid potential infinite loop 				
-				while (NFULevelStatics.getHeightToGround(blockpos1, getFlying()) > heightLimit)
+				while (NFULevelStatics.getHeightToGround(blockpos1, this.getMob().asMob()) > heightLimit)
 				{
 					// Search until an acceptable
 					blockpos1 = blockpos.offset(
-							getFlying().getRandom().nextInt(this.width * 2 + 1) - this.width,
-							getFlying().getRandom().nextInt(this.height * 2 + 1) - this.height,
-							getFlying().getRandom().nextInt(this.width * 2 + 1) - this.width);
+						this.getMob().asMob().getRandom().nextInt(this.width * 2 + 1) - this.width,
+						this.getMob().asMob().getRandom().nextInt(this.height * 2 + 1) - this.height,
+						this.getMob().asMob().getRandom().nextInt(this.width * 2 + 1) - this.width);
 					it--;
 					if (it <= 0)
 						break;
 				}
 				// If failed, find below to get an acceptable position
-				while (NFULevelStatics.getHeightToGround(blockpos1, getFlying()) > heightLimit)
+				while (NFULevelStatics.getHeightToGround(blockpos1, this.getMob().asMob()) > heightLimit)
 					blockpos1 = blockpos1.below();
 				return blockpos1;
 			}
@@ -284,13 +290,7 @@ public interface NFFGirlsHmagFlyingGoal
 		@Override
 		public void onTick()
 		{
-			AbstractFlyingMonsterEntity flyingentity = getFlying();
-			BlockPos blockpos = flyingentity.getBoundOrigin();
-
-			if (blockpos == null)
-			{
-				blockpos = flyingentity.blockPosition();
-			}
+			INFFGirlsFlyingMob flyingentity = getFlying();
 
 			for (int i = 0; i < 6; ++i)
 			{
@@ -298,14 +298,13 @@ public interface NFFGirlsHmagFlyingGoal
 				
 				if (shouldAvoidSun.test(mob) && NFULevelStatics.isUnderSun(blockpos1, mob.asMob()))
 					continue;
-				
-				if (flyingentity.level.isEmptyBlock(blockpos1))
+				if (this.getMob().asMob().level().isEmptyBlock(blockpos1))
 				{
-					flyingentity.getMoveControl().setWantedPosition(blockpos1.getX() + 0.5D, blockpos1.getY() + 0.5D, blockpos1.getZ() + 0.5D, this.moveSpeed);
+					this.getMob().asMob().getMoveControl().setWantedPosition(blockpos1.getX() + 0.5D, blockpos1.getY() + 0.5D, blockpos1.getZ() + 0.5D, this.moveSpeed);
 
-					if (flyingentity.getTarget() == null)
+					if (this.getMob().asMob().getTarget() == null)
 					{
-						flyingentity.getLookControl().setLookAt(blockpos1.getX() + 0.5D, blockpos1.getY() + 0.5D, blockpos1.getZ() + 0.5D, 180.0F, 20.0F);
+						this.getMob().asMob().getLookControl().setLookAt(blockpos1.getX() + 0.5D, blockpos1.getY() + 0.5D, blockpos1.getZ() + 0.5D, 180.0F, 20.0F);
 					}
 
 					break;
@@ -340,7 +339,7 @@ public interface NFFGirlsHmagFlyingGoal
 		@Override
 		public boolean checkCanUse()
 		{
-			if (getFlying().getMoveControl().hasWanted())
+			if (this.getMob().asMob().getMoveControl().hasWanted())
 				return false;
 			if (!mob.isOwnerPresent())
 				return false;

@@ -1,11 +1,15 @@
 package net.sodiumzh.nff.girls.entity.ai.goal;
 
 import net.sodiumzh.nff.girls.entity.capability.CNFFGirlsFavorabilityHandler;
+import net.sodiumzh.nff.services.entity.ai.NFFTamedMobAIState;
 import net.sodiumzh.nff.services.entity.ai.goal.preset.NFFFlyingFollowOwnerGoal;
 import net.sodiumzh.nff.services.entity.taming.INFFTamed;
 
 public class NFFGirlsFlyingFollowOwnerGoal extends NFFFlyingFollowOwnerGoal
 {
+	public NFFGirlsFlyingFollowOwnerGoal(INFFTamed mob, double moveSpeed) {
+		super(mob, moveSpeed);
+	}
 
 	public NFFGirlsFlyingFollowOwnerGoal(INFFTamed mob)
 	{

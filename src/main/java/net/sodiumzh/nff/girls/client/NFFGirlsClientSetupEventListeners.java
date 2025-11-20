@@ -2,6 +2,7 @@ package net.sodiumzh.nff.girls.client;
 
 import com.github.mechalopa.hmag.client.renderer.*;
 import net.minecraft.client.renderer.entity.FishingHookRenderer;
+import net.minecraft.client.renderer.entity.NoopRenderer;
 import net.minecraft.client.renderer.entity.ThrownItemRenderer;
 import net.minecraft.client.renderer.item.ItemProperties;
 import net.minecraft.resources.ResourceLocation;
@@ -19,6 +20,7 @@ import net.sodiumzh.nff.girls.client.renderer.NFFGirlsHmagEnderExecutorRenderer;
 import net.sodiumzh.nff.girls.inventory.*;
 import net.sodiumzh.nff.girls.item.ReinforcedFishingRodItem;
 import net.sodiumzh.nff.girls.registry.NFFGirlsEntityTypes;
+import net.sodiumzh.nff.girls.registry.NFFGirlsHealingItems;
 import net.sodiumzh.nff.girls.registry.NFFGirlsItems;
 import net.sodiumzh.nff.girls.registry.NFFGirlsParticleTypes;
 import net.sodiumzh.nff.services.event.client.NFFGuiScreenRegisterEvent;
@@ -69,6 +71,8 @@ public class NFFGirlsClientSetupEventListeners
         event.registerEntityRenderer(NFFGirlsEntityTypes.ALRAUNE_HEALING_SEED.get(), ModThrownItemRenderer::new);
         event.registerEntityRenderer(NFFGirlsEntityTypes.REINFORCED_FISHING_HOOK.get(), FishingHookRenderer::new);
         event.registerEntityRenderer(NFFGirlsEntityTypes.MOBILE_PARTICLE_SOURCE.get(), ThrownItemRenderer::new);
+        event.registerEntityRenderer(NFFGirlsEntityTypes.SAFE_THROWN_POTION.get(), ThrownItemRenderer::new);
+        event.registerEntityRenderer(NFFGirlsEntityTypes.SAFE_EFFECT_CLOUD.get(), NoopRenderer::new);
     }
 
     public static void onRegisterParticleProvider(RegisterParticleProvidersEvent event)
