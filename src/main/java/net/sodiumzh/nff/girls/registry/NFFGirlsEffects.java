@@ -16,8 +16,7 @@ public class NFFGirlsEffects {
 	public static final DeferredRegister<MobEffect> EFFECTS = DeferredRegister.create(ForgeRegistries.MOB_EFFECTS, NFFGirls.MOD_ID);
 	
 	// Registry body
-	
-	public static final RegistryObject<MobEffect> UNDEAD_AFFINITY = EFFECTS.register("undead_affinity", () -> new UndeadAffinityEffect());
-	public static final RegistryObject<MobEffect> ENDER_PROTECTION = EFFECTS.register("ender_protection", () -> new EnderProtectionEffect());
-	public static final RegistryObject<MobEffect> NECROMANCER_WITHER = EFFECTS.register("necromancer_wither", () -> new NecromancerWitherEffect());
+	public static final RegistryObject<MobEffect> UNDEAD_AFFINITY = EFFECTS.register("undead_affinity", UndeadAffinityEffect::new);
+	public static final RegistryObject<MobEffect> ENDER_PROTECTION = EFFECTS.register("ender_protection", EnderProtectionEffect::new);
+	public static final RegistryObject<MobEffect> NECROMANCER_WITHER = EFFECTS.register("necromancer_wither", NecromancerWitherEffect::new);
 }

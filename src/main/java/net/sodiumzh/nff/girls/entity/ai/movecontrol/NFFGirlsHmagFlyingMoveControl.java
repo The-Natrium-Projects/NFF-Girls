@@ -9,6 +9,8 @@ import net.minecraft.world.phys.Vec3;
 import net.sodiumzh.nff.services.entity.taming.INFFTamed;
 
 // From Mechalopa's code
+// Use INFFGirlsFlyingMob.MoveControl instead
+@Deprecated
 public class NFFGirlsHmagFlyingMoveControl extends MoveControl
 {
 	

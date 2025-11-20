@@ -1,17 +1,17 @@
 package net.sodiumzh.nff.girls.registry;
 
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.entity.AreaEffectCloud;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.MobCategory;
 import net.minecraft.world.level.block.Blocks;
-import net.minecraftforge.event.entity.EntityAttributeCreationEvent;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 import net.sodiumzh.nff.girls.NFFGirls;
+import net.sodiumzh.nff.girls.entity.projectile.NFFSafeThrownPotionEntity;
 import net.sodiumzh.nff.girls.entity.hmag.*;
 import net.sodiumzh.nff.girls.entity.projectile.*;
 
@@ -361,8 +361,26 @@ public class NFFGirlsEntityTypes {
 			.sized(0.1f, 0.1f)
 			.updateInterval(1)
 			.build(new ResourceLocation(NFFGirls.MOD_ID, "mobile_particle_source").toString()));
-	
-	
+
+	public static final RegistryObject<EntityType<NFFSafeThrownPotionEntity>> SAFE_THROWN_POTION =
+		ENTITY_TYPES.register("safe_thrown_potion", () -> EntityType.Builder
+			.<NFFSafeThrownPotionEntity>of(NFFSafeThrownPotionEntity::new, MobCategory.MISC)
+			.noSave()
+			.noSummon()
+			.sized(0.25F, 0.25F)
+			.clientTrackingRange(4)
+			.updateInterval(10)
+			.build(new ResourceLocation(NFFGirls.MOD_ID, "safe_thrown_potion").toString()));
+
+	public static final RegistryObject<EntityType<NFFSafeEffectCloudEntity>> SAFE_EFFECT_CLOUD =
+		ENTITY_TYPES.register("safe_effect_cloud", () -> EntityType.Builder
+			.<NFFSafeEffectCloudEntity>of(NFFSafeEffectCloudEntity::new, MobCategory.MISC)
+			.fireImmune()
+			.sized(6.0F, 0.5F)
+			.clientTrackingRange(10)
+			.updateInterval(Integer.MAX_VALUE)
+			.build(new ResourceLocation(NFFGirls.MOD_ID, "safe_effect_cloud").toString()));
+
 	// ========== Utilities ============ //
 	
 	protected static <T extends LivingEntity> RegistryObject<EntityType<T>> registerBM(DeferredRegister<EntityType<?>> registry, String modId, String regName, 

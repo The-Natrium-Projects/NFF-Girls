@@ -21,6 +21,7 @@ import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
 import net.sodiumzh.nff.girls.entity.INFFGirlsTamed;
+import net.sodiumzh.nff.girls.entity.ai.INFFGirlsFlyingMob;
 import net.sodiumzh.nff.girls.entity.ai.goal.NFFGirlsFlyingFollowOwnerGoal;
 import net.sodiumzh.nff.girls.entity.ai.goal.NFFGirlsHmagFlyingGoal;
 import net.sodiumzh.nff.girls.entity.ai.goal.target.*;
@@ -68,7 +69,7 @@ public class HmagGhastlySeekerEntity extends GhastlySeekerEntity implements INFF
 		this.xpReward = 0;
 		Arrays.fill(this.armorDropChances, 0);
 		Arrays.fill(this.handDropChances, 0);
-		this.moveControl = new NFFGirlsHmagFlyingMoveControl(this);
+		this.moveControl = new INFFGirlsFlyingMob.MoveControl(this);
 	}
 
 	@Deprecated
@@ -90,7 +91,7 @@ public class HmagGhastlySeekerEntity extends GhastlySeekerEntity implements INFF
 	@Override
 	protected void registerGoals() {				
 		this.goalSelector.addGoal(5, new NFFFlyingLandGoal(this));
-		this.goalSelector.addGoal(6, new HmagGhastlySeekerEntity.FollowOwnerGoal(this));
+		this.goalSelector.addGoal(6, new HmagGhastlySeekerEntity.FollowOwnerGoal(this, 0.25d));
 		this.goalSelector.addGoal(7, new FireballAttackGoal(this));
 		this.goalSelector.addGoal(8, new NFFFlyingRandomMoveGoal(this, 0.25d, 20, 8, 2)
 				.heightLimit(7));
@@ -335,10 +336,9 @@ public class HmagGhastlySeekerEntity extends GhastlySeekerEntity implements INFF
 	public static class FollowOwnerGoal extends NFFGirlsFlyingFollowOwnerGoal implements INFFFollowOwnerGoal
 	{
 
-		public FollowOwnerGoal(INFFTamed mob)
+		public FollowOwnerGoal(INFFTamed mob, double speedModifier)
 		{
-			super(mob);
-			speed = 0.25d;
+			super(mob, speedModifier);
 		}
 		
 		@Override
@@ -353,7 +353,7 @@ public class HmagGhastlySeekerEntity extends GhastlySeekerEntity implements INFF
 			if (!mob.isOwnerInDimension())
 				return;
 			this.teleportToOwner();
-			this.moveToOwner(getActualSpeed(), new Vec3(0, 2, 0));
+			this.moveToOwner(this.getSpeedModifier(), new Vec3(0, 2, 0));
 		}		
 	}
 

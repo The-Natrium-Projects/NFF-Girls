@@ -25,6 +25,7 @@ import net.minecraft.world.level.block.FlowerBlock;
 import net.minecraft.world.phys.AABB;
 import net.sodiumzh.nff.girls.NFFGirls;
 import net.sodiumzh.nff.girls.entity.INFFGirlsTamedSunSensitiveMob;
+import net.sodiumzh.nff.girls.entity.ai.INFFGirlsFlyingMob;
 import net.sodiumzh.nff.girls.entity.ai.goal.NFFGirlsFlyingFollowOwnerGoal;
 import net.sodiumzh.nff.girls.entity.ai.goal.target.NFFGirlsNearestHostileToOwnerTargetGoal;
 import net.sodiumzh.nff.girls.entity.ai.goal.target.NFFGirlsNearestHostileToSelfTargetGoal;
@@ -54,7 +55,7 @@ import java.util.List;
 import java.util.Random;
 import java.util.UUID;
 
-public class HmagBansheeEntity extends BansheeEntity implements INFFGirlsTamedSunSensitiveMob
+public class HmagBansheeEntity extends BansheeEntity implements INFFGirlsTamedSunSensitiveMob, INFFGirlsFlyingMob
 {
 	
 	/* Initialization */
@@ -89,7 +90,7 @@ public class HmagBansheeEntity extends BansheeEntity implements INFFGirlsTamedSu
 	protected void registerGoals() {
 		this.goalSelector.addGoal(0, new FloatGoal(this));
 		this.goalSelector.addGoal(5, new NFFFlyingLandGoal(this));
-		this.goalSelector.addGoal(4, new NFFGirlsHmagFlyingGoal.ChargeAttackGoal(this, 0.5D, 1.5F, 6));
+		this.goalSelector.addGoal(4, new NFFGirlsHmagFlyingGoal.ChargeAttackGoal(this, 1.275D, 1.5F, 6));
 		// this.goalSelector.addGoal(4, new NFFMeleeAttackGoal(this, 1d, false));
 		this.goalSelector.addGoal(6, new NFFGirlsFlyingFollowOwnerGoal(this));
 		this.goalSelector.addGoal(8, new NFFFlyingRandomMoveGoal(this).heightLimit(7));
@@ -359,5 +360,10 @@ public class HmagBansheeEntity extends BansheeEntity implements INFFGirlsTamedSu
 	@Override
 	public boolean shouldSitOnWaiting() {
 		return false;
+	}
+
+	@Override
+	public Mob getMob() {
+		return this;
 	}
 }
