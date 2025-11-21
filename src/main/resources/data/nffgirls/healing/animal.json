@@ -34,5 +34,53 @@
   {
     "item": "minecraft:golden_apple",
     "amount_getter": "nffgirls:mob_max_health"
+  },
+  {
+    "item": "alexsmobs:cooked_moose_ribs",
+    "amount": [10]
+  },
+  {
+    "item": "alexsmobs:cooked_kangaroo_meat",
+    "amount": [10]
+  },
+  {
+    "item": "twilightforest:cooked_venison",
+    "amount": [10]
+  },
+  {
+    "item": "twilightforest:hydra_chop",
+    "amount": [30]
+  },
+  {
+    "item": "alexscaves:dinosaur_nugget",
+    "amount": [20]
+  },
+  {
+    "item": "farmersdelight:beef_patty",
+    "amount": [10]
+  },
+  {
+    "item": "farmersdelight:cooked_mutton_chops",
+    "amount": [8]
+  },
+  {
+    "item": "farmersdelight:cooked_bacon",
+    "amount": [10]
+  },
+  {
+    "item": "farmersdelight:cooked_chicken_cuts",
+    "amount": [8]
+  },
+  {
+    "item": "farmersdelight:smoked_ham",
+    "amount": [15]
+  },
+  {
+    "item": "grimoireofgaia:meat",
+    "amount": [12]
+  },
+  {
+    "item": "grimoireofgaia:golden_apple_pie_slice",
+    "amount_getter": "nffgirls:mob_max_health"
   }
 ]

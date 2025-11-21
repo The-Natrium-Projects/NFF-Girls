@@ -14,5 +14,25 @@
   {
     "item": "hmag:mysterious_petal",
     "amount_getter": "nffgirls:mob_max_health"
+  },
+  {
+    "item": "twilightforest:magic_beans",
+    "amount_getter": "nffgirls:mob_max_health"
+  },
+  {
+    "item": "grimoireofgaia:mandrake",
+    "amount": [20]
+  },
+  {
+    "item": "alexscaves:fertilizer",
+    "amount": [15]
+  },
+  {
+    "item": "farmersdelight:organic_compost",
+    "amount": [15]
+  },
+  {
+    "item": "twilightforest:uberous_soil",
+    "amount": [15]
   }
 ]

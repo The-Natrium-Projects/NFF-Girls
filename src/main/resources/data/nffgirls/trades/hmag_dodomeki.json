@@ -36,9 +36,9 @@
     "level": 2,
     "type": "sell",
     "item": "nffgirls:death_crystal_powder",
-    "amount": 1,
-    "price": [3, 5],
-    "maxUses": 4
+    "amount": 4,
+    "price": 1,
+    "maxUses": 2
   },
   {
     "level": 3,

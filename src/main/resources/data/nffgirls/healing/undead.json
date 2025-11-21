@@ -14,5 +14,25 @@
   {
     "item": "hmag:soul_apple",
     "amount_getter": "nffgirls:mob_max_health"
+  },
+  {
+    "item": "alexsmobs:soul_heart",
+    "amount_getter": "nffgirls:mob_max_health"
+  },
+  {
+    "item": "cataclysm:koboleton_bone",
+    "amount": [15]
+  },
+  {
+    "item": "alexscaves:darkened_apple",
+    "amount_getter": "nffgirls:mob_max_health"
+  },
+  {
+    "item": "grimoireofgaia:rotten_heart",
+    "amount": [15]
+  },
+  {
+    "item": "grimoireofgaia:soulfire",
+    "amount": [15]
   }
 ]
