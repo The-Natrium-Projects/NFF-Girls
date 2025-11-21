@@ -62,15 +62,6 @@
   {
     "level": 5,
     "type": "sell",
-    "item": "hmag:fortune_crystal",
-    "amount": 1,
-    "price": [36, 48],
-    "maxUses": 1,
-    "weight": 0.3
-  },
-  {
-    "level": 5,
-    "type": "sell",
     "item": "minecraft:enchanted_golden_apple",
     "amount": 1,
     "price": [6, 8],
@@ -78,11 +69,14 @@
   },
   {
     "level": 5,
-    "type": "sell",
-    "item": "hmag:fortune_crystal_plus",
-    "amount": 1,
-    "price": [64, 64],
-    "maxUses": 1,
+    "type": "registry",
+    "key": "nffgirls:sells_fortune_crystal",
+    "weight": 0.3
+  },
+  {
+    "level": 5,
+    "type": "registry",
+    "key": "nffgirls:sells_fortune_crystal_plus",
     "weight": 0.1
   },
   {

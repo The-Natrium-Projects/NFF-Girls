@@ -8,11 +8,35 @@
     "amount": [5]
   },
   {
+    "item": "minecraft:amethyst_shard",
+    "amount": [8]
+  },
+  {
     "item": "hmag:ancient_stone",
     "amount": [15]
   },
   {
     "item": "minecraft:golden_apple",
+    "amount_getter": "nffgirls:mob_max_health"
+  },
+  {
+    "item": "grimoireofgaia:golden_apple_pie_slice",
+    "amount_getter": "nffgirls:mob_max_health"
+  },
+  {
+    "item": "alexsmobs:straddlite",
+    "amount": [20]
+  },
+  {
+    "item": "cataclysm:amethyst_crab_shell",
+    "amount": [20]
+  },
+  {
+    "item": "ars_nouveau:source_gem",
+    "amount": [15]
+  },
+  {
+    "item": "alexsmobs:guster_eye",
     "amount_getter": "nffgirls:mob_max_health"
   }
 ]

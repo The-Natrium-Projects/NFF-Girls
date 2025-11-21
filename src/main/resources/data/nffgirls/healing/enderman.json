@@ -6,5 +6,13 @@
   {
     "item": "hmag:ancient_stone",
     "amount": [15]
+  },
+  {
+    "item": "alexsmobs:cosmic_cod",
+    "amount": [10]
+  },
+  {
+    "item": "alexsmobs:void_worm_eye",
+    "amount_getter": "nffgirls:mob_max_health"
   }
 ]

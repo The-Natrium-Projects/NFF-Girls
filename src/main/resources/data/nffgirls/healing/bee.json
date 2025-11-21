@@ -14,5 +14,9 @@
   {
     "item": "hmag:mysterious_petal",
     "amount_getter": "nffgirls:mob_max_health"
+  },
+  {
+    "item": "grimoireofgaia:honeydew",
+    "amount": [20]
   }
 ]
