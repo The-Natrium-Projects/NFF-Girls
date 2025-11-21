@@ -36,14 +36,6 @@
   {
     "level": 3,
     "type": "sell",
-    "item": "nffgirls:enderberry",
-    "amount": 1,
-    "price": [6, 10],
-    "maxUses": 4
-  },
-  {
-    "level": 3,
-    "type": "sell",
     "item": "minecraft:shulker_shell",
     "amount": [2, 3],
     "price": 1,

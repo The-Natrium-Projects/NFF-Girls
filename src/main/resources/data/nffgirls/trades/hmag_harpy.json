@@ -36,7 +36,7 @@
     "level": 3,
     "type": "buy",
     "item": "hmag:swamper_tentacle",
-    "amount": [4, 6],
+    "amount": [6, 10],
     "price": 1,
     "maxUses": 2
   },

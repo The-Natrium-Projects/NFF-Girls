@@ -14,5 +14,21 @@
   {
     "item": "minecraft:golden_apple",
     "amount_getter": "nffgirls:mob_max_health"
+  },
+  {
+    "item": "alexscaves:chocolate_ice_cream",
+    "amount": [10]
+  },
+  {
+    "item": "alexscaves:sweetberry_ice_cream",
+    "amount": [10]
+  },
+  {
+    "item": "alexscaves:vanilla_ice_cream",
+    "amount": [10]
+  },
+  {
+    "item": "grimoireofgaia:golden_apple_pie_slice",
+    "amount_getter": "nffgirls:mob_max_health"
   }
 ]

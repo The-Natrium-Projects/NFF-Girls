@@ -84,19 +84,14 @@
   },
   {
     "level": 5,
-    "type": "sell",
-    "item": "hmag:greedy_crystal",
-    "amount": 1,
-    "price": [36, 48],
-    "maxUses": 2
+    "type": "registry",
+    "key": "nffgirls:sells_greedy_crystal",
+    "weight": 0.3
   },
   {
     "level": 5,
-    "type": "sell",
-    "item": "hmag:greedy_crystal_plus",
-    "amount": 1,
-    "price": [64, 64],
-    "maxUses": 1,
+    "type": "registry",
+    "key": "nffgirls:sells_greedy_crystal_plus",
     "weight": 0.1
   },
   {

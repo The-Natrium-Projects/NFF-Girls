@@ -2,124 +2,138 @@
   {
     "key": "nffgirls:hmag_zombie_girl",
     "collections": [
-      "nffgirls:common_undead",
-      "nffgirls:common_zombie"
+      {"key": "nffgirls:common_undead", "weight": 0.1},
+      {"key": "nffgirls:common_zombie", "weight": 0.2}
     ]
   },
   {
     "key": "nffgirls:hmag_husk_girl",
     "collections": [
-      {"key": "nffgirls:common_undead", "weight": 0.5},
-      {"key": "nffgirls:common_zombie", "weight": 0.5}
+      {"key": "nffgirls:common_undead", "weight": 0.1},
+      {"key": "nffgirls:common_zombie", "weight": 0.2}
     ]
   },
   {
     "key": "nffgirls:hmag_drowned_girl",
     "collections": [
-      {"key": "nffgirls:common_undead", "weight": 0.3},
-      {"key": "nffgirls:common_zombie", "weight": 0.3},
-      {"key": "nffgirls:common_aquatic","weight": 0.5}
+      {"key": "nffgirls:common_undead", "weight": 0.1},
+      {"key": "nffgirls:common_zombie", "weight": 0.2},
+      {"key": "nffgirls:common_aquatic","weight": 0.2}
     ]
   },
   {
     "key": "nffgirls:hmag_skeleton_girl",
     "collections": [
-      {"key": "nffgirls:common_undead", "weight": 0.8},
-      "nffgirls:common_skeleton",
-      "nffgirls:common_archer"
+      {"key": "nffgirls:common_undead", "weight": 0.1},
+      {"key": "nffgirls:common_archer", "weight": 0.2},
+      {"key": "nffgirls:common_skeleton", "weight": 0.2}
     ]
   },
   {
     "key": "nffgirls:hmag_stray_girl",
     "collections": [
-      {"key": "nffgirls:common_undead", "weight": 0.5},
-      {"key": "nffgirls:common_archer", "weight": 0.5},
-      {"key": "nffgirls:common_skeleton", "weight": 0.5},
-      {"key": "nffgirls:common_ice", "weight": 0.5}
+      {"key": "nffgirls:common_undead", "weight": 0.1},
+      {"key": "nffgirls:common_archer", "weight": 0.2},
+      {"key": "nffgirls:common_skeleton", "weight": 0.2},
+      {"key": "nffgirls:common_ice", "weight": 0.2}
     ]
   },
   {
     "key": "nffgirls:hmag_wither_skeleton_girl",
     "collections": [
-      {"key": "nffgirls:common_undead", "weight": 0.5},
+      {"key": "nffgirls:common_undead", "weight": 0.1},
       {"key": "nffgirls:common_archer", "weight": 0.2},
-      {"key": "nffgirls:common_skeleton", "weight": 0.5},
-      {"key": "nffgirls:common_nether", "weight": 0.5}
+      {"key": "nffgirls:common_skeleton", "weight": 0.2},
+      {"key": "nffgirls:common_nether", "weight": 0.2}
     ]
   },
   {
     "key": "nffgirls:hmag_ender_executor",
-    "collections": "nffgirls:common_ender"
+    "collections": [
+	  {"key": "nffgirls:common_ender", "weight": 0.2}
+	]
   },
   {
     "key": "nffgirls:hmag_ghastly_seeker",
     "collections": [
-      {"key": "nffgirls:common_undead", "weight": 0.2},
-      {"key": "nffgirls:common_nether", "weight": 0.5}
+      {"key": "nffgirls:common_undead", "weight": 0.1},
+      {"key": "nffgirls:common_nether", "weight": 0.2}
     ]
   },
   {
     "key": "nffgirls:hmag_creeper_girl",
-    "collections": "nffgirls:common_explosive"
+	"collections": [
+	  {"key": "nffgirls:common_explosive", "weight": 0.2}
+	]
   },
   {
     "key": "nffgirls:hmag_necrotic_reaper",
     "collections": [
-      {"key": "nffgirls:common_undead", "weight": 0.7},
-      {"key": "nffgirls:common_zombie", "weight": 0.1},
-      {"key": "nffgirls:common_skeleton", "weight": 0.1}
+      {"key": "nffgirls:common_undead", "weight": 0.1},
+      {"key": "nffgirls:common_zombie", "weight": 0.2},
+      {"key": "nffgirls:common_skeleton", "weight": 0.2}
     ]
   },
   {
     "key": "nffgirls:hmag_melty_monster",
-    "collections": "nffgirls:common_nether"
+	"collections": [
+	  {"key": "nffgirls:common_nether", "weight": 0.2}
+	]
   },
   {
     "key": "nffgirls:hmag_alraune",
-    "collections": "nffgirls:common_plant"
+	"collections": [
+	  {"key": "nffgirls:common_plant", "weight": 0.2}
+	]
   },
   {
     "key": "nffgirls:hmag_glaryad",
-    "collections": "nffgirls:common_plant"
+	"collections": [
+	  {"key": "nffgirls:common_plant", "weight": 0.2}
+	]
   },
   {
     "key": "nffgirls:hmag_banshee",
     "collections": [
-      {"key": "nffgirls:common_undead", "weight": 0.5}
+      {"key": "nffgirls:common_undead", "weight": 0.1}
     ]
   },
   {
     "key": "nffgirls:hmag_crimson_slaughterer",
     "collections": [
-      {"key": "nffgirls:common_nether", "weight": 0.5}
+      {"key": "nffgirls:common_nether", "weight": 0.2}
     ]
   },
   {
     "key": "nffgirls:hmag_harpy",
-    "collections": "nffgirls:common_animal"
+	"collections": [
+	  {"key": "nffgirls:common_animal", "weight": 0.2}
+	]
   },
   {
     "key": "nffgirls:hmag_snow_canine",
     "collections": [
-      "nffgirls:common_animal",
-      {"key": "nffgirls:common_ice", "weight": 0.3}
+      {"key": "nffgirls:common_animal", "weight": 0.2},
+      {"key": "nffgirls:common_ice", "weight": 0.2}
     ]
   },
   {
     "key": "nffgirls:hmag_imp",
     "collections": [
-      {"key": "nffgirls:common_nether", "weight": 0.5}
+      {"key": "nffgirls:common_nether", "weight": 0.2}
     ]
   },
   {
     "key": "nffgirls:hmag_jiangshi",
     "collections": [
-      {"key": "nffgirls:common_undead", "weight": 0.3}
+      {"key": "nffgirls:common_undead", "weight": 0.1}
     ]
   },
   {
     "key": "nffgirls:hmag_jack_frost",
-    "collections": "nffgirls:common_ice"
+	"collections": [
+	  {"key": "nffgirls:common_ice", "weight": 0.2}
+	]
   },
   "nffgirls:hmag_dullahan",
   "nffgirls:hmag_dodomeki",
