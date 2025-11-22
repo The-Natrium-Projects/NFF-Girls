@@ -2,6 +2,9 @@ To interact with a monster girl, you need a Commanding Wand. Right click the mob
 behaviors among Waiting, Following and Wandering. They will attack mobs which are attacking it or the owner, or the
 owner is attacking.
 <NEWLINE>
+Some items can be used to heal the monster girl. Hold the item on the main hand and right-click the mob to heal.
+Healing items are shown in the corresponding JEI tab.
+<NEWLINE>
 Shift + Right click with a Commanding Wand to open the GUI of the monster girl. The GUI shows basic data and attributes
 of the mob. Also, you can customize the mob's inventory. Some mobs can equip weapons and/or armors to boost the attributes,
 and most enchantments can also take effects.
@@ -10,7 +13,7 @@ Most mobs can equip "Baubles" in the slots with the gem icon. These slots accept
 effects depending on item types. Most Bauble effects are repeatable.
 <NEWLINE>
 Right click with bare hand or the Evil Gem to trade with the mobs. The Evil Gem is the currency in the trade with
-monster girls.
+monster girls. Trade entries are shown in the corresponding JEI tab.
 <NEWLINE>
 Each mob has 10 trade entries. Different mobs have different trade entries, many in which provide rare items.
 Some trade entries are unlocked only when the mob reaches a specific XP level. When a trade entry is out-of-stock,

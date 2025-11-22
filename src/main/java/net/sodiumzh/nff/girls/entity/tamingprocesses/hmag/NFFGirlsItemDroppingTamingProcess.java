@@ -15,6 +15,9 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.sodiumzh.nff.girls.entity.ai.goal.NFFGirlsTamablePickItemGoal;
 import net.sodiumzh.nff.girls.entity.ai.goal.NFFGirlsTamableWatchHandItemGoal;
 import net.sodiumzh.nff.services.entity.capability.CNFFTamable;
+import net.sodiumzh.nff.services.entity.taming.CNFFTamable;
+import net.sodiumzh.nff.services.entity.capability.CNFFTamable;
+import net.sodiumzh.nff.services.entity.taming.IItemTableUsingProcess;
 import net.sodiumzh.nff.services.entity.taming.INFFDefaultProgressedTamingProcess;
 import net.sodiumzh.nff.services.entity.taming.NFFTamingProcess;
 import net.sodiumzh.nfu.capability.EntityTimerAccessor;
@@ -34,7 +37,9 @@ import java.util.*;
 import java.util.function.Predicate;
 import java.util.function.Supplier;
 
-public abstract class NFFGirlsItemDroppingTamingProcess extends NFFTamingProcess implements INFFDefaultProgressedTamingProcess<Mob>
+import static net.sodiumzh.nff.services.entity.capability.CNFFTamable.getOptional;
+
+public abstract class NFFGirlsItemDroppingTamingProcess extends NFFTamingProcess implements INFFDefaultProgressedTamingProcess<Mob>, IItemTableUsingProcess<NFFTamingProcess>
 {
 	// Label on the item entity to record which mob(s) have picked an item from this entity,
 	// to prevent picking immediately

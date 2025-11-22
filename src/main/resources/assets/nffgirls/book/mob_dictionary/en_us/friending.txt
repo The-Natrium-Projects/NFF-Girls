@@ -20,3 +20,6 @@ start from the beginning. At this time the mob will also generate anger particle
 <NEWLINE>
 Some mobs are more alert, and you need to put the present on the ground. They will pick them up like Piglins,
 hold the item for a few seconds, consume it and boost the progress.
+<NEWLINE>
+Required item types are shown in the corresponding JEI tab. Note that mobs using unconventional friending processes
+are not shown in JEI, and can be found in this guidebook.

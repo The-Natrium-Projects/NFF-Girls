@@ -20,10 +20,12 @@ import net.sodiumzh.nff.girls.registry.NFFGirlsFriendingItems;
 import net.sodiumzh.nff.girls.registry.NFFGirlsHealingItemMappings;
 import net.sodiumzh.nff.girls.registry.NFFGirlsHealingItems;
 import net.sodiumzh.nff.girls.registry.NFFGirlsTrades;
+import net.sodiumzh.nff.services.entity.taming.IItemTableUsingProcess;
 import net.sodiumzh.nff.services.entity.taming.NFFTamingMapping;
 import net.sodiumzh.nff.services.entity.taming.TamingProcessItemGivingProgress;
 import net.sodiumzh.nfu.container.Tuple2;
 import net.sodiumzh.nfu.container.Tuple3;
+import net.sodiumzh.nfu.entity.MobApplicableItemTable;
 import net.sodiumzh.nfu.entity.vanillatrade.VanillaTradeListing;
 import net.sodiumzh.nfu.entity.vanillatrade.VanillaTradeRegistry;
 import net.sodiumzh.nfu.object.Validatable;
@@ -62,9 +64,9 @@ public class NFFGirlsJeiStatics {
     // Server side
     public static Map<EntityType<? extends Mob>, Tuple2<ResourceLocation, MobApplicableItemTableJeiRecord>> gatherFriending() {
         return NFFTamingMapping.getAllTamableTypes().stream()
-            .map(type -> Tuple2.of(type, NFUMiscStatics.cast(NFFTamingMapping.getProcess((EntityType<? extends Mob>) type), TamingProcessItemGivingProgress.class)))
+            .map(type -> Tuple2.of(type, NFUMiscStatics.cast(NFFTamingMapping.getProcess((EntityType<? extends Mob>) type), IItemTableUsingProcess.class)))
             .filter(entry -> entry.getB() != null && entry.getB().getItemGivingTableOverride() != null)
-            .map(entry -> Tuple2.of(entry.getA(), entry.getB().getItemGivingTableOverride().get()))
+            .map(entry -> Tuple2.of(entry.getA(), (MobApplicableItemTable) entry.getB().getItemGivingTableOverride().get()))
             .filter(entry -> entry.getB() != null)
             .map(entry -> Tuple3.of(entry.getA(), NFFGirlsFriendingItems.REGISTRY.getKey(entry.getB()), entry.getB()))
             .filter(entry -> entry.getB() != null)
