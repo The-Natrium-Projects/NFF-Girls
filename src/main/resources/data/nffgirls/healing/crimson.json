@@ -14,5 +14,17 @@
   {
     "item": "minecraft:golden_apple",
     "amount_getter": "nffgirls:mob_max_health"
+  },
+  {
+    "item": "alexsmobs:mosquito_larva",
+    "amount": [15]
+  },
+  {
+    "item": "grimoireofgaia:golden_apple_pie_slice",
+    "amount_getter": "nffgirls:mob_max_health"
+  },
+  {
+    "item": "grimoireofgaia:nether_wart_jam",
+    "amount": [30]
   }
 ]
