@@ -22,5 +22,45 @@
   {
     "item": "minecraft:golden_apple",
     "amount_getter": "nffgirls:mob_max_health"
+  },
+  {
+    "item": "alexscaves:caramel_apple",
+    "amount": [20]
+  },
+  {
+    "item": "farmersdelight:honey_cookie",
+    "amount": [5]
+  },
+  {
+    "item": "farmersdelight:sweet_berry_cookie",
+    "amount": [5]
+  },
+  {
+    "item": "farmersdelight:chocolate_pie_slice",
+    "amount": [8]
+  },
+  {
+    "item": "farmersdelight:sweet_berry_cheesecake_slice",
+    "amount": [8]
+  },
+  {
+    "item": "farmersdelight:apple_pie_slice",
+    "amount": [8]
+  },
+  {
+    "item": "farmersdelight:cake_slice",
+    "amount": [8]
+  },
+  {
+    "item": "ars_nouveau:source_berry_pie",
+    "amount_getter": "nffgirls:mob_max_health"
+  },
+  {
+    "item": "ars_nouveau:source_berry_roll",
+    "amount": [15]
+  },
+  {
+    "item": "grimoireofgaia:golden_apple_pie_slice",
+    "amount_getter": "nffgirls:mob_max_health"
   }
 ]

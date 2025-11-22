@@ -14,5 +14,17 @@
   {
     "item": "hmag:burning_core",
     "amount_getter": "nffgirls:mob_max_health"
+  },
+  {
+    "item": "alexscaves:tectonic_shard",
+    "amount_getter": "nffgirls:mob_max_health"
+  },
+  {
+    "item": "grimoireofgaia:stone_coal",
+    "amount": [20]
+  },
+  {
+    "item": "grimoireofgaia:fireshard",
+    "amount": [20]
   }
 ]

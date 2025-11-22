@@ -10,5 +10,17 @@
   {
     "item": "minecraft:redstone_block",
     "amount": [15]
+  },
+  {
+    "item": "alexscaves:tesla_bulb",
+    "amount_getter": "nffgirls:mob_max_health"
+  },
+  {
+    "item": "alexscaves:fissile_core",
+    "amount_getter": "nffgirls:mob_max_health"
+  },
+  {
+    "item": "alexscaves:sulfur_dust",
+    "amount": [5]
   }
 ]

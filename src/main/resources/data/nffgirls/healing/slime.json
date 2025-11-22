@@ -10,5 +10,21 @@
   {
     "item": "hmag:cubic_nucleus",
     "amount_getter": "nffgirls:mob_max_health"
+  },
+  {
+    "item": "alexsmobs:mimicream",
+    "amount_getter": "nffgirls:mob_max_health"
+  },
+  {
+    "item": "alexscaves:ferrouslime_ball",
+    "amount": [15]
+  },
+  {
+    "item": "alexscaves:ferrouslime_ball",
+    "amount": [15]
+  },
+  {
+    "tag": "alexscaves:gelatins",
+    "amount": [10]
   }
 ]
