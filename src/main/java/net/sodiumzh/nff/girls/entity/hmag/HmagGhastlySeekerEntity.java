@@ -91,7 +91,7 @@ public class HmagGhastlySeekerEntity extends GhastlySeekerEntity implements INFF
 	@Override
 	protected void registerGoals() {				
 		this.goalSelector.addGoal(5, new NFFFlyingLandGoal(this));
-		this.goalSelector.addGoal(6, new HmagGhastlySeekerEntity.FollowOwnerGoal(this, 0.25d));
+		this.goalSelector.addGoal(6, new HmagGhastlySeekerEntity.FollowOwnerGoal(this, 0.4d));
 		this.goalSelector.addGoal(7, new FireballAttackGoal(this));
 		this.goalSelector.addGoal(8, new NFFFlyingRandomMoveGoal(this, 0.25d, 20, 8, 2)
 				.heightLimit(7));
