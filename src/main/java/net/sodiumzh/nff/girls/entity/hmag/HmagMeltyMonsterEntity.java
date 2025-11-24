@@ -473,7 +473,7 @@ public class HmagMeltyMonsterEntity extends MeltyMonsterEntity implements INFFGi
 	@Override
 	public void readAdditionalSaveData(CompoundTag nbt) {
 		super.readAdditionalSaveData(nbt);
-		NFFTamedStatics.readBefriendedCommonSaveData(this, nbt);
+		//NFFTamedStatics.readBefriendedCommonSaveData(this, nbt);
 		// Add other data reading here
 		this.takingLavaCooldown = nbt.getInt("taking_lava_cooldown");
 		this.setStamina(nbt.getInt("stamina"));

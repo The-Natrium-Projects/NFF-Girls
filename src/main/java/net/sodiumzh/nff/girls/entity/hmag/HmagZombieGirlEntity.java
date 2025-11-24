@@ -190,7 +190,7 @@ public class HmagZombieGirlEntity extends ZombieGirlEntity implements INFFGirlsT
 	@Override
 	public void readAdditionalSaveData(CompoundTag nbt) {
 		super.readAdditionalSaveData(nbt);
-		NFFTamedStatics.readBefriendedCommonSaveData(this, nbt);
+		//NFFTamedStatics.readBefriendedCommonSaveData(this, nbt);
 		this.isFromHusk = nbt.getBoolean("isFromHusk") || nbt.getBoolean("is_from_husk");	// TODO: the latter is legacy, remove after 0.x.30
 		this.setInit();
 	}

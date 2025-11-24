@@ -217,7 +217,7 @@ public class HmagDrownedGirlEntity extends DrownedGirlEntity implements INFFGirl
 	@Override
 	public void readAdditionalSaveData(CompoundTag nbt) {
 		super.readAdditionalSaveData(nbt);
-		NFFTamedStatics.readBefriendedCommonSaveData(this, nbt);
+		//NFFTamedStatics.readBefriendedCommonSaveData(this, nbt);
 		isFromHusk = nbt.getBoolean("isFromHusk") || nbt.getBoolean("is_from_husk");
 		isFromZombie = nbt.getBoolean("isFromZombie") || nbt.getBoolean("is_from_zombie");
 		setInit();
