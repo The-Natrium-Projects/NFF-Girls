@@ -133,7 +133,7 @@ public class HmagHuskGirlEntity extends HuskGirlEntity implements INFFGirlsTamed
 	@Override
 	public void readAdditionalSaveData(CompoundTag nbt) {
 		super.readAdditionalSaveData(nbt);
-		NFFTamedStatics.readBefriendedCommonSaveData(this, nbt);
+		//NFFTamedStatics.readBefriendedCommonSaveData(this, nbt);
 		this.setInit();
 	}
 

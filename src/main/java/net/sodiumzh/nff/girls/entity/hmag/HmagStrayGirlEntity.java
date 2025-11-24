@@ -236,7 +236,7 @@ public class HmagStrayGirlEntity extends StrayGirlEntity implements INFFGirlsTam
 	@Override
 	public void readAdditionalSaveData(CompoundTag nbt) {
 		super.readAdditionalSaveData(nbt);
-		NFFTamedStatics.readBefriendedCommonSaveData(this, nbt);
+		//NFFTamedStatics.readBefriendedCommonSaveData(this, nbt);
 		isFromSkeleton = nbt.getBoolean("is_from_skeleton");
 		setInit();
 	}

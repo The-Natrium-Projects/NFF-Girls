@@ -179,7 +179,7 @@ public class HmagCrimsonSlaughtererEntity extends CrimsonSlaughtererEntity imple
 	@Override
 	public void readAdditionalSaveData(CompoundTag nbt) {
 		super.readAdditionalSaveData(nbt);
-		NFFTamedStatics.readBefriendedCommonSaveData(this, nbt);
+		//NFFTamedStatics.readBefriendedCommonSaveData(this, nbt);
 		// Add other data reading here
 		setInit();
 	}
