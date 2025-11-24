@@ -481,7 +481,7 @@ public class HmagEnderExecutorEntity extends NFFTamedEnderManPreset implements I
 	public void readAdditionalSaveData(CompoundTag nbt) {
 		super.readAdditionalSaveData(nbt);
 		setGrowEnderberryRemainedCooldown(nbt.getInt("growEnderberryRemainedCooldown"));
-		NFFTamedStatics.readBefriendedCommonSaveData(this, nbt);
+		////NFFTamedStatics.readBefriendedCommonSaveData(this, nbt);
 		this.setInit();
 	}
 

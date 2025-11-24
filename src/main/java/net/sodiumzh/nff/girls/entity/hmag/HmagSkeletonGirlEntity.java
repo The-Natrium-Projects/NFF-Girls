@@ -179,13 +179,13 @@ public class HmagSkeletonGirlEntity extends SkeletonGirlEntity implements INFFGi
 	@Override
 	public void addAdditionalSaveData(CompoundTag nbt) {
 		super.addAdditionalSaveData(nbt);
-		NFFTamedStatics.addBefriendedCommonSaveData(this, nbt);
+		//NFFTamedStatics.addBefriendedCommonSaveData(this, nbt);
 	}
 
 	@Override
 	public void readAdditionalSaveData(CompoundTag nbt) {
 		super.readAdditionalSaveData(nbt);
-		NFFTamedStatics.readBefriendedCommonSaveData(this, nbt);
+		//NFFTamedStatics.readBefriendedCommonSaveData(this, nbt);
 		setInit();
 	}
 	

@@ -171,7 +171,7 @@ public class HmagWitherSkeletonGirlEntity extends WitherSkeletonGirlEntity imple
 	@Override
 	public void readAdditionalSaveData(CompoundTag nbt) {
 		super.readAdditionalSaveData(nbt);
-		NFFTamedStatics.readBefriendedCommonSaveData(this, nbt);
+		//NFFTamedStatics.readBefriendedCommonSaveData(this, nbt);
 		setInit();
 	}
 

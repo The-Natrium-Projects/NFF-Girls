@@ -150,7 +150,7 @@ public class HmagJiangshiEntity extends JiangshiEntity implements INFFGirlsTamed
 	@Override
 	public void readAdditionalSaveData(CompoundTag nbt) {
 		super.readAdditionalSaveData(nbt);
-		NFFTamedStatics.readBefriendedCommonSaveData(this, nbt);
+		//NFFTamedStatics.readBefriendedCommonSaveData(this, nbt);
 		// Add other data reading here
 		setInit();
 	}
