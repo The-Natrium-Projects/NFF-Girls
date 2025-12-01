@@ -4,6 +4,8 @@ import com.github.mechalopa.hmag.HMaG;
 import com.github.mechalopa.hmag.registry.ModItems;
 import com.github.mechalopa.hmag.world.entity.EnderExecutorEntity;
 import com.github.mechalopa.hmag.world.entity.GhastlySeekerEntity;
+import com.github.mechalopa.hmag.world.entity.projectile.MagicBulletEntity;
+import com.google.common.cache.Cache;
 import com.mojang.logging.LogUtils;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
@@ -20,6 +22,7 @@ import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.goal.WrappedGoal;
 import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
+import net.minecraft.world.entity.animal.horse.AbstractHorse;
 import net.minecraft.world.entity.monster.*;
 import net.minecraft.world.entity.monster.hoglin.Hoglin;
 import net.minecraft.world.entity.monster.piglin.Piglin;
@@ -77,12 +80,14 @@ import net.sodiumzh.nff.services.registry.NFFCapRegistry;
 import net.sodiumzh.nfu.entity.RepeatableAttributeModifier;
 import net.sodiumzh.nfu.entity.taming.ITamingProcessWithProgress;
 import net.sodiumzh.nfu.mixin.event.entity.*;
+import net.sodiumzh.nfu.reflection.CachedMethodAccessor;
 import net.sodiumzh.nfu.util.*;
 import org.apache.commons.lang3.mutable.MutableObject;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 import java.util.function.Predicate;
 
 @SuppressWarnings("removal")
@@ -701,8 +706,8 @@ public class NFFGirlsEntityEventListeners
 	{
 		if (!event.getEntity().level.isClientSide)
 		{
-			// This function only handler non-befriended
-			if (event.getEntity() instanceof INFFTamed)
+			// This function only handle non-befriended
+			if (INFFTamed.get(event.getEntity()).isPresent())
 				return;
 			// When BM killed a mob targeting the player, favorability + 0.5 
 			if (event.getSource().getEntity() != null 
@@ -1152,7 +1157,8 @@ public class NFFGirlsEntityEventListeners
 			return;
 		}*/
 	}
-	
+
+
 	@SubscribeEvent
 	public static void onBefriended(NFFMobTamedEvent event)
 	{
@@ -1186,6 +1192,32 @@ public class NFFGirlsEntityEventListeners
 			event.mobBefriended.setItemSlot(EquipmentSlot.CHEST, ItemStack.EMPTY);
 			event.mobBefriended.setItemSlot(EquipmentSlot.LEGS, ItemStack.EMPTY);
 			event.mobBefriended.setItemSlot(EquipmentSlot.FEET, ItemStack.EMPTY);
+		}
+		if (event.mobBefriended.isPassenger()) {
+			Entity vehicle = event.mobBefriended.getVehicle();
+			event.mobBefriended.stopRiding();
+			// Try taming the riding entity
+			UUID ownerUUID = INFFTamed.get(event.mobBefriended).map(INFFTamed::getOwnerUUID).orElse(null);
+			LivingEntity owner = INFFTamed.get(event.mobBefriended).map(INFFTamed::getOwner).orElse(null);
+			if (vehicle instanceof LivingEntity l && ownerUUID != null) {
+				NFFTamedStatics.ownableFromLiving(l).ifPresent(o -> {
+					// INFFTamable and vanilla tamable mobs
+					if (o instanceof INFFTamed t) t.setOwnerUUID(ownerUUID);
+					else if (o instanceof AbstractHorse h) h.setOwnerUUID(ownerUUID);
+					else if (o instanceof TamableAnimal t) t.setOwnerUUID(ownerUUID);
+					// Reflectively try setting UUID
+					else {
+						NFUReflectionStatics.findPublicMethodIfInherited(l.getClass(), "setOwnerUUID", UUID.class)
+							.ifPresentOrElse(method -> NFUReflectionStatics.invokeMethod(method, l, ownerUUID), () -> {
+								if (owner != null) {
+								NFUReflectionStatics.findPublicMethodIfInherited(l.getClass(), "setOwner", LivingEntity.class)
+									.ifPresent(method -> NFUReflectionStatics.invokeMethod(method, l, owner));
+								}
+							});
+					}
+				});
+			}
+
 		}
 	}
 	
