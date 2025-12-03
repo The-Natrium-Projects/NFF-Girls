@@ -1,5 +1,21 @@
 # Change Log
 
+### 0.2.31
+
+Added Attacking Strategy List.
+
+Added JEI tabs for friending items, healing items and trade entries.
+
+Added trades of other implemented mobs.
+
+Added some compatibilities in healing and friending mobs.
+
+Tweaked the AI of flying mobs.
+
+Now mobs will auto unmount on being friendly.
+
+Fixed crashes on Kobold and Imp locating ores.
+
 ### 0.2.30.6
 
 Fixed crash on villager trade.

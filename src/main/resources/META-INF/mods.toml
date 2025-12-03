@@ -1,7 +1,7 @@
 modLoader="javafml" #mandatory
 loaderVersion="${loader_version_range}" #mandatory This is typically bumped every Minecraft version by Forge. See our download page for lists of versions.
 license="${mod_license}"
-issueTrackerURL="https://github.com/SodiumZH/Days-with-Monster-Girls"
+issueTrackerURL="https://github.com/SodiumZH/NFF-Girls"
 [[mods]] #mandatory
 modId="${mod_id}" #mandatory
 version="${mod_version}" #mandatory
