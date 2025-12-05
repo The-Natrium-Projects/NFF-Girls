@@ -45,7 +45,10 @@ public class NFFGirlsJeiEventListeners {
                 NFUNetworkStatics.sendToPlayer(NFFGirlsChannels.SYNC_CHANNEL,
                     packet, event.getPlayer()),
             () ->
-                event.getPlayerList().broadcastAll(packet));
+                    event.getPlayerList().getPlayers().forEach(player -> {
+                        NFUNetworkStatics.sendToPlayer(NFFGirlsChannels.SYNC_CHANNEL,
+                                packet, player);
+                    }));
     }
 
 }
