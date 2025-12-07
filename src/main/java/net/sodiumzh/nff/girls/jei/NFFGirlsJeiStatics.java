@@ -11,6 +11,8 @@ import net.minecraft.server.network.ServerGamePacketListenerImpl;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.player.Player;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.fml.ModList;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.sodiumzh.nff.girls.jei.item.MobApplicableItemTableJeiRecord;
@@ -96,6 +98,7 @@ public class NFFGirlsJeiStatics {
             }));
     }
 
+    @OnlyIn(Dist.CLIENT)
     // Client side
     public static void requestJeiDataSync(Player player) {
         if(!player.level().isClientSide) return;
@@ -109,7 +112,8 @@ public class NFFGirlsJeiStatics {
         }
     }
 
-    // Server side
+    @OnlyIn(Dist.CLIENT)
+    // Client side
     public static void handleJeiDataSync(ClientboundNFFGirlsJeiDataSyncPacket packet, ClientGamePacketListener pHandler) {
         if (!ModList.get().isLoaded("jei")) return;
         Minecraft mc = Minecraft.getInstance();
