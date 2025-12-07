@@ -1,15 +1,9 @@
 package net.sodiumzh.nff.girls.jei.item;
 
-import com.github.tartaricacid.touhoulittlemaid.geckolib3.core.molang.builtin.math.Min;
-import jeresources.config.Settings;
-import jeresources.util.Font;
-import jeresources.util.RenderHelper;
-import jeresources.util.TranslationHelper;
 import mezz.jei.api.gui.ingredient.IRecipeSlotTooltipCallback;
 import mezz.jei.api.gui.ingredient.IRecipeSlotView;
 import mezz.jei.api.recipe.category.extensions.IRecipeCategoryExtension;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.Gui;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.screens.inventory.InventoryScreen;
 import net.minecraft.nbt.Tag;
@@ -17,18 +11,14 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.item.ItemStack;
 import net.sodiumzh.nff.girls.NFFGirls;
-import net.sodiumzh.nff.girls.jei.NFFGirlsJeiStatics;
 import net.sodiumzh.nfu.client.NFUGUIStatics;
 import net.sodiumzh.nfu.info.ComponentBuilder;
 import net.sodiumzh.nfu.math.GuiPos;
 import net.sodiumzh.nfu.object.Validatable;
-import net.sodiumzh.nfu.util.NFUDebugStatics;
 import net.sodiumzh.nfu.util.NFUInfoStatics;
-import net.sodiumzh.nfu.util.NFUMiscStatics;
 import org.jetbrains.annotations.NotNull;
 
 import java.math.BigDecimal;

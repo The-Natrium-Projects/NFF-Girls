@@ -1,7 +1,6 @@
 package net.sodiumzh.nff.girls.entity.ai.goal;
 
 import net.sodiumzh.nff.girls.entity.capability.CNFFGirlsFavorabilityHandler;
-import net.sodiumzh.nff.services.entity.ai.NFFTamedMobAIState;
 import net.sodiumzh.nff.services.entity.ai.goal.preset.NFFFlyingFollowOwnerGoal;
 import net.sodiumzh.nff.services.entity.taming.INFFTamed;
 

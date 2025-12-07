@@ -11,26 +11,16 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
-import net.sodiumzh.nff.girls.NFFGirls;
 import net.sodiumzh.nff.girls.entity.INFFGirlsTamed;
 import net.sodiumzh.nff.girls.entity.ai.NFFGirlsAttackingStrategy;
-import net.sodiumzh.nff.girls.entity.ai.goal.target.NFFGirlsAttackingStrategyTargetGoal;
 import net.sodiumzh.nfu.info.ComponentBuilder;
 import net.sodiumzh.nfu.item.NFUItem;
 import net.sodiumzh.nfu.util.NFUInfoStatics;
-import net.sodiumzh.nfu.util.NFUMiscStatics;
-import org.checkerframework.checker.units.qual.A;
-import org.spongepowered.asm.mixin.injection.At;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 import java.util.UUID;
-import java.util.concurrent.atomic.AtomicReference;
-import java.util.function.Function;
-import java.util.function.Supplier;
 
 public class AttackingStrategyListItem extends NFUItem {
 

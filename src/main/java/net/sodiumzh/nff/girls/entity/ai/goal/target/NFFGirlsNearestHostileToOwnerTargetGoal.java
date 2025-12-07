@@ -1,10 +1,7 @@
 package net.sodiumzh.nff.girls.entity.ai.goal.target;
 
-import net.minecraft.world.entity.Mob;
 import net.sodiumzh.nff.girls.entity.INFFGirlsTamed;
 import net.sodiumzh.nff.services.entity.ai.goal.preset.target.NFFNearestUnfriendlyMobTargetGoal;
-
-import java.util.function.Predicate;
 
 public class NFFGirlsNearestHostileToOwnerTargetGoal extends NFFNearestUnfriendlyMobTargetGoal
 {

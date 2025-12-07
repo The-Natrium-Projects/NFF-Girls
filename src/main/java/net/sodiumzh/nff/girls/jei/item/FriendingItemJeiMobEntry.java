@@ -1,14 +1,11 @@
 package net.sodiumzh.nff.girls.jei.item;
 
-import com.github.tartaricacid.touhoulittlemaid.geckolib3.core.molang.builtin.math.Min;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.Mob;
 import net.sodiumzh.nff.girls.jei.NFFGirlsJeiStatics;
-import net.sodiumzh.nfu.info.ComponentBuilder;
-import net.sodiumzh.nfu.math.GuiPos;
 import net.sodiumzh.nfu.object.Validatable;
 import net.sodiumzh.nfu.util.NFUDebugStatics;
 import net.sodiumzh.nfu.util.NFUInfoStatics;

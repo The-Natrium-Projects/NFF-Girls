@@ -4,13 +4,10 @@ import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.FlowerBlock;
 import net.sodiumzh.nff.girls.NFFGirls;
-import net.sodiumzh.nfu.function.RegistrableFunction;
 import net.sodiumzh.nfu.function.RegistrablePredicate;
 import net.sodiumzh.nfu.registry.NFURegistries;
 import net.sodiumzh.nfu.registry.NFURegistry;
 import net.sodiumzh.nfu.registry.NFURegistryEntryCollection;
-
-import java.util.function.Function;
 
 public class NFFGirlsPredicates {
 

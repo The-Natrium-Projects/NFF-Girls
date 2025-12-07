@@ -5,13 +5,11 @@ import net.minecraft.world.entity.Mob;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.sodiumzh.nff.girls.registry.NFFGirlsBaubles;
-import net.sodiumzh.nff.girls.registry.NFFGirlsItemTooltips;
-import net.sodiumzh.nfu.item.bauble.NFUBaubleAPI;
 import net.sodiumzh.nfu.item.bauble.IBaubleRegistryEntry;
+import net.sodiumzh.nfu.item.bauble.NFUBaubleAPI;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 public interface INFFGirlsBauble extends IBaubleRegistryEntry {
 
