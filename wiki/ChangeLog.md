@@ -1,6 +1,10 @@
 # Change Log
 
-### 0.2.31
+### 0.2.31.1
+
+Fixed startup crash on standalone server.
+
+### 0.x.31
 
 Added Attacking Strategy List.
 
