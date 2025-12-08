@@ -1,6 +1,7 @@
 package net.sodiumzh.nff.girls.jei.trade;
 
 import com.google.common.collect.Multimap;
+import com.mojang.blaze3d.vertex.PoseStack;
 import mezz.jei.api.constants.VanillaTypes;
 import mezz.jei.api.gui.builder.IRecipeLayoutBuilder;
 import mezz.jei.api.gui.drawable.IDrawable;
@@ -11,7 +12,6 @@ import mezz.jei.api.recipe.IFocusGroup;
 import mezz.jei.api.recipe.RecipeIngredientRole;
 import mezz.jei.api.recipe.RecipeType;
 import mezz.jei.api.recipe.category.IRecipeCategory;
-import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
@@ -78,7 +78,7 @@ public class NFFGirlsTradeJeiCategory implements IRecipeCategory<NFFGirlsTradeJe
         return this.icon;
     }
 
-    public void draw(NFFGirlsTradeJeiMobEntry recipe, @Nonnull IRecipeSlotsView recipeSlotsView, @Nonnull GuiGraphics guiGraphics, double mouseX, double mouseY) {
+    public void draw(NFFGirlsTradeJeiMobEntry recipe, @Nonnull IRecipeSlotsView recipeSlotsView, @Nonnull PoseStack guiGraphics, double mouseX, double mouseY) {
         recipe.drawInfo(this.getBackground().getWidth(), this.getBackground().getHeight(), guiGraphics, mouseX, mouseY);
     }
 

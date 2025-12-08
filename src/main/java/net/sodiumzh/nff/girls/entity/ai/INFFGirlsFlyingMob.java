@@ -117,7 +117,7 @@ public interface INFFGirlsFlyingMob {
         @SubscribeEvent(priority = EventPriority.LOW)
         public static void resetAttackOnHurt(LivingHurtEvent event) {
             if (!event.isCanceled()
-                && !event.getEntity().level().isClientSide()
+                && !event.getEntity().level.isClientSide()
                 && event.getEntity() instanceof INFFGirlsFlyingMob mob
                 && !mob.getMob().isNoAi()
                 && !event.getEntity().isInvulnerableTo(event.getSource())

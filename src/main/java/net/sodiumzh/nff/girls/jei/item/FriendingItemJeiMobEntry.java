@@ -1,9 +1,9 @@
 package net.sodiumzh.nff.girls.jei.item;
 
-import com.github.tartaricacid.touhoulittlemaid.geckolib3.core.molang.builtin.math.Min;
+import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.util.FormattedCharSequence;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.Mob;
 import net.sodiumzh.nff.girls.jei.NFFGirlsJeiStatics;
@@ -14,6 +14,7 @@ import net.sodiumzh.nfu.util.NFUDebugStatics;
 import net.sodiumzh.nfu.util.NFUInfoStatics;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.List;
 import java.util.Optional;
 
 public class FriendingItemJeiMobEntry extends MobApplicableItemTableJeiMobEntry {
@@ -46,7 +47,7 @@ public class FriendingItemJeiMobEntry extends MobApplicableItemTableJeiMobEntry 
     }
 
     @Override
-    public void drawAdditional(int recipeWidth, int recipeHeight, @NotNull GuiGraphics guiGraphics, double mouseX, double mouseY) {
+    public void drawAdditional(int recipeWidth, int recipeHeight, @NotNull PoseStack guiGraphics, double mouseX, double mouseY) {
        /* if (itemTableKey.isValidated()) {
             String descKey = "jei." + itemTableKey.get().getNamespace() +
                 ".friending_condition." + itemTableKey.get().getPath();
@@ -55,9 +56,12 @@ public class FriendingItemJeiMobEntry extends MobApplicableItemTableJeiMobEntry 
                     .appendText(descKey).build(),
                 2, 14, 8, false);
         }*/
-        guiGraphics.drawWordWrap(Minecraft.getInstance().font,
-            NFUInfoStatics.createTranslatable("jei.nffgirls.friending_not_including_all"),
-            2, 102, 158, 8);
+        List<FormattedCharSequence> lines = Minecraft.getInstance().font.split(
+            NFUInfoStatics.createTranslatable("jei.nffgirls.friending_not_including_all"), 158
+        );
+        for (int i = 0; i < lines.size(); i++) {
+            Minecraft.getInstance().font.draw(guiGraphics, lines.get(i), 2, 102 + i * 9, 8);
+        }
     }
 
     @Override

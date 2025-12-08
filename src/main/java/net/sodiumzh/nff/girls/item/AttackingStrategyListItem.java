@@ -42,24 +42,24 @@ public class AttackingStrategyListItem extends NFUItem {
     @Override
     public InteractionResult interactLivingEntity(Player player, LivingEntity target, InteractionHand hand) {
         INFFGirlsTamed tamed = INFFGirlsTamed.get(target).orElse(null);
-        if (player.level().isClientSide)
-            return InteractionResult.sidedSuccess(player.level().isClientSide);
+        if (player.level.isClientSide)
+            return InteractionResult.sidedSuccess(player.level.isClientSide);
         // For tamed, merge strategy to mob
         if (tamed != null) {
             UUID ownerUUID = tamed.getOwnerUUID();
             // Other player's mob should not be set
             if (!player.getUUID().equals(ownerUUID))
-                return InteractionResult.sidedSuccess(player.level().isClientSide);
+                return InteractionResult.sidedSuccess(player.level.isClientSide);
             else if (player.isShiftKeyDown() && getStrategy(player.getItemInHand(hand)).isEmpty()) {
                 setStrategy(player.getItemInHand(hand), tamed.getAttackingStrategy());
                 NFUInfoStatics.printMessageTranslatable(player, "info.nffgirls.attacking_strategy.copied", target.getName().getString());
-                return InteractionResult.sidedSuccess(player.level().isClientSide);
+                return InteractionResult.sidedSuccess(player.level.isClientSide);
             }
             else if (!player.isShiftKeyDown()) {
                 NFFGirlsAttackingStrategy strategy = getStrategy(player.getItemInHand(hand));
                 tamed.setAttackingStrategy(getStrategy(player.getItemInHand(hand)));
                 NFUInfoStatics.printMessageTranslatable(player, "info.nffgirls.attacking_strategy.specified", target.getName().getString());
-                return InteractionResult.sidedSuccess(player.level().isClientSide);
+                return InteractionResult.sidedSuccess(player.level.isClientSide);
             }
         }
         else if (target instanceof Mob targetMob) {
@@ -94,7 +94,7 @@ public class AttackingStrategyListItem extends NFUItem {
             }
             setStrategy(player.getItemInHand(hand), strategy);
         }
-        return InteractionResult.sidedSuccess(player.level().isClientSide);
+        return InteractionResult.sidedSuccess(player.level.isClientSide);
     }
 
     @Nonnull

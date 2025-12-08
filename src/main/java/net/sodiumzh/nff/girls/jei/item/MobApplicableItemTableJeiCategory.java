@@ -1,7 +1,6 @@
 package net.sodiumzh.nff.girls.jei.item;
 
-import jeresources.api.drop.LootDrop;
-import jeresources.config.Settings;
+import com.mojang.blaze3d.vertex.PoseStack;
 import mezz.jei.api.gui.builder.IRecipeLayoutBuilder;
 import mezz.jei.api.gui.builder.IRecipeSlotBuilder;
 import mezz.jei.api.gui.drawable.IDrawable;
@@ -11,7 +10,6 @@ import mezz.jei.api.recipe.IFocusGroup;
 import mezz.jei.api.recipe.RecipeIngredientRole;
 import mezz.jei.api.recipe.RecipeType;
 import mezz.jei.api.recipe.category.IRecipeCategory;
-import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.ItemStack;
 import net.sodiumzh.nff.girls.jei.trade.NFFGirlsTradeJeiMobEntry;
@@ -59,7 +57,7 @@ public abstract class MobApplicableItemTableJeiCategory<T extends MobApplicableI
     }
 
     @Override
-    public void draw(T recipe, @Nonnull IRecipeSlotsView recipeSlotsView, @Nonnull GuiGraphics guiGraphics, double mouseX, double mouseY) {
+    public void draw(T recipe, @Nonnull IRecipeSlotsView recipeSlotsView, @Nonnull PoseStack guiGraphics, double mouseX, double mouseY) {
         recipe.drawInfo(this.getBackground().getWidth(), this.getBackground().getHeight(), guiGraphics, mouseX, mouseY);
     }
 
