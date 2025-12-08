@@ -2,13 +2,10 @@ package net.sodiumzh.nff.girls.item.bauble;
 
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.entity.Mob;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
-import net.sodiumzh.nfu.item.bauble.BaubleAttributeModifier;
 import net.sodiumzh.nfu.item.bauble.BaubleBehavior;
 import net.sodiumzh.nfu.item.bauble.BaubleEquippingCondition;
-import net.sodiumzh.nfu.item.bauble.BaubleProcessingArgs;
 import net.sodiumzh.nfu.util.NFUMathStatics;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;

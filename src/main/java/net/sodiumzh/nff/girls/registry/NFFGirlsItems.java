@@ -17,7 +17,6 @@ import net.sodiumzh.nff.services.item.NFFMobRespawnerItem;
 import net.sodiumzh.nfu.compat.ModDependencyFallbackItem;
 import net.sodiumzh.nfu.util.NFUCompatStatics;
 
-import java.util.HashSet;
 import java.util.function.Supplier;
 
 public class NFFGirlsItems {

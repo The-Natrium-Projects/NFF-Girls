@@ -13,7 +13,6 @@ import net.minecraftforge.fml.common.Mod;
 import net.sodiumzh.nff.girls.NFFGirls;
 import net.sodiumzh.nff.girls.block.SoulCarpetBlock;
 import net.sodiumzh.nff.girls.entity.projectile.NecromancerMagicBulletEntity;
-import net.sodiumzh.nff.girls.registry.NFFGirlsAngerRules;
 import net.sodiumzh.nff.girls.registry.NFFGirlsItems;
 import net.sodiumzh.nff.services.entity.taming.CNFFTamable;
 import net.sodiumzh.nff.services.entity.taming.NFFTamingProcess;

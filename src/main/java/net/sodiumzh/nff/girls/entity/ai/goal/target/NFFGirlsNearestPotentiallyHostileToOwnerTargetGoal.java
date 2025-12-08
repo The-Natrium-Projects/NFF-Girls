@@ -1,6 +1,5 @@
 package net.sodiumzh.nff.girls.entity.ai.goal.target;
 
-import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.ai.goal.WrappedGoal;
@@ -9,12 +8,10 @@ import net.minecraft.world.entity.ai.targeting.TargetingConditions;
 import net.minecraft.world.entity.player.Player;
 import net.sodiumzh.nff.girls.entity.INFFGirlsTamed;
 import net.sodiumzh.nff.services.entity.ai.goal.preset.target.NFFNearestAttackableTargetGoal;
-import net.sodiumzh.nff.services.entity.ai.goal.preset.target.NFFNearestUnfriendlyMobTargetGoal;
 import net.sodiumzh.nff.services.entity.taming.INFFTamed;
 import net.sodiumzh.nfu.util.NFUReflectionStatics;
 
 import java.lang.reflect.Field;
-import java.util.function.Predicate;
 
 public class NFFGirlsNearestPotentiallyHostileToOwnerTargetGoal extends NFFNearestAttackableTargetGoal<Mob> {
 

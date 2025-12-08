@@ -4,8 +4,6 @@ import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.protocol.Packet;
 import net.minecraft.network.protocol.game.ServerGamePacketListener;
 
-import java.util.UUID;
-
 public class ServerboundNFFGirlsJeiDataSyncRequestPacket implements Packet<ServerGamePacketListener> {
 
     public final int playerID;

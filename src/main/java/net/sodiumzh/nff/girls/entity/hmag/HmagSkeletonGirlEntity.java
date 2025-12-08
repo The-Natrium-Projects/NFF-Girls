@@ -23,7 +23,6 @@ import net.sodiumzh.nff.girls.entity.ai.goal.target.*;
 import net.sodiumzh.nff.girls.inventory.NFFGirlsSkeletonInventoryMenu;
 import net.sodiumzh.nff.girls.registry.NFFGirlsConfigs;
 import net.sodiumzh.nff.girls.registry.NFFGirlsEntityTypes;
-import net.sodiumzh.nff.girls.registry.NFFGirlsHealingItems;
 import net.sodiumzh.nff.girls.sound.NFFGirlsSoundPresets;
 import net.sodiumzh.nff.girls.util.NFFGirlsEntityStatics;
 import net.sodiumzh.nff.services.entity.ai.goal.preset.NFFFleeSunGoal;
@@ -34,7 +33,6 @@ import net.sodiumzh.nff.services.entity.taming.NFFTamedStatics;
 import net.sodiumzh.nff.services.inventory.NFFTamedInventoryMenu;
 import net.sodiumzh.nff.services.inventory.NFFTamedMobInventory;
 import net.sodiumzh.nff.services.inventory.NFFTamedMobInventoryWithEquipment;
-import net.sodiumzh.nfu.entity.MobApplicableItemTable;
 
 import java.util.Arrays;
 

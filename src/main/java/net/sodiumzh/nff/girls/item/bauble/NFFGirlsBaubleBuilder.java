@@ -16,7 +16,9 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.config.ModConfigEvent;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.sodiumzh.nff.girls.NFFGirls;
+import net.sodiumzh.nff.girls.registry.NFFGirlsBaubles;
 import net.sodiumzh.nff.girls.registry.NFFGirlsConfigs;
+import net.sodiumzh.nff.girls.registry.NFFGirlsEntityAttributes;
 import net.sodiumzh.nfu.function.ModifiableSupplier;
 import net.sodiumzh.nfu.function.RegistrablePredicate;
 import net.sodiumzh.nfu.info.ComponentBuilder;
@@ -32,7 +34,6 @@ import net.sodiumzh.nfu.registry.NFURegistryEntryCollection;
 import net.sodiumzh.nfu.util.NFUDebugStatics;
 import net.sodiumzh.nfu.util.NFUInfoStatics;
 import org.jetbrains.annotations.Nullable;
-import net.sodiumzh.nff.girls.registry.*;
 
 import javax.annotation.Nonnull;
 import java.text.DecimalFormat;

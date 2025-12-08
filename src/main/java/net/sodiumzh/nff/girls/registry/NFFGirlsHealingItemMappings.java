@@ -6,14 +6,12 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.sodiumzh.nff.girls.NFFGirls;
-import net.sodiumzh.nfu.container.Tuple2;
 import net.sodiumzh.nfu.entity.MobApplicableItemTable;
 
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
 import java.util.function.Supplier;
-import java.util.stream.Collectors;
 
 @Mod.EventBusSubscriber(bus = Mod.EventBusSubscriber.Bus.MOD, modid = NFFGirls.MOD_ID)
 public class NFFGirlsHealingItemMappings {

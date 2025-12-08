@@ -7,8 +7,6 @@ import net.minecraft.util.FormattedCharSequence;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.Mob;
 import net.sodiumzh.nff.girls.jei.NFFGirlsJeiStatics;
-import net.sodiumzh.nfu.info.ComponentBuilder;
-import net.sodiumzh.nfu.math.GuiPos;
 import net.sodiumzh.nfu.object.Validatable;
 import net.sodiumzh.nfu.util.NFUDebugStatics;
 import net.sodiumzh.nfu.util.NFUInfoStatics;

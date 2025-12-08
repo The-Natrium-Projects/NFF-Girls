@@ -16,7 +16,6 @@ import net.sodiumzh.nff.girls.jei.trade.NFFGirlsTradeJeiMobEntry;
 
 import javax.annotation.Nonnull;
 import java.util.Comparator;
-import java.util.stream.Collectors;
 
 @JeiPlugin
 public class NFFGirlsJeiPlugin implements IModPlugin

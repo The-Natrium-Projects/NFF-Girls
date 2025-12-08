@@ -2,10 +2,8 @@ package net.sodiumzh.nff.girls.entity.hmag;
 
 import com.github.mechalopa.hmag.world.entity.ImpEntity;
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.particles.ParticleOptions;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.nbt.CompoundTag;
-import net.minecraft.nbt.ListTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundSource;
@@ -24,36 +22,26 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.phys.Vec3;
 import net.sodiumzh.nff.girls.NFFGirls;
 import net.sodiumzh.nff.girls.entity.INFFGirlsTamed;
-import net.sodiumzh.nff.girls.entity.ai.goal.IBlockLocator;
 import net.sodiumzh.nff.girls.entity.ai.goal.NFFGirlsFollowOwnerGoal;
-import net.sodiumzh.nff.girls.entity.ai.goal.NFFGirlsLocateBlockGoal;
 import net.sodiumzh.nff.girls.entity.ai.goal.target.*;
 import net.sodiumzh.nff.girls.entity.projectile.MobileParticleSourceEntity;
 import net.sodiumzh.nff.girls.inventory.NFFGirlsHmagImpInventoryMenu;
-import net.sodiumzh.nff.girls.registry.NFFGirlsHealingItems;
 import net.sodiumzh.nff.girls.registry.NFFGirlsItems;
 import net.sodiumzh.nff.girls.sound.NFFGirlsSoundPresets;
 import net.sodiumzh.nff.services.entity.ai.NFFTamedMobAIState;
 import net.sodiumzh.nff.services.entity.ai.goal.preset.NFFMeleeAttackGoal;
 import net.sodiumzh.nff.services.entity.ai.goal.preset.NFFWaterAvoidingRandomStrollGoal;
 import net.sodiumzh.nff.services.entity.ai.goal.preset.target.NFFHurtByTargetGoal;
-import net.sodiumzh.nff.services.entity.ai.goal.preset.target.NFFOwnerHurtByTargetGoal;
-import net.sodiumzh.nff.services.entity.ai.goal.preset.target.NFFOwnerHurtTargetGoal;
-import net.sodiumzh.nff.services.entity.taming.NFFTamedStatics;
 import net.sodiumzh.nff.services.entity.taming.NFFTamingMapping;
 import net.sodiumzh.nff.services.inventory.NFFTamedInventoryMenu;
 import net.sodiumzh.nff.services.inventory.NFFTamedMobInventory;
 import net.sodiumzh.nff.services.inventory.NFFTamedMobInventoryWithHandItems;
 import net.sodiumzh.nfu.entity.ManualTimer;
-import net.sodiumzh.nfu.entity.MobApplicableItemTable;
-import net.sodiumzh.nfu.network.NFUDataSerializers;
-import net.sodiumzh.nfu.util.NFUContainerStatics;
 import net.sodiumzh.nfu.util.NFULevelStatics;
 import net.sodiumzh.nfu.util.NFUTagStatics;
 
 import javax.annotation.Nonnull;
 import java.util.Arrays;
-import java.util.Collection;
 import java.util.List;
 
 public class HmagImpEntity extends ImpEntity implements INFFGirlsTamed//, IBlockLocator

@@ -34,7 +34,6 @@ import net.sodiumzh.nfu.entity.vanillatrade.IVanillaTradeListing;
 import net.sodiumzh.nfu.entity.vanillatrade.ScaledVanillaTradeListing;
 import net.sodiumzh.nfu.entity.vanillatrade.VanillaMerchant;
 import net.sodiumzh.nfu.util.NFUContainerStatics;
-import net.sodiumzh.nfu.util.NFUMiscStatics;
 
 import javax.annotation.Nullable;
 import java.util.*;

@@ -10,9 +10,6 @@ import net.sodiumzh.nff.girls.NFFGirls;
 import net.sodiumzh.nff.girls.item.bauble.NFFGirlsBaubleBehavior;
 import net.sodiumzh.nfu.object.Validatable;
 
-import java.util.HashMap;
-import java.util.Map;
-
 @Mod.EventBusSubscriber(bus = Mod.EventBusSubscriber.Bus.FORGE, modid = NFFGirls.MOD_ID)
 public class NFFGirlsItemTooltips {
 
