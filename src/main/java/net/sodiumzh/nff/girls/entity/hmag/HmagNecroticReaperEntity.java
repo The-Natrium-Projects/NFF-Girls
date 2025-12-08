@@ -26,7 +26,6 @@ import net.sodiumzh.nff.girls.entity.ai.goal.target.NFFGirlsOwnerHurtTargetGoal;
 import net.sodiumzh.nff.girls.inventory.HmagNecroticReaperInventoryMenu;
 import net.sodiumzh.nff.girls.inventory.NFFGirlsNecroticReaperInventoryMenu;
 import net.sodiumzh.nff.girls.entity.ai.goal.target.*;
-import net.sodiumzh.nff.girls.inventory.NFFGirlsHmagNecroticReaperInventoryMenu;
 import net.sodiumzh.nff.girls.registry.NFFGirlsHealingItems;
 import net.sodiumzh.nff.girls.sound.NFFGirlsSoundPresets;
 import net.sodiumzh.nff.girls.util.NFFGirlsEntityStatics;

@@ -4,7 +4,6 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.mojang.logging.LogUtils;
-import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.entity.Mob;
@@ -117,7 +116,7 @@ public class NFFGirlsDataReaders {
 
     public static Map<ResourceLocation, VanillaTradeListing> readTradeListings(String namespace, JsonArray from) {
         Map<ResourceLocation, VanillaTradeListing> res = new HashMap<>();
-        from.asList().stream().filter(JsonElement::isJsonObject).map(JsonElement::getAsJsonObject)
+        NFUDataStatics.jsonArrayToList(from).stream().filter(JsonElement::isJsonObject).map(JsonElement::getAsJsonObject)
             .forEach(jo -> {
                 try {
                     String key = NFUDataStatics.getOptionalString(jo, "key").orElse(null);

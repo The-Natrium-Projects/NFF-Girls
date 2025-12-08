@@ -298,7 +298,7 @@ public interface NFFGirlsHmagFlyingGoal
 				
 				if (shouldAvoidSun.test(mob) && NFULevelStatics.isUnderSun(blockpos1, mob.asMob()))
 					continue;
-				if (this.getMob().asMob().level().isEmptyBlock(blockpos1))
+				if (this.getMob().asMob().level.isEmptyBlock(blockpos1))
 				{
 					this.getMob().asMob().getMoveControl().setWantedPosition(blockpos1.getX() + 0.5D, blockpos1.getY() + 0.5D, blockpos1.getZ() + 0.5D, this.moveSpeed);
 

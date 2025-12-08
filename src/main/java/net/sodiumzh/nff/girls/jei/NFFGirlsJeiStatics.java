@@ -101,7 +101,7 @@ public class NFFGirlsJeiStatics {
     @OnlyIn(Dist.CLIENT)
     // Client side
     public static void requestJeiDataSync(Player player) {
-        if(!player.level().isClientSide) return;
+        if(!player.level.isClientSide) return;
         NFUNetworkStatics.sendToServer(player, NFFGirlsChannels.SYNC_CHANNEL, new ServerboundNFFGirlsJeiDataSyncRequestPacket(player.getId()));
     }
 

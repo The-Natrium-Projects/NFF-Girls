@@ -32,7 +32,6 @@ import net.sodiumzh.nff.girls.entity.ai.goal.target.NFFGirlsNearestHostileToOwne
 import net.sodiumzh.nff.girls.entity.ai.goal.target.NFFGirlsNearestHostileToSelfTargetGoal;
 import net.sodiumzh.nff.girls.entity.ai.goal.target.NFFGirlsOwnerHurtByTargetGoal;
 import net.sodiumzh.nff.girls.entity.ai.goal.target.NFFGirlsOwnerHurtTargetGoal;
-import net.sodiumzh.nff.girls.entity.ai.goal.NFFGirlsTridentAttackGoal;
 import net.sodiumzh.nff.girls.entity.ai.goal.target.*;
 import net.sodiumzh.nff.girls.inventory.NFFGirlsEquipmentTwoBaublesInventoryMenu;
 import net.sodiumzh.nff.girls.registry.NFFGirlsConfigs;

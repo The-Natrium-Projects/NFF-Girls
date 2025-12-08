@@ -16,7 +16,6 @@ import net.sodiumzh.nff.girls.entity.ai.goal.NFFGirlsTamablePickItemGoal;
 import net.sodiumzh.nff.girls.entity.ai.goal.NFFGirlsTamableWatchHandItemGoal;
 import net.sodiumzh.nff.services.entity.capability.CNFFTamable;
 import net.sodiumzh.nff.services.entity.taming.CNFFTamable;
-import net.sodiumzh.nff.services.entity.capability.CNFFTamable;
 import net.sodiumzh.nff.services.entity.taming.IItemTableUsingProcess;
 import net.sodiumzh.nff.services.entity.taming.INFFDefaultProgressedTamingProcess;
 import net.sodiumzh.nff.services.entity.taming.NFFTamingProcess;
@@ -26,8 +25,7 @@ import net.sodiumzh.nfu.entity.taming.ITamingProcess;
 import net.sodiumzh.nfu.entity.taming.TamingInteractionResult;
 import net.sodiumzh.nfu.mixin.event.entity.EntityStartBaseTickEvent;
 import net.sodiumzh.nfu.mixin.event.entity.EntityTickEvent;
-import net.sodiumzh.nfu.registry.NFUCaps;
-import net.sodiumzh.nfu.util.NFUEntityStatics;
+import net.sodiumzh.nfu.registry.NFUCapabilities;
 import net.sodiumzh.nfu.util.NFUItemStatics;
 import net.sodiumzh.nfu.util.NFUParticleStatics;
 
@@ -36,8 +34,6 @@ import javax.annotation.Nullable;
 import java.util.*;
 import java.util.function.Predicate;
 import java.util.function.Supplier;
-
-import static net.sodiumzh.nff.services.entity.capability.CNFFTamable.getOptional;
 
 public abstract class NFFGirlsItemDroppingTamingProcess extends NFFTamingProcess implements INFFDefaultProgressedTamingProcess<Mob>, IItemTableUsingProcess<NFFTamingProcess>
 {
@@ -142,7 +138,7 @@ public abstract class NFFGirlsItemDroppingTamingProcess extends NFFTamingProcess
 		if (this.getTamable(mob).isAngryAt(playerThrown))
 			return false;
 		// If the item is still in picking cooldown for the mob, pass
-		if (itemEntity.getCapability(NFUCaps.CAP_ENTITY_DATA)
+		if (itemEntity.getCapability(NFUCapabilities.CAP_ENTITY_DATA)
 				.map(c -> c.getNBT().getCompound(ENTITY_DATA_KEY_ALREADY_PICKED_TAMABLE_MOBS).getInt(mob.getStringUUID()))
 				.orElse(0) > 0)
 			return false;
@@ -197,7 +193,7 @@ public abstract class NFFGirlsItemDroppingTamingProcess extends NFFTamingProcess
 			itemEntity.getItem().shrink(1);
 			// Label on the item entity that the mob has picked an item from this entity, to prevent picking immediately
 			// This is a timer and handled in the event listener at the end of this class
-			itemEntity.getCapability(NFUCaps.CAP_ENTITY_DATA).ifPresent(c -> {
+			itemEntity.getCapability(NFUCapabilities.CAP_ENTITY_DATA).ifPresent(c -> {
 				this.setItemEntityPickingCooldown(itemEntity, mob, getItemPickingCooldown());
 			});
 		}
@@ -348,7 +344,7 @@ public abstract class NFFGirlsItemDroppingTamingProcess extends NFFTamingProcess
 	 * mob to pick the item again.
 	 */
 	private int getItemEntityPickingCooldown(ItemEntity itemEntity, Mob mob) {
-		return itemEntity.getCapability(NFUCaps.CAP_ENTITY_DATA)
+		return itemEntity.getCapability(NFUCapabilities.CAP_ENTITY_DATA)
 				.map(c -> c.getNBT().getCompound(ENTITY_DATA_KEY_ALREADY_PICKED_TAMABLE_MOBS).getInt(mob.getStringUUID()))
 				.orElse(0);
 	}
@@ -358,7 +354,7 @@ public abstract class NFFGirlsItemDroppingTamingProcess extends NFFTamingProcess
 	 * mob to pick the item again.
 	 */
 	private void setItemEntityPickingCooldown(ItemEntity itemEntity, Mob mob, int ticks) {
-		var optC = itemEntity.getCapability(NFUCaps.CAP_ENTITY_DATA);
+		var optC = itemEntity.getCapability(NFUCapabilities.CAP_ENTITY_DATA);
 		if (!optC.isPresent()) return;
 		var c = optC.orElseThrow(RuntimeException::new);
 		if (!c.getNBT().contains(ENTITY_DATA_KEY_ALREADY_PICKED_TAMABLE_MOBS, Tag.TAG_COMPOUND))
@@ -393,7 +389,7 @@ public abstract class NFFGirlsItemDroppingTamingProcess extends NFFTamingProcess
 	{
 		if (event.getEntity() instanceof ItemEntity ie && !ie.level.isClientSide)
 		{
-			ie.getCapability(NFUCaps.CAP_ENTITY_DATA).ifPresent(dataCap -> {
+			ie.getCapability(NFUCapabilities.CAP_ENTITY_DATA).ifPresent(dataCap -> {
 				CompoundTag allTimers = dataCap.getNBT().getCompound(ENTITY_DATA_KEY_ALREADY_PICKED_TAMABLE_MOBS);
 				Set<String> removal = new HashSet<>();
 				for (String key: allTimers.getAllKeys()) {

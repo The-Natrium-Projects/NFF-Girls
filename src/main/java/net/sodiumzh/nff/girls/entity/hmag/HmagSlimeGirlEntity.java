@@ -28,7 +28,6 @@ import net.sodiumzh.nff.girls.entity.ai.goal.target.NFFGirlsOwnerHurtTargetGoal;
 import net.sodiumzh.nff.girls.inventory.HmagSlimeGirlInventoryMenu;
 import net.sodiumzh.nff.girls.inventory.NFFGirlsHmagSlimeGirlInventoryMenu;
 import net.sodiumzh.nff.girls.entity.ai.goal.target.*;
-import net.sodiumzh.nff.girls.inventory.NFFGirlsSlimeGirlInventoryMenu;
 import net.sodiumzh.nff.girls.item.MagicalGelColorUtils;
 import net.sodiumzh.nff.girls.registry.NFFGirlsHealingItems;
 import net.sodiumzh.nff.girls.sound.NFFGirlsSoundPresets;

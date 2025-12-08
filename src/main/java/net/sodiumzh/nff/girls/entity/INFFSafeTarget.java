@@ -39,10 +39,10 @@ public interface INFFSafeTarget<T extends INFFSafeTarget<T>> {
                     && NFFTamedStatics.isLivingAlliedToBM(source, targetOfTarget))
                     yield true;
                     // Mob that owner is attacking
-                else if (target.getLastAttacker().equals(source.getOwnerInDimension()))
+                else if (target.getLastHurtByMob().equals(source.getOwnerInDimension()))
                     yield true;
                     // Mob that shooter's ally is attacking
-                else if (source.asMob().level().getEntities(EntityTypeTest.forClass(Mob.class), source.asMob().getBoundingBox().inflate(8, 8, 8), mob -> NFFTamedStatics.isLivingAlliedToBM(source, mob))
+                else if (source.asMob().level.getEntities(EntityTypeTest.forClass(Mob.class), source.asMob().getBoundingBox().inflate(8, 8, 8), mob -> NFFTamedStatics.isLivingAlliedToBM(source, mob))
                     .stream().anyMatch(mob -> mob.getTarget() != null && mob.getTarget().equals(target)))
                     yield true;
                 yield false;

@@ -161,7 +161,7 @@ public class NFFSafeThrownPotionEntity extends ThrownPotion implements INFFSafeT
         @SubscribeEvent
         public static void onSpawnEffectCloud(ThrownPotionEffectCloudEvent.Construct event) {
             if (event.getEntity() instanceof NFFSafeThrownPotionEntity stp) {
-                NFFSafeEffectCloudEntity cloud = new NFFSafeEffectCloudEntity(event.getCloud().level(), event.getCloud().getX(), event.getCloud().getY(), event.getCloud().getZ());
+                NFFSafeEffectCloudEntity cloud = new NFFSafeEffectCloudEntity(event.getCloud().level, event.getCloud().getX(), event.getCloud().getY(), event.getCloud().getZ());
                 stp.getEffectOverride().ifPresent(cloud::setEffectOverride);
                 cloud.setIntendedTarget(stp.getIntendedTarget());
                 cloud.setTargetType(stp.getTargetType());

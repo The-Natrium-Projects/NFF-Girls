@@ -1,16 +1,11 @@
 package net.sodiumzh.nff.girls.jei.item;
 
-import com.github.tartaricacid.touhoulittlemaid.geckolib3.core.molang.builtin.math.Min;
-import jeresources.config.Settings;
-import jeresources.util.Font;
-import jeresources.util.RenderHelper;
-import jeresources.util.TranslationHelper;
+import com.mojang.blaze3d.vertex.PoseStack;
 import mezz.jei.api.gui.ingredient.IRecipeSlotTooltipCallback;
 import mezz.jei.api.gui.ingredient.IRecipeSlotView;
 import mezz.jei.api.recipe.category.extensions.IRecipeCategoryExtension;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Gui;
-import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.screens.inventory.InventoryScreen;
 import net.minecraft.nbt.Tag;
 import net.minecraft.network.chat.Component;
@@ -22,11 +17,11 @@ import net.minecraft.world.entity.Mob;
 import net.minecraft.world.item.ItemStack;
 import net.sodiumzh.nff.girls.NFFGirls;
 import net.sodiumzh.nff.girls.jei.NFFGirlsJeiStatics;
-import net.sodiumzh.nfu.client.NFUGUIStatics;
 import net.sodiumzh.nfu.info.ComponentBuilder;
 import net.sodiumzh.nfu.math.GuiPos;
 import net.sodiumzh.nfu.object.Validatable;
 import net.sodiumzh.nfu.util.NFUDebugStatics;
+import net.sodiumzh.nfu.util.NFUGUIStatics;
 import net.sodiumzh.nfu.util.NFUInfoStatics;
 import net.sodiumzh.nfu.util.NFUMiscStatics;
 import org.jetbrains.annotations.NotNull;
@@ -115,18 +110,18 @@ public abstract class MobApplicableItemTableJeiMobEntry implements IRecipeCatego
     }
 
     @Override
-    public void drawInfo(int recipeWidth, int recipeHeight, @NotNull GuiGraphics guiGraphics, double mouseX, double mouseY) {
+    public void drawInfo(int recipeWidth, int recipeHeight, @NotNull PoseStack guiGraphics, double mouseX, double mouseY) {
         this.tryInitialize();
-        NFUGUIStatics.drawSprite(guiGraphics, TEXTURE_LOCATION, GuiPos.ZERO, 0, new GuiPos(0, 20),
+        NFUGUIStatics.drawSprite(guiGraphics, GuiPos.ZERO, 0, new GuiPos(0, 20),
             new GuiPos(164, 120), TEXTURE_SIZE);
         this.drawAdditional(recipeWidth, recipeHeight, guiGraphics, mouseX, mouseY);
         this.mobInstance.getIfValidated().ifPresent(mob ->
-            InventoryScreen.renderEntityInInventoryFollowsMouse(guiGraphics, 33, 96,
+            InventoryScreen.renderEntityInInventory(33, 96,
                 (int)(mob.getBbHeight() > 2 ? 68d / mob.getBbHeight() : 34d),
                 (float) (38.0 - mouseX), (float) (80.0 - mouseY), mob)
         );
         Component mobName = this.entityType.getDescription();
-        guiGraphics.drawString(Minecraft.getInstance().font, mobName, 7, 2, 8, false);
+        Minecraft.getInstance().font.draw(guiGraphics, mobName, 7, 2, 8);
     }
 
     @Override
@@ -151,7 +146,7 @@ public abstract class MobApplicableItemTableJeiMobEntry implements IRecipeCatego
         }
     }
 
-    public abstract void drawAdditional(int recipeWidth, int recipeHeight, @NotNull GuiGraphics guiGraphics, double mouseX, double mouseY);
+    public abstract void drawAdditional(int recipeWidth, int recipeHeight, @NotNull PoseStack guiGraphics, double mouseX, double mouseY);
 
     public abstract boolean showCooldown();
 

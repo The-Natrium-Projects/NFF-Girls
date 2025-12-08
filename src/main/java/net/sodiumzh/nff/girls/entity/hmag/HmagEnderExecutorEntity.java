@@ -47,7 +47,6 @@ import net.sodiumzh.nff.girls.inventory.HmagEnderExecutorInventory;
 import net.sodiumzh.nff.girls.inventory.HmagEnderExecutorInventoryMenu;
 import net.sodiumzh.nff.girls.inventory.NFFGirlsEnderExecutorInventory;
 import net.sodiumzh.nff.girls.entity.ai.goal.target.*;
-import net.sodiumzh.nff.girls.inventory.NFFGirlsHmagEnderExecutorInventory;
 import net.sodiumzh.nff.girls.inventory.NFFGirlsHmagEnderExecutorInventoryMenu;
 import net.sodiumzh.nff.girls.item.bauble.INFFGirlsBauble;
 import net.sodiumzh.nff.girls.registry.NFFGirlsBlocks;

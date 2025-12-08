@@ -100,7 +100,7 @@ public class NFFGirlsBaubles {
     public static final NFURegistry.Accessor<RegistrablePredicate<Entity>> EFFECT_CONDITION_IN_WATER = BAUBLE_EFFECT_CONDITIONS.register("in_water", () ->
         new RegistrablePredicate<>(Entity.class, "in_water", Entity::isInWaterOrBubble).setTranslation("tooltip.nffgirls.bauble.in_water").cast());
     public static final NFURegistry.Accessor<RegistrablePredicate<Mob>> EFFECT_CONDITION_AT_NIGHT = BAUBLE_EFFECT_CONDITIONS.register("at_night", () ->
-        new RegistrablePredicate<>(Mob.class, "at_night", (Mob m) -> m.level().isNight()).setTranslation("tooltip.nffgirls.bauble.at_night"));
+        new RegistrablePredicate<>(Mob.class, "at_night", (Mob m) -> m.level.isNight()).setTranslation("tooltip.nffgirls.bauble.at_night"));
 
     public static final NFURegistry.Accessor<RegistrablePredicate<Entity>> EFFECT_CONDITION_IN_WATER_OR_RAIN = BAUBLE_EFFECT_CONDITIONS.register("in_water_or_rain", () ->
         new RegistrablePredicate<>(Entity.class, "in_water_or_rain", Entity::isInWaterRainOrBubble).setTranslation("tooltip.nffgirls.bauble.in_water_or_rain").cast());

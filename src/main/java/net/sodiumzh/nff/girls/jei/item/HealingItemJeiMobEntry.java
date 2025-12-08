@@ -1,7 +1,7 @@
 package net.sodiumzh.nff.girls.jei.item;
 
+import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.Mob;
 import net.sodiumzh.nff.girls.jei.NFFGirlsJeiStatics;
@@ -37,7 +37,7 @@ public class HealingItemJeiMobEntry extends MobApplicableItemTableJeiMobEntry {
     }
 
     @Override
-    public void drawAdditional(int recipeWidth, int recipeHeight, @NotNull GuiGraphics guiGraphics, double mouseX, double mouseY) {
+    public void drawAdditional(int recipeWidth, int recipeHeight, @NotNull PoseStack guiGraphics, double mouseX, double mouseY) {
 
     }
 

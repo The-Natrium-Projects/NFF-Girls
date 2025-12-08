@@ -25,7 +25,6 @@ import net.sodiumzh.nff.girls.inventory.NFFGirlsThreeBaublesInventoryMenu;
 import net.sodiumzh.nff.girls.inventory.NFFGirlsHmagThreeBaublesInventoryMenu;
 
 import net.sodiumzh.nff.girls.entity.ai.goal.target.*;
-import net.sodiumzh.nff.girls.inventory.NFFGirlsThreeBaublesInventoryMenu;
 
 import net.sodiumzh.nff.girls.registry.NFFGirlsHealingItems;
 import net.sodiumzh.nff.girls.sound.NFFGirlsSoundPresets;
