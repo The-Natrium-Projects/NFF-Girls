@@ -145,6 +145,7 @@ repositories {
     flatDir {
         dir 'libs'
         dir '../NFF-Services/build/libs'
+        dir '../NFU-Library/build/libs'
     }
     	
 	maven {
@@ -183,10 +184,11 @@ dependencies {
     compileOnly fg.deobf("mezz.jei:jei-${minecraft_version}-forge-api:${jei_version}")
     runtimeOnly fg.deobf("mezz.jei:jei-${minecraft_version}-forge:${jei_version}")
 	implementation fg.deobf("blank:nffservices-${minecraft_version}:${services_version}")
-	/*jarJar(group: 'net.sodiumzh.nautils', name: 'nautils', version: "[${minecraft_version}-${nautils_version},)"){
-		jarJar.pin(it, "${minecraft_version}-${nautils_version}")
-	}*/
-	jarJar(group: 'net.sodiumzh', name: 'nffservices', version: "[${minecraft_version}-${services_version},)"){
+    implementation fg.deobf("blank:nfulib-${minecraft_version}:${nfu_version}")
+	jarJar(group: 'net.sodiumzh.nfu', name: 'nfulib', version: "[${minecraft_version}-${nfu_version},)"){
+		jarJar.pin(it, "${minecraft_version}-${nfu_version}")
+	}
+	jarJar(group: 'net.sodiumzh.nff.services', name: 'nffservices', version: "[${minecraft_version}-${services_version},)"){
 		jarJar.pin(it, "${minecraft_version}-${services_version}")
 	}
     implementation fg.deobf("curse.maven:hmag-537613:5391696")
