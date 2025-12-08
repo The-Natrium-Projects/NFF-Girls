@@ -13,7 +13,6 @@ import net.sodiumzh.nfu.container.Tuple2;
 
 import javax.annotation.Nullable;
 import java.util.Comparator;
-import java.util.Optional;
 
 /**
  * Common interface of flying mobs that can actively collect honey from flower blocks and then fly back.

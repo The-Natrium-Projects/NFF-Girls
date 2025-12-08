@@ -1,10 +1,7 @@
 package net.sodiumzh.nff.girls.registry;
 
-import com.github.mechalopa.hmag.registry.ModItems;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Items;
-import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.LogicalSide;
 import net.minecraftforge.fml.common.Mod;
@@ -12,7 +9,6 @@ import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 import net.sodiumzh.nff.girls.NFFGirls;
 import net.sodiumzh.nff.girls.data.NFFGirlsDataReaders;
-import net.sodiumzh.nfu.container.Tuple2;
 import net.sodiumzh.nfu.entity.vanillatrade.VanillaTradeListing;
 import net.sodiumzh.nfu.entity.vanillatrade.VanillaTradeListingCollection;
 import net.sodiumzh.nfu.entity.vanillatrade.VanillaTradeListingCollectionHelper;
@@ -23,7 +19,10 @@ import net.sodiumzh.nfu.registry.NFURegistryEntryCollection;
 import net.sodiumzh.nfu.registry.NFURegistryGenerateValuesEvent;
 import net.sodiumzh.nfu.util.NFUDataStatics;
 
-import java.util.*;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 @Mod.EventBusSubscriber(modid = NFFGirls.MOD_ID, bus = Mod.EventBusSubscriber.Bus.FORGE)

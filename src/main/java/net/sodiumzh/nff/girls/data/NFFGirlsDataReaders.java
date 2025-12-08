@@ -3,35 +3,18 @@ package net.sodiumzh.nff.girls.data;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
-import com.mojang.logging.LogUtils;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.tags.TagKey;
-import net.minecraft.world.entity.Mob;
-import net.minecraft.world.item.Item;
-import net.minecraft.world.item.ItemStack;
-import net.minecraftforge.registries.ForgeRegistries;
 import net.sodiumzh.nff.girls.registry.NFFGirlsHealingItems;
 import net.sodiumzh.nff.girls.registry.NFFGirlsItems;
-import net.sodiumzh.nfu.annotation.DontCallManually;
 import net.sodiumzh.nfu.entity.MobApplicableItemTable;
 import net.sodiumzh.nfu.entity.vanillatrade.VanillaTradeListing;
 import net.sodiumzh.nfu.entity.vanillatrade.VanillaTradeListingCollectionHelper;
-import net.sodiumzh.nfu.function.RegistrableFunction;
-import net.sodiumzh.nfu.function.RegistrablePredicate;
 import net.sodiumzh.nfu.math.RandomSelection;
 import net.sodiumzh.nfu.math.RangedRandomDouble;
-import net.sodiumzh.nfu.math.RangedRandomInt;
-import net.sodiumzh.nfu.registry.NFUFunctions;
-import net.sodiumzh.nfu.registry.NFURegistries;
 import net.sodiumzh.nfu.util.NFUDataStatics;
-import org.checkerframework.checker.units.qual.A;
 
-import javax.swing.text.html.Option;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
-import java.util.Optional;
-import java.util.function.Function;
 
 public class NFFGirlsDataReaders {
 

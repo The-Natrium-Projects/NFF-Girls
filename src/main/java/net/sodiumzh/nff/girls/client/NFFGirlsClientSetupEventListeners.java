@@ -22,7 +22,6 @@ import net.sodiumzh.nff.girls.client.renderer.NFFGirlsHmagEnderExecutorRenderer;
 import net.sodiumzh.nff.girls.inventory.*;
 import net.sodiumzh.nff.girls.item.ReinforcedFishingRodItem;
 import net.sodiumzh.nff.girls.registry.NFFGirlsEntityTypes;
-import net.sodiumzh.nff.girls.registry.NFFGirlsHealingItems;
 import net.sodiumzh.nff.girls.registry.NFFGirlsItems;
 import net.sodiumzh.nff.girls.registry.NFFGirlsParticleTypes;
 import net.sodiumzh.nff.services.event.client.RegisterGuiScreenEvent;

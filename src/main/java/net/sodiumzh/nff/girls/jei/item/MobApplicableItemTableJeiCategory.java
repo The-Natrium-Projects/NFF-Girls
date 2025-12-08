@@ -2,7 +2,6 @@ package net.sodiumzh.nff.girls.jei.item;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import mezz.jei.api.gui.builder.IRecipeLayoutBuilder;
-import mezz.jei.api.gui.builder.IRecipeSlotBuilder;
 import mezz.jei.api.gui.drawable.IDrawable;
 import mezz.jei.api.gui.ingredient.IRecipeSlotsView;
 import mezz.jei.api.helpers.IGuiHelper;
@@ -12,12 +11,10 @@ import mezz.jei.api.recipe.RecipeType;
 import mezz.jei.api.recipe.category.IRecipeCategory;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.ItemStack;
-import net.sodiumzh.nff.girls.jei.trade.NFFGirlsTradeJeiMobEntry;
 import net.sodiumzh.nfu.math.GuiPos;
 
 import javax.annotation.Nonnull;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public abstract class MobApplicableItemTableJeiCategory<T extends MobApplicableItemTableJeiMobEntry> implements IRecipeCategory<T> {
 

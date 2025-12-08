@@ -5,7 +5,6 @@ import com.github.mechalopa.hmag.registry.ModItems;
 import com.github.mechalopa.hmag.world.entity.EnderExecutorEntity;
 import com.github.mechalopa.hmag.world.entity.GhastlySeekerEntity;
 import com.github.mechalopa.hmag.world.entity.projectile.MagicBulletEntity;
-import com.google.common.cache.Cache;
 import com.mojang.logging.LogUtils;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
@@ -80,7 +79,6 @@ import net.sodiumzh.nff.services.registry.NFFCapRegistry;
 import net.sodiumzh.nfu.entity.RepeatableAttributeModifier;
 import net.sodiumzh.nfu.entity.taming.ITamingProcessWithProgress;
 import net.sodiumzh.nfu.mixin.event.entity.*;
-import net.sodiumzh.nfu.reflection.CachedMethodAccessor;
 import net.sodiumzh.nfu.util.*;
 import org.apache.commons.lang3.mutable.MutableObject;
 
