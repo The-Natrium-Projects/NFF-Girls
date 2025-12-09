@@ -7,6 +7,7 @@ import net.sodiumzh.nfu.util.NFUMathStatics;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 import java.util.function.Predicate;
 
@@ -31,14 +32,14 @@ public abstract class NFFGirlsDedicatedBaubleItem extends DedicatedBaubleItem im
 	{
 		if (tier == 1)
 			return "";
-		return "_" + NFUMathStatics.intToRoman(tier).toLowerCase();
+		return "_" + NFUMathStatics.intToRoman(tier).toLowerCase(Locale.ENGLISH);
 	}
 
 	public static String getTierSuffix(int tier)
 	{
 		if (tier == 1)
 			return "";
-		return "_" + NFUMathStatics.intToRoman(tier).toLowerCase();
+		return "_" + NFUMathStatics.intToRoman(tier).toLowerCase(Locale.ENGLISH);
 	}
 
 	@Override
