@@ -1,7 +1,9 @@
 package net.sodiumzh.nff.girls.jei.trade;
 
 import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.world.item.EnchantedBookItem;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.enchantment.EnchantmentInstance;
 import net.sodiumzh.nfu.container.Tuple3;
 import net.sodiumzh.nfu.entity.vanillatrade.VanillaTradeListing;
 import net.sodiumzh.nfu.entity.vanillatrade.VanillaTradeListingEnchanted;
@@ -71,7 +73,7 @@ public class NFFGirlsTradeJeiRecord {
                 items.forEach(itemStack -> {
                     res.r.addAll(encs.stream().map(tp -> {
                         ItemStack itemCopy = itemStack.copy();
-                        itemCopy.enchant(tp.getA(), tp.getB());
+                        EnchantedBookItem.addEnchantment(itemCopy, new EnchantmentInstance(tp.getA(), tp.getB()));
                         return itemCopy;
                     }).toList());
                 });
