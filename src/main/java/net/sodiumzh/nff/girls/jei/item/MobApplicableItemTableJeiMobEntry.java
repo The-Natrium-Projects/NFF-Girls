@@ -1,6 +1,7 @@
 package net.sodiumzh.nff.girls.jei.item;
 
 import com.mojang.blaze3d.vertex.PoseStack;
+import mezz.jei.api.constants.VanillaTypes;
 import mezz.jei.api.gui.ingredient.IRecipeSlotTooltipCallback;
 import mezz.jei.api.gui.ingredient.IRecipeSlotView;
 import mezz.jei.api.recipe.category.extensions.IRecipeCategoryExtension;
@@ -14,10 +15,10 @@ import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.item.ItemStack;
 import net.sodiumzh.nff.girls.NFFGirls;
+import net.sodiumzh.nfu.client.NFUGUIStatics;
 import net.sodiumzh.nfu.info.ComponentBuilder;
 import net.sodiumzh.nfu.math.GuiPos;
 import net.sodiumzh.nfu.object.Validatable;
-import net.sodiumzh.nfu.util.NFUGUIStatics;
 import net.sodiumzh.nfu.util.NFUInfoStatics;
 import org.jetbrains.annotations.NotNull;
 
@@ -121,7 +122,7 @@ public abstract class MobApplicableItemTableJeiMobEntry implements IRecipeCatego
 
     @Override
     public void onTooltip(@NotNull IRecipeSlotView recipeSlotView, @NotNull List<Component> tooltip) {
-        ItemStack itemStack = recipeSlotView.getItemStacks()
+        ItemStack itemStack = recipeSlotView.getIngredients(VanillaTypes.ITEM_STACK)
             .filter(i -> i.hasTag() && i.getTag().contains("amount", Tag.TAG_STRING)
                 && i.getTag().contains("cooldown", Tag.TAG_INT) && i.getTag().contains("noConsume", Tag.TAG_BYTE))
             .findFirst().orElse(ItemStack.EMPTY);

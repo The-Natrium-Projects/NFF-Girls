@@ -23,4 +23,14 @@ public class HealingItemJeiCategory extends MobApplicableItemTableJeiCategory<He
         return NFFGirlsJeiPlugin.HEALING_ITEMS;
     }
 
+    @Override
+    public ResourceLocation getUid() {
+        return NFFGirlsJeiPlugin.HEALING_ITEMS.getUid();
+    }
+
+    @Override
+    public Class<? extends HealingItemJeiMobEntry> getRecipeClass() {
+        return HealingItemJeiMobEntry.class;
+    }
+
 }

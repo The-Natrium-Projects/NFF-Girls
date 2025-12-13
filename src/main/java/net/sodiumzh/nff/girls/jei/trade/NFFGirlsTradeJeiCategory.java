@@ -87,6 +87,16 @@ public class NFFGirlsTradeJeiCategory implements IRecipeCategory<NFFGirlsTradeJe
     }
 
     @Override
+    public ResourceLocation getUid() {
+        return NFFGirlsJeiPlugin.TRADES.getUid();
+    }
+
+    @Override
+    public Class<? extends NFFGirlsTradeJeiMobEntry> getRecipeClass() {
+        return NFFGirlsTradeJeiMobEntry.class;
+    }
+
+    @Override
     public void setRecipe(IRecipeLayoutBuilder builder, NFFGirlsTradeJeiMobEntry recipe, IFocusGroup focuses) {
         recipe.tryInitialize();
         IFocus<ItemStack> focus = focuses.getFocuses(VanillaTypes.ITEM_STACK).findFirst().orElse(null);

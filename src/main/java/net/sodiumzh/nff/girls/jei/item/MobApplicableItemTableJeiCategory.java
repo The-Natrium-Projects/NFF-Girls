@@ -1,6 +1,7 @@
 package net.sodiumzh.nff.girls.jei.item;
 
 import com.mojang.blaze3d.vertex.PoseStack;
+import mezz.jei.api.constants.VanillaTypes;
 import mezz.jei.api.gui.builder.IRecipeLayoutBuilder;
 import mezz.jei.api.gui.drawable.IDrawable;
 import mezz.jei.api.gui.ingredient.IRecipeSlotsView;
@@ -68,9 +69,9 @@ public abstract class MobApplicableItemTableJeiCategory<T extends MobApplicableI
     public void setRecipe(IRecipeLayoutBuilder builder, T recipe, IFocusGroup focuses) {
         List<List<ItemStack>> itemList = recipe.getMergedEntries().orElse(List.of());
         if (itemList.isEmpty()) return;
-        ItemStack focus = focuses.getItemStackFocuses().findFirst()
+        ItemStack focus = focuses.getFocuses(VanillaTypes.ITEM_STACK).findFirst()
             .filter(f -> f.getRole().equals(RecipeIngredientRole.INPUT))
-            .flatMap(f -> f.getTypedValue().getItemStack())
+            .flatMap(f -> f.getTypedValue().getIngredient(VanillaTypes.ITEM_STACK))
             .orElse(null);
         if (focus != null &&
             itemList.stream().flatMap(List::stream).noneMatch(item -> item.is(focus.getItem())))

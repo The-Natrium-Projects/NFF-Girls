@@ -78,12 +78,12 @@ public class NFFGirlsJeiStatics {
     public static Map<EntityType<?>, Multimap<Integer, NFFGirlsTradeJeiRecord>> gatherTradeEntries() {
         Set<ResourceLocation> availableKeys = NFFGirlsTrades.TRADE_REGISTRY.get()
             .keySet().stream().map(Tuple2::getA)
-            .filter(ForgeRegistries.ENTITY_TYPES::containsKey)
+            .filter(ForgeRegistries.ENTITIES::containsKey)
             .collect(Collectors.toSet());
         VanillaTradeRegistry.Collected regView = NFFGirlsTrades.TRADE_REGISTRY.get().collect();
 
         return availableKeys.stream().collect(Collectors.toMap(
-            ForgeRegistries.ENTITY_TYPES::getValue,
+            ForgeRegistries.ENTITIES::getValue,
             key -> {
                 Multimap<Integer, NFFGirlsTradeJeiRecord> multimap = HashMultimap.create();
                 regView.getForDefaultProfession(key)

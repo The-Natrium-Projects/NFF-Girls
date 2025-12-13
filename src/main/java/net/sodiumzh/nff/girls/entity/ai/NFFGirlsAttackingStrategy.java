@@ -34,11 +34,11 @@ public class NFFGirlsAttackingStrategy {
         CompoundTag nbt = new CompoundTag();
         ListTag attacking = new ListTag();
         ListTag notAttacking = new ListTag();
-        this.activeAttackingList.stream().map(ForgeRegistries.ENTITY_TYPES::getKey)
+        this.activeAttackingList.stream().map(ForgeRegistries.ENTITIES::getKey)
             .filter(Objects::nonNull)
             .map(ResourceLocation::toString)
             .forEach(str -> attacking.add(StringTag.valueOf(str)));
-        this.notAttackingList.stream().map(ForgeRegistries.ENTITY_TYPES::getKey)
+        this.notAttackingList.stream().map(ForgeRegistries.ENTITIES::getKey)
             .filter(Objects::nonNull)
             .map(ResourceLocation::toString)
             .forEach(str -> notAttacking.add(StringTag.valueOf(str)));
@@ -53,13 +53,13 @@ public class NFFGirlsAttackingStrategy {
             NFFGirlsAttackingStrategy strategy = new NFFGirlsAttackingStrategy();
             nbt.getList("attacking", Tag.TAG_STRING).stream()
                 .map(t -> new ResourceLocation(t.getAsString()))
-                .map(ForgeRegistries.ENTITY_TYPES::getValue)
+                .map(ForgeRegistries.ENTITIES::getValue)
                 .filter(Objects::nonNull)
                 .map(t -> (EntityType<? extends Mob>) t)
                 .forEach(strategy.activeAttackingList::add);
             nbt.getList("notAttacking", Tag.TAG_STRING).stream()
                 .map(t -> new ResourceLocation(t.getAsString()))
-                .map(ForgeRegistries.ENTITY_TYPES::getValue)
+                .map(ForgeRegistries.ENTITIES::getValue)
                 .filter(Objects::nonNull)
                 .map(t -> (EntityType<? extends Mob>) t)
                 .forEach(strategy.notAttackingList::add);

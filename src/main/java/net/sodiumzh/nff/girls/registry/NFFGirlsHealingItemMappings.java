@@ -48,11 +48,9 @@ public class NFFGirlsHealingItemMappings {
         TABLE.put(NFFGirlsEntityTypes.HMAG_HUSK_GIRL.get(), NFFGirlsHealingItems.UNDEAD);
         TABLE.put(NFFGirlsEntityTypes.HMAG_IMP.get(), NFFGirlsHealingItems.GENERAL_HUMANOID_0);
         TABLE.put(NFFGirlsEntityTypes.HMAG_JACK_FROST.get(), NFFGirlsHealingItems.SNOWMAN);
-        TABLE.put(NFFGirlsEntityTypes.HMAG_JIANGSHI.get(), NFFGirlsHealingItems.UNDEAD);
         TABLE.put(NFFGirlsEntityTypes.HMAG_KOBOLD.get(), NFFGirlsHealingItems.GENERAL_HUMANOID_0);
         TABLE.put(NFFGirlsEntityTypes.HMAG_MELTY_MONSTER.get(), NFFGirlsHealingItems.BLAZE);
         TABLE.put(NFFGirlsEntityTypes.HMAG_NECROTIC_REAPER.get(), NFFGirlsHealingItems.UNDEAD);
-        TABLE.put(NFFGirlsEntityTypes.HMAG_NIGHTWALKER.get(), NFFGirlsHealingItems.CLAY_DOLL);
         TABLE.put(NFFGirlsEntityTypes.HMAG_REDCAP.get(), NFFGirlsHealingItems.GENERAL_HUMANOID_0);
         TABLE.put(NFFGirlsEntityTypes.HMAG_SKELETON_GIRL.get(), NFFGirlsHealingItems.UNDEAD);
         TABLE.put(NFFGirlsEntityTypes.HMAG_SLIME_GIRL.get(), NFFGirlsHealingItems.SLIME);

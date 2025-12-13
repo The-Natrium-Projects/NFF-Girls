@@ -25,6 +25,16 @@ public class FriendingItemJeiCategory extends MobApplicableItemTableJeiCategory<
     }
 
     @Override
+    public ResourceLocation getUid() {
+        return NFFGirlsJeiPlugin.FRIENDING_ITEMS.getUid();
+    }
+
+    @Override
+    public Class<? extends FriendingItemJeiMobEntry> getRecipeClass() {
+        return FriendingItemJeiMobEntry.class;
+    }
+
+    @Override
     public GuiPos getBackgroundSize() {
         return new GuiPos(166, 140);
     }

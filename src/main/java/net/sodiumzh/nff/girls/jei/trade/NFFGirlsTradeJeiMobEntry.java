@@ -4,6 +4,7 @@ import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Multimap;
 import com.google.common.collect.Multimaps;
 import com.mojang.blaze3d.vertex.PoseStack;
+import mezz.jei.api.constants.VanillaTypes;
 import mezz.jei.api.recipe.IFocus;
 import mezz.jei.api.recipe.RecipeIngredientRole;
 import mezz.jei.api.recipe.category.extensions.IRecipeCategoryExtension;
@@ -18,12 +19,12 @@ import net.sodiumzh.nff.girls.NFFGirls;
 import net.sodiumzh.nff.girls.entity.INFFGirlsTamed;
 import net.sodiumzh.nff.girls.entity.vanillatrade.CNFFGirlsTradeHandler;
 import net.sodiumzh.nff.girls.jei.NFFGirlsJeiStatics;
+import net.sodiumzh.nfu.client.NFUGUIStatics;
 import net.sodiumzh.nfu.container.Tuple2;
 import net.sodiumzh.nfu.container.Tuple3;
 import net.sodiumzh.nfu.math.GuiPos;
 import net.sodiumzh.nfu.object.Validatable;
 import net.sodiumzh.nfu.util.NFUDebugStatics;
-import net.sodiumzh.nfu.util.NFUGUIStatics;
 import net.sodiumzh.nfu.util.NFUInfoStatics;
 import net.sodiumzh.nfu.util.NFUMiscStatics;
 import org.jetbrains.annotations.NotNull;
@@ -139,7 +140,7 @@ public class NFFGirlsTradeJeiMobEntry implements IRecipeCategoryExtension {
             .flatMap(entryList -> entryList.getValue().toJeiDisplayEntries().stream().map(e -> new AbstractMap.SimpleEntry<>(entryList.getKey(), e)))
             // Filter if focus present
             .filter(elem -> getFocus().map(f -> {
-                ItemStack itemStack = f.getTypedValue().getItemStack().orElse(ItemStack.EMPTY);
+                ItemStack itemStack = f.getTypedValue().getIngredient(VanillaTypes.ITEM_STACK).orElse(ItemStack.EMPTY);
                 if (itemStack.isEmpty()) return false;  // Ignore if missing focus item
                 if (f.getRole().equals(RecipeIngredientRole.INPUT))
                     return elem.getValue().a.is(itemStack.getItem()) || elem.getValue().b.is(itemStack.getItem());

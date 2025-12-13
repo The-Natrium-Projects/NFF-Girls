@@ -30,20 +30,20 @@ public class ClientboundNFFGirlsJeiDataSyncPacket implements Packet<ClientGamePa
     @Override
     public void write(FriendlyByteBuf pBuffer) {
         pBuffer.writeMap(healingItems, (buf, type) ->
-                buf.writeResourceLocation(ForgeRegistries.ENTITY_TYPES.getKey(type)),
+                buf.writeResourceLocation(ForgeRegistries.ENTITIES.getKey(type)),
             (buf, keyAndTable) -> {
                 buf.writeResourceLocation(keyAndTable.getA());
                 keyAndTable.getB().writeBuf(buf);
             });
         pBuffer.writeMap(friendingItems, (buf, type) ->
-                buf.writeResourceLocation(ForgeRegistries.ENTITY_TYPES.getKey(type)),
+                buf.writeResourceLocation(ForgeRegistries.ENTITIES.getKey(type)),
             (buf, keyAndTable) -> {
                 buf.writeResourceLocation(keyAndTable.getA());
                 keyAndTable.getB().writeBuf(buf);
             });
         pBuffer.writeMap(tradeEntries,
             (buf, type) ->
-                buf.writeResourceLocation(ForgeRegistries.ENTITY_TYPES.getKey(type)),
+                buf.writeResourceLocation(ForgeRegistries.ENTITIES.getKey(type)),
             (buf, multimap) ->
                 NFUNetworkStatics.writeMultimap(buf, multimap, FriendlyByteBuf::writeInt,
                     (buf1, entry) -> entry.writeBuf(buf)));
@@ -52,13 +52,13 @@ public class ClientboundNFFGirlsJeiDataSyncPacket implements Packet<ClientGamePa
 
     public ClientboundNFFGirlsJeiDataSyncPacket(FriendlyByteBuf pBuffer) {
         this.healingItems = pBuffer.readMap(
-            buf -> (EntityType<? extends Mob>) ForgeRegistries.ENTITY_TYPES.getValue(buf.readResourceLocation()),
+            buf -> (EntityType<? extends Mob>) ForgeRegistries.ENTITIES.getValue(buf.readResourceLocation()),
             buf -> Tuple2.of(buf.readResourceLocation(), MobApplicableItemTableJeiRecord.readBuf(buf)));
         this.friendingItems = pBuffer.readMap(
-            buf -> (EntityType<? extends Mob>) ForgeRegistries.ENTITY_TYPES.getValue(buf.readResourceLocation()),
+            buf -> (EntityType<? extends Mob>) ForgeRegistries.ENTITIES.getValue(buf.readResourceLocation()),
             buf -> Tuple2.of(buf.readResourceLocation(), MobApplicableItemTableJeiRecord.readBuf(buf)));
         this.tradeEntries = pBuffer.readMap(
-            buf -> ForgeRegistries.ENTITY_TYPES.getValue(new ResourceLocation(buf.readUtf())),
+            buf -> ForgeRegistries.ENTITIES.getValue(new ResourceLocation(buf.readUtf())),
             buf -> NFUNetworkStatics.readMultimap(buf, FriendlyByteBuf::readInt, NFFGirlsTradeJeiRecord::readBuf));
     }
 

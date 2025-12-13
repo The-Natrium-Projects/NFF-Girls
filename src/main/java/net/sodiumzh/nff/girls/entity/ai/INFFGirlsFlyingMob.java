@@ -15,12 +15,14 @@ import net.sodiumzh.nff.girls.entity.ai.goal.NFFGirlsHmagFlyingGoal;
 import net.sodiumzh.nfu.annotation.DontOverride;
 
 import java.util.Optional;
+import java.util.Random;
 
 /**
  * Base interface for HMaG-style flying mobs. Used in {@link NFFGirlsHmagFlyingGoal}.
  */
 public interface INFFGirlsFlyingMob {
 
+    public static final Random RND = new Random();
     public static Optional<INFFGirlsFlyingMob> get(Object obj) {
         return obj instanceof INFFGirlsFlyingMob fm ? Optional.of(fm) : Optional.empty();
     }
@@ -120,7 +122,7 @@ public interface INFFGirlsFlyingMob {
                 && event.getAmount() > 0
                 && event.getSource().getEntity() instanceof LivingEntity
                 && mob.isCharging()
-                && event.getEntity().getRandom().nextInt(3) == 0) // IDK why randomize here, but HMaG did this
+                && RND.nextInt(3) == 0) // IDK why randomize here, but HMaG did this
             {
                 mob.setAttackPhase(1);
             }
