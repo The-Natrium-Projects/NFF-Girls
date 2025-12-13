@@ -144,6 +144,7 @@ repositories {
     // See https://docs.gradle.org/current/userguide/declaring_repositories.html#sub:flat_dir_resolver
     flatDir {
         dir 'libs'
+        dir '../NFU-Library/build/libs'
         dir '../NFF-Services/build/libs'
     }
     	
@@ -182,10 +183,13 @@ dependencies {
     compileOnly fg.deobf("mezz.jei:jei-${minecraft_version}:${jei_version}:api") // Adds JEI API as a compile dependency
     runtimeOnly fg.deobf("mezz.jei:jei-${minecraft_version}:${jei_version}")
 	implementation fg.deobf("blank:nffservices-${minecraft_version}:${services_version}")
-	jarJar(group: 'net.sodiumzh', name: 'nffservices', version: "[${minecraft_version}-${services_version},)"){
+	jarJar(group: 'net.sodiumzh.nff.services', name: 'nffservices', version: "[${minecraft_version}-${services_version},)"){
 		jarJar.pin(it, "${minecraft_version}-${services_version}")
 	}
-
+    implementation fg.deobf("blank:nfulib-${minecraft_version}:${nfu_version}")
+    jarJar(group: 'net.sodiumzh.nfu', name: 'nfulib', version: "[${minecraft_version}-${nfu_version},)"){
+        jarJar.pin(it, "${minecraft_version}-${services_version}")
+    }
     implementation fg.deobf("curse.maven:hmag-537613:5391730")
     
     implementation fg.deobf("curse.maven:jade-324717:4082408")
@@ -206,7 +210,7 @@ tasks.named('processResources', ProcessResources).configure {
             loader_version_range: loader_version_range,
             mod_id: mod_id, mod_name: mod_name, mod_license: mod_license, mod_version: mod_version,
             mod_authors: mod_authors, mod_description: mod_description, services_version_range: services_version_range,
-            hmag_version_range: hmag_version_range, nautils_version_range: nautils_version_range
+            hmag_version_range: hmag_version_range, nfu_version_range: nfu_version_range
     ]
     inputs.properties replaceProperties
 
