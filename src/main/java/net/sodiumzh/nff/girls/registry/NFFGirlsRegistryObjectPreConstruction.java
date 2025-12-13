@@ -2,7 +2,6 @@ package net.sodiumzh.nff.girls.registry;
 
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.event.lifecycle.FMLConstructModEvent;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.sodiumzh.nff.girls.NFFGirls;
 import net.sodiumzh.nfu.registry.RegistryObjectPreConstruction;

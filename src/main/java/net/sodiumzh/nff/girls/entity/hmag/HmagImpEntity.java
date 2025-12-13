@@ -26,8 +26,6 @@ import net.sodiumzh.nff.girls.entity.ai.goal.NFFGirlsFollowOwnerGoal;
 import net.sodiumzh.nff.girls.entity.ai.goal.target.*;
 import net.sodiumzh.nff.girls.entity.projectile.MobileParticleSourceEntity;
 import net.sodiumzh.nff.girls.inventory.HmagImpInventoryMenu;
-import net.sodiumzh.nff.girls.registry.NFFGirlsHealingItems;
-import net.sodiumzh.nff.girls.inventory.NFFGirlsHmagImpInventoryMenu;
 import net.sodiumzh.nff.girls.registry.NFFGirlsItems;
 import net.sodiumzh.nff.girls.sound.NFFGirlsSoundPresets;
 import net.sodiumzh.nff.services.entity.ai.NFFTamedMobAIState;

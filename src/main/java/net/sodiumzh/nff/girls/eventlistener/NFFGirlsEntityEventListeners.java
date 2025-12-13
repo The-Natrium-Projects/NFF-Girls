@@ -4,7 +4,6 @@ import com.github.mechalopa.hmag.HMaG;
 import com.github.mechalopa.hmag.registry.ModItems;
 import com.github.mechalopa.hmag.world.entity.EnderExecutorEntity;
 import com.github.mechalopa.hmag.world.entity.GhastlySeekerEntity;
-import com.github.mechalopa.hmag.world.entity.projectile.MagicBulletEntity;
 import com.mojang.logging.LogUtils;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;

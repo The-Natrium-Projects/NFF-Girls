@@ -15,7 +15,6 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.sodiumzh.nff.girls.entity.ai.goal.NFFGirlsTamablePickItemGoal;
 import net.sodiumzh.nff.girls.entity.ai.goal.NFFGirlsTamableWatchHandItemGoal;
 import net.sodiumzh.nff.services.entity.capability.CNFFTamable;
-import net.sodiumzh.nff.services.entity.taming.CNFFTamable;
 import net.sodiumzh.nff.services.entity.taming.IItemTableUsingProcess;
 import net.sodiumzh.nff.services.entity.taming.INFFDefaultProgressedTamingProcess;
 import net.sodiumzh.nff.services.entity.taming.NFFTamingProcess;
@@ -25,6 +24,7 @@ import net.sodiumzh.nfu.entity.taming.ITamingProcess;
 import net.sodiumzh.nfu.entity.taming.TamingInteractionResult;
 import net.sodiumzh.nfu.mixin.event.entity.EntityStartBaseTickEvent;
 import net.sodiumzh.nfu.registry.NFUCapabilities;
+import net.sodiumzh.nfu.util.NFUEntityStatics;
 import net.sodiumzh.nfu.util.NFUItemStatics;
 import net.sodiumzh.nfu.util.NFUParticleStatics;
 

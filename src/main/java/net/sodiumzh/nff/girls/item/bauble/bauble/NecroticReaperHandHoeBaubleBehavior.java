@@ -8,7 +8,10 @@ import net.minecraft.world.item.HoeItem;
 import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.item.enchantment.Enchantments;
 import net.sodiumzh.nff.girls.entity.hmag.HmagNecroticReaperEntity;
-import net.sodiumzh.nfu.item.bauble.*;
+import net.sodiumzh.nfu.item.bauble.BaubleAttributeModifier;
+import net.sodiumzh.nfu.item.bauble.BaubleBehavior;
+import net.sodiumzh.nfu.item.bauble.BaubleEquippingCondition;
+import net.sodiumzh.nfu.item.bauble.BaubleProcessingArgs;
 
 public class NecroticReaperHandHoeBaubleBehavior extends BaubleBehavior
 {
