@@ -43,6 +43,6 @@ description='''Enjoy your Minecraft days with monster girls!'''
 [[dependencies.${mod_id}]]
     modId="nfulib"
     mandatory=true
-    versionRange="${nautils_version_range}"
+    versionRange="${nfu_version_range}"
     ordering="NONE"
     side="BOTH"
