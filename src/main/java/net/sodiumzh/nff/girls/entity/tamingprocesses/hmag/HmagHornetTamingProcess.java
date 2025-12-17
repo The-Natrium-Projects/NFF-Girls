@@ -73,10 +73,10 @@ public class HmagHornetTamingProcess extends TamingProcessItemGivingProgress
 			if (ongoing.distanceToSqr(mob) > 32d * 32d)
 				this.interrupt(ongoing, mob, true);
 		}
-		if (!has8HoneyBlocksAround(mob) && this.isInAnyProcess(mob))
-		{
+		if (!has8HoneyBlocksAround(mob) && this.isInAnyProcess(mob)) {
 			NFFGirlsTamingRules.tickContinuousProgressLoss(this, mob);
-		}		
+		}
+		CNFFTamable.get(mob).setAlwaysHostileTo(ongoing);
 	}
 
 	@Override
