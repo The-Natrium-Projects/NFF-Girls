@@ -1,8 +1,16 @@
 # Change Log
 
+### 0.2.31.2
+
+Fixed broken enchantment book trades. (Thanks Yoghurt4C)
+
+Fixed startup crash in Turkish locale.
+
+Now Hornet will keep hostile during the friending process.
+
 ### 0.2.31.1
 
-Fixed startup crash on standalone server.
+Fixed startup crash on standalone server. (Thanks Yoghurt4C)
 
 ### 0.x.31
 
