@@ -193,6 +193,7 @@ dependencies {
     implementation fg.deobf("curse.maven:hmag-537613:5391730")
     
     implementation fg.deobf("curse.maven:jade-324717:4082408")
+    implementation fg.deobf("curse.maven:just-enough-resources-jer-240630:3831559")
 	implementation fg.deobf("curse.maven:gog4-228948:4525159")
 	//implementation fg.deobf("curse.maven:tf-227639:4337390")
 	implementation fg.deobf("curse.maven:testdummy-225738:3820503")
