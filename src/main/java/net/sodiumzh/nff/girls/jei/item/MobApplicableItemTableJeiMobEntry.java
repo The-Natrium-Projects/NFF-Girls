@@ -108,13 +108,18 @@ public abstract class MobApplicableItemTableJeiMobEntry implements IRecipeCatego
     @Override
     public void drawInfo(int recipeWidth, int recipeHeight, @NotNull PoseStack guiGraphics, double mouseX, double mouseY) {
         this.tryInitialize();
+        NFUGUIStatics.setActiveTexture(TEXTURE_LOCATION);
         NFUGUIStatics.drawSprite(guiGraphics, GuiPos.ZERO, 0, new GuiPos(0, 20),
             new GuiPos(164, 120), TEXTURE_SIZE);
         this.drawAdditional(recipeWidth, recipeHeight, guiGraphics, mouseX, mouseY);
         this.mobInstance.getIfValidated().ifPresent(mob ->
-            InventoryScreen.renderEntityInInventory(33, 96,
-                (int)(mob.getBbHeight() > 2 ? 68d / mob.getBbHeight() : 34d),
-                (float) (38.0 - mouseX), (float) (80.0 - mouseY), mob)
+            Optional.ofNullable(Minecraft.getInstance().screen).ifPresent(screen -> {
+                int baseX = (screen.width - recipeWidth) / 2;
+                int baseY = (screen.height - recipeHeight) / 2;
+                InventoryScreen.renderEntityInInventory(baseX + 33, baseY + 116,
+                    (int) (mob.getBbHeight() > 2 ? 68d / mob.getBbHeight() : 34d),
+                    (float) (38.0 - mouseX), (float) (80.0 - mouseY), mob);
+            })
         );
         Component mobName = this.entityType.getDescription();
         Minecraft.getInstance().font.draw(guiGraphics, mobName, 7, 2, 8);
