@@ -88,14 +88,21 @@ public class NFFGirlsTradeJeiMobEntry implements IRecipeCategoryExtension {
         List<Integer> merchantLevels = this.getEntriesToDisplay().keySet().stream().sorted().limit(levelRequirements.length).toList();
 
         // Draw background
-        NFUGUIStatics.drawSprite(guiGraphics,  new GuiPos(0, 0), 0,
-            new GuiPos(0, 0), new GuiPos(162, 120), TEXTURE_SIZE);
+        NFUGUIStatics.setActiveTexture(TEXTURE_PATH);
+        NFUGUIStatics.drawSprite(guiGraphics,  GuiPos.zero(), 0,
+            GuiPos.zero(), new GuiPos(162, 120), TEXTURE_SIZE);
+
         // Draw entity
-        entityAndEntries.getA().map(e -> NFUMiscStatics.cast(e, LivingEntity.class)).ifPresent(e ->
-            InventoryScreen.renderEntityInInventory(33, 116,
-                (int)(e.getBbHeight() > 2 ? 68d / e.getBbHeight() : 34d),
-                (float) (38.0 - mouseX), (float) (80.0 - mouseY), e)
-        );
+        Optional.ofNullable(Minecraft.getInstance().screen).ifPresent(screen -> {
+            int baseX = (screen.width - recipeWidth) / 2;
+            int baseY = (screen.height - recipeHeight) / 2;
+            entityAndEntries.getA().map(e -> NFUMiscStatics.cast(e, LivingEntity.class)).ifPresent(e ->
+                InventoryScreen.renderEntityInInventory(baseX + 33, baseY + 136,
+                    (int)(e.getBbHeight() > 2 ? 68d / e.getBbHeight() : 34d),
+                    (float) (38.0 - mouseX), (float) (80.0 - mouseY), e)
+            );
+        });
+
         // Draw item frames and arrows
         int y0 = Math.max(0, 5 + getBgHeight(merchantLevels.size()) / 2 - 11 * merchantLevels.size());
         for (int i = 0; i < merchantLevels.size(); ++i) {
