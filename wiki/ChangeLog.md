@@ -1,5 +1,13 @@
 # Change Log
 
+### 0.2.31.3
+
+Fixed crash on mob friended in some cases.
+
+Fixed server crash caused by particles.
+
+Now the effects of Alraune's thrown seeds are impacted by Attacking Damage and Poison Aspect attributes.
+
 ### 0.2.31.2
 
 Fixed broken enchantment book trades. (Thanks Yoghurt4C)
