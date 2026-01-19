@@ -188,7 +188,7 @@ public class MobileParticleSourceEntity extends Entity implements ItemSupplier {
             this.setDeltaMovement(currentTargetPos.subtract(this.position()).normalize().scale(speed / 20d));
             this.move(MoverType.SELF, this.getDeltaMovement());
         }
-        if (this.isAlive() && this.level() instanceof ClientLevel)
+        if (this.isAlive() && this.level().isClientSide() && this.level() instanceof ClientLevel)
             NFUParticleStatics.sendParticlesToEntity(this, this.getParticleType(), Vec3.ZERO, posRndScale,
                 getParticleAmountThisTick(), speed);
     }

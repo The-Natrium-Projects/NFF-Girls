@@ -3,11 +3,16 @@ package net.sodiumzh.nff.girls.entity.projectile;
 import com.github.mechalopa.hmag.world.entity.projectile.ModProjectileItemEntity;
 import net.minecraft.core.particles.ItemParticleOption;
 import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.core.registries.Registries;
+import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.damagesource.DamageTypes;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.TamableAnimal;
+import net.minecraft.world.entity.ai.attributes.AttributeInstance;
+import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
@@ -19,12 +24,15 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.network.PlayMessages;
 import net.minecraftforge.network.PlayMessages.SpawnEntity;
+import net.sodiumzh.nff.girls.registry.NFFGirlsEntityAttributes;
 import net.sodiumzh.nff.girls.registry.NFFGirlsEntityTypes;
 import net.sodiumzh.nff.services.entity.taming.INFFTamed;
 import net.sodiumzh.nfu.util.NFUEntityStatics;
+import net.sodiumzh.nfu.util.NFUMiscStatics;
 
 import javax.annotation.Nonnull;
 import java.util.List;
+import java.util.Optional;
 
 public abstract class NFFHmagAlrauneSeedEntity extends ModProjectileItemEntity
 {
@@ -188,9 +196,20 @@ public abstract class NFFHmagAlrauneSeedEntity extends ModProjectileItemEntity
 
 		@Override
 		protected void applyEffects(LivingEntity target, int ticks) {
-			target.addEffect(new MobEffectInstance(MobEffects.POISON, ticks, 0));
-			target.addEffect(new MobEffectInstance(MobEffects.WEAKNESS, ticks, 0));
-			target.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, ticks, 0));
+			double atk= Math.round(Optional.ofNullable(this.getOwner())
+				.map(o -> NFUMiscStatics.cast(o, LivingEntity.class))
+				.map(o -> o.getAttribute(Attributes.ATTACK_DAMAGE))
+				.map(AttributeInstance::getValue).orElse(0d));
+			int poisonLevel = (int) Math.round(Optional.ofNullable(this.getOwner())
+				.map(o -> NFUMiscStatics.cast(o, LivingEntity.class))
+				.map(o -> o.getAttribute(NFFGirlsEntityAttributes.POISON_ASPECT.get()))
+				.map(AttributeInstance::getValue).orElse(0d));
+			target.hurt(new DamageSource(target.level().registryAccess().registryOrThrow(Registries.DAMAGE_TYPE).getHolderOrThrow(DamageTypes.MAGIC),
+					this, Optional.ofNullable(this.getOwner()).orElse(this), this.position()),
+				(float)(0.5 * atk));
+			target.addEffect(new MobEffectInstance(MobEffects.POISON, ticks, poisonLevel));
+			target.addEffect(new MobEffectInstance(MobEffects.WEAKNESS, (int)(ticks * (1d + poisonLevel * 0.5d)), poisonLevel / 2));
+			target.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, (int)(ticks * (1d + poisonLevel * 0.5d)), poisonLevel / 2));
 		}
 
 		@Override
@@ -258,8 +277,16 @@ public abstract class NFFHmagAlrauneSeedEntity extends ModProjectileItemEntity
 		
 		@Override
 		protected void applyEffects(LivingEntity target, int ticks) {
-			target.heal(1);
-			NFUEntityStatics.addEffectSafe(target, new MobEffectInstance(MobEffects.REGENERATION, ticks, 0));
+			double atk= Math.round(Optional.ofNullable(this.getOwner())
+				.map(o -> NFUMiscStatics.cast(o, LivingEntity.class))
+				.map(o -> o.getAttribute(Attributes.ATTACK_DAMAGE))
+				.map(AttributeInstance::getValue).orElse(0d));
+			int poisonLevel = (int) Math.round(Optional.ofNullable(this.getOwner())
+				.map(o -> NFUMiscStatics.cast(o, LivingEntity.class))
+				.map(o -> o.getAttribute(NFFGirlsEntityAttributes.POISON_ASPECT.get()))
+				.map(AttributeInstance::getValue).orElse(0d));
+			target.heal((float)(0.25 * atk));
+			NFUEntityStatics.addEffectSafe(target, new MobEffectInstance(MobEffects.REGENERATION, ticks, poisonLevel));
 		}
 
 		@Override
