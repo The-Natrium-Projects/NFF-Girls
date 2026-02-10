@@ -6,6 +6,8 @@ Fixed crash on mob friended in some cases.
 
 Fixed server crash caused by particles.
 
+Fixed crash on Ender Executor teleporting.
+
 Now the effects of Alraune's thrown seeds are impacted by Attacking Damage and Poison Aspect attributes.
 
 ### 0.2.31.2
