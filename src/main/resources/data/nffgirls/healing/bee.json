@@ -1,7 +1,7 @@
 [
   {
     "item": "minecraft:honey_bottle",
-    "amount": [5]
+    "amount": [10]
   },
   {
     "item": "minecraft:honeycomb",
@@ -9,7 +9,7 @@
   },
   {
     "item": "minecraft:honey_block",
-    "amount": [15]
+    "amount": [20]
   },
   {
     "item": "hmag:mysterious_petal",
