@@ -6,6 +6,8 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.item.*;
 import net.minecraftforge.eventbus.api.IEventBus;
+import net.minecraftforge.fml.ModList;
+import net.minecraftforge.fml.ModLoader;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
@@ -15,6 +17,7 @@ import net.sodiumzh.nff.girls.item.*;
 import net.sodiumzh.nff.services.item.MobCatcherItem;
 import net.sodiumzh.nff.services.item.NFFMobRespawnerItem;
 import net.sodiumzh.nfu.compat.ModDependencyFallbackItem;
+import net.sodiumzh.nfu.item.NFUItem;
 import net.sodiumzh.nfu.util.NFUCompatStatics;
 
 import java.util.function.Supplier;
@@ -88,9 +91,7 @@ public class NFFGirlsItems {
 	public static final RegistryObject<CombatCommandingWandItem> COMBAT_COMMANDING_WAND = register("combat_commanding_wand",
 			() -> new CombatCommandingWandItem(new Item.Properties().stacksTo(1).tab(TAB))
 					.descTranslatable("desc.nffgirls.item.combat_commanding_wand").cast());
-	@Deprecated
-	public static final RegistryObject<EvilMagnetItem> EVIL_MAGNET = register("evil_magnet", () -> new EvilMagnetItem(new Item.Properties().stacksTo(1).tab(TAB))
-			.descTranslatable("info.nffgirls.item.deprecated_recover_ingredients").cast());
+
 	public static final RegistryObject<ReinforcedFishingRodItem> REINFORCED_FISHING_ROD = register("reinforced_fishing_rod", () -> new ReinforcedFishingRodItem(new Item.Properties().durability(256).tab(TAB)));
 	
 	// Utility items
@@ -128,11 +129,22 @@ public class NFFGirlsItems {
 
 	// Other mod depending
 
-	public static final Either<RegistryObject<CitadelBasedMobDictionaryItem>, RegistryObject<ModDependencyFallbackItem>> MOB_DICTIONARY =
-			registerDepending(true,"mob_dictionary", "citadel",
-			() -> new CitadelBasedMobDictionaryItem(new Item.Properties().stacksTo(1).tab(TAB),
+	public static final RegistryObject<Item> MOB_DICTIONARY =
+			register("mob_dictionary", () -> {
+				if (ModList.get().isLoaded("patchouli")) {
+					return new NFUItem(new Item.Properties().stacksTo(1));
+				}
+				else if (ModList.get().isLoaded("citadel")) {
+					return new CitadelBasedMobDictionaryItem(new Item.Properties().stacksTo(1),
+						new ResourceLocation("nffgirls:book/mob_dictionary/root.json"),
+						"dict.nffgirls.title", "nffgirls:book/mob_dictionary/")
+						.descTranslatable("tooltip.nffgirls.port_to_patchouli");
+				} else return new ModDependencyFallbackItem("patchouli", new Item.Properties().stacksTo(1).tab(TAB));
+			});
+			/*registerDepending(true,"mob_dictionary", "citadel",
+			() -> new CitadelBasedMobDictionaryItem(new Item.Properties().stacksTo(1),
 				new ResourceLocation("nffgirls:book/mob_dictionary/root.json"),
-				"dict.nffgirls.title", "nffgirls:book/mob_dictionary/"));
+				"dict.nffgirls.title", "nffgirls:book/mob_dictionary/"));*/
 
 	/*static
 	{

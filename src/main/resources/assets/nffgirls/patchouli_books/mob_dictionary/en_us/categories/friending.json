@@ -1,0 +1,7 @@
+{
+  "name": "dict.nffgirls.title_friending",
+  "description": "dict.nffgirls.title_friending.desc",
+  "icon": "nffgirls:tab_icon",
+  "sortnum": 60,
+  "secret": false
+}

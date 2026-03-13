@@ -298,15 +298,17 @@
   "desc.nffgirls.item.commanding_wand": "Right click your mob to switch the AI\nShift+Right click an NFF mob to open the GUI\nRight click a Bell to gather NFF mobs within 16 blocks\nRight click a Soul Powder Block to find current locations of the mobs",
   "desc.nffgirls.item.combat_commanding_wand": "Right click an NFF mob to select, and then right click an enemy to make your mob attack it\nShift+Right click your mob to make it stop attacking\nShift+Right click an enemy to make all your mobs around attack it together",
 
-  "dict.nffgirls.title": "HMaG - Mob Dictionary",
-  "dict.nffgirls.button_friendable": "A Special Encounter?",
-  "dict.nffgirls.button_interaction" : "Interaction",
-  "dict.nffgirls.button_favorability" : "Favorability",
-  "dict.nffgirls.button_friending" : "Getting Friendly",
-  "dict.nffgirls.button_xp": "Experience",
-  "dict.nffgirls.title_friendable": "Interactions",
-  "dict.nffgirls.title_friending" : "Getting Friendly",
-  "dict.nffgirls.title_favorability" : "Favorability",
-  "dict.nffgirls.title_xp": "Experience",
-  "dict.nffgirls.title_interaction" : "Interaction"
+  "dict.nffgirls.legacy.title": "HMaG - Mob Dictionary",
+  "dict.nffgirls.legacy.button_friendable": "A Special Encounter?",
+  "dict.nffgirls.legacy.button_interaction" : "Interaction",
+  "dict.nffgirls.legacy.button_favorability" : "Favorability",
+  "dict.nffgirls.legacy.button_friending" : "Getting Friendly",
+  "dict.nffgirls.legacy.button_xp": "Experience",
+  "dict.nffgirls.legacy.title_friendable": "Interactions",
+  "dict.nffgirls.legacy.title_friending" : "Getting Friendly",
+  "dict.nffgirls.legacy.title_favorability" : "Favorability",
+  "dict.nffgirls.legacy.title_xp": "Experience",
+  "dict.nffgirls.legacy.title_interaction" : "Interaction",
+
+  "tooltip.nffgirls.port_to_patchouli": "Citadel book is out-of-date. It's recommended to use Patchouli for a better book."
 }

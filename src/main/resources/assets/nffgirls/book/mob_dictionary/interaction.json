@@ -1,7 +1,7 @@
 {
   "parent": "nffgirls_dictionary.json",
   "text": "interaction.txt",
-  "title": "dict.nffgirls.title_interaction",
+  "title": "dict.nffgirls.legacy.title_interaction",
   "entity_buttons": [
 
   ],

@@ -291,15 +291,17 @@
   "desc.nffgirls.item.commanding_wand": "右键你的NFF Girls生物切换AI\nShift+右键你的NFF Girls生物打开GUI面板\n右键钟以集合16格内的NFF Girls生物\n右键灵魂粉尘块以查找NFF Girls生物坐标",
   "desc.nffgirls.item.combat_commanding_wand": "右键你的NFF Girls生物选定，然后右键其他对象以指示你的生物攻击这个对象\nShift+右键你的NFF Girls生物以指示其停止攻击\nShift+右键敌人使你周围的NFF Girls生物集火攻击",
 
-  "dict.nffgirls.title": "HMaG - 生物图鉴",
-  "dict.nffgirls.button_friendable": "一场特殊的邂逅？",
-  "dict.nffgirls.button_interaction" : "互动",
-  "dict.nffgirls.button_favorability" : "好感度",
-  "dict.nffgirls.button_friending" : "化敌为友",
-  "dict.nffgirls.button_xp": "经验值等级",
-  "dict.nffgirls.title_friendable": "怪物娘的互动方法",
-  "dict.nffgirls.title_friending" : "化敌为友",
-  "dict.nffgirls.title_favorability" : "好感度",
-  "dict.nffgirls.title_xp": "经验值等级",
-  "dict.nffgirls.title_interaction" : "互动"
+  "dict.nffgirls.legacy.title": "HMaG - 生物图鉴",
+  "dict.nffgirls.legacy.button_friendable": "一场特殊的邂逅？",
+  "dict.nffgirls.legacy.button_interaction" : "互动",
+  "dict.nffgirls.legacy.button_favorability" : "好感度",
+  "dict.nffgirls.legacy.button_friending" : "化敌为友",
+  "dict.nffgirls.legacy.button_xp": "经验值等级",
+  "dict.nffgirls.legacy.title_friendable": "怪物娘的互动方法",
+  "dict.nffgirls.legacy.title_friending" : "化敌为友",
+  "dict.nffgirls.legacy.title_favorability" : "好感度",
+  "dict.nffgirls.legacy.title_xp": "经验值等级",
+  "dict.nffgirls.legacy.title_interaction" : "互动",
+
+  "tooltip.nffgirls.port_to_patchouli": "基于Citadel的指导书已过期，建议使用Patchouli。"
 }

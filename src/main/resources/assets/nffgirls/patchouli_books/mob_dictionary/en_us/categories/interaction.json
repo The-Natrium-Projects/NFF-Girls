@@ -1,0 +1,7 @@
+{
+  "name": "dict.nffgirls.title_interaction",
+  "description": "dict.nffgirls.title_interaction.desc",
+  "icon": "nffgirls:commanding_wand",
+  "sortnum": 70,
+  "secret": false
+}
