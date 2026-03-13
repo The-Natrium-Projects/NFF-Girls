@@ -56,7 +56,7 @@
 <NEWLINE>
 耗1点耐久。其拉力是原版鱼竿的3倍
 <NEWLINE>
-（对道具实体是4倍）。使用shift右键
+（对物品实体是4倍）。使用shift右键
 <NEWLINE>
 可以收回鱼钩。强化鱼竿可以用强化
 <NEWLINE>
