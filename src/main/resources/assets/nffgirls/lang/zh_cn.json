@@ -292,6 +292,7 @@
   "desc.nffgirls.item.combat_commanding_wand": "右键你的NFF Girls生物选定，然后右键其他对象以指示你的生物攻击这个对象\nShift+右键你的NFF Girls生物以指示其停止攻击\nShift+右键敌人使你周围的NFF Girls生物集火攻击",
 
   "dict.nffgirls.title": "HMaG - 生物图鉴",
+  "nffgirls.book.mob_dictionary.landing": "HMaG在主世界、下界与末地中添加了大量的奇幻生物。本指南作为记录这些生物习性的参考书，将会帮助你了解它们的特性。$(br2)或者是……？",
   "dict.nffgirls.button_friendable": "一场特殊的邂逅？",
   "dict.nffgirls.button_interaction" : "互动",
   "dict.nffgirls.button_favorability" : "好感度",

@@ -46,3 +46,11 @@ description='''Enjoy your Minecraft days with monster girls!'''
     versionRange="${hmag_version_range}"
     ordering="NONE"
     side="BOTH"
+
+[[dependencies.${mod_id}]]
+    modId="patchouli"
+    mandatory=false
+    # 84 = Patchouli 1.20.1-84-FORGE
+    versionRange="[84,)"
+    ordering="NONE"
+    side="BOTH"

@@ -295,6 +295,7 @@
   "desc.nffgirls.item.combat_commanding_wand": "Right click an NFF mob to select, and then right click an enemy to make your mob attack it\nShift+Right click your mob to make it stop attacking\nShift+Right click an enemy to make all your mobs around attack it together",
 
   "dict.nffgirls.title": "HMaG - Mob Dictionary",
+  "nffgirls.book.mob_dictionary.landing": "HMaG added a lot of creatures in the Overworld, Nether and End. This dictionary is a reference for helping you understand about the mobs.$(br2)Or...?",
   "dict.nffgirls.button_friendable": "A Special Encounter?",
   "dict.nffgirls.button_interaction" : "Interaction",
   "dict.nffgirls.button_favorability" : "Favorability",
