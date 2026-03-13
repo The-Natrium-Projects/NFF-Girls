@@ -22,9 +22,9 @@ build
 eclipse
 run
 libs
-gradle
-gradlew.bat
-gradlew
+gradle/*
+/gradlew.bat
+/gradlew
 
 
 # Files from Forge MDK
