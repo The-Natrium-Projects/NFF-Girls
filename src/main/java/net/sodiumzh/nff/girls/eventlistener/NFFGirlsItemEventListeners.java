@@ -120,7 +120,7 @@ public class NFFGirlsItemEventListeners
 				event.setOutput(out);
 			}
 			// Evil Magnet fixing
-			if (event.getLeft().is(NFFGirlsItems.EVIL_MAGNET.get())
+/*			if (event.getLeft().is(NFFGirlsItems.EVIL_MAGNET.get())
 					&& wd.canRepair(event.getLeft())
 					&& event.getRight().is(ModItems.EVIL_CRYSTAL.get()))
 			{
@@ -129,7 +129,7 @@ public class NFFGirlsItemEventListeners
 				event.setMaterialCost(1);
 				wd.repair(out, 8);
 				event.setOutput(out);
-			}
+			}*/
 		}
 	}
 	
