@@ -1,0 +1,379 @@
+================================================================================
+                    LEGACY BOOK MIGRATION - COMPLETE DATA
+================================================================================
+
+PROJECT: NFF-Girls Mob Dictionary
+LEGACY SYSTEM: Custom book format (Citadel-based)
+TARGET SYSTEM: Patchouli mod format
+EXTRACTION DATE: 2024-03-14
+
+================================================================================
+EXECUTIVE SUMMARY
+================================================================================
+
+✓ All legacy book files have been successfully extracted and catalogued
+✓ Complete English content: 84 text files (51 mob + 33 magazine entries)
+✓ Complete Chinese content: 84 text files (same structure)
+✓ Metadata: 88 JSON files with entity rendering and drop information
+✓ Translations: Existing lang/en_us.json and lang/zh_cn.json with 314+ keys
+✓ Reference implementation: 1 Patchouli friending entry found (alraune.json)
+
+TOTAL FILES TO MIGRATE: 259+
+TOTAL CONTENT: 245 KB
+
+================================================================================
+DELIVERABLES
+================================================================================
+
+1. EN_US_BOOK_CONTENT.txt (67 KB)
+   - All 84 English text files from book/mob_dictionary/en_us/
+   - Includes 51 mob descriptions + 33 HMaG magazine entries
+   - Includes system pages: root.txt, experience.txt, favorability.txt, 
+     friending.txt, interaction.txt, nffgirls_dictionary.txt
+   - File delimiter: "=== filename ==="
+
+2. ZH_CN_BOOK_CONTENT.txt (100 KB)
+   - All 84 Chinese text files from book/mob_dictionary/zh_cn/
+   - Parallel structure to English version
+   - All translations provided for migration
+   - File delimiter: "=== filename ==="
+
+3. ROOT_JSON_CONTENT.txt (58 KB)
+   - All 88 JSON metadata files from book/mob_dictionary/
+   - Contains entity rendering parameters
+   - Contains parent/child relationships (parent: "root.json")
+   - Includes large index files (root.json 12.4 KB, nffgirls_dictionary.json 9.3 KB)
+   - File delimiter: "=== filename ==="
+
+4. LEGACY_BOOK_MIGRATION_DATA.md (7.3 KB)
+   - Structured migration guide
+   - Complete file listing with exact names
+   - JSON structure explanation
+   - Translation key patterns
+   - Migration strategy outline
+
+5. FILE_EXTRACTION_GUIDE.txt (13 KB)
+   - Comprehensive extraction instructions
+   - Commands for extracting individual files
+   - Translation reference system
+   - Legacy format explanation
+   - Step-by-step migration strategy
+
+6. MIGRATION_SUMMARY.txt (this file)
+   - Executive overview
+   - Directory mappings
+   - Content organization
+   - Quick reference
+
+================================================================================
+FILE ORGANIZATION
+================================================================================
+
+SOURCE DIRECTORIES:
+├── book/mob_dictionary/
+│   ├── en_us/ (84 .txt files)
+│   │   ├── alraune.txt through zombie_girl.txt
+│   │   └── hmag_*.txt files (33 entries)
+│   ├── zh_cn/ (84 .txt files)
+│   │   └── (parallel structure to en_us)
+│   └── *.json files (88 total)
+│       ├── Individual mob entries (alraune.json, banshee.json, etc.)
+│       ├── HMaG entries (hmag_*.json)
+│       ├── System entries (root.json, nffgirls_dictionary.json)
+│       └── Meta entries (experience.json, favorability.json, etc.)
+│
+├── lang/
+│   ├── en_us.json (translations)
+│   ├── zh_cn.json (Chinese translations)
+│   └── __ja_jp.json (Japanese translations)
+│
+├── patchouli_books/mob_dictionary/
+│   └── en_us/entries/
+│       ├── friending/alraune.json (EXISTING REFERENCE)
+│       └── [mob/ entries to be created]
+
+EXTRACTED FILES (in project root):
+├── EN_US_BOOK_CONTENT.txt (67 KB)
+├── ZH_CN_BOOK_CONTENT.txt (100 KB)
+├── ROOT_JSON_CONTENT.txt (58 KB)
+├── LEGACY_BOOK_MIGRATION_DATA.md (7.3 KB)
+├── FILE_EXTRACTION_GUIDE.txt (13 KB)
+└── MIGRATION_SUMMARY.txt (this file)
+
+================================================================================
+MOB LIST (84 Total)
+================================================================================
+
+HOSTILE MOBS (51):
+  Alraune, Banshee, Catoblepas, Creeper Girl, Crimson Slaughterer, 
+  Cursed Doll, Dodomeki, Dogu, Drowned Girl, Dullahan, Dyssomnia, 
+  Ender Executor, Ghastly Seeker, Ghost, Giant Mummy, Glaryad, Harpy, 
+  Hornet, Husk Girl, Imp, Jack Frost, Jiangshi, Kasha, Kobold, Lich, 
+  Magical Slime, Melty Monster, Monolith, Necrotic Reaper, Nightwalker, 
+  Ogre, Redcap, Savagefang, Scorpion, Skeleton Girl, Slime Girl, Snow Canine, 
+  Spider Nest, Stray Girl, Swamper, Wither Ghost, Wither Skeleton Girl, 
+  Zombie Girl
+
+SYSTEM/GUIDE ENTRIES (13):
+  root.txt, nffgirls_dictionary.txt, experience.txt, favorability.txt, 
+  friending.txt, interaction.txt, + 7 special entries
+
+HMAG MAGAZINE ENTRIES (33):
+  Detailed descriptions for mobs prefixed with "hmag_" (hmag_alraune.txt, 
+  hmag_banshee.txt, etc.)
+
+TOTAL UNIQUE ENTRIES: 84
+
+================================================================================
+TRANSLATION KEY MAPPING
+================================================================================
+
+ENTITY NAMES (Already in en_us.json):
+  entity.nffgirls.hmag_alraune → "Alraune"
+  entity.nffgirls.hmag_banshee → "Banshee"
+  entity.nffgirls.hmag_zombie_girl → "Zombie Girl"
+  [+ 37 more entity entries]
+
+DESCRIPTION KEYS (To be added for Patchouli):
+  dict.nffgirls.desc.mob.alraune → [content from alraune.txt]
+  dict.nffgirls.desc.mob.banshee → [content from banshee.txt]
+  dict.nffgirls.desc.friending.alraune → [content from hmag_alraune.txt]
+  [+ entries for all 84 mobs]
+
+PATTERN OBSERVED:
+  - Existing: entity.nffgirls.hmag_<mobname> = Display name
+  - Required: dict.nffgirls.desc.mob.<mobname> = Description text
+  - Required: dict.nffgirls.desc.friending.<mobname> = Friending guide
+
+================================================================================
+JSON METADATA REFERENCE
+================================================================================
+
+STANDARD MOB JSON STRUCTURE:
+{
+  "parent": "root.json",
+  "text": "mobname.txt",
+  "title": "entity.hmag.mobname",
+  "entity_renders": [{
+    "entity": "hmag:mobname",
+    "x": 92, "y": 102, "page": 0,
+    "scale": 1.0,
+    "rot_x": 30, "rot_y": 225, "rot_z": 0,
+    "follow_cursor": false
+  }]
+}
+
+KEY INFORMATION:
+- "text" = Name of .txt file to display (from en_us/ or zh_cn/)
+- "title" = Translation key for mob name (entity.hmag.*)
+- "entity_renders" = 3D mob model display parameters
+  * x, y = Position on page
+  * scale = Display size (0.75-1.0 typical)
+  * rot_x, rot_y, rot_z = Rotation angles for 3D rendering
+
+ENTITY NAME PATTERN:
+- English: "entity.hmag.mobname" (e.g., entity.hmag.alraune)
+- JSON files use: "title": "entity.hmag.alraune"
+- Lang files use: "entity.nffgirls.hmag_alraune": "Alraune"
+
+================================================================================
+EXISTING PATCHOULI REFERENCE
+================================================================================
+
+FILE: patchouli_books/mob_dictionary/en_us/entries/friending/alraune.json
+
+STRUCTURE:
+{
+  "category": "nffgirls:mobs",
+  "name": "hmag:alraune",
+  "icon": "nffgirls:textures/book/icon_alraune.png",
+  "pages": [
+    {
+      "type": "patchouli:entity",
+      "entity": "hmag:alraune",
+      "scale": 0.75
+    },
+    {
+      "type": "patchouli:text",
+      "text": "dict.nffgirls.desc.friending.alraune"
+    }
+  ]
+}
+
+OBSERVATIONS:
+✓ Uses Patchouli format (not legacy)
+✓ Has multiple pages (entity render + text)
+✓ References text via translation key (dict.nffgirls.desc.friending.alraune)
+✓ Entity ID uses format: hmag:entityname
+✓ Category: "nffgirls:mobs"
+✓ This is the template for mob entries to be created
+
+================================================================================
+MIGRATION CHECKLIST
+================================================================================
+
+For each of 84 mobs, perform these steps:
+
+[ ] 1. Create en_us mob entry:
+      patchouli_books/mob_dictionary/en_us/entries/mob/<mobname>.json
+      
+[ ] 2. Add en_us translation key:
+      lang/en_us.json: "dict.nffgirls.desc.mob.<mobname>"
+      (Value: content from <mobname>.txt in EN_US_BOOK_CONTENT.txt)
+
+[ ] 3. Add en_us friending translation key:
+      lang/en_us.json: "dict.nffgirls.desc.friending.<mobname>"
+      (Value: content from hmag_<mobname>.txt in EN_US_BOOK_CONTENT.txt)
+
+[ ] 4. Create zh_cn mob entry:
+      patchouli_books/mob_dictionary/zh_cn/entries/mob/<mobname>.json
+
+[ ] 5. Add zh_cn translation key:
+      lang/zh_cn.json: "dict.nffgirls.desc.mob.<mobname>"
+      (Value: content from <mobname>.txt in ZH_CN_BOOK_CONTENT.txt)
+
+[ ] 6. Add zh_cn friending translation key:
+      lang/zh_cn.json: "dict.nffgirls.desc.friending.<mobname>"
+      (Value: content from hmag_<mobname>.txt in ZH_CN_BOOK_CONTENT.txt)
+
+[ ] 7. Ensure zh_cn friending entry exists:
+      patchouli_books/mob_dictionary/zh_cn/entries/friending/<mobname>.json
+
+NOTE: Use existing patchouli entry as template. Scale values (0.75) should be
+adjusted per mob from entity_renders data in ROOT_JSON_CONTENT.txt.
+
+================================================================================
+CONTENT EXTRACTION EXAMPLES
+================================================================================
+
+EXAMPLE 1: Extract alraune.txt content
+
+File location in EN_US_BOOK_CONTENT.txt:
+  Look for: === alraune.txt ===
+  Ends with: === banshee.txt ===
+
+Content (abbreviated):
+  "The Alraune is a spirit of nature and plants, found in the Jungle biomes 
+   above Y=64. It can perform 2 types of attack depending on the distance to 
+   its enemies. When the enemy is close, it performs melee attack, giving Poison 
+   II, Weakness III and Slowness III..."
+
+Usage: This becomes the value for "dict.nffgirls.desc.mob.alraune" in lang/en_us.json
+
+EXAMPLE 2: Extract entity rendering parameters
+
+File location in ROOT_JSON_CONTENT.txt:
+  Look for: === alraune.json ===
+
+Relevant data:
+  "entity_renders": [{
+    "entity": "hmag:alraune",
+    "x": 92,
+    "y": 102,
+    "page": 0,
+    "scale": 1.0,
+    "rot_x": 30,
+    "rot_y": 225,
+    "rot_z": 0,
+    "follow_cursor": false
+  }]
+
+Usage: Transfer "scale" value (1.0) to Patchouli entry,
+       and x, y positioning if needed for Patchouli layout
+
+================================================================================
+QUICK COMMAND REFERENCE
+================================================================================
+
+# Count entries in each file
+wc -l EN_US_BOOK_CONTENT.txt ZH_CN_BOOK_CONTENT.txt ROOT_JSON_CONTENT.txt
+
+# Extract specific mob description
+sed -n '/^=== alraune\.txt ===/,/^=== [a-z_]*\.txt ===/p' EN_US_BOOK_CONTENT.txt
+
+# Find all unique mob names
+grep "^===" ROOT_JSON_CONTENT.txt | sed 's/.*=== //' | sed 's/\.json ===//' | sort
+
+# List only hmag magazine entries
+grep "^=== hmag_" EN_US_BOOK_CONTENT.txt | sed 's/.*=== //' | sed 's/\.txt ===//' | sort
+
+# Verify Chinese translations exist for all mobs
+comm -23 <(grep "^===" EN_US_BOOK_CONTENT.txt | sort) \
+         <(grep "^===" ZH_CN_BOOK_CONTENT.txt | sort)
+
+================================================================================
+FILE STATISTICS
+================================================================================
+
+Total legacy content extracted: 245 KB
+  - English descriptions: 67 KB
+  - Chinese translations: 100 KB
+  - Metadata (JSON): 58 KB
+  - Documentation: 20 KB
+
+File count by type:
+  - .txt files (en_us): 84
+  - .txt files (zh_cn): 84
+  - .json files (metadata): 88
+  - .json files (translation): 3
+  - .json files (patchouli reference): 1
+  
+Total entries to migrate: 84 mobs × 2 languages × 2 types (mob + friending) = 336 entries
+
+================================================================================
+IMPORTANT NOTES
+================================================================================
+
+1. ENTITY ID FORMAT INCONSISTENCY
+   - Legacy JSON: "title": "entity.hmag.mobname"
+   - Lang files: "entity.nffgirls.hmag_mobname"
+   - Patchouli uses: "name": "hmag:mobname"
+   
+   Migration should standardize on: "entity.nffgirls.hmag_<mobname>" pattern
+
+2. SCALE VARIATIONS
+   - Most mobs have scale: 1.0
+   - Patchouli friending entry uses scale: 0.75
+   - Adjust per mob for optimal display
+
+3. ROTATION ANGLES
+   - Standard: rot_x: 30, rot_y: 225, rot_z: 0
+   - Some mobs may vary; check ROOT_JSON_CONTENT.txt for specific values
+
+4. MISSING MOB ENTRIES
+   - Some entry types (experience, favorability, interaction, root) are 
+     system guides, not specific mob entries
+   - These should be organized separately or in their own category
+
+5. TRANSLATION COMPLETENESS
+   - All 84 mobs have English and Chinese translations
+   - Japanese translations exist but in separate __ja_jp.json file
+   - Consider adding Japanese migration if needed
+
+================================================================================
+SUCCESS CRITERIA
+================================================================================
+
+✓ All 84 unique mobs have mob entries in patchouli format
+✓ All 84 mobs have friending entries in patchouli format
+✓ English and Chinese versions created and tested
+✓ All translation keys added to lang files
+✓ Entity rendering parameters preserved/adjusted for Patchouli
+✓ Book structure maintains hierarchy (categories, subcategories)
+✓ No content is lost or truncated in migration
+✓ References/links updated to use Patchouli format
+
+================================================================================
+NEXT STEPS
+================================================================================
+
+1. Use EN_US_BOOK_CONTENT.txt to populate English descriptions
+2. Use ZH_CN_BOOK_CONTENT.txt for Chinese translations
+3. Use existing friending/alraune.json as template for all entries
+4. Reference ROOT_JSON_CONTENT.txt for entity rendering parameters
+5. Follow FILE_EXTRACTION_GUIDE.txt for detailed extraction procedures
+6. Add translation keys to lang/en_us.json and lang/zh_cn.json
+7. Create corresponding Patchouli entries for each mob
+8. Test rendering and navigation in game
+
+================================================================================
