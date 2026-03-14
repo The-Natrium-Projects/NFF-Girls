@@ -306,5 +306,8 @@
   "dict.nffgirls.legacy.title_xp": "Experience",
   "dict.nffgirls.legacy.title_interaction" : "Interaction",
 
-  "tooltip.nffgirls.port_to_patchouli": "Citadel book is out-of-date. It's recommended to use Patchouli for a better book."
+  "tooltip.nffgirls.port_to_patchouli": "Citadel book is deprecated. Use Patchouli as dependency instead.",
+
+  "dict.nffgirls.name": "Mob Dictionary - By NFF: Girls",
+  "dict.nffgirls.landing_text": "This guidebook introduces mobs involved in NFF: Girls, and how to interact with them."
 }
