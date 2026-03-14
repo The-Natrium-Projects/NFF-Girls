@@ -2,6 +2,6 @@
   "name": "dict.nffgirls.title_friending",
   "description": "dict.nffgirls.title_friending.desc",
   "icon": "nffgirls:tab_icon",
-  "sortnum": 60,
+  "sortnum": 12,
   "secret": false
 }
