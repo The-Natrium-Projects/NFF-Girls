@@ -14,8 +14,8 @@
     },
     {
       "type": "patchouli:spotlight",
-      "item": "hmag:raw_savagefang_meat",
-      "text": "dict.nffgirls.desc.item.raw_savagefang_meat"
+      "item": "hmag:savagefang_meat",
+      "text": "dict.nffgirls.desc.item.savagefang_meat"
     }
   ]
 }
