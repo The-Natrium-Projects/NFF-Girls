@@ -4,5 +4,6 @@
   "version": 1,
   "icon": "nffgirls:mob_dictionary",
   "creative_tab": "nffgirls:tab",
-  "use_resource_pack": true
+  "use_resource_pack": true,
+  "i18n": true
 }

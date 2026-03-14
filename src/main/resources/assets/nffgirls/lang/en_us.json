@@ -409,6 +409,13 @@
   "dict.nffgirls.desc.item.honeycomb": "Dropped by the Hornet.",
   "dict.nffgirls.desc.item.magma_cream": "A drop from the Melty Monster.",
   "dict.nffgirls.desc.item.slime_ball": "Dropped by the Magical Slime.",
-  "dict.nffgirls.desc.item.wither_rose": "An occasional drop from the Wither Ghost."
+  "dict.nffgirls.desc.item.wither_rose": "An occasional drop from the Wither Ghost.",
+
+  "dict.nffgirls.title_mobs": "Mobs",
+  "dict.nffgirls.title_mobs.desc": "Information about mobs in NFF: Girls.",
+  "dict.nffgirls.title_friending": "Getting Friendly",
+  "dict.nffgirls.title_friending.desc": "Methods to get friendly with mobs.",
+  "dict.nffgirls.title_interaction": "Interaction",
+  "dict.nffgirls.title_interaction.desc": "Interaction mechanics for tamed mobs."
 
 }
