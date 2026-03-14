@@ -1,0 +1,16 @@
+{
+  "category": "nffgirls:mobs",
+  "name": "hmag:alraune",
+  "icon": "nffgirls:textures/book/icon_alraune.png",
+  "pages": [
+    {
+      "type": "patchouli:entity",
+      "entity": "hmag:alraune",
+      "scale": 0.75
+    },
+    {
+      "type": "patchouli:text",
+      "text": "dict.nffgirls.desc.friending.alraune"
+    }
+  ]
+}
