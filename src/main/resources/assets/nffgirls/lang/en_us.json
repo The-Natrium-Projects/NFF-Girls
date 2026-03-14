@@ -309,5 +309,6 @@
   "tooltip.nffgirls.port_to_patchouli": "Citadel book is deprecated. Use Patchouli as dependency instead.",
 
   "dict.nffgirls.name": "Mob Dictionary - By NFF: Girls",
-  "dict.nffgirls.landing_text": "This guidebook introduces mobs involved in NFF: Girls, and how to interact with them."
+  "dict.nffgirls.landing_text": "This guidebook introduces mobs involved in NFF: Girls, and how to interact with them.",
+
 }
