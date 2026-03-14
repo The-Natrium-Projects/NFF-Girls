@@ -19,7 +19,7 @@
     },
     {
       "type": "patchouli:spotlight",
-      "item": "hmag:experience_berry",
+      "item": "hmag:exp_berry",
       "text": "dict.nffgirls.desc.item.experience_berry"
     }
   ]
