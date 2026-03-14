@@ -1,20 +1,20 @@
 {
   "category": "nffgirls:mobs",
-  "name": "hmag:jack_frost",
-  "icon": "nffgirls:textures/book/icon_jack_frost.png",
+  "name": "hmag:spider_nest",
+  "icon": "nffgirls:textures/book/icon_spider_nest.png",
   "pages": [
     {
       "type": "patchouli:entity",
-      "entity": "hmag:jack_frost",
+      "entity": "hmag:spider_nest",
       "scale": 0.75
     },
     {
       "type": "patchouli:text",
-      "text": "dict.nffgirls.desc.mob.jack_frost"
+      "text": "dict.nffgirls.desc.mob.spider_nest"
     },
     {
       "type": "patchouli:spotlight",
-      "item": "hmag:experience_berry",
+      "item": "hmag:exp_berry",
       "text": "dict.nffgirls.desc.item.experience_berry"
     }
   ]
