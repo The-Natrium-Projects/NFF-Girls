@@ -1,0 +1,26 @@
+{
+  "category": "nffgirls:mobs",
+  "name": "hmag:jiangshi",
+  "icon": "nffgirls:textures/book/icon_jiangshi.png",
+  "pages": [
+    {
+      "type": "patchouli:entity",
+      "entity": "hmag:jiangshi",
+      "scale": 0.75
+    },
+    {
+      "type": "patchouli:text",
+      "text": "dict.nffgirls.desc.mob.jiangshi"
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "hmag:sharp_fang",
+      "text": "dict.nffgirls.desc.item.sharp_fang"
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "hmag:soul_powder",
+      "text": "dict.nffgirls.desc.item.soul_powder"
+    }
+  ]
+}

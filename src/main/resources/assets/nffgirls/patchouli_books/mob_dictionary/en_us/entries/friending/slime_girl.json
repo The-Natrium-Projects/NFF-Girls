@@ -1,0 +1,16 @@
+{
+  "category": "nffgirls:friending",
+  "name": "hmag:slime_girl",
+  "icon": "nffgirls:textures/book/icon_slime_girl.png",
+  "pages": [
+    {
+      "type": "patchouli:entity",
+      "entity": "hmag:slime_girl",
+      "scale": 0.75
+    },
+    {
+      "type": "patchouli:text",
+      "text": "dict.nffgirls.desc.friending.slime_girl"
+    }
+  ]
+}

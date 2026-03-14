@@ -1,0 +1,21 @@
+{
+  "category": "nffgirls:mobs",
+  "name": "hmag:dogu",
+  "icon": "nffgirls:textures/book/icon_dogu.png",
+  "pages": [
+    {
+      "type": "patchouli:entity",
+      "entity": "hmag:dogu",
+      "scale": 0.75
+    },
+    {
+      "type": "patchouli:text",
+      "text": "dict.nffgirls.desc.mob.dogu"
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "hmag:ancient_stone",
+      "text": "dict.nffgirls.desc.item.ancient_stone"
+    }
+  ]
+}

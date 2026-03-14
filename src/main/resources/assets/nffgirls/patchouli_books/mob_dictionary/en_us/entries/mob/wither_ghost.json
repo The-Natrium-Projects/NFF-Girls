@@ -1,0 +1,26 @@
+{
+  "category": "nffgirls:mobs",
+  "name": "hmag:wither_ghost",
+  "icon": "nffgirls:textures/book/icon_wither_ghost.png",
+  "pages": [
+    {
+      "type": "patchouli:entity",
+      "entity": "hmag:wither_ghost",
+      "scale": 0.75
+    },
+    {
+      "type": "patchouli:text",
+      "text": "dict.nffgirls.desc.mob.wither_ghost"
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "hmag:soul_powder",
+      "text": "dict.nffgirls.desc.item.soul_powder"
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "minecraft:wither_rose",
+      "text": "dict.nffgirls.desc.item.wither_rose"
+    }
+  ]
+}
