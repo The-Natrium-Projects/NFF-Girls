@@ -403,6 +403,15 @@
   "dict.nffgirls.desc.item.honeycomb": "蜜蜂娘的掉落物。",
   "dict.nffgirls.desc.item.magma_cream": "岩浆娘的掉落物。",
   "dict.nffgirls.desc.item.slime_ball": "魔法史莱姆的掉落物。",
-  "dict.nffgirls.desc.item.wither_rose": "凋零鬼魂的偶尔掉落物。"
+  "dict.nffgirls.desc.item.wither_rose": "凋零鬼魂的偶尔掉落物。",
+
+  "dict.nffgirls.name": "NFF: Girls 生物图鉴",
+  "dict.nffgirls.landing_text": "这本图鉴介绍了NFF: Girls模组中涉及的生物，以及如何与它们互动。",
+  "dict.nffgirls.title_mobs": "怪物",
+  "dict.nffgirls.title_mobs.desc": "NFF: Girls中的生物信息。",
+  "dict.nffgirls.title_friending": "化敌为友",
+  "dict.nffgirls.title_friending.desc": "与怪物化敌为友的方法。",
+  "dict.nffgirls.title_interaction": "互动",
+  "dict.nffgirls.title_interaction.desc": "已友好化生物的互动机制。"
 
 }
