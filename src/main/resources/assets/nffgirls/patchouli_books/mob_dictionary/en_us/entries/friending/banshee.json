@@ -1,0 +1,16 @@
+{
+  "category": "nffgirls:friending",
+  "name": "hmag:banshee",
+  "icon": "nffgirls:textures/book/icon_banshee.png",
+  "pages": [
+    {
+      "type": "patchouli:entity",
+      "entity": "hmag:banshee",
+      "scale": 0.75
+    },
+    {
+      "type": "patchouli:text",
+      "text": "dict.nffgirls.desc.friending.banshee"
+    }
+  ]
+}

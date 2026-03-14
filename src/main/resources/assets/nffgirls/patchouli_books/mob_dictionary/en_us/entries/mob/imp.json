@@ -1,0 +1,21 @@
+{
+  "category": "nffgirls:mobs",
+  "name": "hmag:imp",
+  "icon": "nffgirls:textures/book/icon_imp.png",
+  "pages": [
+    {
+      "type": "patchouli:entity",
+      "entity": "hmag:imp",
+      "scale": 0.75
+    },
+    {
+      "type": "patchouli:text",
+      "text": "dict.nffgirls.desc.mob.imp"
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "hmag:golden_fork",
+      "text": "dict.nffgirls.desc.item.golden_fork"
+    }
+  ]
+}

@@ -1,0 +1,21 @@
+{
+  "category": "nffgirls:mobs",
+  "name": "hmag:savagefang",
+  "icon": "nffgirls:textures/book/icon_savagefang.png",
+  "pages": [
+    {
+      "type": "patchouli:entity",
+      "entity": "hmag:savagefang",
+      "scale": 0.75
+    },
+    {
+      "type": "patchouli:text",
+      "text": "dict.nffgirls.desc.mob.savagefang"
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "hmag:raw_savagefang_meat",
+      "text": "dict.nffgirls.desc.item.raw_savagefang_meat"
+    }
+  ]
+}

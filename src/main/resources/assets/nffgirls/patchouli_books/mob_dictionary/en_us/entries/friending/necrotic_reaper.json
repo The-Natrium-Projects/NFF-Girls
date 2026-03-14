@@ -1,0 +1,16 @@
+{
+  "category": "nffgirls:friending",
+  "name": "hmag:necrotic_reaper",
+  "icon": "nffgirls:textures/book/icon_necrotic_reaper.png",
+  "pages": [
+    {
+      "type": "patchouli:entity",
+      "entity": "hmag:necrotic_reaper",
+      "scale": 0.75
+    },
+    {
+      "type": "patchouli:text",
+      "text": "dict.nffgirls.desc.friending.necrotic_reaper"
+    }
+  ]
+}

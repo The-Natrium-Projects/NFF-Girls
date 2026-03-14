@@ -1,0 +1,16 @@
+{
+  "category": "nffgirls:friending",
+  "name": "hmag:hornet",
+  "icon": "nffgirls:textures/book/icon_hornet.png",
+  "pages": [
+    {
+      "type": "patchouli:entity",
+      "entity": "hmag:hornet",
+      "scale": 0.75
+    },
+    {
+      "type": "patchouli:text",
+      "text": "dict.nffgirls.desc.friending.hornet"
+    }
+  ]
+}

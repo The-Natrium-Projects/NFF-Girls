@@ -1,0 +1,21 @@
+{
+  "category": "nffgirls:mobs",
+  "name": "hmag:monolith",
+  "icon": "nffgirls:textures/book/icon_monolith.png",
+  "pages": [
+    {
+      "type": "patchouli:entity",
+      "entity": "hmag:monolith",
+      "scale": 0.75
+    },
+    {
+      "type": "patchouli:text",
+      "text": "dict.nffgirls.desc.mob.monolith"
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "hmag:ancient_stone",
+      "text": "dict.nffgirls.desc.item.ancient_stone"
+    }
+  ]
+}

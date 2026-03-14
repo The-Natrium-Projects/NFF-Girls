@@ -1,0 +1,26 @@
+{
+  "category": "nffgirls:mobs",
+  "name": "hmag:dullahan",
+  "icon": "nffgirls:textures/book/icon_dullahan.png",
+  "pages": [
+    {
+      "type": "patchouli:entity",
+      "entity": "hmag:dullahan",
+      "scale": 0.75
+    },
+    {
+      "type": "patchouli:text",
+      "text": "dict.nffgirls.desc.mob.dullahan"
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "hmag:soul_powder",
+      "text": "dict.nffgirls.desc.item.soul_powder"
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "hmag:randomberry",
+      "text": "dict.nffgirls.desc.item.randomberry"
+    }
+  ]
+}

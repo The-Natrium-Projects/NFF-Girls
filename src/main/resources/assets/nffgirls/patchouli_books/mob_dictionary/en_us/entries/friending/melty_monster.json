@@ -1,0 +1,16 @@
+{
+  "category": "nffgirls:friending",
+  "name": "hmag:melty_monster",
+  "icon": "nffgirls:textures/book/icon_melty_monster.png",
+  "pages": [
+    {
+      "type": "patchouli:entity",
+      "entity": "hmag:melty_monster",
+      "scale": 0.75
+    },
+    {
+      "type": "patchouli:text",
+      "text": "dict.nffgirls.desc.friending.melty_monster"
+    }
+  ]
+}
