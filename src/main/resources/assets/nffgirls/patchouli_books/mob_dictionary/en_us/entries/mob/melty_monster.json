@@ -1,0 +1,26 @@
+{
+  "category": "nffgirls:mobs",
+  "name": "hmag:melty_monster",
+  "icon": "nffgirls:textures/book/icon_melty_monster.png",
+  "pages": [
+    {
+      "type": "patchouli:entity",
+      "entity": "hmag:melty_monster",
+      "scale": 0.75
+    },
+    {
+      "type": "patchouli:text",
+      "text": "dict.nffgirls.desc.mob.melty_monster"
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "minecraft:magma_cream",
+      "text": "dict.nffgirls.desc.item.magma_cream"
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "hmag:evil_crystal_fragment",
+      "text": "dict.nffgirls.desc.item.evil_crystal_fragment"
+    }
+  ]
+}

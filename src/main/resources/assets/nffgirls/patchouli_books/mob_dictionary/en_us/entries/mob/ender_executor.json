@@ -1,0 +1,26 @@
+{
+  "category": "nffgirls:mobs",
+  "name": "hmag:ender_executor",
+  "icon": "nffgirls:textures/book/icon_ender_executor.png",
+  "pages": [
+    {
+      "type": "patchouli:entity",
+      "entity": "hmag:ender_executor",
+      "scale": 0.75
+    },
+    {
+      "type": "patchouli:text",
+      "text": "dict.nffgirls.desc.mob.ender_executor"
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "hmag:evil_crystal_fragment",
+      "text": "dict.nffgirls.desc.item.evil_crystal_fragment"
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "hmag:ender_plasm",
+      "text": "dict.nffgirls.desc.item.ender_plasm"
+    }
+  ]
+}

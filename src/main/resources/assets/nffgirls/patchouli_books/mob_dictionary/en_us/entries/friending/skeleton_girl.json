@@ -1,0 +1,16 @@
+{
+  "category": "nffgirls:friending",
+  "name": "hmag:skeleton_girl",
+  "icon": "nffgirls:textures/book/icon_skeleton_girl.png",
+  "pages": [
+    {
+      "type": "patchouli:entity",
+      "entity": "hmag:skeleton_girl",
+      "scale": 0.75
+    },
+    {
+      "type": "patchouli:text",
+      "text": "dict.nffgirls.desc.friending.skeleton_girl"
+    }
+  ]
+}
