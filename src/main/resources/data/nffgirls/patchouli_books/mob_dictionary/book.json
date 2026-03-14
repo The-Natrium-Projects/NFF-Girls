@@ -2,6 +2,7 @@
   "name": "dict.nffgirls.name",
   "landing_text": "dict.nffgirls.landing_text",
   "version": 1,
+  "icon": "nffgirls:mob_dictionary",
   "creative_tab": "nffgirls:tab",
   "use_resource_pack": true
 }

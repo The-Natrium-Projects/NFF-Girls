@@ -303,5 +303,7 @@
   "dict.nffgirls.legacy.title_xp": "经验值等级",
   "dict.nffgirls.legacy.title_interaction" : "互动",
 
-  "tooltip.nffgirls.port_to_patchouli": "基于Citadel的指导书已过期，建议使用Patchouli。"
+  "tooltip.nffgirls.port_to_patchouli": "基于Citadel的指导书已过期，建议使用Patchouli。",
+
+
 }
