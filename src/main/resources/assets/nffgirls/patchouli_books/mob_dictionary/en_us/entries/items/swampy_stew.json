@@ -1,0 +1,13 @@
+{
+  "category": "nffgirls:items",
+  "name": "item.hmag.swampy_stew",
+  "icon": "hmag:swampy_stew",
+  "sortnum": 40,
+  "pages": [
+    {
+      "type": "patchouli:spotlight",
+      "item": "hmag:swampy_stew",
+      "text": "dict.nffgirls.desc.item.swampy_stew"
+    }
+  ]
+}

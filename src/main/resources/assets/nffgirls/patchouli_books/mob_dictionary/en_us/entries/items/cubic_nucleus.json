@@ -2,6 +2,7 @@
   "category": "nffgirls:items",
   "name": "item.hmag.cubic_nucleus",
   "icon": "hmag:cubic_nucleus",
+  "sortnum": 40,
   "pages": [
     {
       "type": "patchouli:spotlight",

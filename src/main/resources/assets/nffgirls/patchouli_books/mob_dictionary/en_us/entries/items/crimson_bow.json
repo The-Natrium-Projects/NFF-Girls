@@ -1,0 +1,13 @@
+{
+  "category": "nffgirls:items",
+  "name": "item.hmag.crimson_bow",
+  "icon": "hmag:crimson_bow",
+  "sortnum": 30,
+  "pages": [
+    {
+      "type": "patchouli:spotlight",
+      "item": "hmag:crimson_bow",
+      "text": "dict.nffgirls.desc.item.crimson_bow"
+    }
+  ]
+}

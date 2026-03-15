@@ -1,0 +1,13 @@
+{
+  "category": "nffgirls:items",
+  "name": "item.nffgirls.ender_fruit_jam",
+  "icon": "nffgirls:ender_fruit_jam",
+  "sortnum": 20,
+  "pages": [
+    {
+      "type": "patchouli:spotlight",
+      "item": "nffgirls:ender_fruit_jam",
+      "text": "dict.nffgirls.desc.item.ender_fruit_jam"
+    }
+  ]
+}

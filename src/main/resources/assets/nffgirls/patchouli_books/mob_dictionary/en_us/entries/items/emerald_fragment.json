@@ -1,0 +1,13 @@
+{
+  "category": "nffgirls:items",
+  "name": "item.hmag.emerald_fragment",
+  "icon": "hmag:emerald_fragment",
+  "sortnum": 50,
+  "pages": [
+    {
+      "type": "patchouli:spotlight",
+      "item": "hmag:emerald_fragment",
+      "text": "dict.nffgirls.desc.item.emerald_fragment"
+    }
+  ]
+}

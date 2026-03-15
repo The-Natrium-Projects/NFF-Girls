@@ -1,0 +1,13 @@
+{
+  "category": "nffgirls:items",
+  "name": "item.hmag.insomnia_fruit",
+  "icon": "hmag:insomnia_fruit",
+  "sortnum": 40,
+  "pages": [
+    {
+      "type": "patchouli:spotlight",
+      "item": "hmag:insomnia_fruit",
+      "text": "dict.nffgirls.desc.item.insomnia_fruit"
+    }
+  ]
+}

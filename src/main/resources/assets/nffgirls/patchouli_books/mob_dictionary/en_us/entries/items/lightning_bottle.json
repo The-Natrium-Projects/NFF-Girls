@@ -1,0 +1,13 @@
+{
+  "category": "nffgirls:items",
+  "name": "item.hmag.lightning_bottle",
+  "icon": "hmag:lightning_bottle",
+  "sortnum": 40,
+  "pages": [
+    {
+      "type": "patchouli:spotlight",
+      "item": "hmag:lightning_bottle",
+      "text": "dict.nffgirls.desc.item.lightning_bottle"
+    }
+  ]
+}

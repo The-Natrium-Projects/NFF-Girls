@@ -1,0 +1,13 @@
+{
+  "category": "nffgirls:items",
+  "name": "item.hmag.evil_flame",
+  "icon": "hmag:evil_flame",
+  "sortnum": 40,
+  "pages": [
+    {
+      "type": "patchouli:spotlight",
+      "item": "hmag:evil_flame",
+      "text": "dict.nffgirls.desc.item.evil_flame"
+    }
+  ]
+}

@@ -1,0 +1,13 @@
+{
+  "category": "nffgirls:items",
+  "name": "item.hmag.evil_crystal",
+  "icon": "hmag:evil_crystal",
+  "sortnum": 50,
+  "pages": [
+    {
+      "type": "patchouli:spotlight",
+      "item": "hmag:evil_crystal",
+      "text": "dict.nffgirls.desc.item.evil_crystal"
+    }
+  ]
+}

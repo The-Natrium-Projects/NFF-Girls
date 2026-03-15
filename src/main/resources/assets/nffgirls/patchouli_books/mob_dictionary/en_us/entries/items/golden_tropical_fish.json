@@ -1,0 +1,13 @@
+{
+  "category": "nffgirls:items",
+  "name": "item.hmag.golden_tropical_fish",
+  "icon": "hmag:golden_tropical_fish",
+  "sortnum": 40,
+  "pages": [
+    {
+      "type": "patchouli:spotlight",
+      "item": "hmag:golden_tropical_fish",
+      "text": "dict.nffgirls.desc.item.golden_tropical_fish"
+    }
+  ]
+}

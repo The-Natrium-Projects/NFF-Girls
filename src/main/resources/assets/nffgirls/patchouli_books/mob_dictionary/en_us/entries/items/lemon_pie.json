@@ -1,0 +1,13 @@
+{
+  "category": "nffgirls:items",
+  "name": "item.hmag.lemon_pie",
+  "icon": "hmag:lemon_pie",
+  "sortnum": 40,
+  "pages": [
+    {
+      "type": "patchouli:spotlight",
+      "item": "hmag:lemon_pie",
+      "text": "dict.nffgirls.desc.item.lemon_pie"
+    }
+  ]
+}

@@ -1,0 +1,25 @@
+{
+  "category": "nffgirls:items",
+  "name": "item.hmag.necrotic_chainmail_chestplate",
+  "icon": "hmag:necrotic_chainmail_chestplate",
+  "sortnum": 30,
+  "pages": [
+    {
+      "type": "patchouli:spotlight",
+      "item": "hmag:necrotic_chainmail_helmet",
+      "text": "dict.nffgirls.desc.item.necrotic_chainmail"
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "hmag:necrotic_chainmail_chestplate"
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "hmag:necrotic_chainmail_leggings"
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "hmag:necrotic_chainmail_boots"
+    }
+  ]
+}

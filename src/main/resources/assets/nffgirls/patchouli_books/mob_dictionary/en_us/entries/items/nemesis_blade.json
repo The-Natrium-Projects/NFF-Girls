@@ -1,0 +1,13 @@
+{
+  "category": "nffgirls:items",
+  "name": "item.hmag.nemesis_blade",
+  "icon": "hmag:nemesis_blade",
+  "sortnum": 30,
+  "pages": [
+    {
+      "type": "patchouli:spotlight",
+      "item": "hmag:nemesis_blade",
+      "text": "dict.nffgirls.desc.item.nemesis_blade"
+    }
+  ]
+}

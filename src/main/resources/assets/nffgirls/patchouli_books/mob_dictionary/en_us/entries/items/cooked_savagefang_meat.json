@@ -1,0 +1,13 @@
+{
+  "category": "nffgirls:items",
+  "name": "item.hmag.cooked_savagefang_meat",
+  "icon": "hmag:cooked_savagefang_meat",
+  "sortnum": 40,
+  "pages": [
+    {
+      "type": "patchouli:spotlight",
+      "item": "hmag:cooked_savagefang_meat",
+      "text": "dict.nffgirls.desc.item.cooked_savagefang_meat"
+    }
+  ]
+}

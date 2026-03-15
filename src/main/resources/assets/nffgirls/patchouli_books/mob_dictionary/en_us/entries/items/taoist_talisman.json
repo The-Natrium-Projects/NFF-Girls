@@ -1,0 +1,13 @@
+{
+  "category": "nffgirls:items",
+  "name": "item.nffgirls.taoist_talisman",
+  "icon": "nffgirls:taoist_talisman",
+  "sortnum": 20,
+  "pages": [
+    {
+      "type": "patchouli:spotlight",
+      "item": "nffgirls:taoist_talisman",
+      "text": "dict.nffgirls.desc.item.taoist_talisman"
+    }
+  ]
+}

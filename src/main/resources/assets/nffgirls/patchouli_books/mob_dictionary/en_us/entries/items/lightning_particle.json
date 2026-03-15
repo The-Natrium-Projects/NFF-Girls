@@ -1,0 +1,13 @@
+{
+  "category": "nffgirls:items",
+  "name": "item.hmag.lightning_particle",
+  "icon": "hmag:lightning_particle",
+  "sortnum": 50,
+  "pages": [
+    {
+      "type": "patchouli:spotlight",
+      "item": "hmag:lightning_particle",
+      "text": "dict.nffgirls.desc.item.lightning_particle"
+    }
+  ]
+}

@@ -1,0 +1,13 @@
+{
+  "category": "nffgirls:items",
+  "name": "item.hmag.nether_star_fragment",
+  "icon": "hmag:nether_star_fragment",
+  "sortnum": 50,
+  "pages": [
+    {
+      "type": "patchouli:spotlight",
+      "item": "hmag:nether_star_fragment",
+      "text": "dict.nffgirls.desc.item.nether_star_fragment"
+    }
+  ]
+}

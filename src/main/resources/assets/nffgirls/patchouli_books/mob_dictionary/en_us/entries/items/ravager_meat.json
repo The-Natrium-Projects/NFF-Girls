@@ -1,0 +1,13 @@
+{
+  "category": "nffgirls:items",
+  "name": "item.hmag.ravager_meat",
+  "icon": "hmag:ravager_meat",
+  "sortnum": 40,
+  "pages": [
+    {
+      "type": "patchouli:spotlight",
+      "item": "hmag:ravager_meat",
+      "text": "dict.nffgirls.desc.item.ravager_meat"
+    }
+  ]
+}

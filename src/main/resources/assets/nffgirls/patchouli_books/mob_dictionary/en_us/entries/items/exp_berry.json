@@ -2,6 +2,7 @@
   "category": "nffgirls:items",
   "name": "item.hmag.exp_berry",
   "icon": "hmag:exp_berry",
+  "sortnum": 40,
   "pages": [
     {
       "type": "patchouli:spotlight",

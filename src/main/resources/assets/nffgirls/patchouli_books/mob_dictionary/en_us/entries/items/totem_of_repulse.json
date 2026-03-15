@@ -1,0 +1,13 @@
+{
+  "category": "nffgirls:items",
+  "name": "item.hmag.totem_of_repulse",
+  "icon": "hmag:totem_of_repulse",
+  "sortnum": 40,
+  "pages": [
+    {
+      "type": "patchouli:spotlight",
+      "item": "hmag:totem_of_repulse",
+      "text": "dict.nffgirls.desc.item.totem_of_repulse"
+    }
+  ]
+}

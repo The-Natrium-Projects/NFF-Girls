@@ -2,6 +2,7 @@
   "category": "nffgirls:items",
   "name": "item.hmag.burning_core",
   "icon": "hmag:burning_core",
+  "sortnum": 50,
   "pages": [
     {
       "type": "patchouli:spotlight",

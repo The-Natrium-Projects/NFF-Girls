@@ -1,0 +1,13 @@
+{
+  "category": "nffgirls:items",
+  "name": "item.hmag.fortress_shield",
+  "icon": "hmag:fortress_shield",
+  "sortnum": 30,
+  "pages": [
+    {
+      "type": "patchouli:spotlight",
+      "item": "hmag:fortress_shield",
+      "text": "dict.nffgirls.desc.item.fortress_shield"
+    }
+  ]
+}

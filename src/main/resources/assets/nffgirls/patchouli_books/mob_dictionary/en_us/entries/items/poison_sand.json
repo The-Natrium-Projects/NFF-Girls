@@ -1,0 +1,13 @@
+{
+  "category": "nffgirls:items",
+  "name": "item.hmag.poison_sand",
+  "icon": "hmag:poison_sand",
+  "sortnum": 50,
+  "pages": [
+    {
+      "type": "patchouli:spotlight",
+      "item": "hmag:poison_sand",
+      "text": "dict.nffgirls.desc.item.poison_sand"
+    }
+  ]
+}

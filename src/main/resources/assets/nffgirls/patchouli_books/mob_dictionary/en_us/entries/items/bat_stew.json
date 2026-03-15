@@ -1,0 +1,13 @@
+{
+  "category": "nffgirls:items",
+  "name": "item.hmag.bat_stew",
+  "icon": "hmag:bat_stew",
+  "sortnum": 40,
+  "pages": [
+    {
+      "type": "patchouli:spotlight",
+      "item": "hmag:bat_stew",
+      "text": "dict.nffgirls.desc.item.bat_stew"
+    }
+  ]
+}
