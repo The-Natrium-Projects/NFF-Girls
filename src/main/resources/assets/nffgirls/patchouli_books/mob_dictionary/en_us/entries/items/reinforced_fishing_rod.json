@@ -1,0 +1,13 @@
+{
+  "category": "nffgirls:items",
+  "name": "item.nffgirls.reinforced_fishing_rod",
+  "icon": "nffgirls:reinforced_fishing_rod",
+  "sortnum": 10,
+  "pages": [
+    {
+      "type": "patchouli:spotlight",
+      "item": "nffgirls:reinforced_fishing_rod",
+      "text": "dict.nffgirls.desc.item.reinforced_fishing_rod"
+    }
+  ]
+}

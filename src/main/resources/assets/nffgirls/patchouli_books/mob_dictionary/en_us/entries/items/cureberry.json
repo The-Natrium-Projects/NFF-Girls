@@ -1,0 +1,13 @@
+{
+  "category": "nffgirls:items",
+  "name": "item.hmag.cureberry",
+  "icon": "hmag:cureberry",
+  "sortnum": 40,
+  "pages": [
+    {
+      "type": "patchouli:spotlight",
+      "item": "hmag:cureberry",
+      "text": "dict.nffgirls.desc.item.cureberry"
+    }
+  ]
+}

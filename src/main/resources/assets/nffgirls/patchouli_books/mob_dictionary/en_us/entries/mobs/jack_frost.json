@@ -1,0 +1,21 @@
+{
+  "category": "nffgirls:mobs",
+  "name": "entity.hmag.jack_frost",
+  "icon": "nffgirls:textures/book/icon_jack_frost.png",
+  "pages": [
+    {
+      "type": "patchouli:entity",
+      "entity": "hmag:jack_frost",
+      "scale": 0.75
+    },
+    {
+      "type": "patchouli:text",
+      "text": "dict.nffgirls.desc.mob.jack_frost"
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "hmag:exp_berry",
+      "text": "dict.nffgirls.desc.item.experience_berry"
+    }
+  ]
+}

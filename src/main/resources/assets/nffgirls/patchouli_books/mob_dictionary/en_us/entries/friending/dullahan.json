@@ -1,0 +1,20 @@
+{
+  "category": "nffgirls:friending",
+  "name": "entity.hmag.dullahan",
+  "icon": "nffgirls:textures/book/icon_dullahan.png",
+  "pages": [
+    {
+      "type": "patchouli:entity",
+      "entity": "hmag:dullahan",
+      "scale": 0.75
+    },
+    {
+      "type": "patchouli:text",
+      "text": "dict.nffgirls.desc.friending.dullahan"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "dict.nffgirls.desc.friending.dullahan_1"
+    }
+  ]
+}

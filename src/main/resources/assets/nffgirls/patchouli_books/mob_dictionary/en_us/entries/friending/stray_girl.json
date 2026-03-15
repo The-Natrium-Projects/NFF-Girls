@@ -1,0 +1,20 @@
+{
+  "category": "nffgirls:friending",
+  "name": "entity.hmag.stray_girl",
+  "icon": "nffgirls:textures/book/icon_stray_girl.png",
+  "pages": [
+    {
+      "type": "patchouli:entity",
+      "entity": "hmag:stray_girl",
+      "scale": 0.75
+    },
+    {
+      "type": "patchouli:text",
+      "text": "dict.nffgirls.desc.friending.stray_girl"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "dict.nffgirls.desc.friending.stray_girl_1"
+    }
+  ]
+}

@@ -1,0 +1,20 @@
+{
+  "category": "nffgirls:friending",
+  "name": "entity.hmag.redcap",
+  "icon": "nffgirls:textures/book/icon_redcap.png",
+  "pages": [
+    {
+      "type": "patchouli:entity",
+      "entity": "hmag:redcap",
+      "scale": 0.75
+    },
+    {
+      "type": "patchouli:text",
+      "text": "dict.nffgirls.desc.friending.redcap"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "dict.nffgirls.desc.friending.redcap_1"
+    }
+  ]
+}

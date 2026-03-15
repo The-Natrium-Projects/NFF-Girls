@@ -1,0 +1,16 @@
+{
+  "category": "nffgirls:mobs",
+  "name": "entity.hmag.harpy",
+  "icon": "nffgirls:textures/book/icon_harpy.png",
+  "pages": [
+    {
+      "type": "patchouli:entity",
+      "entity": "hmag:harpy",
+      "scale": 0.75
+    },
+    {
+      "type": "patchouli:text",
+      "text": "dict.nffgirls.desc.mob.harpy"
+    }
+  ]
+}

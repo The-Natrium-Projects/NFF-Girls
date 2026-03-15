@@ -1,0 +1,25 @@
+{
+  "category": "nffgirls:mobs",
+  "name": "entity.hmag.dyssomnia",
+  "icon": "nffgirls:textures/book/icon_dyssomnia.png",
+  "pages": [
+    {
+      "type": "patchouli:entity",
+      "entity": "hmag:dyssomnia",
+      "scale": 0.75
+    },
+    {
+      "type": "patchouli:text",
+      "text": "dict.nffgirls.desc.mob.dyssomnia"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "dict.nffgirls.desc.mob.dyssomnia_1"
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "hmag:dyssomnia_skin",
+      "text": "dict.nffgirls.desc.item.dyssomnia_skin"
+    }
+  ]
+}

@@ -1,0 +1,24 @@
+{
+  "category": "nffgirls:friending",
+  "name": "entity.hmag.imp",
+  "icon": "nffgirls:textures/book/icon_imp.png",
+  "pages": [
+    {
+      "type": "patchouli:entity",
+      "entity": "hmag:imp",
+      "scale": 0.75
+    },
+    {
+      "type": "patchouli:text",
+      "text": "dict.nffgirls.desc.friending.imp"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "dict.nffgirls.desc.friending.imp_1"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "dict.nffgirls.desc.friending.imp_2"
+    }
+  ]
+}

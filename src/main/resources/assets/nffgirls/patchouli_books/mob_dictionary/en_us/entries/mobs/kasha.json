@@ -1,0 +1,25 @@
+{
+  "category": "nffgirls:mobs",
+  "name": "entity.hmag.kasha",
+  "icon": "nffgirls:textures/book/icon_kasha.png",
+  "pages": [
+    {
+      "type": "patchouli:entity",
+      "entity": "hmag:kasha",
+      "scale": 0.75
+    },
+    {
+      "type": "patchouli:text",
+      "text": "dict.nffgirls.desc.mob.kasha"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "dict.nffgirls.desc.mob.kasha_1"
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "hmag:soul_powder",
+      "text": "dict.nffgirls.desc.item.soul_powder"
+    }
+  ]
+}

@@ -1,0 +1,36 @@
+{
+  "category": "nffgirls:friending",
+  "name": "entity.hmag.slime_girl",
+  "icon": "nffgirls:textures/book/icon_slime_girl.png",
+  "pages": [
+    {
+      "type": "patchouli:entity",
+      "entity": "hmag:slime_girl",
+      "scale": 0.75
+    },
+    {
+      "type": "patchouli:text",
+      "text": "dict.nffgirls.desc.friending.slime_girl"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "dict.nffgirls.desc.friending.slime_girl_1"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "dict.nffgirls.desc.friending.slime_girl_2"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "dict.nffgirls.desc.friending.slime_girl_3"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "dict.nffgirls.desc.friending.slime_girl_4"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "dict.nffgirls.desc.friending.slime_girl_5"
+    }
+  ]
+}

@@ -1,0 +1,13 @@
+{
+  "category": "nffgirls:items",
+  "name": "item.nffgirls.magical_gel_ball",
+  "icon": "nffgirls:magical_gel_ball",
+  "sortnum": 20,
+  "pages": [
+    {
+      "type": "patchouli:spotlight",
+      "item": "nffgirls:magical_gel_ball",
+      "text": "dict.nffgirls.desc.item.magical_gel_ball"
+    }
+  ]
+}

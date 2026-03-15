@@ -1,0 +1,21 @@
+{
+  "category": "nffgirls:mobs",
+  "name": "entity.hmag.magical_slime",
+  "icon": "nffgirls:textures/book/icon_magical_slime.png",
+  "pages": [
+    {
+      "type": "patchouli:entity",
+      "entity": "hmag:magical_slime",
+      "scale": 0.75
+    },
+    {
+      "type": "patchouli:text",
+      "text": "dict.nffgirls.desc.mob.magical_slime"
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "minecraft:slime_ball",
+      "text": "dict.nffgirls.desc.item.slime_ball"
+    }
+  ]
+}

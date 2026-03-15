@@ -1,0 +1,13 @@
+{
+  "category": "nffgirls:items",
+  "name": "block.hmag.tinted_reinforced_glass",
+  "icon": "hmag:tinted_reinforced_glass",
+  "sortnum": 50,
+  "pages": [
+    {
+      "type": "patchouli:spotlight",
+      "item": "hmag:tinted_reinforced_glass",
+      "text": "dict.nffgirls.desc.item.tinted_reinforced_glass"
+    }
+  ]
+}

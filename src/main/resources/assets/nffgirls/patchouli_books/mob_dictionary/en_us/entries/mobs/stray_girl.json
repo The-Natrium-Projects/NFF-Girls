@@ -1,0 +1,21 @@
+{
+  "category": "nffgirls:mobs",
+  "name": "entity.hmag.stray_girl",
+  "icon": "nffgirls:textures/book/icon_stray_girl.png",
+  "pages": [
+    {
+      "type": "patchouli:entity",
+      "entity": "hmag:stray_girl",
+      "scale": 0.75
+    },
+    {
+      "type": "patchouli:text",
+      "text": "dict.nffgirls.desc.mob.stray_girl"
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "hmag:evil_crystal_fragment",
+      "text": "dict.nffgirls.desc.item.evil_crystal_fragment"
+    }
+  ]
+}

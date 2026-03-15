@@ -1,0 +1,24 @@
+{
+  "category": "nffgirls:friending",
+  "name": "entity.hmag.kobold",
+  "icon": "nffgirls:textures/book/icon_kobold.png",
+  "pages": [
+    {
+      "type": "patchouli:entity",
+      "entity": "hmag:kobold",
+      "scale": 0.75
+    },
+    {
+      "type": "patchouli:text",
+      "text": "dict.nffgirls.desc.friending.kobold"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "dict.nffgirls.desc.friending.kobold_1"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "dict.nffgirls.desc.friending.kobold_2"
+    }
+  ]
+}

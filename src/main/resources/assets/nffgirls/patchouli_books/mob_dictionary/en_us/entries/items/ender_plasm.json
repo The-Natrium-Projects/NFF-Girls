@@ -1,0 +1,13 @@
+{
+  "category": "nffgirls:items",
+  "name": "item.hmag.ender_plasm",
+  "icon": "hmag:ender_plasm",
+  "sortnum": 50,
+  "pages": [
+    {
+      "type": "patchouli:spotlight",
+      "item": "hmag:ender_plasm",
+      "text": "dict.nffgirls.desc.item.ender_plasm"
+    }
+  ]
+}

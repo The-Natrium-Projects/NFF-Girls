@@ -1,0 +1,36 @@
+{
+  "category": "nffgirls:mobs",
+  "name": "entity.hmag.hornet",
+  "icon": "nffgirls:textures/book/icon_hornet.png",
+  "pages": [
+    {
+      "type": "patchouli:entity",
+      "entity": "hmag:hornet",
+      "scale": 0.75
+    },
+    {
+      "type": "patchouli:text",
+      "text": "dict.nffgirls.desc.mob.hornet"
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "minecraft:honeycomb",
+      "text": "dict.nffgirls.desc.item.honeycomb"
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "minecraft:honey_bottle",
+      "text": "dict.nffgirls.desc.item.honey_bottle"
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "hmag:mysterious_petal",
+      "text": "dict.nffgirls.desc.item.mysterious_petal"
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "hmag:iron_spear",
+      "text": "dict.nffgirls.desc.item.iron_spear"
+    }
+  ]
+}

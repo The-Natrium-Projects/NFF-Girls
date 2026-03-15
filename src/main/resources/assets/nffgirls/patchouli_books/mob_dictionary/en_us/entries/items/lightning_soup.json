@@ -1,0 +1,13 @@
+{
+  "category": "nffgirls:items",
+  "name": "item.hmag.lightning_soup",
+  "icon": "hmag:lightning_soup",
+  "sortnum": 40,
+  "pages": [
+    {
+      "type": "patchouli:spotlight",
+      "item": "hmag:lightning_soup",
+      "text": "dict.nffgirls.desc.item.lightning_soup"
+    }
+  ]
+}

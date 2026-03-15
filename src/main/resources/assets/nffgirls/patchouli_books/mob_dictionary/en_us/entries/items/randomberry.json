@@ -1,0 +1,13 @@
+{
+  "category": "nffgirls:items",
+  "name": "item.hmag.randomberry",
+  "icon": "hmag:randomberry",
+  "sortnum": 40,
+  "pages": [
+    {
+      "type": "patchouli:spotlight",
+      "item": "hmag:randomberry",
+      "text": "dict.nffgirls.desc.item.randomberry"
+    }
+  ]
+}

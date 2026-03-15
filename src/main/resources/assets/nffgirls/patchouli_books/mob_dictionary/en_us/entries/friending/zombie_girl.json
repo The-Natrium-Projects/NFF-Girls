@@ -1,0 +1,20 @@
+{
+  "category": "nffgirls:friending",
+  "name": "entity.hmag.zombie_girl",
+  "icon": "nffgirls:textures/book/icon_zombie_girl.png",
+  "pages": [
+    {
+      "type": "patchouli:entity",
+      "entity": "hmag:zombie_girl",
+      "scale": 0.75
+    },
+    {
+      "type": "patchouli:text",
+      "text": "dict.nffgirls.desc.friending.zombie_girl"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "dict.nffgirls.desc.friending.zombie_girl_1"
+    }
+  ]
+}

@@ -1,0 +1,20 @@
+{
+  "category": "nffgirls:friending",
+  "name": "entity.hmag.ender_executor",
+  "icon": "nffgirls:textures/book/icon_ender_executor.png",
+  "pages": [
+    {
+      "type": "patchouli:entity",
+      "entity": "hmag:ender_executor",
+      "scale": 0.75
+    },
+    {
+      "type": "patchouli:text",
+      "text": "dict.nffgirls.desc.friending.ender_executor"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "dict.nffgirls.desc.friending.ender_executor_1"
+    }
+  ]
+}

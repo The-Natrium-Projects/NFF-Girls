@@ -1,7 +1,7 @@
 {
   "name": "dict.nffgirls.title_mobs",
   "description": "dict.nffgirls.title_mobs.desc",
-  "icon": "hmag:zombie_girl_spawn_egg",
-  "sortnum": 50,
+  "icon": "nffgirls:textures/book/icon_zombie_girl_small.png",
+  "sortnum": 11,
   "secret": false
 }

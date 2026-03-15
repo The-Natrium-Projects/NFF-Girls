@@ -1,0 +1,13 @@
+{
+  "category": "nffgirls:items",
+  "name": "item.hmag.dyssomnia_skin",
+  "icon": "hmag:dyssomnia_skin",
+  "sortnum": 50,
+  "pages": [
+    {
+      "type": "patchouli:spotlight",
+      "item": "hmag:dyssomnia_skin",
+      "text": "dict.nffgirls.desc.item.dyssomnia_skin"
+    }
+  ]
+}

@@ -1,0 +1,13 @@
+{
+  "category": "nffgirls:items",
+  "name": "item.hmag.tiny_netherite_scrap",
+  "icon": "hmag:tiny_netherite_scrap",
+  "sortnum": 50,
+  "pages": [
+    {
+      "type": "patchouli:spotlight",
+      "item": "hmag:tiny_netherite_scrap",
+      "text": "dict.nffgirls.desc.item.tiny_netherite_scrap"
+    }
+  ]
+}

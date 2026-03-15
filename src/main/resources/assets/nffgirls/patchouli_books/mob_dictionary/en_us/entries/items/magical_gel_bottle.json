@@ -1,0 +1,18 @@
+{
+  "category": "nffgirls:items",
+  "name": "item.nffgirls.magical_gel_bottle",
+  "icon": "nffgirls:magical_gel_bottle",
+  "sortnum": 20,
+  "pages": [
+    {
+      "type": "patchouli:spotlight",
+      "item": "nffgirls:magical_gel_bottle",
+      "text": "dict.nffgirls.desc.item.magical_gel_bottle"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "dict.nffgirls.desc.item.magical_gel_bottle_1"
+    }
+
+  ]
+}

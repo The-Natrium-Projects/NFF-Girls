@@ -1,0 +1,21 @@
+{
+  "category": "nffgirls:mobs",
+  "name": "entity.hmag.snow_canine",
+  "icon": "nffgirls:textures/book/icon_snow_canine.png",
+  "pages": [
+    {
+      "type": "patchouli:entity",
+      "entity": "hmag:snow_canine",
+      "scale": 0.75
+    },
+    {
+      "type": "patchouli:text",
+      "text": "dict.nffgirls.desc.mob.snow_canine"
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "hmag:sharp_fang",
+      "text": "dict.nffgirls.desc.item.sharp_fang"
+    }
+  ]
+}

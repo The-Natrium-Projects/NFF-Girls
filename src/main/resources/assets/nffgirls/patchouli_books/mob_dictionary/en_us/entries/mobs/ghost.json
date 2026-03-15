@@ -1,0 +1,26 @@
+{
+  "category": "nffgirls:mobs",
+  "name": "entity.hmag.ghost",
+  "icon": "nffgirls:textures/book/icon_ghost.png",
+  "pages": [
+    {
+      "type": "patchouli:entity",
+      "entity": "hmag:ghost",
+      "scale": 0.75
+    },
+    {
+      "type": "patchouli:text",
+      "text": "dict.nffgirls.desc.mob.ghost"
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "hmag:soul_powder",
+      "text": "dict.nffgirls.desc.item.soul_powder"
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "minecraft:glowstone_dust",
+      "text": "dict.nffgirls.desc.item.glowstone_dust"
+    }
+  ]
+}

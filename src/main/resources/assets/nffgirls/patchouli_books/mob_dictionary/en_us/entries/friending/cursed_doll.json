@@ -1,0 +1,20 @@
+{
+  "category": "nffgirls:friending",
+  "name": "entity.hmag.cursed_doll",
+  "icon": "nffgirls:textures/book/icon_cursed_doll.png",
+  "pages": [
+    {
+      "type": "patchouli:entity",
+      "entity": "hmag:cursed_doll",
+      "scale": 0.75
+    },
+    {
+      "type": "patchouli:text",
+      "text": "dict.nffgirls.desc.friending.cursed_doll"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "dict.nffgirls.desc.friending.cursed_doll_1"
+    }
+  ]
+}

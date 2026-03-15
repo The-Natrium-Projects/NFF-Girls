@@ -1,0 +1,13 @@
+{
+  "category": "nffgirls:items",
+  "name": "block.hmag.healing_sand",
+  "icon": "hmag:healing_sand",
+  "sortnum": 50,
+  "pages": [
+    {
+      "type": "patchouli:spotlight",
+      "item": "hmag:healing_sand",
+      "text": "dict.nffgirls.desc.item.healing_sand"
+    }
+  ]
+}

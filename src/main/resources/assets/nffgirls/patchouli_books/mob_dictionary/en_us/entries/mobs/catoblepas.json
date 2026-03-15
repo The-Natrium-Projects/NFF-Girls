@@ -1,0 +1,21 @@
+{
+  "category": "nffgirls:mobs",
+  "name": "entity.hmag.catoblepas",
+  "icon": "nffgirls:textures/book/icon_catoblepas.png",
+  "pages": [
+    {
+      "type": "patchouli:entity",
+      "entity": "hmag:catoblepas",
+      "scale": 0.75
+    },
+    {
+      "type": "patchouli:text",
+      "text": "dict.nffgirls.desc.mob.catoblepas"
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "hmag:randomberry",
+      "text": "dict.nffgirls.desc.item.randomberry"
+    }
+  ]
+}

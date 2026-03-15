@@ -1,0 +1,16 @@
+{
+  "category": "nffgirls:mobs",
+  "name": "entity.hmag.ghastly_seeker",
+  "icon": "nffgirls:textures/book/icon_ghastly_seeker.png",
+  "pages": [
+    {
+      "type": "patchouli:entity",
+      "entity": "hmag:ghastly_seeker",
+      "scale": 0.75
+    },
+    {
+      "type": "patchouli:text",
+      "text": "dict.nffgirls.desc.mob.ghastly_seeker"
+    }
+  ]
+}

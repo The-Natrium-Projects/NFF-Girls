@@ -1,0 +1,13 @@
+{
+  "category": "nffgirls:items",
+  "name": "item.hmag.blasting_bottle",
+  "icon": "hmag:blasting_bottle",
+  "sortnum": 40,
+  "pages": [
+    {
+      "type": "patchouli:spotlight",
+      "item": "hmag:blasting_bottle",
+      "text": "dict.nffgirls.desc.item.blasting_bottle"
+    }
+  ]
+}

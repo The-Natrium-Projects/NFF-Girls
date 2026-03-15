@@ -1,0 +1,25 @@
+{
+  "category": "nffgirls:mobs",
+  "name": "entity.hmag.crimson_slaughterer",
+  "icon": "nffgirls:textures/book/icon_crimson_slaughterer.png",
+  "pages": [
+    {
+      "type": "patchouli:entity",
+      "entity": "hmag:crimson_slaughterer",
+      "scale": 0.75
+    },
+    {
+      "type": "patchouli:text",
+      "text": "dict.nffgirls.desc.mob.crimson_slaughterer"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "dict.nffgirls.desc.mob.crimson_slaughterer_1"
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "hmag:crimson_cuticula",
+      "text": "dict.nffgirls.desc.item.crimson_cuticula"
+    }
+  ]
+}

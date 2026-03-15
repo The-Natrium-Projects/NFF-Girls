@@ -1,0 +1,21 @@
+{
+  "category": "nffgirls:mobs",
+  "name": "entity.hmag.spider_nest",
+  "icon": "nffgirls:textures/book/icon_spider_nest.png",
+  "pages": [
+    {
+      "type": "patchouli:entity",
+      "entity": "hmag:spider_nest",
+      "scale": 0.75
+    },
+    {
+      "type": "patchouli:text",
+      "text": "dict.nffgirls.desc.mob.spider_nest"
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "hmag:exp_berry",
+      "text": "dict.nffgirls.desc.item.experience_berry"
+    }
+  ]
+}

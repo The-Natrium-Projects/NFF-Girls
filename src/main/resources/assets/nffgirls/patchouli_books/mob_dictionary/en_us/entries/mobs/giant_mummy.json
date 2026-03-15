@@ -1,0 +1,21 @@
+{
+  "category": "nffgirls:mobs",
+  "name": "entity.hmag.giant_mummy",
+  "icon": "nffgirls:textures/book/icon_giant_mummy.png",
+  "pages": [
+    {
+      "type": "patchouli:entity",
+      "entity": "hmag:giant_mummy",
+      "scale": 0.75
+    },
+    {
+      "type": "patchouli:text",
+      "text": "dict.nffgirls.desc.mob.giant_mummy"
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "hmag:randomberry",
+      "text": "dict.nffgirls.desc.item.randomberry"
+    }
+  ]
+}

@@ -1,0 +1,28 @@
+{
+  "category": "nffgirls:interaction",
+  "name": "dict.nffgirls.desc.interaction.friending_title",
+  "icon": "nffgirls:tab_icon",
+  "sortnum": 10,
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "dict.nffgirls.desc.interaction.friending"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "dict.nffgirls.desc.interaction.friending_1"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "dict.nffgirls.desc.interaction.friending_2"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "dict.nffgirls.desc.interaction.friending_3"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "dict.nffgirls.desc.interaction.friending_4"
+    }
+  ]
+}

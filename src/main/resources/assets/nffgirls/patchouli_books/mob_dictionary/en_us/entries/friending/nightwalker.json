@@ -1,0 +1,24 @@
+{
+  "category": "nffgirls:friending",
+  "name": "entity.hmag.nightwalker",
+  "icon": "nffgirls:textures/book/icon_nightwalker.png",
+  "pages": [
+    {
+      "type": "patchouli:entity",
+      "entity": "hmag:nightwalker",
+      "scale": 0.75
+    },
+    {
+      "type": "patchouli:text",
+      "text": "dict.nffgirls.desc.friending.nightwalker"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "dict.nffgirls.desc.friending.nightwalker_1"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "dict.nffgirls.desc.friending.nightwalker_2"
+    }
+  ]
+}

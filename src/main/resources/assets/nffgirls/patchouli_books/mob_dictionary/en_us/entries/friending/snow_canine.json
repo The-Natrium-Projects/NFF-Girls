@@ -1,0 +1,16 @@
+{
+  "category": "nffgirls:friending",
+  "name": "entity.hmag.snow_canine",
+  "icon": "nffgirls:textures/book/icon_snow_canine.png",
+  "pages": [
+    {
+      "type": "patchouli:entity",
+      "entity": "hmag:snow_canine",
+      "scale": 0.75
+    },
+    {
+      "type": "patchouli:text",
+      "text": "dict.nffgirls.desc.friending.snow_canine"
+    }
+  ]
+}

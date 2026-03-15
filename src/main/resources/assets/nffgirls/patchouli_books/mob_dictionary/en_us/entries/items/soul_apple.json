@@ -1,0 +1,13 @@
+{
+  "category": "nffgirls:items",
+  "name": "item.hmag.soul_apple",
+  "icon": "hmag:soul_apple",
+  "sortnum": 40,
+  "pages": [
+    {
+      "type": "patchouli:spotlight",
+      "item": "hmag:soul_apple",
+      "text": "dict.nffgirls.desc.item.soul_apple"
+    }
+  ]
+}

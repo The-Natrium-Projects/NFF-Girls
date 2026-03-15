@@ -1,0 +1,13 @@
+{
+  "category": "nffgirls:items",
+  "name": "item.hmag.spectral_soup",
+  "icon": "hmag:spectral_soup",
+  "sortnum": 40,
+  "pages": [
+    {
+      "type": "patchouli:spotlight",
+      "item": "hmag:spectral_soup",
+      "text": "dict.nffgirls.desc.item.spectral_soup"
+    }
+  ]
+}

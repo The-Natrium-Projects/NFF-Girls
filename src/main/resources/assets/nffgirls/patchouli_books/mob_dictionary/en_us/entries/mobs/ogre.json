@@ -1,0 +1,21 @@
+{
+  "category": "nffgirls:mobs",
+  "name": "entity.hmag.ogre",
+  "icon": "nffgirls:textures/book/icon_ogre.png",
+  "pages": [
+    {
+      "type": "patchouli:entity",
+      "entity": "hmag:ogre",
+      "scale": 0.75
+    },
+    {
+      "type": "patchouli:text",
+      "text": "dict.nffgirls.desc.mob.ogre"
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "hmag:ogre_horn",
+      "text": "dict.nffgirls.desc.item.ogre_horn"
+    }
+  ]
+}

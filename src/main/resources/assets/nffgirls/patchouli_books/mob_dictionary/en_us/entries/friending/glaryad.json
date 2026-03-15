@@ -1,0 +1,16 @@
+{
+  "category": "nffgirls:friending",
+  "name": "entity.hmag.glaryad",
+  "icon": "nffgirls:textures/book/icon_glaryad.png",
+  "pages": [
+    {
+      "type": "patchouli:entity",
+      "entity": "hmag:glaryad",
+      "scale": 0.75
+    },
+    {
+      "type": "patchouli:text",
+      "text": "dict.nffgirls.desc.friending.glaryad"
+    }
+  ]
+}

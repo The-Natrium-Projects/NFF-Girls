@@ -1,0 +1,13 @@
+{
+  "category": "nffgirls:items",
+  "name": "item.hmag.cooked_swamper_tentacle",
+  "icon": "hmag:cooked_swamper_tentacle",
+  "sortnum": 40,
+  "pages": [
+    {
+      "type": "patchouli:spotlight",
+      "item": "hmag:cooked_swamper_tentacle",
+      "text": "dict.nffgirls.desc.item.cooked_swamper_tentacle"
+    }
+  ]
+}

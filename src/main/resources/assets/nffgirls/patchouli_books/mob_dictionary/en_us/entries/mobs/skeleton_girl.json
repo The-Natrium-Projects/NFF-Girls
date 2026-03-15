@@ -1,0 +1,21 @@
+{
+  "category": "nffgirls:mobs",
+  "name": "entity.hmag.skeleton_girl",
+  "icon": "nffgirls:textures/book/icon_skeleton_girl.png",
+  "pages": [
+    {
+      "type": "patchouli:entity",
+      "entity": "hmag:skeleton_girl",
+      "scale": 0.75
+    },
+    {
+      "type": "patchouli:text",
+      "text": "dict.nffgirls.desc.mob.skeleton_girl"
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "hmag:evil_crystal_fragment",
+      "text": "dict.nffgirls.desc.item.evil_crystal_fragment"
+    }
+  ]
+}
