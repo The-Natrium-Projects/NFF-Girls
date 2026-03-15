@@ -1,0 +1,13 @@
+{
+  "category": "nffgirls:items",
+  "name": "item.hmag.reinforced_block",
+  "icon": "hmag:reinforced_block",
+  "sortnum": 50,
+  "pages": [
+    {
+      "type": "patchouli:spotlight",
+      "item": "hmag:reinforced_block",
+      "text": "dict.nffgirls.desc.item.reinforced_block"
+    }
+  ]
+}

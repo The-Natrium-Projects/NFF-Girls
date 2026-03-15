@@ -1,0 +1,13 @@
+{
+  "category": "nffgirls:items",
+  "name": "item.hmag.endless_pearl",
+  "icon": "hmag:endless_pearl",
+  "sortnum": 40,
+  "pages": [
+    {
+      "type": "patchouli:spotlight",
+      "item": "hmag:endless_pearl",
+      "text": "dict.nffgirls.desc.item.endless_pearl"
+    }
+  ]
+}

@@ -2,6 +2,7 @@
   "category": "nffgirls:items",
   "name": "item.hmag.swamper_tentacle",
   "icon": "hmag:swamper_tentacle",
+  "sortnum": 40,
   "pages": [
     {
       "type": "patchouli:spotlight",

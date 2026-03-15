@@ -2,6 +2,7 @@
   "category": "nffgirls:items",
   "name": "item.hmag.kobold_leather",
   "icon": "hmag:kobold_leather",
+  "sortnum": 50,
   "pages": [
     {
       "type": "patchouli:spotlight",

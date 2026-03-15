@@ -1,0 +1,13 @@
+{
+  "category": "nffgirls:items",
+  "name": "item.hmag.insomnia_sword",
+  "icon": "hmag:insomnia_sword",
+  "sortnum": 30,
+  "pages": [
+    {
+      "type": "patchouli:spotlight",
+      "item": "hmag:insomnia_sword",
+      "text": "dict.nffgirls.desc.item.insomnia_sword"
+    }
+  ]
+}

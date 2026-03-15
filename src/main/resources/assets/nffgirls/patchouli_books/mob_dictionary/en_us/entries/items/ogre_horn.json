@@ -2,6 +2,7 @@
   "category": "nffgirls:items",
   "name": "item.hmag.ogre_horn",
   "icon": "hmag:ogre_horn",
+  "sortnum": 50,
   "pages": [
     {
       "type": "patchouli:spotlight",

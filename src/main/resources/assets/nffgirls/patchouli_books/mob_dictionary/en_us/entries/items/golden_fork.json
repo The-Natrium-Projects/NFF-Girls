@@ -2,6 +2,7 @@
   "category": "nffgirls:items",
   "name": "item.hmag.golden_fork",
   "icon": "hmag:golden_fork",
+  "sortnum": 30,
   "pages": [
     {
       "type": "patchouli:spotlight",

@@ -1,0 +1,13 @@
+{
+  "category": "nffgirls:items",
+  "name": "item.hmag.diamond_fragment",
+  "icon": "hmag:diamond_fragment",
+  "sortnum": 50,
+  "pages": [
+    {
+      "type": "patchouli:spotlight",
+      "item": "hmag:diamond_fragment",
+      "text": "dict.nffgirls.desc.item.diamond_fragment"
+    }
+  ]
+}

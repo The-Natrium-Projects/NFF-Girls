@@ -1,0 +1,13 @@
+{
+  "category": "nffgirls:items",
+  "name": "item.hmag.wither_sand",
+  "icon": "hmag:wither_sand",
+  "sortnum": 50,
+  "pages": [
+    {
+      "type": "patchouli:spotlight",
+      "item": "hmag:wither_sand",
+      "text": "dict.nffgirls.desc.item.wither_sand"
+    }
+  ]
+}

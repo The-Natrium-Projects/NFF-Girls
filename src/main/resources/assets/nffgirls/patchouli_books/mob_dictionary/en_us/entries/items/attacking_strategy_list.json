@@ -1,0 +1,13 @@
+{
+  "category": "nffgirls:items",
+  "name": "item.nffgirls.attacking_strategy_list",
+  "icon": "nffgirls:attacking_strategy_list",
+  "sortnum": 20,
+  "pages": [
+    {
+      "type": "patchouli:spotlight",
+      "item": "nffgirls:attacking_strategy_list",
+      "text": "dict.nffgirls.desc.item.attacking_strategy_list"
+    }
+  ]
+}

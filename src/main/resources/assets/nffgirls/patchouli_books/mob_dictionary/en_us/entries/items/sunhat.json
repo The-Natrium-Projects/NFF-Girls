@@ -1,0 +1,13 @@
+{
+  "category": "nffgirls:items",
+  "name": "item.nffgirls.sunhat",
+  "icon": "nffgirls:sunhat",
+  "sortnum": 10,
+  "pages": [
+    {
+      "type": "patchouli:spotlight",
+      "item": "nffgirls:sunhat",
+      "text": "dict.nffgirls.desc.item.sunhat"
+    }
+  ]
+}

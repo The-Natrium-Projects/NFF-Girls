@@ -1,0 +1,13 @@
+{
+  "category": "nffgirls:items",
+  "name": "item.hmag.purification_cloth",
+  "icon": "hmag:purification_cloth",
+  "sortnum": 40,
+  "pages": [
+    {
+      "type": "patchouli:spotlight",
+      "item": "hmag:purification_cloth",
+      "text": "dict.nffgirls.desc.item.purification_cloth"
+    }
+  ]
+}

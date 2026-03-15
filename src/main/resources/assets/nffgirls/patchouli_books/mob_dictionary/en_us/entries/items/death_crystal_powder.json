@@ -1,0 +1,13 @@
+{
+  "category": "nffgirls:items",
+  "name": "item.nffgirls.death_crystal_powder",
+  "icon": "nffgirls:death_crystal_powder",
+  "sortnum": 20,
+  "pages": [
+    {
+      "type": "patchouli:spotlight",
+      "item": "nffgirls:death_crystal_powder",
+      "text": "dict.nffgirls.desc.item.death_crystal_powder"
+    }
+  ]
+}

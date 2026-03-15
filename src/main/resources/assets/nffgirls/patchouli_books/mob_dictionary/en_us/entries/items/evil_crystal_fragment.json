@@ -2,6 +2,7 @@
   "category": "nffgirls:items",
   "name": "item.hmag.evil_crystal_fragment",
   "icon": "hmag:evil_crystal_fragment",
+  "sortnum": 50,
   "pages": [
     {
       "type": "patchouli:spotlight",

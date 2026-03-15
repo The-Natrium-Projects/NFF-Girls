@@ -1,0 +1,13 @@
+{
+  "category": "nffgirls:items",
+  "name": "item.nffgirls.netherite_fork",
+  "icon": "nffgirls:netherite_fork",
+  "sortnum": 10,
+  "pages": [
+    {
+      "type": "patchouli:spotlight",
+      "item": "nffgirls:netherite_fork",
+      "text": "dict.nffgirls.desc.item.netherite_fork"
+    }
+  ]
+}
