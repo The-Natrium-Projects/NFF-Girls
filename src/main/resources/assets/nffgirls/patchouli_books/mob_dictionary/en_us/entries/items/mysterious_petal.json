@@ -1,7 +1,7 @@
 {
-  "category": "nffgirls:mobs",
-  "name": "entity.hmag.alraune",
-  "icon": "nffgirls:textures/book/icon_alraune.png",
+  "category": "nffgirls:items",
+  "name": "item.hmag.mysterious_petal",
+  "icon": "hmag:mysterious_petal",
   "pages": [
     {
       "type": "patchouli:spotlight",
