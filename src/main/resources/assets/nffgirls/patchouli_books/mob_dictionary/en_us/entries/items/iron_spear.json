@@ -1,0 +1,12 @@
+{
+  "category": "nffgirls:items",
+  "name": "item.hmag.iron_spear",
+  "icon": "hmag:iron_spear",
+  "pages": [
+    {
+      "type": "patchouli:spotlight",
+      "item": "hmag:iron_spear",
+      "text": "dict.nffgirls.desc.item.iron_spear"
+    }
+  ]
+}

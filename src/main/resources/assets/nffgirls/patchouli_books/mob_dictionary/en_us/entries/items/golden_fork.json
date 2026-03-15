@@ -1,0 +1,12 @@
+{
+  "category": "nffgirls:items",
+  "name": "item.hmag.golden_fork",
+  "icon": "hmag:golden_fork",
+  "pages": [
+    {
+      "type": "patchouli:spotlight",
+      "item": "hmag:golden_fork",
+      "text": "dict.nffgirls.desc.item.golden_fork"
+    }
+  ]
+}

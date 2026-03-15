@@ -1,0 +1,12 @@
+{
+  "category": "nffgirls:items",
+  "name": "item.hmag.exp_berry",
+  "icon": "hmag:exp_berry",
+  "pages": [
+    {
+      "type": "patchouli:spotlight",
+      "item": "hmag:exp_berry",
+      "text": "dict.nffgirls.desc.item.experience_berry"
+    }
+  ]
+}

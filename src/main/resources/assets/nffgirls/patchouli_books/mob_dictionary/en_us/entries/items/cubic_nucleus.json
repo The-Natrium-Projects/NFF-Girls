@@ -1,0 +1,12 @@
+{
+  "category": "nffgirls:items",
+  "name": "item.hmag.cubic_nucleus",
+  "icon": "hmag:cubic_nucleus",
+  "pages": [
+    {
+      "type": "patchouli:spotlight",
+      "item": "hmag:cubic_nucleus",
+      "text": "dict.nffgirls.desc.item.cubic_nucleus"
+    }
+  ]
+}
