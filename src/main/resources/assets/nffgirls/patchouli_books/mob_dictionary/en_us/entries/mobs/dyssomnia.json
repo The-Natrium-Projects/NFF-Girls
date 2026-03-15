@@ -13,6 +13,10 @@
       "text": "dict.nffgirls.desc.mob.dyssomnia"
     },
     {
+      "type": "patchouli:text",
+      "text": "dict.nffgirls.desc.mob.dyssomnia_1"
+    },
+    {
       "type": "patchouli:spotlight",
       "item": "hmag:dyssomnia_skin",
       "text": "dict.nffgirls.desc.item.dyssomnia_skin"

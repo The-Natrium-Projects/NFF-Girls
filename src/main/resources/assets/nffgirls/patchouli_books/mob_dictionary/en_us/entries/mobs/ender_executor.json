@@ -13,6 +13,10 @@
       "text": "dict.nffgirls.desc.mob.ender_executor"
     },
     {
+      "type": "patchouli:text",
+      "text": "dict.nffgirls.desc.mob.ender_executor_1"
+    },
+    {
       "type": "patchouli:spotlight",
       "item": "hmag:evil_crystal_fragment",
       "text": "dict.nffgirls.desc.item.evil_crystal_fragment"

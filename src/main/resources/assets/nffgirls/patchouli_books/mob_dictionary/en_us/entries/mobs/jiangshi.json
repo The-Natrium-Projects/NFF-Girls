@@ -13,6 +13,10 @@
       "text": "dict.nffgirls.desc.mob.jiangshi"
     },
     {
+      "type": "patchouli:text",
+      "text": "dict.nffgirls.desc.mob.jiangshi_1"
+    },
+    {
       "type": "patchouli:spotlight",
       "item": "hmag:sharp_fang",
       "text": "dict.nffgirls.desc.item.sharp_fang"

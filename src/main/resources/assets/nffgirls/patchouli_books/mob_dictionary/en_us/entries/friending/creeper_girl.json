@@ -11,6 +11,18 @@
     {
       "type": "patchouli:text",
       "text": "dict.nffgirls.desc.friending.creeper_girl"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "dict.nffgirls.desc.friending.creeper_girl_1"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "dict.nffgirls.desc.friending.creeper_girl_2"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "dict.nffgirls.desc.friending.creeper_girl_3"
     }
   ]
 }
