@@ -1,0 +1,11 @@
+{
+  "category": "nffgirls:effects",
+  "name": "effect.nffgirls.necromancer_wither",
+  "icon": "nffgirls:textures/mob_effect/necromancer_wither.png",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "dict.nffgirls.desc.effect.necromancer_wither"
+    }
+  ]
+}
