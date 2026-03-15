@@ -1,0 +1,28 @@
+{
+  "category": "nffgirls:interaction",
+  "name": "dict.nffgirls.desc.interaction.interaction_title",
+  "icon": "nffgirls:commanding_wand",
+  "sortnum": 20,
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "dict.nffgirls.desc.interaction.interaction"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "dict.nffgirls.desc.interaction.interaction_1"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "dict.nffgirls.desc.interaction.interaction_2"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "dict.nffgirls.desc.interaction.interaction_3"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "dict.nffgirls.desc.interaction.interaction_4"
+    }
+  ]
+}
