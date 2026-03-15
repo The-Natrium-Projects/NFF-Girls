@@ -2,6 +2,7 @@
   "category": "nffgirls:items",
   "name": "item.hmag.iron_spear",
   "icon": "hmag:iron_spear",
+  "sortnum": 30,
   "pages": [
     {
       "type": "patchouli:spotlight",

@@ -2,6 +2,7 @@
   "category": "nffgirls:items",
   "name": "item.hmag.ancient_stone",
   "icon": "hmag:ancient_stone",
+  "sortnum": 50,
   "pages": [
     {
       "type": "patchouli:spotlight",

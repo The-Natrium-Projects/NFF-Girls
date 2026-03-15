@@ -1,0 +1,13 @@
+{
+  "category": "nffgirls:items",
+  "name": "item.nffgirls.empty_mob_storage_pod",
+  "icon": "nffgirls:empty_mob_storage_pod",
+  "sortnum": 20,
+  "pages": [
+    {
+      "type": "patchouli:spotlight",
+      "item": "nffgirls:empty_mob_storage_pod",
+      "text": "dict.nffgirls.desc.item.empty_mob_storage_pod"
+    }
+  ]
+}

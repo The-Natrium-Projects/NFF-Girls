@@ -1,0 +1,13 @@
+{
+  "category": "nffgirls:items",
+  "name": "item.hmag.bat_wing",
+  "icon": "hmag:bat_wing",
+  "sortnum": 50,
+  "pages": [
+    {
+      "type": "patchouli:spotlight",
+      "item": "hmag:bat_wing",
+      "text": "dict.nffgirls.desc.item.bat_wing"
+    }
+  ]
+}

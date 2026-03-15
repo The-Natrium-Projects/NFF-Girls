@@ -1,0 +1,13 @@
+{
+  "category": "nffgirls:items",
+  "name": "item.nffgirls.combat_commanding_wand",
+  "icon": "nffgirls:combat_commanding_wand",
+  "sortnum": 10,
+  "pages": [
+    {
+      "type": "patchouli:spotlight",
+      "item": "nffgirls:combat_commanding_wand",
+      "text": "dict.nffgirls.desc.item.combat_commanding_wand"
+    }
+  ]
+}

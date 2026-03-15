@@ -1,0 +1,13 @@
+{
+  "category": "nffgirls:items",
+  "name": "item.nffgirls.evil_gem",
+  "icon": "nffgirls:evil_gem",
+  "sortnum": 20,
+  "pages": [
+    {
+      "type": "patchouli:spotlight",
+      "item": "nffgirls:evil_gem",
+      "text": "dict.nffgirls.desc.item.evil_gem"
+    }
+  ]
+}

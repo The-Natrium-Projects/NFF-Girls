@@ -1,0 +1,13 @@
+{
+  "category": "nffgirls:items",
+  "name": "item.nffgirls.trade_introduction_letter",
+  "icon": "nffgirls:trade_introduction_letter",
+  "sortnum": 20,
+  "pages": [
+    {
+      "type": "patchouli:spotlight",
+      "item": "nffgirls:trade_introduction_letter",
+      "text": "dict.nffgirls.desc.item.trade_introduction_letter"
+    }
+  ]
+}

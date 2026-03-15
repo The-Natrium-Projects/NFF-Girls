@@ -1,0 +1,13 @@
+{
+  "category": "nffgirls:items",
+  "name": "item.nffgirls.soul_cloth",
+  "icon": "nffgirls:soul_cloth",
+  "sortnum": 20,
+  "pages": [
+    {
+      "type": "patchouli:spotlight",
+      "item": "nffgirls:soul_cloth",
+      "text": "dict.nffgirls.desc.item.soul_cloth"
+    }
+  ]
+}

@@ -1,0 +1,13 @@
+{
+  "category": "nffgirls:items",
+  "name": "item.nffgirls.enderberry",
+  "icon": "nffgirls:enderberry",
+  "sortnum": 20,
+  "pages": [
+    {
+      "type": "patchouli:spotlight",
+      "item": "nffgirls:enderberry",
+      "text": "dict.nffgirls.desc.item.enderberry"
+    }
+  ]
+}

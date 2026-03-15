@@ -1,0 +1,13 @@
+{
+  "category": "nffgirls:items",
+  "name": "item.hmag.evil_thorn",
+  "icon": "hmag:evil_thorn",
+  "sortnum": 40,
+  "pages": [
+    {
+      "type": "patchouli:spotlight",
+      "item": "hmag:evil_thorn",
+      "text": "dict.nffgirls.desc.item.evil_thorn"
+    }
+  ]
+}

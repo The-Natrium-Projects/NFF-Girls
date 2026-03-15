@@ -2,6 +2,7 @@
   "category": "nffgirls:items",
   "name": "item.hmag.mysterious_petal",
   "icon": "hmag:mysterious_petal",
+  "sortnum": 50,
   "pages": [
     {
       "type": "patchouli:spotlight",

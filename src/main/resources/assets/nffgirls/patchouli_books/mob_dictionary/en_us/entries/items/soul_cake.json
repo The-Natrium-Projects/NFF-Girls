@@ -1,0 +1,13 @@
+{
+  "category": "nffgirls:items",
+  "name": "item.nffgirls.soul_cake",
+  "icon": "nffgirls:soul_cake",
+  "sortnum": 20,
+  "pages": [
+    {
+      "type": "patchouli:spotlight",
+      "item": "nffgirls:soul_cake",
+      "text": "dict.nffgirls.desc.item.soul_cake"
+    }
+  ]
+}

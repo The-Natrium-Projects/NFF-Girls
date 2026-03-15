@@ -1,0 +1,25 @@
+{
+  "category": "nffgirls:items",
+  "name": "item.hmag.ancient_chestplate",
+  "icon": "hmag:ancient_chestplate",
+  "sortnum": 30,
+  "pages": [
+    {
+      "type": "patchouli:spotlight",
+      "item": "hmag:ancient_helmet",
+      "text": "dict.nffgirls.desc.item.ancient_armor"
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "hmag:ancient_chestplate"
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "hmag:ancient_leggings"
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "hmag:ancient_boots"
+    }
+  ]
+}

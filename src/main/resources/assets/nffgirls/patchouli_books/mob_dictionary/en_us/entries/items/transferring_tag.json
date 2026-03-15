@@ -1,0 +1,13 @@
+{
+  "category": "nffgirls:items",
+  "name": "item.nffgirls.transferring_tag",
+  "icon": "nffgirls:transferring_tag",
+  "sortnum": 20,
+  "pages": [
+    {
+      "type": "patchouli:spotlight",
+      "item": "nffgirls:transferring_tag",
+      "text": "dict.nffgirls.desc.item.transferring_tag"
+    }
+  ]
+}

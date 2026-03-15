@@ -1,0 +1,13 @@
+{
+  "category": "nffgirls:items",
+  "name": "item.hmag.honeyed_apple",
+  "icon": "hmag:honeyed_apple",
+  "sortnum": 40,
+  "pages": [
+    {
+      "type": "patchouli:spotlight",
+      "item": "hmag:honeyed_apple",
+      "text": "dict.nffgirls.desc.item.honeyed_apple"
+    }
+  ]
+}

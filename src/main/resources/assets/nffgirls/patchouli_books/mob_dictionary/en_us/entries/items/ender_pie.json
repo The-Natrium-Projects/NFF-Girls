@@ -1,0 +1,13 @@
+{
+  "category": "nffgirls:items",
+  "name": "item.nffgirls.ender_pie",
+  "icon": "nffgirls:ender_pie",
+  "sortnum": 20,
+  "pages": [
+    {
+      "type": "patchouli:spotlight",
+      "item": "nffgirls:ender_pie",
+      "text": "dict.nffgirls.desc.item.ender_pie"
+    }
+  ]
+}
