@@ -17,7 +17,6 @@ import net.sodiumzh.nff.girls.item.*;
 import net.sodiumzh.nff.services.item.MobCatcherItem;
 import net.sodiumzh.nff.services.item.NFFMobRespawnerItem;
 import net.sodiumzh.nfu.compat.ModDependencyFallbackItem;
-import net.sodiumzh.nfu.item.NFUItem;
 import net.sodiumzh.nfu.util.NFUCompatStatics;
 
 import java.util.function.Supplier;
@@ -132,7 +131,8 @@ public class NFFGirlsItems {
 	public static final RegistryObject<Item> MOB_DICTIONARY =
 			register("mob_dictionary", () -> {
 				if (ModList.get().isLoaded("patchouli")) {
-					return new NFUItem(new Item.Properties().stacksTo(1));
+					return new PatchouliMobDictionaryItem(new Item.Properties().stacksTo(1),
+						new ResourceLocation("nffgirls", "mob_dictionary"));
 				}
 				else if (ModList.get().isLoaded("citadel")) {
 					return new CitadelBasedMobDictionaryItem(new Item.Properties().stacksTo(1),
