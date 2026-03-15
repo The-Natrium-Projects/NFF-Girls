@@ -11,6 +11,14 @@
     {
       "type": "patchouli:text",
       "text": "dict.nffgirls.desc.friending.imp"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "dict.nffgirls.desc.friending.imp_1"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "dict.nffgirls.desc.friending.imp_2"
     }
   ]
 }

@@ -11,6 +11,14 @@
     {
       "type": "patchouli:text",
       "text": "dict.nffgirls.desc.friending.nightwalker"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "dict.nffgirls.desc.friending.nightwalker_1"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "dict.nffgirls.desc.friending.nightwalker_2"
     }
   ]
 }
