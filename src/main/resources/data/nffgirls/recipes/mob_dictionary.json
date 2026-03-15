@@ -1,5 +1,5 @@
 {
-  "type": "patchouli:shapeless_book_recipe",
+  "type": "minecraft:crafting_shapeless",
 
   "ingredients":[
     {
@@ -9,5 +9,8 @@
       "item": "hmag:evil_crystal_fragment"
     }
   ],
-  "book": "nffgirls:mob_dictionary"
+  "result": {
+    "item": "nffgirls:mob_dictionary",
+    "count": 1
+    }
 }
