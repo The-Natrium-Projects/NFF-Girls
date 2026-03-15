@@ -11,6 +11,18 @@
     {
       "type": "patchouli:text",
       "text": "dict.nffgirls.desc.friending.jiangshi"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "dict.nffgirls.desc.friending.jiangshi_1"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "dict.nffgirls.desc.friending.jiangshi_2"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "dict.nffgirls.desc.friending.jiangshi_3"
     }
   ]
 }

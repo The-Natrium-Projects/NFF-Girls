@@ -11,6 +11,10 @@
     {
       "type": "patchouli:text",
       "text": "dict.nffgirls.desc.friending.stray_girl"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "dict.nffgirls.desc.friending.stray_girl_1"
     }
   ]
 }

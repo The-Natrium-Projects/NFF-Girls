@@ -11,6 +11,10 @@
     {
       "type": "patchouli:text",
       "text": "dict.nffgirls.desc.friending.drowned_girl"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "dict.nffgirls.desc.friending.drowned_girl_1"
     }
   ]
 }

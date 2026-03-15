@@ -11,6 +11,14 @@
     {
       "type": "patchouli:text",
       "text": "dict.nffgirls.desc.friending.kobold"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "dict.nffgirls.desc.friending.kobold_1"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "dict.nffgirls.desc.friending.kobold_2"
     }
   ]
 }

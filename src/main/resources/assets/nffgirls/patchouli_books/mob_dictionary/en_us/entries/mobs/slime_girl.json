@@ -13,6 +13,10 @@
       "text": "dict.nffgirls.desc.mob.slime_girl"
     },
     {
+      "type": "patchouli:text",
+      "text": "dict.nffgirls.desc.mob.slime_girl_1"
+    },
+    {
       "type": "patchouli:spotlight",
       "item": "hmag:cubic_nucleus",
       "text": "dict.nffgirls.desc.item.cubic_nucleus"

@@ -11,6 +11,18 @@
     {
       "type": "patchouli:text",
       "text": "dict.nffgirls.desc.friending.melty_monster"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "dict.nffgirls.desc.friending.melty_monster_1"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "dict.nffgirls.desc.friending.melty_monster_2"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "dict.nffgirls.desc.friending.melty_monster_3"
     }
   ]
 }

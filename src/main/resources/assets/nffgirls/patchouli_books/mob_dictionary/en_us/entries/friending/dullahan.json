@@ -11,6 +11,10 @@
     {
       "type": "patchouli:text",
       "text": "dict.nffgirls.desc.friending.dullahan"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "dict.nffgirls.desc.friending.dullahan_1"
     }
   ]
 }

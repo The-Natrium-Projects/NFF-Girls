@@ -11,6 +11,10 @@
     {
       "type": "patchouli:text",
       "text": "dict.nffgirls.desc.friending.redcap"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "dict.nffgirls.desc.friending.redcap_1"
     }
   ]
 }

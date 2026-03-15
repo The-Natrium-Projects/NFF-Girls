@@ -13,6 +13,14 @@
       "text": "dict.nffgirls.desc.mob.monolith"
     },
     {
+      "type": "patchouli:text",
+      "text": "dict.nffgirls.desc.mob.monolith_1"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "dict.nffgirls.desc.mob.monolith_2"
+    },
+    {
       "type": "patchouli:spotlight",
       "item": "hmag:ancient_stone",
       "text": "dict.nffgirls.desc.item.ancient_stone"

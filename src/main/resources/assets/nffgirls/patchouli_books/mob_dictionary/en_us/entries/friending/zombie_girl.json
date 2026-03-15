@@ -11,6 +11,10 @@
     {
       "type": "patchouli:text",
       "text": "dict.nffgirls.desc.friending.zombie_girl"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "dict.nffgirls.desc.friending.zombie_girl_1"
     }
   ]
 }

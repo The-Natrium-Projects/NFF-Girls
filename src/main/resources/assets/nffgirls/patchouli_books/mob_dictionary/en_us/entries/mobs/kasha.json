@@ -13,6 +13,10 @@
       "text": "dict.nffgirls.desc.mob.kasha"
     },
     {
+      "type": "patchouli:text",
+      "text": "dict.nffgirls.desc.mob.kasha_1"
+    },
+    {
       "type": "patchouli:spotlight",
       "item": "hmag:soul_powder",
       "text": "dict.nffgirls.desc.item.soul_powder"
