@@ -1,0 +1,24 @@
+{
+  "category": "nffgirls:interaction",
+  "name": "dict.nffgirls.desc.interaction.favorability_title",
+  "icon": "minecraft:textures/mob_effect/regeneration.png",
+  "sortnum": 30,
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "dict.nffgirls.desc.interaction.favorability"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "dict.nffgirls.desc.interaction.favorability_1"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "dict.nffgirls.desc.interaction.favorability_2"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "dict.nffgirls.desc.interaction.favorability_3"
+    }
+  ]
+}
