@@ -286,6 +286,7 @@
   "dict.nffgirls.legacy.title_interaction": "互动",
   "tooltip.nffgirls.port_to_patchouli": "基于Citadel的指导书已过期，建议使用Patchouli。",
 
+  "dict.nffgirls.name": "NFF: Girls 生物图鉴",
   "dict.nffgirls.title_items": "物品",
   "dict.nffgirls.landing_text": "这本图鉴介绍了NFF: Girls模组中涉及的生物，以及如何与其互动。",
   "dict.nffgirls.title_items.desc": "相关物品的介绍。",
@@ -449,7 +450,6 @@
   "dict.nffgirls.desc.item.magma_cream": "岩浆娘的掉落物。",
   "dict.nffgirls.desc.item.slime_ball": "魔法史莱姆的掉落物。",
   "dict.nffgirls.desc.item.wither_rose": "凋零鬼魂的偶尔掉落物。",
-  "dict.nffgirls.name": "NFF: Girls 生物图鉴"
-
-
+  "dict.nffgirls.desc.item.necromancer_hat": "",
+  "dict.nffgirls.desc.item.necromancer_wand": ""
 }

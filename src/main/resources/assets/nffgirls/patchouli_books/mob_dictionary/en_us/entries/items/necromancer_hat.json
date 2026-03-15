@@ -1,0 +1,13 @@
+{
+  "category": "nffgirls:items",
+  "name": "item.nffgirls.necromancer_hat",
+  "icon": "nffgirls:necromancer_hat",
+  "sortnum": 10,
+  "pages": [
+    {
+      "type": "patchouli:spotlight",
+      "item": "nffgirls:necromancer_hat",
+      "text": "dict.nffgirls.desc.item.necromancer_hat"
+    }
+  ]
+}
