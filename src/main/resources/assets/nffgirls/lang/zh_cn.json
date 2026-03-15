@@ -294,6 +294,8 @@
   "dict.nffgirls.title_friending.desc": "与怪物娘化敌为友的方法。",
   "dict.nffgirls.title_interaction": "互动",
   "dict.nffgirls.title_interaction.desc": "已友好化生物的互动机制。",
+  "dict.nffgirls.title_effects": "状态效果",
+  "dict.nffgirls.title_effects.desc": "NFF: Girls加入的状态效果。",
   "dict.nffgirls.desc.mob.alraune": "花精灵是自然元素的化身，自然生成于主世界Y轴64层及以上的丛林群系中。$(br2)花精灵会根据敌人与自身的距离分别使用两种攻击方式。$(br2)距离近时会使用近战攻击，在游戏难度普通及以上时，攻击命中会施加中毒Ⅱ、虚弱Ⅱ和缓慢Ⅲ的效果。",
   "dict.nffgirls.desc.mob.alraune_1": "距离远时会使用远程攻击，连续发射出有毒的种子，命中会施加中毒Ⅰ、虚弱Ⅰ和缓慢Ⅰ效果。$(br2)花精灵免疫中毒和反胃状态的影响。$(br2)花精灵喜好潮湿，并可以吸收水分滋养自身，处于水中和淋雨时会赋予自身生命恢复Ⅲ状态效果。相对应的，花精灵会受到2倍的火焰伤害。",
   "dict.nffgirls.desc.mob.banshee": "报丧女妖是永远保持双手掩面姿态的奇异妖灵，自然生成于主世界Y轴64层及以上的针叶林和山地群系中。$(br2)报丧女妖会在低空中飞行并对目标进行冲锋攻击。游戏难度普通及以上时，报丧女妖攻击命中会施加虚弱Ⅰ和饥饿Ⅰ效果。$(br2)报丧女妖是亡灵生物的一种，在阳光下会燃烧。$(br2)报丧女妖有 2 种不同的皮肤材质。",
@@ -535,5 +537,9 @@
   "dict.nffgirls.desc.interaction.interaction_1": "面板左侧是怪物娘的物品定制，某些怪物娘可以装备玩家使用的武器、盔甲和工具，且会根据工具的属性与附魔获取增益，而大部分附魔也会正常生效。$(br2)一些物品可以用于治疗怪物娘，主手持相应物品右键即可。可用的物品见相应JEI选项卡。$(br2)某些怪物娘可以装备怪物娘独有的饰品，饰品栏用宝石符号标记，饰品栏仅接受特定种类的物品并随物品种类不同而给予不同效果，大部分饰品效果可叠加。",
   "dict.nffgirls.desc.interaction.interaction_2": "此外，友好化后的怪物娘还可以与玩家进行交易，玩家空手或手持邪恶宝石右键互动即可打开交易面板。邪恶宝石是怪物娘通用的交易货币。交易条目可以在相应JEI选项卡下查到。每个怪物娘将有 10 个交易条目，不同的怪物娘会收购/售卖不同的物品，其中不乏珍稀物品。一部分交易需要怪物娘达到特定的等级解锁。",
   "dict.nffgirls.desc.interaction.interaction_3": "与怪物娘交易会积累交易点。玩家可以消耗128交易点获取一个“交易介绍信”，用于交给另一个怪物娘，以刷新其所有的交易条目。$(br2)当一个交易条目缺货后，补货需要花一定的时间。高等级的交易需要更长时间补货。$(br2)此外，随着好感度升高，交易会随之打折。",
-  "dict.nffgirls.desc.interaction.interaction_title": "交互"
+  "dict.nffgirls.desc.interaction.interaction_title": "交互",
+
+  "dict.nffgirls.desc.effect.undead_affinity": "亡灵生物会对带有此状态效果的玩家或生物中立。",
+  "dict.nffgirls.desc.effect.ender_protection": "使玩家受伤害时传送。如果带有此效果时掉入虚空，玩家将被传送到最近的地面上，同时效果会被立即移除。如果周围没有地面，玩家将被提升到Y=60并获得10秒缓降效果。",
+  "dict.nffgirls.desc.effect.necromancer_wither": "死灵巫师帽子造成的负面效果，会持续受到伤害且无法通过附魔减免。"
 }
