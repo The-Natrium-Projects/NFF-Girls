@@ -1,7 +1,7 @@
 {
   "name": "dict.nffgirls.title_mobs",
   "description": "dict.nffgirls.title_mobs.desc",
-  "icon": "nffgirls:textures/book/icon_zombie_girl.png",
+  "icon": "nffgirls:textures/book/icon_zombie_girl_small.png",
   "sortnum": 11,
   "secret": false
 }
