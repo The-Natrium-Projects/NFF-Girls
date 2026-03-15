@@ -1,0 +1,12 @@
+{
+  "category": "nffgirls:items",
+  "name": "item.hmag.ancient_stone",
+  "icon": "hmag:ancient_stone",
+  "pages": [
+    {
+      "type": "patchouli:spotlight",
+      "item": "hmag:ancient_stone",
+      "text": "dict.nffgirls.desc.item.ancient_stone"
+    }
+  ]
+}

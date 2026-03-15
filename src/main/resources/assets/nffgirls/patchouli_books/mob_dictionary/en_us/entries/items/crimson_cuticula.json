@@ -1,0 +1,12 @@
+{
+  "category": "nffgirls:items",
+  "name": "item.hmag.crimson_cuticula",
+  "icon": "hmag:crimson_cuticula",
+  "pages": [
+    {
+      "type": "patchouli:spotlight",
+      "item": "hmag:crimson_cuticula",
+      "text": "dict.nffgirls.desc.item.crimson_cuticula"
+    }
+  ]
+}

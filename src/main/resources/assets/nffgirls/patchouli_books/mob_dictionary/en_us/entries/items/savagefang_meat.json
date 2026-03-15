@@ -1,0 +1,12 @@
+{
+  "category": "nffgirls:items",
+  "name": "item.hmag.savagefang_meat",
+  "icon": "hmag:savagefang_meat",
+  "pages": [
+    {
+      "type": "patchouli:spotlight",
+      "item": "hmag:savagefang_meat",
+      "text": "dict.nffgirls.desc.item.savagefang_meat"
+    }
+  ]
+}

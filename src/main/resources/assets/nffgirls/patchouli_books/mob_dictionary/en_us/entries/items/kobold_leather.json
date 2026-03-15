@@ -1,0 +1,12 @@
+{
+  "category": "nffgirls:items",
+  "name": "item.hmag.kobold_leather",
+  "icon": "hmag:kobold_leather",
+  "pages": [
+    {
+      "type": "patchouli:spotlight",
+      "item": "hmag:kobold_leather",
+      "text": "dict.nffgirls.desc.item.kobold_leather"
+    }
+  ]
+}

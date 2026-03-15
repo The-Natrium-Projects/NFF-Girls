@@ -1,0 +1,12 @@
+{
+  "category": "nffgirls:items",
+  "name": "item.hmag.lich_cloth",
+  "icon": "hmag:lich_cloth",
+  "pages": [
+    {
+      "type": "patchouli:spotlight",
+      "item": "hmag:lich_cloth",
+      "text": "dict.nffgirls.desc.item.lich_cloth"
+    }
+  ]
+}
