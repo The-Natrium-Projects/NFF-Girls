@@ -1,0 +1,12 @@
+{
+  "category": "nffgirls:items",
+  "name": "item.hmag.necrofiber",
+  "icon": "hmag:necrofiber",
+  "pages": [
+    {
+      "type": "patchouli:spotlight",
+      "item": "hmag:necrofiber",
+      "text": "dict.nffgirls.desc.item.necrofiber"
+    }
+  ]
+}

@@ -1,0 +1,12 @@
+{
+  "category": "nffgirls:items",
+  "name": "item.hmag.ogre_horn",
+  "icon": "hmag:ogre_horn",
+  "pages": [
+    {
+      "type": "patchouli:spotlight",
+      "item": "hmag:ogre_horn",
+      "text": "dict.nffgirls.desc.item.ogre_horn"
+    }
+  ]
+}

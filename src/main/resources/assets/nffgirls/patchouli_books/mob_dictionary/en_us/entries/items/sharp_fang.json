@@ -1,0 +1,12 @@
+{
+  "category": "nffgirls:items",
+  "name": "item.hmag.sharp_fang",
+  "icon": "hmag:sharp_fang",
+  "pages": [
+    {
+      "type": "patchouli:spotlight",
+      "item": "hmag:sharp_fang",
+      "text": "dict.nffgirls.desc.item.sharp_fang"
+    }
+  ]
+}
