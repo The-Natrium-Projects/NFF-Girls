@@ -11,6 +11,14 @@
     {
       "type": "patchouli:text",
       "text": "dict.nffgirls.desc.friending.banshee"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "dict.nffgirls.desc.friending.banshee_1"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "dict.nffgirls.desc.friending.banshee_2"
     }
   ]
 }
