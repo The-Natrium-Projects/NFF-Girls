@@ -1,0 +1,11 @@
+{
+  "category": "nffgirls:effects",
+  "name": "effect.nffgirls.undead_affinity",
+  "icon": "nffgirls:textures/mob_effect/undead_affinity.png",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "dict.nffgirls.desc.effect.undead_affinity"
+    }
+  ]
+}

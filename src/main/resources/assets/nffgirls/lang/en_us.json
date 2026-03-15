@@ -271,6 +271,7 @@
   "tooltip.nffgirls.attacking_strategy.typename_separator": ", ",
   "desc.nffgirls.item.commanding_wand": "Right click your mob to switch the AI\nShift+Right click an NFF mob to open the GUI\nRight click a Bell to gather NFF mobs within 16 blocks\nRight click a Soul Powder Block to find current locations of the mobs",
   "desc.nffgirls.item.combat_commanding_wand": "Right click an NFF mob to select, and then right click an enemy to make your mob attack it\nShift+Right click your mob to make it stop attacking\nShift+Right click an enemy to make all your mobs around attack it together",
+
   "dict.nffgirls.legacy.title": "HMaG - Mob Dictionary",
   "dict.nffgirls.legacy.button_friendable": "A Special Encounter?",
   "dict.nffgirls.legacy.button_interaction": "Interaction",
@@ -283,6 +284,7 @@
   "dict.nffgirls.legacy.title_xp": "Experience",
   "dict.nffgirls.legacy.title_interaction": "Interaction",
   "tooltip.nffgirls.port_to_patchouli": "Citadel book is deprecated. Use Patchouli as dependency instead.",
+
   "dict.nffgirls.name": "Mob Dictionary - By NFF: Girls",
   "dict.nffgirls.landing_text": "This guidebook introduces mobs involved in NFF: Girls, and how to interact with them.",
   "dict.nffgirls.title_items": "Items",
@@ -293,6 +295,8 @@
   "dict.nffgirls.title_friending.desc": "Methods to get friendly with mobs.",
   "dict.nffgirls.title_interaction": "Interaction",
   "dict.nffgirls.title_interaction.desc": "Interaction mechanics for tamed mobs.",
+  "dict.nffgirls.title_effects": "Effects",
+  "dict.nffgirls.title_effects.desc": "Effects added in NFF: Girls",
   "dict.nffgirls.desc.mob.alraune": "The Alraune is a spirit of nature and plants, found in the Jungle biomes above Y=64.$(br2)They can perform 2 types of attack depending on the distance to their enemies. When the enemy is close, they perform melee attack, giving Poison II, Weakness III and Slowness III. If the enemy is far away, they can shoot poisonous seeds and give Poison I, Weakness I and Slowness I. They are immune to Poison and Nausea effects.",
   "dict.nffgirls.desc.mob.alraune_1": "They love moisture. When they are in water or rain, they will gain Regeneration III. Oppositely, they are weak to fire damage.",
   "dict.nffgirls.desc.mob.banshee": "The Banshee is a peculiar spirit which keeps a pose of buried face, found in the Taiga and Mountain biomes above Y=64.$(br2)They float in the air and attack by rushing to their prey. The attack gives Weakness and Hunger I.$(br2)They are an undead mob, and burn under the sun. They have 2 different textures.",
@@ -534,5 +538,9 @@
   "dict.nffgirls.desc.interaction.interaction_2": "Also, you can customize the mob's inventory. Some mobs can equip weapons and/or armors to boost the attributes, and most enchantments can also take effects.$(br2)Most mobs can equip \"Baubles\" in the slots with the gem icon. These slots accept only specific Bauble items and provide effects depending on item types. Most Bauble effects are repeatable.",
   "dict.nffgirls.desc.interaction.interaction_3": "Right click with bare hand or the Evil Gem to trade with the mobs. The Evil Gem is the currency in the trade with monster girls. Trade entries are shown in the corresponding JEI tab.$(br2)Each mob has 10 trade entries. Different mobs have different trade entries, many in which provide rare items. Some trade entries are unlocked only when the mob reaches a specific XP level. ",
   "dict.nffgirls.desc.interaction.interaction_4": "When a trade entry is out-of-stock, it will take some time to restock. Entries of higher level will take more time to restock.$(br2)You can get \"Trade Points\" when trading with a monster girl, and consume 128 Trade Points for a \"Trade Introduction Letter\". The letter can be given to another monster girl to refresh its trade entries. Also, you'll get discount depending on your favorability with the mob.",
-  "dict.nffgirls.desc.interaction.interaction_title": "Interaction"
+  "dict.nffgirls.desc.interaction.interaction_title": "Interaction",
+
+  "dict.nffgirls.desc.effect.undead_affinity": "Undead mobs will be neutral to players or mobs with this effect.",
+  "dict.nffgirls.desc.effect.ender_protection": "Making player teleport on taking damage. If player drops into the Void with this effect, this effect will pull the player to the closest ground, and be immediately removed. If there is no ground around, it will pull the player to Y=60 and give Slow Falling for 10s.",
+  "dict.nffgirls.desc.effect.necromancer_wither": "Debuff caused by Necromancer's Hat. This effect gradually causes damage which cannot be reduced by enchantments."
 } 

@@ -1,0 +1,11 @@
+{
+  "category": "nffgirls:effects",
+  "name": "effect.nffgirls.ender_protection",
+  "icon": "nffgirls:textures/mob_effect/ender_protection.png",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "dict.nffgirls.desc.effect.ender_protection"
+    }
+  ]
+}
