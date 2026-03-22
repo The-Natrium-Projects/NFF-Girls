@@ -1,7 +1,5 @@
-HMaG added a lot of creatures in the Overworld, Nether and End. This dictionary is
-a reference for helping you understand about the mobs.
 <NEWLINE>
-Or...?
+Citadel book is outdated. Use Patchouli instead.
 <NEWLINE>
 <NEWLINE>
 <NEWLINE>
