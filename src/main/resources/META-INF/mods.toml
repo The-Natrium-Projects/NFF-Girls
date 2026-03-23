@@ -48,6 +48,13 @@ description='''Enjoy your Minecraft days with monster girls!'''
     side="BOTH"
 
 [[dependencies.${mod_id}]]
+    modId="jei"
+    mandatory=false
+    versionRange="[15,)"
+    ordering="NONE"
+    side="BOTH"
+
+[[dependencies.${mod_id}]]
     modId="patchouli"
     mandatory=false
     versionRange="[1.20.1-80-FORGE,)"

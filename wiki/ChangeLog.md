@@ -1,5 +1,11 @@
 # Change Log
 
+### 0.x.32
+
+Added Patchouli Book in place of Citadel.
+
+Tweaked some healing amount data.
+
 ### 0.2.31.3
 
 Fixed crash on mob friended in some cases.
