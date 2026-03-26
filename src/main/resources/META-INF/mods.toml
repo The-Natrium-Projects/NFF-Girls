@@ -57,6 +57,6 @@ description='''Enjoy your Minecraft days with monster girls!'''
 [[dependencies.${mod_id}]]
     modId="patchouli"
     mandatory=false
-    versionRange="{patchouli_version_range}"
+    versionRange="${patchouli_version_range}"
     ordering="NONE"
     side="BOTH"
