@@ -34,13 +34,13 @@ public class ItemContainerItem extends NFUItem {
     @Override
     public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand pUsedHand)
     {
-        if (!player.level().isClientSide)
+        if (!player.level.isClientSide)
         {
             player.getItemInHand(pUsedHand).shrink(1);
             for (ItemStack content: this.contents) {
                 NFUItemStatics.giveOrDrop(player, content.copy());
             }
         }
-        return InteractionResultHolder.sidedSuccess(player.getItemInHand(pUsedHand), player.level().isClientSide);
+        return InteractionResultHolder.sidedSuccess(player.getItemInHand(pUsedHand), player.level.isClientSide);
     }
 }
