@@ -212,8 +212,8 @@ dependencies {
 	implementation fg.deobf("curse.maven:byg-247560:5116293")
 	implementation fg.deobf("curse.maven:assortedtools-409802:4651299")
 	//implementation fg.deobf("curse.maven:gog4-228948:4683680")
-    compileOnly fg.deobf("vazkii.patchouli:Patchouli:${minecraft_version}-${patchouli_version}-FORGE:api")
-    runtimeOnly fg.deobf("vazkii.patchouli:Patchouli:${minecraft_version}-${patchouli_version}-FORGE")
+    compileOnly fg.deobf("vazkii.patchouli:Patchouli:${minecraft_version}-${patchouli_version}:api")
+    runtimeOnly fg.deobf("vazkii.patchouli:Patchouli:${minecraft_version}-${patchouli_version}")
     //implementation fg.deobf("curse.maven:the-bumblezone-forge-362479:6960926")
     // For more info:
     // http://www.gradle.org/docs/current/userguide/artifact_dependencies_tutorial.html
