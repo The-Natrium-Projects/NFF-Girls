@@ -198,6 +198,13 @@ dependencies {
 	//implementation fg.deobf("curse.maven:tf-227639:4337390")
 	implementation fg.deobf("curse.maven:testdummy-225738:3820503")
     implementation fg.deobf("curse.maven:citadel-331936:3783096")
+
+    compileOnly fg.deobf("vazkii.patchouli:Patchouli:${minecraft_version}-${patchouli_version}:api")
+    runtimeOnly fg.deobf("vazkii.patchouli:Patchouli:${minecraft_version}-${patchouli_version}")
+    //implementation fg.deobf("curse.maven:the-bumblezone-forge-362479:6960926")
+    // For more info:
+    // http://www.gradle.org/docs/current/userguide/artifact_dependencies_tutorial.html
+    // http://www.gradle.org/docs/current/userguide/dependency_management.html
 }
 
 // This block of code expands all declared replace properties in the specified resource targets.
@@ -211,7 +218,8 @@ tasks.named('processResources', ProcessResources).configure {
             loader_version_range: loader_version_range,
             mod_id: mod_id, mod_name: mod_name, mod_license: mod_license, mod_version: mod_version,
             mod_authors: mod_authors, mod_description: mod_description, services_version_range: services_version_range,
-            hmag_version_range: hmag_version_range, nfu_version_range: nfu_version_range
+            hmag_version_range: hmag_version_range, nfu_version_range: nfu_version_range,
+            jei_version_range: jei_version_range, patchouli_version_range: patchouli_version_range
     ]
     inputs.properties replaceProperties
 
