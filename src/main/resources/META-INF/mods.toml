@@ -41,8 +41,15 @@ description='''Enjoy your Minecraft days with monster girls!'''
     side="BOTH"
 
 [[dependencies.nffgirls]]
-    modId="citadel"
+    modId="jei"
     mandatory=false
-    versionRange="[2.1.4,)"
+    versionRange="${jei_version_range}"
+    ordering="NONE"
+    side="BOTH"
+
+[[dependencies.${mod_id}]]
+    modId="patchouli"
+    mandatory=false
+    versionRange="${patchouli_version_range}"
     ordering="NONE"
     side="BOTH"
