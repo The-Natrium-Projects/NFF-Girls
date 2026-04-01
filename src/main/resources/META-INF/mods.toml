@@ -46,7 +46,7 @@ description='''Enjoy your Minecraft days with monster girls!'''
     versionRange="${nfu_version_range}"
     side="BOTH"
 
-[[dependencies.nffgirls]]
+[[dependencies.${mod_id}]]
     modId="jei"
     mandatory=false
     versionRange="${jei_version_range}"
