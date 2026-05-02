@@ -53,6 +53,7 @@ public class NFFGirls
         NFFGirlsBaubles.BAUBLE_EQUIPPING_CONDITIONS.merge();
         NFFGirlsEntityAttributeProviders.ATTRIBUTE_PROVIDERS.merge();
         NFFGirlsBaubleBuilder.EQUIPPING_CONDITION_PRESETS.merge();
+        NFFGirlsAngerReasons.COLLECTION.merge();
 
 
         // Register ourselves for server and other game events we are interested in
