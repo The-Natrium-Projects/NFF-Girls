@@ -81,11 +81,9 @@ import net.sodiumzh.nfu.mixin.event.entity.*;
 import net.sodiumzh.nfu.util.*;
 import org.apache.commons.lang3.mutable.MutableObject;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
-import java.util.UUID;
+import java.util.*;
 import java.util.function.Predicate;
+import java.util.stream.Collectors;
 
 @SuppressWarnings("removal")
 @Mod.EventBusSubscriber(modid = NFFGirls.MOD_ID, bus = Mod.EventBusSubscriber.Bus.FORGE)
@@ -543,8 +541,20 @@ public class NFFGirlsEntityEventListeners
 		// Necromancer armor
 		if (!event.getEntity().level.isClientSide)
 		{
-			NecromancerArmorItem.necromancerArmorUpdate(event.getEntityLiving());
-			
+			NecromancerArmorItem.necromancerArmorUpdate(event.getEntity());
+
+            // Handle OTHER_ANGRY angry rule
+            if (event.getEntity() instanceof Player player) {
+                // Update from player, as searching mobs is somewhat costly
+                List<Mob> undeadMobs = player.level()
+                        .getEntitiesOfClass(Mob.class, player.getBoundingBox().inflate(32, 32, 32), mob -> mob.getMobType().equals(MobType.UNDEAD));
+                Set<EntityType<?>> hostileTypes = undeadMobs.stream()
+                        .filter(m -> Objects.equals(m.getTarget(), player))
+                        .map(Entity::getType)
+                        .collect(Collectors.toSet());
+                undeadMobs.stream().filter(mob -> hostileTypes.contains(mob.getType()))
+                        .filter(m -> m.hasLineOfSight(player))
+                        .forEach();
 			if (event.getEntity() instanceof Mob mob)
 			{
 				// Undead mob forgiving player
