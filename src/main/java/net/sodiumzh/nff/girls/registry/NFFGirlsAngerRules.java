@@ -6,7 +6,6 @@ import net.sodiumzh.nfu.entity.anger.MobAngerRules;
 import net.sodiumzh.nfu.registry.NFURegistries;
 import net.sodiumzh.nfu.registry.NFURegistry;
 import net.sodiumzh.nfu.registry.NFURegistryEntryCollection;
-import org.checkerframework.checker.units.qual.A;
 
 public class NFFGirlsAngerRules {
 
@@ -50,5 +49,8 @@ public class NFFGirlsAngerRules {
 	public static final NFURegistry.Accessor<MobAngerRules> UNDEAD_AFFINITY
 		= ANGER_RULES.register("undead_affinity",
 		() -> new MobAngerRules()
-			.forReason(Mob))
+			.forReason(MobAngerReason.ATTACKED.get())
+            .forReason(MobAngerReason.HIT.get())
+            .forReason(MobAngerReason.TARGETING.get())
+            .forReason(NFFGirlsAngerReasons.OTHER_ANGRY.get()));
 }
