@@ -1,5 +1,11 @@
 # Change Log
 
+### 0.1.32.1/0.0.32.1
+
+Fixed baubles not shown in the creative tab.
+
+Fixed creative tab missing translation.
+
 ### 0.x.32
 
 Added Patchouli Book in place of Citadel.
