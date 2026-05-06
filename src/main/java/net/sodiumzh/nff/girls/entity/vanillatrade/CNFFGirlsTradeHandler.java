@@ -33,6 +33,7 @@ import net.sodiumzh.nfu.entity.vanillatrade.IVanillaTradeListing;
 import net.sodiumzh.nfu.entity.vanillatrade.ScaledVanillaTradeListing;
 import net.sodiumzh.nfu.entity.vanillatrade.VanillaMerchant;
 import net.sodiumzh.nfu.util.NFUContainerStatics;
+import net.sodiumzh.nfu.util.NFUDebugStatics;
 
 import javax.annotation.Nullable;
 import java.util.*;
@@ -229,15 +230,16 @@ public interface CNFFGirlsTradeHandler extends CVanillaMerchant
 		@Override
 		public void onTrade(MerchantOffer offer) {
 			var meta = this.getMeta(offer);
-			if (meta != null)
-				this.getBM().getFavorabilityHandler().addFavorability(meta.requiredMerchantLevel * 0.1f);
-			if (offer.getResult().is(NFFGirlsItems.TRADE_INTRODUCTION_LETTER.get()))
-				tradePoints = 0;
-			else 
-			{
-				tradePoints += meta.requiredMerchantLevel;
-				this.getBM().getLevelHandler().addExp((1 + meta.requiredMerchantLevel) * meta.requiredMerchantLevel / 2 );
-			}
+			if (meta != null) {
+                this.getBM().getFavorabilityHandler().addFavorability(meta.requiredMerchantLevel * 0.1f);
+                if (offer.getResult().is(NFFGirlsItems.TRADE_INTRODUCTION_LETTER.get()))
+                    tradePoints -= this.getPointsPerIntroduction();
+                else
+                {
+                    tradePoints += meta.requiredMerchantLevel;
+                    this.getBM().getLevelHandler().addExp((1 + meta.requiredMerchantLevel) * meta.requiredMerchantLevel / 2 );
+                }
+            }
 		}
 
 		
@@ -339,9 +341,34 @@ public interface CNFFGirlsTradeHandler extends CVanillaMerchant
 			NFUMiscStatics.printToScreen(String.format("Restock time left: %d s", restockTimer / 20) , getBM().getOwner());*/
 			
 			// Update introduction letter entry
-			if (this.tradePoints < this.getPointsPerIntroduction())
-				this.getOffers().get(this.getOffers().size() - 1).setToOutOfStock();
-			else this.getOffers().get(this.getOffers().size() - 1).resetUses();
+            if (this.getOffers().get(this.getOffers().size() - 1).getResult().is(NFFGirlsItems.TRADE_INTRODUCTION_LETTER.get())) {
+                // Regenerate this entry every second, as the mob's name may update
+                if (this.getMob().tickCount % 20 == 10)
+                   this.getOffers().set(this.getOffers().size() - 1, INTRODUCTION.getOffer(getMob(), RND));
+                // Update letter entry availability
+                if (this.tradePoints < this.getPointsPerIntroduction())
+                    this.getOffers().get(this.getOffers().size() - 1).setToOutOfStock();
+                else this.getOffers().get(this.getOffers().size() - 1).resetUses();
+            }
+            // This branch should not happen, going into this branch means the introduction
+            // letter entry is not correctly added. Try fixing
+            else {
+                NFUDebugStatics.errorOnce("NFFGirls: Mob " + this.getMob().getName().getString()
+                + " trade offers missing introduction letter. Trying to regenerate.");
+                // Collect and remove letter entries that are not at the end
+                List<Integer> wrongLetterEntries = new ArrayList<>();
+                for (int i = 0; i < this.getOffers().size(); ++i) {
+                    if (getOffers().get(i).getResult().is(NFFGirlsItems.TRADE_INTRODUCTION_LETTER.get()))
+                        wrongLetterEntries.add(i);
+                }
+                for (int i = wrongLetterEntries.size() - 1; i >= 0; --i) {
+                    this.getOffers().remove(wrongLetterEntries.get(i).intValue());
+                    this.getMeta().remove(wrongLetterEntries.get(i).intValue());
+                }
+                // Try regenerating
+                this.getOffersRaw().add(INTRODUCTION.getOffer(getMob(), RND));
+                this.getMeta().add(new NFFGirlsTradeOfferMetaData(1, 0, false));
+            }
 
 			// Update discount
 			for (var offer: this.getOffers())
