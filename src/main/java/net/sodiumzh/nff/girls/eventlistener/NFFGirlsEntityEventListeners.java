@@ -79,6 +79,8 @@ import net.sodiumzh.nff.services.item.NFFMobRespawnerItem;
 import net.sodiumzh.nff.services.registry.NFFCapRegistry;
 import net.sodiumzh.nfu.block.ColoredBlocks;
 import net.sodiumzh.nfu.entity.RepeatableAttributeModifier;
+import net.sodiumzh.nfu.entity.anger.MobAngerHandlerComponent;
+import net.sodiumzh.nfu.entity.component.EntityComponentAPI;
 import net.sodiumzh.nfu.entity.taming.ITamingProcessWithProgress;
 import net.sodiumzh.nfu.mixin.event.entity.*;
 import net.sodiumzh.nfu.util.*;
@@ -119,17 +121,13 @@ public class NFFGirlsEntityEventListeners
 	        		&& !(event.getEntity() instanceof INFFTamed) 
 	        		&& !event.getEntity().getType().is(NFFGirlsTags.IGNORES_UNDEAD_AFFINITY))
 	        {
-	        	// Handle CUndeadAffinityHandler //
-        		mob.getCapability(NFFGirlsCapabilities.CAP_UNDEAD_AFFINITY_HANDLER).ifPresent((l) ->
-        		{
-        			if (target.hasEffect(NFFGirlsEffects.UNDEAD_AFFINITY.get()) && lastHurtBy != target && !l.getHatred().contains(target.getUUID()))
-        			{
-        				event.setCanceled(true);
-        				return;
-        			}
-        			// Hatred will be added in priority-lowest event
-        		});
-        		// Handle CUndeadAffinityHandler end //
+	        	// Handle undead affinity //
+                EntityComponentAPI.getComponentManager(mob).getSubComponent("/undead_affinity_handler", NFFGirlsEntityComponents.UNDEAD_AFFINITY_HANDLER.get())
+                    .ifPresent(c -> {
+                        if (mob.getTarget().hasEffect(NFFGirlsEffects.UNDEAD_AFFINITY.get()) && !c.isAngryAt(mob.getTarget()))
+                            event.setCanceled(true);
+                    });
+        		// Handle undead affinity end //
 		    } 
 	        // Handle undead mobs end //
 
@@ -553,17 +551,21 @@ public class NFFGirlsEntityEventListeners
 			NecromancerArmorItem.necromancerArmorUpdate(event.getEntity());
 
             // Handle OTHER_ANGRY angry rule
-            if (event.getEntity() instanceof Player player) {
-                // Update from player, as searching mobs is somewhat costly
+            // Update from player each second, as searching mobs is somewhat costly
+            if (event.getEntity() instanceof Player player && player.tickCount % 20 == 19) {
                 List<Mob> undeadMobs = player.level()
-                        .getEntitiesOfClass(Mob.class, player.getBoundingBox().inflate(32, 32, 32), mob -> mob.getMobType().equals(MobType.UNDEAD));
-                Set<EntityType<?>> hostileTypes = undeadMobs.stream()
-                        .filter(m -> Objects.equals(m.getTarget(), player))
-                        .map(Entity::getType)
-                        .collect(Collectors.toSet());
-                undeadMobs.stream().filter(mob -> hostileTypes.contains(mob.getType()))
-                        .filter(m -> m.hasLineOfSight(player))
-                        .forEach();
+                    .getEntitiesOfClass(Mob.class, player.getBoundingBox().inflate(32, 32, 32), mob -> mob.isAlive() && mob.getMobType().equals(MobType.UNDEAD));
+                List<Mob> hostiles = undeadMobs.stream()
+                    .filter(m -> Objects.equals(m.getTarget(), player))
+                    .toList();
+                Set<EntityType<?>> hostileTypes = hostiles.stream().map(Entity::getType).collect(Collectors.toSet());
+                undeadMobs.stream().filter(m -> hostileTypes.contains(m.getType())) // There is at least one hostile mob of the same type
+                    .filter(m -> hostiles.stream().anyMatch(hostile ->
+                        hostile.getType().equals(m.getType()) && m.hasLineOfSight(hostile) && m.hasLineOfSight(player))) // Can see a hostile mob of the same type, and can see the player
+                    .forEach(m -> {
+                        MobAngerHandlerComponent.setAngryAtForMob(m, player, NFFGirlsAngerReasons.OTHER_ANGRY.get());
+                    });
+            }
 
 			if (event.getEntity() instanceof Mob mob)
 			{
