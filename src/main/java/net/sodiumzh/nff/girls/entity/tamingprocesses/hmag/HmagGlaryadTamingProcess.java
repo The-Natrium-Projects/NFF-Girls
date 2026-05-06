@@ -28,11 +28,6 @@ public class HmagGlaryadTamingProcess extends TamingProcessItemGivingProgress
 	}
 
 	@Override
-	public MobAngerRules getAngerRules() {
-		return NFFGirlsAngerRules.DEFAULT.get();
-	}
-
-	@Override
 	public void tamableInit(CNFFTamable cnffTamable) {
 
 	}

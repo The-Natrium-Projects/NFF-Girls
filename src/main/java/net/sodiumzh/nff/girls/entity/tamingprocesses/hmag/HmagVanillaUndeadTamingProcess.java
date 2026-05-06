@@ -35,9 +35,4 @@ public class HmagVanillaUndeadTamingProcess extends TamingProcessItemGivingProgr
 			interrupt(player, mob, false);		
 	}
 
-	@Override
-	public MobAngerRules getAngerRules() {
-		return NFFGirlsAngerRules.ATTACKER_AND_MINOR_ATTACKING.get();
-	}
-
 }

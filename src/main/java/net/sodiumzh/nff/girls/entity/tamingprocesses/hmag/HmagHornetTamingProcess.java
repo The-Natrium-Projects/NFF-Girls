@@ -80,11 +80,6 @@ public class HmagHornetTamingProcess extends TamingProcessItemGivingProgress
 	}
 
 	@Override
-	public MobAngerRules getAngerRules() {
-		return NFFGirlsAngerRules.ATTACKER_AND_MINOR_ATTACKING.get();
-	}
-
-	@Override
 	public void tamableInit(CNFFTamable cnffTamable) {
 
 	}

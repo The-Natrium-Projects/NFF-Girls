@@ -13,8 +13,4 @@ public class HmagGhastlySeekerTamingProcess extends HmagVanillaUndeadTamingProce
 		return mob.level.dimension().equals(Level.OVERWORLD) && mob.level.canSeeSky(mob.blockPosition());
 	}
 
-	@Override
-	public MobAngerRules getAngerRules() {
-		return NFFGirlsAngerRules.DEFAULT.get();
-	}
 }

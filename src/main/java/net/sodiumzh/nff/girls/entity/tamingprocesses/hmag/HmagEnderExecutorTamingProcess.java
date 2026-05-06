@@ -78,17 +78,6 @@ public class HmagEnderExecutorTamingProcess extends TamingProcessItemGivingProgr
 	}
 
 	@Override
-	public MobAngerRules getAngerRules() {
-		return NFFGirlsAngerRules.DEFAULT.get();
-	}
-
-	@NotNull
-	@Override
-	public MobAngerRules getInterruptingAngerRules() {
-		return NFFGirlsAngerRules.DEFAULT.get();
-	}
-
-	@Override
 	public void onAttackProcessingPlayer(Mob mob, Player player, double damageGiven)
 	{
 		TIMER_KEY_NO_ATTACK_EXPIRING.setTimer(mob, NO_ATTACK_EXPIRE_TIME);

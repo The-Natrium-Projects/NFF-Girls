@@ -184,11 +184,6 @@ public class HmagCursedDollTamingProcess extends NFFTamingProcess
 	}
 
 	@Override
-	public MobAngerRules getAngerRules() {
-		return MobAngerRules.ATTACKER_DAMAGED.get();
-	}
-
-	@Override
 	public void onAttackProcessingPlayer(Mob mob, Player player, double damageGiven)
 	{
 		if (woolCount(mob, player) > 0 && damageGiven > CNFFTamable.get(mob).getDamageThreshold())
