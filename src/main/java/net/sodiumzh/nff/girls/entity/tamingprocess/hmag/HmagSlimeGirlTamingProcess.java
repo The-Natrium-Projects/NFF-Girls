@@ -42,11 +42,7 @@ public class HmagSlimeGirlTamingProcess extends TamingProcessItemGivingProgress
 		else res = (0.5d - colorDist) / 2d;	// Far : -0.25 ~ 0
 		return res;
 	}
-	
-	@Override
-	public MobAngerRules getAngerRules() {
-		return NFFGirlsAngerRules.DEFAULT.get();
-	}
+
 	@Override
 	public boolean additionalConditions(Player player, Mob mob) {
 		return true;

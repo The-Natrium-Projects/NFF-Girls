@@ -28,9 +28,4 @@ public class HmagKoboldTamingProcess extends NFFGirlsItemDroppingTamingProcess
 		return 5 * 20;
 	}
 
-	@Override
-	public MobAngerRules getAngerRules() {
-		return NFFGirlsAngerRules.DEFAULT.get();
-	}
-
 }

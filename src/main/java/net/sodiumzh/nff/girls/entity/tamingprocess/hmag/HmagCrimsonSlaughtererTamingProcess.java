@@ -36,11 +36,6 @@ public class HmagCrimsonSlaughtererTamingProcess extends TamingProcessItemGiving
 	}
 
 	@Override
-	public MobAngerRules getAngerRules() {
-		return NFFGirlsAngerRules.DEFAULT.get();
-	}
-
-	@Override
 	public void serverTick(Mob mob)
 	{
 		super.serverTick(mob);

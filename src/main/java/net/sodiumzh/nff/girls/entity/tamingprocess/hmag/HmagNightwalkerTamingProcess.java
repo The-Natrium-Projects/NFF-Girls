@@ -31,11 +31,6 @@ public class HmagNightwalkerTamingProcess extends TamingProcessItemGivingProgres
 	}
 
 	@Override
-	public MobAngerRules getAngerRules() {
-		return NFFGirlsAngerRules.DEFAULT.get();
-	}
-	
-	@Override
 	public void afterItemGiven(Player player, Mob mob, ItemStack item) 
 	{
 		convertBlockOnGiven(mob.level, mob.blockPosition().below());

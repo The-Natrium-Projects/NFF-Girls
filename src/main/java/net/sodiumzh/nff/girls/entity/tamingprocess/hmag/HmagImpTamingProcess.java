@@ -26,9 +26,4 @@ public class HmagImpTamingProcess extends NFFGirlsItemDroppingTamingProcess
 		return 10 * 20;
 	}
 
-	@Override
-	public MobAngerRules getAngerRules() {
-		return NFFGirlsAngerRules.DEFAULT.get();
-	}
-
 }

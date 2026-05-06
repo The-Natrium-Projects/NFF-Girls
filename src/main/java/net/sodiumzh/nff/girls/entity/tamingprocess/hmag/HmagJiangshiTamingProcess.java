@@ -116,17 +116,6 @@ public class HmagJiangshiTamingProcess extends NFFTamingProcess
 	}
 
 	@Override
-	public MobAngerRules getAngerRules() {
-		return MobAngerRules.NO_ANGER.get();
-	}
-
-	@Override
-	@Nonnull
-	public MobAngerRules getInterruptingAngerRules() {
-		return MobAngerRules.NO_ANGER.get();
-	}
-
-	@Override
 	public TamingInteractionResult handleInteract(Player player, Mob mob, InteractionHand interactionHand) {
 		return TamingInteractionResult.unhandled(player.level);
 	}

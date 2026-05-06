@@ -238,11 +238,6 @@ public class HmagCreeperGirlTamingProcess extends TamingProcessItemGivingProgres
 	}
 
 	@Override
-	public MobAngerRules getAngerRules() {
-		return MobAngerRules.ATTACKER_DAMAGED_AND_ATTACKING.get();
-	}
-
-	@Override
 	public void onGeneralTimerExpire(Mob mob, String key) {
 		if (key.equals(TIMER_KEY_FINAL_EXPLOSION_FAIL_COOLDOWN))
 			mob.setNoAi(false);
