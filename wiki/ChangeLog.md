@@ -1,5 +1,15 @@
 # Change Log
 
+### 0.x.33
+
+Added Soul Wheat.
+
+Now undead mobs will stop being neutral to players with Undead Affinity when seeing a hostile mob of the same type, just like Zombified Piglins.
+
+Fixed Enderberry Bush unexpectedly being grown with Bone Meal.
+
+Fixed Trade Introduction Letter not correctly showing the mob's custom name.
+
 ### 0.1.32.1/0.0.32.1
 
 Fixed baubles not shown in the creative tab.
