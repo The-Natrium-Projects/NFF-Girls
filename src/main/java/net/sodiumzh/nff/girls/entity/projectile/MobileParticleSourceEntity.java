@@ -7,6 +7,7 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.MoverType;
@@ -190,7 +191,7 @@ public class MobileParticleSourceEntity extends Entity implements ItemSupplier {
         }
         if (this.isAlive() && this.level().isClientSide() && this.level() instanceof ClientLevel)
             NFUParticleStatics.sendParticlesToEntity(this, this.getParticleType(), Vec3.ZERO, posRndScale,
-                getParticleAmountThisTick(), speed);
+                getParticleAmountThisTick(), 1);
     }
 
     @Override
@@ -207,4 +208,25 @@ public class MobileParticleSourceEntity extends Entity implements ItemSupplier {
     public ItemStack getItem() {
         return ItemStack.EMPTY;
     }
+
+    public static MobileParticleSourceEntity addDefault(ServerLevel level,
+                                  ParticleOptions type,
+                                  Vec3 start, Vec3 end,
+                                  double speed,
+                                  int amountPerTick) {
+        MobileParticleSourceEntity particleSource = NFFGirlsEntityTypes.MOBILE_PARTICLE_SOURCE.get().create(level);
+        if (particleSource != null) {
+            particleSource.setTargetPos(end)
+                .setParticleType(ParticleTypes.HAPPY_VILLAGER)
+                .particlesPerTick(amountPerTick)
+                .setSpeed(speed)
+                .setMaxLifetime((int) (Math.round(end.distanceTo(start) / speed)) + 20)
+                .setPos(start);
+            particleSource.setPos(start);
+            level.addFreshEntity(particleSource);
+        }
+        return particleSource;
+    }
+
+
 }
