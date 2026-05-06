@@ -40,11 +40,6 @@ public class HmagAnimalTamingProcess extends NFFGirlsItemDroppingTamingProcess
 	}
 
 	@Override
-	public MobAngerRules getAngerRules() {
-		return NFFGirlsAngerRules.DEFAULT.get();
-	}
-
-	@Override
 	public void onConsumeItem(Mob mob, ItemStack item, double deltaProc)
 	{
 		CNFFTamable.getOptional(mob).ifPresent(tamable -> {

@@ -90,11 +90,6 @@ public class HmagNecroticReaperTamingProcess extends NFFTamingProcess
 				&& CNFFTamable.get(mob).getGeneralNBT().getUUID(NBT_KEY_ONGOING_PLAYER_UUID).equals(player.getUUID());
 	}
 
-	@Override
-	public MobAngerRules getAngerRules() {
-		return MobAngerRules.NO_ANGER.get();
-	}
-
 	/**
 	 *  Invoked on server when player hit the mob with Necromancer's Wand. (Only in server)
 	 *  Return if the hit effects taken here. If true, it will cancel adding Wither effect.

@@ -48,11 +48,6 @@ public class HmagMeltyMonsterTamingProcess extends TamingProcessItemGivingProgre
 		player.addEffect(new MobEffectInstance(MobEffects.FIRE_RESISTANCE, 5 * 20));
 		NFUEntityStatics.addEffectSafe(player, ModEffects.COMBUSTION.get(), 30 * 20);
 	}
-	
-	@Override
-	public MobAngerRules getAngerRules() {
-		return NFFGirlsAngerRules.DEFAULT.get();
-	}
 
 	@Override
 	public void tamableInit(CNFFTamable cnffTamable) {
