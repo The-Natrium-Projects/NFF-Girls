@@ -17,6 +17,7 @@ import net.sodiumzh.nff.girls.item.*;
 import net.sodiumzh.nff.services.item.MobCatcherItem;
 import net.sodiumzh.nff.services.item.NFFMobRespawnerItem;
 import net.sodiumzh.nfu.compat.ModDependencyFallbackItem;
+import net.sodiumzh.nfu.item.NFUItem;
 import net.sodiumzh.nfu.util.NFUCompatStatics;
 
 import java.util.HashSet;
@@ -96,15 +97,16 @@ public class NFFGirlsItems {
 	public static final RegistryObject<Item> ENDER_FRUIT_JAM = register("ender_fruit_jam", () -> new Item(new Item.Properties().rarity(Rarity.RARE).craftRemainder(Items.GLASS_BOTTLE)));
 	public static final RegistryObject<Item> EVIL_GEM = registerDefault("evil_gem");
 	
-	// Foods
+	// Foods & Agriculture
 	public static final RegistryObject<Item> SOUL_CAKE_SLICE = register("soul_cake_slice", () -> new Item(new Item.Properties().food(NFFGirlsFoodProperties.SOUL_CAKE_SLICE).rarity(Rarity.UNCOMMON)));
 	public static final RegistryObject<Item> ENDERBERRY = register("enderberry", () -> new EnderberryItem(NFFGirlsBlocks.ENDERBERRY_BUSH.get(),
 		new Item.Properties().food(NFFGirlsFoodProperties.ENDERBERRY).rarity(Rarity.UNCOMMON)));
 	public static final RegistryObject<Item> ENDER_PIE = ITEMS.register("ender_pie", () -> new Item(new Item.Properties().food(NFFGirlsFoodProperties.ENDER_PIE).rarity(Rarity.RARE)));
+    public static final RegistryObject<Item> SOUL_WHEAT_SEEDS = ITEMS.register("soul_wheat_seeds",
+        () -> new ItemNameBlockItem(NFFGirlsBlocks.SOUL_WHEAT.get(), new Item.Properties()));
+    public static final RegistryObject<Item> SOUL_WHEAT = ITEMS.register("soul_wheat",
+        () -> new NFUItem(new Item.Properties()));
 
-
-
-	
 	// Equipment & tools
 	public static final RegistryObject<Item> NECROMANCER_HAT = register("necromancer_hat", () -> new NecromancerArmorItem(
 			NFFGirlsArmorMaterials.NECROMANCER,
