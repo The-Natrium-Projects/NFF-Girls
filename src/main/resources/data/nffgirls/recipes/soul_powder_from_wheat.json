@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:smelting",
+  "ingredient": {
+    "item": "nffgirls:soul_wheat"
+  },
+  "result": "hmag:soul_powder",
+  "experience": 1.0,
+  "cookingtime": 200
+}
