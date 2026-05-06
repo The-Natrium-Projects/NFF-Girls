@@ -4,6 +4,7 @@ import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Rarity;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.material.Material;
@@ -17,6 +18,8 @@ import net.sodiumzh.nff.girls.NFFGirls;
 import net.sodiumzh.nff.girls.block.EnderberryBushBlock;
 import net.sodiumzh.nff.girls.block.SoulCakeBlock;
 import net.sodiumzh.nff.girls.block.SoulCarpetBlock;
+import net.sodiumzh.nff.girls.block.SoulWheatBlock;
+import net.sodiumzh.nfu.block.BlockMaterial;
 
 @Mod.EventBusSubscriber(modid = NFFGirls.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class NFFGirlsBlocks {
@@ -68,6 +71,15 @@ public class NFFGirlsBlocks {
 		new EnderberryBushBlock(BlockBehaviour.Properties.of(Material.PLANT)
 			.randomTicks().noCollission().sound(SoundType.SWEET_BERRY_BUSH)
 			.lightLevel(bs -> bs.getValue(EnderberryBushBlock.CAN_GROW_ENDERBERRY) && bs.getValue(EnderberryBushBlock.AGE) < EnderberryBushBlock.MAX_AGE ? 0 : 15)));
+
+    public static final RegistryObject<SoulWheatBlock> SOUL_WHEAT = BLOCKS.register("soul_wheat", () ->
+        new SoulWheatBlock(BlockBehaviour.Properties.of()
+            .mapColor(MapColor.PLANT)
+            .noCollission()
+            .randomTicks()
+            .instabreak()
+            .sound(SoundType.CROP)
+            .pushReaction(PushReaction.DESTROY)));
 
 	/* Block Items */
 	public static final RegistryObject<BlockItem> ITEM_SOUL_CARPET = regBlockItem("soul_carpet", SOUL_CARPET, new Item.Properties());

@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "nffgirls:soul_wheat"
+    }
+  ],
+  "result": {
+    "item": "nffgirls:soul_wheat_seeds",
+    "count": 1
+  }
+}
