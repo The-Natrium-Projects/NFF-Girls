@@ -55,6 +55,7 @@ public class NFFGirls
         NFFGirlsEntityAttributeProviders.ATTRIBUTE_PROVIDERS.merge();
         NFFGirlsBaubleBuilder.EQUIPPING_CONDITION_PRESETS.merge();
         NFFGirlsAngerReasons.COLLECTION.merge();
+        NFFGirlsEntityComponents.COLLECTION.merge();
 
         // Register ourselves for server and other game events we are interested in
         MinecraftForge.EVENT_BUS.register(this);
