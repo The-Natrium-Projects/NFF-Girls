@@ -131,7 +131,37 @@ public class NFFGirlsEntityEventListeners
 		    } 
 	        // Handle undead mobs end //
 
-	        // Handle Ghastly Seeker
+			// Handle wild mob neutrality due to friended mobs
+			if (event.getNewTarget() instanceof Player player) {
+				EntityComponentAPI.getComponentManager(mob).getSubComponent("/wild_mob_neutrality_handler", NFFGirlsEntityComponents.WILD_MOB_NEUTRALITY_HANDLER.get())
+					.ifPresent(c -> {
+						// If already neutral, keep neutral
+						// Provocation will auto remove neutrality
+						// See WildMobNeutralityHandler class
+						if (c.getNeutralPlayers().contains(player) && !c.isAngryAt(player)) {
+							event.setCanceled(true);
+						}
+						// Search if should be neutralized
+						// TO-DO cache all types that's possible to be neutralized, to reduce entity searching frequency
+						else {
+                            boolean hasFriended =
+								mob.level().getEntitiesOfClass(Mob.class, mob.getBoundingBox().inflate(16, 16, 16)).stream()
+									.map(m -> INFFGirlsTamed.get(m).orElse(null))
+									.filter(Objects::nonNull) // NFFGirls tamed mob
+									.filter(t -> player.equals(t.getOwnerInDimension())) // Target player is the owner
+									// Included in the neutralization list
+									.filter(t -> mob.getType().equals(NFFTamingMapping.getTypeBefore(t.asMob())) || t.getNeutralizingTypes().contains(mob.getType()))
+									.anyMatch(t -> mob.hasLineOfSight(t.asMob()));	// Can see the mob
+							if (hasFriended) {
+								c.addNeutral(player);
+								event.setCanceled(true);
+							}
+						}
+					});
+			}
+			// Handle wild mob neutrality end
+
+			// Handle Ghastly Seeker
 	        if (mob instanceof HmagGhastlySeekerEntity gs)
 	        {
 	        	// If last target is still attackable, prevent removing target
@@ -184,21 +214,22 @@ public class NFFGirlsEntityEventListeners
 				return;
 			}
 			// Tamed mobs don't attack their wild variation
-			if (INFFGirlsTamed.isBM(mob)
+			// Handled in onLivingSetAttackTarget 0.x.33
+			/*if (INFFGirlsTamed.isBM(mob)
 				&& NFFTamingMapping.getTypeBefore(mob) == target.getType()) {
 				event.setCanceled(true);
 				return;
-			}
+			}*/
 			// When tamed mob is present, wild variation will not be hostile to player
-			if (hasTamedVariationAround(mob, target))
+			/*if (hasTamedVariationAround(mob, target))
 			{
 				event.setCanceled(true);
 				return;
-			}
+			}*/
 		}
 	}
 
-	private static boolean hasTamedVariationAround(Mob attacker, LivingEntity target)
+	/*private static boolean hasTamedVariationAround(Mob attacker, LivingEntity target)
 	{
 		if (!(target instanceof Player p)) return false;
 		EntityType<? extends Mob> tamedType = NFFTamingMapping.getConvertTo(attacker);
@@ -211,7 +242,7 @@ public class NFFGirlsEntityEventListeners
 			.filter(attacker::hasLineOfSight)
 			.toList();
 		return !tamed.isEmpty();
-	}
+	}*/
 
 	@SubscribeEvent
 	public static void onTamedDeath(NFFTamedDeathEvent event)
@@ -544,19 +575,19 @@ public class NFFGirlsEntityEventListeners
 			NecromancerArmorItem.necromancerArmorUpdate(event.getEntity());
 
             // Handle OTHER_ANGRY angry rule
-            // Update from player each second, as searching mobs is somewhat costly
-            if (event.getEntity() instanceof Player player && player.tickCount % 20 == 19) {
-                List<Mob> undeadMobs = player.level()
-                    .getEntitiesOfClass(Mob.class, player.getBoundingBox().inflate(32, 32, 32), mob -> mob.isAlive() && mob.getMobType().equals(MobType.UNDEAD));
+            // Update from undead-affinity carrying entity each second, as searching mobs is somewhat costly
+            if (event.getEntity().tickCount % 20 == 19) {
+                List<Mob> undeadMobs = event.getEntity().level()
+                    .getEntitiesOfClass(Mob.class, event.getEntity().getBoundingBox().inflate(32, 32, 32), mob -> mob.isAlive() && mob.getMobType().equals(MobType.UNDEAD));
                 List<Mob> hostiles = undeadMobs.stream()
-                    .filter(m -> Objects.equals(m.getTarget(), player))
+                    .filter(m -> Objects.equals(m.getTarget(), event.getEntity()))
                     .toList();
                 Set<EntityType<?>> hostileTypes = hostiles.stream().map(Entity::getType).collect(Collectors.toSet());
                 undeadMobs.stream().filter(m -> hostileTypes.contains(m.getType())) // There is at least one hostile mob of the same type
                     .filter(m -> hostiles.stream().anyMatch(hostile ->
-                        hostile.getType().equals(m.getType()) && m.hasLineOfSight(hostile) && m.hasLineOfSight(player))) // Can see a hostile mob of the same type, and can see the player
+                        hostile.getType().equals(m.getType()) && m.hasLineOfSight(hostile) && m.hasLineOfSight(event.getEntity()))) // Can see a hostile mob of the same type, and can see the player
                     .forEach(m -> {
-                        MobAngerHandlerComponent.setAngryAtForMob(m, player, NFFGirlsAngerReasons.OTHER_ANGRY.get());
+                        MobAngerHandlerComponent.setAngryAtForMob(m, event.getEntity(), NFFGirlsAngerReasons.OTHER_ANGRY.get());
                     });
             }
 
@@ -570,6 +601,7 @@ public class NFFGirlsEntityEventListeners
 					if (mob.getTarget() != null && mob.getTarget().hasEffect(NFFGirlsEffects.UNDEAD_AFFINITY.get()) && !cap.getHatred().contains(mob.getTarget().getUUID()))
 						mob.setTarget(null);
 				});
+				//
 				// Sync mobs
 				if (mob instanceof INFFGirlsTamed bm)
 					bm.doSync();

@@ -76,16 +76,16 @@ public class NFFGirlsTamingProcesses {
     public static final NFURegistry.Accessor<NFFTamingProcess> VANILLA_UNDEAD_A = TAMING_PROCESSES.register(
             "vanilla_undead_a",  () -> new HmagVanillaUndeadTamingProcess()
             .setItemGivingTableOverride(NFFGirlsFriendingItems.UNDEAD_A::get)
-            .setAngerAndInterruptionRules(NFFGirlsAngerRules.UNDEAD_AFFINITY.get(), MobAngerRules.ATTACKER.get()));
+            .setAngerAndInterruptionRules(NFFGirlsAngerRules.ZOMBIE_PIGLIN_LIKE.get(), MobAngerRules.ATTACKER.get()));
     // Previously for Skeleton Girls etc.
     public static final NFURegistry.Accessor<NFFTamingProcess> VANILLA_UNDEAD_B = TAMING_PROCESSES.register(
             "vanilla_undead_b",  () -> new HmagVanillaUndeadTamingProcess()
             .setItemGivingTableOverride(NFFGirlsFriendingItems.UNDEAD_B::get)
-            .setAngerAndInterruptionRules(NFFGirlsAngerRules.UNDEAD_AFFINITY.get(), MobAngerRules.ATTACKER.get()));
+            .setAngerAndInterruptionRules(NFFGirlsAngerRules.ZOMBIE_PIGLIN_LIKE.get(), MobAngerRules.ATTACKER.get()));
     // Previously for Wither Skeleton Girl
     public static final NFURegistry.Accessor<NFFTamingProcess> VANILLA_UNDEAD_C = TAMING_PROCESSES.register(
             "vanilla_undead_c",  () -> new HmagVanillaUndeadTamingProcess()
             .setItemGivingTableOverride(NFFGirlsFriendingItems.UNDEAD_NETHER_C::get)
-            .setAngerAndInterruptionRules(NFFGirlsAngerRules.UNDEAD_AFFINITY.get(), MobAngerRules.ATTACKER.get()));
+            .setAngerAndInterruptionRules(NFFGirlsAngerRules.ZOMBIE_PIGLIN_LIKE.get(), MobAngerRules.ATTACKER.get()));
 
 }
