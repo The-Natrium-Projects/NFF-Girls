@@ -46,8 +46,8 @@ public class NFFGirlsAngerRules {
 			.forReason(MobAngerReason.HIT.get(), 30 * 20)
 			.end());
 
-	public static final NFURegistry.Accessor<MobAngerRules> UNDEAD_AFFINITY
-		= ANGER_RULES.register("undead_affinity",
+	public static final NFURegistry.Accessor<MobAngerRules> ZOMBIE_PIGLIN_LIKE
+		= ANGER_RULES.register("zombie_piglin_like",
 		() -> new MobAngerRules()
 			.forReason(MobAngerReason.ATTACKED.get())
             .forReason(MobAngerReason.HIT.get())

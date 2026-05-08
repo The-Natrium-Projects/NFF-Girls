@@ -24,11 +24,14 @@ import net.sodiumzh.nff.girls.eventlistener.NFFGirlsEntityEventListeners;
 import net.sodiumzh.nff.girls.item.bauble.INFFGirlsBauble;
 import net.sodiumzh.nff.girls.network.ClientboundNFFGirlsMobGeneralSyncPacket;
 import net.sodiumzh.nff.girls.network.NFFGirlsChannels;
+import net.sodiumzh.nff.girls.registry.NFFGirlsBefriendingTypes;
 import net.sodiumzh.nff.girls.registry.NFFGirlsCapabilities;
 import net.sodiumzh.nff.girls.registry.NFFGirlsHealingItemMappings;
 import net.sodiumzh.nff.girls.registry.NFFGirlsItems;
 import net.sodiumzh.nff.services.entity.capability.wrapper.IAttributeMonitor;
 import net.sodiumzh.nff.services.entity.taming.INFFTamed;
+import net.sodiumzh.nff.services.entity.taming.NFFTamedStatics;
+import net.sodiumzh.nff.services.entity.taming.NFFTamingMapping;
 import net.sodiumzh.nff.services.item.NFFMobRespawnerItem;
 import net.sodiumzh.nff.services.item.capability.wrapper.IItemStackMonitor;
 import net.sodiumzh.nfu.annotation.DontCallManually;
@@ -352,7 +355,15 @@ public interface INFFGirlsTamed extends INFFTamed, IAttributeMonitor, IItemStack
 			.map(i -> INFFGirlsBauble.asBauble(i.getItem())).reduce(new ArrayList<>(), (a, b) -> { a.addAll(b); return a;})
 			.stream().anyMatch(b -> b.hasBaubleTag(INFFGirlsBauble.TAG_ACTIVE_ATTACK));
 	}
-	
+
+	/**
+	 * Get mob types that becomes neutral when it sees player with a friended mob of this type.
+	 * <p>The wild version of this mob is always added, and no need to add here.
+	 */
+	public default Set<EntityType<?>> getNeutralizingTypes() {
+		return Set.of();
+	}
+
 	// ===== Network =========== //
 	
 	public default void doSync()
