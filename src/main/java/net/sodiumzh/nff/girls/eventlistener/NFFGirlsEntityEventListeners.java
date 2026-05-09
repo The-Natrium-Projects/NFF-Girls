@@ -54,6 +54,7 @@ import net.sodiumzh.nff.girls.NFFGirls;
 import net.sodiumzh.nff.girls.effect.NecromancerWitherEffect;
 import net.sodiumzh.nff.girls.entity.INFFGirlsTamed;
 import net.sodiumzh.nff.girls.entity.ai.goal.NFFGirlsTamableGhastlySeekerRandomFlyGoal;
+import net.sodiumzh.nff.girls.entity.component.NFFGirlsNeutralityHandlerComponent;
 import net.sodiumzh.nff.girls.entity.hmag.*;
 import net.sodiumzh.nff.girls.entity.projectile.MobileParticleSourceEntity;
 import net.sodiumzh.nff.girls.entity.projectile.NecromancerMagicBulletEntity;
@@ -64,6 +65,7 @@ import net.sodiumzh.nff.girls.item.NecromancerArmorItem;
 import net.sodiumzh.nff.girls.registry.*;
 import net.sodiumzh.nff.girls.util.NFFGirlsEntityStatics;
 import net.sodiumzh.nff.services.entity.ai.NFFTamedMobAIState;
+import net.sodiumzh.nff.services.entity.capability.CNFFTamable;
 import net.sodiumzh.nff.services.entity.taming.INFFTamed;
 import net.sodiumzh.nff.services.entity.taming.NFFTamedStatics;
 import net.sodiumzh.nff.services.entity.taming.NFFTamingMapping;
@@ -132,33 +134,7 @@ public class NFFGirlsEntityEventListeners
 	        // Handle undead mobs end //
 
 			// Handle wild mob neutrality due to friended mobs
-			if (event.getNewTarget() instanceof Player player) {
-				EntityComponentAPI.getComponentManager(mob).getSubComponent("/wild_mob_neutrality_handler", NFFGirlsEntityComponents.WILD_MOB_NEUTRALITY_HANDLER.get())
-					.ifPresent(c -> {
-						// If already neutral, keep neutral
-						// Provocation will auto remove neutrality
-						// See WildMobNeutralityHandler class
-						if (c.getNeutralPlayers().contains(player) && !c.isAngryAt(player)) {
-							event.setCanceled(true);
-						}
-						// Search if should be neutralized
-						// TO-DO cache all types that's possible to be neutralized, to reduce entity searching frequency
-						else {
-                            boolean hasFriended =
-								mob.level().getEntitiesOfClass(Mob.class, mob.getBoundingBox().inflate(16, 16, 16)).stream()
-									.map(m -> INFFGirlsTamed.get(m).orElse(null))
-									.filter(Objects::nonNull) // NFFGirls tamed mob
-									.filter(t -> player.equals(t.getOwnerInDimension())) // Target player is the owner
-									// Included in the neutralization list
-									.filter(t -> mob.getType().equals(NFFTamingMapping.getTypeBefore(t.asMob())) || t.getNeutralizingTypes().contains(mob.getType()))
-									.anyMatch(t -> mob.hasLineOfSight(t.asMob()));	// Can see the mob
-							if (hasFriended) {
-								c.addNeutral(player);
-								event.setCanceled(true);
-							}
-						}
-					});
-			}
+			NFFGirlsNeutralityHandlerComponent.updateOnServerTick(mob);
 			// Handle wild mob neutrality end
 
 			// Handle Ghastly Seeker
@@ -215,17 +191,20 @@ public class NFFGirlsEntityEventListeners
 			}
 			// Tamed mobs don't attack their wild variation
 			// Handled in onLivingSetAttackTarget 0.x.33
-			/*if (INFFGirlsTamed.isBM(mob)
+			if (INFFGirlsTamed.isBM(mob)
 				&& NFFTamingMapping.getTypeBefore(mob) == target.getType()) {
 				event.setCanceled(true);
 				return;
-			}*/
+			}
+			// Handle neutrality
 			// When tamed mob is present, wild variation will not be hostile to player
-			/*if (hasTamedVariationAround(mob, target))
+			// Friending process will prevent neutrality
+			if (EntityComponentAPI.getComponentManager(mob).getSubComponentByPath("/neutrality_handler", NFFGirlsEntityComponents.NEUTRALITY_HANDLER.get())
+				.filter(c -> c.isNeutralTo(event.getNewTarget())).filter(c -> !CNFFTamable.get(c.getEntity()).getTamingProcess().isInAnyProcess(c.getEntity())).isPresent())
 			{
 				event.setCanceled(true);
 				return;
-			}*/
+			}
 		}
 	}
 
