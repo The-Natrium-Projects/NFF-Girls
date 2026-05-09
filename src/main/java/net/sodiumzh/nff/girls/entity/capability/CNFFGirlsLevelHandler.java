@@ -22,6 +22,7 @@ import net.sodiumzh.nff.girls.registry.NFFGirlsCapabilities;
 import net.sodiumzh.nff.girls.registry.NFFGirlsConfigs;
 import net.sodiumzh.nfu.entity.RepeatableAttributeModifier;
 
+@Deprecated
 public interface CNFFGirlsLevelHandler extends INBTSerializable<LongTag>
 {
 	/** Attribute modifier for HP increase by level upgrading, called in {@code NFFGirlsSubsystemEventListeners} */
