@@ -5,7 +5,7 @@ import net.minecraft.world.entity.MobType;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.sodiumzh.nff.girls.NFFGirls;
-import net.sodiumzh.nff.girls.entity.component.WildMobNeutralityHandlerComponent;
+import net.sodiumzh.nff.girls.entity.component.NFFGirlsNeutralityHandlerComponent;
 import net.sodiumzh.nfu.entity.anger.MobAngerHandlerComponent;
 import net.sodiumzh.nfu.entity.anger.MobAngerRules;
 import net.sodiumzh.nfu.entity.component.EntityComponentInitEvent;
@@ -22,9 +22,9 @@ public class NFFGirlsEntityComponents {
     public static final NFURegistry.Accessor<EntityComponentType<Mob, MobAngerHandlerComponent>> UNDEAD_AFFINITY_HANDLER =
         COLLECTION.register("undead_affinity_handler", () -> new EntityComponentType<>(Mob.class, MobAngerHandlerComponent.class,
             m -> new MobAngerHandlerComponent(m, NFFGirlsAngerRules.ZOMBIE_PIGLIN_LIKE.get())));
-    public static final NFURegistry.Accessor<EntityComponentType<Mob, WildMobNeutralityHandlerComponent>> WILD_MOB_NEUTRALITY_HANDLER =
-        COLLECTION.register("wild_mob_neutrality_handler", () -> new EntityComponentType<>(Mob.class, WildMobNeutralityHandlerComponent.class,
-            m -> new WildMobNeutralityHandlerComponent(m, MobAngerRules.ATTACKER.get())));
+    public static final NFURegistry.Accessor<EntityComponentType<Mob, NFFGirlsNeutralityHandlerComponent>> NEUTRALITY_HANDLER =
+        COLLECTION.register("neutrality_handler", () -> new EntityComponentType<>(Mob.class, NFFGirlsNeutralityHandlerComponent.class,
+            m -> new NFFGirlsNeutralityHandlerComponent(m, MobAngerRules.ATTACKER.get())));
 
     @Mod.EventBusSubscriber(modid = NFFGirls.MOD_ID, bus = Mod.EventBusSubscriber.Bus.FORGE)
     public static class Attachment {
@@ -35,7 +35,7 @@ public class NFFGirlsEntityComponents {
                 if (mob.getMobType().equals(MobType.UNDEAD)) {
                     event.getComponentManager().setRequired("/undead_affinity_handler", UNDEAD_AFFINITY_HANDLER.get());
                 }
-                event.getComponentManager().setRequired("/wild_mob_neutrality_handler", WILD_MOB_NEUTRALITY_HANDLER.get());
+                event.getComponentManager().setRequired("/neutrality_handler", NEUTRALITY_HANDLER.get());
             }
         }
 

@@ -41,6 +41,7 @@ import javax.annotation.Nullable;
  * * Killing the mob: to zero
  * * Mob dying with player nearby (8 blocks): -20
  */
+@Deprecated
 public interface CNFFGirlsFavorabilityHandler extends INBTSerializable<CompoundTag>
 {
 	

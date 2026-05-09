@@ -7,6 +7,7 @@ import net.minecraftforge.common.util.INBTSerializable;
 import java.util.HashSet;
 import java.util.UUID;
 
+@Deprecated
 public interface CUndeadAffinityHandler extends INBTSerializable<CompoundTag>{
 
 	// Get this mob's neutral list
