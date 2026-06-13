@@ -190,6 +190,9 @@ dependencies {
 	/*jarJar(group: 'net.sodiumzh.nautils', name: 'nautils', version: "[${minecraft_version}-${nautils_version},)"){
 		jarJar.pin(it, "${minecraft_version}-${nautils_version}")
 	}*/
+    compileOnly fg.deobf("vazkii.patchouli:Patchouli:1.20.1-84.1-FORGE:api")
+    runtimeOnly fg.deobf("vazkii.patchouli:Patchouli:1.20.1-84.1-FORGE")
+
 	jarJar(group: 'net.sodiumzh', name: 'nffservices', version: "[${minecraft_version}-${services_version},)"){
 		jarJar.pin(it, "${minecraft_version}-${services_version}")
 	}
