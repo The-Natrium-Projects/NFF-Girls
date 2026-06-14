@@ -11,20 +11,17 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.phys.Vec3;
-import net.minecraftforge.common.util.LazyOptional;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.sodiumzh.nff.girls.entity.ai.goal.NFFGirlsTamablePickItemGoal;
 import net.sodiumzh.nff.girls.entity.ai.goal.NFFGirlsTamableWatchHandItemGoal;
-import net.sodiumzh.nff.services.entity.taming.CNFFTamable;
 import net.sodiumzh.nff.services.entity.taming.IItemTableUsingProcess;
 import net.sodiumzh.nff.services.entity.taming.INFFDefaultProgressedTamingProcess;
+import net.sodiumzh.nff.services.entity.taming.NFFTamableComponent;
 import net.sodiumzh.nff.services.entity.taming.NFFTamingProcess;
-import net.sodiumzh.nfu.capability.EntityTimerAccessor;
 import net.sodiumzh.nfu.entity.MobApplicableItemTable;
+import net.sodiumzh.nfu.entity.component.EntityComponentAPI;
+import net.sodiumzh.nfu.entity.component.preset.EntityTimerComponent;
 import net.sodiumzh.nfu.entity.taming.ITamingProcess;
 import net.sodiumzh.nfu.entity.taming.TamingInteractionResult;
-import net.sodiumzh.nfu.mixin.event.entity.EntityStartBaseTickEvent;
-import net.sodiumzh.nfu.registry.NFUCapabilities;
 import net.sodiumzh.nfu.util.NFUItemStatics;
 import net.sodiumzh.nfu.util.NFUParticleStatics;
 
@@ -40,24 +37,22 @@ public abstract class NFFGirlsItemDroppingTamingProcess extends NFFTamingProcess
 	// to prevent picking immediately
 	// This is a timer and handled in the event listener at the end of this class
 	// In entity data cap, Compound (UUID string -> int for remaining time)
-	protected static final String ENTITY_DATA_KEY_ALREADY_PICKED_TAMABLE_MOBS = "already_picked_befriendable_mobs";
+	protected static final String ITEM_ENTITY_TIMER_KEY_ALREADY_PICKED_TAMABLE_MOBS = "already_picked_befriendable_mobs";
 	// Timer for how long this mob is holding an item.
-	protected static final EntityTimerAccessor TIMER_KEY_HOLD_ITEM_TIME
-			= CNFFTamable.getTimerAccessor("hold_item_time");
-	protected static final EntityTimerAccessor TIMER_KEY_PICKING_COOLDOWN
-			= CNFFTamable.getTimerAccessor("picking_cooldown");
+	protected static final String TIMER_KEY_HOLD_ITEM_TIME = "holdItemTime";
+	protected static final String TIMER_KEY_PICKING_COOLDOWN = "pickingCooldown";
 	// Label an item if it's on the tamable mob's offhand and is player-thrown. The value is the thrower uuid.
-	protected static final String ITEM_NBT_KEY_PICKED_FROM_PLAYER = "befriendable_picked_from_player";
+	protected static final String ITEM_NBT_KEY_PICKED_FROM_PLAYER = "itemPickedFromPlayer";
 	protected int[] watchAndPickItemGoalPriorities = {2, 3};
 
 
 	@Nullable
 	protected Supplier<MobApplicableItemTable> tamingItemTableOverride = null;
 	@Override
-	public void tamableInit(CNFFTamable cap)
+	public void tamableInit(NFFTamableComponent c)
 	{
-		cap.getEntity().goalSelector.addGoal(this.watchAndPickItemGoalPriorities()[0], new NFFGirlsTamableWatchHandItemGoal(cap.getEntity()));
-		cap.getEntity().goalSelector.addGoal(this.watchAndPickItemGoalPriorities()[1], new NFFGirlsTamablePickItemGoal(cap.getEntity()));
+		c.getEntity().goalSelector.addGoal(this.watchAndPickItemGoalPriorities()[0], new NFFGirlsTamableWatchHandItemGoal(c.getEntity()));
+		c.getEntity().goalSelector.addGoal(this.watchAndPickItemGoalPriorities()[1], new NFFGirlsTamablePickItemGoal(c.getEntity()));
 	}
 
 	@Override
@@ -131,12 +126,10 @@ public abstract class NFFGirlsItemDroppingTamingProcess extends NFFTamingProcess
 		if (this.getOngoingPlayer(mob).map(p -> !p.equals(playerThrown)).orElse(false))
 			return false;
 		// If angry, pass
-		if (this.getTamable(mob).isAngryAt(playerThrown))
+		if (this.getTamable(mob).getAngerHandler().isAngryAt(playerThrown))
 			return false;
 		// If the item is still in picking cooldown for the mob, pass
-		if (itemEntity.getCapability(NFUCapabilities.CAP_ENTITY_DATA)
-				.map(c -> c.getNBT().getCompound(ENTITY_DATA_KEY_ALREADY_PICKED_TAMABLE_MOBS).getInt(mob.getStringUUID()))
-				.orElse(0) > 0)
+		if (this.getItemEntityPickingCooldown(itemEntity, mob) > 0)
 			return false;
 		// If in other player's process, pass
 		if (this.getOngoingPlayer(mob).map(player -> !Objects.equals(player, playerThrown)).orElse(false))
@@ -145,11 +138,11 @@ public abstract class NFFGirlsItemDroppingTamingProcess extends NFFTamingProcess
 		/*if (!mob.getBoundingBox().intersects(itemEntity.getBoundingBox()))
 			return false;*/
 		// Holding another item, pass
-		if (TIMER_KEY_HOLD_ITEM_TIME.hasTimer(mob))
-			return false;
+        if (this.getTamable(mob).getTimerComponent().hasGeneralTimer(TIMER_KEY_HOLD_ITEM_TIME))
+            return false;
 		// In picking up cooldown, pass
-		if (TIMER_KEY_PICKING_COOLDOWN.hasTimer(mob))
-			return false;
+        if (this.getTamable(mob).getTimerComponent().hasGeneralTimer(TIMER_KEY_PICKING_COOLDOWN))
+            return false;
 		return true;
 	}
 
@@ -158,7 +151,7 @@ public abstract class NFFGirlsItemDroppingTamingProcess extends NFFTamingProcess
 		// This tag should only exist on the mob off-hand item, so remove before dropping
 		if (mob.getItemInHand(InteractionHand.OFF_HAND).hasTag()
 				&& mob.getItemInHand(InteractionHand.OFF_HAND).getTag().hasUUID(ITEM_NBT_KEY_PICKED_FROM_PLAYER)) {
-			mob.getItemInHand(InteractionHand.OFF_HAND).getTag().remove(ITEM_NBT_KEY_PICKED_FROM_PLAYER);
+			mob.getItemInHand(InteractionHand.OFF_HAND).removeTagKey(ITEM_NBT_KEY_PICKED_FROM_PLAYER);
 		}
 		mob.spawnAtLocation(mob.getItemInHand(InteractionHand.OFF_HAND));
 		mob.setItemInHand(InteractionHand.OFF_HAND, ItemStack.EMPTY);
@@ -189,12 +182,10 @@ public abstract class NFFGirlsItemDroppingTamingProcess extends NFFTamingProcess
 			itemEntity.getItem().shrink(1);
 			// Label on the item entity that the mob has picked an item from this entity, to prevent picking immediately
 			// This is a timer and handled in the event listener at the end of this class
-			itemEntity.getCapability(NFUCapabilities.CAP_ENTITY_DATA).ifPresent(c -> {
-				this.setItemEntityPickingCooldown(itemEntity, mob, getItemPickingCooldown());
-			});
+            this.setItemEntityPickingCooldown(itemEntity, mob, getItemPickingCooldown());
 		}
 		// Add timer on mob during which it should hold the item on off-hand
-		TIMER_KEY_HOLD_ITEM_TIME.setTimer(mob, getHoldingItemTime());
+        this.getTamable(mob).getTimerComponent().addTimer(TIMER_KEY_HOLD_ITEM_TIME, getHoldingItemTime(), true);
 		return true;
 	}
 	
@@ -222,7 +213,7 @@ public abstract class NFFGirlsItemDroppingTamingProcess extends NFFTamingProcess
 					.getTag().getUUID(ITEM_NBT_KEY_PICKED_FROM_PLAYER));
 			if (player != null && mob.hasLineOfSight(player))
 			{
-				CNFFTamable tamable = CNFFTamable.get(mob);
+				NFFTamableComponent tamable = NFFTamableComponent.get(mob);
 				double oldProgress = this.getProgressValue(mob).orElse(0d);
 				double newProgress = oldProgress + getProgressGainInternal(mob.getItemInHand(InteractionHand.OFF_HAND), mob);
 				NFUParticleStatics.sendGlintParticlesToEntityDefault(mob);
@@ -239,7 +230,7 @@ public abstract class NFFGirlsItemDroppingTamingProcess extends NFFTamingProcess
 					int heartCount = ((int) (newProgress / 0.2d) - (int) (oldProgress / 0.2d));
 					NFUParticleStatics.sendParticlesToEntity(mob, ParticleTypes.HEART, mob.getBbHeight() - 0.5, 0.2d, heartCount, 1d);
 					this.setProgressValue(mob, player.getUUID(), newProgress);
-					TIMER_KEY_PICKING_COOLDOWN.setTimer(mob, getMobPickingCooldown());
+                    this.getTamable(mob).getTimerComponent().addTimer(TIMER_KEY_PICKING_COOLDOWN, getMobPickingCooldown(), true);
 				}
 				this.debugPrint(player, "Progress: " + newProgress);
 			}
@@ -256,19 +247,16 @@ public abstract class NFFGirlsItemDroppingTamingProcess extends NFFTamingProcess
 	@Override
 	public void onGeneralTimerExpire(Mob mob, String key) {
 		super.onGeneralTimerExpire(mob, key);
-		if (key.equals(TIMER_KEY_HOLD_ITEM_TIME.getKey()))
+		if (key.equals(TIMER_KEY_HOLD_ITEM_TIME))
 			this.finalizeHoldingItem(mob);
 	}
 
 	@Override
 	public void serverTick(Mob mob)
 	{
-		LazyOptional<CNFFTamable> tamableOptional = CNFFTamable.getOptional(mob);
-		if (!tamableOptional.isPresent())
-			return;
-		CNFFTamable tamable = tamableOptional.orElseThrow(RuntimeException::new);
+        NFFTamableComponent tamable = this.getTamable(mob);
 		// Check pick-up
-		if (!TIMER_KEY_HOLD_ITEM_TIME.hasTimer(mob))
+		if (!tamable.getTimerComponent().hasGeneralTimer(TIMER_KEY_HOLD_ITEM_TIME))
 		{
 			// Overlapping or on neighboring block position
 			Predicate<ItemEntity> pickCondition = (ItemEntity ie) -> ie.getBoundingBox().intersects(mob.getBoundingBox()) 
@@ -340,9 +328,9 @@ public abstract class NFFGirlsItemDroppingTamingProcess extends NFFTamingProcess
 	 * mob to pick the item again.
 	 */
 	private int getItemEntityPickingCooldown(ItemEntity itemEntity, Mob mob) {
-		return itemEntity.getCapability(NFUCapabilities.CAP_ENTITY_DATA)
-				.map(c -> c.getNBT().getCompound(ENTITY_DATA_KEY_ALREADY_PICKED_TAMABLE_MOBS).getInt(mob.getStringUUID()))
-				.orElse(0);
+		return EntityComponentAPI.getDefaultTimer(itemEntity)
+                .getUUIDSpecificTimer(mob.getUUID(), ITEM_ENTITY_TIMER_KEY_ALREADY_PICKED_TAMABLE_MOBS)
+                .map(EntityTimerComponent.Timer::getTicksRemaining).orElse(0);
 	}
 
 	/**
@@ -350,22 +338,10 @@ public abstract class NFFGirlsItemDroppingTamingProcess extends NFFTamingProcess
 	 * mob to pick the item again.
 	 */
 	private void setItemEntityPickingCooldown(ItemEntity itemEntity, Mob mob, int ticks) {
-		var optC = itemEntity.getCapability(NFUCapabilities.CAP_ENTITY_DATA);
-		if (!optC.isPresent()) return;
-		var c = optC.orElseThrow(RuntimeException::new);
-		if (!c.getNBT().contains(ENTITY_DATA_KEY_ALREADY_PICKED_TAMABLE_MOBS, Tag.TAG_COMPOUND))
-			c.getNBT().put(ENTITY_DATA_KEY_ALREADY_PICKED_TAMABLE_MOBS, new CompoundTag());
-		if (ticks <= 0) c.getNBT().getCompound(ENTITY_DATA_KEY_ALREADY_PICKED_TAMABLE_MOBS).remove(mob.getStringUUID());
-		else {
-			c.getNBT().getCompound(ENTITY_DATA_KEY_ALREADY_PICKED_TAMABLE_MOBS).putInt(mob.getStringUUID(), ticks);
-			if (c.getNBT().getCompound(ENTITY_DATA_KEY_ALREADY_PICKED_TAMABLE_MOBS).isEmpty())
-				c.getNBT().remove(ENTITY_DATA_KEY_ALREADY_PICKED_TAMABLE_MOBS);
-		}
+        EntityComponentAPI.getDefaultTimer(itemEntity)
+                .addUUIDSpecificTimer(mob.getUUID(), ITEM_ENTITY_TIMER_KEY_ALREADY_PICKED_TAMABLE_MOBS, ticks, 1, true);
 	}
 
-	private void tickItemEntityPickingCooldown(ItemEntity itemEntity) {
-
-	}
 	/**
 	 * Return an {@code int[2]} of {@code {watchItemGoalPriority, pickItemGoalPriority}}.
 	 */
@@ -380,23 +356,4 @@ public abstract class NFFGirlsItemDroppingTamingProcess extends NFFTamingProcess
 		return this;
 	}
 
-	@SubscribeEvent
-	public static void tickItemEntityPickingCooldown(EntityStartBaseTickEvent event)
-	{
-		if (event.getEntity() instanceof ItemEntity ie && !ie.level.isClientSide)
-		{
-			ie.getCapability(NFUCapabilities.CAP_ENTITY_DATA).ifPresent(dataCap -> {
-				CompoundTag allTimers = dataCap.getNBT().getCompound(ENTITY_DATA_KEY_ALREADY_PICKED_TAMABLE_MOBS);
-				Set<String> removal = new HashSet<>();
-				for (String key: allTimers.getAllKeys()) {
-					int oldVal = allTimers.getInt(key);
-					allTimers.putInt(key, oldVal - 1);
-					if (oldVal - 1 <= 0) removal.add(key);
-				}
-				for (String key: removal) {
-					allTimers.remove(key);
-				}
-			});
-		}
-	}
  }

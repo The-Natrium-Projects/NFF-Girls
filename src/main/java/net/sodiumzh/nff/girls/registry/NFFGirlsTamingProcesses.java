@@ -1,6 +1,7 @@
 package net.sodiumzh.nff.girls.registry;
 
 import net.sodiumzh.nff.girls.NFFGirls;
+import net.sodiumzh.nff.girls.entity.NFFGirlsTamingRules;
 import net.sodiumzh.nff.girls.entity.tamingprocess.hmag.*;
 import net.sodiumzh.nff.services.entity.taming.NFFTamingProcess;
 import net.sodiumzh.nff.services.registry.NFFRegistries;
@@ -15,6 +16,7 @@ public class NFFGirlsTamingProcesses {
 
     public static final NFURegistry.Accessor<NFFTamingProcess> HMAG_ALRAUNE = TAMING_PROCESSES.register(
             "hmag_alraune",  () -> new HmagAlrauneTamingProcess().setItemGivingTableOverride(NFFGirlsFriendingItems.PLANT_A::get)
+            .setItemGivingCooldownTicks(NFFGirlsTamingRules.COOLDOWN_SHORT)
             .setAngerAndInterruptionRules(NFFGirlsAngerRules.DEFAULT.get(), MobAngerRules.ATTACKER.get()));
     public static final NFURegistry.Accessor<NFFTamingProcess> HMAG_BANSHEE = TAMING_PROCESSES.register(
             "hmag_banshee",  () -> new HmagBansheeTamingProcess().setItemGivingTableOverride(NFFGirlsFriendingItems.UNDEAD_B::get)
