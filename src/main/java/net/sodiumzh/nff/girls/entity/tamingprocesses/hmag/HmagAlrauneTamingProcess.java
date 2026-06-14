@@ -4,10 +4,8 @@ import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.player.Player;
 import net.sodiumzh.nff.girls.entity.NFFGirlsTamingRules;
-import net.sodiumzh.nff.girls.registry.NFFGirlsAngerRules;
-import net.sodiumzh.nff.services.entity.capability.CNFFTamable;
+import net.sodiumzh.nff.services.entity.taming.NFFTamableComponent;
 import net.sodiumzh.nff.services.entity.taming.TamingProcessItemGivingProgress;
-import net.sodiumzh.nfu.entity.anger.MobAngerRules;
 
 public class HmagAlrauneTamingProcess extends TamingProcessItemGivingProgress
 {
@@ -25,8 +23,7 @@ public class HmagAlrauneTamingProcess extends TamingProcessItemGivingProgress
 	}
 
 	@Override
-	public void tamableInit(CNFFTamable cnffTamable) {
-
+	public void tamableInit(NFFTamableComponent c) {
 	}
 
 }
