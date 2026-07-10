@@ -8,6 +8,7 @@ import net.minecraft.nbt.Tag;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.npc.VillagerProfession;
 import net.minecraft.world.entity.npc.VillagerTrades.ItemListing;
 import net.minecraft.world.entity.player.Player;
@@ -26,9 +27,9 @@ import net.sodiumzh.nff.girls.network.NFFGirlsChannels;
 import net.sodiumzh.nff.girls.registry.NFFGirlsCapabilities;
 import net.sodiumzh.nff.girls.registry.NFFGirlsItems;
 import net.sodiumzh.nff.girls.registry.NFFGirlsTrades;
-import net.sodiumzh.nfu.capability.SerializableCapabilityProvider;
+import net.sodiumzh.nfu.capability.NFUEntitySerializableCapProvider;
 import net.sodiumzh.nfu.container.Tuple2;
-import net.sodiumzh.nfu.entity.vanillatrade.CVanillaMerchant;
+import net.sodiumzh.nfu.entity.vanillatrade.IVanillaMerchant;
 import net.sodiumzh.nfu.entity.vanillatrade.IVanillaTradeListing;
 import net.sodiumzh.nfu.entity.vanillatrade.ScaledVanillaTradeListing;
 import net.sodiumzh.nfu.entity.vanillatrade.VanillaMerchant;
@@ -40,14 +41,14 @@ import java.util.*;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
-public interface CNFFGirlsTradeHandler extends CVanillaMerchant
+public interface CNFFGirlsTradeHandler extends IVanillaMerchant
 {
 	public static final int[] LEVEL_REQUIREMENTS = {0, 5, 15, 30, 45};
 	public static final int[] OFFER_COUNT_FOR_LEVEL = {2, 2, 2, 2, 1};
 	public static final ItemListing INTRODUCTION = (e, rnd) -> 
 	{
 		ItemStack res = new ItemStack(NFFGirlsItems.TRADE_INTRODUCTION_LETTER.get());
-		NFFGirlsItems.TRADE_INTRODUCTION_LETTER.get().write(res, INFFGirlsTamed.getBM(e));
+		NFFGirlsItems.TRADE_INTRODUCTION_LETTER.get().write(res, INFFGirlsTamed.get(e).orElseThrow());
 		return new MerchantOffer(new ItemStack(Items.WRITABLE_BOOK), res, 1, 0, 0);
 	};
 
@@ -106,13 +107,7 @@ public interface CNFFGirlsTradeHandler extends CVanillaMerchant
 		{
 			super(bm.asMob());
 		}
-		
-		@Override
-		public INFFGirlsTamed getBM()
-		{
-			return INFFGirlsTamed.getBM(this.getMob());
-		}
-		
+
 		@Override
 		public List<NFFGirlsTradeOfferMetaData> getMeta()
 		{
@@ -122,7 +117,7 @@ public interface CNFFGirlsTradeHandler extends CVanillaMerchant
 		@Override
 		public int getPointsPerIntroduction()
 		{
-			return INFFGirlsTamed.isBM(this.getMob()) ? INFFGirlsTamed.getBM(this.getMob()).pointsPerIntroductionLetter() : 128;
+			return INFFGirlsTamed.get(this.getMob()).map(INFFGirlsTamed::pointsPerIntroductionLetter).orElse(128);
 		}
 		
 		@Override
@@ -170,8 +165,7 @@ public interface CNFFGirlsTradeHandler extends CVanillaMerchant
 			// Don't allow to regenerate at the introduction letter entry
 			if (index < 0 || index >= this.getOffersRaw().size() - 1) throw new IllegalArgumentException();
 			Set<ScaledVanillaTradeListing> available = NFFGirlsTrades.TRADE_REGISTRY.get().collect().
-				get(ForgeRegistries.ENTITIES.getKey(INFFGirlsTamed.getBM(this.getMob()).getData().getInitialEntityType()), VillagerProfession.NONE)
-
+				get(ForgeRegistries.ENTITIES.getKey(INFFGirlsTamed.get(this.getMob()).orElseThrow().getDataAccessor().getInitialEntityType()), VillagerProfession.NONE)
 				.forLevel(this.getMeta(index).requiredMerchantLevel);
 			if (available.isEmpty()) return;
 			int merchantLevel = this.getMeta(index).requiredMerchantLevel;
@@ -279,7 +273,12 @@ public interface CNFFGirlsTradeHandler extends CVanillaMerchant
 				}
 			}
 		}
-		
+
+		@Override
+		public INFFGirlsTamed getBM() {
+			return INFFGirlsTamed.get(this.getMob()).orElseThrow();
+		}
+
 		protected void serverTickInternal()
 		{
 
@@ -512,12 +511,12 @@ public interface CNFFGirlsTradeHandler extends CVanillaMerchant
 		}
 	}
 	
-	public static class Prvd extends SerializableCapabilityProvider<CompoundTag, CNFFGirlsTradeHandler>
+	public static class Prvd extends NFUEntitySerializableCapProvider<Mob, CNFFGirlsTradeHandler, CompoundTag>
 	{
 
 		public Prvd(INFFGirlsTamed bm, Capability<CNFFGirlsTradeHandler> holder)
 		{
-			super(() -> new Impl(bm), holder);
+			super(bm.asMob(), holder, () -> new Impl(bm));
 		}
 		
 	}

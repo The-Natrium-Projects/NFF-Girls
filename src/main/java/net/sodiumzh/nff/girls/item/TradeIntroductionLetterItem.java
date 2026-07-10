@@ -1,6 +1,7 @@
 package net.sodiumzh.nff.girls.item;
 
 import net.minecraft.ChatFormatting;
+import net.minecraft.nbt.Tag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
@@ -37,16 +38,16 @@ public class TradeIntroductionLetterItem extends NFUItem
 		stack.getTag().putUUID("writer_id", writer.getIdentifier());
 		stack.getTag().putString("writer_name", writer.asMob().getName().getString());
 		stack.getTag().putUUID("player_uuid", writer.getOwnerUUID());
-		stack.getTag().putString("player_name", writer.getData().getOwnerName());
+		stack.getTag().putString("player_name", writer.getDataAccessor().getOwnerName());
 	}
 	
 	public boolean isValid(ItemStack stack)
 	{
 		return stack.hasTag() 
 				&& stack.getTag().hasUUID("writer_id") 
-				&& stack.getTag().contains("writer_name", NFUNBTStatics.TAG_STRING_ID)
+				&& stack.getTag().contains("writer_name", Tag.TAG_STRING)
 				&& stack.getTag().hasUUID("player_uuid")
-				&& stack.getTag().contains("player_name", NFUNBTStatics.TAG_STRING_ID);
+				&& stack.getTag().contains("player_name", Tag.TAG_STRING);
 	}
 	
 	public UUID getWriterId(ItemStack stack)
@@ -73,13 +74,12 @@ public class TradeIntroductionLetterItem extends NFUItem
 	public InteractionResult interactLivingEntity(Player player, LivingEntity living, InteractionHand usedHand)
 	{
 		ItemStack stack = player.getItemInHand(usedHand);
-		if (INFFGirlsTamed.isBM(living)
-				&& living.getCapability(NFFGirlsCapabilities.CAP_TRADE_HANDLER).isPresent()
-				&& INFFGirlsTamed.getBM(living).getOwnerUUID().equals(player.getUUID()))
+		if (INFFGirlsTamed.get(living).filter(t -> player.getUUID().equals(t.getOwnerUUID())).isPresent()
+				&& living.getCapability(NFFGirlsCapabilities.CAP_TRADE_HANDLER).isPresent())
 		{
 			if (!player.level.isClientSide)
 			{
-				UUID targetId = INFFGirlsTamed.getBM(living).getIdentifier();
+				UUID targetId = INFFGirlsTamed.get(living).get().getIdentifier();
 				if (this.isValid(stack) && this.getPlayerUUID(stack).equals(player.getUUID()))
 				{
 					if (this.getWriterId(stack).equals(targetId))
@@ -96,7 +96,7 @@ public class TradeIntroductionLetterItem extends NFUItem
 				}
 				else if (!this.isValid(stack))
 				{
-					this.write(stack, INFFGirlsTamed.getBM(living));
+					this.write(stack, INFFGirlsTamed.get(living).orElseThrow());
 					NFUMiscStatics.printToScreen(NFUInfoStatics.createTranslatable("info.nffgirls.introduction_written", living.getName().getString()), player);
 				}
 				else return InteractionResult.PASS;

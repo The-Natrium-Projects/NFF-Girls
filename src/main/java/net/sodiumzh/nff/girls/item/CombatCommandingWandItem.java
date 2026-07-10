@@ -72,7 +72,7 @@ public class CombatCommandingWandItem extends NFUItem {
 				return InteractionResult.sidedSuccess(player.level.isClientSide());
 			}).orElseGet(() -> {
 				AtomicBoolean set = new AtomicBoolean(false);
-				player.level.getEntities(player, player.getBoundingBox().inflate(16d), INFFGirlsTamed::isBM)
+				player.level().getEntities(player, player.getBoundingBox().inflate(16d), e -> INFFGirlsTamed.get(e).isPresent())
 					.forEach(e -> {
 						if (trySetTarget(player, e, target)) set.set(true);
 					});
@@ -93,8 +93,8 @@ public class CombatCommandingWandItem extends NFUItem {
 				return InteractionResult.sidedSuccess(player.level.isClientSide());
 			}
 		}
-		else if (INFFGirlsTamed.isBMAnd(target, tamed -> player.getUUID().equals(tamed.getOwnerUUID()))) {
-			player.getItemInHand(hand).getOrCreateTag().putUUID(KEY_SETTING_MOB_IDENTIFIER, INFFGirlsTamed.getBM(target).getIdentifier());
+		else if (INFFGirlsTamed.get(target).filter(tamed -> player.getUUID().equals(tamed.getOwnerUUID())).isPresent()) {
+			player.getItemInHand(hand).getOrCreateTag().putUUID(KEY_SETTING_MOB_IDENTIFIER, INFFGirlsTamed.get(target).orElseThrow().getIdentifier());
 			NFUInfoStatics.printMessageTranslatable(player, "info.nffgirls.item." +
 				"combat_setting_target_selected", target.getName().getString());
 			return InteractionResult.sidedSuccess(player.level.isClientSide());
@@ -104,14 +104,14 @@ public class CombatCommandingWandItem extends NFUItem {
 
 	private static boolean canTamedAttackTarget(Entity tamed, LivingEntity target) {
 		if (tamed == null || target == null) return false;
-		return INFFGirlsTamed.isBMAnd(tamed, tm -> tm.wantsToAttack(target));
+		return INFFGirlsTamed.get(tamed).filter(tm -> tm.wantsToAttack(target)).isPresent();
 	}
 
 	private static boolean trySetTarget(@Nonnull Player owner, @Nullable Entity tamedEntity, @Nullable LivingEntity target) {
 		if (tamedEntity == null || target == null) return false;
-		if (!INFFGirlsTamed.isBMAnd(tamedEntity, t -> owner.getUUID().equals(t.getOwnerUUID()))) return false;
+		if (!INFFGirlsTamed.get(tamedEntity).filter(t -> owner.getUUID().equals(t.getOwnerUUID())).isPresent()) return false;
 		if (canTamedAttackTarget(tamedEntity, target)) {
-			INFFGirlsTamed.ifBM(tamedEntity, tm -> tm.asMob().setTarget(target));
+			INFFGirlsTamed.get(tamedEntity).ifPresent(tm -> tm.asMob().setTarget(target));
 			return true;
 		}
 		return false;

@@ -5,6 +5,7 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
 import net.minecraft.nbt.StringTag;
 import net.minecraft.nbt.Tag;
+import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.Mob;
@@ -12,10 +13,7 @@ import net.minecraftforge.registries.ForgeRegistries;
 import net.sodiumzh.nff.girls.entity.INFFGirlsTamed;
 import net.sodiumzh.nff.services.entity.taming.NFFTamedStatics;
 
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.Objects;
-import java.util.Set;
+import java.util.*;
 
 public class NFFGirlsAttackingStrategy {
 
@@ -68,6 +66,22 @@ public class NFFGirlsAttackingStrategy {
             LogUtils.getLogger().error("NFF: Girls Attacking Strategy loading failed:", e);
             return new NFFGirlsAttackingStrategy();
         }
+    }
+
+    public void writeBuf(FriendlyByteBuf buf) {
+        buf.writeCollection(this.activeAttackingList.stream().map(ForgeRegistries.ENTITY_TYPES::getKey)
+            .filter(Objects::nonNull).map(ResourceLocation::toString).toList(), FriendlyByteBuf::writeUtf);
+        buf.writeCollection(this.notAttackingList.stream().map(ForgeRegistries.ENTITY_TYPES::getKey)
+            .filter(Objects::nonNull).map(ResourceLocation::toString).toList(), FriendlyByteBuf::writeUtf);
+    }
+
+    public static NFFGirlsAttackingStrategy readBuf(FriendlyByteBuf buf) {
+        NFFGirlsAttackingStrategy strategy = new NFFGirlsAttackingStrategy();
+        var attack = buf.readCollection(ArrayList::new, b -> (EntityType<? extends Mob>)ForgeRegistries.ENTITY_TYPES.getValue(new ResourceLocation(b.readUtf())));
+        strategy.activeAttackingList.addAll(attack);
+        var noAttack = buf.readCollection(ArrayList::new, b -> (EntityType<? extends Mob>)ForgeRegistries.ENTITY_TYPES.getValue(new ResourceLocation(b.readUtf())));
+        strategy.notAttackingList.addAll(noAttack);
+        return strategy;
     }
 
     public boolean shouldActivelyAttack(INFFGirlsTamed attacker, Mob target) {

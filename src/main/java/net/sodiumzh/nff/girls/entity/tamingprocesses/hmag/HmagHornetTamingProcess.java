@@ -1,4 +1,4 @@
-package net.sodiumzh.nff.girls.entity.tamingprocesses.hmag;
+package net.sodiumzh.nff.girls.entity.tamingprocess.hmag;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.effect.MobEffects;
@@ -10,15 +10,14 @@ import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.AABB;
 import net.sodiumzh.nff.girls.entity.NFFGirlsTamingRules;
-import net.sodiumzh.nff.girls.registry.NFFGirlsAngerRules;
-import net.sodiumzh.nff.services.entity.capability.CNFFTamable;
+import net.sodiumzh.nff.services.entity.taming.NFFTamableComponent;
 import net.sodiumzh.nff.services.entity.taming.TamingProcessItemGivingProgress;
-import net.sodiumzh.nfu.entity.anger.MobAngerRules;
 
 import java.util.stream.Stream;
 
 public class HmagHornetTamingProcess extends TamingProcessItemGivingProgress
 {
+
 	@Override
 	public boolean isItemAcceptable(ItemStack item) {
 		return item.is(Items.HONEY_BOTTLE)
@@ -40,7 +39,7 @@ public class HmagHornetTamingProcess extends TamingProcessItemGivingProgress
 		// If consumed honey bottle, drop a glass bottle
 		if (!args.isClient() && args.getPlayer().getItemInHand(args.getHand()).getCount() != count && flag)
 		{
-			NFUItemStatics.giveOrDropDefault(args.getPlayer(), Items.GLASS_BOTTLE);
+			NaUtilsItemStatics.giveOrDropDefault(args.getPlayer(), Items.GLASS_BOTTLE);
 		}
 		return res;
 	}*/
@@ -55,7 +54,7 @@ public class HmagHornetTamingProcess extends TamingProcessItemGivingProgress
 		BlockPos pos = mob.blockPosition();
 		// Search 9x9x9 area centered by mob
 		AABB searchArea = new AABB(pos.getX() - 4, pos.getY() - 4, pos.getZ() - 4, pos.getX() + 4, pos.getY() + 4, pos.getZ() + 4);
-		Stream<BlockState> blocks = mob.level.getBlockStates(searchArea);
+		Stream<BlockState> blocks = mob.level().getBlockStates(searchArea);
 		long count = blocks.filter(b -> b.is(Blocks.HONEY_BLOCK)).count();
 		return count >= 8;
 	}
@@ -76,11 +75,11 @@ public class HmagHornetTamingProcess extends TamingProcessItemGivingProgress
 		if (!has8HoneyBlocksAround(mob) && this.isInAnyProcess(mob)) {
 			NFFGirlsTamingRules.tickContinuousProgressLoss(this, mob);
 		}
-		CNFFTamable.get(mob).setAlwaysHostileTo(ongoing);
+		NFFTamableComponent.getOrDefault(mob).setAlwaysHostileTo(ongoing);
 	}
 
 	@Override
-	public void tamableInit(CNFFTamable cnffTamable) {
+	public void tamableInit(NFFTamableComponent cnffTamable) {
 
 	}
 }

@@ -10,8 +10,8 @@ import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.player.Player;
 import net.sodiumzh.nff.girls.entity.INFFGirlsTamed;
 import net.sodiumzh.nff.girls.registry.NFFGirlsEntityComponents;
-import net.sodiumzh.nff.girls.registry.NFFGirlsNeutralizationMapping;
 import net.sodiumzh.nff.services.entity.taming.NFFTamingMapping;
+import net.sodiumzh.nff.services.registry.NFFEntityComponents;
 import net.sodiumzh.nfu.entity.anger.MobAngerHandlerComponent;
 import net.sodiumzh.nfu.entity.anger.MobAngerRules;
 import net.sodiumzh.nfu.entity.anger.MobSetAngerResult;
@@ -87,7 +87,7 @@ public class NFFGirlsNeutralityHandlerComponent extends MobAngerHandlerComponent
         if (INFFGirlsTamed.get(mobUpdated).filter(INFFGirlsTamed::isOwnerInDimension).isPresent()) {
             mobUpdated.level().getEntitiesOfClass(Mob.class, mobUpdated.getBoundingBox().inflate(16d), m ->
                m.getType().equals(NFFTamingMapping.getTypeBefore(mobUpdated))).forEach(m ->
-                EntityComponentAPI.getComponentManager(m).getSubComponentByPath("/neutrality_handler", NFFGirlsEntityComponents.NEUTRALITY_HANDLER.get()).ifPresent(c -> {
+                EntityComponentAPI.getComponentManager(m).getSubComponentByPath(NFFGirlsEntityComponents.PATH_NEUTRALITY_HANDLER, NFFGirlsEntityComponents.NEUTRALITY_HANDLER.get()).ifPresent(c -> {
                     Player owner = INFFGirlsTamed.get(mobUpdated).map(INFFGirlsTamed::getOwnerInDimension).orElseThrow();
                     if (!c.isAngryAt(owner) && !c.isAngryAt(mobUpdated) && m.hasLineOfSight(mobUpdated) && m.hasLineOfSight(owner))
                         c.addNeutral(INFFGirlsTamed.get(mobUpdated).map(INFFGirlsTamed::getOwnerInDimension).orElseThrow());
@@ -97,14 +97,14 @@ public class NFFGirlsNeutralityHandlerComponent extends MobAngerHandlerComponent
         // Now mobUpdated is the neutralized mob
         // Update each second for performance
         if (mobUpdated.tickCount / 20 == 10) {
-            EntityComponentAPI.getComponentManager(mobUpdated).getSubComponentByPath("/neutrality_handler", NFFGirlsEntityComponents.NEUTRALITY_HANDLER.get()).ifPresent(c -> {
+            EntityComponentAPI.getComponentManager(mobUpdated).getSubComponentByPath(NFFGirlsEntityComponents.PATH_NEUTRALITY_HANDLER, NFFGirlsEntityComponents.NEUTRALITY_HANDLER.get()).ifPresent(c -> {
                 List<Player> neutralToPlayers = c.getNeutralPlayers();
                 if (!neutralToPlayers.isEmpty()) {
                     List<Mob> surroundingMobsSameType = mobUpdated.level().getEntitiesOfClass(Mob.class, mobUpdated.getBoundingBox().inflate(12d),
                         m -> mobUpdated.getType().equals(m.getType()) && m.hasLineOfSight(mobUpdated));
                     for (Player player: neutralToPlayers) {
                         surroundingMobsSameType.stream().filter(m -> m.hasLineOfSight(player)).forEach(m ->
-                            EntityComponentAPI.getComponentManager(m).getSubComponentByPath("/neutrality_handler", NFFGirlsEntityComponents.NEUTRALITY_HANDLER.get()).ifPresent(c1 -> {
+                            EntityComponentAPI.getComponentManager(m).getSubComponentByPath(NFFGirlsEntityComponents.PATH_NEUTRALITY_HANDLER, NFFGirlsEntityComponents.NEUTRALITY_HANDLER.get()).ifPresent(c1 -> {
                                 if (!c1.isAngryAt(player))
                                     c1.addNeutral(player);
                             }));

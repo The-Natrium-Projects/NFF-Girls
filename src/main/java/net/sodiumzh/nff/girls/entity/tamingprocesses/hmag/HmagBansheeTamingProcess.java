@@ -1,15 +1,15 @@
-package net.sodiumzh.nff.girls.entity.tamingprocesses.hmag;
+package net.sodiumzh.nff.girls.entity.tamingprocess.hmag;
 
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.phys.AABB;
-import net.minecraftforge.event.entity.living.PotionEvent;
+import net.minecraftforge.event.entity.living.MobEffectEvent;
 import net.minecraftforge.eventbus.api.Event;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.sodiumzh.nff.girls.entity.NFFGirlsTamingRules;
-import net.sodiumzh.nff.services.entity.capability.CNFFTamable;
+import net.sodiumzh.nff.services.entity.taming.NFFTamableComponent;
 
 public class HmagBansheeTamingProcess extends HmagVanillaUndeadTamingProcess
 {
@@ -32,9 +32,9 @@ public class HmagBansheeTamingProcess extends HmagVanillaUndeadTamingProcess
 			NFFGirlsTamingRules.tickContinuousProgressLoss(this, mob);
 		}
 		if (ongoing != null && mob.hasLineOfSight(ongoing)) {
-			CNFFTamable.get(mob).setAlwaysHostileTo(ongoing);
+			this.getTamable(mob).setAlwaysHostileTo(ongoing);
 		}
-		else CNFFTamable.get(mob).setAlwaysHostileTo(null);
+		else this.getTamable(mob).setAlwaysHostileTo(null);
 
 	}
 
@@ -46,11 +46,11 @@ public class HmagBansheeTamingProcess extends HmagVanillaUndeadTamingProcess
 	}
 
 	@SubscribeEvent
-	public static void preventWitherInProcess(PotionEvent.PotionApplicableEvent event) {
-		if (event.getPotionEffect().getEffect().equals(MobEffects.WITHER)
+	public static void preventWitherInProcess(MobEffectEvent.Applicable event) {
+		if (event.getEffectInstance().getEffect().equals(MobEffects.WITHER)
 				&& event.getEntity() instanceof Mob e
-				&& (CNFFTamable.getOptional(e).map(tamable -> tamable.getTamingProcess() instanceof HmagBansheeTamingProcess).orElse(false)
-				&& CNFFTamable.get(e).getTamingProcess().isInAnyProcess(e)))
+				&& NFFTamableComponent.getOptional(e).map(tamable -> tamable.getTamingProcess() instanceof HmagBansheeTamingProcess
+			&& tamable.getTamingProcess().isInAnyProcess(e)).orElse(false))
 		{
 			event.setResult(Event.Result.DENY);
 		}

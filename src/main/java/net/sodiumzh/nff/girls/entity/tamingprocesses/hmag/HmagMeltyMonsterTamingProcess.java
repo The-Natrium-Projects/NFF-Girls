@@ -7,10 +7,8 @@ import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.sodiumzh.nff.girls.entity.NFFGirlsTamingRules;
-import net.sodiumzh.nff.girls.registry.NFFGirlsAngerRules;
-import net.sodiumzh.nff.services.entity.capability.CNFFTamable;
+import net.sodiumzh.nff.services.entity.taming.NFFTamableComponent;
 import net.sodiumzh.nff.services.entity.taming.TamingProcessItemGivingProgress;
-import net.sodiumzh.nfu.entity.anger.MobAngerRules;
 import net.sodiumzh.nfu.util.NFUEntityStatics;
 
 public class HmagMeltyMonsterTamingProcess extends TamingProcessItemGivingProgress
@@ -34,7 +32,7 @@ public class HmagMeltyMonsterTamingProcess extends TamingProcessItemGivingProgre
 	}
 
 	@Override
-	public void tamableInit(CNFFTamable cnffTamable) {
+	public void tamableInit(NFFTamableComponent cnffTamable) {
 
 	}
 }

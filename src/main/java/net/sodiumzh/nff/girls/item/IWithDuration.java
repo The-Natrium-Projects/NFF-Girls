@@ -1,6 +1,7 @@
 package net.sodiumzh.nff.girls.item;
 
 import net.minecraft.ChatFormatting;
+import net.minecraft.nbt.Tag;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.world.item.ItemStack;
 import net.sodiumzh.nfu.annotation.DontOverride;
@@ -23,7 +24,7 @@ public interface IWithDuration {
 		{
 			throw new IllegalArgumentException("Wrong item type");
 		}
-		if (!stack.getOrCreateTag().contains("IWithDuration_duration", NFUNBTStatics.TAG_INT_ID))
+		if (!stack.getOrCreateTag().contains("IWithDuration_duration", Tag.TAG_INT))
 		{
 			stack.getOrCreateTag().putInt("IWithDuration_duration", getMaxDuration());
 			return getMaxDuration();

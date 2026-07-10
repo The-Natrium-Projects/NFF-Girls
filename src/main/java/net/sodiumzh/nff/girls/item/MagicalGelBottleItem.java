@@ -8,6 +8,7 @@ import net.minecraft.core.Vec3i;
 import net.minecraft.nbt.ByteTag;
 import net.minecraft.nbt.DoubleTag;
 import net.minecraft.nbt.IntTag;
+import net.minecraft.nbt.Tag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.Style;
 import net.minecraft.world.InteractionHand;
@@ -74,11 +75,11 @@ public class MagicalGelBottleItem extends NFUItem
 	protected boolean checkValid(ItemStack stack)
 	{
 		checkStackType(stack);
-		return stack.hasTag() && stack.getTag().contains("amount", NFUNBTStatics.TAG_INT_ID)
-				&& stack.getTag().contains("red", NFUNBTStatics.TAG_DOUBLE_ID)
-				&& stack.getTag().contains("green", NFUNBTStatics.TAG_DOUBLE_ID)
-				&& stack.getTag().contains("blue", NFUNBTStatics.TAG_DOUBLE_ID)
-				&& stack.getTag().contains("show_color", NFUNBTStatics.TAG_BYTE_ID);
+		return stack.hasTag() && stack.getTag().contains("amount", Tag.TAG_INT)
+				&& stack.getTag().contains("red", Tag.TAG_DOUBLE)
+				&& stack.getTag().contains("green", Tag.TAG_DOUBLE)
+				&& stack.getTag().contains("blue", Tag.TAG_DOUBLE)
+				&& stack.getTag().contains("show_color", Tag.TAG_BYTE);
 	}
 		
 	public int getAmount(ItemStack stack)

@@ -6,7 +6,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.common.MinecraftForge;
-import net.sodiumzh.nff.girls.eventlistener.NFFGirlsHooks;
+import net.sodiumzh.nff.girls.eventlistener.NFFGirlsEvents;
 import net.sodiumzh.nfu.mixin.NFUMixin;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
@@ -18,6 +18,6 @@ public class NFFGirlsMeltyMonsterEntityMixin implements NFUMixin<MeltyMonsterEnt
 			target = "Lnet/minecraft/world/level/Level;setBlockAndUpdate(Lnet/minecraft/core/BlockPos;Lnet/minecraft/world/level/block/state/BlockState;)Z"), expect = -1)
 	private boolean canSetFire(Level instance, BlockPos pos, BlockState blockstate)
 	{
-		return !MinecraftForge.EVENT_BUS.post(new NFFGirlsHooks.MeltyMonsterSetFireEvent(caller(), pos, blockstate));
+		return !MinecraftForge.EVENT_BUS.post(new NFFGirlsEvents.MeltyMonsterSetFireEvent(caller(), pos, blockstate));
 	}
 }

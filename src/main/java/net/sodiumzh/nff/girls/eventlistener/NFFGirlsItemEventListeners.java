@@ -143,19 +143,21 @@ public class NFFGirlsItemEventListeners
 	@SubscribeEvent
 	public static void longDistanceInteract(PlayerInteractEvent.RightClickItem event) {
 		// Lengthen the AI switching distance
-		if (!event.getEntity().level.isClientSide()
-				&& !event.getEntity().isShiftKeyDown()) {
-			Player player = event.getPlayer();
+		if (!event.getEntity().level().isClientSide()
+				&& !event.getEntity().isShiftKeyDown()
+				&& !NFULevelStatics.getMouseFocus(event.getEntity()).getType().equals(HitResult.Type.ENTITY)) {
+			Player player = event.getEntity();
 			InteractionHand usedHand = event.getHand();
 
 			NFULevelStatics.eyeTrace(player, 32d).ifPresent(hr -> {
 				if (hr.getType().equals(HitResult.Type.ENTITY)
 						&& hr instanceof EntityHitResult ehr
-						&& INFFGirlsTamed.isBMAnd(ehr.getEntity(), tamed ->
-						Objects.equals(tamed.getOwnerUUID(), player.getUUID())
-						&& tamed.isCommandingItem(player.getItemInHand(usedHand))))
+						&& INFFGirlsTamed.get(ehr.getEntity()).filter(tamed ->
+							Objects.equals(tamed.getOwnerUUID(), player.getUUID())
+							&& tamed.isCommandingItem(player.getItemInHand(usedHand)))
+						.isPresent())
 				{
-					INFFGirlsTamed.ifBM(ehr.getEntity(), INFFGirlsTamed::switchAIState);
+					INFFGirlsTamed.get(ehr.getEntity()).ifPresent(INFFGirlsTamed::switchAIState);
 					event.setCanceled(true);
 					event.setCancellationResult(InteractionResult.SUCCESS);
 				}

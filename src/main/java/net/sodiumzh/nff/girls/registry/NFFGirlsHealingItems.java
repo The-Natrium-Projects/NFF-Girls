@@ -4,6 +4,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.sodiumzh.nff.girls.NFFGirls;
 import net.sodiumzh.nff.girls.data.NFFGirlsDataReaders;
 import net.sodiumzh.nfu.entity.MobApplicableItemTable;
+import net.sodiumzh.nfu.network.AvailableSide;
 import net.sodiumzh.nfu.registry.NFURegistry;
 import net.sodiumzh.nfu.registry.NFURegistryEntryCollection;
 
@@ -16,9 +17,9 @@ public class NFFGirlsHealingItems
 
     public static final NFURegistry<MobApplicableItemTable> REGISTRY =
         new NFURegistry<MobApplicableItemTable>(new ResourceLocation(NFFGirls.MOD_ID, "healing_items"))
-            .setShouldGenerateOnServerSetup()
-            .setUnavailableBefore(NFURegistry.SetupPhase.SERVER_SETUP)
-            .setSide(NFURegistry.AvailableSide.SERVER);
+            .setSide(AvailableSide.SERVER)
+            .setLoadTiming(NFURegistry.LoadTiming.SIDE_SETUP)
+            .setAllowsAccessBeforeLoading(false);
 
     public static final NFURegistryEntryCollection<MobApplicableItemTable> HEALING_ITEMS_COLLECTION =
         NFURegistryEntryCollection.create(REGISTRY, NFFGirls.MOD_ID);
