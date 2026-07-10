@@ -56,7 +56,8 @@ public class NFFGirlsClientGamePacketHandler
 	{
 		Minecraft mc = Minecraft.getInstance();
 		PacketUtils.ensureRunningOnSameThread(packet, listener, mc);
-		INFFGirlsTamed bm = INFFGirlsTamed.getBM(mc.level.getEntity(packet.entityId));
+		INFFGirlsTamed bm = INFFGirlsTamed.get(mc.level.getEntity(packet.entityId)).orElse(null);
+		if (bm == null) return;
 		bm.asMob().getCapability(NFFGirlsCapabilities.CAP_TRADE_HANDLER).ifPresent(cap -> 
 		{
 			cap.setTradingPlayer(packet.tradingPlayerId == -1 ? null : (Player) mc.level.getEntity(packet.tradingPlayerId));

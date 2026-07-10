@@ -10,10 +10,8 @@ import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.AABB;
 import net.sodiumzh.nff.girls.entity.NFFGirlsTamingRules;
-import net.sodiumzh.nff.girls.registry.NFFGirlsAngerRules;
-import net.sodiumzh.nff.services.entity.taming.CNFFTamable;
+import net.sodiumzh.nff.services.entity.taming.NFFTamableComponent;
 import net.sodiumzh.nff.services.entity.taming.TamingProcessItemGivingProgress;
-import net.sodiumzh.nfu.entity.anger.MobAngerRules;
 
 import java.util.stream.Stream;
 
@@ -56,7 +54,7 @@ public class HmagHornetTamingProcess extends TamingProcessItemGivingProgress
 		BlockPos pos = mob.blockPosition();
 		// Search 9x9x9 area centered by mob
 		AABB searchArea = new AABB(pos.getX() - 4, pos.getY() - 4, pos.getZ() - 4, pos.getX() + 4, pos.getY() + 4, pos.getZ() + 4);
-		Stream<BlockState> blocks = mob.level.getBlockStates(searchArea);
+		Stream<BlockState> blocks = mob.level().getBlockStates(searchArea);
 		long count = blocks.filter(b -> b.is(Blocks.HONEY_BLOCK)).count();
 		return count >= 8;
 	}
@@ -77,11 +75,11 @@ public class HmagHornetTamingProcess extends TamingProcessItemGivingProgress
 		if (!has8HoneyBlocksAround(mob) && this.isInAnyProcess(mob)) {
 			NFFGirlsTamingRules.tickContinuousProgressLoss(this, mob);
 		}
-		CNFFTamable.get(mob).setAlwaysHostileTo(ongoing);
+		NFFTamableComponent.getOrDefault(mob).setAlwaysHostileTo(ongoing);
 	}
 
 	@Override
-	public void tamableInit(CNFFTamable cnffTamable) {
+	public void tamableInit(NFFTamableComponent cnffTamable) {
 
 	}
 }

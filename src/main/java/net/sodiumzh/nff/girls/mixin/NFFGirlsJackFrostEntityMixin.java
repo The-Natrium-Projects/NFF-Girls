@@ -4,7 +4,7 @@ import com.github.mechalopa.hmag.world.entity.JackFrostEntity;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.common.MinecraftForge;
-import net.sodiumzh.nff.girls.event.NFFGirlsHooks;
+import net.sodiumzh.nff.girls.eventlistener.NFFGirlsEvents;
 import net.sodiumzh.nfu.mixin.NFUMixin;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
@@ -19,7 +19,7 @@ public class NFFGirlsJackFrostEntityMixin implements NFUMixin<JackFrostEntity>
 	{
 		if (e instanceof JackFrostEntity jf)
 		{
-			if (MinecraftForge.EVENT_BUS.post(new NFFGirlsHooks.JackFrostCheckMeltingBiomeEvent(jf)))
+			if (MinecraftForge.EVENT_BUS.post(new NFFGirlsEvents.JackFrostCheckMeltingBiomeEvent(jf)))
 			{
 				cir.setReturnValue(false);
 			}

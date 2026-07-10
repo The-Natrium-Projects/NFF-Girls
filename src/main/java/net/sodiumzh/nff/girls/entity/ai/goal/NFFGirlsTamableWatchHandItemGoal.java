@@ -4,25 +4,21 @@ import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.ai.goal.Goal;
 import net.minecraft.world.phys.Vec3;
 import net.sodiumzh.nff.girls.entity.tamingprocess.hmag.NFFGirlsItemDroppingTamingProcess;
-import net.sodiumzh.nff.services.entity.taming.CNFFTamable;
+import net.sodiumzh.nff.services.entity.taming.NFFTamableComponent;
 import net.sodiumzh.nff.services.entity.taming.NFFTamingMapping;
-import net.sodiumzh.nff.services.registry.NFFCapRegistry;
 
 import java.util.EnumSet;
 
 public class NFFGirlsTamableWatchHandItemGoal extends Goal
 {
 	protected final Mob mob;
-	protected final CNFFTamable cap;
+	protected final NFFTamableComponent tamable;
 	
 	public NFFGirlsTamableWatchHandItemGoal(Mob mobBefriendable)
 	{
 		this.mob = mobBefriendable;
-		if (mob.getCapability(NFFCapRegistry.CAP_BEFRIENDABLE_MOB).isPresent())
-		{
-			cap = CNFFTamable.get(mob);
-		}
-		else throw new UnsupportedOperationException("This goal supports only mobs with CNFFTamable capability.");
+		this.tamable = NFFTamableComponent.getOptional(mob)
+			.orElseThrow(() -> new UnsupportedOperationException("This goal supports only mobs with CNFFTamable capability."));
 		if (!(NFFTamingMapping.getProcess(mob) instanceof NFFGirlsItemDroppingTamingProcess))
 			throw new UnsupportedOperationException("This goal supports befriendable mobs only with NFFGirlsItemDroppingTamingProcess as befriending handler.");
 		this.setFlags(EnumSet.of(Goal.Flag.MOVE, Goal.Flag.LOOK, Goal.Flag.JUMP));
@@ -30,7 +26,7 @@ public class NFFGirlsTamableWatchHandItemGoal extends Goal
 	
 	@Override
 	public boolean canUse() {
-		return cap.hasTimer("hold_item_time");
+		return tamable.getTimerComponent().hasGeneralTimer(NFFGirlsItemDroppingTamingProcess.TIMER_KEY_PICKING_COOLDOWN);
 	}
 	
 	@Override

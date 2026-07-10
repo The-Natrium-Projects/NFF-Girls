@@ -15,7 +15,7 @@ import net.sodiumzh.nff.girls.item.MagicalGelBottleItem;
 import net.sodiumzh.nff.girls.item.MagicalGelColorUtils;
 import net.sodiumzh.nff.girls.registry.NFFGirlsAngerRules;
 import net.sodiumzh.nff.girls.registry.NFFGirlsItems;
-import net.sodiumzh.nff.services.entity.taming.CNFFTamable;
+import net.sodiumzh.nff.services.entity.taming.NFFTamableComponent;
 import net.sodiumzh.nff.services.entity.taming.TamingProcessItemGivingProgress;
 import net.sodiumzh.nff.services.registry.NFFCapRegistry;
 import net.sodiumzh.nfu.entity.anger.MobAngerRules;
@@ -97,13 +97,13 @@ public class HmagSlimeGirlTamingProcess extends TamingProcessItemGivingProgress
 		{
 			if (mob.getType() == ModEntityTypes.SLIME_GIRL.get() && mob instanceof SlimeGirlEntity sg && RND.nextDouble() < 0.25d)
             {
-	            MagicalSlimeEntity slime = ModEntityTypes.MAGICAL_SLIME.get().create(mob.level);
+	            MagicalSlimeEntity slime = ModEntityTypes.MAGICAL_SLIME.get().create(mob.level());
 	            slime.setSize(1, true);
             	LinearColor sgColorCompl = MagicalGelColorUtils.getSlimeColor(sg).getComplementary();
             	SlimeGirlEntity.ColorVariant v = MagicalGelColorUtils.closestVariant(sgColorCompl);
-            	slime.setVariant(v.getId());
+            	slime.setVariant(v);
             	slime.moveTo(mob.getX() + NFUMathStatics.rndRangedDouble(-0.5, 0.5), mob.getY() + 0.5D, mob.getZ() + NFUMathStatics.rndRangedDouble(-0.5, 0.5), RND.nextFloat() * 360.0F, 0.0F);
-            	mob.level.addFreshEntity(slime);
+            	mob.level().addFreshEntity(slime);
             }
 			NFUParticleStatics.sendGlintParticlesToEntityDefault(mob);
 		}
@@ -115,19 +115,19 @@ public class HmagSlimeGirlTamingProcess extends TamingProcessItemGivingProgress
 	@Override
 	public TamingInteractionResult handleInteract(Player player, Mob mob, InteractionHand hand)
 	{
-		if (!player.level.isClientSide() && hand.equals(InteractionHand.MAIN_HAND)
+		if (!player.level().isClientSide() && hand.equals(InteractionHand.MAIN_HAND)
 				&& player.getMainHandItem().is(NFFGirlsItems.MAGICAL_GEL_BALL.get()))
 		{
-			player.getCapability(NFFCapRegistry.CAP_BM_PLAYER).ifPresent((c) ->
+			/*player.getCapability(NFFCapRegistry.CAP_BM_PLAYER).ifPresent((c) ->
 			{
 				c.getNbt().putBoolean("magical_gel_ball_no_use", true);
-			});
+			});*/
 		}
 		return super.handleInteract(player, mob, hand);
 	}
 
 	@Override
-	public void tamableInit(CNFFTamable cnffTamable) {
+	public void tamableInit(NFFTamableComponent NFFTamableComponent) {
 
 	}
 

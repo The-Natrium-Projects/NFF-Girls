@@ -1,5 +1,6 @@
 package net.sodiumzh.nff.girls.item;
 
+import net.minecraft.nbt.Tag;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.InteractionResultHolder;
@@ -31,7 +32,7 @@ public class XPModifierItem extends Item
 	
 	public int getValue(ItemStack stack)
 	{
-		if (!stack.getOrCreateTag().contains("value", NFUNBTStatics.TAG_INT_ID))
+		if (!stack.getOrCreateTag().contains("value", Tag.TAG_INT))
 			stack.getOrCreateTag().putInt("value", 1);
 		return stack.getOrCreateTag().getInt("value");
 	}

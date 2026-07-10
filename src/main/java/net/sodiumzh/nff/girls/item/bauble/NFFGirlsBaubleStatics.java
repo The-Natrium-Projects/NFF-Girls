@@ -3,32 +3,17 @@ package net.sodiumzh.nff.girls.item.bauble;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.item.ItemStack;
-import net.sodiumzh.nfu.container.MapPair;
 import net.sodiumzh.nfu.item.bauble.NFUBaubleAPI;
 import net.sodiumzh.nfu.util.NFUContainerStatics;
 
 import javax.annotation.Nullable;
+import java.util.AbstractMap;
 import java.util.Map;
 import java.util.function.Predicate;
 
 public class NFFGirlsBaubleStatics
 {
 
-	@Deprecated
-	private static final Map<Integer, String> ROMAN_NUMERALS = NFUContainerStatics.mapOf(
-			MapPair.of(0, "0"),
-			MapPair.of(1, "i"),
-			MapPair.of(2, "ii"),
-			MapPair.of(3, "iii"),
-			MapPair.of(4, "iv"),
-			MapPair.of(5, "v"),
-			MapPair.of(6, "vi"),
-			MapPair.of(7, "vii"),
-			MapPair.of(8, "viii"),
-			MapPair.of(9, "ix"),
-			MapPair.of(10, "x")
-			);
-	
 	/**
 	 * Count how many bauble of given key the mob has within the tier range.
 	 */
@@ -76,20 +61,6 @@ public class NFFGirlsBaubleStatics
 	public static int countBaubles(Mob mob, ResourceLocation key)
 	{
 		return countBaublesWithMinTier(mob, key, 0); 
-	}
-	
-	/**
-	 * Get a value as Roman numerals.
-	 * Supports 0-10 now.
-	 */
-	@Nullable
-	public static String getRomanNumeral(int value, boolean isUpperCase)
-	{
-		if (value > 10 || value < 0)
-			throw new UnsupportedOperationException("getRomanNumeral support only 0-10.");
-		String out = ROMAN_NUMERALS.get(value);
-		if (isUpperCase) out = out.toUpperCase();
-		return out;
 	}
 	
 }

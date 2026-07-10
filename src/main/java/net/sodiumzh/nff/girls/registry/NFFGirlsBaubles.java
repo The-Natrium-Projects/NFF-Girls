@@ -21,7 +21,6 @@ import net.sodiumzh.nff.girls.item.bauble.*;
 import net.sodiumzh.nff.girls.item.bauble.bauble.EnderManHandBlockBaubleBehavior;
 import net.sodiumzh.nff.girls.item.bauble.bauble.NecroticReaperHandHoeBaubleBehavior;
 import net.sodiumzh.nff.services.entity.taming.INFFTamed;
-import net.sodiumzh.nff.services.entity.taming.INFFTamedSunSensitiveMob;
 import net.sodiumzh.nff.services.entity.taming.NFFTamingMapping;
 import net.sodiumzh.nfu.function.RegistrablePredicate;
 import net.sodiumzh.nfu.item.bauble.BaubleEquippingCondition;
@@ -48,7 +47,7 @@ public class NFFGirlsBaubles {
      */
     public static final NFURegistry<INFFGirlsBauble> BAUBLE_REGISTRY =
         new NFURegistry<INFFGirlsBauble>(new ResourceLocation(NFFGirls.MOD_ID, "baubles"))
-            .setShouldGenerateOnCommonSetup();
+            .setLoadTiming(NFURegistry.LoadTiming.COMMON_SETUP);
 
     public static final NFURegistryEntryCollection<INFFGirlsBauble> BAUBLES =
         NFURegistryEntryCollection.create(BAUBLE_REGISTRY, NFFGirls.MOD_ID);
@@ -67,7 +66,7 @@ public class NFFGirlsBaubles {
         BaubleEquippingCondition.of(args -> args.user().getMobType().equals(MobType.UNDEAD) || args.user().getType().is(NFFGirlsTags.EQUIPS_BAUBLES_AS_UNDEAD))
             .setTranslation("tooltip.nffgirls.bauble.for_undead"));
     public static final NFURegistry.Accessor<BaubleEquippingCondition> CONDITION_SUN_SENSITIVE = BAUBLE_EQUIPPING_CONDITIONS.register("sun_sensitive", () ->
-        BaubleEquippingCondition.of(args -> args.user() instanceof INFFTamedSunSensitiveMob || args.user().getType().is(NFFGirlsTags.EQUIPS_BAUBLES_AS_SUN_SENSITIVE))
+        BaubleEquippingCondition.of(args -> INFFTamed.get(args.user()).filter(INFFTamed::enableSunSensitivity).isPresent() || args.user().getType().is(NFFGirlsTags.EQUIPS_BAUBLES_AS_SUN_SENSITIVE))
             .setTranslation("tooltip.nffgirls.bauble.for_sun_sensitive"));
     public static final NFURegistry.Accessor<BaubleEquippingCondition> CONDITION_UNDEAD_AND_SUN_SENSITIVE = BAUBLE_EQUIPPING_CONDITIONS.register("undead_and_sun_sensitive", () ->
         CONDITION_UNDEAD.get().or(CONDITION_SUN_SENSITIVE.get())

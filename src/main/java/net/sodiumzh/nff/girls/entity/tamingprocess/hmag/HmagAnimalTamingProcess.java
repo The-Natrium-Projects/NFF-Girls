@@ -39,7 +39,7 @@ public class HmagAnimalTamingProcess extends NFFGirlsItemDroppingTamingProcess
 	@Override
 	public void onConsumeItem(Mob mob, ItemStack item, double deltaProc)
 	{
-		CNFFTamable.getOptional(mob).ifPresent(tamable -> {
+		NFFTamableComponent.getOptional(mob).ifPresent(tamable -> {
 			tamable.getGeneralNBT().putDouble(NBT_KEY_STRENGTH, tamable.getGeneralNBT().getDouble(NBT_KEY_STRENGTH) + deltaProc);
 		});
 	}

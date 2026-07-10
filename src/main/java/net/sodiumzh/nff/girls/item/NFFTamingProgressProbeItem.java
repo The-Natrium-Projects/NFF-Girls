@@ -8,6 +8,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.sodiumzh.nff.girls.entity.tamingprocess.hmag.NFFGirlsItemDroppingTamingProcess;
+import net.sodiumzh.nff.services.entity.taming.NFFTamableComponent;
 import net.sodiumzh.nff.services.entity.taming.NFFTamingMapping;
 import net.sodiumzh.nff.services.entity.taming.TamingProcessItemGivingProgress;
 import net.sodiumzh.nff.services.registry.NFFCapRegistry;
@@ -26,7 +27,7 @@ public class NFFTamingProgressProbeItem extends Item
 	{
 		if (!player.level.isClientSide)
 		{
-			if (target instanceof Mob mob && target.getCapability(NFFCapRegistry.CAP_BEFRIENDABLE_MOB).isPresent())
+			if (target instanceof Mob mob && NFFTamableComponent.getOptional(target).isPresent())
 			{
 				if (NFFTamingMapping.getProcess(mob) instanceof TamingProcessItemGivingProgress prog)
 				{

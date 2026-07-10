@@ -25,10 +25,10 @@ public class MagicalGelBallItem extends Item
 	public InteractionResultHolder<ItemStack> use(Level pLevel, Player pPlayer, InteractionHand pHand) {
 		ItemStack itemstack = pPlayer.getItemInHand(pHand);
 		MutableObject<Boolean> noUse = new MutableObject<>(false);
-		pPlayer.getCapability(NFFCapRegistry.CAP_BM_PLAYER).ifPresent(c -> {
+		/*pPlayer.getCapability(NFFCapRegistry.CAP_BM_PLAYER).ifPresent(c -> {
 			if (c.getNbt().contains("magical_gel_ball_no_use"))
 				noUse.setValue(true);
-		});
+		});*/
 		if (noUse.getValue())
 			return InteractionResultHolder.pass(itemstack);
 		pLevel.playSound((Player) null, pPlayer.getX(), pPlayer.getY(), pPlayer.getZ(), SoundEvents.SNOWBALL_THROW,

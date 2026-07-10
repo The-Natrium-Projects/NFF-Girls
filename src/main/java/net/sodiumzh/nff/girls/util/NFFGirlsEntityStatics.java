@@ -13,7 +13,6 @@ import net.minecraft.world.item.ItemStack;
 import net.sodiumzh.nff.girls.entity.INFFGirlsTamed;
 import net.sodiumzh.nff.services.entity.ai.NFFTamedMobAIState;
 import net.sodiumzh.nff.services.entity.taming.INFFTamed;
-import net.sodiumzh.nff.services.entity.taming.INFFTamedSunSensitiveMob;
 import net.sodiumzh.nff.services.entity.taming.NFFTamedStatics;
 import net.sodiumzh.nfu.util.NFUEntityStatics;
 import net.sodiumzh.nfu.util.NFUReflectionStatics;
@@ -55,42 +54,15 @@ public class NFFGirlsEntityStatics
 	{
 		return living.getMainHandItem().is(item) || living.getOffhandItem().is(item);
 	}
-	
-	/**
-	 * Force set equipment item without any other operation.
-	 */
-	@SuppressWarnings("unchecked")
-	public static void setMobEquipmentWithoutSideEffect(Mob mob, EquipmentSlot slot, ItemStack item)
-	{
-		NonNullList<ItemStack> slotList = null;
-		switch (slot.getType())
-		{
-		case HAND:
-			slotList = NFUReflectionStatics.forceGet(mob, Mob.class, "f_21350_").cast();	// Mob.handItems
-			break;
-		case ARMOR:
-			slotList = NFUReflectionStatics.forceGet(mob, Mob.class, "f_21351_").cast();	// Mob.armorItems
-		}
-		if (slotList != null)
-			slotList.set(slot.getIndex(), item);
-	}
-	
+
 	/**
 	 * Check if a befriended undead mob will burn under sun.
 	 * @param mobUndead Mob to test.
-	 * @return Whether this mob is sun-sensitive, or always false if it doesn't implement {@link INFFTamedSunSensitiveMob}/
 	 */
+	@Deprecated
 	public static boolean isSunSensitive(INFFTamed mobUndead)
 	{
-		if (mobUndead instanceof INFFTamedSunSensitiveMob u)
-		{
-			return !u.isSunImmune() && !mobUndead.asMob().hasEffect(MobEffects.FIRE_RESISTANCE);
-		}
-		else
-		{
-			LogUtils.getLogger().error("NFFGirlsEntityStatics#isSunSafe: mob to test must implement INFFTamedSunSensitiveMob.");
-			return false;
-		}
+		return mobUndead.enableSunSensitivity() && !mobUndead.isSunImmune();
 	}
 
 	public static void sendCriticalParticlesToLivingDefault(LivingEntity entity, float heightOffset, int amount)

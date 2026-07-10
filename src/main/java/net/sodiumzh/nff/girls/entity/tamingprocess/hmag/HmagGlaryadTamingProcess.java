@@ -5,10 +5,8 @@ import com.github.mechalopa.hmag.world.entity.GlaryadEntity;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.player.Player;
-import net.sodiumzh.nff.girls.registry.NFFGirlsAngerRules;
-import net.sodiumzh.nff.services.entity.taming.CNFFTamable;
+import net.sodiumzh.nff.services.entity.taming.NFFTamableComponent;
 import net.sodiumzh.nff.services.entity.taming.TamingProcessItemGivingProgress;
-import net.sodiumzh.nfu.entity.anger.MobAngerRules;
 
 public class HmagGlaryadTamingProcess extends TamingProcessItemGivingProgress
 {
@@ -28,7 +26,7 @@ public class HmagGlaryadTamingProcess extends TamingProcessItemGivingProgress
 	}
 
 	@Override
-	public void tamableInit(CNFFTamable cnffTamable) {
+	public void tamableInit(NFFTamableComponent cnffTamable) {
 
 	}
 }

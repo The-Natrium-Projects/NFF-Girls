@@ -54,14 +54,14 @@ public interface INFFGirlsBowShootingMob extends INFFGirlsTamed, INFFGirlsBowSho
 		if (this.asMob().distanceToSqr(this.asMob().getTarget()) < 6.25d) {
 			if (isBow(this.getAdditionalInventory().getItem(4)) && isMeleeWeapon(this.getAdditionalInventory().getItem(7))) {
 				this.getAdditionalInventory().swapItem(4, 7);
-				updateFromInventory();
+				this.getAdditionalInventory().syncToMob(this.asMob());
 			}
 		}
 		// When run out arrows, try taking weapon from backup-weapon slot
 		if (isBow(this.getAdditionalInventory().getItem(4)) && isMeleeWeapon(this.getAdditionalInventory().getItem(7))
 				&& this.getAdditionalInventory().getItem(8).isEmpty()) {
 			this.getAdditionalInventory().swapItem(4, 7);
-			updateFromInventory();
+			this.getAdditionalInventory().syncToMob(this.asMob());
 		}
 		// When too far and having a bow on backup-weapon, switch to bow mode
 		// Don't switch if don't have arrows
@@ -69,7 +69,7 @@ public interface INFFGirlsBowShootingMob extends INFFGirlsTamed, INFFGirlsBowSho
 			if (!isBow(this.getAdditionalInventory().getItem(4)) && isBow(getAdditionalInventory().getItem(7))
 					&& !this.getAdditionalInventory().getItem(8).isEmpty()) {
 				this.getAdditionalInventory().swapItem(4, 7);
-				updateFromInventory();
+				this.getAdditionalInventory().syncToMob(this.asMob());
 			}
 		}
 		// When in melee mode without a weapon but having one on backup slot, change to it
@@ -81,7 +81,7 @@ public interface INFFGirlsBowShootingMob extends INFFGirlsTamed, INFFGirlsBowSho
 				)
 		{
 			this.getAdditionalInventory().swapItem(4, 7);
-			updateFromInventory();
+			this.getAdditionalInventory().syncToMob(this.asMob());
 		}
 	}
 	

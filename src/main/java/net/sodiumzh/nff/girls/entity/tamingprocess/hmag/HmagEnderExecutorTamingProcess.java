@@ -9,15 +9,11 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.sodiumzh.nff.girls.NFFGirls;
 import net.sodiumzh.nff.girls.entity.NFFGirlsTamingRules;
-import net.sodiumzh.nff.girls.registry.NFFGirlsAngerRules;
 import net.sodiumzh.nff.girls.registry.NFFGirlsConfigs;
-import net.sodiumzh.nff.services.entity.taming.CNFFTamable;
+import net.sodiumzh.nff.services.entity.taming.NFFTamableComponent;
 import net.sodiumzh.nff.services.entity.taming.NFFTamingProcess;
 import net.sodiumzh.nff.services.entity.taming.TamingProcessItemGivingProgress;
-import net.sodiumzh.nff.services.entity.taming.preset.NFFTamedEnderManPreset;
-import net.sodiumzh.nfu.capability.EntityTimerAccessor;
-import net.sodiumzh.nfu.entity.anger.MobAngerRules;
-import org.jetbrains.annotations.NotNull;
+import net.sodiumzh.nff.services.entity.taming.presets.NFFTamedEnderManPreset;
 
 import java.util.Optional;
 import java.util.UUID;
@@ -26,11 +22,12 @@ import java.util.UUID;
 public class HmagEnderExecutorTamingProcess extends TamingProcessItemGivingProgress
 {
 	// The latest player that gave an item. This controls always-hostile target.
-	private static final EntityTimerAccessor TIMER_KEY_NO_ATTACK_EXPIRING = CNFFTamable.getTimerAccessor("noAttackExpiring");
+	private static final String TIMER_KEY_NO_ATTACK_EXPIRING = "noAttackExpiring";
 	private static final int NO_ATTACK_EXPIRE_TIME = 30 * 20;
+	public static final String DATA_KEY_NO_TELEPORT = "nffgirlsEnderManNoTeleport";
 
 	@Override
-	public void tamableInit(CNFFTamable cap)
+	public void tamableInit(NFFTamableComponent cap)
 	{
 	}
 
@@ -60,31 +57,33 @@ public class HmagEnderExecutorTamingProcess extends TamingProcessItemGivingProgr
 	public void serverTick(Mob mob)
 	{
 		super.serverTick(mob);
+		NFFTamableComponent tamable = this.getTamable(mob);
 		Optional<UUID> playerUUID = this.getOngoingPlayerUUID(mob);
 		if (playerUUID.isEmpty()) return;
-		if (TIMER_KEY_NO_ATTACK_EXPIRING.getRemainingTime(mob) == 0    // Too long time not attacked
+		if (tamable.getTimerComponent().getGeneralTimer(TIMER_KEY_NO_ATTACK_EXPIRING).filter(timer -> timer.getTicksRemaining() != 0).isEmpty()    // Too long time not attacked
 				|| mob.getTarget() == null                                  // Missing target
 				|| !mob.getTarget().getUUID().equals(playerUUID.get())) {         // Attacking another target
 			NFFGirlsTamingRules.tickContinuousProgressLoss(this, mob);
 		}
 		this.getTamable(mob).setAlwaysHostileTo(this.getOngoingPlayer(mob).orElse(null));
+		this.getTamable(mob).getDataComponent().putTransientVariable(DATA_KEY_NO_TELEPORT, true);
 	}
 
 	@Override
 	public void interrupt(Player player, Mob mob, boolean isQuiet)
 	{
 		super.interrupt(player, mob, isQuiet);
-		TIMER_KEY_NO_ATTACK_EXPIRING.removeTimer(mob, false);
+		this.getTamable(mob).getTimerComponent().removeGeneralTimer(TIMER_KEY_NO_ATTACK_EXPIRING, false);
 	}
 
 	@Override
 	public void onAttackProcessingPlayer(Mob mob, Player player, double damageGiven)
 	{
-		TIMER_KEY_NO_ATTACK_EXPIRING.setTimer(mob, NO_ATTACK_EXPIRE_TIME);
+		this.getTamable(mob).getTimerComponent().addTimer(TIMER_KEY_NO_ATTACK_EXPIRING, NO_ATTACK_EXPIRE_TIME, 1, true);
 	}
 
 	public static boolean allowTeleport(Mob mob) {
-		NFFTamingProcess processRaw = CNFFTamable.getOptional(mob).map(CNFFTamable::getTamingProcess).orElse(null);
+		NFFTamingProcess processRaw = NFFTamableComponent.getOptional(mob).map(NFFTamableComponent::getTamingProcess).orElse(null);
 		if (!(processRaw instanceof HmagEnderExecutorTamingProcess process)) return true;
 		for (Player player: mob.level.players()) {
 			if (player.distanceToSqr(mob) <= 16d * 16d && process.isInProcess(player, mob)) return false;
