@@ -1,6 +1,5 @@
 package net.sodiumzh.nff.girls.entity.tamingprocess.hmag;
 
-import com.github.mechalopa.hmag.world.entity.NecroticReaperEntity;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.util.Mth;
 import net.minecraft.world.InteractionHand;
@@ -14,10 +13,8 @@ import net.sodiumzh.nff.girls.NFFGirls;
 import net.sodiumzh.nff.girls.block.SoulCarpetBlock;
 import net.sodiumzh.nff.girls.entity.projectile.NecromancerMagicBulletEntity;
 import net.sodiumzh.nff.girls.registry.NFFGirlsItems;
-import net.sodiumzh.nff.services.entity.capability.CNFFTamable;
+import net.sodiumzh.nff.services.entity.taming.NFFTamableComponent;
 import net.sodiumzh.nff.services.entity.taming.NFFTamingProcess;
-import net.sodiumzh.nff.services.registry.NFFCapRegistry;
-import net.sodiumzh.nfu.entity.anger.MobAngerRules;
 import net.sodiumzh.nfu.entity.taming.TamingInteractionResult;
 import net.sodiumzh.nfu.util.NFUEntityStatics;
 import net.sodiumzh.nfu.util.NFUMathStatics;
@@ -43,7 +40,7 @@ public class HmagNecroticReaperTamingProcess extends NFFTamingProcess
 	 * Init on adding capability to mob
 	 */
 	@Override
-	public void tamableInit(CNFFTamable cap)
+	public void tamableInit(NFFTamableComponent cap)
 	{
 		if (!cap.getGeneralNBT().contains(NBT_KEY_HIT_COUNT, 3))
 		{
@@ -54,7 +51,7 @@ public class HmagNecroticReaperTamingProcess extends NFFTamingProcess
 	/**
 	 * Update modifier from current hit count, invoked every tick
 	 */
-	protected void updateStrengthEffect(CNFFTamable cap)
+	protected void updateStrengthEffect(NFFTamableComponent cap)
 	{
 		int hits = cap.getGeneralNBT().getInt(NBT_KEY_HIT_COUNT);
 		if (hits < 0 || hits > 5)
@@ -66,7 +63,7 @@ public class HmagNecroticReaperTamingProcess extends NFFTamingProcess
 
 	@Override
 	public void interrupt(@Nullable Player player, Mob mob, boolean isQuiet) {
-		CNFFTamable cap = CNFFTamable.get(mob);
+		NFFTamableComponent cap = NFFTamableComponent.getOrDefault(mob);
 		cap.getGeneralNBT().remove(NBT_KEY_ONGOING_PLAYER_UUID);
 		cap.getGeneralNBT().putInt(NBT_KEY_HIT_COUNT, 0);
 		mob.setLastHurtByPlayer(null);
@@ -77,7 +74,7 @@ public class HmagNecroticReaperTamingProcess extends NFFTamingProcess
 
 	@Override
 	public boolean interruptAll(Mob mob, boolean b) {
-		if (CNFFTamable.get(mob).getGeneralNBT().contains(NBT_KEY_ONGOING_PLAYER_UUID)) {
+		if (NFFTamableComponent.getOrDefault(mob).getGeneralNBT().contains(NBT_KEY_ONGOING_PLAYER_UUID)) {
 			interrupt(null, mob, false);    // interrupt here doesn't involve player, see above
 			return true;
 		}
@@ -86,8 +83,8 @@ public class HmagNecroticReaperTamingProcess extends NFFTamingProcess
 
 	@Override
 	public boolean isInProcess(Player player, Mob mob) {
-		return CNFFTamable.get(mob).getGeneralNBT().hasUUID(NBT_KEY_ONGOING_PLAYER_UUID)
-				&& CNFFTamable.get(mob).getGeneralNBT().getUUID(NBT_KEY_ONGOING_PLAYER_UUID).equals(player.getUUID());
+		return NFFTamableComponent.getOrDefault(mob).getGeneralNBT().hasUUID(NBT_KEY_ONGOING_PLAYER_UUID)
+				&& NFFTamableComponent.getOrDefault(mob).getGeneralNBT().getUUID(NBT_KEY_ONGOING_PLAYER_UUID).equals(player.getUUID());
 	}
 
 	/**
@@ -97,7 +94,7 @@ public class HmagNecroticReaperTamingProcess extends NFFTamingProcess
 	 */
 	public boolean onHit(Player player, Mob mob)
 	{
-		CNFFTamable cap = CNFFTamable.get(mob);
+		NFFTamableComponent cap = NFFTamableComponent.getOrDefault(mob);
 		// If player not wearing necromancer's hat, it cannot be befriended, add wither
 		if (!player.getItemBySlot(EquipmentSlot.HEAD).is(NFFGirlsItems.NECROMANCER_HAT.get())) return false;
 
@@ -110,7 +107,7 @@ public class HmagNecroticReaperTamingProcess extends NFFTamingProcess
 		}
 		// If mob is not on soul carpet, nothing happens but don't add wither
 		else if (!SoulCarpetBlock.isEntityInside(mob)) return true;
-		else if (cap.isAngryAt(player))
+		else if (cap.getAngerHandler().isAngryAt(player))
 		{
 			NFUParticleStatics.sendAngryParticlesToEntityDefault(mob);
 			return true;
@@ -129,10 +126,10 @@ public class HmagNecroticReaperTamingProcess extends NFFTamingProcess
 		cap.getGeneralNBT().putUUID(NBT_KEY_ONGOING_PLAYER_UUID, player.getUUID());
 
 		// The first hit, add player info
-		if (hits == 0 || !cap.hasTimer(TIMER_NO_ATTACK_EXPIRING_TIME)/* 0.2.30.2 fixed a missing-timer issue. Port the old mob */)
+		if (hits == 0 || !cap.getTimerComponent().hasGeneralTimer(TIMER_NO_ATTACK_EXPIRING_TIME)/* 0.2.30.2 fixed a missing-timer issue. Port the old mob */)
 		{
 			// After 10s without attacking player, interrupt
-			cap.setTimer(TIMER_NO_ATTACK_EXPIRING_TIME, 30 * 20);
+			cap.getTimerComponent().addTimer(TIMER_NO_ATTACK_EXPIRING_TIME, 30 * 20, 1, true);
 		}
 
 		// The last hit, befriend
@@ -159,7 +156,7 @@ public class HmagNecroticReaperTamingProcess extends NFFTamingProcess
 	@Override
 	public void serverTick(Mob mob)
 	{
-		CNFFTamable cap = CNFFTamable.get(mob);
+		NFFTamableComponent cap = NFFTamableComponent.getOrDefault(mob);
 		updateStrengthEffect(cap);
 		boolean isAlwaysHostile = false;
 		if (	// Is in player process
@@ -224,20 +221,16 @@ public class HmagNecroticReaperTamingProcess extends NFFTamingProcess
 	@Override
 	public void onAttackProcessingPlayer(Mob mob, Player player, double damageGiven)
 	{
-		if (mob instanceof NecroticReaperEntity ee)
+		NFFTamableComponent cap = this.getTamable(mob);
+		if (cap.getGeneralNBT().contains(TIMER_NO_ATTACK_EXPIRING_TIME))
 		{
-			ee.getCapability(NFFCapRegistry.CAP_BEFRIENDABLE_MOB).ifPresent((cap) -> {
-				if (cap.getGeneralNBT().contains(TIMER_NO_ATTACK_EXPIRING_TIME))
-				{
-					cap.getGeneralNBT().putInt(TIMER_NO_ATTACK_EXPIRING_TIME, 30 * 20);
-				}						
-			});
+			cap.getGeneralNBT().putInt(TIMER_NO_ATTACK_EXPIRING_TIME, 30 * 20);
 		}
 	}
 
 	@Override
 	public void onGeneralTimerExpire(Mob mob, String key) {
-		CNFFTamable tamable = CNFFTamable.get(mob);
+		NFFTamableComponent tamable = NFFTamableComponent.getOrDefault(mob);
 		if (tamable.getGeneralNBT().hasUUID(NBT_KEY_ONGOING_PLAYER_UUID)) {
 			Player player = tamable.getEntity().level().getPlayerByUUID(tamable.getGeneralNBT().getUUID(NBT_KEY_ONGOING_PLAYER_UUID));
 			if (player == null || !player.isCreative() && tamable.getGeneralNBT().getInt(NBT_KEY_HIT_COUNT) > 0) {

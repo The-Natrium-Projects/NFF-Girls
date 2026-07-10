@@ -7,10 +7,7 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.Container;
-import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.Mob;
-import net.minecraft.world.entity.TamableAnimal;
+import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.goal.FloatGoal;
 import net.minecraft.world.entity.ai.goal.LookAtPlayerGoal;
@@ -30,11 +27,13 @@ import net.sodiumzh.nff.girls.item.bauble.INFFGirlsBauble;
 import net.sodiumzh.nff.girls.sound.NFFGirlsSoundPresets;
 import net.sodiumzh.nff.services.entity.ai.goal.preset.NFFWaterAvoidingRandomStrollGoal;
 import net.sodiumzh.nff.services.entity.ai.goal.preset.target.NFFHurtByTargetGoal;
-import net.sodiumzh.nff.services.entity.capability.wrapper.ILivingDelayedActions;
 import net.sodiumzh.nff.services.entity.taming.INFFTamed;
 import net.sodiumzh.nff.services.entity.taming.NFFTamingMapping;
 import net.sodiumzh.nff.services.inventory.NFFTamedInventoryMenu;
 import net.sodiumzh.nff.services.inventory.NFFTamedMobInventory;
+import net.sodiumzh.nfu.entity.component.EntityComponentAPI;
+import net.sodiumzh.nfu.entity.component.preset.EntityTimerComponent;
+import net.sodiumzh.nfu.entity.component.preset.IEntityTimerComponentAccess;
 import net.sodiumzh.nfu.function.MutablePredicate;
 import net.sodiumzh.nfu.util.NFUMathStatics;
 
@@ -43,7 +42,11 @@ import java.util.Arrays;
 import java.util.UUID;
 import java.util.function.Consumer;
 
-public class HmagJackFrostEntity extends JackFrostEntity implements INFFGirlsTamed, ILivingDelayedActions {
+public class HmagJackFrostEntity extends JackFrostEntity implements INFFGirlsTamed {
+
+	private EntityTimerComponent<Entity> getTimerComponent() {
+		return EntityComponentAPI.getDefaultTimer(this);
+	}
 
 	@Override
 	public void onInit(UUID playerUUID, Mob from)
@@ -113,8 +116,9 @@ public class HmagJackFrostEntity extends JackFrostEntity implements INFFGirlsTam
 		}
 		case 1:
 		{
-			action1.run();
-			this.addMultipleDelayedActions(action1, 4, 8);
+			this.getTimerComponent().addDelayedAction(action1, 4, 2, false, true);
+			//action1.run();
+			//this.addMultipleDelayedActions(action1, 4, 8);
 			break;
 		}
 		case 2:
@@ -124,8 +128,9 @@ public class HmagJackFrostEntity extends JackFrostEntity implements INFFGirlsTam
 				for (int j = 0; j < 3; ++j)
 					action.accept(NFUMathStatics.randomUnitVector().scale(NFUMathStatics.rndRangedDouble(0, 2)));
 			};
-			action2.run();
-			this.addMultipleDelayedActions(action2, 3, 6, 9, 12);
+			this.getTimerComponent().addDelayedAction(action2, 3, 4, false, true);
+			//action2.run();
+			//this.addMultipleDelayedActions(action2, 3, 6, 9, 12);
 			break;
 		}
 		case 3:
@@ -135,8 +140,9 @@ public class HmagJackFrostEntity extends JackFrostEntity implements INFFGirlsTam
 				for (int j = 0; j < 6; ++j)
 					action.accept(NFUMathStatics.randomUnitVector().scale(NFUMathStatics.rndRangedDouble(0, 2)));
 			};
-			action3.run();
-			this.addMultipleDelayedActions(action3, 3, 6, 9, 12, 15, 18);
+			this.getTimerComponent().addDelayedAction(action3, 3, 6, false, true);
+			//action3.run();
+			//this.addMultipleDelayedActions(action3, 3, 6, 9, 12, 15, 18);
 			break;
 		}
 		default: 

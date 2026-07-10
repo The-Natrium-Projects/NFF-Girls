@@ -44,7 +44,7 @@ public class NFFGirlsClientEventListeners
 	public static void onCheckSit(LivingRendererCheckSitEvent event) {
 		INFFGirlsTamed.get(event.getEntity()).ifPresent(tamed -> {
 			if (tamed.level() instanceof ClientLevel cl && cl.getEntity(tamed.asMob().getId()) != null	// Sit only on level, but not in GUI
-				&& tamed.getAIState().equals(NFFTamedMobAIState.WAIT) && tamed.getData().getAttackTarget() == null
+				&& tamed.getAIState().equals(NFFTamedMobAIState.WAIT) && tamed.getDataAccessor().getAttackTarget() == null
 				&& tamed.shouldSitOnWaiting() && tamed.asMob().getDeltaMovement().length() < 1e-8) {
 				event.getPoseStack().translate(0, tamed.sitPositionOffset(), 0);
 				event.setResult(Event.Result.ALLOW);

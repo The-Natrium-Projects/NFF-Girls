@@ -23,11 +23,12 @@ import net.sodiumzh.nff.girls.item.TaoistTalismanItem;
 import net.sodiumzh.nff.girls.registry.NFFGirlsItems;
 import net.sodiumzh.nff.girls.util.NFFGirlsEntityStatics;
 import net.sodiumzh.nff.services.entity.ai.goal.preset.FreezeGoal;
-import net.sodiumzh.nff.services.entity.capability.CNFFTamable;
+import net.sodiumzh.nff.services.entity.taming.NFFTamableComponent;
 import net.sodiumzh.nff.services.entity.taming.NFFTamingMapping;
 import net.sodiumzh.nff.services.entity.taming.NFFTamingProcess;
 import net.sodiumzh.nfu.entity.AttributeModifierSwitch;
 import net.sodiumzh.nfu.entity.anger.MobAngerRules;
+import net.sodiumzh.nfu.entity.component.preset.EntityTimerComponent;
 import net.sodiumzh.nfu.entity.taming.TamingInteractionResult;
 import net.sodiumzh.nfu.util.NFUEntityStatics;
 import net.sodiumzh.nfu.util.NFUParticleStatics;
@@ -67,7 +68,7 @@ public class HmagJiangshiTamingProcess extends NFFTamingProcess
 	protected static final AttributeModifier FROZEN_ARMOR = new AttributeModifier(UUID.fromString("3b41599b-b30f-4106-8b69-93cb4b3df66a"), 
 			"frozen_armor", 40d, AttributeModifier.Operation.ADDITION);
 	@Override
-	public void tamableInit(CNFFTamable cap)
+	public void tamableInit(NFFTamableComponent cap)
 	{
 		if (cap.getEntity() instanceof JiangshiEntity js)
 		{
@@ -94,16 +95,16 @@ public class HmagJiangshiTamingProcess extends NFFTamingProcess
 	@Override
 	public void interrupt(Player player, Mob mob, boolean isQuiet) 
 	{
-		CNFFTamable.get(mob).getGeneralNBT().remove(NBT_KEY_PROGRESS);
+		NFFTamableComponent.getOrDefault(mob).getGeneralNBT().remove(NBT_KEY_PROGRESS);
 		MODIFIERS.apply(mob, 0);
 	}
 	
 	@Override
 	public boolean interruptAll(Mob mob, boolean isQuiet)
 	{
-		if (!CNFFTamable.get(mob).getGeneralNBT().contains(NBT_KEY_PROGRESS, Tag.TAG_INT))
+		if (!NFFTamableComponent.getOrDefault(mob).getGeneralNBT().contains(NBT_KEY_PROGRESS, Tag.TAG_INT))
 		{
-			CNFFTamable.get(mob).getGeneralNBT().putInt(NBT_KEY_PROGRESS, 0);
+			NFFTamableComponent.getOrDefault(mob).getGeneralNBT().putInt(NBT_KEY_PROGRESS, 0);
 			MODIFIERS.apply(mob, 0);
 			return true;
 		}
@@ -123,7 +124,7 @@ public class HmagJiangshiTamingProcess extends NFFTamingProcess
 	@Override
 	public void serverTick(Mob mob)
 	{
-		CNFFTamable cap = CNFFTamable.get(mob);
+		NFFTamableComponent cap = NFFTamableComponent.getOrDefault(mob);
 		if (getFrozenTime(mob) > 0)
 		{
 			if (!mob.getAttribute(Attributes.ARMOR).hasModifier(FROZEN_ARMOR))
@@ -152,7 +153,7 @@ public class HmagJiangshiTamingProcess extends NFFTamingProcess
 		{
 			NFUParticleStatics.sendSmokeParticlesToEntityDefault(mob, 0, getAngerPhase(mob) * 2);
 		}
-		if (cap.hasTimer(TIMER_KEY_CLEAR_FIRE) && mob.tickCount % 10 == 0)
+		if (cap.getTimerComponent().hasGeneralTimer(TIMER_KEY_CLEAR_FIRE) && mob.tickCount % 10 == 0)
 		{
 			mob.clearFire();
 		}
@@ -189,8 +190,8 @@ public class HmagJiangshiTamingProcess extends NFFTamingProcess
 			{
 				progressIncrease(mob);
 				NFUParticleStatics.sendParticlesToEntity(mob, ParticleTypes.EXPLOSION, 0.2, 0, 1, 0);
-				CNFFTamable.get(mob).removeTimer(TIMER_KEY_FROZEN, true);
-				CNFFTamable.get(mob).setTimer(TIMER_KEY_PEACH_SWORD, 60 * 20);
+				NFFTamableComponent.getOrDefault(mob).getTimerComponent().removeGeneralTimer(TIMER_KEY_FROZEN, true);
+				NFFTamableComponent.getOrDefault(mob).getTimerComponent().addTimer(TIMER_KEY_PEACH_SWORD, 60 * 20, 1, true);
 			}
 			// phase 2->3 strike a thunder bolt
 			if (oldPhase == 2 || getProgressLevel(mob) == 3)
@@ -199,7 +200,7 @@ public class HmagJiangshiTamingProcess extends NFFTamingProcess
 			}
 			updateModifiers(mob);
 			mob.level().playSound(null, mob, SoundEvents.GENERIC_EXPLODE, SoundSource.BLOCKS, 2f, 0.7f);
-			CNFFTamable.get(mob).getGeneralNBT().putUUID(NBT_KEY_ONGOING_PLAYER, player.getUUID());
+			NFFTamableComponent.getOrDefault(mob).getGeneralNBT().putUUID(NBT_KEY_ONGOING_PLAYER, player.getUUID());
 			return true;
 		}
 		// Prevent damage and effects during the friending process
@@ -211,10 +212,8 @@ public class HmagJiangshiTamingProcess extends NFFTamingProcess
 	/** Freezing is handled with {@link FreezeGoal} and {@link NFFGirlsEntityEventListeners#onEntityJoinLevel} */
 	public int getFrozenTime(Mob mob)
 	{
-		CNFFTamable cap = CNFFTamable.get(mob);
-		if (cap.hasTimer(TIMER_KEY_FROZEN))
-			return cap.getTimerRemainingTime(TIMER_KEY_FROZEN);
-		else return 0;
+		NFFTamableComponent cap = NFFTamableComponent.getOrDefault(mob);
+		return cap.getTimerComponent().getGeneralTimer(TIMER_KEY_FROZEN).map(EntityTimerComponent.Timer::getTicksRemaining).orElse(0);
 	}
 	
 	public static boolean isFrozen(Mob mob)
@@ -233,14 +232,14 @@ public class HmagJiangshiTamingProcess extends NFFTamingProcess
 	 */
 	public boolean applyTalisman(Mob mob)
 	{
-		CNFFTamable cap = CNFFTamable.get(mob);
+		NFFTamableComponent cap = NFFTamableComponent.getOrDefault(mob);
 		if (getFrozenTime(mob) > 0)
 			return false;
-		else if (cap.hasTimer(TIMER_KEY_FREEZE_COOLDOWN))
+		else if (cap.getTimerComponent().hasGeneralTimer(TIMER_KEY_FREEZE_COOLDOWN))
 			return false;
 		else
 		{
-			cap.setTimer(TIMER_KEY_FROZEN, 200);
+			cap.getTimerComponent().addTimer(TIMER_KEY_FROZEN, 200, 1, true);
 			return true;
 		}
 	}
@@ -249,7 +248,7 @@ public class HmagJiangshiTamingProcess extends NFFTamingProcess
 	
 	public int getProgressLevel(Mob mob)
 	{
-		return CNFFTamable.get(mob).getGeneralNBT().getInt(NBT_KEY_PROGRESS);
+		return NFFTamableComponent.getOrDefault(mob).getGeneralNBT().getInt(NBT_KEY_PROGRESS);
 	}
 	
 	public void setProgressLevel(Mob mob, int value)
@@ -257,7 +256,7 @@ public class HmagJiangshiTamingProcess extends NFFTamingProcess
 		if (value < 0 || value > 5)
 			throw new IllegalArgumentException("Progress should be 0-5. Input: " + value);
 		else
-			CNFFTamable.get(mob).getGeneralNBT().putInt(NBT_KEY_PROGRESS, value);
+			NFFTamableComponent.getOrDefault(mob).getGeneralNBT().putInt(NBT_KEY_PROGRESS, value);
 		updateModifiers(mob);		
 	}
 	
@@ -273,7 +272,7 @@ public class HmagJiangshiTamingProcess extends NFFTamingProcess
 	
 	public int getAngerPhase(Mob mob)
 	{
-		return CNFFTamable.get(mob).getGeneralNBT().getInt(NBT_KEY_PROGRESS);
+		return NFFTamableComponent.getOrDefault(mob).getGeneralNBT().getInt(NBT_KEY_PROGRESS);
 	}
 
 	public void updateModifiers(Mob mob)
@@ -287,12 +286,12 @@ public class HmagJiangshiTamingProcess extends NFFTamingProcess
 		if (key.equals(TIMER_KEY_FROZEN)) {
 			if (mob.getRandom().nextDouble() < 0.667)
 				mob.spawnAtLocation(NFFGirlsItems.TAOIST_TALISMAN.get().getDefaultInstance());
-			CNFFTamable.get(mob).setTimer(TIMER_KEY_FREEZE_COOLDOWN, 15 * 20);
+			NFFTamableComponent.getOrDefault(mob).getTimerComponent().addTimer(TIMER_KEY_FREEZE_COOLDOWN, 15 * 20, 1, true);
 		}
 		else if (key.equals(TIMER_KEY_PEACH_SWORD)) {
 			if (this.isInAnyProcess(mob) && getProgressLevel(mob) > 1) {
 				this.progressDecrease(mob);
-				CNFFTamable.get(mob).setTimer(TIMER_KEY_PEACH_SWORD, 60 * 20);
+				NFFTamableComponent.getOrDefault(mob).getTimerComponent().addTimer(TIMER_KEY_PEACH_SWORD, 60 * 20, 1, true);
 			} else {
 				this.interruptAll(mob, true);
 			}
@@ -306,6 +305,6 @@ public class HmagJiangshiTamingProcess extends NFFTamingProcess
 		lb.setDamage(0);
 		mob.level().addFreshEntity(lb);
 		mob.addEffect(new MobEffectInstance(MobEffects.FIRE_RESISTANCE, 30 * 20));
-		CNFFTamable.get(mob).setTimer(TIMER_KEY_CLEAR_FIRE, 10 * 20);
+		NFFTamableComponent.getOrDefault(mob).getTimerComponent().addTimer(TIMER_KEY_CLEAR_FIRE, 10 * 20, 1, true);
 	}
 }

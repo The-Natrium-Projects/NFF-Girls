@@ -9,7 +9,7 @@ import net.minecraftforge.event.entity.living.MobEffectEvent;
 import net.minecraftforge.eventbus.api.Event;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.sodiumzh.nff.girls.entity.NFFGirlsTamingRules;
-import net.sodiumzh.nff.services.entity.capability.CNFFTamable;
+import net.sodiumzh.nff.services.entity.taming.NFFTamableComponent;
 
 public class HmagBansheeTamingProcess extends HmagVanillaUndeadTamingProcess
 {
@@ -32,9 +32,9 @@ public class HmagBansheeTamingProcess extends HmagVanillaUndeadTamingProcess
 			NFFGirlsTamingRules.tickContinuousProgressLoss(this, mob);
 		}
 		if (ongoing != null && mob.hasLineOfSight(ongoing)) {
-			CNFFTamable.get(mob).setAlwaysHostileTo(ongoing);
+			this.getTamable(mob).setAlwaysHostileTo(ongoing);
 		}
-		else CNFFTamable.get(mob).setAlwaysHostileTo(null);
+		else this.getTamable(mob).setAlwaysHostileTo(null);
 
 	}
 
@@ -49,8 +49,8 @@ public class HmagBansheeTamingProcess extends HmagVanillaUndeadTamingProcess
 	public static void preventWitherInProcess(MobEffectEvent.Applicable event) {
 		if (event.getEffectInstance().getEffect().equals(MobEffects.WITHER)
 				&& event.getEntity() instanceof Mob e
-				&& (CNFFTamable.getOptional(e).map(tamable -> tamable.getTamingProcess() instanceof HmagBansheeTamingProcess).orElse(false)
-				&& CNFFTamable.get(e).getTamingProcess().isInAnyProcess(e)))
+				&& NFFTamableComponent.getOptional(e).map(tamable -> tamable.getTamingProcess() instanceof HmagBansheeTamingProcess
+			&& tamable.getTamingProcess().isInAnyProcess(e)).orElse(false))
 		{
 			event.setResult(Event.Result.DENY);
 		}

@@ -1,57 +1,43 @@
 package net.sodiumzh.nff.girls.entity;
 
-import com.mojang.logging.LogUtils;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.util.Mth;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.Mob;
-import net.minecraft.world.entity.ai.attributes.Attribute;
-import net.minecraft.world.entity.ai.attributes.AttributeModifier;
-import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.enchantment.EnchantmentHelper;
-import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.level.GameRules;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.eventbus.api.Event;
 import net.minecraftforge.fml.LogicalSide;
+import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.network.PacketDistributor;
+import net.sodiumzh.nff.girls.NFFGirls;
 import net.sodiumzh.nff.girls.entity.ai.NFFGirlsAttackingStrategy;
-import net.sodiumzh.nff.girls.entity.capability.CNFFGirlsFavorabilityHandler;
-import net.sodiumzh.nff.girls.entity.capability.CNFFGirlsLevelHandler;
 import net.sodiumzh.nff.girls.entity.vanillatrade.CNFFGirlsTradeHandler;
 import net.sodiumzh.nff.girls.eventlistener.NFFGirlsEntityEventListeners;
 import net.sodiumzh.nff.girls.item.bauble.INFFGirlsBauble;
 import net.sodiumzh.nff.girls.network.ClientboundNFFGirlsMobGeneralSyncPacket;
 import net.sodiumzh.nff.girls.network.NFFGirlsChannels;
-import net.sodiumzh.nff.girls.registry.NFFGirlsBefriendingTypes;
-import net.sodiumzh.nff.girls.registry.NFFGirlsCapabilities;
-import net.sodiumzh.nff.girls.registry.NFFGirlsHealingItemMappings;
-import net.sodiumzh.nff.girls.registry.NFFGirlsItems;
-import net.sodiumzh.nff.services.entity.capability.wrapper.IAttributeMonitor;
+import net.sodiumzh.nff.girls.registry.*;
 import net.sodiumzh.nff.services.entity.taming.INFFTamed;
 import net.sodiumzh.nff.services.entity.taming.NFFTamedStatics;
-import net.sodiumzh.nff.services.entity.taming.NFFTamingMapping;
 import net.sodiumzh.nff.services.item.NFFMobRespawnerItem;
-import net.sodiumzh.nff.services.item.capability.wrapper.IItemStackMonitor;
 import net.sodiumzh.nfu.annotation.DontCallManually;
 import net.sodiumzh.nfu.annotation.DontOverride;
 import net.sodiumzh.nfu.entity.MobApplicableItemTable;
 import net.sodiumzh.nfu.item.bauble.NFUBaubleAPI;
 import net.sodiumzh.nfu.object.FilteredMapper;
 import net.sodiumzh.nfu.util.NFUInfoStatics;
-import org.apache.commons.lang3.mutable.MutableObject;
 
-import javax.annotation.Nullable;
 import java.util.*;
 import java.util.concurrent.atomic.AtomicReference;
-import java.util.function.Consumer;
-import java.util.function.Predicate;
 
-public interface INFFGirlsTamed extends INFFTamed, IAttributeMonitor, IItemStackMonitor
+public interface INFFGirlsTamed extends INFFTamed
 {
 
 	public static FilteredMapper<Object, INFFGirlsTamed> GETTER = FilteredMapper.unconditionalNoVararg(Object.class, INFFGirlsTamed.class, o -> {
@@ -65,131 +51,40 @@ public interface INFFGirlsTamed extends INFFTamed, IAttributeMonitor, IItemStack
 		return GETTER.apply(o);
 	}
 
-	/**
-	 * Check if a mob has a NFFGirls BM interface.
-	 * <p>
-	 * As INFFTamed could also be implemented in capabilities instead of the mob class in the future,
-	 * always use this instead of {@code instanceof} check.
-	 */
-	@Deprecated
-	public static boolean isBM(Object o)
-	{
-		return get(o).isPresent();
-	}
-	
-	/**
-	 * Cast a mob to the NFFGirls BM interface. Null if failed.
-	 * <p>
-	 * As INFFTamed could also be implemented in capabilities instead of the mob class in the future,
-	 * always use this to cast a mob to BM.
-	 */
-	@Deprecated
-	@Nullable
-	public static INFFGirlsTamed getBM(Object o)
-	{
-		return get(o).orElse(null);
-	}
-	
-	/**
-	 * Do an action if a mob has a NFFGirls BM interface.
-	 * <p>
-	 * As INFFTamed could also be implemented in capabilities instead of the mob class in the future,
-	 * you can use this to safely cast and do things to BM.
-	 * @return Whether the action is invoked.
-	 */
-	@Deprecated
-	public static boolean ifBM(Object o, Consumer<INFFGirlsTamed> action)
-	{
-		return get(o).map(t -> {
-			action.accept(t);
-			return true;
-		}).orElse(false);
+	@Override
+	public default NFFGirlsDataAccessor getDataAccessor() {
+		return new NFFGirlsDataAccessor(this);
 	}
 
-	/**
-	 * Check if a mob has a NFFGirls BM interface and satisfied the given condition.
-	 * <p>
-	 * As INFFTamed could also be implemented in capabilities instead of the mob class in the future,
-	 * always use this instead of {@code instanceof} check and followed checks of the cast BM.
-	 */
-	@Deprecated
-	public static boolean isBMAnd(Object o, Predicate<INFFGirlsTamed> cond)
+	public default double getFavorability()
 	{
-		return get(o).filter(cond).isPresent();
-	}
-
-	@Deprecated
-	public static void ifBMAnd(Object o, Predicate<INFFGirlsTamed> cond, Consumer<INFFGirlsTamed> operation) {
-		get(o).filter(cond).ifPresent(operation);
-	}
-
-	@Deprecated
-	public static boolean isBMAndOwnedBy(Object o, UUID ownerUUID) {
-		return isBMAnd(o, bm -> Objects.equals(ownerUUID, bm.getOwnerUUID()));
-	}
-
-	@DontOverride
-	public default CNFFGirlsFavorabilityHandler getFavorabilityHandler()
-	{
-		MutableObject<CNFFGirlsFavorabilityHandler> cap = new MutableObject<CNFFGirlsFavorabilityHandler>(null);
-		asMob().getCapability(NFFGirlsCapabilities.CAP_FAVORABILITY_HANDLER).ifPresent((c) ->
-		{
-			cap.setValue(c);
-		});
-		if (cap.getValue() == null)
-		{
-			LogUtils.getLogger().error("Missing CNFFGirlsFavorabilityHandler capability");
-			return new CNFFGirlsFavorabilityHandler.Impl(this.asMob());
-		}
-		return cap.getValue();
-	}
-	
-	@DontOverride
-	public default CNFFGirlsLevelHandler getLevelHandler()
-	{
-		MutableObject<CNFFGirlsLevelHandler> cap = new MutableObject<CNFFGirlsLevelHandler>(null);
-		asMob().getCapability(NFFGirlsCapabilities.CAP_LEVEL_HANDLER).ifPresent((c) -> 
-		{
-			cap.setValue(c);
-		});
-		if (cap.getValue() == null)
-		{
-			LogUtils.getLogger().error("Missing CNFFGirlsLevelHandler capability");
-			return new CNFFGirlsLevelHandler.Impl(this.asMob());
-		}
-		return cap.getValue();
-	}
-
-	@DontOverride
-	public default float getFavorability()
-	{
-		return this.getFavorabilityHandler().getFavorability();
+		return this.getDataAccessor().getFavorability();
 	}
 	
 	/** Get the proportion of fav/maxfav, ranged 0-1 */
 	@DontOverride
-	public default float getNormalizedFavorability()
+	public default double getNormalizedFavorability()
 	{
-		var cap = this.getFavorabilityHandler();
-		return cap.getFavorability() / cap.getMaxFavorability();
+		NFFGirlsDataAccessor ac = this.getDataAccessor();
+		return Mth.clamp(ac.getFavorability() / ac.getMaxFavorability(), 0d, 1d);
 	}
-	
+
 	@DontOverride
 	public default int getXpLevel()
 	{
-		return this.getLevelHandler().getExpectedLevel();
+		return this.getDataAccessor().getExpectedXPLevel();
 	}
 	
 	@DontOverride
 	public default long getOverallXp()
 	{
-		return this.getLevelHandler().getExp();
+		return this.getDataAccessor().getXP();
 	}
 	
 	@DontOverride
 	public default long getXpInThisLevel()
 	{
-		return this.getLevelHandler().getExpInThisLevel();
+		return this.getDataAccessor().getXPInThisLevel();
 	}
 	
 	@DontOverride
@@ -251,15 +146,15 @@ public interface INFFGirlsTamed extends INFFTamed, IAttributeMonitor, IItemStack
 					if (side.isServer())
 						this.switchAIState();
 				}
-				return InteractionResult.sidedSuccess(side.isClient());
+				return InteractionResult.SUCCESS;
 			}
 			// Handle healing
 			if (this.tryApplyHealingItems(player.getItemInHand(hand), player) != InteractionResult.PASS) {
-				return InteractionResult.sidedSuccess(side.isClient());
+				return InteractionResult.SUCCESS;
 			}
 			// Handle trade
 			if ((player.getItemInHand(InteractionHand.MAIN_HAND).isEmpty() || player.getItemInHand(InteractionHand.MAIN_HAND).is(NFFGirlsItems.EVIL_GEM.get()))
-				&& this.getData().getAttackTarget() == null
+				&& this.getDataAccessor().getAttackTarget() == null
 				&& !player.isShiftKeyDown()) {
 				AtomicReference<InteractionResult> res = new AtomicReference<>(InteractionResult.PASS);
 				this.asMob().getCapability(NFFGirlsCapabilities.CAP_TRADE_HANDLER).ifPresent(cap -> {
@@ -268,7 +163,7 @@ public interface INFFGirlsTamed extends INFFTamed, IAttributeMonitor, IItemStack
 						res.set(InteractionResult.sidedSuccess(side.isClient()));
 					}
 				});
-				if (res.get().consumesAction()) return InteractionResult.sidedSuccess(side.isClient());
+				if (res.get().consumesAction()) return InteractionResult.SUCCESS;
 			}
 		}
 
@@ -336,31 +231,32 @@ public interface INFFGirlsTamed extends INFFTamed, IAttributeMonitor, IItemStack
 		return !this.asMob().level().getGameRules().getBoolean(GameRules.RULE_KEEPINVENTORY);
 	}
 	
-	// === IAttributeMonitor interface
+	// === AttributeMonitor related
 	
-	@Override
-	public default void onAttributeChange(Attribute attr, double oldVal, double newVal) 
+	/*@Override
+	public default void onAttributeChange(EntityAttributeMonitorComponent component, Attribute attribute, double oldVal, double newVal)
 	{
-		if (attr == Attributes.MAX_HEALTH)
+		if (attribute == Attributes.MAX_HEALTH)
 		{
 			this.asMob().setHealth((float) (this.asMob().getHealth() * newVal / oldVal));
 		}
 	}
 
 	@Override
-	public default MobApplicableItemTable getHealingItems() {
-		return NFFGirlsHealingItemMappings.get(this.asMob().getType()).orElse(MobApplicableItemTable.EMPTY);
-	}
+	void setupAttributeMonitor(EntityAttributeMonitorComponent entityAttributeMonitorComponent);
 
 	// === IItemStackMonitor interface
-	
+
 	private static UUID getSharpnessModifierUUID()
 	{
 		return UUID.fromString("9c12b503-63c0-43e6-bd30-d7aae9818c99");
 	}
-	
+
 	@Override
-	public default void onItemStackChange(String key, ItemStack oldStack, ItemStack newStack) {
+	default void setupItemStackMonitor(EntityItemStackMonitorComponent entityItemStackMonitorComponent) {};
+
+	@Override
+	default void onItemStackChange(EntityItemStackMonitorComponent entityItemStackMonitorComponent, String key, ItemStack oldStack, ItemStack newStack) {
 		if (key.equals("main_hand"))
 		{
 			this.asMob().getAttribute(Attributes.ATTACK_DAMAGE).removeModifier(getSharpnessModifierUUID());
@@ -369,11 +265,21 @@ public interface INFFGirlsTamed extends INFFTamed, IAttributeMonitor, IItemStack
 			if (lv > 0)
 			{
 				this.asMob().getAttribute(Attributes.ATTACK_DAMAGE).addTransientModifier(new AttributeModifier(
-						getSharpnessModifierUUID(), "sharpness_modifier", 0.5d + 0.5d * (double) lv, AttributeModifier.Operation.ADDITION));
+					getSharpnessModifierUUID(), "sharpness_modifier", 0.5d + 0.5d * (double) lv, AttributeModifier.Operation.ADDITION));
 			}
 		}
+	}*/
+
+	// Healing
+
+	@Override
+	public default MobApplicableItemTable getHealingItems() {
+		return NFFGirlsHealingItemMappings.get(this.asMob().getType()).orElse(MobApplicableItemTable.EMPTY);
 	}
-	
+
+
+
+
 	// == Trade interface ==
 	
 	/**
@@ -462,11 +368,12 @@ public interface INFFGirlsTamed extends INFFTamed, IAttributeMonitor, IItemStack
 	// ATTACKING STRATEGY RELATED //
 
 	public default NFFGirlsAttackingStrategy getAttackingStrategy() {
-		return NFFGirlsAttackingStrategy.fromNBT(this.getData().getAdditionalNBT().getCompound("attackingStrategy"));
+		return this.getDataAccessor().getDataComponent().getVariable("attackingStrategy", NFFGirlsAttackingStrategy.class)
+			.orElseGet(NFFGirlsAttackingStrategy::new);
 	}
 
 	public default void setAttackingStrategy(NFFGirlsAttackingStrategy strategy) {
-		this.getData().getAdditionalNBT().put("attackingStrategy", strategy.toNBT());
+		this.getDataAccessor().getDataComponent().putPermanentVariable("attackingStrategy", NFFGirlsAttackingStrategy.class, NFFGirlsDataSerializers.ATTACKING_STRATEGY.get());
 	}
 
 	/**
@@ -491,6 +398,22 @@ public interface INFFGirlsTamed extends INFFTamed, IAttributeMonitor, IItemStack
 
 	public default float sitPositionOffset() {
 		return this.asMob().isBaby() ? -0.3f : -0.6f;
+	}
+
+
+	// Sun sensitive related
+
+	@Override
+	public default void setupSunImmunityRules()
+	{
+		this.getSunImmunity().putOptional("sunhat", mob -> mob.asMob().getItemBySlot(EquipmentSlot.HEAD).is(NFFGirlsItems.SUNHAT.get()));
+		this.getSunImmunity().putOptional("bauble", mob -> INFFGirlsBauble.isEnvironmentImmunized(mob.asMob()));
+	}
+
+	@Mod.EventBusSubscriber(modid = NFFGirls.MOD_ID, bus = Mod.EventBusSubscriber.Bus.FORGE)
+	public static class EventListeners {
+
+
 	}
 
 }

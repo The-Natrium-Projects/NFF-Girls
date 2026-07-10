@@ -8,6 +8,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.Container;
@@ -52,7 +53,8 @@ import java.util.Arrays;
 public class HmagNightwalkerEntity extends NightwalkerEntity implements INFFGirlsTamed {
 
 
-	private static final RepeatableAttributeModifier ARMOR_MODIFIER = new RepeatableAttributeModifier(0.1d, AttributeModifier.Operation.ADDITION, 300);
+	private static final RepeatableAttributeModifier ARMOR_MODIFIER = new RepeatableAttributeModifier(0.1d, new ResourceLocation(NFFGirls.MOD_ID, "nightwalker_armor"),
+		AttributeModifier.Operation.ADDITION, 300);
 
 	/* Initialization */
 
@@ -68,14 +70,14 @@ public class HmagNightwalkerEntity extends NightwalkerEntity implements INFFGirl
 	
 	protected int getAttackInterval()
 	{
-		int expected = 60 - (this.getLevelHandler().getExpectedLevel() / 2);
+		int expected = 60 - (this.getDataAccessor().getExpectedXPLevel() / 2);
 		return Math.max(10, expected);
 	}
 	
 	@Override
 	protected void registerGoals() {
 		goalSelector.addGoal(4, new NFFGirlsRangedAttackGoal(this, 1.0D, 3 * 20, 15.0F)
-				.setAttackIntervalGetter(() -> this.getAttackInterval()).setSkipChance(0.5d));
+				.setAttackIntervalGetter(this::getAttackInterval).setSkipChance(0.5d));
 		goalSelector.addGoal(5, new NFFGirlsFollowOwnerGoal(this, 1.0d, 5.0f, 2.0f, false));
 		goalSelector.addGoal(6, new NFFWaterAvoidingRandomStrollGoal(this, 1.0d));
 		goalSelector.addGoal(7, new LookAtPlayerGoal(this, Player.class, 8.0F));
@@ -125,56 +127,8 @@ public class HmagNightwalkerEntity extends NightwalkerEntity implements INFFGirl
 		super.customServerAiStep();
 		// It may be applied > 100 times, so update per 0.5s to reduce cost
 		if (this.tickCount % 10 == 2)
-			ARMOR_MODIFIER.apply(this, Attributes.ARMOR, Math.min(200, this.getLevelHandler().getExpectedLevel()));
+			ARMOR_MODIFIER.apply(this, Attributes.ARMOR, Math.min(200, this.getDataAccessor().getExpectedXPLevel()));
 	}
-	
-	/* Interaction */
-
-	// Map items that can heal the mob and healing values here.
-	// Leave it empty if you don't need healing features.
-	/*@Override
-	public MobApplicableItemTable getHealingItems()
-	{
-		return NFFGirlsHealingItems.CLAY_DOLL.get();
-	}
-*/
-	/*@Override
-	public InteractionResult mobInteract(Player player, InteractionHand hand)
-	{
-		if (player.getUUID().equals(getOwnerUUID())) {
-			// For normal interaction
-			if (!player.isShiftKeyDown())
-			{
-				if (!player.level().isClientSide()) 
-				{
-					if (this.tryApplyHealingItems(player.getItemInHand(hand)) != InteractionResult.PASS)
-						return InteractionResult.sidedSuccess(player.level().isClientSide);
-					// The function above returns PASS when the items are not correct. So when not PASS it should stop here
-					else if (hand == InteractionHand.MAIN_HAND
-							&& NFFGirlsEntityStatics.isOnEitherHand(player, NFFGirlsItems.COMMANDING_WAND.get()))
-					{
-						switchAIState();
-					}
-					// Here it's main hand but no interaction. Return pass to enable off hand interaction.
-					else return InteractionResult.PASS;
-				}
-				// Interacted
-				return InteractionResult.sidedSuccess(player.level().isClientSide);
-			}
-			// For interaction with shift key down
-			else
-			{
-				// Open inventory and GUI
-				if (hand == InteractionHand.MAIN_HAND && NFFGirlsEntityStatics.isOnEitherHand(player, NFFGirlsItems.COMMANDING_WAND.get()))
-				{
-					NFFTamedStatics.openBefriendedInventory(player, this);
-					return InteractionResult.sidedSuccess(player.level().isClientSide);
-				}
-			}
-		} 
-		// Always pass when not owning this mob
-		return InteractionResult.PASS;
-	}*/
 	
 	/* Inventory */
 

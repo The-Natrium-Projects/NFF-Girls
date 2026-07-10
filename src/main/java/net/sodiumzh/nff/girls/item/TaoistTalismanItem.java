@@ -10,6 +10,7 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.sodiumzh.nff.girls.entity.tamingprocess.hmag.HmagJiangshiTamingProcess;
+import net.sodiumzh.nff.services.entity.taming.NFFTamableComponent;
 import net.sodiumzh.nff.services.entity.taming.NFFTamingMapping;
 import net.sodiumzh.nff.services.registry.NFFCapRegistry;
 import net.sodiumzh.nfu.item.NFUItem;
@@ -31,7 +32,7 @@ public class TaoistTalismanItem extends NFUItem
 			MutableObject<Boolean> interacted = new MutableObject<>(false);
 			if (NFFTamingMapping.getProcess(js) != null && NFFTamingMapping.getProcess(js) instanceof HmagJiangshiTamingProcess handler)
 			{
-				js.getCapability(NFFCapRegistry.CAP_BEFRIENDABLE_MOB).ifPresent(cap ->
+				NFFTamableComponent.getOptional(js).ifPresent(cap ->
 				{
 					if (handler.applyTalisman(js))
 					{

@@ -168,23 +168,6 @@ public class HmagAlrauneEntity extends AlrauneEntity implements INFFGirlsTamed {
 		return new NFFTamedMobInventory(3, this);
 	}
 
-	@Override
-	public void updateFromInventory() {
-		if (!this.level().isClientSide) {
-			// Sync inventory with mob equipments. If it's not NFFTamedMobInventoryWithEquipment, remove it
-			//additionalInventory.setMobEquipment(this);
-		}
-	}
-
-	@Override
-	public void setInventoryFromMob()
-	{
-		if (!this.level().isClientSide) {
-			// Sync inventory with mob equipments. If it's not NFFTamedMobInventoryWithEquipment, remove it
-			//additionalInventory.getFromMob(this);
-		}
-		return;
-	}
 
 	@Override
 	public NFFTamedInventoryMenu makeMenu(int containerId, Inventory playerInventory, Container container) {

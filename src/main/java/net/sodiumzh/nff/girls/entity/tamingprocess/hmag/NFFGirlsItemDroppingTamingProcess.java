@@ -37,13 +37,13 @@ public abstract class NFFGirlsItemDroppingTamingProcess extends NFFTamingProcess
 	// to prevent picking immediately
 	// This is a timer and handled in the event listener at the end of this class
 	// In entity data cap, Compound (UUID string -> int for remaining time)
-	protected static final String ITEM_ENTITY_TIMER_KEY_ALREADY_PICKED_TAMABLE_MOBS = "already_picked_befriendable_mobs";
+	public static final String ITEM_ENTITY_TIMER_KEY_ALREADY_PICKED_TAMABLE_MOBS = "already_picked_befriendable_mobs";
 	// Timer for how long this mob is holding an item.
-	protected static final String TIMER_KEY_HOLD_ITEM_TIME = "holdItemTime";
-	protected static final String TIMER_KEY_PICKING_COOLDOWN = "pickingCooldown";
+	public static final String TIMER_KEY_HOLD_ITEM_TIME = "holdItemTime";
+	public static final String TIMER_KEY_PICKING_COOLDOWN = "pickingCooldown";
 	// Label an item if it's on the tamable mob's offhand and is player-thrown. The value is the thrower uuid.
-	protected static final String ITEM_NBT_KEY_PICKED_FROM_PLAYER = "itemPickedFromPlayer";
-	protected int[] watchAndPickItemGoalPriorities = {2, 3};
+	public static final String ITEM_NBT_KEY_PICKED_FROM_PLAYER = "itemPickedFromPlayer";
+	public int[] watchAndPickItemGoalPriorities = {2, 3};
 
 
 	@Nullable
@@ -214,7 +214,7 @@ public abstract class NFFGirlsItemDroppingTamingProcess extends NFFTamingProcess
 					.getTag().getUUID(ITEM_NBT_KEY_PICKED_FROM_PLAYER));
 			if (player != null && mob.hasLineOfSight(player))
 			{
-				NFFTamableComponent tamable = NFFTamableComponent.get(mob);
+				NFFTamableComponent tamable = NFFTamableComponent.getOrDefault(mob);
 				double oldProgress = this.getProgressValue(mob).orElse(0d);
 				double newProgress = oldProgress + getProgressGainInternal(mob.getItemInHand(InteractionHand.OFF_HAND), mob);
 				NFUParticleStatics.sendGlintParticlesToEntityDefault(mob);

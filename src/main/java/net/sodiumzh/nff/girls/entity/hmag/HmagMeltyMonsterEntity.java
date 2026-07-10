@@ -14,6 +14,7 @@ import net.minecraft.world.Container;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.effect.MobEffects;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Mob;
@@ -46,12 +47,13 @@ import net.sodiumzh.nff.girls.sound.NFFGirlsSoundPresets;
 import net.sodiumzh.nff.services.entity.ai.NFFTamedMobAIState;
 import net.sodiumzh.nff.services.entity.ai.goal.preset.NFFWaterAvoidingRandomStrollGoal;
 import net.sodiumzh.nff.services.entity.ai.goal.preset.target.NFFHurtByTargetGoal;
-import net.sodiumzh.nff.services.entity.capability.wrapper.ILivingDelayedActions;
 import net.sodiumzh.nff.services.entity.taming.NFFTamedStatics;
 import net.sodiumzh.nff.services.entity.taming.NFFTamingMapping;
 import net.sodiumzh.nff.services.inventory.NFFTamedInventoryMenu;
 import net.sodiumzh.nff.services.inventory.NFFTamedMobInventory;
 import net.sodiumzh.nfu.entity.ConditionalAttributeModifier;
+import net.sodiumzh.nfu.entity.component.EntityComponentAPI;
+import net.sodiumzh.nfu.entity.component.preset.EntityTimerComponent;
 import net.sodiumzh.nfu.util.*;
 
 import javax.annotation.Nonnull;
@@ -61,7 +63,11 @@ import java.util.UUID;
 import java.util.function.Consumer;
 import java.util.function.Predicate;
 
-public class HmagMeltyMonsterEntity extends MeltyMonsterEntity implements INFFGirlsTamed, ILivingDelayedActions {
+public class HmagMeltyMonsterEntity extends MeltyMonsterEntity implements INFFGirlsTamed {
+
+	private EntityTimerComponent<Entity> getTimerComponent() {
+		return EntityComponentAPI.getDefaultTimer(this);
+	}
 
 	public static final ConditionalAttributeModifier MODIFIER_SLOWNESS_ON_LOW_STAMINA = 
 			new ConditionalAttributeModifier(Attributes.MOVEMENT_SPEED, -0.5d,  AttributeModifier.Operation.MULTIPLY_TOTAL, living ->
@@ -166,8 +172,9 @@ public class HmagMeltyMonsterEntity extends MeltyMonsterEntity implements INFFGi
 		}
 		case 1:
 		{
-			action1.run();
-			this.addMultipleDelayedActions(action1, 4, 8);
+			this.getTimerComponent().addDelayedAction(action1, 4, 2, false, true);
+			//action1.run();
+			//this.addMultipleDelayedActions(action1, 4, 8);
 			break;
 		}
 		case 2:
@@ -177,8 +184,9 @@ public class HmagMeltyMonsterEntity extends MeltyMonsterEntity implements INFFGi
 				for (int j = 0; j < 3; ++j)
 					action.accept(NFUMathStatics.randomUnitVector().scale(NFUMathStatics.rndRangedDouble(0, 2)));
 			};
-			action2.run();
-			this.addMultipleDelayedActions(action2, 3, 6, 9, 12);
+			this.getTimerComponent().addDelayedAction(action2, 3, 4, false, true);
+			//action2.run();
+			//this.addMultipleDelayedActions(action2, 3, 6, 9, 12);
 			break;
 		}
 		case 3:
@@ -188,8 +196,9 @@ public class HmagMeltyMonsterEntity extends MeltyMonsterEntity implements INFFGi
 				for (int j = 0; j < 6; ++j)
 					action.accept(NFUMathStatics.randomUnitVector().scale(NFUMathStatics.rndRangedDouble(0, 2)));
 			};
-			action3.run();
-			this.addMultipleDelayedActions(action3, 3, 6, 9, 12, 15, 18);
+			this.getTimerComponent().addDelayedAction(action3, 3, 6, false, true);
+			//action3.run();
+			//this.addMultipleDelayedActions(action3, 3, 6, 9, 12, 15, 18);
 			break;
 		}
 		case 4:
@@ -199,8 +208,9 @@ public class HmagMeltyMonsterEntity extends MeltyMonsterEntity implements INFFGi
 				for (int j = 0; j < 9; ++j)
 					action.accept(NFUMathStatics.randomUnitVector().scale(NFUMathStatics.rndRangedDouble(0, 3)));
 			};
-			action4.run();
-			this.addMultipleDelayedActions(action4, NFUContainerStatics.intRangeArray(2, 20, 2));
+			this.getTimerComponent().addDelayedAction(action4, 2, 10, false, true);
+			//action4.run();
+			//this.addMultipleDelayedActions(action4, NFUContainerStatics.intRangeArray(2, 20, 2));
 			break;
 		}
 		default: 

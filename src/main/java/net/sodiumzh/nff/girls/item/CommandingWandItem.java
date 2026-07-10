@@ -143,7 +143,7 @@ public class CommandingWandItem extends NFUItem
 	private boolean summonMobsAround(Level level, Player player) {
 		if (level.isClientSide) return false;
 		List<Entity> mobs = level.getEntities(player, player.getBoundingBox().inflate(16d),
-			(Entity e) -> INFFGirlsTamed.isBMAnd(e, tamed -> Objects.equals(player.getUUID(), tamed.getOwnerUUID())));
+			(Entity e) -> INFFGirlsTamed.get(e).filter(tamed -> Objects.equals(player.getUUID(), tamed.getOwnerUUID())).isPresent());
 		boolean res = false;
 		// Set each mob follow, clear target, try teleport
 		for (Entity mobEntity : mobs) {
@@ -167,7 +167,7 @@ public class CommandingWandItem extends NFUItem
 	private boolean summonMob(Level level, Player player, Mob mob) {
 		if (level.isClientSide) return false;
 		mob.setTarget(null);
-		return INFFGirlsTamed.isBMAnd(mob, bm -> {
+		return INFFGirlsTamed.get(mob).filter(bm -> {
 			bm.setAIState(NFFTamedMobAIState.FOLLOW, false);
 			List<INFFFollowOwnerGoal> followGoals =
 				NFUAIStatics.getGoalsAndPriorities(mob).keySet().stream()
@@ -175,7 +175,7 @@ public class CommandingWandItem extends NFUItem
 					.map(goal -> (INFFFollowOwnerGoal)goal).toList();
 			if (!followGoals.isEmpty()) followGoals.get(0).teleportToOwner();
 			return true;
-		});
+		}).isPresent();
 	}
 
 	// *** Mob Finding Related
@@ -212,9 +212,9 @@ public class CommandingWandItem extends NFUItem
 				.stream().map(NbtUtils::loadUUID).toList();
 		AtomicReference<FindMobResult> found = new AtomicReference<>(FindMobResult.end());
 
-		List<INFFTamed> mobsLoaded = NFUEntityStatics.getEntitiesOnServer(level,
-			EntityTypeTest.forClass(Mob.class), e -> INFFGirlsTamed.isBMAndOwnedBy(e, player.getUUID()))
-			.stream().map(INFFTamed::getBM).filter(Objects::nonNull).toList();
+		List<INFFGirlsTamed> mobsLoaded = NFUEntityStatics.getEntitiesOnServer(level, EntityTypeTest.forClass(Mob.class),
+			e -> INFFGirlsTamed.get(e).filter(tm -> Objects.equals(tm.getOwnerUUID(), player.getUUID())).isPresent())
+			.stream().flatMap(en -> INFFGirlsTamed.get(en).stream()).toList();
 		// Search in levels
 		mobsLoaded.stream().filter(e -> {
 			UUID uuid = e.getIdentifier();

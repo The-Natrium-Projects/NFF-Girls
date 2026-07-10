@@ -12,7 +12,7 @@ import net.sodiumzh.nff.girls.entity.NFFGirlsTamingRules;
 import net.sodiumzh.nff.girls.registry.NFFGirlsAngerRules;
 import net.sodiumzh.nff.girls.registry.NFFGirlsBlocks;
 import net.sodiumzh.nff.girls.registry.NFFGirlsTags;
-import net.sodiumzh.nff.services.entity.capability.CNFFTamable;
+import net.sodiumzh.nff.services.entity.taming.NFFTamableComponent;
 import net.sodiumzh.nff.services.entity.taming.TamingProcessItemGivingProgress;
 import net.sodiumzh.nfu.block.ColoredBlocks;
 import net.sodiumzh.nfu.entity.anger.MobAngerRules;
@@ -68,7 +68,7 @@ public class HmagNightwalkerTamingProcess extends TamingProcessItemGivingProgres
 	}
 
 	@Override
-	public void tamableInit(CNFFTamable cnffTamable) {
+	public void tamableInit(NFFTamableComponent NFFTamableComponent) {
 
 	}
 }

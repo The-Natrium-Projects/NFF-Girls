@@ -28,7 +28,7 @@ import net.sodiumzh.nfu.util.NFUReflectionStatics;
 import javax.annotation.Nullable;
 import java.util.List;
 
-public class NFFGirlsHooks
+public class NFFGirlsEvents
 {
 
 	/** Fired on Peach Wood Sword damaging by percentage */
