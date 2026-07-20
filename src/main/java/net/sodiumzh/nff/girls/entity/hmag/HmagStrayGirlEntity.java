@@ -236,7 +236,7 @@ public class HmagStrayGirlEntity extends StrayGirlEntity implements INFFGirlsTam
 		super.readAdditionalSaveData(nbt);
 		//NFFTamedStatics.readBefriendedCommonSaveData(this, nbt);
 		isFromSkeleton = nbt.getBoolean("is_from_skeleton");
-		setInit();
+		
 	}
 	
 	/* Conversion */
@@ -246,7 +246,7 @@ public class HmagStrayGirlEntity extends StrayGirlEntity implements INFFGirlsTam
 	public HmagSkeletonGirlEntity convertToSkeleton()
 	{
 		HmagSkeletonGirlEntity newMob = (HmagSkeletonGirlEntity)NFFTamedStatics.convertToOtherBefriendedType(this, NFFGirlsEntityTypes.HMAG_SKELETON_GIRL.get());
-		newMob.setInit();
+		;
 		return newMob;
 	}
 	

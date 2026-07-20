@@ -143,7 +143,7 @@ public class HmagSnowCanineEntity extends SnowCanineEntity implements INFFGirlsT
 		super.readAdditionalSaveData(nbt);
 		//NFFTamedStatics.readBefriendedCommonSaveData(this, nbt);
 		// Add other data reading here
-		setInit();
+
 	}
 /*
 	@SuppressWarnings("unchecked")

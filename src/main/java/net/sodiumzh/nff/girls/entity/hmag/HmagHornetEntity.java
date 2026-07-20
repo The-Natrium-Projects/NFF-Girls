@@ -167,7 +167,7 @@ public class HmagHornetEntity extends HornetEntity implements INFFGirlsTamed, IN
 		////NFFTamedStatics.readBefriendedCommonSaveData(this, nbt);
 		// Add other data reading here
 
-		setInit();
+
 	}
 
 	@Override

@@ -49,7 +49,7 @@ public class HmagJackFrostEntity extends JackFrostEntity implements INFFGirlsTam
 	}
 
 	@Override
-	public void onInit(UUID playerUUID, Mob from)
+	public void onTamed(Player player, Mob from)
 	{
 		this.immuneToHotBiomes.putOptional("bauble", INFFGirlsBauble::isEnvironmentImmunized);
 	}
@@ -92,9 +92,9 @@ public class HmagJackFrostEntity extends JackFrostEntity implements INFFGirlsTam
 	
 	protected int getThrowLevel()
 	{
-		return this.getLevelHandler().getExpectedLevel() < 15 ? 0 : (
-				this.getLevelHandler().getExpectedLevel() < 30 ? 1 : (
-				this.getLevelHandler().getExpectedLevel() < 60 ? 2 : 3));
+		return this.getDataAccessor().getExpectedXPLevel() < 15 ? 0 : (
+				this.getDataAccessor().getExpectedXPLevel() < 30 ? 1 : (
+				this.getDataAccessor().getExpectedXPLevel() < 60 ? 2 : 3));
 	}
 	
 	@Override
@@ -268,7 +268,7 @@ public class HmagJackFrostEntity extends JackFrostEntity implements INFFGirlsTam
 		super.readAdditionalSaveData(nbt);
 		//NFFTamedStatics.readBefriendedCommonSaveData(this, nbt);
 		// Add other data reading here
-		setInit();
+
 	}
 /*
 	@Override

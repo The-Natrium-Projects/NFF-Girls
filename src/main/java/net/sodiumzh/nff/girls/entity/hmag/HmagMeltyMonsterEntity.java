@@ -103,7 +103,7 @@ public class HmagMeltyMonsterEntity extends MeltyMonsterEntity implements INFFGi
 	}
 	
 	@Override
-	public void onInit(UUID playerUUID, Mob source)
+	public void onTamed(Player player, Mob source)
 	{
 		if (source != null && source.getClass().equals(MeltyMonsterEntity.class))
 			this.setStamina(10000);
@@ -126,7 +126,7 @@ public class HmagMeltyMonsterEntity extends MeltyMonsterEntity implements INFFGi
 	
 	public int getMaxStamina()
 	{
-		return Math.min(10000 + this.getLevelHandler().getExpectedLevel() * 1000, 1000000);
+		return Math.min(10000 + this.getDataAccessor().getExpectedXPLevel() * 1000, 1000000);
 	}
 
 	@Override
@@ -223,10 +223,10 @@ public class HmagMeltyMonsterEntity extends MeltyMonsterEntity implements INFFGi
 	
 	protected int getFireLevel()
 	{
-		return this.getLevelHandler().getExpectedLevel() < 15 ? 0 : (
-				this.getLevelHandler().getExpectedLevel() < 30 ? 1 : (
-				this.getLevelHandler().getExpectedLevel() < 50 ? 2 : (
-				this.getLevelHandler().getExpectedLevel() < 80 ? 3 : 4)));
+		return this.getDataAccessor().getExpectedXPLevel() < 15 ? 0 : (
+				this.getDataAccessor().getExpectedXPLevel() < 30 ? 1 : (
+				this.getDataAccessor().getExpectedXPLevel() < 50 ? 2 : (
+				this.getDataAccessor().getExpectedXPLevel() < 80 ? 3 : 4)));
 	}
 	
 	protected void playFiringSound()
@@ -307,7 +307,7 @@ public class HmagMeltyMonsterEntity extends MeltyMonsterEntity implements INFFGi
 				&& this.tickCount % 5 == 0)	// Invoke 4 times per second
 			
 		{
-			this.getFavorabilityHandler().addFavorability(1f / 240f);	// 1 per minute
+			this.getDataAccessor().addFavorability(1f / 240f);	// 1 per minute
 		}
 	}
 	
@@ -481,7 +481,7 @@ public class HmagMeltyMonsterEntity extends MeltyMonsterEntity implements INFFGi
 		this.takingLavaCooldown = nbt.getInt("taking_lava_cooldown");
 		this.setStamina(nbt.getInt("stamina"));
 		this.shouldSetFire = nbt.getBoolean("should_set_fire");
-		setInit();
+
 	}
 /*
 	@Override

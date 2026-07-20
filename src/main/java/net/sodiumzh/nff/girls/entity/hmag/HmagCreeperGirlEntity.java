@@ -101,9 +101,8 @@ public class HmagCreeperGirlEntity extends NFFTamedCreeperPreset implements INFF
 	}
 	
 	@Override
-	public void init(UUID playerUUID, Mob from)
+	public void onTamed(Player player, Mob from)
 	{
-		super.init(playerUUID, from);
 		if (from != null && from instanceof CreeperGirlEntity c)
 			this.setVariant(c.getVariant());
 		else if (from != null)

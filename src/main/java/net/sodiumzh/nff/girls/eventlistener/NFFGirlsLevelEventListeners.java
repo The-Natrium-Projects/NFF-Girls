@@ -30,7 +30,7 @@ public class NFFGirlsLevelEventListeners
 					if (INFFGirlsTamed.get(entity).filter(bm -> bm.getOwnerUUID().equals(player.getUUID())).isPresent()
 							&& entity.distanceToSqr(player) < 64f)
 					{
-						INFFGirlsTamed.get(entity).orElseThrow().getFavorabilityHandler().addFavorability(2f);
+						INFFGirlsTamed.get(entity).orElseThrow().getDataAccessor().addFavorability(2f);
 					}
 				}
 			}

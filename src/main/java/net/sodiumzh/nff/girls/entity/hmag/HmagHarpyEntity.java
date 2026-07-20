@@ -58,7 +58,7 @@ public class HmagHarpyEntity extends HarpyEntity implements INFFGirlsTamed {
 	}
 
 	@Override
-	public void onInit(UUID playerUUID, Mob from)
+	public void onTamed(Player player, Mob from)
 	{
 		if (from instanceof HarpyEntity he)
 		{
@@ -156,7 +156,7 @@ public class HmagHarpyEntity extends HarpyEntity implements INFFGirlsTamed {
 		super.readAdditionalSaveData(nbt);
 		//NFFTamedStatics.readBefriendedCommonSaveData(this, nbt);
 		// Add other data reading here
-		setInit();
+
 	}
 
 	// Sounds

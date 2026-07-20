@@ -69,7 +69,7 @@ public class HmagBansheeEntity extends BansheeEntity implements INFFGirlsTamedSu
 	}
 
 	@Override
-	public void onInit(UUID playerUUID, Mob from)
+	public void onTamed(Player player, Mob from)
 	{
 		if (from instanceof BansheeEntity b)
 		{
@@ -325,7 +325,7 @@ public class HmagBansheeEntity extends BansheeEntity implements INFFGirlsTamedSu
 		super.readAdditionalSaveData(nbt);
 		//NFFTamedStatics.readBefriendedCommonSaveData(this, nbt);
 		// Add other data reading here
-		setInit();
+
 	}
 
 	// Sounds

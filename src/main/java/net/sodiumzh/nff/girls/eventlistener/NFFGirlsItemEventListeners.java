@@ -136,7 +136,7 @@ public class NFFGirlsItemEventListeners
 	@SubscribeEvent
 	public static void onItemEntityHurt(ItemEntityHurtEvent event)
 	{
-		if (event.damageSource.getEntity() != null && event.damageSource.getEntity() instanceof INFFGirlsTamed)
+		if (event.damageSource.getEntity() != null && INFFGirlsTamed.get(event.damageSource.getEntity()).isPresent())
 			event.setCanceled(true);
 	}
 

@@ -192,7 +192,7 @@ public class HmagKoboldEntity extends KoboldEntity implements INFFGirlsTamed
 			this.locatedBlocks.deserialize(nbt.getCompound("locatedBlocks"));
 		if (nbt.contains("locatingCooldown"))
 			this.locatingBlockRemainingCooldown = nbt.getInt("locatingCooldown");
-		setInit();
+
 	}
 
 /*

@@ -132,7 +132,7 @@ public class HmagHuskGirlEntity extends HuskGirlEntity implements INFFGirlsTamed
 	public void readAdditionalSaveData(CompoundTag nbt) {
 		super.readAdditionalSaveData(nbt);
 		//NFFTamedStatics.readBefriendedCommonSaveData(this, nbt);
-		this.setInit();
+		
 	}
 
 	/* Conversion */
@@ -162,7 +162,7 @@ public class HmagHuskGirlEntity extends HuskGirlEntity implements INFFGirlsTamed
 	{
 		HmagZombieGirlEntity newMob = (HmagZombieGirlEntity)NFFTamedStatics.convertToOtherBefriendedType(this, NFFGirlsEntityTypes.HMAG_ZOMBIE_GIRL.get());
 		newMob.isFromHusk = true;
-		newMob.setInit();
+		;
 		return newMob;
 	}
 

@@ -10,6 +10,7 @@ import net.sodiumzh.nfu.entity.anger.MobAngerHandlerComponent;
 import net.sodiumzh.nfu.entity.anger.MobAngerRules;
 import net.sodiumzh.nfu.entity.component.EntityComponentSetupEvent;
 import net.sodiumzh.nfu.entity.component.EntityComponentType;
+import net.sodiumzh.nfu.entity.component.SubComponentAccessor;
 import net.sodiumzh.nfu.network.AvailableSide;
 import net.sodiumzh.nfu.object.HierarchyPath;
 import net.sodiumzh.nfu.registry.NFURegistries;
@@ -31,6 +32,11 @@ public class NFFGirlsEntityComponents {
     public static final HierarchyPath PATH_NFF_GIRLS = HierarchyPath.byLiteral("/nff/girls");
     public static final HierarchyPath PATH_UNDEAD_AFFINITY_HANDLER = HierarchyPath.byLiteral("/nff/girls/undead_affinity_handler");
     public static final HierarchyPath PATH_NEUTRALITY_HANDLER = HierarchyPath.byLiteral("/nff/girls/neutrality_handler");
+
+    public static final SubComponentAccessor<Mob, MobAngerHandlerComponent> ACCESSOR_UNDEAD_AFFINITY_HANDLER
+        = new SubComponentAccessor<>(PATH_UNDEAD_AFFINITY_HANDLER, UNDEAD_AFFINITY_HANDLER);
+    public static final SubComponentAccessor<Mob, NFFGirlsNeutralityHandlerComponent> ACCESSOR_NEUTRALITY_HANDLER
+        = new SubComponentAccessor<>(PATH_NEUTRALITY_HANDLER, NEUTRALITY_HANDLER);
 
     @Mod.EventBusSubscriber(modid = NFFGirls.MOD_ID, bus = Mod.EventBusSubscriber.Bus.FORGE)
     public static class Attachment {
