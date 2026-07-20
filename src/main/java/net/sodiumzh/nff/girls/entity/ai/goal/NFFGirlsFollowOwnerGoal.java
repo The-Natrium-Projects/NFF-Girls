@@ -4,7 +4,6 @@
 package net.sodiumzh.nff.girls.entity.ai.goal;
 
 import net.sodiumzh.nff.girls.entity.NFFGirlsDataAccessor;
-import net.sodiumzh.nff.girls.entity.capability.CNFFGirlsFavorabilityHandler;
 import net.sodiumzh.nff.services.entity.ai.goal.preset.NFFFollowOwnerGoal;
 import net.sodiumzh.nff.services.entity.taming.INFFTamed;
 

@@ -212,7 +212,7 @@ public class HmagDrownedGirlEntity extends DrownedGirlEntity implements INFFGirl
 		//NFFTamedStatics.readBefriendedCommonSaveData(this, nbt);
 		isFromHusk = nbt.getBoolean("isFromHusk") || nbt.getBoolean("is_from_husk");
 		isFromZombie = nbt.getBoolean("isFromZombie") || nbt.getBoolean("is_from_zombie");
-		setInit();
+		
 	}
 
 	/* Convertions */
@@ -224,7 +224,7 @@ public class HmagDrownedGirlEntity extends DrownedGirlEntity implements INFFGirl
 		HmagZombieGirlEntity newMob = (HmagZombieGirlEntity) NFFTamedStatics
 				.convertToOtherBefriendedType(this, NFFGirlsEntityTypes.HMAG_ZOMBIE_GIRL.get());
 		newMob.isFromHusk = isFromHusk;
-		newMob.setInit();
+		;
 		return newMob;
 	}
 	

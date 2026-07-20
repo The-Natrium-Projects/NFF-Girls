@@ -209,8 +209,7 @@ public interface CNFFGirlsTradeHandler extends IVanillaMerchant
 
 		@Override
 		public int getMerchantLevel() {
-			if (this.getMob() instanceof INFFGirlsTamed bm)
-			{
+			return INFFGirlsTamed.get(this.getMob()).map(bm -> {
 				int[] levelRequirements = bm.getXpLevelRequirementsEachMerchantLevel();
 				for (int i = levelRequirements.length; i > 0; --i)
 				{
@@ -218,21 +217,20 @@ public interface CNFFGirlsTradeHandler extends IVanillaMerchant
 						return i;
 				}
 				return 1;
-			}
-			return 1;
+			}).orElse(1);
 		}
 
 		@Override
 		public void onTrade(MerchantOffer offer) {
 			var meta = this.getMeta(offer);
 			if (meta != null) {
-                this.getBM().getFavorabilityHandler().addFavorability(meta.requiredMerchantLevel * 0.1f);
+                this.getBM().getDataAccessor().addFavorability(meta.requiredMerchantLevel * 0.1f);
                 if (offer.getResult().is(NFFGirlsItems.TRADE_INTRODUCTION_LETTER.get()))
                     tradePoints -= this.getPointsPerIntroduction();
                 else
                 {
                     tradePoints += meta.requiredMerchantLevel;
-                    this.getBM().getLevelHandler().addExp((1 + meta.requiredMerchantLevel) * meta.requiredMerchantLevel / 2 );
+                    this.getBM().getDataAccessor().addXP((1 + meta.requiredMerchantLevel) * meta.requiredMerchantLevel / 2 );
                 }
             }
 		}
@@ -373,8 +371,8 @@ public interface CNFFGirlsTradeHandler extends IVanillaMerchant
 			// Update discount
 			for (var offer: this.getOffers())
 			{
-				float factor = Mth.lerp(this.getBM().getNormalizedFavorability(), 0.5f, -0.5f);
-				offer.setSpecialPriceDiff(Math.round(factor * offer.getBaseCostA().getCount()));
+				double factor = Mth.lerp(this.getBM().getNormalizedFavorability(), 0.5f, -0.5f);
+				offer.setSpecialPriceDiff((int)Math.round(factor * offer.getBaseCostA().getCount()));
 			}
 			
 			// Handle sync

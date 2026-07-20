@@ -40,15 +40,8 @@ import java.util.concurrent.atomic.AtomicReference;
 public interface INFFGirlsTamed extends INFFTamed
 {
 
-	public static FilteredMapper<Object, INFFGirlsTamed> GETTER = FilteredMapper.unconditionalNoVararg(Object.class, INFFGirlsTamed.class, o -> {
-			if (o == null) return null;
-			if (o instanceof INFFGirlsTamed bm)
-				return bm;
-			else return null;
-		});
-
-	public static Optional<INFFGirlsTamed> get(Object o) {
-		return GETTER.apply(o);
+	public static Optional<INFFGirlsTamed> get(Entity o) {
+		return INFFTamed.get(o).filter(t -> t instanceof INFFGirlsTamed).map(t -> (INFFGirlsTamed)t);
 	}
 
 	@Override

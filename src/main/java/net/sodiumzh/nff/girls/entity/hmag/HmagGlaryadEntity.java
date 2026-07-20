@@ -139,7 +139,7 @@ public class HmagGlaryadEntity extends GlaryadEntity implements INFFGirlsTamed
 		super.readAdditionalSaveData(nbt);
 		//NFFTamedStatics.readBefriendedCommonSaveData(this, nbt);
 		// Add other data reading here
-		setInit();
+
 	}
 /*
 	@Override

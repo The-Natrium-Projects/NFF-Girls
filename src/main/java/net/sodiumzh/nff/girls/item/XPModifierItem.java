@@ -9,6 +9,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
+import net.sodiumzh.nff.girls.entity.INFFGirlsTamed;
 import net.sodiumzh.nff.girls.registry.NFFGirlsCapabilities;
 import net.sodiumzh.nfu.util.NFUEntityStatics;
 import net.sodiumzh.nfu.util.NFUMiscStatics;
@@ -44,29 +45,28 @@ public class XPModifierItem extends Item
 	
     @Override
 	public InteractionResult interactLivingEntity(ItemStack stack, Player player, LivingEntity target, InteractionHand hand) {
-    	if (target.getCapability(NFFGirlsCapabilities.CAP_LEVEL_HANDLER).isPresent())
-    	{
-    		target.getCapability(NFFGirlsCapabilities.CAP_LEVEL_HANDLER).ifPresent(cap -> {
-    			if (!player.level().isClientSide)
-	    		{
-	    			if (!player.isShiftKeyDown())
-	    			{
-	    				cap.setExp(cap.getExp() + this.getValue(stack));
-	    				NFUMiscStatics.printToScreen("Mob [" + target.getName().getString() + "] EXP +" + this.getValue(stack) + "." , player);
-	    				NFUMiscStatics.printToScreen("Current: Lv " + Integer.toString(cap.getExpectedLevel()) + ", EXP " + Long.toString(cap.getExpInThisLevel()) , player);
-	    				NFUEntityStatics.sendGlintParticlesToLivingDefault(target);
-	    			}
-	    			else 
-	    			{
-	    				cap.setExp(Math.max(0, cap.getExp() - this.getValue(stack)));
-	    				NFUMiscStatics.printToScreen("Mob [" + target.getName().getString() + "] EXP -" + this.getValue(stack) + "." , player);
-	    				NFUMiscStatics.printToScreen("Current: Lv " + Integer.toString(cap.getExpectedLevel()) + ", EXP " + Long.toString(cap.getExpInThisLevel()) , player);
-	    				NFUEntityStatics.sendSmokeParticlesToLivingDefault(target);
-	    			}
-    			}
-    		});
-    		return InteractionResult.sidedSuccess(player.level().isClientSide);
-    	}
+		if (INFFGirlsTamed.get(target).isPresent()) {
+			INFFGirlsTamed.get(target).map(INFFGirlsTamed::getDataAccessor).ifPresent(cap -> {
+				if (!player.level().isClientSide)
+				{
+					if (!player.isShiftKeyDown())
+					{
+						cap.setXP(cap.getXP() + this.getValue(stack));
+						NFUMiscStatics.printToScreen("Mob [" + target.getName().getString() + "] EXP +" + this.getValue(stack) + "." , player);
+						NFUMiscStatics.printToScreen("Current: Lv " + Integer.toString(cap.getExpectedXPLevel()) + ", EXP " + Long.toString(cap.getXPInThisLevel()) , player);
+						NFUEntityStatics.sendGlintParticlesToLivingDefault(target);
+					}
+					else
+					{
+						cap.setXP(Math.max(0, cap.getXP() - this.getValue(stack)));
+						NFUMiscStatics.printToScreen("Mob [" + target.getName().getString() + "] EXP -" + this.getValue(stack) + "." , player);
+						NFUMiscStatics.printToScreen("Current: Lv " + Integer.toString(cap.getExpectedXPLevel()) + ", EXP " + Long.toString(cap.getXPInThisLevel()) , player);
+						NFUEntityStatics.sendSmokeParticlesToLivingDefault(target);
+					}
+				}
+			});
+			return InteractionResult.sidedSuccess(player.level().isClientSide);
+		}
     	return InteractionResult.PASS;
     }
     

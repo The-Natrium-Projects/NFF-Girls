@@ -41,7 +41,7 @@ public class NFFGirlsNearestPotentiallyHostileToOwnerTargetGoal extends NFFNeare
 
     public NFFGirlsNearestPotentiallyHostileToOwnerTargetGoal(INFFGirlsTamed mob, int randomInterval, boolean mustSee, boolean mustReach) {
         super(mob, Mob.class, randomInterval, mustSee, mustReach, living -> isPotentiallyHostileToOwner(mob, living));
-        stateConditions(bm -> INFFGirlsTamed.get(bm).filter(INFFGirlsTamed::shouldAttackMobsHostileToOwner).isPresent());
+        stateConditions(bm -> INFFGirlsTamed.get(bm.asMob()).filter(INFFGirlsTamed::shouldAttackMobsHostileToOwner).isPresent());
     }
 
     public NFFGirlsNearestPotentiallyHostileToOwnerTargetGoal(INFFGirlsTamed mob, boolean mustSee, boolean mustReach) {

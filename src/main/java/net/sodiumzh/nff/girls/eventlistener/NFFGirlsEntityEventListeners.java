@@ -91,12 +91,14 @@ import net.sodiumzh.nfu.entity.anger.MobAngerHandlerComponent;
 import net.sodiumzh.nfu.entity.anger.MobAngerReason;
 import net.sodiumzh.nfu.entity.component.EntityComponentAPI;
 import net.sodiumzh.nfu.entity.component.EntityComponentFinalizeSetupEvent;
+import net.sodiumzh.nfu.entity.component.EntityComponentTypes;
 import net.sodiumzh.nfu.entity.component.preset.EntityAttributeMonitorComponent;
 import net.sodiumzh.nfu.entity.component.preset.EntityItemStackMonitorComponent;
 import net.sodiumzh.nfu.entity.component.preset.HealingHandlerComponent;
 import net.sodiumzh.nfu.entity.taming.ITamingProcessWithProgress;
 import net.sodiumzh.nfu.mixin.event.entity.*;
 import net.sodiumzh.nfu.network.NFUDataSerializers;
+import net.sodiumzh.nfu.registry.NFUEntityComponents;
 import net.sodiumzh.nfu.util.*;
 import org.apache.commons.lang3.mutable.MutableObject;
 
@@ -259,8 +261,7 @@ public class NFFGirlsEntityEventListeners
 		}
 
 		/* Favorability & Level */
-		if (event.getMob() instanceof INFFGirlsTamed bm && bm.isOwnerInDimension())
-		{
+		INFFGirlsTamed.get(event.getMob().asMob()).filter(INFFGirlsTamed::isOwnerInDimension).ifPresent(bm -> {
 			// Favorability loss on death
 			if (event.getDamageSource().getEntity() != null
 					&& event.getDamageSource().getEntity() == bm.getOwner()
@@ -276,7 +277,7 @@ public class NFFGirlsEntityEventListeners
 			// EXP loses by a half on death
 			// As respawner construction (in befriendmobs) is after posting NFFTamedDeathEvent, it can be set here
 			bm.getDataAccessor().setXP(bm.getDataAccessor().getXP() / 2);
-		}
+		});
 		/* Favorability & Level end */
 	}
 	
@@ -359,13 +360,6 @@ public class NFFGirlsEntityEventListeners
 						&& !event.getSource().is(DamageTypes.STARVE))
 				{
 					NFUParticleStatics.sendParticlesToEntity(living, ParticleTypes.PORTAL, 0, living.getBbHeight()/2, 0, 0.5, living.getBbHeight()/2, 0.5, 2, 1);
-					/*living.level.addParticle(ParticleTypes.PORTAL, 
-							living.getRandomX(0.5D), 
-							living.getRandomY() - 0.25D,
-							living.getRandomZ(0.5D), 
-							(living.getRandom().nextDouble() - 0.5D) * 2.0D,
-							-living.getRandom().nextDouble(), 
-							(living.getRandom().nextDouble() - 0.5D) * 2.0D);*/
 					NFUEntityStatics.chorusLikeTeleport(living);
 				}
 			}
@@ -393,9 +387,7 @@ public class NFFGirlsEntityEventListeners
 				});
 			}
 			// Armor durability
-			if (event.getEntity() instanceof INFFGirlsTamed bm
-					&& bm.getModId().equals(NFFGirls.MOD_ID))
-			{
+			INFFGirlsTamed.get(event.getEntity()).ifPresent(bm -> {
 				if (!bm.asMob().getItemBySlot(EquipmentSlot.HEAD).isEmpty())
 				{
 					if (event.getSource().is(DamageTypeTags.DAMAGES_HELMET))
@@ -404,7 +396,7 @@ public class NFFGirlsEntityEventListeners
 					}
 					hurtArmor(bm.asMob(), event.getSource(), event.getAmount());
 				}
-			}
+			});
 			
 			/** Durability end */
 			
@@ -561,41 +553,42 @@ public class NFFGirlsEntityEventListeners
                     });
             }
 
-			if (event.getEntity() instanceof Mob mob)
-			{
-				// Undead mob forgiving player
-				// TODO Is this out-of-date?
-				mob.getCapability(NFFGirlsCapabilities.CAP_UNDEAD_AFFINITY_HANDLER).ifPresent(cap -> 
-				{
-					cap.updateForgivingTimers();
-					if (mob.getTarget() != null && mob.getTarget().hasEffect(NFFGirlsEffects.UNDEAD_AFFINITY.get()) && !cap.getHatred().contains(mob.getTarget().getUUID()))
-						mob.setTarget(null);
-				});
-				//
-				// Sync mobs
-				if (mob instanceof INFFGirlsTamed bm)
-					bm.doSync();
-			}
+
+			// Update tamed
+			INFFGirlsTamed.get(event.getEntity()).ifPresent(t -> {
+				// Update undead affinity handler
+				EntityComponentAPI.getComponentByPath(t.asMob(), NFFGirlsEntityComponents.PATH_UNDEAD_AFFINITY_HANDLER, NFFGirlsEntityComponents.UNDEAD_AFFINITY_HANDLER.get())
+					.ifPresent(c -> {
+						if (c.getEntity().getTarget() != null
+							&& c.getEntity().getTarget().hasEffect(NFFGirlsEffects.UNDEAD_AFFINITY.get())
+							&& !c.isAngryAt(c.getEntity().getTarget()))
+						{
+							c.getEntity().setTarget(null);
+						}
+					});
+				// Sync mob
+				t.doSync();
+				// Detect entity touching
+				if (t.asMob().getHealth() > 0.0F) {
+					AABB aabb;
+					if (t.asMob().isPassenger() && !t.asMob().getVehicle().isRemoved()) {
+						aabb = t.asMob().getBoundingBox().minmax(t.asMob().getVehicle().getBoundingBox());
+					} else {
+						aabb = t.asMob().getBoundingBox();
+					}
+					t.asMob().level().getEntities(t.asMob(), aabb.inflate(10d)).stream()
+						.filter(e -> !e.isRemoved())
+						.filter(e -> e.getBoundingBox().intersects(aabb))
+						.forEach(t::touchEntity);
+				}
+			});
+			//
+			// Sync mobs
+
 			// Send overlap event
-			if (event.getEntity() instanceof INFFGirlsTamed bm)
+			if (event.getEntity() instanceof INFFGirlsTamed t)
 			{
-				if (bm.asMob().getHealth() > 0.0F) {
-			         AABB aabb;
-			         if (bm.asMob().isPassenger() && !bm.asMob().getVehicle().isRemoved()) {
-			            aabb = bm.asMob().getBoundingBox().minmax(bm.asMob().getVehicle().getBoundingBox()).inflate(1.0D, 0.0D, 1.0D);
-			         } else {
-			            aabb = bm.asMob().getBoundingBox().inflate(1.0D, 0.5D, 1.0D);
-			         }
 
-			         List<Entity> list = bm.asMob().level().getEntities(bm.asMob(), aabb);
-
-			         for(int i = 0; i < list.size(); ++i) {
-			            Entity entity = list.get(i);
-			            if (!entity.isRemoved()) {
-			               bm.touchEntity(entity);
-			            }
-			         }
-			     }
 			}
 			// Handle necromancer wither effect
 			if (event.getEntity().hasEffect(NFFGirlsEffects.NECROMANCER_WITHER.get()))
@@ -706,7 +699,7 @@ public class NFFGirlsEntityEventListeners
 	@SubscribeEvent
 	public static void onBefriendedSwitchAiState(NFFTamedChangeAiStateEvent event)
 	{
-		if (INFFGirlsTamed.get(event.getMob()).isPresent() && !event.getMob().asMob().level().isClientSide)
+		if (INFFGirlsTamed.get(event.getMob().asMob()).isPresent() && !event.getMob().asMob().level().isClientSide)
 		{
 			NFUMiscStatics.printToScreen(NFUInfoStatics.createText("")
 					.append(event.getMob().asMob().getName())
@@ -959,20 +952,20 @@ public class NFFGirlsEntityEventListeners
 					&& !(EntityType.getKey(mob.getType()).getNamespace().equals(HMaG.MODID))	// Exclude HMAG mob girls
 					/*&& NaUtilsAIStatics.isMobHostileToPlayer(mob)*/)	// For hostile mobs only // Something is wrong with NaUtilsAIStatics#isMobHostileToPlayer
 				{
-					NFUAIStatics.setHostileTo(mob, HmagZombieGirlEntity.class);
-					NFUAIStatics.setHostileTo(mob, HmagHuskGirlEntity.class);
-					NFUAIStatics.setHostileTo(mob, HmagDrownedGirlEntity.class);
-					NFUAIStatics.setHostileTo(mob, HmagCreeperGirlEntity.class);
+					NFUAIStatics.setHostileTo(mob, HmagZombieGirlEntity.class, isNotWaiting);
+					NFUAIStatics.setHostileTo(mob, HmagHuskGirlEntity.class, isNotWaiting);
+					NFUAIStatics.setHostileTo(mob, HmagDrownedGirlEntity.class, isNotWaiting);
+					NFUAIStatics.setHostileTo(mob, HmagCreeperGirlEntity.class, isNotWaiting);
 				}
 				// Zombies (including Zombified Piglins and Zoglins) hostile to skeletons & creepers
 				if ((mob instanceof Zombie || mob instanceof Zoglin)
 						&& !(EntityType.getKey(mob.getType()).getNamespace().equals(HMaG.MODID)))	// Exclude HMAG mob girls
 				{
 					//NaUtilsDebugStatics.debugPrintToScreen("Zombie add hostility", player);
-					NFUAIStatics.setHostileTo(mob, HmagSkeletonGirlEntity.class);
-					NFUAIStatics.setHostileTo(mob, HmagStrayGirlEntity.class);
-					NFUAIStatics.setHostileTo(mob, HmagWitherSkeletonGirlEntity.class);
-					NFUAIStatics.setHostileTo(mob, HmagCreeperGirlEntity.class);
+					NFUAIStatics.setHostileTo(mob, HmagSkeletonGirlEntity.class, isNotWaiting);
+					NFUAIStatics.setHostileTo(mob, HmagStrayGirlEntity.class, isNotWaiting);
+					NFUAIStatics.setHostileTo(mob, HmagWitherSkeletonGirlEntity.class, isNotWaiting);
+					NFUAIStatics.setHostileTo(mob, HmagCreeperGirlEntity.class, isNotWaiting);
 					/*NaUtilsDebugStatics.debugPrintToScreen("Zombie add hostility end", player);
 					for (WrappedGoal wg: mob.goalSelector.getAvailableGoals())
 					{
@@ -982,33 +975,28 @@ public class NFFGirlsEntityEventListeners
 				// Piglins hostile to all mobs not wearing gold
 				if (mob instanceof Piglin)
 				{
-					setHostileToAllBefriendedMobs(mob, isNotWearingGold);
+					setHostileToAllBefriendedMobs(mob, isNotWearingGold.and(isNotWaiting));
 				}
 				// Piglin brutes, Hoglins hostile to all mobs
 				if (mob instanceof PiglinBrute || mob instanceof Hoglin)
 				{
-					setHostileToAllBefriendedMobs(mob);
-				}
-				// Ghasts attack non-undead mobs
-				if (mob instanceof Ghast)
-				{
-					setHostileToAllBefriendedMobs(mob, isUndead.negate());
+					setHostileToAllBefriendedMobs(mob, isNotWaiting);
 				}
 				// Slimes (including magical) and magma cubes attack all mobs
 				if (mob instanceof Slime)
 				{
-					setHostileToAllBefriendedMobs(mob);
+					setHostileToAllBefriendedMobs(mob, isNotWaiting);
 				}
 				// Blaze attacks all flying mobs and skeletons (excluding wither)
 				if (mob instanceof Blaze)
 				{
-					NFUAIStatics.setHostileTo(mob, HmagSkeletonGirlEntity.class);
-					NFUAIStatics.setHostileTo(mob, HmagStrayGirlEntity.class);
-					NFUAIStatics.setHostileTo(mob, HmagHornetEntity.class);
+					NFUAIStatics.setHostileTo(mob, HmagSkeletonGirlEntity.class, isNotWaiting);
+					NFUAIStatics.setHostileTo(mob, HmagStrayGirlEntity.class, isNotWaiting);
+					NFUAIStatics.setHostileTo(mob, HmagHornetEntity.class, isNotWaiting);
 				}
 				if (mob instanceof Spider)
 				{
-					setHostileToAllBefriendedMobs(mob, (living) -> (living.getMobType() != MobType.ARTHROPOD));
+					setHostileToAllBefriendedMobs(mob, isNotWaiting.and(living -> (living.getMobType() != MobType.ARTHROPOD)));
 				}
 				/* Mob hostility end */
 				
@@ -1161,8 +1149,8 @@ public class NFFGirlsEntityEventListeners
 			// Send msg if trying to interact other people's mob
 			if (!event.getEntity().getUUID().equals(bm.getOwnerUUID())) 
 			{
-				if (bm.getData().getOwnerName() != null) {
-					NFUInfoStatics.printMessageTranslatable(event.getEntity(), "info.nffgirls.interact_not_owning", bm.getData().getOwnerName());
+				if (bm.getDataAccessor().getOwnerName() != null) {
+					NFUInfoStatics.printMessageTranslatable(event.getEntity(), "info.nffgirls.interact_not_owning", bm.getDataAccessor().getOwnerName());
 				} else {
 					NFUInfoStatics.printMessageTranslatable(event.getEntity(), "info.nffgirls.interact_not_owning_unpresent");
 				}
@@ -1310,7 +1298,8 @@ public class NFFGirlsEntityEventListeners
 
 	@SubscribeEvent
 	public static void onEntityComponentComponentFinishConstruction(EntityComponentFinalizeSetupEvent event) {
-		event.getComponentByPath(NFFEntityComponents.PATH_TAMED_SYNCHER, NFFEntityComponents.TAMED_SYNCHER.get())
+		event.getComponentManager()
+			.getSubComponentByPath(NFFEntityComponents.PATH_TAMED_SYNCHER, NFFEntityComponents.TAMED_SYNCHER.get())
 			.ifPresent(c -> {
 				// Access these three fields by NFFGirlsDataAccessor. No direct access.
 				c.createSynchedData(NFFGirlsDataAccessor.KEY_MAX_FAVORABILITY, NFUDataSerializers.DOUBLE, 100d, true);
@@ -1319,35 +1308,32 @@ public class NFFGirlsEntityEventListeners
 			});
 	}
 
-	public static void onAttributeMonitorSetup(EntityAttributeMonitorComponent.SetupEvent event) {
-		if (event.getComponent() == EntityComponentAPI.getAttributeMonitor(event.getEntity())
-			&& INFFGirlsTamed.get(event.getEntity()).isPresent())
-		{
-			event.addListened(Attributes.MAX_HEALTH);
-		}
+	@SubscribeEvent
+	public static void initComponentsOnJoinLevel(EntityJoinLevelEvent event) {
+		INFFGirlsTamed.get(event.getEntity()).ifPresent(t -> {
+			EntityComponentAPI.getComponentManager(event.getEntity())
+				.getSubComponentByPath(EntityComponentTypes.ACCESSOR_ATTRIBUTE_MONITOR)
+				.ifPresent(c -> c.addListened(Attributes.MAX_HEALTH));
+			EntityComponentAPI.getComponentManager(event.getEntity())
+				.getSubComponentByPath(NFFEntityComponents.ACCESSOR_ITEM_STACK_MONITOR)
+				.ifPresent(c -> c.addListened("mainHand", t.asMob()::getMainHandItem));
+		});
 	}
 
+	@SubscribeEvent
 	public static void onAttributeChange(EntityAttributeMonitorComponent.ChangeEvent event) {
-		if (event.getComponent() == EntityComponentAPI.getAttributeMonitor(event.getEntity())
+		if (INFFGirlsTamed.get(event.getEntity()).isPresent()
 			&& event.getAttribute().equals(Attributes.MAX_HEALTH)
-			&& INFFGirlsTamed.get(event.getEntity()).isPresent())
+			&& !event.involvesNaN())
 		{
 			event.getEntity().setHealth((float) (event.getEntity().getHealth() * event.getNewValue() / event.getOldValue()));
-		}
-	}
-
-	public static void onItemStackMonitorSetup(EntityItemStackMonitorComponent.SetupEvent event) {
-		if (event.getComponent().getPathFromRoot().equals(NFFEntityComponents.PATH_ITEM_STACK_MONITOR)
-			&& event.getEntity() instanceof LivingEntity living
-			&& INFFGirlsTamed.get(living).isPresent())
-		{
-			event.getComponent().addListened("mainHand", living::getMainHandItem);
 		}
 	}
 
 	private static final RepeatableAttributeModifier SHARPNESS =
 		new RepeatableAttributeModifier(0.5d, new ResourceLocation(NFFGirls.MOD_ID, "sharpness"), AttributeModifier.Operation.ADDITION, 200);
 
+	@SubscribeEvent
 	public static void onItemStackChange(EntityItemStackMonitorComponent.ChangeEvent event) {
 		if (event.getKey().equals("mainHand")
 			&& event.getComponent().getPathFromRoot().equals(NFFEntityComponents.PATH_ITEM_STACK_MONITOR)
@@ -1360,8 +1346,6 @@ public class NFFGirlsEntityEventListeners
 	}
 
 	// FAVORABILITY AND XP LEVEL RELATED //
-
-
 
 	private static void updateFavorability(Mob entity, double newValue) {
 		// Handle Favorability attack modifier
@@ -1395,13 +1379,15 @@ public class NFFGirlsEntityEventListeners
 		if (!entity.level().isClientSide && INFFGirlsTamed.get(entity).isPresent()) {
 			if (hpMaxInst != null) {
 				hpMaxInst.removeModifier(NFFGirlsDataAccessor.XP_HP_MODIFIER_UUID);
-				hpMaxInst.addPermanentModifier(new AttributeModifier(NFFGirlsDataAccessor.XP_HP_MODIFIER_UUID, "xp_level_hpmax",
-					hpLevel * NFFGirlsConfigs.ValueCache.Combat.HEALTH_BOOST_PER_LEVEL, AttributeModifier.Operation.ADDITION));
+				if (newLevel > 0)
+					hpMaxInst.addTransientModifier(new AttributeModifier(NFFGirlsDataAccessor.XP_HP_MODIFIER_UUID, "xp_level_hpmax",
+						hpLevel * NFFGirlsConfigs.ValueCache.Combat.HEALTH_BOOST_PER_LEVEL, AttributeModifier.Operation.ADDITION));
 			}
 			if (atkMaxInst != null) {
 				atkMaxInst.removeModifier(NFFGirlsDataAccessor.XP_ATK_MODIFIER_UUID);
-				atkMaxInst.addPermanentModifier(new AttributeModifier(NFFGirlsDataAccessor.XP_ATK_MODIFIER_UUID, "xp_level_atk",
-					atkLevel * NFFGirlsConfigs.ValueCache.Combat.ATK_BOOST_PER_LEVEL, AttributeModifier.Operation.ADDITION));
+				if (newLevel > 0)
+					atkMaxInst.addTransientModifier(new AttributeModifier(NFFGirlsDataAccessor.XP_ATK_MODIFIER_UUID, "xp_level_atk",
+						atkLevel * NFFGirlsConfigs.ValueCache.Combat.ATK_BOOST_PER_LEVEL, AttributeModifier.Operation.ADDITION));
 			}
 		}
 	}

@@ -175,7 +175,7 @@ public class HmagGhastlySeekerEntity extends GhastlySeekerEntity implements INFF
 		super.readAdditionalSaveData(nbt);
 		//NFFTamedStatics.readBefriendedCommonSaveData(this, nbt);
 		// Add other data reading here
-		setInit();
+
 	}
 
 	// Sounds

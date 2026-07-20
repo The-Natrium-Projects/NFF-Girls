@@ -49,7 +49,7 @@ public class HmagJiangshiEntity extends JiangshiEntity implements INFFGirlsTamed
 	}
 
 	@Override
-	public void onInit(UUID playerUUID, Mob from)
+	public void onTamed(Player player, Mob from)
 	{
 		if (from instanceof JiangshiEntity js)
 		{
@@ -147,7 +147,7 @@ public class HmagJiangshiEntity extends JiangshiEntity implements INFFGirlsTamed
 		super.readAdditionalSaveData(nbt);
 		//NFFTamedStatics.readBefriendedCommonSaveData(this, nbt);
 		// Add other data reading here
-		setInit();
+
 	}
 /*
 	@Override
@@ -178,7 +178,7 @@ public class HmagJiangshiEntity extends JiangshiEntity implements INFFGirlsTamed
 		NFUEntityStatics.addEffectSafe(this, new MobEffectInstance(MobEffects.DAMAGE_RESISTANCE, 60 * 20, 2));
 		NFUEntityStatics.addEffectSafe(this, new MobEffectInstance(MobEffects.MOVEMENT_SPEED, 60 * 20, 1));
 		NFUEntityStatics.addEffectSafe(this, new MobEffectInstance(MobEffects.FIRE_RESISTANCE, 60 * 20));
-		this.getLevelHandler().addExp(20);
+		this.getDataAccessor().addXP(20);
 	}
 	
 	/*@Override

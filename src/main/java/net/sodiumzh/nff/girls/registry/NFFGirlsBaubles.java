@@ -49,58 +49,58 @@ public class NFFGirlsBaubles {
         new NFURegistry<INFFGirlsBauble>(new ResourceLocation(NFFGirls.MOD_ID, "baubles"))
             .setLoadTiming(NFURegistry.LoadTiming.COMMON_SETUP);
 
-    public static final NFURegistryEntryCollection<INFFGirlsBauble> BAUBLES =
+    public static final NFURegistryEntryCollection<INFFGirlsBauble> BAUBLE_COLLECTION =
         NFURegistryEntryCollection.create(BAUBLE_REGISTRY, NFFGirls.MOD_ID);
 
     public static final DeferredRegister<Item> BAUBLE_ITEMS = DeferredRegister.create(
         ForgeRegistries.ITEMS, NFFGirls.MOD_ID);
 
-    public static final NFURegistryEntryCollection<RegistrablePredicate<?>> BAUBLE_EFFECT_CONDITIONS =
+    public static final NFURegistryEntryCollection<RegistrablePredicate<?>> BAUBLE_EFFECT_CONDITION_COLLECTION =
         NFURegistryEntryCollection.create(NFURegistries.PREDICATES, NFFGirls.MOD_ID);
 
-    public static final NFURegistryEntryCollection<BaubleEquippingCondition> BAUBLE_EQUIPPING_CONDITIONS =
+    public static final NFURegistryEntryCollection<BaubleEquippingCondition> BAUBLE_EQUIPPING_CONDITION_COLLECTION =
         NFURegistryEntryCollection.create(NFUBaubleAPI.EQUIPPING_CONDITIONS, NFFGirls.MOD_ID);
 
     // SOME COMMON CONDITIONS
-    public static final NFURegistry.Accessor<BaubleEquippingCondition> CONDITION_UNDEAD = BAUBLE_EQUIPPING_CONDITIONS.register("undead", () ->
+    public static final NFURegistry.Accessor<BaubleEquippingCondition> CONDITION_UNDEAD = BAUBLE_EQUIPPING_CONDITION_COLLECTION.register("undead", () ->
         BaubleEquippingCondition.of(args -> args.user().getMobType().equals(MobType.UNDEAD) || args.user().getType().is(NFFGirlsTags.EQUIPS_BAUBLES_AS_UNDEAD))
             .setTranslation("tooltip.nffgirls.bauble.for_undead"));
-    public static final NFURegistry.Accessor<BaubleEquippingCondition> CONDITION_SUN_SENSITIVE = BAUBLE_EQUIPPING_CONDITIONS.register("sun_sensitive", () ->
+    public static final NFURegistry.Accessor<BaubleEquippingCondition> CONDITION_SUN_SENSITIVE = BAUBLE_EQUIPPING_CONDITION_COLLECTION.register("sun_sensitive", () ->
         BaubleEquippingCondition.of(args -> INFFTamed.get(args.user()).filter(INFFTamed::enableSunSensitivity).isPresent() || args.user().getType().is(NFFGirlsTags.EQUIPS_BAUBLES_AS_SUN_SENSITIVE))
             .setTranslation("tooltip.nffgirls.bauble.for_sun_sensitive"));
-    public static final NFURegistry.Accessor<BaubleEquippingCondition> CONDITION_UNDEAD_AND_SUN_SENSITIVE = BAUBLE_EQUIPPING_CONDITIONS.register("undead_and_sun_sensitive", () ->
+    public static final NFURegistry.Accessor<BaubleEquippingCondition> CONDITION_UNDEAD_AND_SUN_SENSITIVE = BAUBLE_EQUIPPING_CONDITION_COLLECTION.register("undead_and_sun_sensitive", () ->
         CONDITION_UNDEAD.get().or(CONDITION_SUN_SENSITIVE.get())
             .setTranslation("tooltip.nffgirls.bauble.for_undead_and_sun_sensitive"));
-    public static final NFURegistry.Accessor<BaubleEquippingCondition> CONDITION_NOT_UNDEAD = BAUBLE_EQUIPPING_CONDITIONS.register("not_undead", () ->
+    public static final NFURegistry.Accessor<BaubleEquippingCondition> CONDITION_NOT_UNDEAD = BAUBLE_EQUIPPING_CONDITION_COLLECTION.register("not_undead", () ->
         CONDITION_UNDEAD.get().negate().setTranslation("tooltip.nffgirls.bauble.not_undead"));
-    public static final NFURegistry.Accessor<BaubleEquippingCondition> CONDITION_ARTHROPOD =  BAUBLE_EQUIPPING_CONDITIONS.register("arthropod", () ->
+    public static final NFURegistry.Accessor<BaubleEquippingCondition> CONDITION_ARTHROPOD =  BAUBLE_EQUIPPING_CONDITION_COLLECTION.register("arthropod", () ->
         BaubleEquippingCondition.of(args -> args.user().getMobType().equals(MobType.ARTHROPOD) || args.user().getType().is(NFFGirlsTags.EQUIPS_BAUBLES_AS_ARTHROPOD))
             .setTranslation("tooltip.nffgirls.bauble.for_arthropod"));
-    public static final NFURegistry.Accessor<BaubleEquippingCondition> CONDITION_PLANT =  BAUBLE_EQUIPPING_CONDITIONS.register("plant", () ->
+    public static final NFURegistry.Accessor<BaubleEquippingCondition> CONDITION_PLANT =  BAUBLE_EQUIPPING_CONDITION_COLLECTION.register("plant", () ->
         BaubleEquippingCondition.of(args -> args.user().getType().is(NFFGirlsTags.PLANT_MOB))
             .setTranslation("tooltip.nffgirls.bauble.for_plant"));
-    public static final NFURegistry.Accessor<BaubleEquippingCondition> CONDITION_ARTHROPOD_AND_PLANT =  BAUBLE_EQUIPPING_CONDITIONS.register("arthropod_and_plant", () ->
+    public static final NFURegistry.Accessor<BaubleEquippingCondition> CONDITION_ARTHROPOD_AND_PLANT =  BAUBLE_EQUIPPING_CONDITION_COLLECTION.register("arthropod_and_plant", () ->
         CONDITION_ARTHROPOD.get().or(CONDITION_PLANT.get())
             .setTranslation("tooltip.nffgirls.bauble.for_arthropod_and_plant"));
-    public static final NFURegistry.Accessor<BaubleEquippingCondition> CONDITION_AQUATIC =  BAUBLE_EQUIPPING_CONDITIONS.register("aquatic", () ->
+    public static final NFURegistry.Accessor<BaubleEquippingCondition> CONDITION_AQUATIC =  BAUBLE_EQUIPPING_CONDITION_COLLECTION.register("aquatic", () ->
         BaubleEquippingCondition.of(args -> args.user().getType().is(NFFGirlsTags.AQUATIC_MOB) || args.user().getMobType().equals(MobType.WATER)
         || Optional.ofNullable(NFFTamingMapping.getTypeBefore(args.user())).filter(t -> t.is(NFFGirlsTags.AQUATIC_MOB)).isPresent())
         .setTranslation("tooltip.nffgirls.bauble.for_aquatic"));
-    public static final NFURegistry.Accessor<BaubleEquippingCondition> CONDITION_NETHER =  BAUBLE_EQUIPPING_CONDITIONS.register("nether", () ->
+    public static final NFURegistry.Accessor<BaubleEquippingCondition> CONDITION_NETHER =  BAUBLE_EQUIPPING_CONDITION_COLLECTION.register("nether", () ->
         BaubleEquippingCondition.of(args -> args.user().getType().is(NFFGirlsTags.NETHER_MOB))
             .setTranslation("tooltip.nffgirls.bauble.for_nether"));
-    public static final NFURegistry.Accessor<BaubleEquippingCondition> CONDITION_ENDER =  BAUBLE_EQUIPPING_CONDITIONS.register("ender", () ->
+    public static final NFURegistry.Accessor<BaubleEquippingCondition> CONDITION_ENDER =  BAUBLE_EQUIPPING_CONDITION_COLLECTION.register("ender", () ->
         BaubleEquippingCondition.of(args -> args.user().getType().is(NFFGirlsTags.ENDER_MOB))
         .setTranslation("tooltip.nffgirls.bauble.for_ender"));
-    public static final NFURegistry.Accessor<BaubleEquippingCondition> CONDITION_NETHER_AND_ENDER =  BAUBLE_EQUIPPING_CONDITIONS.register("nether_and_ender", () ->
+    public static final NFURegistry.Accessor<BaubleEquippingCondition> CONDITION_NETHER_AND_ENDER =  BAUBLE_EQUIPPING_CONDITION_COLLECTION.register("nether_and_ender", () ->
         CONDITION_NETHER.get().or(CONDITION_ENDER.get()).setTranslation("tooltip.nffgirls.bauble.for_nether_and_ender"));
 
-    public static final NFURegistry.Accessor<RegistrablePredicate<Entity>> EFFECT_CONDITION_IN_WATER = BAUBLE_EFFECT_CONDITIONS.register("in_water", () ->
+    public static final NFURegistry.Accessor<RegistrablePredicate<Entity>> EFFECT_CONDITION_IN_WATER = BAUBLE_EFFECT_CONDITION_COLLECTION.register("in_water", () ->
         new RegistrablePredicate<>(Entity.class, "in_water", Entity::isInWaterOrBubble).setTranslation("tooltip.nffgirls.bauble.in_water").cast());
-    public static final NFURegistry.Accessor<RegistrablePredicate<Mob>> EFFECT_CONDITION_AT_NIGHT = BAUBLE_EFFECT_CONDITIONS.register("at_night", () ->
+    public static final NFURegistry.Accessor<RegistrablePredicate<Mob>> EFFECT_CONDITION_AT_NIGHT = BAUBLE_EFFECT_CONDITION_COLLECTION.register("at_night", () ->
         new RegistrablePredicate<>(Mob.class, "at_night", (Mob m) -> m.level().isNight()).setTranslation("tooltip.nffgirls.bauble.at_night"));
 
-    public static final NFURegistry.Accessor<RegistrablePredicate<Entity>> EFFECT_CONDITION_IN_WATER_OR_RAIN = BAUBLE_EFFECT_CONDITIONS.register("in_water_or_rain", () ->
+    public static final NFURegistry.Accessor<RegistrablePredicate<Entity>> EFFECT_CONDITION_IN_WATER_OR_RAIN = BAUBLE_EFFECT_CONDITION_COLLECTION.register("in_water_or_rain", () ->
         new RegistrablePredicate<>(Entity.class, "in_water_or_rain", Entity::isInWaterRainOrBubble).setTranslation("tooltip.nffgirls.bauble.in_water_or_rain").cast());
 
     // =========== AMULETS ============ //
@@ -802,7 +802,7 @@ public class NFFGirlsBaubles {
         .buildAsBaubleItem(new ResourceLocation(NFFGirls.MOD_ID, "resistance_core"), 1, new Item.Properties()));
 
     public static final NFURegistry.Accessor<NFFGirlsBaubleBehavior> INSOMNIA_FRUIT =
-        BAUBLES.register("insomnia_fruit", () -> new NFFGirlsBaubleBuilder()
+        BAUBLE_COLLECTION.register("insomnia_fruit", () -> new NFFGirlsBaubleBuilder()
         .repeatable(Attributes.ATTACK_DAMAGE, 5d, AttributeModifier.Operation.ADDITION, EFFECT_CONDITION_AT_NIGHT.get())
         .repeatable(Attributes.MAX_HEALTH, 50d, AttributeModifier.Operation.ADDITION, EFFECT_CONDITION_AT_NIGHT.get())
         .repeatable(NFFGirlsEntityAttributes.PERSISTENT_HEALING.get(), 0.1d, AttributeModifier.Operation.ADDITION, EFFECT_CONDITION_AT_NIGHT.get())
@@ -824,9 +824,8 @@ public class NFFGirlsBaubles {
     public static Function<Mob, ItemStack> accessMobAdditionalInventory(int position)
     {
         return mob -> {
-            if (mob instanceof INFFTamed bm)
-                return bm.getAdditionalInventory().getItem(position);
-            else throw new IllegalArgumentException("Input mob isn't INFFTamed.");
+            INFFTamed tamed = INFFTamed.get(mob).orElseThrow(() -> new IllegalArgumentException("Input mob isn't INFFTamed."));
+            return tamed.getAdditionalInventory().getItem(position);
         };
     }
 

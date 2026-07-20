@@ -184,7 +184,7 @@ public class HmagSkeletonGirlEntity extends SkeletonGirlEntity implements INFFGi
 	public void readAdditionalSaveData(CompoundTag nbt) {
 		super.readAdditionalSaveData(nbt);
 		//NFFTamedStatics.readBefriendedCommonSaveData(this, nbt);
-		setInit();
+		
 	}
 	
 	/* Conversion */
@@ -214,7 +214,7 @@ public class HmagSkeletonGirlEntity extends SkeletonGirlEntity implements INFFGi
 	{
 		HmagStrayGirlEntity newMob = (HmagStrayGirlEntity)NFFTamedStatics.convertToOtherBefriendedType(this, NFFGirlsEntityTypes.HMAG_STRAY_GIRL.get());
 		newMob.isFromSkeleton = true;
-		newMob.setInit();
+		;
 		return newMob;
 	}
 
