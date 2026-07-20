@@ -1,20 +1,17 @@
 package net.sodiumzh.nff.girls.entity;
 
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.Mob;
-import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraftforge.common.MinecraftForge;
-import net.sodiumzh.nff.girls.NFFGirls;
-import net.sodiumzh.nff.girls.registry.NFFGirlsConfigs;
 import net.sodiumzh.nff.services.entity.taming.NFFTamedDataAccessor;
-import net.sodiumzh.nfu.entity.RepeatableAttributeModifier;
 
+import javax.annotation.Nonnull;
 import java.util.UUID;
 
 public class NFFGirlsDataAccessor extends NFFTamedDataAccessor {
 
-    private final INFFGirlsTamed girlsTamed;
+    private static NFFGirlsDataAccessor INSTANCE = null;
+
     public static final String KEY_MAX_FAVORABILITY = "nffgirlsMaxFavorability";
     public static final String KEY_FAVORABILITY = "nffgirlsFavorability";
     public static final String KEY_XP = "nffgirlsXP";
@@ -22,9 +19,19 @@ public class NFFGirlsDataAccessor extends NFFTamedDataAccessor {
     public static final UUID XP_HP_MODIFIER_UUID = UUID.fromString("7d8887d5-9c50-41d0-af8f-542bd6426fa0");
     public static final UUID XP_ATK_MODIFIER_UUID = UUID.fromString("f95763ee-6981-4951-bf2b-dd35688b0364");
 
-    public NFFGirlsDataAccessor(INFFGirlsTamed tamed) {
+    protected INFFGirlsTamed girlsTamed;
+
+    protected NFFGirlsDataAccessor(INFFGirlsTamed tamed) {
         super(tamed);
         this.girlsTamed = tamed;
+    }
+
+    public static NFFGirlsDataAccessor get(@Nonnull INFFGirlsTamed tamed) {
+        if (INSTANCE == null) INSTANCE = new NFFGirlsDataAccessor(tamed);
+        else {
+            INSTANCE.girlsTamed = tamed;
+        }
+        return INSTANCE;
     }
 
     @Override
@@ -106,7 +113,7 @@ public class NFFGirlsDataAccessor extends NFFTamedDataAccessor {
         return getCurrentExp(this.getXP());
     }
 
-    public long getRequiredExpInThisLevel() {
+    public long getRequiredXPInThisLevel() {
         return getExpRequiredForLevelUp(getExpectedXPLevel());
     }
 

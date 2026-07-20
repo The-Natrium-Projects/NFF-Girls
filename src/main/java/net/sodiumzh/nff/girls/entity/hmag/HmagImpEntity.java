@@ -194,7 +194,7 @@ public class HmagImpEntity extends ImpEntity implements INFFGirlsTamed//, IBlock
 			this.locatedBlocks.deserialize(nbt.getCompound("locatedBlocks"));
 		if (nbt.contains("locatingCooldown"))
 			this.locatingBlockRemainingCooldown = nbt.getInt("locatingCooldown");
-		setInit();
+
 	}
 /*
 	@Override

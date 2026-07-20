@@ -43,7 +43,6 @@ import java.util.function.*;
 /**
  * A utility for declaration of baubles on construction.
  */
-@Mod.EventBusSubscriber(modid = NFFGirls.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class NFFGirlsBaubleBuilder {
 
     public static NFURegistryEntryCollection<RegistrablePredicate<?>> EQUIPPING_CONDITION_PRESETS
@@ -98,6 +97,7 @@ public class NFFGirlsBaubleBuilder {
     public NFFGirlsBaubleBuilder repeatable(Attribute attr, double amount, AttributeModifier.Operation operation, @Nullable Predicate<? super Mob> condition, @Nullable ResourceLocation id) {
         if (this.validated.get()) {
             NFUDebugStatics.errorOnce("Builder has been validated, no more modification. Skipped.");
+            return this;
         }
         Predicate<? super Mob> cond1 = condition != null ? condition : NO_CONDITION.get();
         repeatableModifierSuppliers.put(() -> getModifierFromProperties(attr, amount, operation, cond1, id), cond1);
@@ -119,6 +119,7 @@ public class NFFGirlsBaubleBuilder {
     public NFFGirlsBaubleBuilder unrepeatable(Attribute attr, double amount, AttributeModifier.Operation operation, Predicate<? super Mob> condition, @Nullable ResourceLocation id) {
         if (this.validated.get()) {
             NFUDebugStatics.errorOnce("Builder has been validated, no more modification. Skipped.");
+            return this;
         }
         Predicate<? super Mob> cond1 = condition != null ? condition : NO_CONDITION.get();
         unrepeatableModifierSuppliers.put(() -> getModifierFromProperties(attr, amount, operation, cond1, id), cond1);
@@ -695,6 +696,7 @@ public class NFFGirlsBaubleBuilder {
         if (autoRegister)
             NFFGirlsBaubles.BAUBLE_REGISTRY.registerIfAbsent(NFFGirlsDedicatedBaubleItem.getBaubleRegistryKey(key, tier), () -> res);
         this.builtBauble = res;
+        this.validate();
         return res;
     }
 
@@ -707,6 +709,7 @@ public class NFFGirlsBaubleBuilder {
         if (autoRegister)
             NFFGirlsBaubles.BAUBLE_REGISTRY.registerIfAbsent(NFFGirlsBaubleBehavior.getBaubleRegistryKey(categoryKey, tier), () -> res);
         this.builtBauble = res;
+        this.validate();
         return res;
     }
 
@@ -842,14 +845,20 @@ public class NFFGirlsBaubleBuilder {
         }
     }
 
-    // Validate builders after config
-    @SubscribeEvent(priority = EventPriority.LOWEST)
-    public static void validateBaublesAfterConfig(ModConfigEvent.Loading event) {
-        NFFGirlsBaubles.BAUBLE_REGISTRY.values().forEach(bauble -> {
-            if (bauble instanceof IBuiltBauble b) {
-                b.validate();
-            }
-        });
+    @Mod.EventBusSubscriber(bus = Mod.EventBusSubscriber.Bus.MOD, modid = NFFGirls.MOD_ID)
+    public static class EventListeners {
+        // Validate builders after config
+        @SubscribeEvent(priority = EventPriority.LOWEST)
+        public static void validateBaublesAfterConfig(ModConfigEvent.Loading event) {
+            NFFGirlsBaubles.BAUBLE_REGISTRY.values().forEach(bauble -> {
+                if (bauble instanceof IBuiltBauble b) {
+                    b.validate();
+                }
+            });
+        }
+
     }
+
+
 
 }

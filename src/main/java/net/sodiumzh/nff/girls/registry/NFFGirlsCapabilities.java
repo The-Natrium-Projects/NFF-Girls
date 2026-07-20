@@ -7,19 +7,12 @@ import net.minecraftforge.common.capabilities.RegisterCapabilitiesEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.sodiumzh.nff.girls.NFFGirls;
-import net.sodiumzh.nff.girls.entity.capability.CNFFGirlsFavorabilityHandler;
-import net.sodiumzh.nff.girls.entity.capability.CNFFGirlsLevelHandler;
-import net.sodiumzh.nff.girls.entity.capability.CUndeadAffinityHandler;
 import net.sodiumzh.nff.girls.entity.vanillatrade.CNFFGirlsTradeHandler;
 
 @Mod.EventBusSubscriber(bus = Mod.EventBusSubscriber.Bus.MOD, modid = NFFGirls.MOD_ID)
 public class NFFGirlsCapabilities
 {
 
-	@Deprecated
-	public static final Capability<CUndeadAffinityHandler> CAP_UNDEAD_AFFINITY_HANDLER = CapabilityManager.get(new CapabilityToken<>(){});
-	public static final Capability<CNFFGirlsFavorabilityHandler> CAP_FAVORABILITY_HANDLER = CapabilityManager.get(new CapabilityToken<>(){});
-	public static final Capability<CNFFGirlsLevelHandler> CAP_LEVEL_HANDLER = CapabilityManager.get(new CapabilityToken<>(){});
 	public static final Capability<CNFFGirlsTradeHandler> CAP_TRADE_HANDLER = CapabilityManager.get(new CapabilityToken<>(){});
 	
 	// Register capabilities
@@ -27,9 +20,6 @@ public class NFFGirlsCapabilities
 	public static void register(RegisterCapabilitiesEvent event)
 	{
 		// Entities
-		event.register(CUndeadAffinityHandler.class);
-		event.register(CNFFGirlsFavorabilityHandler.class);
-		event.register(CNFFGirlsLevelHandler.class);
 		event.register(CNFFGirlsTradeHandler.class);
 	}
 	

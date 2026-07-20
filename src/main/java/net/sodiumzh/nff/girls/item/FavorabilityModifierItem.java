@@ -8,6 +8,7 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
+import net.sodiumzh.nff.girls.entity.INFFGirlsTamed;
 import net.sodiumzh.nff.girls.registry.NFFGirlsCapabilities;
 import net.sodiumzh.nfu.item.NFUItem;
 import net.sodiumzh.nfu.util.NFUMiscStatics;
@@ -47,10 +48,10 @@ public class FavorabilityModifierItem extends NFUItem
 	
     @Override
 	public InteractionResult interactLivingEntity(Player player, LivingEntity target, InteractionHand hand) {
-    	if (target.getCapability(NFFGirlsCapabilities.CAP_FAVORABILITY_HANDLER).isPresent())
+    	if (INFFGirlsTamed.get(target).isPresent())
     	{
-    		target.getCapability(NFFGirlsCapabilities.CAP_FAVORABILITY_HANDLER).ifPresent(cap -> {
-    			if (!player.level.isClientSide)
+    		INFFGirlsTamed.get(target).map(INFFGirlsTamed::getDataAccessor).ifPresent(cap -> {
+    			if (!player.level().isClientSide)
 	    		{
 	    			if (!player.isShiftKeyDown())
 	    			{

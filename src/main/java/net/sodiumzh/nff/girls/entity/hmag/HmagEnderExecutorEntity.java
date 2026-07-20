@@ -242,7 +242,7 @@ public class HmagEnderExecutorEntity extends NFFTamedEnderManPreset implements I
 				// Case to deal damage
 				else if (i >= this.getAttackDuration()) {
 					if (this.getActiveAttackTarget() != null && doBeamAttack)
-						this.attackEntityWithBeamAttack(this.getActiveAttackTarget(), 8f + 0.1f * (float) (this.getLevelHandler().getExpectedLevel()));
+						this.attackEntityWithBeamAttack(this.getActiveAttackTarget(), 8f + 0.1f * (float) (this.getDataAccessor().getExpectedXPLevel()));
 					this.setAttackingTime(-(10 + this.random.nextInt(6)));
 					this.setActiveAttackTarget(0);
 				}
@@ -472,8 +472,6 @@ public class HmagEnderExecutorEntity extends NFFTamedEnderManPreset implements I
 	public void readAdditionalSaveData(CompoundTag nbt) {
 		super.readAdditionalSaveData(nbt);
 		setGrowEnderberryRemainedCooldown(nbt.getInt("growEnderberryRemainedCooldown"));
-		////NFFTamedStatics.readBefriendedCommonSaveData(this, nbt);
-		this.setInit();
 	}
 
 	public void addAdditionalSaveData(CompoundTag tag) {

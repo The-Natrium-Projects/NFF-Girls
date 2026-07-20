@@ -48,9 +48,9 @@ public class NFFGirls
         NFFGirlsPredicates.PREDICATES.merge();
         NFFGirlsTrades.TRADE_COLLECTIONS.merge();
         NFFGirlsTrades.TRADE_REGISTRIES.merge();
-        NFFGirlsBaubles.BAUBLES.merge();
-        NFFGirlsBaubles.BAUBLE_EFFECT_CONDITIONS.merge();
-        NFFGirlsBaubles.BAUBLE_EQUIPPING_CONDITIONS.merge();
+        NFFGirlsBaubles.BAUBLE_COLLECTION.merge();
+        NFFGirlsBaubles.BAUBLE_EFFECT_CONDITION_COLLECTION.merge();
+        NFFGirlsBaubles.BAUBLE_EQUIPPING_CONDITION_COLLECTION.merge();
         NFFGirlsEntityAttributeProviders.ATTRIBUTE_PROVIDERS.merge();
         NFFGirlsBaubleBuilder.EQUIPPING_CONDITION_PRESETS.merge();
         NFFGirlsAngerReasons.COLLECTION.merge();

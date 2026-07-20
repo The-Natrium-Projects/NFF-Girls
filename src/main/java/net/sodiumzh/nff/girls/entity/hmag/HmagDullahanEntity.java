@@ -49,7 +49,7 @@ public class HmagDullahanEntity extends DullahanEntity implements INFFGirlsTamed
 	}
 
 	@Override
-	public void onInit(UUID playerUUID, Mob from)
+	public void onTamed(Player player, Mob from)
 	{
 		if (from instanceof DullahanEntity d)
 		{
@@ -147,7 +147,7 @@ public class HmagDullahanEntity extends DullahanEntity implements INFFGirlsTamed
 		super.readAdditionalSaveData(nbt);
 		//NFFTamedStatics.readBefriendedCommonSaveData(this, nbt);
 		// Add other data reading here
-		setInit();
+
 	}
 /*
 	@Override

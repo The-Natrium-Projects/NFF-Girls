@@ -8,7 +8,7 @@ public class NFFGirlsNearestHostileToSelfTargetGoal extends NFFNearestUnfriendly
 	public NFFGirlsNearestHostileToSelfTargetGoal(INFFGirlsTamed pMob)
 	{		
 		super(pMob, true, true);
-		stateConditions(bm -> INFFGirlsTamed.get(bm).filter(INFFGirlsTamed::shouldAttackMobsHostileToSelf).isPresent());
+		stateConditions(bm -> INFFGirlsTamed.get(bm.asMob()).filter(INFFGirlsTamed::shouldAttackMobsHostileToSelf).isPresent());
 		targetOfTargetConditions(living -> living != null && living.equals(pMob.asMob()));
 		allowAllStatesExceptWait();
 	}

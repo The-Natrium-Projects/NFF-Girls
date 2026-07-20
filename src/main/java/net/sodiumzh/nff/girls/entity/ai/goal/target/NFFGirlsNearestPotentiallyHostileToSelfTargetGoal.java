@@ -38,7 +38,7 @@ public class NFFGirlsNearestPotentiallyHostileToSelfTargetGoal extends NFFNeares
 
     public NFFGirlsNearestPotentiallyHostileToSelfTargetGoal(INFFTamed mob) {
         super(mob, Mob.class, 10, true, false, living -> isPotentiallyHostileToSelf(mob, living));
-        stateConditions(bm -> INFFGirlsTamed.get(bm).filter(INFFGirlsTamed::shouldAttackMobsHostileToSelf).isPresent());
+        stateConditions(bm -> INFFGirlsTamed.get(bm.asMob()).filter(INFFGirlsTamed::shouldAttackMobsHostileToSelf).isPresent());
         allowAllStatesExceptWait();
     }
 
