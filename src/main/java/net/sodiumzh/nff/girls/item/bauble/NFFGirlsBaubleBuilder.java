@@ -665,7 +665,9 @@ public class NFFGirlsBaubleBuilder {
                         modifier.getAmount(), modifier.getOperation());
                     if (modifierFormatter != null)
                         modifierFormatter.accept(modifierInfo);
-                    builder.append(modifierInfo.get());
+                    MutableComponent c = modifierInfo.get();
+                    if (c != null)
+                        builder.append(modifierInfo.get());
                 }
                 if (fixedPart != null)
                     builder.append(fixedPart.build());
