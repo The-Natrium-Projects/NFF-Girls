@@ -1215,6 +1215,8 @@ public class NFFGirlsEntityEventListeners
 			event.mobBefriended.setItemSlot(EquipmentSlot.CHEST, ItemStack.EMPTY);
 			event.mobBefriended.setItemSlot(EquipmentSlot.LEGS, ItemStack.EMPTY);
 			event.mobBefriended.setItemSlot(EquipmentSlot.FEET, ItemStack.EMPTY);
+            INFFTamed.get(event.mobBefriended).ifPresent(t -> t.getAdditionalInventory().syncToOwner());
+            NFUEntityStatics.syncLivingEquipment(event.mobBefriended);
 		}
 		if (event.mobBefriended.isPassenger()) {
 			Entity vehicle = event.mobBefriended.getVehicle();

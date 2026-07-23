@@ -14,7 +14,7 @@ import net.sodiumzh.nff.girls.NFFGirls;
 import java.util.HashMap;
 
 /**
- * Registry of DWMG additional properties for bauble items.
+ * Registry of NFFGirls additional properties for bauble items.
  */
 @EventBusSubscriber(modid = NFFGirls.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class NFFGirlsBaubleAdditionalRegistry

@@ -1,15 +1,21 @@
 package net.sodiumzh.nff.girls.item.bauble;
 
+import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.entity.Mob;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.sodiumzh.nfu.item.bauble.BaubleAttributeModifier;
 import net.sodiumzh.nfu.item.bauble.BaubleBehavior;
 import net.sodiumzh.nfu.item.bauble.BaubleEquippingCondition;
+import net.sodiumzh.nfu.item.bauble.BaubleProcessingArgs;
+import net.sodiumzh.nfu.util.NFUInfoStatics;
 import net.sodiumzh.nfu.util.NFUMathStatics;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import javax.annotation.Nonnull;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -24,28 +30,35 @@ public abstract class NFFGirlsBaubleBehavior extends BaubleBehavior implements I
     private int tier = 1;
     private Map<String, Predicate<Integer>> tags = new HashMap<>();
     private List<Supplier<? extends Component>> tooltips = new ArrayList<>();
+    @Nonnull    // No need to lazy load here because it doesn't involve item registration
+    private final NFFGirlsBaubleProperties properties;
 
     protected NFFGirlsBaubleBehavior(@Nullable Item item, @Nullable BiPredicate<Item, ItemStack> multiItemCondition,
-                                     BaubleEquippingCondition equippingCondition, ResourceLocation categoryKey, int tier) {
+                                     BaubleEquippingCondition equippingCondition, ResourceLocation categoryKey, int tier,
+                                     @NotNull NFFGirlsBaubleProperties properties) { 
         super(getBaubleRegistryKey(categoryKey, tier), item, multiItemCondition, equippingCondition);
         this.categoryKey = categoryKey;
         this.tier = tier;
-
+        this.properties = properties;
+        this.finalizeConstruction();
     }
 
-    public NFFGirlsBaubleBehavior(@NotNull Item item, BaubleEquippingCondition equippingCondition, ResourceLocation categoryKey, int tier) {
+    public NFFGirlsBaubleBehavior(@NotNull Item item, BaubleEquippingCondition equippingCondition, ResourceLocation categoryKey, int tier, @NotNull NFFGirlsBaubleProperties properties) {
         super(item, getBaubleRegistryKey(categoryKey, tier), equippingCondition);
         this.categoryKey = categoryKey;
         this.tier = tier;
+        this.properties = properties;
+        this.finalizeConstruction();
     }
 
-    public NFFGirlsBaubleBehavior(@NotNull BiPredicate<Item, ItemStack> condition, BaubleEquippingCondition equippingCondition, ResourceLocation categoryKey, int tier) {
+    public NFFGirlsBaubleBehavior(@NotNull BiPredicate<Item, ItemStack> condition, BaubleEquippingCondition equippingCondition, ResourceLocation categoryKey, int tier, @NotNull NFFGirlsBaubleProperties properties) {
         super(condition, getBaubleRegistryKey(categoryKey, tier), equippingCondition);
         this.categoryKey = categoryKey;
         this.tier = tier;
+        this.properties = properties;
+        this.finalizeConstruction();
     }
-
-
+    
     public String getTierSuffix()
     {
         if (tier == 1)
@@ -109,4 +122,52 @@ public abstract class NFFGirlsBaubleBehavior extends BaubleBehavior implements I
     public List<Supplier<? extends Component>> getTooltips() {
         return this.tooltips;
     }
+
+    // Properties related //
+    
+    @Override
+    public NFFGirlsBaubleProperties getProperties() {
+        return this.properties;
+    }
+
+    @Override
+    public void onEquipped(BaubleProcessingArgs baubleProcessingArgs) {
+    }
+
+    @Override
+    public void preSlotTick(BaubleProcessingArgs baubleProcessingArgs) {
+    }
+
+    @Override
+    public void postSlotTick(BaubleProcessingArgs baubleProcessingArgs) {
+    }
+
+    @Override
+    public void slotTick(BaubleProcessingArgs baubleProcessingArgs) {
+        this.properties.getTickAction().accept(baubleProcessingArgs);
+    }
+
+    @Nullable
+    @Override
+    public BaubleAttributeModifier[] getRepeatableModifiers(BaubleProcessingArgs baubleProcessingArgs) {
+        return this.properties.getRepeatableModifierSuppliers().keySet().stream()
+            .map(Supplier::get).toArray(BaubleAttributeModifier[]::new);
+    }
+
+    @Nullable
+    @Override
+    public BaubleAttributeModifier[] getUnrepeatableModifiers(Mob mob) {
+        return this.properties.getUnrepeatableModifierSuppliers().keySet().stream()
+            .map(Supplier::get).toArray(BaubleAttributeModifier[]::new);
+    }
+
+    protected void finalizeConstruction() {
+        this.addTooltip(() -> NFUInfoStatics.createTranslatable("tooltip.nffgirls.bauble.existing_item"));
+        if (this.properties.shouldShowRarityTier())
+            this.properties.getRarityTierDesc().ifPresent(m -> this.addTooltip(() -> m));
+        this.properties.getTooltips().forEach(this::addTooltip);
+        if (this.properties.environmentImmune && !this.properties.isEnvironmentImmunityTooltipManuallyAdded)
+            this.addTooltip(() -> NFUInfoStatics.createTranslatable("tooltip.nffgirls.bauble.environment_immunity").withStyle(ChatFormatting.WHITE));
+    }
+
 }
