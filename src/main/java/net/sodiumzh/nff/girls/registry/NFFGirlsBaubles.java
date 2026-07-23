@@ -157,23 +157,23 @@ public class NFFGirlsBaubles {
         .buildAsBaubleItem(new ResourceLocation(NFFGirls.MOD_ID, "soul_amulet"), 3, new Item.Properties())
         .alwaysFoil().cast());
 
-    public static final RegistryObject<NFFGirlsDedicatedBaubleItem> SOUL_AMULET_IV = BAUBLE_ITEMS.register("soul_amulet_iv", () -> new NFFGirlsBaubleProperties()
-        .equippingCondition(CONDITION_UNDEAD.get())
-        .repeatable(Attributes.MAX_HEALTH, 40d, AttributeModifier.Operation.ADDITION)
-        .repeatable(Attributes.ATTACK_DAMAGE, 12d, AttributeModifier.Operation.ADDITION)
-        .repeatable(Attributes.MOVEMENT_SPEED, 0.2d, AttributeModifier.Operation.MULTIPLY_BASE)
-        .repeatable(NFFGirlsEntityAttributes.CRITICAL_RATE.get(), 0.15d, AttributeModifier.Operation.ADDITION)
-        .repeatable(NFFGirlsEntityAttributes.XP_GAIN_RATE.get(), 0.15d, AttributeModifier.Operation.ADDITION)
-        .repeatable(NFFGirlsEntityAttributes.PERSISTENT_HEALING.get(), 0.1d, AttributeModifier.Operation.ADDITION)
-        .unrepeatable(NFFGirlsEntityAttributes.LOOTING_LEVEL.get(), 1d, AttributeModifier.Operation.ADDITION, new ResourceLocation(NFFGirls.MOD_ID, "soul_amulet_looting_level"))
-        .environmentResistance()
-        .setRarityTier(6)
-        .addEquippingConditionTooltip()
-        .addRepeatableModifierTooltips()
-        .addUnrepeatableModifierTooltips()
-        .buildAsBaubleItem(new ResourceLocation(NFFGirls.MOD_ID, "soul_amulet"), 4, new Item.Properties())
-        .alwaysFoil().cast());
-
+    public static final RegistryObject<NFFGirlsDedicatedBaubleItem> SOUL_AMULET_IV = BAUBLE_ITEMS.register("soul_amulet_iv", () ->
+        new NFFGirlsDedicatedBaubleItem(new ResourceLocation(NFFGirls.MOD_ID, "soul_amulet"), 4, new Item.Properties(),
+            () -> new NFFGirlsBaubleProperties()
+                .equippingCondition(CONDITION_UNDEAD.get())
+                .repeatable(Attributes.MAX_HEALTH, 40d, AttributeModifier.Operation.ADDITION)
+                .repeatable(Attributes.ATTACK_DAMAGE, 12d, AttributeModifier.Operation.ADDITION)
+                .repeatable(Attributes.MOVEMENT_SPEED, 0.2d, AttributeModifier.Operation.MULTIPLY_BASE)
+                .repeatable(NFFGirlsEntityAttributes.CRITICAL_RATE.get(), 0.15d, AttributeModifier.Operation.ADDITION)
+                .repeatable(NFFGirlsEntityAttributes.XP_GAIN_RATE.get(), 0.15d, AttributeModifier.Operation.ADDITION)
+                .repeatable(NFFGirlsEntityAttributes.PERSISTENT_HEALING.get(), 0.1d, AttributeModifier.Operation.ADDITION)
+                .unrepeatable(NFFGirlsEntityAttributes.LOOTING_LEVEL.get(), 1d, AttributeModifier.Operation.ADDITION, new ResourceLocation(NFFGirls.MOD_ID, "soul_amulet_looting_level"))
+                .environmentResistance()
+                .setRarityTier(6)
+                .addEquippingConditionTooltip()
+                .addRepeatableModifierTooltips()
+                .addUnrepeatableModifierTooltips())
+            .alwaysFoil().cast());
 
    // AMULETS
 

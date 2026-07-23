@@ -64,9 +64,6 @@ public class NFFGirlsBaubleProperties {
         = new Validatable<>(new HashMap<>());
     private final List<String> tags = new ArrayList<>();
     private BiFunction<ItemStack, MutableComponent, MutableComponent> nameStyle = (i, c) -> c;
-    // Built bauble reference after building. Null before building.
-    @Nullable
-    private IBuiltBauble builtBauble = null;
 
     private final LimitedMutable<Boolean> validated = new LimitedMutable<>(false, 1);
 
@@ -229,8 +226,6 @@ public class NFFGirlsBaubleProperties {
             list.clear();
             list.addAll(this.tooltipsSupplier.get().stream().map(TooltipInfo::getComponentSupplier).toList());
         });
-        if (this.builtBauble == null)
-            throw new IllegalStateException("NFFGirlsBaubleBuilder: attempting to validate before building.");
         this.validated.trySet(true);
     }
 
@@ -725,159 +720,6 @@ public class NFFGirlsBaubleProperties {
 
         public Optional<ComponentBuilder> getFixedPartBuilder() {
             return Optional.ofNullable(this.fixedPart);
-        }
-    }
-
-    // Building
-
-    public NFFGirlsDedicatedBaubleItem buildAsBaubleItem(ResourceLocation key, int tier, Item.Properties properties, boolean autoRegister) {
-        BuiltItem res = new BuiltItem(key, tier, this, properties);
-        if (autoRegister)
-            NFFGirlsBaubles.BAUBLE_REGISTRY.registerIfAbsent(NFFGirlsDedicatedBaubleItem.getBaubleRegistryKey(key, tier), () -> res);
-        this.builtBauble = res;
-        this.validate();
-        return res;
-    }
-
-    public NFFGirlsDedicatedBaubleItem buildAsBaubleItem(ResourceLocation key, int tier, Item.Properties properties) {
-        return buildAsBaubleItem(key, tier, properties, true);
-    }
-
-    public NFFGirlsBaubleBehavior buildAsBaubleBehavior(ResourceLocation categoryKey, int tier, Item item, boolean autoRegister) {
-        BuiltBehavior res = new BuiltBehavior(this, item, categoryKey, tier);
-        if (autoRegister)
-            NFFGirlsBaubles.BAUBLE_REGISTRY.registerIfAbsent(NFFGirlsBaubleBehavior.getBaubleRegistryKey(categoryKey, tier), () -> res);
-        this.builtBauble = res;
-        this.validate();
-        return res;
-    }
-
-    public NFFGirlsBaubleBehavior buildAsBaubleBehavior(ResourceLocation categoryKey, int tier, Item item) {
-        return buildAsBaubleBehavior(categoryKey, tier, item, true);
-    }
-
-    private static interface IBuiltBauble extends INFFGirlsBauble {
-
-        NFFGirlsBaubleProperties getBuilder();
-
-    }
-
-    private static class BuiltItem extends NFFGirlsDedicatedBaubleItem implements IBuiltBauble {
-
-        private final NFFGirlsBaubleProperties builder;
-
-        public BuiltItem(ResourceLocation categoryKey, int tier, NFFGirlsBaubleProperties builder, Item.Properties properties) {
-            super(categoryKey, tier, properties);
-            this.builder = builder;
-            if (builder.environmentImmune) {
-                this.addBaubleTag(INFFGirlsBauble.TAG_ENVIRONMENT_IMMUNITY);
-            }
-            builder.tags.forEach(this::addBaubleTag);
-            this.setNameStyle(builder.nameStyle);
-        }
-
-        @Override
-        public void slotTick(BaubleProcessingArgs baubleProcessingArgs) {
-            if (!builder.isValidated()) throw new IllegalStateException("NFFGirlsBaubleBuilder: Item calling before builder validation.");
-            builder.onTick.accept(baubleProcessingArgs);
-        }
-
-        @Nullable
-        @Override
-        public BaubleAttributeModifier[] getRepeatableModifiers(BaubleProcessingArgs baubleProcessingArgs) {
-            if (!builder.isValidated()) throw new IllegalStateException("NFFGirlsBaubleBuilder: Item calling before builder validation.");
-            return builder.repeatableModifierSuppliers.keySet().stream()
-                .map(Supplier::get).toArray(BaubleAttributeModifier[]::new);
-        }
-
-        @Nullable
-        @Override
-        public BaubleAttributeModifier[] getUnrepeatableModifiers(Mob mob) {
-            if (!builder.isValidated()) throw new IllegalStateException("NFFGirlsBaubleBuilder: Item calling before builder validation.");
-            return builder.unrepeatableModifierSuppliers.keySet().stream()
-                .map(Supplier::get).toArray(BaubleAttributeModifier[]::new);
-        }
-
-        @Nonnull
-        @Override
-        public BaubleEquippingCondition getEquippingCondition() {
-            return Optional.ofNullable(builder.equippingCondition).orElse(BaubleEquippingConditions.CONDITION_ALWAYS.get());
-        }
-
-        @Override
-        public void onValidate() {
-            this.description(() -> NFUInfoStatics.createTranslatable("tooltip.nffgirls.bauble.dedicated_item"));
-            if (builder.showRarityTier)
-                builder.getRarityTierDesc().ifPresent(this::description);
-            builder.tooltips.get().forEach(this::description);
-            if (builder.environmentImmune && !builder.isEnvironmentImmunityTooltipManuallyAdded)
-                this.description(ENVIRONMENT_IMMUNITY_TOOLTIP);
-            if (builder.useRarityTierNameColor)
-                builder.getRarityTierFormat().ifPresent(this::setNameStyle);
-        }
-
-        @Override
-        public NFFGirlsBaubleProperties getBuilder(){
-            return builder;
-        }
-    }
-
-    private static class BuiltBehavior extends NFFGirlsBaubleBehavior implements IBuiltBauble {
-
-        private NFFGirlsBaubleProperties builder;
-
-        public BuiltBehavior(NFFGirlsBaubleProperties builder, @Nonnull Item item, ResourceLocation categoryKey, int tier) {
-            super(item, builder.equippingCondition, categoryKey, tier);
-            this.builder = builder;
-            if (builder.environmentImmune)
-                this.addBaubleTag(INFFGirlsBauble.TAG_ENVIRONMENT_IMMUNITY);
-            builder.tags.forEach(this::addBaubleTag);
-        }
-
-        @Override
-        public void onEquipped(BaubleProcessingArgs baubleProcessingArgs) {
-        }
-
-        @Override
-        public void preSlotTick(BaubleProcessingArgs baubleProcessingArgs) {
-        }
-
-        @Override
-        public void postSlotTick(BaubleProcessingArgs baubleProcessingArgs) {
-        }
-
-        @Override
-        public void slotTick(BaubleProcessingArgs baubleProcessingArgs) {
-            builder.onTick.accept(baubleProcessingArgs);
-        }
-
-        @Nullable
-        @Override
-        public BaubleAttributeModifier[] getRepeatableModifiers(BaubleProcessingArgs baubleProcessingArgs) {
-            return builder.repeatableModifierSuppliers.keySet().stream()
-                .map(Supplier::get).toArray(BaubleAttributeModifier[]::new);
-        }
-
-        @Nullable
-        @Override
-        public BaubleAttributeModifier[] getUnrepeatableModifiers(Mob mob) {
-            return builder.unrepeatableModifierSuppliers.keySet().stream()
-                .map(Supplier::get).toArray(BaubleAttributeModifier[]::new);
-        }
-
-        @Override
-        public void onValidate() {
-            this.addTooltip(() -> NFUInfoStatics.createTranslatable("tooltip.nffgirls.bauble.existing_item"));
-            if (builder.showRarityTier)
-                builder.getRarityTierDesc().ifPresent(m -> this.addTooltip(() -> m));
-            builder.tooltips.get().forEach(this::addTooltip);
-            if (builder.environmentImmune && !builder.isEnvironmentImmunityTooltipManuallyAdded)
-                this.addTooltip(() -> NFUInfoStatics.createTranslatable("tooltip.nffgirls.bauble.environment_immunity").withStyle(ChatFormatting.WHITE));
-        }
-
-        @Override
-        public NFFGirlsBaubleProperties getBuilder(){
-            return builder;
         }
     }
 }
