@@ -11,10 +11,6 @@ import javax.annotation.Nullable;
 import java.util.Map;
 import java.util.function.Predicate;
 
-/**
- * Static helper methods for querying baubles equipped on a mob and for formatting
- * bauble-related values (e.g. Roman numerals for tiers).
- */
 public class NFFGirlsBaubleStatics
 {
 
