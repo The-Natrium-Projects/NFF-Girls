@@ -55,6 +55,8 @@ public interface INFFGirlsBauble extends IBaubleRegistryEntry {
         else return false;
     }
 
+    public NFFGirlsBaubleProperties getProperties();
+
     public static boolean isEnvironmentImmunized(Mob test) {
         return NFUBaubleAPI.getAllSlotItems(test).values().stream()
             .anyMatch(i -> hasBaubleTag(i, TAG_ENVIRONMENT_IMMUNITY));
