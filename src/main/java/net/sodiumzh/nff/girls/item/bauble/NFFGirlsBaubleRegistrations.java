@@ -4,6 +4,11 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
 import net.sodiumzh.nff.girls.NFFGirls;
 
+/**
+ * Mod-event-bus subscriber reserved for registering NFF-Girls bauble-related event
+ * handlers (e.g. modifying which mobs can equip particular baubles). Currently a
+ * placeholder holding commented-out registration examples.
+ */
 @EventBusSubscriber(modid = NFFGirls.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class NFFGirlsBaubleRegistrations
 {
