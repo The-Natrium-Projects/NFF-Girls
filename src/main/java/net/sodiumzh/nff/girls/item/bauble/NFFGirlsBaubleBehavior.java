@@ -6,25 +6,19 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
-import net.sodiumzh.nfu.item.bauble.BaubleAttributeModifier;
-import net.sodiumzh.nfu.item.bauble.BaubleBehavior;
-import net.sodiumzh.nfu.item.bauble.BaubleEquippingCondition;
-import net.sodiumzh.nfu.item.bauble.BaubleProcessingArgs;
+import net.sodiumzh.nfu.item.bauble.*;
 import net.sodiumzh.nfu.util.NFUInfoStatics;
 import net.sodiumzh.nfu.util.NFUMathStatics;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import javax.annotation.Nonnull;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.function.BiPredicate;
 import java.util.function.Predicate;
 import java.util.function.Supplier;
 
-public abstract class NFFGirlsBaubleBehavior extends BaubleBehavior implements INFFGirlsBauble {
+public class NFFGirlsBaubleBehavior extends BaubleBehavior implements INFFGirlsBauble {
 
     private ResourceLocation categoryKey;
     private int tier = 1;
@@ -34,25 +28,24 @@ public abstract class NFFGirlsBaubleBehavior extends BaubleBehavior implements I
     private final NFFGirlsBaubleProperties properties;
 
     protected NFFGirlsBaubleBehavior(@Nullable Item item, @Nullable BiPredicate<Item, ItemStack> multiItemCondition,
-                                     BaubleEquippingCondition equippingCondition, ResourceLocation categoryKey, int tier,
-                                     @NotNull NFFGirlsBaubleProperties properties) { 
-        super(getBaubleRegistryKey(categoryKey, tier), item, multiItemCondition, equippingCondition);
+                                     ResourceLocation categoryKey, int tier, @NotNull NFFGirlsBaubleProperties properties) {
+        super(getBaubleRegistryKey(categoryKey, tier), item, multiItemCondition, properties.equippingCondition);
         this.categoryKey = categoryKey;
         this.tier = tier;
         this.properties = properties;
         this.finalizeConstruction();
     }
 
-    public NFFGirlsBaubleBehavior(@NotNull Item item, BaubleEquippingCondition equippingCondition, ResourceLocation categoryKey, int tier, @NotNull NFFGirlsBaubleProperties properties) {
-        super(item, getBaubleRegistryKey(categoryKey, tier), equippingCondition);
+    public NFFGirlsBaubleBehavior(@NotNull Item item, ResourceLocation categoryKey, int tier, @NotNull NFFGirlsBaubleProperties properties) {
+        super(item, getBaubleRegistryKey(categoryKey, tier), properties.equippingCondition);
         this.categoryKey = categoryKey;
         this.tier = tier;
         this.properties = properties;
         this.finalizeConstruction();
     }
 
-    public NFFGirlsBaubleBehavior(@NotNull BiPredicate<Item, ItemStack> condition, BaubleEquippingCondition equippingCondition, ResourceLocation categoryKey, int tier, @NotNull NFFGirlsBaubleProperties properties) {
-        super(condition, getBaubleRegistryKey(categoryKey, tier), equippingCondition);
+    public NFFGirlsBaubleBehavior(@NotNull BiPredicate<Item, ItemStack> condition, ResourceLocation categoryKey, int tier, @NotNull NFFGirlsBaubleProperties properties) {
+        super(condition, getBaubleRegistryKey(categoryKey, tier), properties.equippingCondition);
         this.categoryKey = categoryKey;
         this.tier = tier;
         this.properties = properties;
