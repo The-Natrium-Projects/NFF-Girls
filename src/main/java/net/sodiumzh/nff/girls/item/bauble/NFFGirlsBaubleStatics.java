@@ -11,6 +11,10 @@ import java.util.AbstractMap;
 import java.util.Map;
 import java.util.function.Predicate;
 
+/**
+ * Utility methods for querying how many baubles (from {@link NFFGirlsBaubleAdditionalRegistry}) a mob
+ * currently has equipped, filtered by category key, tier, or a custom condition.
+ */
 public class NFFGirlsBaubleStatics
 {
 

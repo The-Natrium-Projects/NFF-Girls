@@ -11,9 +11,20 @@ import net.sodiumzh.nfu.item.bauble.NFUBaubleAPI;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Common interface of all NFF-Girls bauble entries built on top of NFU-Library's bauble system
+ * ({@link IBaubleRegistryEntry}). It adds the "category key" + "tier" concept used to group related
+ * baubles (e.g. every tier of the Soul Amulet shares the same category key) as well as a set of
+ * string-based "bauble tags" for identifying common behaviors that can't be expressed with plain
+ * attribute modifiers, and exposes the {@link NFFGirlsBaubleProperties} that actually drives the
+ * bauble's effects. It is implemented by both {@link NFFGirlsBaubleBehavior} (baubles attached to an
+ * existing item) and {@link NFFGirlsDedicatedBaubleItem} (baubles that are their own dedicated item).
+ */
 public interface INFFGirlsBauble extends IBaubleRegistryEntry {
 
+    /** Bauble tag marking a bauble that grants environment (e.g. weather/biome) damage immunity. */
     public static final String TAG_ENVIRONMENT_IMMUNITY = "environment_immunity";
+    /** Bauble tag marking a bauble that enables an active attack behavior. */
     public static final String TAG_ACTIVE_ATTACK = "active_attack";
 
     /**
@@ -33,11 +44,18 @@ public interface INFFGirlsBauble extends IBaubleRegistryEntry {
      */
     public List<String> getBaubleTags();
 
+    /**
+     * Build an {@link UnsupportedOperationException} for the current, unsupported {@link #getTier()}.
+     * Intended to be thrown by implementations when they encounter a tier they don't know how to handle.
+     */
     public default UnsupportedOperationException unsupportedTier()
     {
         return new UnsupportedOperationException("Unsupported bauble tier ( " + this.getTier() + ").");
     }
 
+    /**
+     * Check if this bauble currently carries the given {@link #getBaubleTags() bauble tag}.
+     */
     public default boolean hasBaubleTag(String tag) {
         return this.getBaubleTags().contains(tag);
     }
@@ -55,13 +73,27 @@ public interface INFFGirlsBauble extends IBaubleRegistryEntry {
         else return false;
     }
 
+    /**
+     * Get the {@link NFFGirlsBaubleProperties} that describe this bauble's attribute modifiers,
+     * tick behavior and tooltips.
+     */
     public NFFGirlsBaubleProperties getProperties();
 
+    /**
+     * Check if the given mob is currently equipped with a bauble carrying the
+     * {@link #TAG_ENVIRONMENT_IMMUNITY} tag.
+     */
     public static boolean isEnvironmentImmunized(Mob test) {
         return NFUBaubleAPI.getAllSlotItems(test).values().stream()
             .anyMatch(i -> hasBaubleTag(i, TAG_ENVIRONMENT_IMMUNITY));
     }
 
+    /**
+     * Resolve the {@link INFFGirlsBauble} entry (or entries) associated with the given object, which
+     * may be an {@link INFFGirlsBauble} itself, an {@link Item}, or an {@link ItemStack}. For items/stacks
+     * that are not themselves a bauble, this also searches {@code NFFGirlsBaubles.BAUBLE_REGISTRY} for
+     * matching {@link NFFGirlsBaubleBehavior} entries (single-item or multi-item condition based).
+     */
     public static List<INFFGirlsBauble> asBauble(Object obj) {
         List<INFFGirlsBauble> list = new ArrayList<>();
         if (obj instanceof INFFGirlsBauble i) {

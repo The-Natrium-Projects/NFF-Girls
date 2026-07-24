@@ -41,13 +41,25 @@ import java.util.*;
 import java.util.function.*;
 
 /**
- * A utility for declaration of baubles on construction.
+ * A fluent builder describing a bauble's declarative properties: attribute modifiers (repeatable and
+ * unrepeatable), tick behavior, equipping condition, environment immunity, tooltips and rarity tier
+ * display. An instance is attached to an {@link INFFGirlsBauble} (via {@link NFFGirlsBaubleBehavior} or
+ * {@link NFFGirlsDedicatedBaubleItem}) and must be {@link #validate() validated} before its modifiers
+ * and tooltips can be safely read.
  */
 public class NFFGirlsBaubleProperties {
 
+    /**
+     * Registry collection holding the predicate presets used as {@link INFFGirlsBauble} equipping
+     * conditions, such as {@link #NO_CONDITION}.
+     */
     public static NFURegistryEntryCollection<RegistrablePredicate<?>> EQUIPPING_CONDITION_PRESETS
         = NFURegistryEntryCollection.create(NFURegistries.PREDICATES, NFFGirls.MOD_ID);
 
+    /**
+     * A registrable predicate on {@link Mob} that always returns {@code true}, used as the default
+     * additional condition for attribute modifiers that don't require a specific mob condition.
+     */
     public static final NFURegistry.Accessor<RegistrablePredicate<Mob>> NO_CONDITION =
         EQUIPPING_CONDITION_PRESETS.register("bauble_no_condition", () ->
             new RegistrablePredicate<>(Mob.class, "nffgirls_bauble_no_condition", mob -> true));
@@ -91,6 +103,16 @@ public class NFFGirlsBaubleProperties {
         return res;
     }
 
+    /**
+     * Add a repeatable attribute modifier: it is added once per equipped stack of the bauble (i.e. its
+     * effect stacks with the amount equipped).
+     * @param attr Attribute to modify.
+     * @param amount Modifier amount.
+     * @param operation Modifier operation.
+     * @param condition Additional condition on the wearing mob for this modifier to take effect, or null for none.
+     * @param id Explicit modifier id, or null to use a generated one.
+     * @return this.
+     */
     public NFFGirlsBaubleProperties repeatable(Attribute attr, double amount, AttributeModifier.Operation operation, @Nullable Predicate<? super Mob> condition, @Nullable ResourceLocation id) {
         if (this.validated.get()) {
             NFUDebugStatics.errorOnce("Builder has been validated, no more modification. Skipped.");
@@ -101,18 +123,37 @@ public class NFFGirlsBaubleProperties {
         return this;
     }
 
+    /**
+     * @see #repeatable(Attribute, double, AttributeModifier.Operation, Predicate, ResourceLocation)
+     */
     public NFFGirlsBaubleProperties repeatable(Attribute attr, double amount, AttributeModifier.Operation operation, @Nullable Predicate<? super Mob> condition) {
         return repeatable(attr, amount, operation, condition, null);
     }
 
+    /**
+     * @see #repeatable(Attribute, double, AttributeModifier.Operation, Predicate, ResourceLocation)
+     */
     public NFFGirlsBaubleProperties repeatable(Attribute attr, double amount, AttributeModifier.Operation operation, @Nullable ResourceLocation id) {
         return repeatable(attr, amount, operation, null, id);
     }
 
+    /**
+     * @see #repeatable(Attribute, double, AttributeModifier.Operation, Predicate, ResourceLocation)
+     */
     public NFFGirlsBaubleProperties repeatable(Attribute attr, double amount, AttributeModifier.Operation operation) {
         return repeatable(attr, amount, operation, null, null);
     }
 
+    /**
+     * Add an unrepeatable attribute modifier: it is added once regardless of how many stacks of the
+     * bauble are equipped.
+     * @param attr Attribute to modify.
+     * @param amount Modifier amount.
+     * @param operation Modifier operation.
+     * @param condition Additional condition on the wearing mob for this modifier to take effect.
+     * @param id Explicit modifier id, or null to use a generated one.
+     * @return this.
+     */
     public NFFGirlsBaubleProperties unrepeatable(Attribute attr, double amount, AttributeModifier.Operation operation, Predicate<? super Mob> condition, @Nullable ResourceLocation id) {
         if (this.validated.get()) {
             NFUDebugStatics.errorOnce("Builder has been validated, no more modification. Skipped.");
@@ -123,39 +164,72 @@ public class NFFGirlsBaubleProperties {
         return this;
     }
 
+    /**
+     * @see #unrepeatable(Attribute, double, AttributeModifier.Operation, Predicate, ResourceLocation)
+     */
     public NFFGirlsBaubleProperties unrepeatable(Attribute attr, double amount, AttributeModifier.Operation operation, @Nullable Predicate<? super Mob> condition) {
         return unrepeatable(attr, amount, operation, condition, null);
     }
 
+    /**
+     * @see #unrepeatable(Attribute, double, AttributeModifier.Operation, Predicate, ResourceLocation)
+     */
     public NFFGirlsBaubleProperties unrepeatable(Attribute attr, double amount, AttributeModifier.Operation operation, @Nullable ResourceLocation id) {
         return unrepeatable(attr, amount, operation, null, id);
     }
 
+    /**
+     * @see #unrepeatable(Attribute, double, AttributeModifier.Operation, Predicate, ResourceLocation)
+     */
     public NFFGirlsBaubleProperties unrepeatable(Attribute attr, double amount, AttributeModifier.Operation operation) {
         return unrepeatable(attr, amount, operation, null, null);
     }
 
+    /**
+     * Mark this bauble as granting environment (e.g. weather/biome) damage immunity, tagging it with
+     * {@link INFFGirlsBauble#TAG_ENVIRONMENT_IMMUNITY}.
+     * @return this.
+     */
     public NFFGirlsBaubleProperties environmentResistance() {
         this.environmentImmune = true;
         return this;
     }
 
+    /**
+     * Set the condition under which a slot may equip this bauble, along with an optional tooltip
+     * describing it.
+     * @return this.
+     */
     public NFFGirlsBaubleProperties equippingCondition(@Nullable BaubleEquippingCondition condition, @Nullable Component info) {
         this.equippingCondition = Optional.ofNullable(condition).orElse(BaubleEquippingConditions.CONDITION_ALWAYS.get());
         this.equippingConditionTooltip = info;
         return this;
     }
 
+    /**
+     * Set the condition under which a slot may equip this bauble, using the condition's own
+     * translation as tooltip.
+     * @return this.
+     */
     public NFFGirlsBaubleProperties equippingCondition(@Nullable BaubleEquippingCondition condition) {
         return equippingCondition(condition, Optional.ofNullable(condition).map(BaubleEquippingCondition::getTranslation).orElse(null));
     }
 
+    /**
+     * Add an action to run on every tick this bauble is equipped, chained after any previously
+     * registered tick action.
+     * @return this.
+     */
     public NFFGirlsBaubleProperties onTick(Consumer<BaubleProcessingArgs> action) {
         Consumer<BaubleProcessingArgs> oldAction = this.onTick;
         this.onTick = oldAction.andThen(action);
         return this;
     }
 
+    /**
+     * Register an additional bauble tag on this properties instance.
+     * @return this.
+     */
     public NFFGirlsBaubleProperties addTag(String tag) {
         this.tags.add(tag);
         return this;
@@ -163,34 +237,58 @@ public class NFFGirlsBaubleProperties {
 
     // Getters //
 
+    /**
+     * @return The combined tick action to run each tick this bauble is equipped.
+     */
     public Consumer<BaubleProcessingArgs> getTickAction() {
         return onTick;
     }
 
+    /**
+     * @return The registered repeatable attribute modifier suppliers, mapped to their mob condition.
+     */
     public Map<Supplier<BaubleAttributeModifier>, Predicate<? super Mob>> getRepeatableModifierSuppliers() {
         return repeatableModifierSuppliers;
     }
 
+    /**
+     * @return The registered unrepeatable attribute modifier suppliers, mapped to their mob condition.
+     */
     public Map<Supplier<BaubleAttributeModifier>, Predicate<? super Mob>> getUnrepeatableModifierSuppliers() {
         return unrepeatableModifierSuppliers;
     }
 
+    /**
+     * @return The bauble tags registered via {@link #addTag(String)}.
+     */
     public List<String> getBaubleTags() {
         return tags;
     }
 
+    /**
+     * @return Whether {@link #environmentResistance()} was called on this properties instance.
+     */
     public boolean isEnvironmentImmune() {
         return environmentImmune;
     }
 
+    /**
+     * @return The name style modifier applied to the item's display name.
+     */
     public BiFunction<ItemStack, MutableComponent, MutableComponent> getNameStyleModifier() {
         return nameStyle;
     }
 
+    /**
+     * @return Whether the rarity tier tooltip should be shown for this bauble.
+     */
     public boolean shouldShowRarityTier() {
         return showRarityTier;
     }
 
+    /**
+     * @return An immutable copy of the resolved tooltip line suppliers. Only valid after {@link #validate()}.
+     */
     public List<Supplier<? extends Component>> getTooltips() {
         return List.copyOf(tooltips.get());
     }
@@ -286,16 +384,28 @@ public class NFFGirlsBaubleProperties {
     @Nullable
     private Component equippingConditionTooltip = null;
 
+    /**
+     * Set the rarity tier to display in the tooltip (0-based index into an internal color list).
+     * A negative value disables the display.
+     * @return this.
+     */
     public NFFGirlsBaubleProperties setRarityTier(int value) {
         if (value < 0) rarityTier = -1;
         else rarityTier = value;
         return this;
     }
 
+    /**
+     * @return The configured rarity tier, or a negative value if none/disabled.
+     */
     public int getRarityTier() {
         return rarityTier;
     }
 
+    /**
+     * Set whether the rarity tier tooltip should be shown.
+     * @return this.
+     */
     public NFFGirlsBaubleProperties setShowRarityTier(boolean value) {
         this.showRarityTier = value;
         return this;
@@ -314,16 +424,26 @@ public class NFFGirlsBaubleProperties {
             Optional.ofNullable(RARITY_FORMATS.get(Math.min(RARITY_FORMATS.size() - 1, rarityTier)));
     }
 
+    /**
+     * @return The formatted rarity tier tooltip line, if a rarity tier is set.
+     */
     public Optional<MutableComponent> getRarityTierDesc() {
         return getRarityTierFormat().map(format ->
             format.apply(NFUInfoStatics.createTranslatable("tooltip.nffgirls.bauble.rarity_tier", rarityTier)));
     }
 
+    /**
+     * Set the function used to style the item's display name.
+     * @return this.
+     */
     public NFFGirlsBaubleProperties setNameStyle(BiFunction<ItemStack, MutableComponent, MutableComponent> style) {
         this.nameStyle = style;
         return this;
     }
 
+    /**
+     * @see #setNameStyle(BiFunction)
+     */
     public NFFGirlsBaubleProperties setNameStyle(BiConsumer<ItemStack, MutableComponent> style) {
         return setNameStyle((i, c) -> {
             style.accept(i, c);
@@ -331,6 +451,9 @@ public class NFFGirlsBaubleProperties {
         });
     }
 
+    /**
+     * @see #setNameStyle(BiFunction)
+     */
     public NFFGirlsBaubleProperties setNameStyle(Consumer<MutableComponent> style) {
         return setNameStyle((i, c) -> {
             style.accept(c);
@@ -338,6 +461,14 @@ public class NFFGirlsBaubleProperties {
         });
     }
 
+    /**
+     * Add a tooltip line for each registered repeatable attribute modifier matching the given
+     * condition filter, formatted with the given formatter.
+     * @param conditionFilter Only include modifiers whose additional condition equals the supplied
+     *                        predicate; if null (or the supplier returns null), all modifiers are included.
+     * @param format Formatter applied to each generated {@link ModifierTooltipInfo}.
+     * @return this.
+     */
     public NFFGirlsBaubleProperties addRepeatableModifierTooltips(@Nullable Supplier<Predicate<? super Mob>> conditionFilter, Consumer<ModifierTooltipInfo> format) {
         DecimalFormat df = new DecimalFormat("#.##");
         df.setDecimalSeparatorAlwaysShown(false);
@@ -351,18 +482,39 @@ public class NFFGirlsBaubleProperties {
         return this;
     }
 
+    /**
+     * @see #addRepeatableModifierTooltips(Supplier, Consumer)
+     */
     public NFFGirlsBaubleProperties addRepeatableModifierTooltips(@Nullable Supplier<Predicate<? super Mob>> conditionFilter) {
         return addRepeatableModifierTooltips(conditionFilter, m -> {});
     }
 
+    /**
+     * Add a tooltip line for every registered repeatable attribute modifier.
+     * @return this.
+     */
     public NFFGirlsBaubleProperties addRepeatableModifierTooltips() {
         return addRepeatableModifierTooltips(null);
     }
 
+    /**
+     * Add a tooltip line for every repeatable attribute modifier that has no additional mob condition.
+     * @return this.
+     */
     public NFFGirlsBaubleProperties addRepeatableModifierTooltipsUnconditional() {
         return addRepeatableModifierTooltips(NO_CONDITION::get);
     }
 
+    /**
+     * Add a tooltip line for each registered unrepeatable attribute modifier matching the given
+     * condition filter, formatted with the given formatter, optionally appending the default
+     * "unrepeatable" tooltip note.
+     * @param conditionFilter Only include modifiers whose additional condition equals the supplied
+     *                        predicate; if null (or the supplier returns null), all modifiers are included.
+     * @param format Formatter applied to each generated {@link ModifierTooltipInfo}.
+     * @param showUnrepeatableTooltip Whether to append the default "unrepeatable" tooltip note.
+     * @return this.
+     */
     public NFFGirlsBaubleProperties addUnrepeatableModifierTooltips(@Nullable Supplier<Predicate<? super Mob>> conditionFilter, Consumer<ModifierTooltipInfo> format, boolean showUnrepeatableTooltip) {
         DecimalFormat df = new DecimalFormat("#.##");
         df.setDecimalSeparatorAlwaysShown(false);
@@ -379,6 +531,9 @@ public class NFFGirlsBaubleProperties {
         return this;
     }
 
+    /**
+     * @see #addUnrepeatableModifierTooltips(Supplier, Consumer, boolean)
+     */
     public NFFGirlsBaubleProperties addUnrepeatableModifierTooltips(@Nullable Supplier<Predicate<? super Mob>> conditionFilter, Consumer<ModifierTooltipInfo> format) {
         return addUnrepeatableModifierTooltips(conditionFilter, format, true);
     }
@@ -387,18 +542,34 @@ public class NFFGirlsBaubleProperties {
         return addUnrepeatableModifierTooltips(conditionFilter, c -> {}, showUnrepeatableTooltip);
     }
 
+    /**
+     * @see #addUnrepeatableModifierTooltips(Supplier, Consumer, boolean)
+     */
     public NFFGirlsBaubleProperties addUnrepeatableModifierTooltips(@Nullable Supplier<Predicate<? super Mob>> conditionFilter) {
         return addUnrepeatableModifierTooltips(conditionFilter, c -> {});
     }
 
+    /**
+     * Add a tooltip line for every registered unrepeatable attribute modifier.
+     * @return this.
+     */
     public NFFGirlsBaubleProperties addUnrepeatableModifierTooltips() {
         return addUnrepeatableModifierTooltips(null);
     }
 
+    /**
+     * Add a tooltip line for every unrepeatable attribute modifier that has no additional mob condition.
+     * @return this.
+     */
     public NFFGirlsBaubleProperties addUnrepeatableModifierTooltipsUnconditional() {
         return addUnrepeatableModifierTooltips(NO_CONDITION::get);
     }
 
+    /**
+     * Add tooltip lines for both repeatable and unrepeatable attribute modifiers matching the given
+     * condition filter.
+     * @return this.
+     */
     public NFFGirlsBaubleProperties addAllModifierTooltips(@Nullable Supplier<Predicate<? super Mob>> conditionFilter,
                                                            Consumer<ModifierTooltipInfo> format, boolean showUnrepeatableTip) {
         this.addRepeatableModifierTooltips(conditionFilter, format);
@@ -406,28 +577,51 @@ public class NFFGirlsBaubleProperties {
         return this;
     }
 
+    /**
+     * @see #addAllModifierTooltips(Supplier, Consumer, boolean)
+     */
     public NFFGirlsBaubleProperties addAllModifierTooltips(@Nullable Supplier<Predicate<? super Mob>> conditionFilter, Consumer<ModifierTooltipInfo> format) {
         return addAllModifierTooltips(conditionFilter, format, true);
     }
 
+    /**
+     * @see #addAllModifierTooltips(Supplier, Consumer, boolean)
+     */
     public NFFGirlsBaubleProperties addAllModifierTooltips(@Nullable Supplier<Predicate<? super Mob>> conditionFilter) {
         return addAllModifierTooltips(conditionFilter, c -> {});
     }
 
+    /**
+     * Add tooltip lines for every registered attribute modifier (repeatable and unrepeatable).
+     * @return this.
+     */
     public NFFGirlsBaubleProperties addAllModifierTooltips() {
         return addAllModifierTooltips(null);
     }
 
+    /**
+     * Add tooltip lines for every attribute modifier that has no additional mob condition.
+     * @return this.
+     */
     public NFFGirlsBaubleProperties addAllModifierTooltipsUnconditional() {
         return addAllModifierTooltips(NO_CONDITION::get);
     }
 
+    /**
+     * Add the tooltip describing the {@link #equippingCondition(BaubleEquippingCondition, Component) equipping condition},
+     * if one was set.
+     * @return this.
+     */
     public NFFGirlsBaubleProperties addEquippingConditionTooltip() {
         if (this.equippingConditionTooltip != null)
             return addTooltip(() -> TooltipInfo.ofComponent(equippingConditionTooltip));
         return this;
     }
 
+    /**
+     * Register a lazily-supplied {@link TooltipInfo} as an additional tooltip line.
+     * @return this.
+     */
     public NFFGirlsBaubleProperties addTooltip(Supplier<TooltipInfo> tooltip) {
         this.tooltipsSupplier.modify(list -> {
             list.add(tooltip.get());
@@ -435,30 +629,59 @@ public class NFFGirlsBaubleProperties {
         return this;
     }
 
+    /**
+     * Register a {@link TooltipInfo} as an additional tooltip line.
+     * @return this.
+     */
     public NFFGirlsBaubleProperties addTooltip(TooltipInfo tooltip) {
         return this.addTooltip(() -> tooltip);
     }
 
+    /**
+     * Register a fixed {@link Component} as an additional tooltip line.
+     * @return this.
+     */
     public NFFGirlsBaubleProperties addTooltip(Component cpn) {
         return this.addTooltip(() -> TooltipInfo.ofComponent(cpn));
     }
 
+    /**
+     * Register a translatable-key-free text tooltip line with the given formatting.
+     * @return this.
+     */
     public NFFGirlsBaubleProperties addTooltipText(String text, Consumer<MutableComponent> format) {
         return addTooltip(() -> TooltipInfo.ofText(text, format));
     }
 
+    /**
+     * Register a translatable-key-free text tooltip line with the default (gray) formatting.
+     * @return this.
+     */
     public NFFGirlsBaubleProperties addTooltipText(String text) {
         return addTooltipText(text, c -> {});
     }
 
+    /**
+     * Register a translatable tooltip line with the given formatting.
+     * @return this.
+     */
     public NFFGirlsBaubleProperties addTooltipTranslatable(Consumer<MutableComponent> format, String key, Object... args) {
         return addTooltip(() -> TooltipInfo.ofTranslatable(key, format, args));
     }
 
+    /**
+     * Register a translatable tooltip line with the default (gray) formatting.
+     * @return this.
+     */
     public NFFGirlsBaubleProperties addTooltipTranslatable(String key, Object... args) {
         return addTooltipTranslatable(c -> {}, key, args);
     }
 
+    /**
+     * Add the standard "environment immunity" tooltip line and mark it as manually added, so
+     * {@link NFFGirlsBaubleBehavior#finalizeConstruction()} doesn't add a duplicate.
+     * @return this.
+     */
     public NFFGirlsBaubleProperties addEnvironmentImmunityTooltip() {
         isEnvironmentImmunityTooltipManuallyAdded = true;
         return addTooltipTranslatable("tooltip.nffgirls.bauble.environment_immunity");
@@ -481,21 +704,32 @@ public class NFFGirlsBaubleProperties {
         private final Attribute attr;
         private final double amount;
         private AttributeModifier.Operation op;
+        /** Formatting applied to the attribute name component. */
         public BiConsumer<MutableComponent, ModifierTooltipInfo> attributeFormat = DEFAULT_ATTRIBUTE_FORMAT;
+        /** Formatting applied to the +/- operator component. */
         public BiConsumer<MutableComponent, ModifierTooltipInfo> operatorFormat = DEFAULT_AMOUNT_FORMAT;
+        /** Formatting applied to the numeric amount component. */
         public BiConsumer<MutableComponent, ModifierTooltipInfo> amountFormat = DEFAULT_AMOUNT_FORMAT;
+        /** Formatting applied to the trailing "%" component, when the amount is expressed as a percentage. */
         public BiConsumer<MutableComponent, ModifierTooltipInfo> percentFormat = DEFAULT_AMOUNT_FORMAT;
         @Nullable
         private ModifiableSupplier<MutableComponent> additionAtStart = null;
         @Nullable
         private ModifiableSupplier<MutableComponent> additionAtEnd = null;
 
+        /**
+         * Describe a tooltip line for a single attribute modifier.
+         */
         public ModifierTooltipInfo(Attribute attr, double amount, AttributeModifier.Operation op) {
             this.attr = attr;
             this.amount = amount;
             this.op = op;
         }
 
+        /**
+         * Apply the same formatting to the attribute, operator, amount and percent components.
+         * @return this.
+         */
         public ModifierTooltipInfo format(@Nonnull BiConsumer<MutableComponent, ModifierTooltipInfo> formatting) {
             this.attributeFormat = formatting;
             this.operatorFormat = formatting;
@@ -504,26 +738,46 @@ public class NFFGirlsBaubleProperties {
             return this;
         }
 
+        /**
+         * Set the formatting for the attribute name component.
+         * @return this.
+         */
         public ModifierTooltipInfo attributeFormat(@Nonnull BiConsumer<MutableComponent, ModifierTooltipInfo> formatting) {
             this.attributeFormat = formatting;
             return this;
         }
 
+        /**
+         * Set the formatting for the +/- operator component.
+         * @return this.
+         */
         public ModifierTooltipInfo operatorFormat(@Nonnull BiConsumer<MutableComponent, ModifierTooltipInfo> formatting) {
             this.operatorFormat = formatting;
             return this;
         }
 
+        /**
+         * Set the formatting for the numeric amount component.
+         * @return this.
+         */
         public ModifierTooltipInfo amountFormat(@Nonnull BiConsumer<MutableComponent, ModifierTooltipInfo> formatting) {
             this.amountFormat = formatting;
             return this;
         }
 
+        /**
+         * Set the formatting for the trailing "%" component.
+         * @return this.
+         */
         public ModifierTooltipInfo percentFormat(@Nonnull BiConsumer<MutableComponent, ModifierTooltipInfo> formatting) {
             this.percentFormat = formatting;
             return this;
         }
 
+        /**
+         * Append (or chain-append) a component to be shown before the modifier's own text.
+         * @return this.
+         */
         public ModifierTooltipInfo appendAtStart(@Nonnull Supplier<MutableComponent> componentSupplier) {
             if (this.additionAtStart == null)
                 this.additionAtStart = new ModifiableSupplier<>(componentSupplier);
@@ -531,6 +785,10 @@ public class NFFGirlsBaubleProperties {
             return this;
         }
 
+        /**
+         * Append (or chain-append) a component to be shown after the modifier's own text.
+         * @return this.
+         */
         public ModifierTooltipInfo appendAtEnd(@Nonnull Supplier<MutableComponent> componentSupplier) {
             if (this.additionAtEnd == null)
                 this.additionAtEnd = new ModifiableSupplier<>(componentSupplier);
@@ -538,6 +796,10 @@ public class NFFGirlsBaubleProperties {
             return this;
         }
 
+        /**
+         * Build the formatted tooltip component for this attribute modifier, or {@code null} if the
+         * modifier's amount is effectively zero.
+         */
         @Override
         public MutableComponent get() {
             if (Math.abs(amount) < 1e-12d) return null;
@@ -625,38 +887,62 @@ public class NFFGirlsBaubleProperties {
             initializer.accept(this.fixedPart);
         }
 
+        /**
+         * Create a {@link TooltipInfo} that renders the attribute modifier lazily obtained from {@code accessor}.
+         */
         public static TooltipInfo ofAttribute(Supplier<BaubleAttributeModifier> accessor) {
             return new TooltipInfo(accessor);
         }
 
+        /**
+         * Create a {@link TooltipInfo} with a fixed part built via the given initializer.
+         */
         public static TooltipInfo ofFixed(Consumer<ComponentBuilder> initializer) {
             return new TooltipInfo(initializer);
         }
 
+        /**
+         * Create a {@link TooltipInfo} wrapping a lazily-supplied fixed {@link Component}.
+         */
         public static TooltipInfo ofComponent(Supplier<Component> componentSupplier) {
             return ofFixed(b -> b.append(componentSupplier.get()));
         }
 
+        /**
+         * Create a {@link TooltipInfo} wrapping a fixed {@link Component}.
+         */
         public static TooltipInfo ofComponent(Component component) {
             return ofFixed(b -> b.append(component));
         }
 
+        /**
+         * Create a {@link TooltipInfo} from a translation key and arguments, with the given formatting.
+         */
         public static TooltipInfo ofTranslatable(String key, Consumer<MutableComponent> format, Object... args) {
             MutableComponent res = NFUInfoStatics.createTranslatable(key, args);
             format.accept(res);
             return new TooltipInfo(builder -> builder.append(res));
         }
 
+        /**
+         * Create a {@link TooltipInfo} from a translation key and arguments, with the default (gray) formatting.
+         */
         public static TooltipInfo ofTranslatable(String key, Object... args) {
             return ofTranslatable(key, c -> c.withStyle(ChatFormatting.GRAY), args);
         }
 
+        /**
+         * Create a {@link TooltipInfo} from a translatable text key, with the given formatting.
+         */
         public static TooltipInfo ofText(String text, Consumer<MutableComponent> format) {
             MutableComponent res = NFUInfoStatics.createTranslatable(text);
             format.accept(res);
             return new TooltipInfo(builder -> builder.append(res));
         }
 
+        /**
+         * Create a {@link TooltipInfo} from a translatable text key, with the default (gray) formatting.
+         */
         public static TooltipInfo ofText(String text) {
             return ofText(text, c -> c.withStyle(ChatFormatting.GRAY));
         }
@@ -677,12 +963,20 @@ public class NFFGirlsBaubleProperties {
             return this;
         }
 
+        /**
+         * Append an additional component to this tooltip's fixed part.
+         * @return this.
+         */
         public TooltipInfo append(Component next) {
             if (this.fixedPart == null) this.fixedPart = ComponentBuilder.create();
             this.fixedPart.append(next);
             return this;
         }
 
+        /**
+         * Override how the final tooltip component is built from this {@link TooltipInfo}.
+         * @return this.
+         */
         public TooltipInfo setTooltipCreationMethod(Function<TooltipInfo, Supplier<MutableComponent>> method) {
             this.gettingMethod = () -> method.apply(this);
             return this;
@@ -710,14 +1004,24 @@ public class NFFGirlsBaubleProperties {
             };
         }
 
+        /**
+         * @return The current tooltip line component supplier, either the default one or an overridden
+         * one set via {@link #setTooltipCreationMethod(Function)}.
+         */
         public Supplier<MutableComponent> getComponentSupplier() {
             return this.gettingMethod.get();
         }
 
+        /**
+         * @return The attribute modifier accessor, if this tooltip was created via {@link #ofAttribute(Supplier)}.
+         */
         public Optional<Supplier<BaubleAttributeModifier>> getModifierAccessor() {
             return Optional.ofNullable(this.modifierAccessor);
         }
 
+        /**
+         * @return The fixed part builder, if this tooltip has any fixed content.
+         */
         public Optional<ComponentBuilder> getFixedPartBuilder() {
             return Optional.ofNullable(this.fixedPart);
         }
