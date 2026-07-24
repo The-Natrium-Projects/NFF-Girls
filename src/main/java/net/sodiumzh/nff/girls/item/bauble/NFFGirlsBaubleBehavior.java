@@ -24,7 +24,7 @@ import java.util.function.Supplier;
  * {@link INFFGirlsBauble} on top of NFU-Library's {@link BaubleBehavior}, delegating attribute
  * modifiers, tick behavior and tooltips to an attached {@link NFFGirlsBaubleProperties} instance.
  */
-public abstract class NFFGirlsBaubleBehavior extends BaubleBehavior implements INFFGirlsBauble {
+public class NFFGirlsBaubleBehavior extends BaubleBehavior implements INFFGirlsBauble {
 
     private ResourceLocation categoryKey;
     private int tier = 1;
@@ -45,7 +45,6 @@ public abstract class NFFGirlsBaubleBehavior extends BaubleBehavior implements I
     /**
      * Attach this behavior to a single existing item.
      * @param item Item that should take this behavior.
-     * @param equippingCondition Condition deciding whether a slot can equip this bauble.
      * @param categoryKey Category key of this bauble.
      * @param tier Tier of this bauble under the category key.
      * @param properties Properties describing this bauble's effects.
@@ -55,13 +54,13 @@ public abstract class NFFGirlsBaubleBehavior extends BaubleBehavior implements I
         this.categoryKey = categoryKey;
         this.tier = tier;
         this.properties = properties;
+        this.properties.validate();
         this.finalizeConstruction();
     }
 
     /**
      * Attach this behavior to every item matched by the given condition.
      * @param condition Condition matching (item, item stack) pairs that should take this behavior.
-     * @param equippingCondition Condition deciding whether a slot can equip this bauble.
      * @param categoryKey Category key of this bauble.
      * @param tier Tier of this bauble under the category key.
      * @param properties Properties describing this bauble's effects.
@@ -245,11 +244,14 @@ public abstract class NFFGirlsBaubleBehavior extends BaubleBehavior implements I
 
     protected void finalizeConstruction() {
         this.addTooltip(() -> NFUInfoStatics.createTranslatable("tooltip.nffgirls.bauble.existing_item"));
+        this.properties.setShowRarityTier(this.properties.getRarityTier() >= 1);
         if (this.properties.shouldShowRarityTier())
-            this.properties.getRarityTierDesc().ifPresent(m -> this.addTooltip(() -> m));
+            this.properties.getRarityTierDesc().ifPresent(c -> this.addTooltip(() -> c));
         this.properties.getTooltips().forEach(this::addTooltip);
         if (this.properties.environmentImmune && !this.properties.isEnvironmentImmunityTooltipManuallyAdded)
             this.addTooltip(() -> NFUInfoStatics.createTranslatable("tooltip.nffgirls.bauble.environment_immunity").withStyle(ChatFormatting.WHITE));
     }
+
+
 
 }
