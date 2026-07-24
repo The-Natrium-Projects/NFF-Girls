@@ -9,6 +9,7 @@ import net.sodiumzh.nfu.util.NFUMathStatics;
 import org.jetbrains.annotations.Nullable;
 
 import javax.annotation.Nonnull;
+import javax.swing.text.html.Option;
 import java.util.*;
 import java.util.function.Predicate;
 import java.util.function.Supplier;
@@ -123,25 +124,41 @@ public class NFFGirlsDedicatedBaubleItem extends DedicatedBaubleItem implements 
      */
     @Override
     public NFFGirlsBaubleProperties getProperties() {
+        this.loadProperties();
+        return this.propertiesInstance;
+    }
+
+    public void loadProperties() {
         if (this.propertiesInstance == null) {
             this.propertiesInstance = propertiesProvider.get();
             if (this.propertiesInstance == null)
                 throw new NullPointerException("NFF Girls Bauble properties supplier returned null.");
-            this.onPropertiesLoad(this.propertiesInstance);
             this.propertiesInstance.validate();
+            this.onPropertiesLoad(this.propertiesInstance);
         }
-        return this.propertiesInstance;
     }
 
     /**
      * Update self (e.g. bauble tags) from properties on load.
      */
     protected void onPropertiesLoad(@Nonnull NFFGirlsBaubleProperties properties) {
+        // Merge tags
         if (properties.environmentImmune) {
             this.addBaubleTag(INFFGirlsBauble.TAG_ENVIRONMENT_IMMUNITY);
         }
         properties.getBaubleTags().forEach(this::addBaubleTag);
-        this.setNameStyle(properties.getNameStyleModifier());
+        // Merge tooltips
+        this.getProperties().setShowRarityTier(this.getProperties().getRarityTier() > 0);
+        if (this.getProperties().shouldShowRarityTier()) {
+            this.getProperties().getRarityTierDesc().ifPresent(this::description);
+        }
+        Optional.ofNullable(this.getProperties().getTooltips()).ifPresent(ts -> ts.forEach(this::description));
+        // Merge name style
+        var nameStyleModifier = this.getProperties().getNameStyleModifier();
+        if (this.getProperties().shouldUseRarityTierNameColor() && this.getProperties().getRarityTierFormat().isPresent()) {
+            nameStyleModifier = nameStyleModifier.thenApply(this.getProperties().getRarityTierFormat().get());
+        }
+        this.appendNameStyle(nameStyleModifier);
     }
 
     /**
@@ -214,5 +231,9 @@ public class NFFGirlsDedicatedBaubleItem extends DedicatedBaubleItem implements 
     public BaubleEquippingCondition getEquippingCondition() {
         return Optional.ofNullable(this.getProperties().equippingCondition).orElse(BaubleEquippingConditions.CONDITION_ALWAYS.get());
     }
+
+    // NFUItem interface //
+
+
 
 }
