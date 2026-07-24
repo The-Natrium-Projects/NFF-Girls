@@ -809,38 +809,38 @@ public class NFFGirlsBaubles {
                 .setRarityTier(6)
                 .addAllModifierTooltips())
             .alwaysFoil().cast());
-/*
-    public static final RegistryObject<NFFGirlsDedicatedBaubleItem> DECAY_JADE = BAUBLE_ITEMS.register("decay_jade", () -> new NFFGirlsBaubleBuilder()
-        .repeatable(NFFGirlsEntityAttributes.WITHER_ASPECT.get(), 2d, AttributeModifier.Operation.ADDITION)
-        .repeatable(NFFGirlsEntityAttributes.POISON_ASPECT.get(), 2d, AttributeModifier.Operation.ADDITION)
-        .repeatable(Attributes.ARMOR, 6d, AttributeModifier.Operation.ADDITION)
-        .repeatable(Attributes.ARMOR_TOUGHNESS, 0.3d, AttributeModifier.Operation.ADDITION)
-        .repeatable(Attributes.MOVEMENT_SPEED, -0.1d, AttributeModifier.Operation.MULTIPLY_BASE)
-        .setRarityTier(3)
-        .addAllModifierTooltips()
-        .buildAsBaubleItem(new ResourceLocation(NFFGirls.MOD_ID, "decay_jade"), 1, new Item.Properties()));
 
-    public static final RegistryObject<NFFGirlsDedicatedBaubleItem> DECAY_JADE_II = BAUBLE_ITEMS.register("decay_jade_ii", () -> new NFFGirlsBaubleBuilder()
-        .repeatable(NFFGirlsEntityAttributes.WITHER_ASPECT.get(), 4d, AttributeModifier.Operation.ADDITION)
-        .repeatable(NFFGirlsEntityAttributes.POISON_ASPECT.get(), 3.5d, AttributeModifier.Operation.ADDITION)
-        .repeatable(Attributes.ARMOR, 8d, AttributeModifier.Operation.ADDITION)
-        .repeatable(Attributes.ARMOR_TOUGHNESS, 0.5d, AttributeModifier.Operation.ADDITION)
-        .repeatable(Attributes.MOVEMENT_SPEED, -0.1d, AttributeModifier.Operation.MULTIPLY_BASE)
-        .setRarityTier(4)
-        .addAllModifierTooltips()
-        .buildAsBaubleItem(new ResourceLocation(NFFGirls.MOD_ID, "decay_jade"), 2, new Item.Properties()));
+    public static final RegistryObject<NFFGirlsDedicatedBaubleItem> DECAY_JADE = BAUBLE_ITEMS.register("decay_jade", () ->
+        new NFFGirlsDedicatedBaubleItem(new ResourceLocation(NFFGirls.MOD_ID, "decay_jade"), 1, new Item.Properties(),
+        () -> new NFFGirlsBaubleProperties()
+            .repeatable(NFFGirlsEntityAttributes.WITHER_ASPECT.get(), 2d, AttributeModifier.Operation.ADDITION)
+            .repeatable(NFFGirlsEntityAttributes.POISON_ASPECT.get(), 2d, AttributeModifier.Operation.ADDITION)
+            .repeatable(Attributes.ARMOR, 6d, AttributeModifier.Operation.ADDITION)
+            .repeatable(Attributes.ARMOR_TOUGHNESS, 0.3d, AttributeModifier.Operation.ADDITION)
+            .repeatable(Attributes.MOVEMENT_SPEED, -0.1d, AttributeModifier.Operation.MULTIPLY_BASE)
+            .setRarityTier(3)
+            .addAllModifierTooltips()));
 
-    public static final RegistryObject<NFFGirlsDedicatedBaubleItem> DECAY_JADE_III = BAUBLE_ITEMS.register("decay_jade_iii", () -> new NFFGirlsBaubleBuilder()
-        .repeatable(NFFGirlsEntityAttributes.WITHER_ASPECT.get(), 6d, AttributeModifier.Operation.ADDITION)
-        .repeatable(NFFGirlsEntityAttributes.POISON_ASPECT.get(), 5d, AttributeModifier.Operation.ADDITION)
-        .repeatable(Attributes.ARMOR, 10d, AttributeModifier.Operation.ADDITION)
-        .repeatable(Attributes.ARMOR_TOUGHNESS, 0.7d, AttributeModifier.Operation.ADDITION)
-        .repeatable(Attributes.MOVEMENT_SPEED, -0.1d, AttributeModifier.Operation.MULTIPLY_BASE)
-        .setRarityTier(6)
-        .addAllModifierTooltips()
-        .buildAsBaubleItem(new ResourceLocation(NFFGirls.MOD_ID, "decay_jade"), 3, new Item.Properties()));
+    public static final RegistryObject<NFFGirlsDedicatedBaubleItem> DECAY_JADE_II = BAUBLE_ITEMS.register("decay_jade", () ->
+        new NFFGirlsDedicatedBaubleItem(new ResourceLocation(NFFGirls.MOD_ID, "decay_jade"), 2, new Item.Properties(),
+            () -> new NFFGirlsBaubleProperties().repeatable(NFFGirlsEntityAttributes.WITHER_ASPECT.get(), 4d, AttributeModifier.Operation.ADDITION)
+                .repeatable(NFFGirlsEntityAttributes.POISON_ASPECT.get(), 3.5d, AttributeModifier.Operation.ADDITION)
+                .repeatable(Attributes.ARMOR, 8d, AttributeModifier.Operation.ADDITION)
+                .repeatable(Attributes.ARMOR_TOUGHNESS, 0.5d, AttributeModifier.Operation.ADDITION)
+                .repeatable(Attributes.MOVEMENT_SPEED, -0.1d, AttributeModifier.Operation.MULTIPLY_BASE)
+                .setRarityTier(4)
+                .addAllModifierTooltips()));
 
-*/
+    public static final RegistryObject<NFFGirlsDedicatedBaubleItem> DECAY_JADE_III = BAUBLE_ITEMS.register("decay_jade", () ->
+        new NFFGirlsDedicatedBaubleItem(new ResourceLocation(NFFGirls.MOD_ID, "decay_jade"), 1, new Item.Properties(),
+            () -> new NFFGirlsBaubleProperties().repeatable(NFFGirlsEntityAttributes.WITHER_ASPECT.get(), 6d, AttributeModifier.Operation.ADDITION)
+                .repeatable(NFFGirlsEntityAttributes.POISON_ASPECT.get(), 5d, AttributeModifier.Operation.ADDITION)
+                .repeatable(Attributes.ARMOR, 10d, AttributeModifier.Operation.ADDITION)
+                .repeatable(Attributes.ARMOR_TOUGHNESS, 0.7d, AttributeModifier.Operation.ADDITION)
+                .repeatable(Attributes.MOVEMENT_SPEED, -0.1d, AttributeModifier.Operation.MULTIPLY_BASE)
+                .setRarityTier(6)
+                .addAllModifierTooltips()).alwaysFoil().cast());
+
     // Misc
     public static final RegistryObject<NFFGirlsDedicatedBaubleItem> RESISTANCE_CORE = BAUBLE_ITEMS.register("resistance_core", () ->
         new NFFGirlsDedicatedBaubleItem(new ResourceLocation(NFFGirls.MOD_ID, "resistance_core"), 1, new Item.Properties(),
@@ -849,22 +849,18 @@ public class NFFGirlsBaubles {
                 .setRarityTier(0)));
 
     public static final NFURegistry.Accessor<NFFGirlsBaubleBehavior> INSOMNIA_FRUIT =
-        BAUBLE_COLLECTION.register("insomnia_fruit", () -> new NFFGirlsBaubleProperties()
-        .repeatable(Attributes.ATTACK_DAMAGE, 5d, AttributeModifier.Operation.ADDITION, EFFECT_CONDITION_AT_NIGHT.get())
-        .repeatable(Attributes.MAX_HEALTH, 50d, AttributeModifier.Operation.ADDITION, EFFECT_CONDITION_AT_NIGHT.get())
-        .repeatable(NFFGirlsEntityAttributes.PERSISTENT_HEALING.get(), 0.1d, AttributeModifier.Operation.ADDITION, EFFECT_CONDITION_AT_NIGHT.get())
-        .addTooltipTranslatable("tooltip.nffgirls.bauble.at_night")
-        .addAllModifierTooltips()
-        .buildAsBaubleBehavior(new ResourceLocation(NFFGirls.MOD_ID, "insomnia_fruit"), 1, ModItems.INSOMNIA_FRUIT.get(), false));
+        BAUBLE_COLLECTION.register("insomnia_fruit", () -> new NFFGirlsBaubleBehavior(ModItems.INSOMNIA_FRUIT.get(),
+            new ResourceLocation(NFFGirls.MOD_ID, "insomnia_fruit"), 1,
+            new NFFGirlsBaubleProperties()
+                .repeatable(Attributes.ATTACK_DAMAGE, 5d, AttributeModifier.Operation.ADDITION, EFFECT_CONDITION_AT_NIGHT.get())
+                .repeatable(Attributes.MAX_HEALTH, 50d, AttributeModifier.Operation.ADDITION, EFFECT_CONDITION_AT_NIGHT.get())
+                .repeatable(NFFGirlsEntityAttributes.PERSISTENT_HEALING.get(), 0.1d, AttributeModifier.Operation.ADDITION, EFFECT_CONDITION_AT_NIGHT.get())
+                .addTooltipTranslatable("tooltip.nffgirls.bauble.at_night")
+                .addAllModifierTooltips()));
 
     // Ingredients
 
     public static final RegistryObject<Item> JADE_MATERIAL = BAUBLE_ITEMS.register("jade_material", () -> new Item(new Item.Properties()));
-
-
-   /* static {
-        BAUBLE_REGISTRY.register()
-    }*/
 
     // Register slots
 
