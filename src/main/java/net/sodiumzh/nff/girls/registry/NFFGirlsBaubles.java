@@ -30,6 +30,7 @@ import net.sodiumzh.nfu.item.bauble.RegisterBaublesEvent;
 import net.sodiumzh.nfu.registry.NFURegistries;
 import net.sodiumzh.nfu.registry.NFURegistry;
 import net.sodiumzh.nfu.registry.NFURegistryEntryCollection;
+import net.sodiumzh.nfu.registry.NFURegistryGenerateValuesEvent;
 
 import java.util.Optional;
 import java.util.function.Function;
@@ -821,7 +822,7 @@ public class NFFGirlsBaubles {
             .setRarityTier(3)
             .addAllModifierTooltips()));
 
-    public static final RegistryObject<NFFGirlsDedicatedBaubleItem> DECAY_JADE_II = BAUBLE_ITEMS.register("decay_jade", () ->
+    public static final RegistryObject<NFFGirlsDedicatedBaubleItem> DECAY_JADE_II = BAUBLE_ITEMS.register("decay_jade_ii", () ->
         new NFFGirlsDedicatedBaubleItem(new ResourceLocation(NFFGirls.MOD_ID, "decay_jade"), 2, new Item.Properties(),
             () -> new NFFGirlsBaubleProperties().repeatable(NFFGirlsEntityAttributes.WITHER_ASPECT.get(), 4d, AttributeModifier.Operation.ADDITION)
                 .repeatable(NFFGirlsEntityAttributes.POISON_ASPECT.get(), 3.5d, AttributeModifier.Operation.ADDITION)
@@ -831,8 +832,8 @@ public class NFFGirlsBaubles {
                 .setRarityTier(4)
                 .addAllModifierTooltips()));
 
-    public static final RegistryObject<NFFGirlsDedicatedBaubleItem> DECAY_JADE_III = BAUBLE_ITEMS.register("decay_jade", () ->
-        new NFFGirlsDedicatedBaubleItem(new ResourceLocation(NFFGirls.MOD_ID, "decay_jade"), 1, new Item.Properties(),
+    public static final RegistryObject<NFFGirlsDedicatedBaubleItem> DECAY_JADE_III = BAUBLE_ITEMS.register("decay_jade_iii", () ->
+        new NFFGirlsDedicatedBaubleItem(new ResourceLocation(NFFGirls.MOD_ID, "decay_jade"), 3, new Item.Properties(),
             () -> new NFFGirlsBaubleProperties().repeatable(NFFGirlsEntityAttributes.WITHER_ASPECT.get(), 6d, AttributeModifier.Operation.ADDITION)
                 .repeatable(NFFGirlsEntityAttributes.POISON_ASPECT.get(), 5d, AttributeModifier.Operation.ADDITION)
                 .repeatable(Attributes.ARMOR, 10d, AttributeModifier.Operation.ADDITION)
@@ -926,10 +927,30 @@ public class NFFGirlsBaubles {
     @SubscribeEvent
     public static void baubleRegistration(RegisterBaublesEvent event)
     {
+        // Load dedicated baubles from items, before registering NFF-Girls baubles to NFU bauble API
+        ForgeRegistries.ITEMS.getEntries().stream()
+            .filter(entry -> entry.getValue() instanceof INFFGirlsBauble)
+            .filter(entry -> !NFFGirlsBaubles.BAUBLE_REGISTRY.containsKey(entry.getKey().location()))
+            .forEach(entry -> {
+                if (entry.getValue() instanceof NFFGirlsDedicatedBaubleItem item)
+                    item.loadProperties();
+                NFFGirlsBaubles.BAUBLE_REGISTRY.register(entry.getKey().location(), () -> (INFFGirlsBauble)entry.getValue());
+            });
         NFFGirlsBaubles.BAUBLE_REGISTRY.keySet().stream().map(NFFGirlsBaubles.BAUBLE_REGISTRY::getValue)
             .forEach(event::register);
         event.register(new NecroticReaperHandHoeBaubleBehavior(new ResourceLocation(NFFGirls.MOD_ID, "necrotic_reaper_hoe")));
         event.register(new EnderManHandBlockBaubleBehavior(new ResourceLocation(NFFGirls.MOD_ID, "enderman_hand_block")));
+    }
+
+    public static void loadNFUBaubleReg(NFURegistryGenerateValuesEvent.CommonBefore event) {
+        // Load dedicated baubles from items
+        if (event.registry.equals(NFFGirlsBaubles.BAUBLE_REGISTRY)) {
+            ForgeRegistries.ITEMS.getEntries().stream()
+                .filter(entry -> entry.getValue() instanceof INFFGirlsBauble)
+                .filter(entry -> !NFFGirlsBaubles.BAUBLE_REGISTRY.containsKey(entry.getKey().location()))
+                .forEach(entry ->
+                    NFFGirlsBaubles.BAUBLE_REGISTRY.register(entry.getKey().location(), () -> (INFFGirlsBauble)entry.getValue()));
+        }
     }
 
     @SubscribeEvent

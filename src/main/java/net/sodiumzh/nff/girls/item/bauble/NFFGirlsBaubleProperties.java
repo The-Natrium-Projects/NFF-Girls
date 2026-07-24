@@ -21,6 +21,7 @@ import net.sodiumzh.nff.girls.registry.NFFGirlsConfigs;
 import net.sodiumzh.nff.girls.registry.NFFGirlsEntityAttributes;
 import net.sodiumzh.nfu.function.ModifiableSupplier;
 import net.sodiumzh.nfu.function.RegistrablePredicate;
+import net.sodiumzh.nfu.function.UnaryOperatorOneArg;
 import net.sodiumzh.nfu.info.ComponentBuilder;
 import net.sodiumzh.nfu.item.bauble.BaubleAttributeModifier;
 import net.sodiumzh.nfu.item.bauble.BaubleEquippingCondition;
@@ -75,7 +76,7 @@ public class NFFGirlsBaubleProperties {
     private final Validatable<Map<BaubleAttributeModifier, Predicate<? super Mob>>> unrepeatableModifiers
         = new Validatable<>(new HashMap<>());
     private final List<String> tags = new ArrayList<>();
-    private BiFunction<ItemStack, MutableComponent, MutableComponent> nameStyle = (i, c) -> c;
+    private UnaryOperatorOneArg<MutableComponent, ItemStack> nameStyle = (c, i) -> c;
 
     private final LimitedMutable<Boolean> validated = new LimitedMutable<>(false, 1);
 
@@ -275,7 +276,7 @@ public class NFFGirlsBaubleProperties {
     /**
      * @return The name style modifier applied to the item's display name.
      */
-    public BiFunction<ItemStack, MutableComponent, MutableComponent> getNameStyleModifier() {
+    public UnaryOperatorOneArg<MutableComponent, ItemStack> getNameStyleModifier() {
         return nameStyle;
     }
 
@@ -419,7 +420,11 @@ public class NFFGirlsBaubleProperties {
         return this;
     }
 
-    private Optional<UnaryOperator<MutableComponent>> getRarityTierFormat() {
+    public boolean shouldUseRarityTierNameColor() {
+        return this.useRarityTierNameColor;
+    }
+
+    public Optional<UnaryOperator<MutableComponent>> getRarityTierFormat() {
         return rarityTier < 0 ? Optional.empty() :
             Optional.ofNullable(RARITY_FORMATS.get(Math.min(RARITY_FORMATS.size() - 1, rarityTier)));
     }
@@ -436,26 +441,26 @@ public class NFFGirlsBaubleProperties {
      * Set the function used to style the item's display name.
      * @return this.
      */
-    public NFFGirlsBaubleProperties setNameStyle(BiFunction<ItemStack, MutableComponent, MutableComponent> style) {
+    public NFFGirlsBaubleProperties setNameStyle(UnaryOperatorOneArg<MutableComponent, ItemStack> style) {
         this.nameStyle = style;
         return this;
     }
 
     /**
-     * @see #setNameStyle(BiFunction)
+     * @see #setNameStyle(UnaryOperatorOneArg)
      */
-    public NFFGirlsBaubleProperties setNameStyle(BiConsumer<ItemStack, MutableComponent> style) {
-        return setNameStyle((i, c) -> {
-            style.accept(i, c);
+    public NFFGirlsBaubleProperties setNameStyle(BiConsumer<MutableComponent, ItemStack> style) {
+        return setNameStyle((c, i) -> {
+            style.accept(c, i);
             return c;
         });
     }
 
     /**
-     * @see #setNameStyle(BiFunction)
+     * @see #setNameStyle(UnaryOperatorOneArg)
      */
     public NFFGirlsBaubleProperties setNameStyle(Consumer<MutableComponent> style) {
-        return setNameStyle((i, c) -> {
+        return setNameStyle((c, i) -> {
             style.accept(c);
             return c;
         });

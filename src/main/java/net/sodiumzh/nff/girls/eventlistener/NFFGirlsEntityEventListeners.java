@@ -1326,7 +1326,7 @@ public class NFFGirlsEntityEventListeners
 		});
 	}
 
-	@SubscribeEvent
+	/*@SubscribeEvent
 	public static void onAttributeChange(EntityAttributeMonitorComponent.ChangeEvent event) {
 		if (INFFGirlsTamed.get(event.getEntity()).isPresent()
 			&& event.getAttribute().equals(Attributes.MAX_HEALTH)
@@ -1334,7 +1334,7 @@ public class NFFGirlsEntityEventListeners
 		{
 			event.getEntity().setHealth((float) (event.getEntity().getHealth() * event.getNewValue() / event.getOldValue()));
 		}
-	}
+	}*/
 
 	private static final RepeatableAttributeModifier SHARPNESS =
 		new RepeatableAttributeModifier(0.5d, new ResourceLocation(NFFGirls.MOD_ID, "sharpness"), AttributeModifier.Operation.ADDITION, 200);
