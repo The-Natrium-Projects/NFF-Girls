@@ -12,9 +12,9 @@ public class NFFGirlsTamedTypes {
 
     @SubscribeEvent
     public static void registerTamedMobs(FMLCommonSetupEvent event) {
-        ForgeRegistries.ENTITY_TYPES.getKeys().stream()
+        event.enqueueWork(() -> ForgeRegistries.ENTITY_TYPES.getKeys().stream()
             .filter(key -> key.getNamespace().equals(NFFGirls.MOD_ID) && key.getPath().startsWith("hmag_"))
-            .forEach(key -> NFFTamedTypeRegistry.add(key, NFFTamedTypeRegistry.SELF));
+            .forEach(key -> NFFTamedTypeRegistry.add(key, NFFTamedTypeRegistry.SELF)));
     }
 
 }

@@ -28,7 +28,7 @@ public class NFFGirlsClientEventListeners
 			{
 				if (bgs.mob.asMob().isAlive() 
 						&& bgs.mob.asMob().isAddedToWorld() 
-						&& bgs.mob.asMob().distanceToSqr(bgs.mob.getOwner()) > 64.d)
+						&& (bgs.mob.getOwnerInDimension() == null || bgs.mob.asMob().distanceToSqr(bgs.mob.getOwnerInDimension()) > 64.d))
 				{
 					mc.setScreen(null);
 				}
