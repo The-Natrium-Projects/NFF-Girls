@@ -196,9 +196,9 @@ dependencies {
 	jarJar(group: 'net.sodiumzh', name: 'nffservices', version: "[${minecraft_version}-${services_version},)"){
 		jarJar.pin(it, "${minecraft_version}-${services_version}")
 	}
-    jarJar(group: 'net.sodiumzh', name: 'nfulib', version: "[${minecraft_version}-${nfu_version},)"){
+    /*jarJar(group: 'net.sodiumzh', name: 'nfulib', version: "[${minecraft_version}-${nfu_version},)"){
         jarJar.pin(it, "${minecraft_version}-${nfu_version}")
-    }
+    }*/
     implementation fg.deobf("curse.maven:just-enough-resources-jer-240630:5057220")
     implementation fg.deobf("curse.maven:jade-324717:4986594")
     implementation fg.deobf("curse.maven:gog4-228948:5678610")
