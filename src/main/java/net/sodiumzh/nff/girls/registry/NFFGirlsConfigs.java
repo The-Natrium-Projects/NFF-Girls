@@ -150,10 +150,10 @@ public class NFFGirlsConfigs
 		
 		public static class Baubles
 		{
-			public static float BAUBLE_HEALTH_RECOVERY_SCALE;
-			public static double BAUBLE_MAX_HP_BOOSTING_SCALE;
-			public static double BAUBLE_ATK_BOOSTING_SCALE;
-			public static double BAUBLE_ARMOR_BOOSTING_SCALE;
+			public static float BAUBLE_HEALTH_RECOVERY_SCALE = 1.0f;
+			public static double BAUBLE_MAX_HP_BOOSTING_SCALE = 1.0f;
+			public static double BAUBLE_ATK_BOOSTING_SCALE = 1.0f;
+			public static double BAUBLE_ARMOR_BOOSTING_SCALE = 1.0f;
 			
 		}
 

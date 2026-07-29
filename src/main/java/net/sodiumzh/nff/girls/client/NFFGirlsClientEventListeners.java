@@ -26,7 +26,7 @@ public class NFFGirlsClientEventListeners
 			Minecraft mc = Minecraft.getInstance();
 			if (mc.screen != null && mc.screen instanceof NFFTamedGUI bgs)
 			{
-				if (bgs.mob.asMob().isAlive() 
+				if (bgs.mob.asMob().isAlive()
 						&& bgs.mob.asMob().isAddedToWorld() 
 						&& (bgs.mob.getOwnerInDimension() == null || bgs.mob.asMob().distanceToSqr(bgs.mob.getOwnerInDimension()) > 64.d))
 				{
