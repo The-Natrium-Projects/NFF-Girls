@@ -104,7 +104,7 @@ public class NecromancerMagicBulletEntity extends MagicBulletEntity
 				{
 					NecroticReaperEntity nr = (NecroticReaperEntity) living;
 					HmagNecroticReaperTamingProcess handler = (HmagNecroticReaperTamingProcess) NFFTamingMapping
-							.getHandler(ModEntityTypes.NECROTIC_REAPER.get());
+							.getProcess(ModEntityTypes.NECROTIC_REAPER.get());
 					shouldAddWither = !handler.onHit(player, nr);
 				}
 	
@@ -151,7 +151,7 @@ public class NecromancerMagicBulletEntity extends MagicBulletEntity
 				{
 					NecroticReaperEntity nr = (NecroticReaperEntity) living;
 					HmagNecroticReaperTamingProcess handler = (HmagNecroticReaperTamingProcess) NFFTamingMapping
-							.getHandler(ModEntityTypes.NECROTIC_REAPER.get());
+							.getProcess(ModEntityTypes.NECROTIC_REAPER.get());
 					shouldAddWither = !handler.onHit(player, nr);
 				}
 	

@@ -39,7 +39,7 @@ public class NFFGirlsTamablePickItemGoal extends Goal
 		tamable = NFFTamableComponent.getOptional(mob).orElseThrow(() -> new UnsupportedOperationException("This goal supports only mobs with CNFFTamable capability."));
 		if (!(NFFTamingMapping.getProcess(mob) instanceof NFFGirlsItemDroppingTamingProcess))
 			throw new UnsupportedOperationException("This goal supports befriendable mobs only with NFFGirlsItemDroppingTamingProcess as befriending handler.");
-		this.handler = (NFFGirlsItemDroppingTamingProcess) NFFTamingMapping.getHandler((EntityType<? extends Mob>) mob.getType());
+		this.handler = (NFFGirlsItemDroppingTamingProcess) NFFTamingMapping.getProcess((EntityType<? extends Mob>) mob.getType());
 	}
 	
 	public NFFGirlsTamablePickItemGoal(Mob mob, double speedModifier)

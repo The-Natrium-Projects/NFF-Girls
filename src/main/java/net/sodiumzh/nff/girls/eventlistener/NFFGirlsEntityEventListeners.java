@@ -148,7 +148,11 @@ public class NFFGirlsEntityEventListeners
 	        // Handle undead mobs end //
 
 			// Handle wild mob neutrality due to friended mobs
-			NFFGirlsNeutralityHandlerComponent.updateOnServerTick(mob);
+			EntityComponentAPI.getComponentByPath(mob, NFFGirlsEntityComponents.ACCESSOR_NEUTRALITY_HANDLER)
+				.ifPresent(c -> {
+					if (c.isNeutralTo(event.getNewTarget()))
+						event.setCanceled(true);
+				});
 			// Handle wild mob neutrality end
 
 			// Handle Ghastly Seeker
@@ -581,6 +585,8 @@ public class NFFGirlsEntityEventListeners
 						.filter(e -> e.getBoundingBox().intersects(aabb))
 						.forEach(t::touchEntity);
 				}
+				// Spread neutrality
+				NFFGirlsNeutralityHandlerComponent.spreadStrongNeutral(event.getEntity());
 			});
 			//
 			// Sync mobs

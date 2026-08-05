@@ -1,6 +1,8 @@
 {
   "item.nffgirls.death_crystal": "亡灵晶石",
   "item.nffgirls.death_crystal_powder": "亡灵晶石粉",
+  "item.nffgirls.soul_wheat": "灵魂小麦",
+  "item.nffgirls.soul_wheat_seeds": "灵魂小麦种子",
   "item.nffgirls.soul_flour": "灵魂麦粉",
   "item.nffgirls.soul_cake": "灵魂蛋糕",
   "item.nffgirls.soul_cake_slice": "灵魂蛋糕切片",
@@ -153,6 +155,7 @@
   "block.nffgirls.luminous_terracotta": "夜光陶瓦",
   "block.nffgirls.enhanced_luminous_terracotta": "增强夜光陶瓦",
   "block.nffgirls.enderberry_bush": "末影莓果丛",
+  "block.nffgirls.soul_wheat": "灵魂小麦",
   "effect.nffgirls.undead_affinity": "亡灵亲和",
   "effect.nffgirls.ender_protection": "末影之护",
   "effect.nffgirls.necromancer_wither": "死灵诅咒",

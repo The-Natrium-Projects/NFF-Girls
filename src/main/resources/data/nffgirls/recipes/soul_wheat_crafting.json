@@ -1,0 +1,35 @@
+{
+  "type": "minecraft:crafting_shaped",
+
+  "pattern":
+  [
+    "PMP",
+    "DWD",
+    "PDP"
+  ],
+
+  "key":{
+
+    "P":{
+      "item": "hmag:soul_powder"
+    },
+
+    "D":{
+      "item": "nffgirls:death_crystal_powder"
+    },
+
+    "W":{
+      "tag": "forge:crops/wheat"
+    },
+
+    "M": {
+      "item": "hmag:mysterious_petal"
+    }
+
+  },
+
+  "result":{
+    "item": "nffgirls:soul_wheat",
+    "count": 1
+  }
+}

@@ -133,7 +133,7 @@ public class HmagCreeperGirlTamingProcess extends TamingProcessItemGivingProgres
 		mob.invulnerableTime += 2;
 		Level.ExplosionInteraction interaction = net.minecraftforge.event.ForgeEventFactory.getMobGriefingEvent(mob.level(), mob)
 				? Level.ExplosionInteraction.MOB : Level.ExplosionInteraction.NONE;
-		mob.level().explode(mob, mob.getX(), mob.getY(), mob.getZ(), 12.0f, interaction);
+		mob.level().explode(mob, mob.getX(), mob.getY(), mob.getZ(), 6.0f, interaction);
 		spawnLingeringCloud(mob);
 	}
 
