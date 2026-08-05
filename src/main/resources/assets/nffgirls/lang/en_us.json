@@ -1,6 +1,8 @@
 {
   "item.nffgirls.death_crystal": "Crystal of Death",
   "item.nffgirls.death_crystal_powder": "Death Crystal Powder",
+  "item.nffgirls.soul_wheat": "Soul Wheat",
+  "item.nffgirls.soul_wheat_seeds": "Soul Wheat Seeds",
   "item.nffgirls.soul_flour": "Soul Flour",
   "item.nffgirls.soul_cake": "Soul Cake",
   "item.nffgirls.soul_cake_slice": "Soul Cake Slice",
@@ -158,6 +160,7 @@
   "block.nffgirls.luminous_terracotta": "Luminous Terracotta",
   "block.nffgirls.enhanced_luminous_terracotta": "Enhanced Luminous Terracotta",
   "block.nffgirls.enderberry_bush": "Enderberry Bush",
+  "block.nffgirls.soul_wheat": "Soul Wheat",
   "effect.nffgirls.undead_affinity": "Undead Affinity",
   "effect.nffgirls.ender_protection": "Ender Protection",
   "effect.nffgirls.necromancer_wither": "Curse of Necromancy",
