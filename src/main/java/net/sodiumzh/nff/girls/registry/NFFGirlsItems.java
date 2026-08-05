@@ -1,5 +1,6 @@
 package net.sodiumzh.nff.girls.registry;
 
+
 import com.github.mechalopa.hmag.world.item.ModSwordItem;
 import com.mojang.datafixers.util.Either;
 import net.minecraft.resources.ResourceLocation;
@@ -130,31 +131,8 @@ public class NFFGirlsItems {
 	/* Item register end */
 
 	// Other mod depending
-
-	public static final RegistryObject<Item> MOB_DICTIONARY =
-			register("mob_dictionary", () -> {
-				if (ModList.get().isLoaded("patchouli")) {
-					return new PatchouliMobDictionaryItem(new Item.Properties().stacksTo(1),
-						new ResourceLocation("nffgirls", "mob_dictionary"));
-				}
-				else if (ModList.get().isLoaded("citadel")) {
-					return new CitadelBasedMobDictionaryItem(new Item.Properties().stacksTo(1),
-						new ResourceLocation("nffgirls:book/mob_dictionary/root.json"),
-						"dict.nffgirls.title", "nffgirls:book/mob_dictionary/")
-						.descTranslatable("tooltip.nffgirls.port_to_patchouli");
-				} else return new ModDependencyFallbackItem("patchouli", new Item.Properties().stacksTo(1).tab(TAB));
-			});
-			/*registerDepending(true,"mob_dictionary", "citadel",
-			() -> new CitadelBasedMobDictionaryItem(new Item.Properties().stacksTo(1),
-				new ResourceLocation("nffgirls:book/mob_dictionary/root.json"),
-				"dict.nffgirls.title", "nffgirls:book/mob_dictionary/"));*/
-
-	/*static
-	{
-		CITADEL_MOB_DICT = Optional.ofNullable(ModList.get().isLoaded("citadel") ?
-				ITEMS.register("mob_dictionary_citadel", () -> new CitadelBasedMobDictionaryItem(new Item.Properties().stacksTo(1).tab(TAB))) : null);
-	}*/
-
+	public static final RegistryObject<Item> MOB_DICTIONARY = register("mob_dictionary", () ->
+		new PatchouliMobDictionaryItem(new Item.Properties().stacksTo(1), new ResourceLocation("nffgirls", "mob_dictionary")));
 
 	public static void register(IEventBus eventBus) {
 		ITEMS.register(eventBus);
