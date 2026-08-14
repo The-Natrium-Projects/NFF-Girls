@@ -811,7 +811,7 @@ public class NFFGirlsBaubles {
                 .addAllModifierTooltips())
             .alwaysFoil().cast());
 
-    public static final RegistryObject<NFFGirlsDedicatedBaubleItem> DECAY_JADE = BAUBLE_ITEMS.register("decay_jade", () ->
+    /*public static final RegistryObject<NFFGirlsDedicatedBaubleItem> DECAY_JADE = BAUBLE_ITEMS.register("decay_jade", () ->
         new NFFGirlsDedicatedBaubleItem(new ResourceLocation(NFFGirls.MOD_ID, "decay_jade"), 1, new Item.Properties(),
         () -> new NFFGirlsBaubleProperties()
             .repeatable(NFFGirlsEntityAttributes.WITHER_ASPECT.get(), 2d, AttributeModifier.Operation.ADDITION)
@@ -821,7 +821,7 @@ public class NFFGirlsBaubles {
             .repeatable(Attributes.MOVEMENT_SPEED, -0.1d, AttributeModifier.Operation.MULTIPLY_BASE)
             .setRarityTier(3)
             .addAllModifierTooltips()));
-
+*//*
     public static final RegistryObject<NFFGirlsDedicatedBaubleItem> DECAY_JADE_II = BAUBLE_ITEMS.register("decay_jade_ii", () ->
         new NFFGirlsDedicatedBaubleItem(new ResourceLocation(NFFGirls.MOD_ID, "decay_jade"), 2, new Item.Properties(),
             () -> new NFFGirlsBaubleProperties().repeatable(NFFGirlsEntityAttributes.WITHER_ASPECT.get(), 4d, AttributeModifier.Operation.ADDITION)
@@ -831,7 +831,7 @@ public class NFFGirlsBaubles {
                 .repeatable(Attributes.MOVEMENT_SPEED, -0.1d, AttributeModifier.Operation.MULTIPLY_BASE)
                 .setRarityTier(4)
                 .addAllModifierTooltips()));
-
+*//*
     public static final RegistryObject<NFFGirlsDedicatedBaubleItem> DECAY_JADE_III = BAUBLE_ITEMS.register("decay_jade_iii", () ->
         new NFFGirlsDedicatedBaubleItem(new ResourceLocation(NFFGirls.MOD_ID, "decay_jade"), 3, new Item.Properties(),
             () -> new NFFGirlsBaubleProperties().repeatable(NFFGirlsEntityAttributes.WITHER_ASPECT.get(), 6d, AttributeModifier.Operation.ADDITION)
@@ -841,7 +841,7 @@ public class NFFGirlsBaubles {
                 .repeatable(Attributes.MOVEMENT_SPEED, -0.1d, AttributeModifier.Operation.MULTIPLY_BASE)
                 .setRarityTier(6)
                 .addAllModifierTooltips()).alwaysFoil().cast());
-
+*/
     // Misc
     public static final RegistryObject<NFFGirlsDedicatedBaubleItem> RESISTANCE_CORE = BAUBLE_ITEMS.register("resistance_core", () ->
         new NFFGirlsDedicatedBaubleItem(new ResourceLocation(NFFGirls.MOD_ID, "resistance_core"), 1, new Item.Properties(),
