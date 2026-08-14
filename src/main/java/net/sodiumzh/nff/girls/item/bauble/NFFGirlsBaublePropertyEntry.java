@@ -1,12 +1,18 @@
 package net.sodiumzh.nff.girls.item.bauble;
 
+import com.google.gson.JsonObject;
+import com.mojang.logging.LogUtils;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
+import net.minecraftforge.registries.ForgeRegistries;
+import net.sodiumzh.nfu.function.RegistrablePredicate;
 import net.sodiumzh.nfu.item.bauble.BaubleEquippingCondition;
+import net.sodiumzh.nfu.registry.NFURegistries;
 
 import javax.annotation.Nullable;
+import java.util.Arrays;
 import java.util.function.Predicate;
 
 public class NFFGirlsBaublePropertyEntry {
@@ -52,6 +58,14 @@ public class NFFGirlsBaublePropertyEntry {
         return byTag(tag, null);
     }
 
+    public static NFFGirlsBaublePropertyEntry environmentResistance(@Nullable Predicate<LivingEntity> effectCondition) {
+        return new NFFGirlsBaublePropertyEntry(Type.ENVIRONMENT_RESISTANCE, null, 0, null, null, effectCondition);
+    }
+
+    public static NFFGirlsBaublePropertyEntry environmentResistance() {
+        return environmentResistance(null);
+    }
+
     public void modifyBauble(NFFGirlsBaubleProperties properties) {
         switch (this.type) {
             case ATTRIBUTE: {
@@ -76,13 +90,79 @@ public class NFFGirlsBaublePropertyEntry {
         this.isRepeatable = false;
     }
 
+    public void apply(NFFGirlsBaubleProperties properties) {
+        if (this.type.equals(Type.ENVIRONMENT_RESISTANCE)) {
+            properties.environmentResistance();
+        } else if (this.type.equals(Type.TAG)) {
+            properties.addTag(this.tag);
+        } else {
+            if (this.isRepeatable) {
+                properties.repeatable(this.attribute, this.amount, this.operation, this.effectCondition, this.id);
+            } else {
+                properties.unrepeatable(this.attribute, this.amount, this.operation, this.effectCondition, this.id);
+            }
+        }
+    }
+
+    @Nullable
+    public static NFFGirlsBaublePropertyEntry byJson(JsonObject json) {
+        try {
+            // Switch type
+            Type type = Type.byName(json.has("type") ? json.get("type").getAsString() : null);
+            if (type == null) return null;
+            // Get effect condition
+            RegistrablePredicate<LivingEntity> condition = json.has("condition") ?
+                NFURegistries.PREDICATES
+                    .getOptionalValue(new ResourceLocation(json.get("condition").getAsString()))
+                    .flatMap(p -> p.castInputType(LivingEntity.class))
+                    .orElse(null)
+                : null;
+            // Construct property entry instance
+            switch (type) {
+                case ENVIRONMENT_RESISTANCE: {
+                    return NFFGirlsBaublePropertyEntry.environmentResistance(condition);
+                }
+                case TAG: {
+                    String tag = json.get("tag").getAsString();
+                    return NFFGirlsBaublePropertyEntry.byTag(tag, condition);
+                }
+                case ATTRIBUTE: {
+                    ResourceLocation keyAttr = new ResourceLocation(json.get("attribute").getAsString());
+                    Attribute attr = ForgeRegistries.ATTRIBUTES.containsKey(keyAttr) ? ForgeRegistries.ATTRIBUTES.getValue(keyAttr) : null;
+                    if (attr == null) return null;
+                    double amount = json.get("amount").getAsDouble();
+                    AttributeModifier.Operation operation =
+                        switch (json.get("operation").getAsString()) {
+                            case "add", "+", "addition" -> AttributeModifier.Operation.ADDITION;
+                            case "multiply", "*", "multiply_base" -> AttributeModifier.Operation.MULTIPLY_BASE;
+                            case "multiply_total", "**", "*+" -> AttributeModifier.Operation.MULTIPLY_TOTAL;
+                            default -> AttributeModifier.Operation.ADDITION;
+                        };
+                    return NFFGirlsBaublePropertyEntry.byAttribute(attr, amount, operation, condition);
+                }
+                default: return null;
+            }
+        } catch (RuntimeException ex) {
+            LogUtils.getLogger().error("Bauble property loading failed. Skipped.", ex);
+            return null;
+        }
+    }
+
     public static enum Type {
         ATTRIBUTE("attribute"), TAG("tag"), ENVIRONMENT_RESISTANCE("environment_resistance");
 
-        String name;
+        final String name;
 
         Type(String name) {
             this.name = name;
         }
+
+        @Nullable
+        public static Type byName(String name) {
+            return Arrays.stream(Type.values())
+                .filter(t -> t.name.equals(name))
+                .findAny().orElse(null);
+        }
+
     }
 }

@@ -3,18 +3,30 @@ package net.sodiumzh.nff.girls.data;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
+import com.mojang.logging.LogUtils;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.item.Item;
+import net.minecraftforge.registries.ForgeRegistries;
+import net.sodiumzh.nff.girls.item.bauble.NFFGirlsBaubleBehavior;
+import net.sodiumzh.nff.girls.item.bauble.NFFGirlsBaubleProperties;
+import net.sodiumzh.nff.girls.item.bauble.NFFGirlsBaublePropertyEntry;
 import net.sodiumzh.nff.girls.registry.NFFGirlsHealingItems;
 import net.sodiumzh.nff.girls.registry.NFFGirlsItems;
 import net.sodiumzh.nfu.entity.MobApplicableItemTable;
 import net.sodiumzh.nfu.entity.vanillatrade.VanillaTradeListing;
 import net.sodiumzh.nfu.entity.vanillatrade.VanillaTradeListingCollectionHelper;
+import net.sodiumzh.nfu.item.bauble.BaubleEquippingCondition;
+import net.sodiumzh.nfu.item.bauble.BaubleEquippingConditions;
+import net.sodiumzh.nfu.item.bauble.NFUBaubleAPI;
 import net.sodiumzh.nfu.math.RandomSelection;
 import net.sodiumzh.nfu.math.RangedRandomDouble;
 import net.sodiumzh.nfu.util.NFUDataStatics;
 
+import javax.annotation.Nullable;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
+import java.util.function.Consumer;
 
 public class NFFGirlsDataReaders {
 
@@ -117,6 +129,38 @@ public class NFFGirlsDataReaders {
         return res;
     }
 
+    // Method to read a single item entry as a bauble.
+    public static @Nullable NFFGirlsBaubleBehavior readBaubleBehavior(ResourceLocation itemKey, JsonElement jsonElement) {
+        if (!(jsonElement instanceof JsonObject)) return null;
+        try {
+            JsonObject jsonObject = (JsonObject) jsonElement;
+            NFFGirlsBaubleProperties properties = new NFFGirlsBaubleProperties();
+            // Read basic bauble info
+            BaubleEquippingCondition condition;
+            if (!jsonObject.has("equipping_condition")) condition = null;
+            else condition = NFUBaubleAPI.EQUIPPING_CONDITIONS.getOptionalValue(new ResourceLocation(jsonObject.get("equipping_condition").getAsString()))
+                .orElse(null);
+            if (condition != null && !BaubleEquippingConditions.CONDITION_ALWAYS.get().equals(condition))
+                properties.equippingCondition(condition);
+            // Read tooltips
+            NFUDataStatics.getOptionalList(jsonObject, "tooltips", JsonElement::getAsString)
+                    .forEach(properties::addTooltipTranslatable);
+            // Read properties
+            NFUDataStatics.getOptionalList(jsonObject, "properties", je -> je).stream()
+                .filter(je -> je instanceof JsonObject)
+                .map(je -> (JsonObject)je)
+                .map(NFFGirlsBaublePropertyEntry::byJson)
+                .filter(Objects::nonNull)
+                .forEachOrdered(entry -> entry.apply(properties));
+            // Construct behavior
+            Item item = ForgeRegistries.ITEMS.containsKey(itemKey) ? ForgeRegistries.ITEMS.getValue(itemKey) : null;
+            if (item == null) return null;
+            return new NFFGirlsBaubleBehavior(item, itemKey, 1, properties  );
+        } catch (Exception e) {
+            LogUtils.getLogger().warn("Loading bauble properties failed", e);
+            return null;
+        }
+    }
 
 }
 
