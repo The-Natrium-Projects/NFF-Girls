@@ -24,6 +24,7 @@ import net.sodiumzh.nff.girls.item.bauble.INFFGirlsBauble;
 import net.sodiumzh.nff.girls.network.ClientboundNFFGirlsMobGeneralSyncPacket;
 import net.sodiumzh.nff.girls.network.NFFGirlsChannels;
 import net.sodiumzh.nff.girls.registry.*;
+import net.sodiumzh.nff.services.entity.ai.NFFTamedMobAIState;
 import net.sodiumzh.nff.services.entity.taming.INFFTamed;
 import net.sodiumzh.nff.services.entity.taming.NFFTamedStatics;
 import net.sodiumzh.nff.services.item.NFFMobRespawnerItem;
@@ -136,8 +137,11 @@ public interface INFFGirlsTamed extends INFFTamed
 					if (!side.isClient())
 						NFFTamedStatics.openBefriendedInventory(player, this);
 				} else {
-					if (side.isServer())
+					if (side.isServer()) {
 						this.switchAIState();
+						if (this.getAIState().equals(NFFTamedMobAIState.WAIT))
+							this.asMob().setTarget(null);
+					}
 				}
 				return InteractionResult.SUCCESS;
 			}
@@ -342,7 +346,7 @@ public interface INFFGirlsTamed extends INFFTamed
 	}
 
 	public default void setAttackingStrategy(NFFGirlsAttackingStrategy strategy) {
-		this.getDataAccessor().getDataComponent().putPermanentVariable("attackingStrategy", NFFGirlsAttackingStrategy.class, NFFGirlsDataSerializers.ATTACKING_STRATEGY.get());
+		this.getDataAccessor().getDataComponent().putPermanentVariable("attackingStrategy", strategy, NFFGirlsDataSerializers.ATTACKING_STRATEGY.get());
 	}
 
 	/**
