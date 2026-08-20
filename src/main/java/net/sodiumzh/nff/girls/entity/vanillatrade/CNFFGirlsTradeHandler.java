@@ -102,6 +102,7 @@ public interface CNFFGirlsTradeHandler extends IVanillaMerchant
 		private MerchantOffers backupOffers = null;
 		private List<NFFGirlsTradeOfferMetaData> backupMeta = null;
 		private int tradePoints = 0;
+		private int tickInterval = 20;
 		
 		public Impl(INFFGirlsTamed bm)
 		{
@@ -279,7 +280,7 @@ public interface CNFFGirlsTradeHandler extends IVanillaMerchant
 
 		protected void serverTickInternal()
 		{
-
+			if (this.getMob().tickCount % 5 != 0) return;
 			// Handle offer uses cache
 			if (this.getOffers().size() != meta.size() || !this.isValidOffers() && this.isValidTrader())
 			{
@@ -305,7 +306,7 @@ public interface CNFFGirlsTradeHandler extends IVanillaMerchant
 			this.cachedLevel = level;
 			
 			// Handle restock
-			this.restockTimer --;
+			this.restockTimer -= 5;	// Update each 5 ticks
 			if (this.restockTimer <= 0)
 			{
 				for (int i = 0; i < this.getOffers().size() - 1; ++i)	// The last element is introduction, no tick
