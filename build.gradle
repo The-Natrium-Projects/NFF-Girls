@@ -27,7 +27,7 @@ base {
 
 jarJar.enable()
 tasks.named('jarJar') {
-	archiveClassifier = 'full'
+	archiveClassifier = ''
 }
 compileJava.options.encoding = 'UTF-8'
 java {
@@ -208,9 +208,9 @@ dependencies {
 
     implementation fg.deobf("curse.maven:hmag-537613:5391571")
 	implementation fg.deobf("curse.maven:twilightforest-227639:4755494")
-    implementation fg.deobf("curse.maven:citadel-331936:5633260")
+    //implementation fg.deobf("curse.maven:citadel-331936:5633260")
 	//implementation fg.deobf("curse.maven:gog4-228948:4683680")
-    implementation fg.deobf("curse.maven:ice-and-fire-dragons-264231:5633453")
+    //implementation fg.deobf("curse.maven:ice-and-fire-dragons-264231:5633453")
     implementation fg.deobf("curse.maven:touhou-little-maid-355044:6120178")
     compileOnly fg.deobf("vazkii.patchouli:Patchouli:${minecraft_version}-${patchouli_version}-FORGE:api")
     runtimeOnly fg.deobf("vazkii.patchouli:Patchouli:${minecraft_version}-${patchouli_version}-FORGE")
@@ -243,7 +243,7 @@ tasks.named('processResources', ProcessResources).configure {
 
 // Example for how to get properties into the manifest for reading at runtime.
 tasks.named('jar', Jar).configure {
-	archiveClassifier = ''
+	archiveClassifier = 'slim'
     manifest {
         attributes([
                 'Specification-Title'     : mod_id,
