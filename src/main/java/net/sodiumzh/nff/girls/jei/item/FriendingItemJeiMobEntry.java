@@ -9,6 +9,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.FormattedCharSequence;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.Mob;
+import net.minecraftforge.registries.ForgeRegistries;
 import net.sodiumzh.nff.girls.jei.NFFGirlsJeiStatics;
 import net.sodiumzh.nfu.object.Validatable;
 import net.sodiumzh.nfu.util.NFUDebugStatics;
@@ -49,8 +50,11 @@ public class FriendingItemJeiMobEntry extends MobApplicableItemTableJeiMobEntry 
 
     @Override
     public void drawAdditional(int recipeWidth, int recipeHeight, @NotNull GuiGraphics guiGraphics, double mouseX, double mouseY) {
-        // Per-mob taming condition, keyed by the friending item table:
-        // "jei.<namespace>.friending_condition.<table path>".
+        // Per-mob taming condition. Prefer a per-mob key named after the
+        // displayed entity type ("jei.<entity namespace>.friending_condition.<entity path>"),
+        // falling back to the shared per-table key
+        // ("jei.<table namespace>.friending_condition.<table path>"), so mobs
+        // that share one friending item table can still show their own text.
         // The friending page is 170px tall while the base sprite is 120px,
         // so the text is drawn in the bottom band, below the mob model and
         // the item grid, and never overlaps them.
@@ -58,8 +62,12 @@ public class FriendingItemJeiMobEntry extends MobApplicableItemTableJeiMobEntry 
         final int textY = 128;
         if (itemTableKey.isValidated()
             && I18n.exists("jei.nffgirls.friending_condition.condition")) {
-            ResourceLocation key = itemTableKey.get();
-            String descKey = "jei." + key.getNamespace() + ".friending_condition." + key.getPath();
+            ResourceLocation tableKey = itemTableKey.get();
+            String tableDescKey = "jei." + tableKey.getNamespace() + ".friending_condition." + tableKey.getPath();
+            ResourceLocation hostKey = ForgeRegistries.ENTITY_TYPES.getKey(entityType);
+            String mobDescKey = hostKey != null
+                ? "jei." + hostKey.getNamespace() + ".friending_condition." + hostKey.getPath() : null;
+            String descKey = mobDescKey != null && I18n.exists(mobDescKey) ? mobDescKey : tableDescKey;
             guiGraphics.drawString(Minecraft.getInstance().font,
                 NFUInfoStatics.createTranslatable("jei.nffgirls.friending_condition.condition"),
                 2, titleY, 8, false);
