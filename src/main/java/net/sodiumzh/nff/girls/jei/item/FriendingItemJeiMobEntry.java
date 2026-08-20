@@ -49,19 +49,24 @@ public class FriendingItemJeiMobEntry extends MobApplicableItemTableJeiMobEntry 
     @Override
     public void drawAdditional(int recipeWidth, int recipeHeight, @NotNull GuiGraphics guiGraphics, double mouseX, double mouseY) {
         // Per-mob taming condition, keyed by the friending item table:
-        // "jei.<namespace>.friending_condition.<table path>"
+        // "jei.<namespace>.friending_condition.<table path>".
+        // The friending page is 170px tall while the base sprite is 120px,
+        // so the text is drawn in the bottom band, below the mob model and
+        // the item grid, and never overlaps them.
+        final int titleY = 118;
+        final int textY = 128;
         if (itemTableKey.isValidated()
             && I18n.exists("jei.nffgirls.friending_condition.condition")) {
             ResourceLocation key = itemTableKey.get();
             String descKey = "jei." + key.getNamespace() + ".friending_condition." + key.getPath();
             guiGraphics.drawString(Minecraft.getInstance().font,
                 NFUInfoStatics.createTranslatable("jei.nffgirls.friending_condition.condition"),
-                2, 14, 8, false);
+                2, titleY, 8, false);
             if (I18n.exists(descKey)) {
-                int lineY = 24;
+                int lineY = textY;
                 for (FormattedCharSequence line : Minecraft.getInstance().font.split(
-                        Component.translatable(descKey), 158)) {
-                    if (lineY >= 98) break;
+                        Component.translatable(descKey), 160)) {
+                    if (lineY >= recipeHeight - 6) break;
                     guiGraphics.drawString(Minecraft.getInstance().font, line, 2, lineY, 8, false);
                     lineY += Minecraft.getInstance().font.lineHeight;
                 }
@@ -70,7 +75,7 @@ public class FriendingItemJeiMobEntry extends MobApplicableItemTableJeiMobEntry 
         else {
             guiGraphics.drawWordWrap(Minecraft.getInstance().font,
                 NFUInfoStatics.createTranslatable("jei.nffgirls.friending_not_including_all"),
-                2, 102, 158, 8);
+                2, titleY, 160, 8);
         }
     }
 
