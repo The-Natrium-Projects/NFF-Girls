@@ -26,7 +26,9 @@ public class FriendingItemJeiCategory extends MobApplicableItemTableJeiCategory<
 
     @Override
     public GuiPos getBackgroundSize() {
-        return new GuiPos(166, 140);
+        // Extra height below the 164x120 sprite reserves a dedicated bottom
+        // band for the taming condition description (see FriendingItemJeiMobEntry).
+        return new GuiPos(166, 170);
     }
 
 
