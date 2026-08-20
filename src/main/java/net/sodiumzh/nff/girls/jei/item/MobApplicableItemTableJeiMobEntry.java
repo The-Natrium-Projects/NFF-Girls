@@ -12,7 +12,9 @@ import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.Mob;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraftforge.registries.ForgeRegistries;
 import net.sodiumzh.nff.girls.NFFGirls;
 import net.sodiumzh.nfu.client.NFUGUIStatics;
 import net.sodiumzh.nfu.info.ComponentBuilder;
@@ -43,6 +45,23 @@ public abstract class MobApplicableItemTableJeiMobEntry implements IRecipeCatego
 
     public MobApplicableItemTableJeiMobEntry(EntityType<? extends Mob> type) {
         this.entityType = type;
+    }
+
+    public EntityType<? extends Mob> getEntityType() {
+        return entityType;
+    }
+
+    /**
+     * The spawn egg item of this mob, or empty if the mob has no spawn egg.
+     * Used as an input slot on the guide page so that focusing a mob's spawn
+     * egg in JEI shows this mob's taming (or healing) guide.
+     */
+    public ItemStack getSpawnEggItem() {
+        ResourceLocation key = ForgeRegistries.ENTITY_TYPES.getKey(entityType);
+        if (key == null) return ItemStack.EMPTY;
+        Item egg = ForgeRegistries.ITEMS.getValue(
+            new ResourceLocation(key.getNamespace(), key.getPath() + "_spawn_egg"));
+        return egg != null ? egg.getDefaultInstance() : ItemStack.EMPTY;
     }
 
     public abstract void tryInitialize();

@@ -2,7 +2,10 @@ package net.sodiumzh.nff.girls.jei.item;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.resources.language.I18n;
+import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.util.FormattedCharSequence;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.Mob;
 import net.sodiumzh.nff.girls.jei.NFFGirlsJeiStatics;
@@ -11,6 +14,7 @@ import net.sodiumzh.nfu.util.NFUDebugStatics;
 import net.sodiumzh.nfu.util.NFUInfoStatics;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.List;
 import java.util.Optional;
 
 public class FriendingItemJeiMobEntry extends MobApplicableItemTableJeiMobEntry {
@@ -44,17 +48,30 @@ public class FriendingItemJeiMobEntry extends MobApplicableItemTableJeiMobEntry 
 
     @Override
     public void drawAdditional(int recipeWidth, int recipeHeight, @NotNull GuiGraphics guiGraphics, double mouseX, double mouseY) {
-       /* if (itemTableKey.isValidated()) {
-            String descKey = "jei." + itemTableKey.get().getNamespace() +
-                ".friending_condition." + itemTableKey.get().getPath();
-            guiGraphics.drawString(Minecraft.getInstance().font, ComponentBuilder.create()
-                    .appendTranslatable("jei.nffgirls.friending_condition.condition")
-                    .appendText(descKey).build(),
+        // Per-mob taming condition, keyed by the friending item table:
+        // "jei.<namespace>.friending_condition.<table path>"
+        if (itemTableKey.isValidated()
+            && I18n.exists("jei.nffgirls.friending_condition.condition")) {
+            ResourceLocation key = itemTableKey.get();
+            String descKey = "jei." + key.getNamespace() + ".friending_condition." + key.getPath();
+            guiGraphics.drawString(Minecraft.getInstance().font,
+                NFUInfoStatics.createTranslatable("jei.nffgirls.friending_condition.condition"),
                 2, 14, 8, false);
-        }*/
-        guiGraphics.drawWordWrap(Minecraft.getInstance().font,
-            NFUInfoStatics.createTranslatable("jei.nffgirls.friending_not_including_all"),
-            2, 102, 158, 8);
+            if (I18n.exists(descKey)) {
+                int lineY = 24;
+                for (FormattedCharSequence line : Minecraft.getInstance().font.split(
+                        Component.translatable(descKey), 158)) {
+                    if (lineY >= 98) break;
+                    guiGraphics.drawString(Minecraft.getInstance().font, line, 2, lineY, 8, false);
+                    lineY += Minecraft.getInstance().font.lineHeight;
+                }
+            }
+        }
+        else {
+            guiGraphics.drawWordWrap(Minecraft.getInstance().font,
+                NFUInfoStatics.createTranslatable("jei.nffgirls.friending_not_including_all"),
+                2, 102, 158, 8);
+        }
     }
 
     @Override
