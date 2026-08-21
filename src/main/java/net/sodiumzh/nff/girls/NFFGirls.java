@@ -7,7 +7,7 @@ import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.config.ModConfig;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
-import net.sodiumzh.nff.girls.item.bauble.NFFGirlsBaubleBuilder;
+import net.sodiumzh.nff.girls.item.bauble.NFFGirlsBaubleProperties;
 import net.sodiumzh.nff.girls.registry.*;
 import net.sodiumzh.nfu.savedata.redirector.SaveDataLocationRedirector;
 
@@ -49,13 +49,14 @@ public class NFFGirls
         NFFGirlsPredicates.PREDICATES.merge();
         NFFGirlsTrades.TRADE_COLLECTIONS.merge();
         NFFGirlsTrades.TRADE_REGISTRIES.merge();
-        NFFGirlsBaubles.BAUBLES.merge();
-        NFFGirlsBaubles.BAUBLE_EFFECT_CONDITIONS.merge();
-        NFFGirlsBaubles.BAUBLE_EQUIPPING_CONDITIONS.merge();
+        NFFGirlsBaubles.BAUBLE_COLLECTION.merge();
+        NFFGirlsBaubles.BAUBLE_EFFECT_CONDITION_COLLECTION.merge();
+        NFFGirlsBaubles.BAUBLE_EQUIPPING_CONDITION_COLLECTION.merge();
         NFFGirlsEntityAttributeProviders.ATTRIBUTE_PROVIDERS.merge();
-        NFFGirlsBaubleBuilder.EQUIPPING_CONDITION_PRESETS.merge();
+        NFFGirlsBaubleProperties.EQUIPPING_CONDITION_PRESETS.merge();
         NFFGirlsAngerReasons.COLLECTION.merge();
         NFFGirlsEntityComponents.COLLECTION.merge();
+        NFFGirlsDataSerializers.COLLECTION.merge();
 
         // Register ourselves for server and other game events we are interested in
         MinecraftForge.EVENT_BUS.register(this);

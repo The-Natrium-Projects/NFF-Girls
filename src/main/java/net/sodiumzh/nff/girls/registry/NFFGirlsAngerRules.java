@@ -20,8 +20,7 @@ public class NFFGirlsAngerRules {
 			= ANGER_RULES.register("default",
 			() -> new MobAngerRules()
 					.forReason(MobAngerReason.ATTACKED.get())
-					.forReason(MobAngerReason.HIT.get(), 30 * 20)
-					.end());
+					.forReason(MobAngerReason.HIT.get(), 30 * 20));
 
 	/**
 	 * The mob will have major anger for 5 min to which damaged it,
@@ -32,8 +31,7 @@ public class NFFGirlsAngerRules {
 			() -> new MobAngerRules()
 					.forReason(MobAngerReason.ATTACKED.get())
 					.forReason(MobAngerReason.HIT.get(), 30 * 20)
-					.forReason(MobAngerReason.ATTACKING.get(), 30 * 20)
-					.end());
+					.forReason(MobAngerReason.ATTACKING.get(), 30 * 20));
 
 	/**
 	 * The mob will have major anger for 5 min to which damaged it,
@@ -43,8 +41,7 @@ public class NFFGirlsAngerRules {
 		= ANGER_RULES.register("attacker_and_minor_hit" ,
 		() -> new MobAngerRules()
 			.forReason(MobAngerReason.ATTACKED.get())
-			.forReason(MobAngerReason.HIT.get(), 30 * 20)
-			.end());
+			.forReason(MobAngerReason.HIT.get(), 30 * 20));
 
 	public static final NFURegistry.Accessor<MobAngerRules> ZOMBIE_PIGLIN_LIKE
 		= ANGER_RULES.register("zombie_piglin_like",

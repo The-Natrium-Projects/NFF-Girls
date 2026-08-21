@@ -3,6 +3,7 @@ package net.sodiumzh.nff.girls.entity.ai.goal.target;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Mob;
 import net.sodiumzh.nff.girls.entity.INFFGirlsTamed;
+import net.sodiumzh.nff.services.entity.ai.NFFTamedMobAIState;
 import net.sodiumzh.nff.services.entity.ai.goal.preset.target.NFFNearestAttackableTargetGoal;
 
 import java.util.function.Function;
@@ -18,6 +19,8 @@ public class NFFGirlsAttackingStrategyTargetGoal extends NFFNearestAttackableTar
 
     public NFFGirlsAttackingStrategyTargetGoal(INFFGirlsTamed mob) {
         this(mob, 10, true, false);
+        this.disallowAllStates();
+        this.allowState(NFFTamedMobAIState.WANDER);
     }
 
     public NFFGirlsAttackingStrategyTargetGoal(INFFGirlsTamed mob, boolean mustSee, boolean mustReach) {

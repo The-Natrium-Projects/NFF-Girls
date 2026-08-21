@@ -1,9 +1,11 @@
 package net.sodiumzh.nff.girls.registry;
 
+import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraftforge.common.ForgeConfigSpec;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.event.config.ModConfigEvent;
 import net.sodiumzh.nff.girls.eventlistener.NFFGirlsEntityEventListeners;
+import net.sodiumzh.nfu.entity.RepeatableAttributeModifier;
 
 public class NFFGirlsConfigs
 {
@@ -148,10 +150,10 @@ public class NFFGirlsConfigs
 		
 		public static class Baubles
 		{
-			public static float BAUBLE_HEALTH_RECOVERY_SCALE;
-			public static double BAUBLE_MAX_HP_BOOSTING_SCALE;
-			public static double BAUBLE_ATK_BOOSTING_SCALE;
-			public static double BAUBLE_ARMOR_BOOSTING_SCALE;
+			public static float BAUBLE_HEALTH_RECOVERY_SCALE = 1.0f;
+			public static double BAUBLE_MAX_HP_BOOSTING_SCALE = 1.0f;
+			public static double BAUBLE_ATK_BOOSTING_SCALE = 1.0f;
+			public static double BAUBLE_ARMOR_BOOSTING_SCALE = 1.0f;
 			
 		}
 
@@ -197,7 +199,11 @@ public class NFFGirlsConfigs
 			Combat.MAX_ATK_BOOST_BY_LEVEL = NFFGirlsConfigs.MAX_ATK_BOOST_BY_LEVEL.get();
 		}*/
 	}
-	
+
+
+
+
+
 	@SubscribeEvent
 	public static void loadConfig(final ModConfigEvent event)
 	{

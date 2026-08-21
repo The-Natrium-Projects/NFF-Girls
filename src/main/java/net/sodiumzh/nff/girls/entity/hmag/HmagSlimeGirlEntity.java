@@ -62,7 +62,7 @@ public class HmagSlimeGirlEntity extends SlimeGirlEntity implements INFFGirlsTam
 	}
 
 	@Override
-	public void onInit(UUID playerUUID, Mob from)
+	public void onTamed(Player player, Mob from)
 	{
 		if (from instanceof SlimeGirlEntity sg)
 		{
@@ -167,7 +167,6 @@ public class HmagSlimeGirlEntity extends SlimeGirlEntity implements INFFGirlsTam
 		super.readAdditionalSaveData(nbt);
 		////NFFTamedStatics.readBefriendedCommonSaveData(this, nbt);
 		this.setColorLinear(LinearColor.fromNormalized(nbt.getDouble("sg_color_r"), nbt.getDouble("sg_color_g"), nbt.getDouble("sg_color_b")));
-		setInit();
 	}
 
 	// Sound

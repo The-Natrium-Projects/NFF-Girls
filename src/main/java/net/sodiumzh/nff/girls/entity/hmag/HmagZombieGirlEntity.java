@@ -191,7 +191,7 @@ public class HmagZombieGirlEntity extends ZombieGirlEntity implements INFFGirlsT
 		super.readAdditionalSaveData(nbt);
 		//NFFTamedStatics.readBefriendedCommonSaveData(this, nbt);
 		this.isFromHusk = nbt.getBoolean("isFromHusk") || nbt.getBoolean("is_from_husk");	// TODO: the latter is legacy, remove after 0.x.30
-		this.setInit();
+		
 	}
 
 	/* Convertions */
@@ -221,7 +221,6 @@ public class HmagZombieGirlEntity extends ZombieGirlEntity implements INFFGirlsT
 	public HmagHuskGirlEntity convertToHusk()
 	{
 		HmagHuskGirlEntity newMob = (HmagHuskGirlEntity)NFFTamedStatics.convertToOtherBefriendedType(this, NFFGirlsEntityTypes.HMAG_HUSK_GIRL.get());
-		newMob.setInit();
 		return newMob;
 	}
 	
@@ -230,7 +229,7 @@ public class HmagZombieGirlEntity extends ZombieGirlEntity implements INFFGirlsT
 		HmagDrownedGirlEntity newMob = (HmagDrownedGirlEntity)NFFTamedStatics.convertToOtherBefriendedType(this, NFFGirlsEntityTypes.HMAG_DROWNED_GIRL.get());
 		newMob.isFromHusk = this.isFromHusk;
 		newMob.isFromZombie = true;
-		newMob.setInit();
+		;
 		return newMob;
 	}
 

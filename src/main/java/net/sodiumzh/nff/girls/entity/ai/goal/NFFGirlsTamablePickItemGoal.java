@@ -7,9 +7,8 @@ import net.minecraft.world.entity.PathfinderMob;
 import net.minecraft.world.entity.ai.goal.Goal;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.sodiumzh.nff.girls.entity.tamingprocess.hmag.NFFGirlsItemDroppingTamingProcess;
-import net.sodiumzh.nff.services.entity.capability.CNFFTamable;
+import net.sodiumzh.nff.services.entity.taming.NFFTamableComponent;
 import net.sodiumzh.nff.services.entity.taming.NFFTamingMapping;
-import net.sodiumzh.nff.services.registry.NFFCapRegistry;
 import net.sodiumzh.nfu.util.NFUEntityStatics;
 
 import java.util.ArrayList;
@@ -22,7 +21,7 @@ public class NFFGirlsTamablePickItemGoal extends Goal
 
 	protected final Random rnd = new Random();
 	protected final Mob mob;
-	protected final CNFFTamable cap;
+	protected final NFFTamableComponent tamable;
 	protected final NFFGirlsItemDroppingTamingProcess handler;
 	/** Determines the frequency this goal is attempted to run. Larger value means lower frequency. */
 	protected int chance = 1;
@@ -37,15 +36,10 @@ public class NFFGirlsTamablePickItemGoal extends Goal
 	public NFFGirlsTamablePickItemGoal(Mob mob)
 	{
 		this.mob = mob;
-		if (mob.getCapability(NFFCapRegistry.CAP_BEFRIENDABLE_MOB).isPresent())
-		{
-			cap = CNFFTamable.get(mob);
-		}
-		else throw new UnsupportedOperationException("This goal supports only mobs with CNFFTamable capability.");
+		tamable = NFFTamableComponent.getOptional(mob).orElseThrow(() -> new UnsupportedOperationException("This goal supports only mobs with CNFFTamable capability."));
 		if (!(NFFTamingMapping.getProcess(mob) instanceof NFFGirlsItemDroppingTamingProcess))
 			throw new UnsupportedOperationException("This goal supports befriendable mobs only with NFFGirlsItemDroppingTamingProcess as befriending handler.");
-
-		this.handler = (NFFGirlsItemDroppingTamingProcess) NFFTamingMapping.getHandler((EntityType<? extends Mob>) mob.getType());
+		this.handler = (NFFGirlsItemDroppingTamingProcess) NFFTamingMapping.getProcess((EntityType<? extends Mob>) mob.getType());
 	}
 	
 	public NFFGirlsTamablePickItemGoal(Mob mob, double speedModifier)
@@ -60,9 +54,9 @@ public class NFFGirlsTamablePickItemGoal extends Goal
 		this.chance = chance;
 	}
 	
-	protected CNFFTamable cap()
+	protected NFFTamableComponent getTamableComponent()
 	{
-		return CNFFTamable.get(mob);
+		return this.tamable;
 	}
 	
 	protected List<ItemEntity> getAcceptableItems()

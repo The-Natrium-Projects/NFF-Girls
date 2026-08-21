@@ -59,7 +59,7 @@ public class HmagCursedDollEntity extends CursedDollEntity implements INFFGirlsT
 		Arrays.fill(this.handDropChances, 0);
 	}
 	@Override
-	public void onInit(UUID playerUUID, Mob from)
+	public void onTamed(Player player, Mob from)
 	{
 		if (from instanceof CursedDollEntity c)
 		{
@@ -258,7 +258,7 @@ public class HmagCursedDollEntity extends CursedDollEntity implements INFFGirlsT
 		super.readAdditionalSaveData(nbt);
 		//NFFTamedStatics.readBefriendedCommonSaveData(this, nbt);
 		// Add other data reading here
-		setInit();
+
 	}
 
 	// Misc

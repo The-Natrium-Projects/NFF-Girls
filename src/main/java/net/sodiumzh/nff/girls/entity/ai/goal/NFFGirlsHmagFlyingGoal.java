@@ -8,8 +8,8 @@ import net.minecraft.world.entity.PathfinderMob;
 import net.minecraft.world.entity.ai.goal.Goal;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.phys.Vec3;
+import net.sodiumzh.nff.girls.entity.NFFGirlsDataAccessor;
 import net.sodiumzh.nff.girls.entity.ai.INFFGirlsFlyingMob;
-import net.sodiumzh.nff.girls.entity.capability.CNFFGirlsFavorabilityHandler;
 import net.sodiumzh.nff.services.entity.ai.NFFTamedMobAIState;
 import net.sodiumzh.nff.services.entity.ai.goal.NFFGoal;
 import net.sodiumzh.nff.services.entity.ai.goal.NFFMoveGoal;
@@ -348,7 +348,7 @@ public interface NFFGirlsHmagFlyingGoal
 				return false;
 			if (mob.asMob().distanceToSqr(mob.getOwner()) < minStartDistance * minStartDistance)
 				return false;
-			if (CNFFGirlsFavorabilityHandler.isLowFavorability(mob.asMob()))
+			if (NFFGirlsDataAccessor.isLowFavorability(mob.asMob()))
 				return false;
 			else return true;
 		}

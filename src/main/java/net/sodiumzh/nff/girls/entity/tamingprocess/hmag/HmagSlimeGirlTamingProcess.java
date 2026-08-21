@@ -15,7 +15,7 @@ import net.sodiumzh.nff.girls.item.MagicalGelBottleItem;
 import net.sodiumzh.nff.girls.item.MagicalGelColorUtils;
 import net.sodiumzh.nff.girls.registry.NFFGirlsAngerRules;
 import net.sodiumzh.nff.girls.registry.NFFGirlsItems;
-import net.sodiumzh.nff.services.entity.capability.CNFFTamable;
+import net.sodiumzh.nff.services.entity.taming.NFFTamableComponent;
 import net.sodiumzh.nff.services.entity.taming.TamingProcessItemGivingProgress;
 import net.sodiumzh.nff.services.registry.NFFCapRegistry;
 import net.sodiumzh.nfu.entity.anger.MobAngerRules;
@@ -118,16 +118,16 @@ public class HmagSlimeGirlTamingProcess extends TamingProcessItemGivingProgress
 		if (!player.level().isClientSide() && hand.equals(InteractionHand.MAIN_HAND)
 				&& player.getMainHandItem().is(NFFGirlsItems.MAGICAL_GEL_BALL.get()))
 		{
-			player.getCapability(NFFCapRegistry.CAP_BM_PLAYER).ifPresent((c) ->
+			/*player.getCapability(NFFCapRegistry.CAP_BM_PLAYER).ifPresent((c) ->
 			{
 				c.getNbt().putBoolean("magical_gel_ball_no_use", true);
-			});
+			});*/
 		}
 		return super.handleInteract(player, mob, hand);
 	}
 
 	@Override
-	public void tamableInit(CNFFTamable cnffTamable) {
+	public void tamableInit(NFFTamableComponent NFFTamableComponent) {
 
 	}
 

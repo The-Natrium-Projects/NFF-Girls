@@ -2,9 +2,17 @@
 
 ### 0.x.33
 
+Since this version, NFF Girls require JEI and Patchouli.
+
+Refactored the project to adapt to the latest NFF and NFU versions based on NFU Entity Component System (NFU-ECS).
+
 Added Soul Wheat.
 
+Added mob browsing by Spawn Eggs in JEI.
+
 Now undead mobs will stop being neutral to players with Undead Affinity when seeing a hostile mob of the same type, just like Zombified Piglins.
+
+Now Creeper Girl's explosion power is 6 instead of 12 on being friended.
 
 Fixed Enderberry Bush unexpectedly being grown with Bone Meal.
 

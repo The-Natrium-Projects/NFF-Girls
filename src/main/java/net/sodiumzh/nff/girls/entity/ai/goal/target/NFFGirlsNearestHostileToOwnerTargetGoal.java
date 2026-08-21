@@ -8,7 +8,7 @@ public class NFFGirlsNearestHostileToOwnerTargetGoal extends NFFNearestUnfriendl
 	public NFFGirlsNearestHostileToOwnerTargetGoal(INFFGirlsTamed mob)
 	{		
 		super(mob, true, true);
-		stateConditions(bm -> INFFGirlsTamed.get(bm).filter(INFFGirlsTamed::shouldAttackMobsHostileToSelf).isPresent());
+		stateConditions(bm -> INFFGirlsTamed.get(bm.asMob()).filter(INFFGirlsTamed::shouldAttackMobsHostileToSelf).isPresent());
 		targetOfTargetConditions(living -> living != null && living.equals(mob.getOwnerInDimension()));
 		allowAllStatesExceptWait();
 	}

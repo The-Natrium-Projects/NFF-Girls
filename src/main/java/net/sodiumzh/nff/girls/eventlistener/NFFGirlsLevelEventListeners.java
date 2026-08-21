@@ -27,10 +27,10 @@ public class NFFGirlsLevelEventListeners
 				List<Entity> entities = level.getEntities(player, bound);
 				for (Entity entity: entities)
 				{
-					if (INFFGirlsTamed.isBMAnd(entity, bm -> bm.getOwnerUUID().equals(player.getUUID()))
+					if (INFFGirlsTamed.get(entity).filter(bm -> bm.getOwnerUUID().equals(player.getUUID())).isPresent()
 							&& entity.distanceToSqr(player) < 64f)
 					{
-						INFFGirlsTamed.getBM(entity).getFavorabilityHandler().addFavorability(2f);
+						INFFGirlsTamed.get(entity).orElseThrow().getDataAccessor().addFavorability(2f);
 					}
 				}
 			}

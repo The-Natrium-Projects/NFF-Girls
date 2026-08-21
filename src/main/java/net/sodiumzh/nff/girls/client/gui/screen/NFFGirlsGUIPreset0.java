@@ -96,9 +96,9 @@ public class NFFGirlsGUIPreset0 extends NFFTamedGUI {
 	protected MutableComponent getDefaultLevelAndExpInfo()
 	{
 		INFFGirlsTamed bm = (INFFGirlsTamed)mob;
-		String lv = Integer.toString(bm.getLevelHandler().getExpectedLevel());
-		String exp = Long.toString(bm.getLevelHandler().getExpInThisLevel());
-		String expup = Long.toString(bm.getLevelHandler().getRequiredExpInThisLevel());
+		String lv = Integer.toString(bm.getDataAccessor().getExpectedXPLevel());
+		String exp = Long.toString(bm.getDataAccessor().getXPInThisLevel());
+		String expup = Long.toString(bm.getDataAccessor().getRequiredXPInThisLevel());
 		return ComponentBuilder.create().appendTranslatable("info.nffgirls.gui_level_and_exp")
 				.appendText(": " + lv + " (" + exp + " / " + expup + ")").build();
 	}
@@ -106,7 +106,7 @@ public class NFFGirlsGUIPreset0 extends NFFTamedGUI {
 	protected MutableComponent getDefaultLevelInfo()
 	{
 		INFFGirlsTamed bm = (INFFGirlsTamed)mob;		
-		String lv = Integer.toString(bm.getLevelHandler().getExpectedLevel());
+		String lv = Integer.toString(bm.getDataAccessor().getExpectedXPLevel());
 		return NFUInfoStatics.createTranslatable("info.nffgirls.gui_level")
 				.append(NFUInfoStatics.createText(": " + lv));
 	}
@@ -114,8 +114,8 @@ public class NFFGirlsGUIPreset0 extends NFFTamedGUI {
 	protected MutableComponent getDefaultExpInfo()
 	{
 		INFFGirlsTamed bm = (INFFGirlsTamed)mob;
-		String exp = Long.toString(bm.getLevelHandler().getExpInThisLevel());
-		String expup = Long.toString(bm.getLevelHandler().getRequiredExpInThisLevel());
+		String exp = Long.toString(bm.getDataAccessor().getXPInThisLevel());
+		String expup = Long.toString(bm.getDataAccessor().getRequiredXPInThisLevel());
 		return NFUInfoStatics.createTranslatable("info.nffgirls.gui_exp")
 				.append(NFUInfoStatics.createText(": " + exp + " / " + expup));
 		
@@ -124,8 +124,8 @@ public class NFFGirlsGUIPreset0 extends NFFTamedGUI {
 	protected MutableComponent getDefaultFavInfo()
 	{
 		INFFGirlsTamed bm = (INFFGirlsTamed)mob;	
-		String fav = Integer.toString(Mth.floor(bm.getFavorabilityHandler().getFavorability()));
-		String favmax = Integer.toString(Mth.floor(bm.getFavorabilityHandler().getMaxFavorability()));
+		String fav = Integer.toString(Mth.floor(bm.getDataAccessor().getFavorability()));
+		String favmax = Integer.toString(Mth.floor(bm.getDataAccessor().getMaxFavorability()));
 		return NFUInfoStatics.createTranslatable("info.nffgirls.gui_favorability")
 				.append(NFUInfoStatics.createText(": " + fav + " / " + favmax));
 	}

@@ -9,11 +9,9 @@ import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.block.Blocks;
 import net.sodiumzh.nff.girls.entity.NFFGirlsTamingRules;
-import net.sodiumzh.nff.girls.registry.NFFGirlsAngerRules;
 import net.sodiumzh.nff.girls.registry.NFFGirlsTags;
-import net.sodiumzh.nff.services.entity.capability.CNFFTamable;
+import net.sodiumzh.nff.services.entity.taming.NFFTamableComponent;
 import net.sodiumzh.nff.services.entity.taming.TamingProcessItemGivingProgress;
-import net.sodiumzh.nfu.entity.anger.MobAngerRules;
 import net.sodiumzh.nfu.util.NFUEntityStatics;
 
 import java.util.UUID;
@@ -71,7 +69,7 @@ public class HmagCrimsonSlaughtererTamingProcess extends TamingProcessItemGiving
 
 
 	@Override
-	public void tamableInit(CNFFTamable cnffTamable) {
+	public void tamableInit(NFFTamableComponent cnffTamable) {
 
 	}
 }
