@@ -193,6 +193,7 @@ public class NFFGirlsBaubleProperties {
      */
     public NFFGirlsBaubleProperties environmentResistance() {
         this.environmentImmune = true;
+        this.addEnvironmentImmunityTooltip();
         return this;
     }
 
