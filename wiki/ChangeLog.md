@@ -1,12 +1,24 @@
 # Change Log
 
+### 0.2.33.1
+
+Now Jack o' Frost will not take damage in hot biomes when in powder snow.
+
+Now Jack o' Frost, Stray Girl and Snow Canine are resistant to powder snow.
+
+Fixed HP truncation with HP-boosting baubles after save&load.
+
+Fixed Jack o' Frost being not heat-sensitive after save&load.
+
+Fixed Bauble Environment Resistance not taking effect.
+
 ### 0.x.33
 
-Since this version, NFF Girls require JEI and Patchouli.
+Since this version, NFF Girls requires JEI and Patchouli.
 
 Refactored the project to adapt to the latest NFF and NFU versions based on NFU Entity Component System (NFU-ECS).
 
-Added Soul Wheat.
+Added Soul Wheat, a growable crop.
 
 Added mob browsing by Spawn Eggs in JEI.
 
