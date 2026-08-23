@@ -72,89 +72,11 @@ public class HmagNecroticReaperEntity extends NecroticReaperEntity implements IN
 		targetSelector.addGoal(9, new NFFGirlsAttackingStrategyTargetGoal(this));
 	}
 
-	/* Interaction */
-
-	// Map items that can heal the mob and healing values here.
-	// Leave it empty if you don't need healing features.
-	/*@Override
-	public MobApplicableItemTable getHealingItems()
-	{
-		return NFFGirlsHealingItems.UNDEAD.get();
+	@Override
+	public boolean enableSunSensitivity() {
+		return true;
 	}
-*/
-	/*@Override
-	public InteractionResult clientsideMainHandInteraction(Player player, InteractionHand hand)
-	{
-		if (player.getItemInHand(hand).is(NFFGirlsItems.COMMANDING_WAND.get()))
-		{
-			if (this.getFavorability() >= 90 || player.getItemBySlot(EquipmentSlot.HEAD).is(NFFGirlsItems.NECROMANCER_HAT.get()))
-			{
-				NFFTamedStatics.openBefriendedInventory(player, this);
-				return InteractionResult.sidedSuccess(player.level.isClientSide);
-			}
-			else {
-				NaUtilsMiscStatics.printToScreen(NaUtilsInfoStatics.createTranslatable("info.nffgirls.necrotic_reaper_using_commanding_wand"), player);
-				return InteractionResult.PASS;
-			}
-		}
-		return InteractionResult.PASS;
-	}*/
-	/*@Override
-	public InteractionResult mobInteract(Player player, InteractionHand hand)
-	{
-		if (player.getUUID().equals(getOwnerUUID())) {
-			// For normal interaction
-			if (!player.isShiftKeyDown())
-			{
-				if (!player.level.isClientSide()) 
-				{
-					if (getOwner() == null)
-					{
-						throw new RuntimeException("Mob \"" + this.getName().getString() + "\" missing owner.");
-					}
-					if (this.tryApplyHealingItems(player.getItemInHand(hand)) != InteractionResult.PASS)
-						return InteractionResult.sidedSuccess(player.level.isClientSide);
-					// The function above returns PASS when the items are not correct. So when not PASS it should stop here
-					// Print a notice info when trying to use commanding wand
-					else if (hand == InteractionHand.MAIN_HAND
-							&& NFFGirlsEntityStatics.isOnEitherHand(player, NFFGirlsItems.COMMANDING_WAND.get()))
-					{
-						NaUtilsMiscStatics.printToScreen(NaUtilsInfoStatics.createTranslatable("info.nffgirls.necrotic_reaper_using_commanding_wand"), player);
-					}
-					else if (hand == InteractionHand.MAIN_HAND
-							&& NFFGirlsEntityStatics.isOnEitherHand(player, NFFGirlsItems.NECROMANCER_WAND.get()))
-					{
-						if (this.controllable())
-						{
-							switchAIState();
-						}
-						else
-						{
-							NaUtilsMiscStatics.printToScreen(NaUtilsInfoStatics.createTranslatable("info.nffgirls.necrotic_reaper_not_controllable"), getOwner());
-						}
-					}
-					// Here it's main hand but no interaction. Return pass to enable off hand interaction.
-					else return InteractionResult.PASS;
-				}
-				// Interacted
-				return InteractionResult.sidedSuccess(player.level.isClientSide);
-			}
-			// For interaction with shift key down
-			else
-			{
-				if (player.getUUID().equals(getOwnerUUID())) {		
-					if (hand == InteractionHand.MAIN_HAND && NFFGirlsEntityStatics.isOnEitherHand(player, NFFGirlsItems.NECROMANCER_WAND.get()))
-					{
-						NFFTamedStatics.openBefriendedInventory(player, this);
-						return InteractionResult.sidedSuccess(player.level.isClientSide);
-					}
-				}
-			}
-		} 
-		// Always pass when not owning this mob
-		return InteractionResult.PASS;
-	}*/
-	
+
 	/* Inventory */
 
 	@Override
@@ -183,33 +105,7 @@ public class HmagNecroticReaperEntity extends NecroticReaperEntity implements IN
 		// Add other data reading here
 
 	}
-/*
-	// IBaubleEquipable interface
-	@Override
-	public HashMap<String, ItemStack> getBaubleSlots() {
-		HashMap<String, ItemStack> map = new HashMap<String, ItemStack>();
-		map.put("0", this.getAdditionalInventory().getItem(2));
-		map.put("1", this.getAdditionalInventory().getItem(3));
-		map.put("2", this.getAdditionalInventory().getItem(4));
-		map.put("3", this.getAdditionalInventory().getItem(5));
-		map.put("main_hand", this.getAdditionalInventory().getItem(0));
-		return map;
-	}
 
-	@Override
-	public BaubleHandler getBaubleHandler() {
-		return DwmgBaubleHandlers.NECROTIC_REAPER;
-	}
-	*/
-	// INFFTamedSunSensitiveMob interface
-	
-	/*@Override
-	public void setupSunImmunityRules() {
-		this.getSunImmunity().putOptional("soul_amulet", mob -> ((INFFGirlTamed)mob).hasDwmgBauble("soul_amulet"));
-		this.getSunImmunity().putOptional("resis_amulet", mob -> ((INFFGirlTamed)mob).hasDwmgBauble("resistance_amulet"));
-	}*/
-	// Misc
-	
 	// Indicates which mod this mob belongs to
 	@Override
 	public String getModId() {

@@ -14,11 +14,11 @@ public class NFFGirlsBowAttackGoal extends NFFRangedBowAttackGoal {
 
 	@Override
 	public boolean checkCanUse() {
-		if (mob.getAdditionalInventory().getItem(4).isEmpty())
+		if (mob.getAdditionalInventory().orElseThrow().getItem(4).isEmpty())
 			return false;
-		else if (mob.getAdditionalInventory().getItem(8).isEmpty())
+		else if (mob.getAdditionalInventory().orElseThrow().getItem(8).isEmpty())
 			return false;
-		else if (!(mob.getAdditionalInventory().getItem(4).getItem() instanceof BowItem))
+		else if (!(mob.getAdditionalInventory().orElseThrow().getItem(4).getItem() instanceof BowItem))
 			return false;
 		else
 			return super.checkCanUse();

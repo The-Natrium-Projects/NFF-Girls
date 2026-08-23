@@ -76,9 +76,11 @@ public class HmagWitherSkeletonGirlEntity extends WitherSkeletonGirlEntity imple
 
 	@Override
 	public boolean canShoot() {
-		return !this.getAdditionalInventory().getItem(4).isEmpty()
-				&& this.getAdditionalInventory().getItem(4).getItem() instanceof BowItem
-				&& !this.getAdditionalInventory().getItem(8).isEmpty();
+		var inv = this.getAdditionalInventory().orElse(null);
+		return inv != null
+				&& !inv.getItem(4).isEmpty()
+				&& inv.getItem(4).getItem() instanceof BowItem
+				&& !inv.getItem(8).isEmpty();
 	}
 
 	/* Behavior */

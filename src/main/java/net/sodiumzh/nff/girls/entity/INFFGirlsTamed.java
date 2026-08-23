@@ -332,7 +332,7 @@ public interface INFFGirlsTamed extends INFFTamed
 		int j = 0;
 		for (int i = startIndex; i < endIndexExclude; ++i)
 		{
-			map.put(Integer.toString(j), this.getAdditionalInventory().getItem(i));
+			map.put(Integer.toString(j), this.getAdditionalInventory().orElseThrow().getItem(i));
 			j++;
 		}
 		return map;

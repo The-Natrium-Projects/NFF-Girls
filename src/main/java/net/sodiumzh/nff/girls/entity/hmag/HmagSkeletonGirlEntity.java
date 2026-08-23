@@ -71,6 +71,11 @@ public class HmagSkeletonGirlEntity extends SkeletonGirlEntity implements INFFGi
 
 	}
 
+	@Override
+	public boolean enableSunSensitivity() {
+		return true;
+	}
+
 	/* Bow shooting related */
 
 	private boolean justShot = false;
@@ -84,9 +89,9 @@ public class HmagSkeletonGirlEntity extends SkeletonGirlEntity implements INFFGi
 
 	@Override
 	public boolean canShoot() {
-		return !this.getAdditionalInventory().getItem(4).isEmpty()
-				&& this.getAdditionalInventory().getItem(4).getItem() instanceof BowItem
-				&& !this.getAdditionalInventory().getItem(8).isEmpty();
+		return !this.getAdditionalInventory().orElseThrow().getItem(4).isEmpty()
+				&& this.getAdditionalInventory().orElseThrow().getItem(4).getItem() instanceof BowItem
+				&& !this.getAdditionalInventory().orElseThrow().getItem(8).isEmpty();
 	}
 
 
@@ -216,30 +221,6 @@ public class HmagSkeletonGirlEntity extends SkeletonGirlEntity implements INFFGi
 		return newMob;
 	}
 
-	/* INFFTamedSunSensitiveMob interface */
-
-	// Implementation is in aiStep()
-	/*@Override
-	public void setupSunImmunityRules() {
-		this.getSunImmunity().putOptional("sunhat", mob -> mob.getMob().getItemBySlot(EquipmentSlot.HEAD).is(NFFGirlsItems.SUNHAT.get()));
-		this.getSunImmunity().putOptional("soul_amulet", mob -> ((INFFGirlTamed)mob).hasDwmgBauble("soul_amulet"));
-		this.getSunImmunity().putOptional("resis_amulet", mob -> ((INFFGirlTamed)mob).hasDwmgBauble("resistance_amulet"));
-	}*/
-	
-	
-	/* IBaubleEquipable interface */
-/*
-	@Override
-	public HashMap<String, ItemStack> getBaubleSlots() {
-		HashMap<String, ItemStack> map = new HashMap<String, ItemStack>();
-		map.put("0", this.getAdditionalInventory().getItem(6));
-		return map;
-	}
-	@Override
-	public BaubleHandler getBaubleHandler() {
-		return DwmgBaubleHandlers.UNDEAD;
-	}
-*/
 	// Sounds
 	
 	@Override

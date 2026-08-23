@@ -6,4 +6,10 @@ import net.sodiumzh.nff.girls.registry.NFFGirlsItems;
 
 @Deprecated
 public interface INFFGirlsTamedSunSensitiveMob extends INFFGirlsTamed {
+
+    @Override
+    public default boolean enableSunSensitivity() {
+        return true;
+    }
+
 }

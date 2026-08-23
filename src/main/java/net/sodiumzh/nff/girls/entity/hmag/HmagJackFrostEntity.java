@@ -49,12 +49,6 @@ public class HmagJackFrostEntity extends JackFrostEntity implements INFFGirlsTam
 		return EntityComponentAPI.getDefaultTimer(this);
 	}
 
-	@Override
-	public void onTamed(Player player, Mob from)
-	{
-		this.immuneToHotBiomes.putOptional("bauble", INFFGirlsBauble::isEnvironmentImmunized);
-	}
-	
 	/* Initialization */
 
 	public HmagJackFrostEntity(EntityType<? extends HmagJackFrostEntity> pEntityType, Level pLevel) {
@@ -62,11 +56,13 @@ public class HmagJackFrostEntity extends JackFrostEntity implements INFFGirlsTam
 		this.xpReward = 0;
 		Arrays.fill(this.armorDropChances, 0);
 		Arrays.fill(this.handDropChances, 0);
+		this.immuneToHotBiomes.putOptional("bauble", INFFGirlsBauble::isEnvironmentImmunized);
+		this.immuneToHotBiomes.putOptional("powder_snow", mob -> mob.isInPowderSnow);
 	}
 	
 	/* Behavior */
 
-	public final MutablePredicate<HmagJackFrostEntity> immuneToHotBiomes = new MutablePredicate<>();
+	private final MutablePredicate<HmagJackFrostEntity> immuneToHotBiomes = new MutablePredicate<>();
 	
 	@Override
 	protected void registerGoals() {
@@ -199,56 +195,7 @@ public class HmagJackFrostEntity extends JackFrostEntity implements INFFGirlsTam
 	{
 		return this.immuneToHotBiomes.test(this);
 	}
-	
-	/* Interaction */
 
-	// Map items that can heal the mob and healing values here.
-	// Leave it empty if you don't need healing features.
-	/*@Override
-	public MobApplicableItemTable getHealingItems()
-	{
-		return NFFGirlsHealingItems.SNOWMAN.get();
-	}
-*/
-	/*@Override
-	public InteractionResult mobInteract(Player player, InteractionHand hand)
-	{
-		if (player.getUUID().equals(getOwnerUUID())) {
-			// For normal interaction
-			if (!player.isShiftKeyDown())
-			{
-				if (!player.level.isClientSide()) 
-				{
-					if (this.tryApplyHealingItems(player.getItemInHand(hand)) != InteractionResult.PASS)
-						return InteractionResult.sidedSuccess(player.level.isClientSide);
-					// The function above returns PASS when the items are not correct. So when not PASS it should stop here
-					else if (hand == InteractionHand.MAIN_HAND
-							&& NFFGirlsEntityStatics.isOnEitherHand(player, NFFGirlsItems.COMMANDING_WAND.get()))
-					{
-						switchAIState();
-					}
-					// Here it's main hand but no interaction. Return pass to enable off hand interaction.
-					else return InteractionResult.PASS;
-				}
-				// Interacted
-				return InteractionResult.sidedSuccess(player.level.isClientSide);
-			}
-			// For interaction with shift key down
-			else
-			{
-				// Open inventory and GUI
-				if (hand == InteractionHand.MAIN_HAND && NFFGirlsEntityStatics.isOnEitherHand(player, NFFGirlsItems.COMMANDING_WAND.get()))
-				{
-					NFFTamedStatics.openBefriendedInventory(player, this);
-					return InteractionResult.sidedSuccess(player.level.isClientSide);
-				}
-			}
-		} 
-		// Always pass when not owning this mob
-		return InteractionResult.PASS;
-	}
-*/
-	
 	/* Inventory */
 	
 	@Override
