@@ -832,13 +832,15 @@ public class NFFGirlsEntityEventListeners
 				else if (remained == 0)
 				{
 					if (!noUpdateInventory)
-						INFFGirlsTamed.get(mob).ifPresent(t -> t.getAdditionalInventory().getFromMob(mob));
+						INFFGirlsTamed.get(mob).flatMap(INFFGirlsTamed::getAdditionalInventory)
+							.ifPresent(in -> in.getFromMob(mob));
 					return 0;
 				}				
 			}
 		}
 		if (!noUpdateInventory)
-			INFFGirlsTamed.get(mob).ifPresent(t -> t.getAdditionalInventory().getFromMob(mob));
+			INFFGirlsTamed.get(mob).flatMap(INFFGirlsTamed::getAdditionalInventory)
+				.ifPresent(in -> in.getFromMob(mob));
 		return (long)remained;
 	}
 
@@ -1199,7 +1201,7 @@ public class NFFGirlsEntityEventListeners
 		INFFTamed.get(event.mobBefriended).ifPresent(tamed -> tamed.setAIState(NFFTamedMobAIState.FOLLOW, false));
 		if (NFFGirlsConfigs.ValueCache.Misc.REMOVE_HAND_ITEM_ON_TAMING) {
 			INFFGirlsTamed.get(event.mobBefriended).ifPresent(tamed -> {
-				NFFTamedMobInventory inv = tamed.getAdditionalInventory();
+				NFFTamedMobInventory inv = tamed.getAdditionalInventory().orElse(null);
 				if (inv instanceof NFFTamedMobInventoryWithHandItems) {
 					inv.setItem(0, ItemStack.EMPTY);
 					inv.setItem(1, ItemStack.EMPTY);
@@ -1213,7 +1215,7 @@ public class NFFGirlsEntityEventListeners
 		}
 		if (NFFGirlsConfigs.ValueCache.Misc.REMOVE_ARMOR_ON_TAMING) {
 			INFFGirlsTamed.get(event.mobBefriended).ifPresent(tamed -> {
-				NFFTamedMobInventory inv = tamed.getAdditionalInventory();
+				NFFTamedMobInventory inv = tamed.getAdditionalInventory().orElse(null);
 				if (inv instanceof NFFTamedMobInventoryWithEquipment) {
 					inv.setItem(0, ItemStack.EMPTY);
 					inv.setItem(1, ItemStack.EMPTY);
@@ -1225,7 +1227,8 @@ public class NFFGirlsEntityEventListeners
 			event.mobBefriended.setItemSlot(EquipmentSlot.CHEST, ItemStack.EMPTY);
 			event.mobBefriended.setItemSlot(EquipmentSlot.LEGS, ItemStack.EMPTY);
 			event.mobBefriended.setItemSlot(EquipmentSlot.FEET, ItemStack.EMPTY);
-            INFFTamed.get(event.mobBefriended).ifPresent(t -> t.getAdditionalInventory().syncToOwner());
+            INFFTamed.get(event.mobBefriended).flatMap(INFFTamed::getAdditionalInventory)
+				.ifPresent(NFFTamedMobInventory::syncToOwner);
             NFUEntityStatics.syncLivingEquipment(event.mobBefriended);
 		}
 		if (event.mobBefriended.isPassenger()) {

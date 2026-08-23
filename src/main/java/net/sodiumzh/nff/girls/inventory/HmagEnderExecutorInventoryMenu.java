@@ -18,7 +18,7 @@ public class HmagEnderExecutorInventoryMenu extends NFFGirlsInventoryMenuPreset0
 	protected void addMenuSlots()
 	{
 		this.addGeneralSlot(0, leftRowPos().addY(4), null);
-		this.addGeneralSlot(1, leftRowPos().slotBelow().addY(8), s -> mob.getAdditionalInventory().getItem(2).isEmpty());
+		this.addGeneralSlot(1, leftRowPos().slotBelow().addY(8), s -> mob.getAdditionalInventory().orElseThrow().getItem(2).isEmpty());
 		this.addBaubleSlot(2, leftRowPos().slotBelow(2).addY(12), "enderman_hand_block");	
 		this.addBaubleSlot(3, rightRowPos().addY(10), "0");
 		this.addBaubleSlot(4, rightRowPos().slotBelow().addY(20), "1");

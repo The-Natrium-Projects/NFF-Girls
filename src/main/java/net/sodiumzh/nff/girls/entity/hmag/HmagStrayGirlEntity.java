@@ -81,7 +81,12 @@ public class HmagStrayGirlEntity extends StrayGirlEntity implements INFFGirlsTam
 		targetSelector.addGoal(8, new NFFGirlsNearestPotentiallyHostileToOwnerTargetGoal(this));
 		targetSelector.addGoal(9, new NFFGirlsAttackingStrategyTargetGoal(this));
 	}
-	
+
+	@Override
+	public boolean enableSunSensitivity() {
+		return true;
+	}
+
 	/* Bow shooting related */
 	
 	private boolean justShot = false;
@@ -96,9 +101,9 @@ public class HmagStrayGirlEntity extends StrayGirlEntity implements INFFGirlsTam
 
 	@Override
 	public boolean canShoot() {
-		return !this.getAdditionalInventory().getItem(4).isEmpty()
-				&& this.getAdditionalInventory().getItem(4).getItem() instanceof BowItem
-				&& !this.getAdditionalInventory().getItem(8).isEmpty();
+		return !this.getAdditionalInventory().orElseThrow().getItem(4).isEmpty()
+				&& this.getAdditionalInventory().orElseThrow().getItem(4).getItem() instanceof BowItem
+				&& !this.getAdditionalInventory().orElseThrow().getItem(8).isEmpty();
 	}
 
 	@Override
@@ -264,7 +269,7 @@ public class HmagStrayGirlEntity extends StrayGirlEntity implements INFFGirlsTam
 	@Override
 	public HashMap<String, ItemStack> getBaubleSlots() {
 		HashMap<String, ItemStack> map = new HashMap<String, ItemStack>();
-		map.put("0", this.getAdditionalInventory().getItem(6));
+		map.put("0", this.getAdditionalInventory().orElseThrow().getItem(6));
 		return map;
 	}
 	

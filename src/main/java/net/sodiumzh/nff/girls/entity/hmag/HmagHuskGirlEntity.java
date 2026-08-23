@@ -35,7 +35,7 @@ import net.sodiumzh.nff.services.inventory.NFFTamedMobInventoryWithEquipment;
 import javax.annotation.Nonnull;
 import java.util.Arrays;
 
-public class HmagHuskGirlEntity extends HuskGirlEntity implements INFFGirlsTamed//, INFFTamedSunSensitiveMob
+public class HmagHuskGirlEntity extends HuskGirlEntity implements INFFGirlsTamed
 {
 
 	/* Initialization */

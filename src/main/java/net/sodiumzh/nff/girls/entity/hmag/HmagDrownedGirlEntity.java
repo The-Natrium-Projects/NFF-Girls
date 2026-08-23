@@ -100,6 +100,11 @@ public class HmagDrownedGirlEntity extends DrownedGirlEntity implements INFFGirl
 		super.tick();
 	}
 
+	@Override
+	public boolean enableSunSensitivity() {
+		return true;
+	}
+
 	/* Combat */
 
 	@Override
@@ -225,37 +230,12 @@ public class HmagDrownedGirlEntity extends DrownedGirlEntity implements INFFGirl
 		;
 		return newMob;
 	}
-	
-	/* INFFTamedSunSensitiveMob interface */
-
-/*	@Override
-	public void setupSunImmunityRules() {
-		this.getSunImmunity().putOptional("sunhat", mob -> mob.getMob().getItemBySlot(EquipmentSlot.HEAD).is(NFFGirlsItems.SUNHAT.get()));
-		this.getSunImmunity().putOptional("soul_amulet", mob -> ((INFFGirlsTamed)mob).hasDwmgBauble("soul_amulet"));
-		this.getSunImmunity().putOptional("resis_amulet", mob -> ((INFFGirlsTamed)mob).hasDwmgBauble("resistance_amulet"));
-	}*/
 
 	@Override
 	protected boolean isSunSensitive()
 	{
 		return !this.isSunImmune();
 	}
-	
-	/* IBaubleEquipable interface */
-/*
-	@Override
-	public HashMap<String, ItemStack> getBaubleSlots() {
-		HashMap<String, ItemStack> map = new HashMap<String, ItemStack>();
-		map.put("0", this.getAdditionalInventory().getItem(6));
-		map.put("1", this.getAdditionalInventory().getItem(7));
-		return map;
-	}
-	@Override
-	public BaubleHandler getBaubleHandler() {
-		return DwmgBaubleHandlers.DROWNED;
-	}	
-*/
-	/* INFFTamedAmphibious interface */
 
 	@Override
 	public WaterBoundPathNavigation getWaterNav() {

@@ -151,22 +151,22 @@ public class HmagCreeperGirlEntity extends NFFTamedCreeperPreset implements INFF
 		if (!level.isClientSide)
 		{
 			// Update explosion radius by ammo type
-			if (this.getAdditionalInventory().getItem(6).is(Items.GUNPOWDER))
+			if (this.getAdditionalInventory().orElseThrow().getItem(6).is(Items.GUNPOWDER))
 			{
 				this.explosionRadius = 3;
 				this.shouldDestroyBlocks = false;
 			}
-			else if (this.getAdditionalInventory().getItem(6).is(Items.TNT))
+			else if (this.getAdditionalInventory().orElseThrow().getItem(6).is(Items.TNT))
 			{
 				this.explosionRadius = 4;
 				this.shouldDestroyBlocks = true;
 			}
-			else if (!this.getAdditionalInventory().getItem(6).isEmpty())
+			else if (!this.getAdditionalInventory().orElseThrow().getItem(6).isEmpty())
 				throw new IllegalStateException("Befriended Creeper Girl explosive type error");		
-			this.canExplode = !this.getAdditionalInventory().getItem(6).isEmpty();
+			this.canExplode = !this.getAdditionalInventory().orElseThrow().getItem(6).isEmpty();
 			
 			// Powered explosion requires 2 explosive items
-			if (this.getAdditionalInventory().getItem(6).getCount() == 1 && this.isPowered())
+			if (this.getAdditionalInventory().orElseThrow().getItem(6).getCount() == 1 && this.isPowered())
 				this.canExplode = false;
 			this.canIgnite = this.canExplode && this.getSwell() == 0 && this.currentIgnitionCooldown == 0;
 			if (this.getOwner() != null && this.distanceToSqr(this.getOwner()) < explodeSafeDistance * explodeSafeDistance && !this.isPlayerIgnited)
@@ -201,7 +201,7 @@ public class HmagCreeperGirlEntity extends NFFTamedCreeperPreset implements INFF
 		if (!player.isShiftKeyDown()) {
 			if (player.getItemInHand(hand).is(Items.FLINT_AND_STEEL)
 					&& this.canIgnite
-					&& (!this.isPowered() || this.getAdditionalInventory().getItem(6).getCount() >= 2)
+					&& (!this.isPowered() || this.getAdditionalInventory().orElseThrow().getItem(6).getCount() >= 2)
 					&& this.getSwell() == 0) {
 
 				this.playerIgniteDefault(player, hand);
@@ -312,10 +312,10 @@ public class HmagCreeperGirlEntity extends NFFTamedCreeperPreset implements INFF
 				this.resetExplosionProcess();
 				return;
 			}
-			this.getAdditionalInventory().getItem(6).shrink(1);;
+			this.getAdditionalInventory().orElseThrow().getItem(6).shrink(1);;
 			if (this.isPowered())
 			{
-				this.getAdditionalInventory().getItem(6).shrink(1);
+				this.getAdditionalInventory().orElseThrow().getItem(6).shrink(1);
 				this.setPowered(false);
 			}
 			super.explodeCreeper();
@@ -341,7 +341,8 @@ public class HmagCreeperGirlEntity extends NFFTamedCreeperPreset implements INFF
 	
 	public boolean hasEnoughAmmoToExplode()
 	{
-		return !(this.getAdditionalInventory().getItem(6).isEmpty() || this.getAdditionalInventory().getItem(6).getCount() == 1 && this.isPowered());
+		return !(this.getAdditionalInventory().orElseThrow().getItem(6).isEmpty() ||
+			this.getAdditionalInventory().orElseThrow().getItem(6).getCount() == 1 && this.isPowered());
 	}
 	
 

@@ -869,7 +869,7 @@ public class NFFGirlsBaubles {
     {
         return mob -> {
             INFFTamed tamed = INFFTamed.get(mob).orElseThrow(() -> new IllegalArgumentException("Input mob isn't INFFTamed."));
-            return tamed.getAdditionalInventory().getItem(position);
+            return tamed.getAdditionalInventory().map(in -> in.getItem(position)).orElse(ItemStack.EMPTY);
         };
     }
 
