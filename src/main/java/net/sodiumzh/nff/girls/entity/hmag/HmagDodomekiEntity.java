@@ -66,55 +66,10 @@ public class HmagDodomekiEntity extends DodomekiEntity implements INFFGirlsTamed
 		targetSelector.addGoal(9, new NFFGirlsAttackingStrategyTargetGoal(this));
 	}
 
-	/* Interaction */
-
-	// Map items that can heal the mob and healing values here.
-	// Leave it empty if you don't need healing features.
-	/*@Override
-	public MobApplicableItemTable getHealingItems()
-	{
-		return NFFGirlsHealingItems.UNDEAD.get();
-	}*/
-
-	/*@Override
-	public InteractionResult mobInteract(Player player, InteractionHand hand)
-	{
-		if (player.getUUID().equals(getOwnerUUID())) {
-			// For normal interaction
-			if (!player.isShiftKeyDown())
-			{
-				if (!player.level().isClientSide()) 
-				{
-					f (this.tryApplyHealingItems(player.getItemInHand(hand)) != InteractionResult.PASS)
-						return InteractionResult.sidedSuccess(player.level().isClientSide);
-					// The function above returns PASS when the items are not correct. So when not PASS it should stop here
-					else if (hand == InteractionHand.MAIN_HAND
-							&& NFFGirlsEntityStatics.isOnEitherHand(player, NFFGirlsItems.COMMANDING_WAND.get()))
-					{
-						switchAIState();
-					}
-					// Here it's main hand but no interaction. Return pass to enable off hand interaction.
-					else return InteractionResult.PASS;
-				}
-				// Interacted
-				return InteractionResult.sidedSuccess(player.level().isClientSide);
-			}
-			// For interaction with shift key down
-			else
-			{
-				// Open inventory and GUI
-				if (hand == InteractionHand.MAIN_HAND && NFFGirlsEntityStatics.isOnEitherHand(player, NFFGirlsItems.COMMANDING_WAND.get()))
-				{
-					NFFTamedStatics.openBefriendedInventory(player, this);
-					return InteractionResult.sidedSuccess(player.level().isClientSide);
-				}
-			}
-		} 
-		// Always pass when not owning this mob
-		return InteractionResult.PASS;
+	@Override
+	public boolean enableSunSensitivity() {
+		return true;
 	}
-	*/
-	/* Inventory */
 
 	@Override
 	public NFFTamedMobInventory createAdditionalInventory() {

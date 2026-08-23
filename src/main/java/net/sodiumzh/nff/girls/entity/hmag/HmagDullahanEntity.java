@@ -79,54 +79,11 @@ public class HmagDullahanEntity extends DullahanEntity implements INFFGirlsTamed
 		targetSelector.addGoal(8, new NFFGirlsNearestPotentiallyHostileToOwnerTargetGoal(this));
 		targetSelector.addGoal(9, new NFFGirlsAttackingStrategyTargetGoal(this));
 	}
-	
-	/* Interaction */
 
-	// Map items that can heal the mob and healing values here.
-	// Leave it empty if you don't need healing features.
-	/*@Override
-	public MobApplicableItemTable getHealingItems()
-	{
-		return NFFGirlsHealingItems.UNDEAD.get();
-	}*/
-
-	/*@Override
-	public InteractionResult mobInteract(Player player, InteractionHand hand)
-	{
-		if (player.getUUID().equals(getOwnerUUID())) {
-			// For normal interaction
-			if (!player.isShiftKeyDown())
-			{
-				if (!player.level().isClientSide()) 
-				{
-					if (this.tryApplyHealingItems(player.getItemInHand(hand)) != InteractionResult.PASS)
-						return InteractionResult.sidedSuccess(player.level().isClientSide);
-					// The function above returns PASS when the items are not correct. So when not PASS it should stop here
-					else if (hand == InteractionHand.MAIN_HAND
-							&& NFFGirlsEntityStatics.isOnEitherHand(player, NFFGirlsItems.COMMANDING_WAND.get()))
-					{
-						switchAIState();
-					}
-					// Here it's main hand but no interaction. Return pass to enable off hand interaction.
-					else return InteractionResult.PASS;
-				}
-				// Interacted
-				return InteractionResult.sidedSuccess(player.level().isClientSide);
-			}
-			// For interaction with shift key down
-			else
-			{
-				// Open inventory and GUI
-				if (hand == InteractionHand.MAIN_HAND && NFFGirlsEntityStatics.isOnEitherHand(player, NFFGirlsItems.COMMANDING_WAND.get()))
-				{
-					NFFTamedStatics.openBefriendedInventory(player, this);
-					return InteractionResult.sidedSuccess(player.level().isClientSide);
-				}
-			}
-		} 
-		// Always pass when not owning this mob
-		return InteractionResult.PASS;
-	}*/
+	@Override
+	public boolean enableSunSensitivity() {
+		return true;
+	}
 
 	/* Inventory */
 
@@ -140,30 +97,6 @@ public class HmagDullahanEntity extends DullahanEntity implements INFFGirlsTamed
 		return new NFFGirlsHandItemsFourBaublesDefaultInventoryMenu(containerId, playerInventory, container, this);
 	}
 
-	/* Save and Load */
-
-	@Override
-	public void readAdditionalSaveData(CompoundTag nbt) {
-		super.readAdditionalSaveData(nbt);
-		//NFFTamedStatics.readBefriendedCommonSaveData(this, nbt);
-		// Add other data reading here
-
-	}
-/*
-	@Override
-	public HashMap<String, ItemStack> getBaubleSlots() {
-		return NaUtilsContainerStatics.mapOf(
-				MapPair.of("0", getAdditionalInventory().getItem(2)),
-				MapPair.of("1", getAdditionalInventory().getItem(3)),
-				MapPair.of("2", getAdditionalInventory().getItem(4)),
-				MapPair.of("3", getAdditionalInventory().getItem(5)));
-	}
-
-	@Override
-	public BaubleHandler getBaubleHandler() {
-		return DwmgBaubleHandlers.UNDEAD;
-	}
-	*/
 	// Sounds
 	
 	@Override
@@ -171,15 +104,7 @@ public class HmagDullahanEntity extends DullahanEntity implements INFFGirlsTamed
 	{
 		return NFFGirlsSoundPresets.generalAmbient(super.getAmbientSound());
 	}
-	
-	// Misc
-	
-	/*@Override
-	public void setupSunImmunityRules() {
-		this.getSunImmunity().putOptional("soul_amulet", mob -> ((INFFGirlsTamed)mob).hasDwmgBauble("soul_amulet"));
-		this.getSunImmunity().putOptional("resis_amulet", mob -> ((INFFGirlsTamed)mob).hasDwmgBauble("resistance_amulet"));
-	}*/
-	
+
 	// Indicates which mod this mob belongs to
 	@Override
 	public String getModId() {

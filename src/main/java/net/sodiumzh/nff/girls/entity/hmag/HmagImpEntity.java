@@ -124,10 +124,10 @@ public class HmagImpEntity extends ImpEntity implements INFFGirlsTamed//, IBlock
 		this.locatedBlocks.update();
 		if (this.locatingBlockRemainingCooldown > 0) return;
 		if (!this.getAIState().equals(NFFTamedMobAIState.FOLLOW)) return;	// Only locate on following
-		if (!this.getAdditionalInventory().getItem(0).is(NFFGirlsItems.NETHERITE_FORK.get()))
+		if (!this.getAdditionalInventory().orElseThrow().getItem(0).is(NFFGirlsItems.NETHERITE_FORK.get()))
 			return;
 
-		if (this.getAdditionalInventory().getItem(1).is(NETHERITE_SCRAP_NUGGETS)) {
+		if (this.getAdditionalInventory().orElseThrow().getItem(1).is(NETHERITE_SCRAP_NUGGETS)) {
 			List<BlockPos> ores = NFULevelStatics.getSphericalBlockStates(this.level(), this.blockPosition(), 8,
 				(pos, bs) -> bs.is(NETHERITE_SCRAP_ORES) && !this.locatedBlocks.hasTimer(pos))
 				.map(Tuple::getA).toList();
@@ -139,8 +139,8 @@ public class HmagImpEntity extends ImpEntity implements INFFGirlsTamed//, IBlock
 				this.level().addFreshEntity(particleSource);
 				this.locatedBlocks.addTimer(targetPos, 300 * 20);	// Add 300s cooldown to prevent repeatedly locating the same block
 				this.locatingBlockRemainingCooldown = LOCATING_BLOCK_COOLDOWN;
-				this.getAdditionalInventory().getItem(1).shrink(1);
-				this.getAdditionalInventory().syncToMob(this);
+				this.getAdditionalInventory().orElseThrow().getItem(1).shrink(1);
+				this.getAdditionalInventory().orElseThrow().syncToMob(this);
 				this.level().playSound(this, this.blockPosition(), this.getAmbientSound(),
 					SoundSource.PLAYERS, this.getSoundVolume() * 1.5f, this.getVoicePitch() * 1.5f);
 			}

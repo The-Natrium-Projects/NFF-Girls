@@ -210,9 +210,9 @@ public class HmagGhastlySeekerEntity extends GhastlySeekerEntity implements INFF
 	
 	public float calculateFireballDamageScale()
 	{
-		if (getAdditionalInventory().getItem(4).is(Items.FIRE_CHARGE))			
+		if (getAdditionalInventory().orElseThrow().getItem(4).is(Items.FIRE_CHARGE))
 			return (float) (this.getAttributeValue(Attributes.ATTACK_DAMAGE) / 10f) + 1f;
-		else if (getAdditionalInventory().getItem(4).is(ModItems.BLASTING_BOTTLE.get()))
+		else if (getAdditionalInventory().orElseThrow().getItem(4).is(ModItems.BLASTING_BOTTLE.get()))
 			return (float) (this.getAttributeValue(Attributes.ATTACK_DAMAGE) * 1.5f / 10f) + 1.5f;
 		else return 0f;
 	}
@@ -243,8 +243,8 @@ public class HmagGhastlySeekerEntity extends GhastlySeekerEntity implements INFF
 		{
 			// It consumes fire charges
 			return this.parent.getTarget() != null 
-					&& (mob.getAdditionalInventory().getItem(4).is(Items.FIRE_CHARGE) 
-							|| mob.getAdditionalInventory().getItem(4).is(ModItems.BLASTING_BOTTLE.get()));
+					&& (mob.getAdditionalInventory().orElseThrow().getItem(4).is(Items.FIRE_CHARGE)
+							|| mob.getAdditionalInventory().orElseThrow().getItem(4).is(ModItems.BLASTING_BOTTLE.get()));
 		}
 
 		@Override
@@ -276,7 +276,7 @@ public class HmagGhastlySeekerEntity extends GhastlySeekerEntity implements INFF
 			if ((target.distanceToSqr(this.parent) < d0 * d0 || this.attackTimer > 10) && this.parent.hasLineOfSight(target))
 			{
 				
-				if (mob.getAdditionalInventory().getItem(4).isEmpty())
+				if (mob.getAdditionalInventory().orElseThrow().getItem(4).isEmpty())
 					return;
 				
 				Level world = this.parent.level();
@@ -307,16 +307,16 @@ public class HmagGhastlySeekerEntity extends GhastlySeekerEntity implements INFF
 					NFFGhastFireballEntity fireball = new NFFGhastFireballEntity(world, this.parent, velocity.x, velocity.y, velocity.z, this.parent.calculateFireballDamageScale() * this.parent.fireballBaseExplosionPower);
 					fireball.setPos(pos);
 					fireball.hitDamage = this.parent.fireballBaseHitDamage * this.parent.calculateFireballDamageScale();
-					if (mob.getAdditionalInventory().getItem(4).is(Items.FIRE_CHARGE))
+					if (mob.getAdditionalInventory().orElseThrow().getItem(4).is(Items.FIRE_CHARGE))
 						fireball.breakBlocks = false;
 						
 					// Check again to prevent firing without ammo
-					if (mob.getAdditionalInventory().getItem(4).is(Items.FIRE_CHARGE)
-							|| mob.getAdditionalInventory().getItem(4).is(ModItems.BLASTING_BOTTLE.get()))
+					if (mob.getAdditionalInventory().orElseThrow().getItem(4).is(Items.FIRE_CHARGE)
+							|| mob.getAdditionalInventory().orElseThrow().getItem(4).is(ModItems.BLASTING_BOTTLE.get()))
 					{
 						mob.asMob().getLookControl().setLookAt(mob.asMob().getTarget());
 						world.addFreshEntity(fireball);
-						mob.getAdditionalInventory().getItem(4).shrink(1);
+						mob.getAdditionalInventory().orElseThrow().getItem(4).shrink(1);
 					}
 					this.attackTimer = -50;
 				}

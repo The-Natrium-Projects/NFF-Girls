@@ -88,7 +88,12 @@ public class HmagCursedDollEntity extends CursedDollEntity implements INFFGirlsT
 		targetSelector.addGoal(8, new NFFGirlsNearestPotentiallyHostileToOwnerTargetGoal(this));
 		targetSelector.addGoal(9, new NFFGirlsAttackingStrategyTargetGoal(this));
 	}
-	
+
+	@Override
+	public boolean enableSunSensitivity() {
+		return true;
+	}
+
 	@Override
 	public void aiStep()
 	{

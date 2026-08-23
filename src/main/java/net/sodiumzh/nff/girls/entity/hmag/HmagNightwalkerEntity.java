@@ -106,15 +106,15 @@ public class HmagNightwalkerEntity extends NightwalkerEntity implements INFFGirl
 		bullet.setDamage(4.0F + (float)(this.getAttributeValue(Attributes.ATTACK_DAMAGE)));
 		bullet.setEffectLevel((byte)1);
 		bullet.setVariant(MagicBulletEntity.Variant.byId(3));
-		if (this.getAdditionalInventory().getItem(4).is(ModItems.ANCIENT_STONE.get()))
+		if (this.getAdditionalInventory().orElseThrow().getItem(4).is(ModItems.ANCIENT_STONE.get()))
 		{
 			bullet.setExpandsTransformingRange();
-			this.getAdditionalInventory().getItem(4).shrink(1);
+			this.getAdditionalInventory().orElseThrow().getItem(4).shrink(1);
 			bullet.setDamage(bullet.getDamage() * 1.5f);
 		}
-		else if (this.getAdditionalInventory().getItem(4).is(Items.CLAY_BALL))
+		else if (this.getAdditionalInventory().orElseThrow().getItem(4).is(Items.CLAY_BALL))
 		{
-			this.getAdditionalInventory().getItem(4).shrink(1);
+			this.getAdditionalInventory().orElseThrow().getItem(4).shrink(1);
 			bullet.setDamage(bullet.getDamage() * 1.2f);
 		}
 		this.level().addFreshEntity(bullet);

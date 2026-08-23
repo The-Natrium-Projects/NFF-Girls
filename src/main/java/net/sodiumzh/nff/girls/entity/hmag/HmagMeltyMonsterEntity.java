@@ -79,7 +79,7 @@ public class HmagMeltyMonsterEntity extends MeltyMonsterEntity implements INFFGi
 			new ConditionalAttributeModifier(Attributes.MOVEMENT_SPEED, 0.5d,  AttributeModifier.Operation.MULTIPLY_BASE, living ->
 			(
 					living instanceof HmagMeltyMonsterEntity mm
-					&& mm.getAdditionalInventory().getItem(4).is(Items.LAVA_BUCKET)
+					&& mm.getAdditionalInventory().orElseThrow().getItem(4).is(Items.LAVA_BUCKET)
 			));
 	
 	/* Data sync */
@@ -288,7 +288,7 @@ public class HmagMeltyMonsterEntity extends MeltyMonsterEntity implements INFFGi
 			// Consume 2 each second
 			if (this.tickCount % 10 == 0 && this.getStamina() > 0)
 			{
-				if (this.getAdditionalInventory().getItem(4).is(Items.LAVA_BUCKET))
+				if (this.getAdditionalInventory().orElseThrow().getItem(4).is(Items.LAVA_BUCKET))
 				{
 					if (this.tickCount % 20 == 0)
 						this.setStamina(this.getStamina() - 1);
@@ -591,7 +591,8 @@ public class HmagMeltyMonsterEntity extends MeltyMonsterEntity implements INFFGi
 		{
 			if (parent.getAIState() == NFFTamedMobAIState.FOLLOW && this.parent.getStamina() > this.parent.getMaxStamina() / 5)
 				return false;
-			return !this.parent.isInLava() && this.isValidTarget(this.parent.level(), this.blockPos) && (!this.parent.getAdditionalInventory().getItem(4).is(Items.LAVA_BUCKET) || this.parent.getStamina() == 0);
+			return !this.parent.isInLava() && this.isValidTarget(this.parent.level(), this.blockPos)
+				&& (!this.parent.getAdditionalInventory().orElseThrow().getItem(4).is(Items.LAVA_BUCKET) || this.parent.getStamina() == 0);
 		}
 
 		@Override
@@ -599,7 +600,7 @@ public class HmagMeltyMonsterEntity extends MeltyMonsterEntity implements INFFGi
 		{
 			if (parent.getAIState() == NFFTamedMobAIState.FOLLOW && this.parent.getStamina() > this.parent.getMaxStamina() / 5)
 				return false;
-			return !this.parent.isInLava() && super.canUse() && (!this.parent.getAdditionalInventory().getItem(4).is(Items.LAVA_BUCKET) || this.parent.getStamina() == 0) && this.parent.getStamina() < this.parent.getMaxStamina() / 5;
+			return !this.parent.isInLava() && super.canUse() && (!this.parent.getAdditionalInventory().orElseThrow().getItem(4).is(Items.LAVA_BUCKET) || this.parent.getStamina() == 0) && this.parent.getStamina() < this.parent.getMaxStamina() / 5;
 		}
 
 		@Override

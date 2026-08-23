@@ -95,7 +95,7 @@ public class NFFGirlsGUIPreset0 extends NFFTamedGUI {
 	
 	protected MutableComponent getDefaultLevelAndExpInfo()
 	{
-		INFFGirlsTamed bm = (INFFGirlsTamed)mob;
+		INFFGirlsTamed bm = INFFGirlsTamed.get(mob.asMob()).orElseThrow();
 		String lv = Integer.toString(bm.getDataAccessor().getExpectedXPLevel());
 		String exp = Long.toString(bm.getDataAccessor().getXPInThisLevel());
 		String expup = Long.toString(bm.getDataAccessor().getRequiredXPInThisLevel());
@@ -105,7 +105,7 @@ public class NFFGirlsGUIPreset0 extends NFFTamedGUI {
 	
 	protected MutableComponent getDefaultLevelInfo()
 	{
-		INFFGirlsTamed bm = (INFFGirlsTamed)mob;		
+		INFFGirlsTamed bm = INFFGirlsTamed.get(mob.asMob()).orElseThrow();
 		String lv = Integer.toString(bm.getDataAccessor().getExpectedXPLevel());
 		return NFUInfoStatics.createTranslatable("info.nffgirls.gui_level")
 				.append(NFUInfoStatics.createText(": " + lv));
@@ -113,7 +113,7 @@ public class NFFGirlsGUIPreset0 extends NFFTamedGUI {
 	
 	protected MutableComponent getDefaultExpInfo()
 	{
-		INFFGirlsTamed bm = (INFFGirlsTamed)mob;
+		INFFGirlsTamed bm = INFFGirlsTamed.get(mob.asMob()).orElseThrow();
 		String exp = Long.toString(bm.getDataAccessor().getXPInThisLevel());
 		String expup = Long.toString(bm.getDataAccessor().getRequiredXPInThisLevel());
 		return NFUInfoStatics.createTranslatable("info.nffgirls.gui_exp")
@@ -123,7 +123,7 @@ public class NFFGirlsGUIPreset0 extends NFFTamedGUI {
 	
 	protected MutableComponent getDefaultFavInfo()
 	{
-		INFFGirlsTamed bm = (INFFGirlsTamed)mob;	
+		INFFGirlsTamed bm = INFFGirlsTamed.get(mob.asMob()).orElseThrow();
 		String fav = Integer.toString(Mth.floor(bm.getDataAccessor().getFavorability()));
 		String favmax = Integer.toString(Mth.floor(bm.getDataAccessor().getMaxFavorability()));
 		return NFUInfoStatics.createTranslatable("info.nffgirls.gui_favorability")

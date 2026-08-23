@@ -148,8 +148,8 @@ public class HmagKoboldEntity extends KoboldEntity implements INFFGirlsTamed
 		this.locatedBlocks.update();
 		if (this.locatingBlockRemainingCooldown > 0) return;
 		if (!this.getAIState().equals(NFFTamedMobAIState.FOLLOW)) return;	// Only locate on following
-		if (this.getAdditionalInventory().getItem(0).isEmpty()) return;	// Only when holding a pickaxe
-		List<Block> locatableBlocks = getLocatableBlocks(this.getAdditionalInventory().getItem(1));
+		if (this.getAdditionalInventory().orElseThrow().getItem(0).isEmpty()) return;	// Only when holding a pickaxe
+		List<Block> locatableBlocks = getLocatableBlocks(this.getAdditionalInventory().orElseThrow().getItem(1));
 		if (locatableBlocks.isEmpty()) return;
 
 		List<BlockPos> ores = NFULevelStatics.getSphericalBlockStates(this.level(), this.blockPosition(), 8,
@@ -163,8 +163,8 @@ public class HmagKoboldEntity extends KoboldEntity implements INFFGirlsTamed
 			this.level().addFreshEntity(particleSource);
 			this.locatedBlocks.addTimer(targetPos, 300 * 20);	// Add 120s cooldown to prevent repeatedly locating the same block
 			this.locatingBlockRemainingCooldown = LOCATING_BLOCK_COOLDOWN;
-			this.getAdditionalInventory().getItem(1).shrink(1);
-			this.getAdditionalInventory().syncToMob(this);
+			this.getAdditionalInventory().orElseThrow().getItem(1).shrink(1);
+			this.getAdditionalInventory().orElseThrow().syncToMob(this);
 			this.level().playSound(this, this.blockPosition(), this.getAmbientSound(),
 				SoundSource.PLAYERS, this.getSoundVolume() * 1.5f, this.getVoicePitch() * 1.5f);
 		}

@@ -82,7 +82,12 @@ public class HmagZombieGirlEntity extends ZombieGirlEntity implements INFFGirlsT
 
 	}
 
-	
+
+	@Override
+	public boolean enableSunSensitivity() {
+		return true;
+	}
+
 	/* Combat */
 	
 	@Override
@@ -105,12 +110,6 @@ public class HmagZombieGirlEntity extends ZombieGirlEntity implements INFFGirlsT
 
 	/* Interaction */
 
-	/*@Override
-	public MobApplicableItemTable getHealingItems()
-	{
-		return NFFGirlsHealingItems.UNDEAD.get();
-	}
-*/
 	@Override
 	public InteractionResult ownerInteraction(Player player, InteractionHand hand, LogicalSide side) {
 		if (side.isServer() && NFFGirlsConfigs.ValueCache.Interaction.ALLOW_REVERSE_CONVERSION
@@ -123,48 +122,6 @@ public class HmagZombieGirlEntity extends ZombieGirlEntity implements INFFGirlsT
 		}
 		return InteractionResult.PASS;
 	}
-
-	/*@Override
-	public InteractionResult mobInteract(Player player, InteractionHand hand)
-	{
-		if (!player.isShiftKeyDown())
-		{
-			if (player.getUUID().equals(getOwnerUUID())) {
-				if (!player.level().isClientSide() && hand == InteractionHand.MAIN_HAND) 
-				{
-					if (NFFGirlsConfigs.ValueCache.Interaction.ALLOW_REVERSE_CONVERSION
-							&& player.getItemInHand(hand).is(Items.SPONGE) 
-							&& (isFromHusk || NFFGirlsConfigs.ValueCache.Interaction.ALL_ZOMBIE_GIRLS_CAN_CONVERT_TO_HUSKS)) {
-						player.getItemInHand(hand).shrink(1);
-						this.spawnAtLocation(new ItemStack(Items.WET_SPONGE, 1));
-						this.convertToHusk();
-						return InteractionResult.sidedSuccess(player.level().isClientSide);
-					} 
-					else if (this.tryApplyHealingItems(player.getItemInHand(hand)) != InteractionResult.PASS) 
-					{}
-					else if (hand == InteractionHand.MAIN_HAND
-							&& NFFGirlsEntityStatics.isOnEitherHand(player, NFFGirlsItems.COMMANDING_WAND.get()))
-					{
-						switchAIState();
-					}
-					else return InteractionResult.PASS;
-				}
-				return InteractionResult.sidedSuccess(player.level().isClientSide);
-			} 
-			return InteractionResult.PASS;
-		}
-		else
-		{
-			if (player.getUUID().equals(getOwnerUUID())) {		
-				if (hand == InteractionHand.MAIN_HAND && NFFGirlsEntityStatics.isOnEitherHand(player, NFFGirlsItems.COMMANDING_WAND.get()))
-				{
-					NFFTamedStatics.openBefriendedInventory(player, this);
-					return InteractionResult.sidedSuccess(player.level().isClientSide);
-				}
-			}
-			return InteractionResult.PASS;
-		}
-	}*/
 
 	/* Inventory */
 

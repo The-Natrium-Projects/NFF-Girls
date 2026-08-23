@@ -206,11 +206,11 @@ public class HmagEnderExecutorEntity extends NFFTamedEnderManPreset implements I
 	
 	protected void updateHoldingBlock()
 	{
-		if (getAdditionalInventory().getItem(2).isEmpty())
+		if (getAdditionalInventory().orElseThrow().getItem(2).isEmpty())
 		{
 			this.setCarriedBlock(null);
 		}			
-		else if (getAdditionalInventory().getItem(2).getItem() instanceof BlockItem bi)
+		else if (getAdditionalInventory().orElseThrow().getItem(2).getItem() instanceof BlockItem bi)
 		{
 			this.setCarriedBlock(bi.getBlock().defaultBlockState());
 		}

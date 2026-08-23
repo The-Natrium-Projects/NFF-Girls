@@ -26,8 +26,8 @@ public class NFFGirlsHmagCreeperGirlMeleeAttackGoal extends NFFMeleeAttackGoal
 		if (creeper.getSwellDir() > 0)
 			return false;
 		// Creeper girls perform melee attack only when having a weapon on the main hand
-		if (creeper.getAdditionalInventory().getItem(4).isEmpty() 
-				|| !(creeper.getAdditionalInventory().getItem(4).getItem() instanceof TieredItem))
+		if (creeper.getAdditionalInventory().orElseThrow().getItem(4).isEmpty()
+				|| !(creeper.getAdditionalInventory().orElseThrow().getItem(4).getItem() instanceof TieredItem))
 			return false;
 		return super.checkCanUse();
 	}
@@ -35,8 +35,8 @@ public class NFFGirlsHmagCreeperGirlMeleeAttackGoal extends NFFMeleeAttackGoal
 	@Override
 	public boolean checkCanContinueToUse()
 	{
-		if (creeper.getAdditionalInventory().getItem(4).isEmpty() 
-				|| !(creeper.getAdditionalInventory().getItem(4).getItem() instanceof TieredItem))
+		if (creeper.getAdditionalInventory().orElseThrow().getItem(4).isEmpty()
+				|| !(creeper.getAdditionalInventory().orElseThrow().getItem(4).getItem() instanceof TieredItem))
 			return false;
 		else return super.checkCanContinueToUse();
 	}
