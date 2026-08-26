@@ -3,9 +3,14 @@ package net.sodiumzh.nff.girls;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.eventbus.api.IEventBus;
+import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.minecraftforge.fml.ModContainer;
+import net.minecraftforge.fml.ModList;
+import net.minecraftforge.fml.ModLoader;
 import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.config.ModConfig;
+import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.sodiumzh.nff.girls.item.bauble.NFFGirlsBaubleProperties;
 import net.sodiumzh.nff.girls.registry.*;
@@ -82,6 +87,21 @@ public class NFFGirls
             .redirectItem(new ResourceLocation(MOD_ID, "natures_rage_ii"), new ResourceLocation(MOD_ID, "natures_rage_badge_ii"))
             .redirectItem(new ResourceLocation(MOD_ID, "natures_rage_iii"), new ResourceLocation(MOD_ID, "natures_rage_badge_iii"));
 
+    }
+
+    @Mod.EventBusSubscriber(bus = Mod.EventBusSubscriber.Bus.MOD, modid = NFFGirls.MOD_ID)
+    public static class SetupEventListeners {
+
+        @SubscribeEvent
+        public static void checkIncompatMod(FMLCommonSetupEvent event) {
+            event.enqueueWork(() -> {
+                ModList.get().getModContainerById("nffgirlsgaia").ifPresent((ModContainer mc) -> {
+                    if (mc.getModInfo().getVersion().getQualifier().equals("0.2.33"))
+                        throw new IllegalStateException("NFF:Girls Gaia Addon 0.2.33 is not compatible with NFF: Girls 0.2.33.1 or above. "
+                        + "Please update NFF:Girls Gaia Addon to 0.2.33.1 or above.");
+                });
+            });
+        }
     }
 
 }
