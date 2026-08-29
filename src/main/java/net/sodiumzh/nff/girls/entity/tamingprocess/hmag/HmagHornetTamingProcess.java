@@ -54,7 +54,7 @@ public class HmagHornetTamingProcess extends TamingProcessItemGivingProgress
 		BlockPos pos = mob.blockPosition();
 		// Search 9x9x9 area centered by mob
 		AABB searchArea = new AABB(pos.getX() - 4, pos.getY() - 4, pos.getZ() - 4, pos.getX() + 4, pos.getY() + 4, pos.getZ() + 4);
-		Stream<BlockState> blocks = mob.level().getBlockStates(searchArea);
+		Stream<BlockState> blocks = mob.getLevel().getBlockStates(searchArea);
 		long count = blocks.filter(b -> b.is(Blocks.HONEY_BLOCK)).count();
 		return count >= 8;
 	}

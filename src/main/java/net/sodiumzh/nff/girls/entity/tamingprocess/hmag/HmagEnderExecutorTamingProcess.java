@@ -13,7 +13,7 @@ import net.sodiumzh.nff.girls.registry.NFFGirlsConfigs;
 import net.sodiumzh.nff.services.entity.taming.NFFTamableComponent;
 import net.sodiumzh.nff.services.entity.taming.NFFTamingProcess;
 import net.sodiumzh.nff.services.entity.taming.TamingProcessItemGivingProgress;
-import net.sodiumzh.nff.services.entity.taming.presets.NFFTamedEnderManPreset;
+import net.sodiumzh.nff.services.entity.taming.preset.NFFTamedEnderManPreset;
 
 import java.util.Optional;
 import java.util.UUID;

@@ -102,7 +102,7 @@ public class HmagNecroticReaperTamingProcess extends NFFTamingProcess
 		// you can continue taming the mob and inherit his progress
 		else if (cap.getGeneralNBT().hasUUID(NBT_KEY_ONGOING_PLAYER_UUID)
 				&& !cap.getGeneralNBT().getUUID(NBT_KEY_ONGOING_PLAYER_UUID).equals(player.getUUID())) {
-			if (player.level().getPlayerByUUID(cap.getGeneralNBT().getUUID(NBT_KEY_ONGOING_PLAYER_UUID)) != null)
+			if (player.getLevel().getPlayerByUUID(cap.getGeneralNBT().getUUID(NBT_KEY_ONGOING_PLAYER_UUID)) != null)
 				return true;
 		}
 		// If mob is not on soul carpet, nothing happens but don't add wither
@@ -150,7 +150,7 @@ public class HmagNecroticReaperTamingProcess extends NFFTamingProcess
 
 	@Override
 	public TamingInteractionResult handleInteract(Player player, Mob mob, InteractionHand interactionHand) {
-		return TamingInteractionResult.unhandled(player.level());
+		return TamingInteractionResult.unhandled(player.getLevel());
 	}
 
 	@Override
@@ -161,9 +161,9 @@ public class HmagNecroticReaperTamingProcess extends NFFTamingProcess
 		boolean isAlwaysHostile = false;
 		if (	// Is in player process
 			cap.getGeneralNBT().hasUUID(NBT_KEY_ONGOING_PLAYER_UUID)
-			&& mob.level().getPlayerByUUID(cap.getGeneralNBT().getUUID(NBT_KEY_ONGOING_PLAYER_UUID)) != null)
+			&& mob.getLevel().getPlayerByUUID(cap.getGeneralNBT().getUUID(NBT_KEY_ONGOING_PLAYER_UUID)) != null)
 		{
-			Player player = mob.level().getPlayerByUUID(cap.getGeneralNBT().getUUID(NBT_KEY_ONGOING_PLAYER_UUID));
+			Player player = mob.getLevel().getPlayerByUUID(cap.getGeneralNBT().getUUID(NBT_KEY_ONGOING_PLAYER_UUID));
 			/*mob.getCapability(NFFGirlsCapabilities.CAP_UNDEAD_AFFINITY_HANDLER).ifPresent((capUM) ->
 			{
 				capUM.addHatred(player, 300 * 20);	// This blocks the effect of undead affinity
@@ -232,7 +232,7 @@ public class HmagNecroticReaperTamingProcess extends NFFTamingProcess
 	public void onGeneralTimerExpire(Mob mob, String key) {
 		NFFTamableComponent tamable = NFFTamableComponent.getOrDefault(mob);
 		if (tamable.getGeneralNBT().hasUUID(NBT_KEY_ONGOING_PLAYER_UUID)) {
-			Player player = tamable.getEntity().level().getPlayerByUUID(tamable.getGeneralNBT().getUUID(NBT_KEY_ONGOING_PLAYER_UUID));
+			Player player = tamable.getEntity().getLevel().getPlayerByUUID(tamable.getGeneralNBT().getUUID(NBT_KEY_ONGOING_PLAYER_UUID));
 			if (player == null || !player.isCreative() && tamable.getGeneralNBT().getInt(NBT_KEY_HIT_COUNT) > 0) {
 				int hits = tamable.getGeneralNBT().getInt(NBT_KEY_HIT_COUNT);
 				tamable.getGeneralNBT().putInt(NBT_KEY_HIT_COUNT, hits - 1);

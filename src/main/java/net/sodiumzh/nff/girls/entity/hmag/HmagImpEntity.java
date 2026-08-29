@@ -129,7 +129,7 @@ public class HmagImpEntity extends ImpEntity implements INFFGirlsTamed//, IBlock
 			return;
 
 		if (this.getAdditionalInventory().orElseThrow().getItem(1).is(NETHERITE_SCRAP_NUGGETS)) {
-			List<BlockPos> ores = NFULevelStatics.getSphericalBlockStates(this.level(), this.blockPosition(), 8,
+			List<BlockPos> ores = NFULevelStatics.getSphericalBlockStates(this.getLevel(), this.blockPosition(), 8,
 				(pos, bs) -> bs.is(NETHERITE_SCRAP_ORES) && !this.locatedBlocks.hasTimer(pos))
 				.map(Tuple::getA).toList();
 			if (!ores.isEmpty()) {
@@ -142,7 +142,7 @@ public class HmagImpEntity extends ImpEntity implements INFFGirlsTamed//, IBlock
 				this.locatingBlockRemainingCooldown = LOCATING_BLOCK_COOLDOWN;
 				this.getAdditionalInventory().orElseThrow().getItem(1).shrink(1);
 				this.getAdditionalInventory().orElseThrow().syncToMob(this);
-				this.level().playSound(this, this.blockPosition(), this.getAmbientSound(),
+				this.getLevel().playSound(null, this.blockPosition(), this.getAmbientSound(),
 					SoundSource.PLAYERS, this.getSoundVolume() * 1.5f, this.getVoicePitch() * 1.5f);
 			}
 		}

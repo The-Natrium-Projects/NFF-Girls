@@ -75,7 +75,7 @@ public class NFFGirlsNeutralityHandlerComponent extends MobAngerHandlerComponent
 
     public List<Player> getNeutralPlayers() {
         return Stream.concat(this.strongNeutralTo.stream(), this.weakNeutralTo.stream())
-            .map(this.getEntity().level()::getPlayerByUUID).filter(Objects::nonNull).toList();
+            .map(this.getEntity().getLevel()::getPlayerByUUID).filter(Objects::nonNull).toList();
     }
 
     public NeutralityState getNeutralityState(UUID uuid) {
@@ -126,7 +126,7 @@ public class NFFGirlsNeutralityHandlerComponent extends MobAngerHandlerComponent
         if (this.isClientSide()) return;
         if (this.getEntity().tickCount % 20 != 0) return;   // Search each second to save resource
         if (this.strongNeutralTo.isEmpty() && this.angerList.isEmpty()) return;
-        this.getEntity().level().getEntitiesOfClass(Mob.class, this.getEntity().getBoundingBox().inflate(16d))
+        this.getEntity().getLevel().getEntitiesOfClass(Mob.class, this.getEntity().getBoundingBox().inflate(16d))
             .stream().filter(mob -> mob.getType().equals(this.getEntity().getType()))
             .filter(mob -> mob.hasLineOfSight(this.getEntity()))
             .forEach(mob -> {
@@ -145,7 +145,7 @@ public class NFFGirlsNeutralityHandlerComponent extends MobAngerHandlerComponent
      * @see
      */
     public static void spreadStrongNeutral(LivingEntity living) {
-        if (living.level().isClientSide()) return;
+        if (living.getLevel().isClientSide()) return;
         if (living.tickCount % 20 != 0) return;
         if (!NFFTamingMapping.containsAfter(living.getType())) return;
         EntityType<? extends Mob> typeBefore = NFFTamingMapping.getTypeBefore(living.getType());
@@ -153,7 +153,7 @@ public class NFFGirlsNeutralityHandlerComponent extends MobAngerHandlerComponent
         if (tamed == null) return;
         Player owner = tamed.getOwnerInDimension();
         if (owner == null) return;
-        living.level().getEntitiesOfClass(Mob.class, living.getBoundingBox().inflate(16d)).stream()
+        living.getLevel().getEntitiesOfClass(Mob.class, living.getBoundingBox().inflate(16d)).stream()
             .filter(m -> m.getType().equals(typeBefore))
             .filter(m -> m.hasLineOfSight(living) && m.hasLineOfSight(owner))
 

@@ -97,13 +97,13 @@ public class HmagSlimeGirlTamingProcess extends TamingProcessItemGivingProgress
 		{
 			if (mob.getType() == ModEntityTypes.SLIME_GIRL.get() && mob instanceof SlimeGirlEntity sg && RND.nextDouble() < 0.25d)
             {
-	            MagicalSlimeEntity slime = ModEntityTypes.MAGICAL_SLIME.get().create(mob.level());
+	            MagicalSlimeEntity slime = ModEntityTypes.MAGICAL_SLIME.get().create(mob.getLevel());
 	            slime.setSize(1, true);
             	LinearColor sgColorCompl = MagicalGelColorUtils.getSlimeColor(sg).getComplementary();
             	SlimeGirlEntity.ColorVariant v = MagicalGelColorUtils.closestVariant(sgColorCompl);
-            	slime.setVariant(v);
+            	slime.setVariant(v.getId());
             	slime.moveTo(mob.getX() + NFUMathStatics.rndRangedDouble(-0.5, 0.5), mob.getY() + 0.5D, mob.getZ() + NFUMathStatics.rndRangedDouble(-0.5, 0.5), RND.nextFloat() * 360.0F, 0.0F);
-            	mob.level().addFreshEntity(slime);
+            	mob.getLevel().addFreshEntity(slime);
             }
 			NFUParticleStatics.sendGlintParticlesToEntityDefault(mob);
 		}
@@ -115,7 +115,7 @@ public class HmagSlimeGirlTamingProcess extends TamingProcessItemGivingProgress
 	@Override
 	public TamingInteractionResult handleInteract(Player player, Mob mob, InteractionHand hand)
 	{
-		if (!player.level().isClientSide() && hand.equals(InteractionHand.MAIN_HAND)
+		if (!player.getLevel().isClientSide() && hand.equals(InteractionHand.MAIN_HAND)
 				&& player.getMainHandItem().is(NFFGirlsItems.MAGICAL_GEL_BALL.get()))
 		{
 			/*player.getCapability(NFFCapRegistry.CAP_BM_PLAYER).ifPresent((c) ->

@@ -23,7 +23,6 @@ import net.sodiumzh.nff.girls.eventlistener.NFFGirlsEntityEventListeners;
 import net.sodiumzh.nff.girls.item.TaoistTalismanItem;
 import net.sodiumzh.nff.girls.registry.NFFGirlsItems;
 import net.sodiumzh.nff.girls.util.NFFGirlsEntityStatics;
-import net.sodiumzh.nff.services.entity.ai.goal.preset.FreezeGoal;
 import net.sodiumzh.nff.services.entity.taming.NFFTamableComponent;
 import net.sodiumzh.nff.services.entity.taming.NFFTamingMapping;
 import net.sodiumzh.nff.services.entity.taming.NFFTamingProcess;
@@ -200,7 +199,7 @@ public class HmagJiangshiTamingProcess extends NFFTamingProcess
 				thunderEffect(mob);
 			}
 			updateModifiers(mob);
-			mob.level().playSound(null, mob, SoundEvents.GENERIC_EXPLODE, SoundSource.BLOCKS, 2f, 0.7f);
+			mob.getLevel().playSound(null, mob, SoundEvents.GENERIC_EXPLODE, SoundSource.BLOCKS, 2f, 0.7f);
 			NFFTamableComponent.getOrDefault(mob).getGeneralNBT().putUUID(NBT_KEY_ONGOING_PLAYER, player.getUUID());
 			return true;
 		}

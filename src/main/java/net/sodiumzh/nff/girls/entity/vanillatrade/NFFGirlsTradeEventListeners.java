@@ -22,15 +22,16 @@ public class NFFGirlsTradeEventListeners
 	@SubscribeEvent(priority = EventPriority.HIGH)
 	public static void onMobInteract(EntityInteract event)
 	{
-		if (INFFGirlsTamed.isBM(event.getTarget())
+		INFFGirlsTamed t = null;
+		if ((t = INFFGirlsTamed.get(event.getTarget()).orElse(null)) != null
 				&& !event.getTarget().getLevel().isClientSide()
-				&& INFFGirlsTamed.getBM(event.getTarget()).getOwnerUUID().equals(event.getEntity().getUUID())
+				&& t.getOwnerUUID().equals(event.getEntity().getUUID())
 				&& (event.getEntity().getItemInHand(InteractionHand.MAIN_HAND).isEmpty() || event.getEntity().getItemInHand(InteractionHand.MAIN_HAND).is(NFFGirlsItems.EVIL_GEM.get()))
-				&& INFFGirlsTamed.getBM(event.getTarget()).asMob().getTarget() == null
+				&& t.asMob().getTarget() == null
 				&& !event.getEntity().isShiftKeyDown()
 				)
 		{
-			INFFGirlsTamed.getBM(event.getTarget()).asMob().getCapability(NFFGirlsCapabilities.CAP_TRADE_HANDLER).ifPresent(cap -> {
+			t.asMob().getCapability(NFFGirlsCapabilities.CAP_TRADE_HANDLER).ifPresent(cap -> {
 				if (cap.isValidTrader()) {
 					cap.openTradingScreen(event.getEntity(), NFUInfoStatics.createTranslatable("info.nffgirls.open_trade"), 1);
 					event.setCanceled(true);

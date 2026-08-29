@@ -65,7 +65,7 @@ public class HmagCreeperGirlTamingProcess extends TamingProcessItemGivingProgres
 				cg.setSwellDir(-1);
 			}
 
-			Player player = mob.level().getPlayerByUUID(tamable.getGeneralNBT().getUUID(NBT_KEY_FINAL_EXPLOSION_PLAYER));
+			Player player = mob.getLevel().getPlayerByUUID(tamable.getGeneralNBT().getUUID(NBT_KEY_FINAL_EXPLOSION_PLAYER));
 			// Fix reloading crash after quit after player die
 			if (player == null)
 				return;

@@ -19,7 +19,6 @@ import net.sodiumzh.nff.girls.block.EnderberryBushBlock;
 import net.sodiumzh.nff.girls.block.SoulCakeBlock;
 import net.sodiumzh.nff.girls.block.SoulCarpetBlock;
 import net.sodiumzh.nff.girls.block.SoulWheatBlock;
-import net.sodiumzh.nfu.block.BlockMaterial;
 
 @Mod.EventBusSubscriber(modid = NFFGirls.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class NFFGirlsBlocks {
@@ -73,13 +72,11 @@ public class NFFGirlsBlocks {
 			.lightLevel(bs -> bs.getValue(EnderberryBushBlock.CAN_GROW_ENDERBERRY) && bs.getValue(EnderberryBushBlock.AGE) < EnderberryBushBlock.MAX_AGE ? 0 : 15)));
 
     public static final RegistryObject<SoulWheatBlock> SOUL_WHEAT = BLOCKS.register("soul_wheat", () ->
-        new SoulWheatBlock(BlockBehaviour.Properties.of()
-            .mapColor(MapColor.PLANT)
+        new SoulWheatBlock(BlockBehaviour.Properties.of(Material.PLANT, MaterialColor.COLOR_BLUE)
             .noCollission()
             .randomTicks()
             .instabreak()
-            .sound(SoundType.CROP)
-            .pushReaction(PushReaction.DESTROY)));
+            .sound(SoundType.CROP)));
 
 	/* Block Items */
 	public static final RegistryObject<BlockItem> ITEM_SOUL_CARPET = regBlockItem("soul_carpet", SOUL_CARPET, new Item.Properties());

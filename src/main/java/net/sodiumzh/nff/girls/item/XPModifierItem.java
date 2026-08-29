@@ -47,7 +47,7 @@ public class XPModifierItem extends Item
 	public InteractionResult interactLivingEntity(ItemStack stack, Player player, LivingEntity target, InteractionHand hand) {
 		if (INFFGirlsTamed.get(target).isPresent()) {
 			INFFGirlsTamed.get(target).map(INFFGirlsTamed::getDataAccessor).ifPresent(cap -> {
-				if (!player.level().isClientSide)
+				if (!player.getLevel().isClientSide)
 				{
 					if (!player.isShiftKeyDown())
 					{
@@ -65,7 +65,7 @@ public class XPModifierItem extends Item
 					}
 				}
 			});
-			return InteractionResult.sidedSuccess(player.level().isClientSide);
+			return InteractionResult.sidedSuccess(player.getLevel().isClientSide);
 		}
     	return InteractionResult.PASS;
     }
