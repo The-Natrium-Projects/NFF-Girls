@@ -72,7 +72,7 @@ public class CombatCommandingWandItem extends NFUItem {
 				return InteractionResult.sidedSuccess(player.level.isClientSide());
 			}).orElseGet(() -> {
 				AtomicBoolean set = new AtomicBoolean(false);
-				player.level().getEntities(player, player.getBoundingBox().inflate(16d), e -> INFFGirlsTamed.get(e).isPresent())
+				player.getLevel().getEntities(player, player.getBoundingBox().inflate(16d), e -> INFFGirlsTamed.get(e).isPresent())
 					.forEach(e -> {
 						if (trySetTarget(player, e, target)) set.set(true);
 					});

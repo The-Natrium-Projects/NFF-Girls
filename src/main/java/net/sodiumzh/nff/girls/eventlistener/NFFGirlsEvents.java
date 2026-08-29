@@ -128,7 +128,7 @@ public class NFFGirlsEvents
 		@Nullable
 		public CNFFGirlsTradeHandler searchOngoingDwmgTrader(double range)
 		{
-			List<Entity> list = this.player.level().getEntities(player, player.getBoundingBox().inflate(range)).stream().filter(entity -> 
+			List<Entity> list = this.player.getLevel().getEntities(player, player.getBoundingBox().inflate(range)).stream().filter(entity -> 
 				NFUMiscStatics.getValueFromCapability(entity, NFFGirlsCapabilities.CAP_TRADE_HANDLER, CNFFGirlsTradeHandler::getTradingPlayer) == player
 			).toList();
 			return list.isEmpty() ? null : NFUMiscStatics.getValueFromCapability(list.get(0), NFFGirlsCapabilities.CAP_TRADE_HANDLER, cap -> cap);

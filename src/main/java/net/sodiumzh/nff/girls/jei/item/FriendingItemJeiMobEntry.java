@@ -2,7 +2,6 @@ package net.sodiumzh.nff.girls.jei.item;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.resources.language.I18n;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
@@ -49,7 +48,7 @@ public class FriendingItemJeiMobEntry extends MobApplicableItemTableJeiMobEntry 
     }
 
     @Override
-    public void drawAdditional(int recipeWidth, int recipeHeight, @NotNull GuiGraphics guiGraphics, double mouseX, double mouseY) {
+    public void drawAdditional(int recipeWidth, int recipeHeight, @NotNull PoseStack poseStack, double mouseX, double mouseY) {
         // Per-mob taming condition. Prefer a per-mob key named after the
         // displayed entity type ("jei.<entity namespace>.friending_condition.<entity path>"),
         // falling back to the shared per-table key
@@ -68,21 +67,21 @@ public class FriendingItemJeiMobEntry extends MobApplicableItemTableJeiMobEntry 
             String mobDescKey = hostKey != null
                 ? "jei." + hostKey.getNamespace() + ".friending_condition." + hostKey.getPath() : null;
             String descKey = mobDescKey != null && I18n.exists(mobDescKey) ? mobDescKey : tableDescKey;
-            guiGraphics.drawString(Minecraft.getInstance().font,
+            Minecraft.getInstance().font.draw(poseStack,
                 NFUInfoStatics.createTranslatable("jei.nffgirls.friending_condition.condition"),
-                2, titleY, 8, false);
+                2, titleY, 8);
             if (I18n.exists(descKey)) {
                 int lineY = textY;
                 for (FormattedCharSequence line : Minecraft.getInstance().font.split(
                         Component.translatable(descKey), 160)) {
                     if (lineY >= recipeHeight - 6) break;
-                    guiGraphics.drawString(Minecraft.getInstance().font, line, 2, lineY, 8, false);
+                    Minecraft.getInstance().font.draw(poseStack, line, 2, lineY, 8);
                     lineY += Minecraft.getInstance().font.lineHeight;
                 }
             }
         }
         else {
-            guiGraphics.drawWordWrap(Minecraft.getInstance().font,
+            Minecraft.getInstance().font.drawWordWrap(
                 NFUInfoStatics.createTranslatable("jei.nffgirls.friending_not_including_all"),
                 2, titleY, 160, 8);
         }

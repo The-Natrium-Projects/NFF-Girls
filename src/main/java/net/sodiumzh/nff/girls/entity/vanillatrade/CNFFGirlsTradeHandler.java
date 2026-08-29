@@ -327,16 +327,8 @@ public interface CNFFGirlsTradeHandler extends IVanillaMerchant
 						}
 					}
 				}
-
-				
 				this.restockTimer = this.getBM().getRestockTicks();
-				/*if (getBM().isOwnerInDimension())
-					NFUMiscStatics.printToScreen("Restocked", getBM().getOwner());*/
 			}
-			/*if (restockTimer % 200 == 0)
-				if (getBM().isOwnerInDimension())
-			
-			NFUMiscStatics.printToScreen(String.format("Restock time left: %d s", restockTimer / 20) , getBM().getOwner());*/
 			
 			// Update introduction letter entry
             if (this.getOffers().get(this.getOffers().size() - 1).getResult().is(NFFGirlsItems.TRADE_INTRODUCTION_LETTER.get())) {

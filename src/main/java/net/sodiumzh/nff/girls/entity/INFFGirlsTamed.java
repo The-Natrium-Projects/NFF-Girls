@@ -166,16 +166,10 @@ public interface INFFGirlsTamed extends INFFTamed
 
 		return InteractionResult.PASS;
 	}
-*/
 	public default InteractionResult clientsideMainHandInteraction(Player player, InteractionHand hand)
 	{
 		return InteractionResult.PASS;
 	}
-	/*
-	public default InteractionResult clientsideOffHandInteraction(Player player, InteractionHand hand)
-	{
-		return InteractionResult.PASS;
-	}*/
 
 	public default boolean isCommandingItem(ItemStack test)
 	{

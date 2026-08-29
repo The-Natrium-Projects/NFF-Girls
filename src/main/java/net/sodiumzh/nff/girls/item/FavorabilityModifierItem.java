@@ -52,7 +52,7 @@ public class FavorabilityModifierItem extends NFUItem
     	if (INFFGirlsTamed.get(target).isPresent())
     	{
     		INFFGirlsTamed.get(target).map(INFFGirlsTamed::getDataAccessor).ifPresent(cap -> {
-    			if (!player.level().isClientSide)
+    			if (!player.getLevel().isClientSide)
 	    		{
 	    			if (!player.isShiftKeyDown())
 	    			{

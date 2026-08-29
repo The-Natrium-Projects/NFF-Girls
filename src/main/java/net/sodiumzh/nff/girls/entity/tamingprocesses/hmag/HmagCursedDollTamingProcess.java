@@ -38,7 +38,7 @@ public class HmagCursedDollTamingProcess extends NFFTamingProcess
 	@Override
 	public TamingInteractionResult handleInteract(Player player, Mob mob, InteractionHand hand) {
 		NFFTamableComponent tamable = NFFTamableComponent.getOrDefault(mob);
-		TamingInteractionResult result = TamingInteractionResult.unhandled(player.level());
+		TamingInteractionResult result = TamingInteractionResult.unhandled(player.getLevel());
 		
 		if (!player.level.isClientSide)
 		{

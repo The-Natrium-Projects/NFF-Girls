@@ -166,7 +166,7 @@ public class HmagKoboldEntity extends KoboldEntity implements INFFGirlsTamed
 			this.locatingBlockRemainingCooldown = LOCATING_BLOCK_COOLDOWN;
 			this.getAdditionalInventory().orElseThrow().getItem(1).shrink(1);
 			this.getAdditionalInventory().orElseThrow().syncToMob(this);
-			this.level().playSound(this, this.blockPosition(), this.getAmbientSound(),
+			this.getLevel().playSound(null, this.blockPosition(), this.getAmbientSound(),
 				SoundSource.PLAYERS, this.getSoundVolume() * 1.5f, this.getVoicePitch() * 1.5f);
 		}
 	}

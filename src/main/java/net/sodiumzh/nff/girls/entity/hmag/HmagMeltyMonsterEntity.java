@@ -182,7 +182,7 @@ public class HmagMeltyMonsterEntity extends MeltyMonsterEntity implements INFFGi
 			Runnable action2 = () -> {
 				action1.run();
 				for (int j = 0; j < 3; ++j)
-					action.accept(NFUMathStatics.randomUnitVector().scale(RndUtil.rndRangedDouble(0, 2)));
+					action.accept(NFUMathStatics.randomUnitVector().scale(NFUMathStatics.rndRangedDouble(0, 2)));
 			};
 			this.getTimerComponent().addDelayedAction(action2, 3, 4, false, true);
 			//action2.run();
@@ -194,7 +194,7 @@ public class HmagMeltyMonsterEntity extends MeltyMonsterEntity implements INFFGi
 			Runnable action3 = () -> {
 				action1.run();
 				for (int j = 0; j < 6; ++j)
-					action.accept(NFUMathStatics.randomUnitVector().scale(RndUtil.rndRangedDouble(0, 2)));
+					action.accept(NFUMathStatics.randomUnitVector().scale(NFUMathStatics.rndRangedDouble(0, 2)));
 			};
 			this.getTimerComponent().addDelayedAction(action3, 3, 6, false, true);
 			//action3.run();
@@ -206,7 +206,7 @@ public class HmagMeltyMonsterEntity extends MeltyMonsterEntity implements INFFGi
 			Runnable action4 = () -> {
 				action1.run();
 				for (int j = 0; j < 9; ++j)
-					action.accept(NFUMathStatics.randomUnitVector().scale(RndUtil.rndRangedDouble(0, 3)));
+					action.accept(NFUMathStatics.randomUnitVector().scale(NFUMathStatics.rndRangedDouble(0, 3)));
 			};
 			this.getTimerComponent().addDelayedAction(action4, 2, 10, false, true);
 			//action4.run();
@@ -596,7 +596,7 @@ public class HmagMeltyMonsterEntity extends MeltyMonsterEntity implements INFFGi
 		{
 			if (parent.getAIState() == NFFTamedMobAIState.FOLLOW && this.parent.getStamina() > this.parent.getMaxStamina() / 5)
 				return false;
-			return !this.parent.isInLava() && this.isValidTarget(this.parent.level(), this.blockPos)
+			return !this.parent.isInLava() && this.isValidTarget(this.parent.getLevel(), this.blockPos)
 				&& (!this.parent.getAdditionalInventory().orElseThrow().getItem(4).is(Items.LAVA_BUCKET) || this.parent.getStamina() == 0);
 		}
 

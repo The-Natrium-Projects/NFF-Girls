@@ -270,15 +270,16 @@ public class NFFGirlsEntityEventListeners
 			// Favorability loss on death
 			if (event.getDamageSource().getEntity() != null
 					&& event.getDamageSource().getEntity() == bm.getOwner()
-					&& !event.getDamageSource().is(DamageTypes.FELL_OUT_OF_WORLD)
-					&& !event.getDamageSource().is(DamageTypes.GENERIC_KILL))
-					
+					&& !event.getDamageSource().equals(DamageSource.OUT_OF_WORLD))
+			{
 				bm.getDataAccessor().setFavorability(0);
+			}
 			else if (bm.asMob().distanceToSqr(bm.getOwner()) < 64d 
 					&& bm.asMob().hasLineOfSight(bm.getOwner())
-					&& !event.getDamageSource().is(DamageTypes.FELL_OUT_OF_WORLD)
-					&& !event.getDamageSource().is(DamageTypes.GENERIC_KILL))
+					&& !event.getDamageSource().equals(DamageSource.OUT_OF_WORLD))
+			{
 				bm.getDataAccessor().addFavorability(-20);
+			}
 			// EXP loses by a half on death
 			// As respawner construction (in befriendmobs) is after posting NFFTamedDeathEvent, it can be set here
 			bm.getDataAccessor().setXP(bm.getDataAccessor().getXP() / 2);
@@ -541,7 +542,7 @@ public class NFFGirlsEntityEventListeners
             // Handle OTHER_ANGRY angry rule
             // Update from undead-affinity carrying entity each second, as searching mobs is somewhat costly
             if (event.getEntity().tickCount % 20 == 19) {
-                List<Mob> undeadMobs = event.getEntity().level()
+                List<Mob> undeadMobs = event.getEntity().getLevel()
                     .getEntitiesOfClass(Mob.class, event.getEntity().getBoundingBox().inflate(32, 32, 32), mob -> mob.isAlive() && mob.getMobType().equals(MobType.UNDEAD));
                 List<Mob> hostiles = undeadMobs.stream()
                     .filter(m -> Objects.equals(m.getTarget(), event.getEntity()))
@@ -578,7 +579,7 @@ public class NFFGirlsEntityEventListeners
 					} else {
 						aabb = t.asMob().getBoundingBox();
 					}
-					t.asMob().level().getEntities(t.asMob(), aabb.inflate(10d)).stream()
+					t.asMob().getLevel().getEntities(t.asMob(), aabb.inflate(10d)).stream()
 						.filter(e -> !e.isRemoved())
 						.filter(e -> e.getBoundingBox().intersects(aabb))
 						.forEach(t::touchEntity);
@@ -592,11 +593,12 @@ public class NFFGirlsEntityEventListeners
 			// Send overlap event
 			if (event.getEntity() instanceof INFFGirlsTamed t)
 			{
-				List<Entity> list = bm.asMob().level.getEntities(bm.asMob(), aabb);
+				List<Entity> list = t.asMob().level.getEntities(t.asMob(), t.asMob().getBoundingBox().inflate(10))
+					.stream().filter(e -> e.getBoundingBox().intersects(t.asMob().getBoundingBox())).toList();
 				for(int i = 0; i < list.size(); ++i) {
 					Entity entity = list.get(i);
 					if (!entity.isRemoved()) {
-						bm.touchEntity(entity);
+						t.touchEntity(entity);
 					}
 				}
 			}
@@ -709,7 +711,7 @@ public class NFFGirlsEntityEventListeners
 	@SubscribeEvent
 	public static void onBefriendedSwitchAiState(NFFTamedChangeAiStateEvent event)
 	{
-		if (INFFGirlsTamed.get(event.getMob().asMob()).isPresent() && !event.getMob().asMob().level().isClientSide)
+		if (INFFGirlsTamed.get(event.getMob().asMob()).isPresent() && !event.getMob().asMob().getLevel().isClientSide)
 		{
 			NFUMiscStatics.printToScreen(NFUInfoStatics.createText("")
 					.append(event.getMob().asMob().getName())
@@ -884,7 +886,7 @@ public class NFFGirlsEntityEventListeners
 				if (event.getSource().getEntity() != null
 						&& event.getSource().getEntity() instanceof Player player
 						&& INFFGirlsTamed.get(event.getEntity()).filter(bm -> bm.getOwnerUUID().equals(player.getUUID())).isPresent()
-						&& !event.getSource().is(DamageTypes.FELL_OUT_OF_WORLD)
+						&& !event.getSource().equals(DamageSource.OUT_OF_WORLD)
 						&& !event.getSource().isCreativePlayer())
 				{
 					if (event.getAmount() >= 0.5f)
@@ -1391,7 +1393,7 @@ public class NFFGirlsEntityEventListeners
 			newLevel : Math.min((int)Math.round(NFFGirlsConfigs.ValueCache.Combat.MAX_HEALTH_BOOST_BY_LEVEL / NFFGirlsConfigs.ValueCache.Combat.HEALTH_BOOST_PER_LEVEL), newLevel);
 		int atkLevel = NFFGirlsConfigs.ValueCache.Combat.MAX_ATK_BOOST_BY_LEVEL < 1e-12d ?
 			newLevel : Math.min((int)Math.round(NFFGirlsConfigs.ValueCache.Combat.MAX_ATK_BOOST_BY_LEVEL / NFFGirlsConfigs.ValueCache.Combat.ATK_BOOST_PER_LEVEL), newLevel);
-		if (!entity.level().isClientSide && INFFGirlsTamed.get(entity).isPresent()) {
+		if (!entity.getLevel().isClientSide && INFFGirlsTamed.get(entity).isPresent()) {
 			if (hpMaxInst != null) {
 				hpMaxInst.removeModifier(NFFGirlsDataAccessor.XP_HP_MODIFIER_UUID);
 				if (newLevel > 0)
@@ -1425,7 +1427,7 @@ public class NFFGirlsEntityEventListeners
 	@SubscribeEvent
 	public static void onLevelChange(NFFGirlsXPLevelChangeEvent event)
 	{
-		if (!event.getEntity().level().isClientSide()) {
+		if (!event.getEntity().getLevel().isClientSide()) {
 			updateXPModifiers(event.getEntity(), event.levelAfter);
 		}
 	}
@@ -1504,8 +1506,7 @@ public class NFFGirlsEntityEventListeners
 
 	@SubscribeEvent
 	public static void onMobInteract(MobInteractEvent event) {
-		INFFGirlsTamed.ifBM(event.getEntity(), tamed -> {
-			if (tamed == null) return;
+		INFFGirlsTamed.get(event.getEntity()).ifPresent(tamed -> {
 			if (tamed.shouldBypassCommonInteractions()) return;
 			Player player = event.player;
 			InteractionHand hand = event.hand;

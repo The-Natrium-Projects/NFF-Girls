@@ -16,6 +16,7 @@ import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.CropBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.AABB;
+import net.minecraft.world.phys.Vec3;
 import net.sodiumzh.nff.girls.entity.projectile.MobileParticleSourceEntity;
 import net.sodiumzh.nff.girls.registry.NFFGirlsEntityTypes;
 import net.sodiumzh.nff.services.entity.taming.INFFTamed;
@@ -51,7 +52,7 @@ public class SoulWheatBlock extends CropBlock {
                     .findAny().orElse(null);
             if (friendedUndead != null) {
                 MobileParticleSourceEntity.addDefault(pLevel, ParticleTypes.HAPPY_VILLAGER,
-                    friendedUndead.getEyePosition(), pPos.getCenter(), 5d, 3);
+                    friendedUndead.getEyePosition(), new Vec3(pPos.getX(), pPos.getY(), pPos.getZ()), 5d, 3);
                 super.randomTick(pState, pLevel, pPos, pRandom);
             }
         }
@@ -60,7 +61,7 @@ public class SoulWheatBlock extends CropBlock {
     // Cannot be bonemeal-ed
 
     @Override
-    public boolean isValidBonemealTarget(LevelReader pLevel, BlockPos pPos, BlockState pState, boolean pIsClient){
+    public boolean isValidBonemealTarget(BlockGetter pLevel, BlockPos pPos, BlockState pState, boolean pIsClient){
         return false;
     }
 
