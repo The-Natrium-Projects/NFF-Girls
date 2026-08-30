@@ -26,7 +26,7 @@ public class NFFGirlsTradeEventHandlers
 		if ((t = INFFGirlsTamed.get(event.getTarget()).orElse(null)) != null
 				&& !event.getTarget().getLevel().isClientSide()
 				&& t.getOwnerUUID().equals(event.getEntity().getUUID())
-				&& (event.getEntity().getItemInHand(InteractionHand.MAIN_HAND).isEmpty() || event.getEntity().getItemInHand(InteractionHand.MAIN_HAND).is(NFFGirlsItems.EVIL_GEM.get()))
+				&& (event.getEntityLiving().getItemInHand(InteractionHand.MAIN_HAND).isEmpty() || event.getEntityLiving().getItemInHand(InteractionHand.MAIN_HAND).is(NFFGirlsItems.EVIL_GEM.get()))
 				&& t.asMob().getTarget() == null
 				&& !event.getEntity().isShiftKeyDown()
 				)

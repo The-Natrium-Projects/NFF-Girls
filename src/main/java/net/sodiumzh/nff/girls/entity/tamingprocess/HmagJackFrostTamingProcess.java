@@ -1,0 +1,14 @@
+package net.sodiumzh.nff.girls.entity.tamingprocess;
+
+import net.sodiumzh.nff.girls.entity.tamingprocess.NFFGirlsItemDroppingTamingProcess;
+import net.sodiumzh.nff.girls.registry.NFFGirlsAngerRules;
+import net.sodiumzh.nfu.entity.anger.MobAngerRules;
+
+public class HmagJackFrostTamingProcess extends NFFGirlsItemDroppingTamingProcess
+{
+	@Override
+	public int getHoldingItemTime() {
+		return 5 * 20;
+	}
+
+}

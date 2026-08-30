@@ -1,4 +1,4 @@
-package net.sodiumzh.nff.girls.entity.tamingprocess.hmag;
+package net.sodiumzh.nff.girls.entity.tamingprocess;
 
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.monster.EnderMan;

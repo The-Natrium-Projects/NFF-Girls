@@ -58,7 +58,7 @@ public abstract class MobApplicableItemTableJeiMobEntry implements IRecipeCatego
      * egg in JEI shows this mob's taming (or healing) guide.
      */
     public ItemStack getSpawnEggItem() {
-        ResourceLocation key = ForgeRegistries.ENTITY_TYPES.getKey(entityType);
+        ResourceLocation key = ForgeRegistries.ENTITIES.getKey(entityType);
         if (key == null) return ItemStack.EMPTY;
         Item egg = ForgeRegistries.ITEMS.getValue(
             new ResourceLocation(key.getNamespace(), key.getPath() + "_spawn_egg"));

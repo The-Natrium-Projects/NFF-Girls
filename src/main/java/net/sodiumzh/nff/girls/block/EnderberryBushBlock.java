@@ -119,12 +119,12 @@ public class EnderberryBushBlock extends SweetBerryBushBlock {
     }
 
     @Override
-    public boolean isBonemealSuccess(Level pLevel, RandomSource pRandom, BlockPos pPos, BlockState pState){
+    public boolean isBonemealSuccess(Level pLevel, Random pRandom, BlockPos pPos, BlockState pState){
         return false;
     }
 
     @Override
-    public void performBonemeal(ServerLevel pLevel, RandomSource pRandom, BlockPos pPos, BlockState pState) {
+    public void performBonemeal(ServerLevel pLevel, Random pRandom, BlockPos pPos, BlockState pState) {
 
     }
 

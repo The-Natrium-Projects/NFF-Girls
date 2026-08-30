@@ -1,4 +1,4 @@
-package net.sodiumzh.nff.girls.entity.tamingprocesses.hmag;
+package net.sodiumzh.nff.girls.entity.tamingprocess;
 
 import com.github.mechalopa.hmag.registry.ModEffects;
 import net.minecraft.world.effect.MobEffectInstance;

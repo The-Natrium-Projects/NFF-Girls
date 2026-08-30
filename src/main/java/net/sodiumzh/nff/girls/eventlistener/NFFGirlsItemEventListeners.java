@@ -145,8 +145,8 @@ public class NFFGirlsItemEventListeners
 		// Lengthen the AI switching distance
 		if (!event.getEntity().getLevel().isClientSide()
 				&& !event.getEntity().isShiftKeyDown()
-				&& !NFULevelStatics.getMouseFocus(event.getEntity()).getType().equals(HitResult.Type.ENTITY)) {
-			Player player = event.getEntity();
+				&& !NFULevelStatics.getMouseFocus(event.getPlayer()).getType().equals(HitResult.Type.ENTITY)) {
+			Player player = event.getPlayer();
 			InteractionHand usedHand = event.getHand();
 
 			NFULevelStatics.eyeTrace(player, 32d).ifPresent(hr -> {

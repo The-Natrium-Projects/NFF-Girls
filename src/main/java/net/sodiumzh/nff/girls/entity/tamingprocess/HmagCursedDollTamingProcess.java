@@ -1,4 +1,4 @@
-package net.sodiumzh.nff.girls.entity.tamingprocess.hmag;
+package net.sodiumzh.nff.girls.entity.tamingprocess;
 
 import net.minecraft.nbt.Tag;
 import net.minecraft.resources.ResourceLocation;
@@ -8,7 +8,6 @@ import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.DyeColor;
-import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.sodiumzh.nff.girls.NFFGirls;
@@ -16,11 +15,8 @@ import net.sodiumzh.nff.girls.entity.NFFGirlsTamingRules;
 import net.sodiumzh.nff.services.entity.taming.NFFTamableComponent;
 import net.sodiumzh.nff.services.entity.taming.NFFTamingProcess;
 import net.sodiumzh.nfu.entity.RepeatableAttributeModifier;
-import net.sodiumzh.nfu.entity.anger.MobAngerRules;
 import net.sodiumzh.nfu.entity.taming.TamingInteractionResult;
 import net.sodiumzh.nfu.item.ColoredItems;
-import net.sodiumzh.nfu.math.WithDyeColors;
-import net.sodiumzh.nfu.util.NFUContainerStatics;
 import net.sodiumzh.nfu.util.NFUParticleStatics;
 import org.apache.commons.lang3.mutable.MutableObject;
 

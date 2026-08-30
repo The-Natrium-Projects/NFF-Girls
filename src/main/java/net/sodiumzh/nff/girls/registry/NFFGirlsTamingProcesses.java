@@ -2,7 +2,7 @@ package net.sodiumzh.nff.girls.registry;
 
 import net.sodiumzh.nff.girls.NFFGirls;
 import net.sodiumzh.nff.girls.entity.NFFGirlsTamingRules;
-import net.sodiumzh.nff.girls.entity.tamingprocess.hmag.*;
+import net.sodiumzh.nff.girls.entity.tamingprocess.*;
 import net.sodiumzh.nff.services.entity.taming.NFFTamingProcess;
 import net.sodiumzh.nff.services.registry.NFFRegistries;
 import net.sodiumzh.nfu.entity.anger.MobAngerRules;

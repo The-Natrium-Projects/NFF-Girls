@@ -1,4 +1,4 @@
-package net.sodiumzh.nff.girls.entity.tamingprocess.hmag;
+package net.sodiumzh.nff.girls.entity.tamingprocess;
 
 import com.github.mechalopa.hmag.world.entity.CrimsonSlaughtererEntity;
 import net.minecraft.world.effect.MobEffectInstance;

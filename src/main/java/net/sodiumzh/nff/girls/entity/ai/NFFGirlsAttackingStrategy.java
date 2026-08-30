@@ -69,17 +69,17 @@ public class NFFGirlsAttackingStrategy {
     }
 
     public void writeBuf(FriendlyByteBuf buf) {
-        buf.writeCollection(this.activeAttackingList.stream().map(ForgeRegistries.ENTITY_TYPES::getKey)
+        buf.writeCollection(this.activeAttackingList.stream().map(ForgeRegistries.ENTITIES::getKey)
             .filter(Objects::nonNull).map(ResourceLocation::toString).toList(), FriendlyByteBuf::writeUtf);
-        buf.writeCollection(this.notAttackingList.stream().map(ForgeRegistries.ENTITY_TYPES::getKey)
+        buf.writeCollection(this.notAttackingList.stream().map(ForgeRegistries.ENTITIES::getKey)
             .filter(Objects::nonNull).map(ResourceLocation::toString).toList(), FriendlyByteBuf::writeUtf);
     }
 
     public static NFFGirlsAttackingStrategy readBuf(FriendlyByteBuf buf) {
         NFFGirlsAttackingStrategy strategy = new NFFGirlsAttackingStrategy();
-        var attack = buf.readCollection(ArrayList::new, b -> (EntityType<? extends Mob>)ForgeRegistries.ENTITY_TYPES.getValue(new ResourceLocation(b.readUtf())));
+        var attack = buf.readCollection(ArrayList::new, b -> (EntityType<? extends Mob>)ForgeRegistries.ENTITIES.getValue(new ResourceLocation(b.readUtf())));
         strategy.activeAttackingList.addAll(attack);
-        var noAttack = buf.readCollection(ArrayList::new, b -> (EntityType<? extends Mob>)ForgeRegistries.ENTITY_TYPES.getValue(new ResourceLocation(b.readUtf())));
+        var noAttack = buf.readCollection(ArrayList::new, b -> (EntityType<? extends Mob>)ForgeRegistries.ENTITIES.getValue(new ResourceLocation(b.readUtf())));
         strategy.notAttackingList.addAll(noAttack);
         return strategy;
     }

@@ -4,7 +4,6 @@ import com.github.mechalopa.hmag.registry.ModBlocks;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.server.level.ServerLevel;
-import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.MobType;
@@ -20,12 +19,13 @@ import net.minecraft.world.phys.Vec3;
 import net.sodiumzh.nff.girls.entity.projectile.MobileParticleSourceEntity;
 import net.sodiumzh.nff.girls.registry.NFFGirlsEntityTypes;
 import net.sodiumzh.nff.services.entity.taming.INFFTamed;
-import net.sodiumzh.nfu.math.ThreadSafeRandomSource;
 import net.sodiumzh.nfu.util.NFUEntityStatics;
+
+import java.util.Random;
 
 public class SoulWheatBlock extends CropBlock {
 
-    protected static final RandomSource RND = new ThreadSafeRandomSource();
+    protected static final Random RND = new Random();
 
     public SoulWheatBlock(Properties pProperties) {
         super(pProperties);
@@ -37,7 +37,7 @@ public class SoulWheatBlock extends CropBlock {
     }
 
     @Override
-    public void randomTick(BlockState pState, ServerLevel pLevel, BlockPos pPos, RandomSource pRandom) {
+    public void randomTick(BlockState pState, ServerLevel pLevel, BlockPos pPos, Random pRandom) {
         if (RND.nextFloat() < 0.2d // 5x slower growth than vanilla wheat
             // Only grows under night sky or in Nether/End
             && (pLevel.isNight() && pLevel.canSeeSky(pPos)
@@ -66,12 +66,12 @@ public class SoulWheatBlock extends CropBlock {
     }
 
     @Override
-    public boolean isBonemealSuccess(Level pLevel, RandomSource pRandom, BlockPos pPos, BlockState pState){
+    public boolean isBonemealSuccess(Level pLevel, Random pRandom, BlockPos pPos, BlockState pState){
         return false;
     }
 
     @Override
-    public void performBonemeal(ServerLevel pLevel, RandomSource pRandom, BlockPos pPos, BlockState pState) {
+    public void performBonemeal(ServerLevel pLevel, Random pRandom, BlockPos pPos, BlockState pState) {
 
     }
 

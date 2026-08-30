@@ -7,11 +7,10 @@ import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
-import net.sodiumzh.nff.girls.entity.tamingprocess.hmag.NFFGirlsItemDroppingTamingProcess;
+import net.sodiumzh.nff.girls.entity.tamingprocess.NFFGirlsItemDroppingTamingProcess;
 import net.sodiumzh.nff.services.entity.taming.NFFTamableComponent;
 import net.sodiumzh.nff.services.entity.taming.NFFTamingMapping;
 import net.sodiumzh.nff.services.entity.taming.TamingProcessItemGivingProgress;
-import net.sodiumzh.nff.services.registry.NFFCapRegistry;
 import net.sodiumzh.nfu.util.NFUInfoStatics;
 
 public class NFFTamingProgressProbeItem extends Item

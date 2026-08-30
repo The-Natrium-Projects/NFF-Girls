@@ -38,10 +38,10 @@ import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.EntityHitResult;
 import net.minecraft.world.phys.Vec3;
 import net.sodiumzh.nff.girls.entity.INFFGirlsTamed;
+import net.sodiumzh.nff.girls.entity.ai.goal.NFFGirlsHmagMeltyMonsterFollowOwnerGoal;
 import net.sodiumzh.nff.girls.entity.ai.goal.NFFGirlsRangedAttackGoal;
-import net.sodiumzh.nff.girls.entity.ai.goal.NFFMeltyMonsterFollowOwnerGoal;
 import net.sodiumzh.nff.girls.entity.ai.goal.target.*;
-import net.sodiumzh.nff.girls.inventory.NFFGirlsHmagMeltyMonsterInventoryMenu;
+import net.sodiumzh.nff.girls.inventory.HmagMeltyMonsterInventoryMenu;
 import net.sodiumzh.nff.girls.item.bauble.INFFGirlsBauble;
 import net.sodiumzh.nff.girls.sound.NFFGirlsSoundPresets;
 import net.sodiumzh.nff.services.entity.ai.NFFTamedMobAIState;
@@ -138,7 +138,7 @@ public class HmagMeltyMonsterEntity extends MeltyMonsterEntity implements INFFGi
 	protected void registerGoals() {
 		goalSelector.addGoal(3, new GoToLavaGoal(this, 1.5D));
 		goalSelector.addGoal(5, new NFFGirlsRangedAttackGoal(this, 1.0D, 30, 40, 8.0F));
-		goalSelector.addGoal(5, new NFFMeltyMonsterFollowOwnerGoal(this, 1.0d, 5.0f, 2.0f, false));
+		goalSelector.addGoal(5, new NFFGirlsHmagMeltyMonsterFollowOwnerGoal(this, 1.0d, 5.0f, 2.0f, false));
 		goalSelector.addGoal(6, new NFFWaterAvoidingRandomStrollGoal(this, 1.0d));
 		goalSelector.addGoal(7, new LookAtPlayerGoal(this, Player.class, 8.0F));
 		goalSelector.addGoal(7, new RandomLookAroundGoal(this));
@@ -458,7 +458,7 @@ public class HmagMeltyMonsterEntity extends MeltyMonsterEntity implements INFFGi
 
 	@Override
 	public NFFTamedInventoryMenu makeMenu(int containerId, Inventory playerInventory, Container container) {
-		return new NFFGirlsHmagMeltyMonsterInventoryMenu(containerId, playerInventory, container, this);
+		return new HmagMeltyMonsterInventoryMenu(containerId, playerInventory, container, this);
 		// You can keep it null, but in this case never call openBefriendedInventory() or it will crash.
 	}
 

@@ -63,7 +63,7 @@ public class FriendingItemJeiMobEntry extends MobApplicableItemTableJeiMobEntry 
             && I18n.exists("jei.nffgirls.friending_condition.condition")) {
             ResourceLocation tableKey = itemTableKey.get();
             String tableDescKey = "jei." + tableKey.getNamespace() + ".friending_condition." + tableKey.getPath();
-            ResourceLocation hostKey = ForgeRegistries.ENTITY_TYPES.getKey(entityType);
+            ResourceLocation hostKey = ForgeRegistries.ENTITIES.getKey(entityType);
             String mobDescKey = hostKey != null
                 ? "jei." + hostKey.getNamespace() + ".friending_condition." + hostKey.getPath() : null;
             String descKey = mobDescKey != null && I18n.exists(mobDescKey) ? mobDescKey : tableDescKey;
@@ -73,7 +73,7 @@ public class FriendingItemJeiMobEntry extends MobApplicableItemTableJeiMobEntry 
             if (I18n.exists(descKey)) {
                 int lineY = textY;
                 for (FormattedCharSequence line : Minecraft.getInstance().font.split(
-                        Component.translatable(descKey), 160)) {
+                        NFUInfoStatics.createTranslatable(descKey), 160)) {
                     if (lineY >= recipeHeight - 6) break;
                     Minecraft.getInstance().font.draw(poseStack, line, 2, lineY, 8);
                     lineY += Minecraft.getInstance().font.lineHeight;
