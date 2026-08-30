@@ -1,7 +1,4 @@
-package net.sodiumzh.nff.girls.entity.tamingprocess.hmag;
-
-import net.sodiumzh.nff.girls.registry.NFFGirlsAngerRules;
-import net.sodiumzh.nfu.entity.anger.MobAngerRules;
+package net.sodiumzh.nff.girls.entity.tamingprocess;
 
 public class HmagKoboldTamingProcess extends NFFGirlsItemDroppingTamingProcess
 {

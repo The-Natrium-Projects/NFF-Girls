@@ -1,4 +1,4 @@
-package net.sodiumzh.nff.girls.entity.tamingprocess.hmag;
+package net.sodiumzh.nff.girls.entity.tamingprocess;
 
 import com.github.mechalopa.hmag.world.entity.JiangshiEntity;
 import net.minecraft.core.particles.ParticleTypes;
@@ -27,13 +27,11 @@ import net.sodiumzh.nff.services.entity.taming.NFFTamableComponent;
 import net.sodiumzh.nff.services.entity.taming.NFFTamingMapping;
 import net.sodiumzh.nff.services.entity.taming.NFFTamingProcess;
 import net.sodiumzh.nfu.entity.AttributeModifierSwitch;
-import net.sodiumzh.nfu.entity.anger.MobAngerRules;
 import net.sodiumzh.nfu.entity.component.preset.EntityTimerComponent;
 import net.sodiumzh.nfu.entity.taming.TamingInteractionResult;
 import net.sodiumzh.nfu.util.NFUEntityStatics;
 import net.sodiumzh.nfu.util.NFUParticleStatics;
 
-import javax.annotation.Nonnull;
 import java.util.UUID;
 
 public class HmagJiangshiTamingProcess extends NFFTamingProcess

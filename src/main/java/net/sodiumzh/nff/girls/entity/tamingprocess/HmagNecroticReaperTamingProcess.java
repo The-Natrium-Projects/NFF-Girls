@@ -1,4 +1,4 @@
-package net.sodiumzh.nff.girls.entity.tamingprocess.hmag;
+package net.sodiumzh.nff.girls.entity.tamingprocess;
 
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.util.Mth;

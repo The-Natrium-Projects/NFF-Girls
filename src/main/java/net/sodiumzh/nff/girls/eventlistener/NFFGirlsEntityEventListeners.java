@@ -64,10 +64,9 @@ import net.sodiumzh.nff.girls.entity.component.NFFGirlsNeutralityHandlerComponen
 import net.sodiumzh.nff.girls.entity.hmag.*;
 import net.sodiumzh.nff.girls.entity.projectile.MobileParticleSourceEntity;
 import net.sodiumzh.nff.girls.entity.projectile.NecromancerMagicBulletEntity;
-import net.sodiumzh.nff.girls.entity.tamingprocess.hmag.HmagCreeperGirlTamingProcess;
-import net.sodiumzh.nff.girls.entity.tamingprocess.hmag.HmagEnderExecutorTamingProcess;
-import net.sodiumzh.nff.girls.entity.tamingprocess.hmag.HmagJiangshiTamingProcess;
-import net.sodiumzh.nff.girls.event.NFFGirlsHooks;
+import net.sodiumzh.nff.girls.entity.tamingprocess.HmagCreeperGirlTamingProcess;
+import net.sodiumzh.nff.girls.entity.tamingprocess.HmagEnderExecutorTamingProcess;
+import net.sodiumzh.nff.girls.entity.tamingprocess.HmagJiangshiTamingProcess;
 import net.sodiumzh.nff.girls.item.NecromancerArmorItem;
 import net.sodiumzh.nff.girls.registry.*;
 import net.sodiumzh.nff.girls.util.NFFGirlsEntityStatics;
@@ -92,13 +91,11 @@ import net.sodiumzh.nfu.entity.anger.MobAngerReason;
 import net.sodiumzh.nfu.entity.component.EntityComponentAPI;
 import net.sodiumzh.nfu.entity.component.EntityComponentFinalizeSetupEvent;
 import net.sodiumzh.nfu.entity.component.EntityComponentTypes;
-import net.sodiumzh.nfu.entity.component.preset.EntityAttributeMonitorComponent;
 import net.sodiumzh.nfu.entity.component.preset.EntityItemStackMonitorComponent;
 import net.sodiumzh.nfu.entity.component.preset.HealingHandlerComponent;
 import net.sodiumzh.nfu.entity.taming.ITamingProcessWithProgress;
 import net.sodiumzh.nfu.mixin.event.entity.*;
 import net.sodiumzh.nfu.network.NFUDataSerializers;
-import net.sodiumzh.nfu.registry.NFUEntityComponents;
 import net.sodiumzh.nfu.util.*;
 import org.apache.commons.lang3.mutable.MutableObject;
 
