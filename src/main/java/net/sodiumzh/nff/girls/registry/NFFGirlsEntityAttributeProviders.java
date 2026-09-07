@@ -35,7 +35,7 @@ public class NFFGirlsEntityAttributeProviders
 			.add(Attributes.LUCK, 0d));
 
 	public static final NFURegistry.Accessor<EntityAttributeProvider> HMAG_ZOMBIE_GIRL =
-		ATTRIBUTE_PROVIDERS.register("zombie_girl", () -> NFFGIRLS_DEFAULT_ATTRIBUTES.get()
+		ATTRIBUTE_PROVIDERS.register("zombie_girl", () -> EntityAttributeProvider.from(NFFGIRLS_DEFAULT_ATTRIBUTES.get())
 			.add(Attributes.MAX_HEALTH, 30.0D)
 			.add(Attributes.MOVEMENT_SPEED, 0.28D)
 			.add(Attributes.ATTACK_DAMAGE, 4.0D)
@@ -44,7 +44,7 @@ public class NFFGirlsEntityAttributeProviders
 			.add(Attributes.SPAWN_REINFORCEMENTS_CHANCE, 0D));
 
 	public static final NFURegistry.Accessor<EntityAttributeProvider> HMAG_DROWNED_GIRL =
-		ATTRIBUTE_PROVIDERS.register("drowned_girl", () -> NFFGIRLS_DEFAULT_ATTRIBUTES.get()
+		ATTRIBUTE_PROVIDERS.register("drowned_girl", () -> EntityAttributeProvider.from(NFFGIRLS_DEFAULT_ATTRIBUTES.get())
 			.add(Attributes.MAX_HEALTH, 30.0D)
 			.add(Attributes.MOVEMENT_SPEED, 0.245D)
 			.add(Attributes.ATTACK_DAMAGE, 4.0D)
@@ -53,7 +53,7 @@ public class NFFGirlsEntityAttributeProviders
 			.add(Attributes.SPAWN_REINFORCEMENTS_CHANCE, 0D));
 
 	public static final NFURegistry.Accessor<EntityAttributeProvider> HMAG_SKELETON_GIRL =
-		ATTRIBUTE_PROVIDERS.register("skeleton_girl", () -> NFFGIRLS_DEFAULT_ATTRIBUTES.get()
+		ATTRIBUTE_PROVIDERS.register("skeleton_girl", () -> EntityAttributeProvider.from(NFFGIRLS_DEFAULT_ATTRIBUTES.get())
 			.add(Attributes.MAX_HEALTH, 30.0D)
 			.add(Attributes.MOVEMENT_SPEED, 0.25D)
 			.add(Attributes.ATTACK_DAMAGE, 3.25D)
@@ -61,7 +61,7 @@ public class NFFGirlsEntityAttributeProviders
 			.add(Attributes.FOLLOW_RANGE, 64.0D));
 
 	public static final NFURegistry.Accessor<EntityAttributeProvider> HMAG_WITHER_SKELETON_GIRL =
-		ATTRIBUTE_PROVIDERS.register("wither_skeleton_girl", () -> NFFGIRLS_DEFAULT_ATTRIBUTES.get()
+		ATTRIBUTE_PROVIDERS.register("wither_skeleton_girl", () -> EntityAttributeProvider.from(NFFGIRLS_DEFAULT_ATTRIBUTES.get())
 			.add(Attributes.MAX_HEALTH, 36.0D)
 			.add(Attributes.MOVEMENT_SPEED, 0.26D)
 			.add(Attributes.ATTACK_DAMAGE, 4.5D)
@@ -69,14 +69,14 @@ public class NFFGirlsEntityAttributeProviders
 			.add(Attributes.KNOCKBACK_RESISTANCE, 0.25D));
 
 	public static final NFURegistry.Accessor<EntityAttributeProvider> HMAG_CREEPER_GIRL =
-		ATTRIBUTE_PROVIDERS.register("creeper_girl", () -> NFFGIRLS_DEFAULT_ATTRIBUTES.get()
+		ATTRIBUTE_PROVIDERS.register("creeper_girl", () -> EntityAttributeProvider.from(NFFGIRLS_DEFAULT_ATTRIBUTES.get())
 			.add(Attributes.MAX_HEALTH, 30.0D)
 			.add(Attributes.MOVEMENT_SPEED, 0.3D)
 			.add(Attributes.KNOCKBACK_RESISTANCE, 0.25D)
 			.add(Attributes.ATTACK_DAMAGE, 0D));
 
 	public static final NFURegistry.Accessor<EntityAttributeProvider> HMAG_ENDER_EXECUTOR =
-		ATTRIBUTE_PROVIDERS.register("ender_executor", () -> NFFGIRLS_DEFAULT_ATTRIBUTES.get()
+		ATTRIBUTE_PROVIDERS.register("ender_executor", () -> EntityAttributeProvider.from(NFFGIRLS_DEFAULT_ATTRIBUTES.get())
 			.add(Attributes.FOLLOW_RANGE, 64.0D)
 			.add(Attributes.MAX_HEALTH, 120.0D)
 			.add(Attributes.MOVEMENT_SPEED, 0.3D)
@@ -84,14 +84,14 @@ public class NFFGirlsEntityAttributeProviders
 			.add(Attributes.ARMOR, 4.0D));
 
 	public static final NFURegistry.Accessor<EntityAttributeProvider> HMAG_HORNET =
-		ATTRIBUTE_PROVIDERS.register("hornet", () -> NFFGIRLS_DEFAULT_ATTRIBUTES.get()
+		ATTRIBUTE_PROVIDERS.register("hornet", () -> EntityAttributeProvider.from(NFFGIRLS_DEFAULT_ATTRIBUTES.get())
 			.add(Attributes.MAX_HEALTH, 60.0D)
 			.add(Attributes.MOVEMENT_SPEED, 0.28D)
 			.add(Attributes.ATTACK_DAMAGE, 5.0D)
 			.add(Attributes.FOLLOW_RANGE, 24.0D));
 
 	public static final NFURegistry.Accessor<EntityAttributeProvider> HMAG_NECROTIC_REAPER =
-		ATTRIBUTE_PROVIDERS.register("necrotic_reaper", () -> NFFGIRLS_DEFAULT_ATTRIBUTES.get()
+		ATTRIBUTE_PROVIDERS.register("necrotic_reaper", () -> EntityAttributeProvider.from(NFFGIRLS_DEFAULT_ATTRIBUTES.get())
 			.add(Attributes.MAX_HEALTH, 60.0D)
 			.add(Attributes.MOVEMENT_SPEED, 0.31D)
 			.add(Attributes.ATTACK_DAMAGE, 9.0D)
@@ -100,14 +100,14 @@ public class NFFGirlsEntityAttributeProviders
 			.add(Attributes.FOLLOW_RANGE, 24.0D));
 
 	public static final NFURegistry.Accessor<EntityAttributeProvider> HMAG_GHASTLY_SEEKER =
-		ATTRIBUTE_PROVIDERS.register("ghastly_seeker", () -> NFFGIRLS_DEFAULT_ATTRIBUTES.get()
+		ATTRIBUTE_PROVIDERS.register("ghastly_seeker", () -> EntityAttributeProvider.from(NFFGIRLS_DEFAULT_ATTRIBUTES.get())
 			.add(Attributes.MAX_HEALTH, 60.0D)
 			.add(Attributes.ARMOR, 2.0D)
 			.add(Attributes.ATTACK_DAMAGE, 0D)
 			.add(Attributes.FOLLOW_RANGE, 64.0D));
 
 	public static final NFURegistry.Accessor<EntityAttributeProvider> HMAG_BANSHEE =
-		ATTRIBUTE_PROVIDERS.register("banshee", () -> NFFGIRLS_DEFAULT_ATTRIBUTES.get()
+		ATTRIBUTE_PROVIDERS.register("banshee", () -> EntityAttributeProvider.from(NFFGIRLS_DEFAULT_ATTRIBUTES.get())
 			.add(Attributes.MAX_HEALTH, 40.0D)
 			.add(Attributes.MOVEMENT_SPEED, 0.24D)
 			.add(Attributes.ATTACK_DAMAGE, 6.0D)
@@ -115,7 +115,7 @@ public class NFFGirlsEntityAttributeProviders
 			.add(Attributes.FOLLOW_RANGE, 24.0D));
 
 	public static final NFURegistry.Accessor<EntityAttributeProvider> HMAG_KOBOLD =
-		ATTRIBUTE_PROVIDERS.register("kobold", () -> NFFGIRLS_DEFAULT_ATTRIBUTES.get()
+		ATTRIBUTE_PROVIDERS.register("kobold", () -> EntityAttributeProvider.from(NFFGIRLS_DEFAULT_ATTRIBUTES.get())
 			.add(Attributes.MAX_HEALTH, 40.0D)
 			.add(Attributes.MOVEMENT_SPEED, 0.3D)
 			.add(Attributes.ATTACK_DAMAGE, 6.0D)
@@ -124,7 +124,7 @@ public class NFFGirlsEntityAttributeProviders
 			.add(Attributes.FOLLOW_RANGE, 20.0D));
 
 	public static final NFURegistry.Accessor<EntityAttributeProvider> HMAG_IMP =
-		ATTRIBUTE_PROVIDERS.register("imp", () -> NFFGIRLS_DEFAULT_ATTRIBUTES.get()
+		ATTRIBUTE_PROVIDERS.register("imp", () -> EntityAttributeProvider.from(NFFGIRLS_DEFAULT_ATTRIBUTES.get())
 			.add(Attributes.MAX_HEALTH, 40.0D)
 			.add(Attributes.MOVEMENT_SPEED, 0.265D)
 			.add(Attributes.ATTACK_DAMAGE, 7.0D)
@@ -132,7 +132,7 @@ public class NFFGirlsEntityAttributeProviders
 			.add(Attributes.KNOCKBACK_RESISTANCE, 0.5D));
 
 	public static final NFURegistry.Accessor<EntityAttributeProvider> HMAG_HARPY =
-		ATTRIBUTE_PROVIDERS.register("harpy", () -> NFFGIRLS_DEFAULT_ATTRIBUTES.get()
+		ATTRIBUTE_PROVIDERS.register("harpy", () -> EntityAttributeProvider.from(NFFGIRLS_DEFAULT_ATTRIBUTES.get())
 			.add(Attributes.MAX_HEALTH, 40.0D)
 			.add(Attributes.MOVEMENT_SPEED, 0.295D)
 			.add(Attributes.ATTACK_DAMAGE, 7.0D)
@@ -141,7 +141,7 @@ public class NFFGirlsEntityAttributeProviders
 			.add(ForgeMod.STEP_HEIGHT_ADDITION.get(), 1.5D));
 
 	public static final NFURegistry.Accessor<EntityAttributeProvider> HMAG_SNOW_CANINE =
-		ATTRIBUTE_PROVIDERS.register("snow_canine", () -> NFFGIRLS_DEFAULT_ATTRIBUTES.get()
+		ATTRIBUTE_PROVIDERS.register("snow_canine", () -> EntityAttributeProvider.from(NFFGIRLS_DEFAULT_ATTRIBUTES.get())
 			.add(Attributes.MAX_HEALTH, 40.0D)
 			.add(Attributes.MOVEMENT_SPEED, 0.325D)
 			.add(Attributes.ATTACK_DAMAGE, 7.0D)
@@ -150,7 +150,7 @@ public class NFFGirlsEntityAttributeProviders
 			.add(Attributes.KNOCKBACK_RESISTANCE, 0.25D));
 
 	public static final NFURegistry.Accessor<EntityAttributeProvider> HMAG_SLIME_GIRL =
-		ATTRIBUTE_PROVIDERS.register("slime_girl", () -> NFFGIRLS_DEFAULT_ATTRIBUTES.get()
+		ATTRIBUTE_PROVIDERS.register("slime_girl", () -> EntityAttributeProvider.from(NFFGIRLS_DEFAULT_ATTRIBUTES.get())
 			.add(Attributes.MAX_HEALTH, 60.0D)
 			.add(Attributes.MOVEMENT_SPEED, 0.19D)
 			.add(Attributes.ATTACK_DAMAGE, 7.0D)
@@ -158,7 +158,7 @@ public class NFFGirlsEntityAttributeProviders
 			.add(Attributes.KNOCKBACK_RESISTANCE, 0.5D));
 
 	public static final NFURegistry.Accessor<EntityAttributeProvider> HMAG_DULLAHAN =
-		ATTRIBUTE_PROVIDERS.register("dullahan", () -> NFFGIRLS_DEFAULT_ATTRIBUTES.get()
+		ATTRIBUTE_PROVIDERS.register("dullahan", () -> EntityAttributeProvider.from(NFFGIRLS_DEFAULT_ATTRIBUTES.get())
 			.add(Attributes.MAX_HEALTH, 60.0D)
 			.add(Attributes.MOVEMENT_SPEED, 0.31D)
 			.add(Attributes.ATTACK_DAMAGE, 6.0D)
@@ -167,7 +167,7 @@ public class NFFGirlsEntityAttributeProviders
 			.add(Attributes.FOLLOW_RANGE, 20.0D));
 
 	public static final NFURegistry.Accessor<EntityAttributeProvider> HMAG_JIANGSHI =
-		ATTRIBUTE_PROVIDERS.register("jiangshi", () -> NFFGIRLS_DEFAULT_ATTRIBUTES.get()
+		ATTRIBUTE_PROVIDERS.register("jiangshi", () -> EntityAttributeProvider.from(NFFGIRLS_DEFAULT_ATTRIBUTES.get())
 			.add(Attributes.MAX_HEALTH, 40.0D)
 			.add(Attributes.MOVEMENT_SPEED, 0.19D)
 			.add(Attributes.ATTACK_DAMAGE, 6.0D)
@@ -177,7 +177,7 @@ public class NFFGirlsEntityAttributeProviders
 			.add(Attributes.FOLLOW_RANGE, 24.0D));
 
 	public static final NFURegistry.Accessor<EntityAttributeProvider> HMAG_DODOMEKI =
-		ATTRIBUTE_PROVIDERS.register("dodomeki", () -> NFFGIRLS_DEFAULT_ATTRIBUTES.get()
+		ATTRIBUTE_PROVIDERS.register("dodomeki", () -> EntityAttributeProvider.from(NFFGIRLS_DEFAULT_ATTRIBUTES.get())
 			.add(Attributes.MAX_HEALTH, 40.0D)
 			.add(Attributes.MOVEMENT_SPEED, 0.24D)
 			.add(Attributes.ATTACK_DAMAGE, 7.0D)
@@ -186,7 +186,7 @@ public class NFFGirlsEntityAttributeProviders
 			.add(Attributes.FOLLOW_RANGE, 20.0D));
 
 	public static final NFURegistry.Accessor<EntityAttributeProvider> HMAG_ALRAUNE =
-		ATTRIBUTE_PROVIDERS.register("alraune", () -> NFFGIRLS_DEFAULT_ATTRIBUTES.get()
+		ATTRIBUTE_PROVIDERS.register("alraune", () -> EntityAttributeProvider.from(NFFGIRLS_DEFAULT_ATTRIBUTES.get())
 			.add(Attributes.MAX_HEALTH, 60.0D)
 			.add(Attributes.MOVEMENT_SPEED, 0.12D)
 			.add(Attributes.ATTACK_DAMAGE, 6.0D)
@@ -194,7 +194,7 @@ public class NFFGirlsEntityAttributeProviders
 			.add(Attributes.KNOCKBACK_RESISTANCE, 0.98D));
 
 	public static final NFURegistry.Accessor<EntityAttributeProvider> HMAG_GLARYAD =
-		ATTRIBUTE_PROVIDERS.register("glaryad", () -> NFFGIRLS_DEFAULT_ATTRIBUTES.get()
+		ATTRIBUTE_PROVIDERS.register("glaryad", () -> EntityAttributeProvider.from(NFFGIRLS_DEFAULT_ATTRIBUTES.get())
 			.add(Attributes.MAX_HEALTH, 40.0D)
 			.add(Attributes.MOVEMENT_SPEED, 0.23D)
 			.add(Attributes.ATTACK_DAMAGE, 7.0D)
@@ -202,7 +202,7 @@ public class NFFGirlsEntityAttributeProviders
 			.add(Attributes.KNOCKBACK_RESISTANCE, 0.5D));
 
 	public static final NFURegistry.Accessor<EntityAttributeProvider> HMAG_CRIMSON_SLAUGHTERER =
-		ATTRIBUTE_PROVIDERS.register("crimson_slaughterer", () -> NFFGIRLS_DEFAULT_ATTRIBUTES.get()
+		ATTRIBUTE_PROVIDERS.register("crimson_slaughterer", () -> EntityAttributeProvider.from(NFFGIRLS_DEFAULT_ATTRIBUTES.get())
 			.add(Attributes.MAX_HEALTH, 80.0D)
 			.add(Attributes.MOVEMENT_SPEED, 0.33D)
 			.add(Attributes.ATTACK_DAMAGE, 12.0D)
@@ -212,7 +212,7 @@ public class NFFGirlsEntityAttributeProviders
 			.add(ForgeMod.STEP_HEIGHT_ADDITION.get(), 2.0D));
 
 	public static final NFURegistry.Accessor<EntityAttributeProvider> HMAG_CURSED_DOLL =
-		ATTRIBUTE_PROVIDERS.register("cursed_doll", () -> NFFGIRLS_DEFAULT_ATTRIBUTES.get()
+		ATTRIBUTE_PROVIDERS.register("cursed_doll", () -> EntityAttributeProvider.from(NFFGIRLS_DEFAULT_ATTRIBUTES.get())
 			.add(Attributes.MAX_HEALTH, 40.0D)
 			.add(Attributes.MOVEMENT_SPEED, 0.29D)
 			.add(Attributes.ATTACK_DAMAGE, 4.0D)
@@ -221,27 +221,27 @@ public class NFFGirlsEntityAttributeProviders
 			.add(ForgeMod.STEP_HEIGHT_ADDITION.get(), 1.5D));
 
 	public static final NFURegistry.Accessor<EntityAttributeProvider> HMAG_REDCAP =
-		ATTRIBUTE_PROVIDERS.register("redcap", () -> NFFGIRLS_DEFAULT_ATTRIBUTES.get()
+		ATTRIBUTE_PROVIDERS.register("redcap", () -> EntityAttributeProvider.from(NFFGIRLS_DEFAULT_ATTRIBUTES.get())
 			.add(Attributes.MAX_HEALTH, 40.0D)
 			.add(Attributes.MOVEMENT_SPEED, 0.31D)
 			.add(Attributes.ATTACK_DAMAGE, 4.0D)
 			.add(Attributes.FOLLOW_RANGE, 24.0D));
 
 	public static final NFURegistry.Accessor<EntityAttributeProvider> HMAG_JACK_FROST =
-		ATTRIBUTE_PROVIDERS.register("jack_frost", () -> NFFGIRLS_DEFAULT_ATTRIBUTES.get()
+		ATTRIBUTE_PROVIDERS.register("jack_frost", () -> EntityAttributeProvider.from(NFFGIRLS_DEFAULT_ATTRIBUTES.get())
 			.add(Attributes.MAX_HEALTH, 60.0D)
 			.add(Attributes.MOVEMENT_SPEED, 0.24D)
 			.add(Attributes.ATTACK_DAMAGE, 0d)
 			.add(Attributes.ARMOR, 2.0D));
 
 	public static final NFURegistry.Accessor<EntityAttributeProvider> HMAG_MELTY_MONSTER =
-		ATTRIBUTE_PROVIDERS.register("melty_monster", () -> NFFGIRLS_DEFAULT_ATTRIBUTES.get()
+		ATTRIBUTE_PROVIDERS.register("melty_monster", () -> EntityAttributeProvider.from(NFFGIRLS_DEFAULT_ATTRIBUTES.get())
 			.add(Attributes.MAX_HEALTH, 25.0D)
 			.add(Attributes.MOVEMENT_SPEED, 0.18D)
 			.add(Attributes.ATTACK_DAMAGE, 0D));
 
 	public static final NFURegistry.Accessor<EntityAttributeProvider> HMAG_NIGHTWALKER =
-		ATTRIBUTE_PROVIDERS.register("nightwalker", () -> NFFGIRLS_DEFAULT_ATTRIBUTES.get()
+		ATTRIBUTE_PROVIDERS.register("nightwalker", () -> EntityAttributeProvider.from(NFFGIRLS_DEFAULT_ATTRIBUTES.get())
 			.add(Attributes.MAX_HEALTH, 40.0D)
 			.add(Attributes.MOVEMENT_SPEED, 0.22D)
 			.add(Attributes.ARMOR, 2.0D)
@@ -251,7 +251,7 @@ public class NFFGirlsEntityAttributeProviders
 
 	@SubscribeEvent
 	public static void registerAttributes(EntityAttributeCreationEvent event) {
-		NFFGIRLS_DEFAULT_ATTRIBUTES.get();
+		EntityAttributeProvider.from(NFFGIRLS_DEFAULT_ATTRIBUTES.get());
 		event.put(NFFGirlsEntityTypes.HMAG_ZOMBIE_GIRL.get(), NFFGirlsEntityAttributeProviders.HMAG_ZOMBIE_GIRL.get().get().build());
 		event.put(NFFGirlsEntityTypes.HMAG_HUSK_GIRL.get(), NFFGirlsEntityAttributeProviders.HMAG_ZOMBIE_GIRL.get().get().build());
 		event.put(NFFGirlsEntityTypes.HMAG_DROWNED_GIRL.get(), NFFGirlsEntityAttributeProviders.HMAG_DROWNED_GIRL.get().get().build());

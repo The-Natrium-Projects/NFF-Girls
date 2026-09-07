@@ -6,6 +6,7 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.sodiumzh.nff.girls.NFFGirls;
 import net.sodiumzh.nff.girls.entity.component.NFFGirlsNeutralityHandlerComponent;
+import net.sodiumzh.nff.services.entity.taming.NFFTamingMapping;
 import net.sodiumzh.nfu.entity.anger.MobAngerHandlerComponent;
 import net.sodiumzh.nfu.entity.anger.MobAngerRules;
 import net.sodiumzh.nfu.entity.component.EntityComponentSetupEvent;
@@ -52,7 +53,8 @@ public class NFFGirlsEntityComponents {
                 if (mobtype.equals(MobType.UNDEAD)) {
                     event.addComponent(PATH_UNDEAD_AFFINITY_HANDLER, UNDEAD_AFFINITY_HANDLER.get());
                 }
-                event.addComponent(PATH_NEUTRALITY_HANDLER, NEUTRALITY_HANDLER.get());
+                if (NFFTamingMapping.contains(mob))
+                    event.addComponent(PATH_NEUTRALITY_HANDLER, NEUTRALITY_HANDLER.get());
             }
         }
 
