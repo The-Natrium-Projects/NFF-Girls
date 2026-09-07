@@ -85,7 +85,7 @@ public class NFFGirlsTrades
 						.forEach((location, listing) ->
 							collections.get(location.getNamespace()).register(location.getPath(), () -> listing));
 			}));
-			collections.values().forEach(NFURegistryEntryCollection::merge);
+			collections.values().forEach(NFURegistryEntryCollection::mergeIfAbsent);
 		}
 		// Collect unregistered trade collections
 		else if (event.registry.equals(NFURegistries.VANILLA_TRADE_LISTING_COLLECTIONS)) {
@@ -108,7 +108,7 @@ public class NFFGirlsTrades
 					() -> VanillaTradeListingCollectionHelper.newCollection()
 						.setCurrency(NFFGirlsItems.EVIL_GEM.get())
 						.readData(jsonPath(key)).get()));
-			collections.values().forEach(NFURegistryEntryCollection::merge);
+			collections.values().forEach(NFURegistryEntryCollection::mergeIfAbsent);
 		}
 	}
 

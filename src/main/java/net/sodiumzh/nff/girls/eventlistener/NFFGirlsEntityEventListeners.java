@@ -210,7 +210,9 @@ public class NFFGirlsEntityEventListeners
 			// When tamed mob is present, wild variation will not be hostile to player
 			// Friending process will prevent neutrality
 			if (EntityComponentAPI.getComponentManager(mob).getSubComponentByPath(NFFGirlsEntityComponents.PATH_NEUTRALITY_HANDLER, NFFGirlsEntityComponents.NEUTRALITY_HANDLER.get())
-				.filter(c -> c.isNeutralTo(event.getNewTarget())).filter(c -> !NFFTamableComponent.getOrDefault(c.getEntity()).getTamingProcess().isInAnyProcess(c.getEntity())).isPresent())
+				.filter(c -> c.isNeutralTo(event.getNewTarget()))
+				.flatMap(c -> NFFTamableComponent.getOptional(c.getEntity()))
+				.filter(c -> !c.getTamingProcess().isInAnyProcess(c.getEntity())).isPresent())
 			{
 				event.setCanceled(true);
 				return;
