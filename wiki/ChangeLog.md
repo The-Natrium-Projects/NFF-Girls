@@ -1,5 +1,11 @@
 # Change Log
 
+### 0.2.33.2
+
+Optimized the performance.
+
+Partly fixed some random crash caused by NFU Registry.
+
 ### 0.2.33.1
 
 Now Jack o' Frost will not take damage in hot biomes when in powder snow.
