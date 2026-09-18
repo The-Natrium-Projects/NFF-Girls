@@ -46,10 +46,6 @@ public class NFFGirlsFriendingItems {
         FRIENDING_ITEM_COLLECTION.register("undead_nether_b", () -> MobApplicableItemTable.builder()
             .readData(new ResourceLocation(NFFGirls.MOD_ID, "friending/undead_nether_b.json"),NFFGirlsDataReaders::readMobApplicableItemTable)
             .build());
-    public static final NFURegistry.Accessor<MobApplicableItemTable> UNDEAD_C =
-        FRIENDING_ITEM_COLLECTION.register("undead_c", () -> MobApplicableItemTable.builder()
-            .readData(new ResourceLocation(NFFGirls.MOD_ID, "friending/undead_c.json"),NFFGirlsDataReaders::readMobApplicableItemTable)
-            .build());
     // For Wither Skeleton Girl
     public static final NFURegistry.Accessor<MobApplicableItemTable> UNDEAD_NETHER_C =
         FRIENDING_ITEM_COLLECTION.register("undead_nether_c", () -> MobApplicableItemTable.builder()
