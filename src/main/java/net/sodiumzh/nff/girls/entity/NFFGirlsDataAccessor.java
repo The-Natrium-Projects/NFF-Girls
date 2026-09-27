@@ -141,28 +141,47 @@ public class NFFGirlsDataAccessor extends NFFTamedDataAccessor {
             return level * level + level * 6;
         else
         {
-            double leveld = (double)level;
             if (level < 32)
-                return Math.round(2.5d * leveld * leveld - 40.5d * leveld + 360d);
+                return Math.round(2.5d * level * level- 40.5d * level + 360d);
             else
-                return Math.round(4.5d * leveld * leveld - 162.5 * leveld + 2220d);
+                return Math.round(4.5d * level * level - 162.5d * level + 2220d);
         }
     }
 
     /**
      * Get expected level for a given accumulated exp.
+     * <p>
+     * Inverse of {@link #getAccumulatedExpRequirement(int)}, computed in O(1) by solving the
+     * quadratic of the matching segment:
+     * <ul>
+     *   <li>exp &lt; 352   (level &lt; 16):  L² + 6L = exp             → L = sqrt(exp + 9) - 3</li>
+     *   <li>exp &lt; 1628  (level &lt; 32):  2.5L² - 40.5L + 360 = exp → L = (40.5 + sqrt(10·exp - 1959.75)) / 5</li>
+     *   <li>otherwise      (level ≥ 32):     4.5L² - 162.5L + 2220 = exp → L = (162.5 + sqrt(18·exp - 13553.75)) / 9</li>
+     * </ul>
+     * The segment thresholds 352 and 1628 are {@code getAccumulatedExpRequirement(16)} and
+     * {@code getAccumulatedExpRequirement(32)} respectively.
      */
     public static int getExpectedXPLevel(long exp)
     {
         if (exp < 0)
             throw new IllegalArgumentException("Illegal exp value");
-        // TODO Need this awkward algorithm be optimized?
-        int i = 0;
-        while (getAccumulatedExpRequirement(i) <= exp)
-        {
-            ++i;
-        }
-        return i - 1;
+
+        double expd = (double) exp;
+        int level;
+        if (exp < 352L)
+            level = (int) Math.floor(Math.sqrt(expd + 9d) - 3d);
+        else if (exp < 1628L)
+            level = (int) Math.floor((40.5d + Math.sqrt(10d * expd - 1959.75d)) / 5d);
+        else
+            level = (int) Math.floor((162.5d + Math.sqrt(18d * expd - 13553.75d)) / 9d);
+
+        // Guard against floating-point rounding at segment boundaries / exact level thresholds.
+        // At most one step is ever needed in practice, so this stays O(1).
+        while (level > 0 && getAccumulatedExpRequirement(level) > exp)
+            --level;
+        while (getAccumulatedExpRequirement(level + 1) <= exp)
+            ++level;
+        return level;
     }
 
     /**
