@@ -435,7 +435,7 @@ public class NFFGirlsEntityEventListeners
 			
 			if (event.getSource().getEntity() != null && event.getSource().getEntity() instanceof HmagGhastlySeekerEntity gs)
 			{
-				if (NFFGirlsEntityStatics.isAlly(gs, event.getEntity()))
+				if (gs.isTamedAlliedTo(event.getEntity()))
 				{
 					event.setCanceled(true);
 					return;
@@ -445,7 +445,7 @@ public class NFFGirlsEntityEventListeners
 			/** Cancel projectile friendly damage */
 			if (event.getSource().getEntity() != null && event.getSource().getEntity() instanceof INFFGirlsTamed bm && event.getSource().getDirectEntity() instanceof Projectile)
 			{
-				if (!NFFGirlsConfigs.ValueCache.Combat.ENABLE_PROJECTILE_FRIENDLY_DAMAGE && NFFGirlsEntityStatics.isAlly(bm, event.getEntity()))
+				if (!NFFGirlsConfigs.ValueCache.Combat.ENABLE_PROJECTILE_FRIENDLY_DAMAGE && bm.isTamedAlliedTo(event.getEntity()))
 				{
 					event.setCanceled(true);
 					return;
@@ -665,7 +665,7 @@ public class NFFGirlsEntityEventListeners
 					List<LivingEntity> toSendParticles = new ArrayList<>();
 					tamed.asMob().level().getEntities(EntityTypeTest.forClass(LivingEntity.class),
 						tamed.asMob().getBoundingBox().inflate(8, 4, 8),
-							e -> NFFTamedStatics.isLivingAlliedToBM(tamed, e)
+							e -> tamed.isTamedAlliedTo(e)
 							// Apply to a round area
 							&& (e.getX() - tamed.asMob().getX()) * (e.getX() - tamed.asMob().getX()) + (e.getY() - tamed.asMob().getY()) * (e.getY() - tamed.asMob().getY()) < 64d)
 						.stream().filter(e -> !e.equals(tamed.asMob()))
@@ -911,12 +911,12 @@ public class NFFGirlsEntityEventListeners
 			double boostingRate = 1.0d;
 			// Handle debuff attachment
 			double poisonAspect = tm.asMob().getAttributeValue(NFFGirlsEntityAttributes.POISON_ASPECT.get());
-			if (poisonAspect >= 0.5d && !NFFTamedStatics.isLivingAlliedToBM(tm, event.getEntity())) {
+			if (poisonAspect >= 0.5d && !tm.isTamedAlliedTo(event.getEntity())) {
 				NFUEntityStatics.addEffectSafe(event.getEntity(), MobEffects.POISON, (int)Math.round(100d + poisonAspect * 40d), Math.max(0, (int) (Math.round(poisonAspect - 1) / 3)));
 				NFUEntityStatics.addEffectSafe(event.getEntity(), MobEffects.MOVEMENT_SLOWDOWN, (int)Math.round(100d + poisonAspect * 40d), (((int)poisonAspect) + 2) / 2);
 			}
 			double witherAspect = tm.asMob().getAttributeValue(NFFGirlsEntityAttributes.WITHER_ASPECT.get());
-			if (witherAspect >= 0.5d && !NFFTamedStatics.isLivingAlliedToBM(tm, event.getEntity())) {
+			if (witherAspect >= 0.5d && !tm.isTamedAlliedTo(event.getEntity())) {
 				NFUEntityStatics.addEffectSafe(event.getEntity(), MobEffects.WITHER, (int) Math.round(100d + witherAspect * 20d), Math.max(0, (int) (Math.round(witherAspect - 1) / 3)));
 			}
 			// Handle Anti-Type damage boosts
@@ -1536,7 +1536,7 @@ public class NFFGirlsEntityEventListeners
 	public static void onDamageTaken(LivingEntityDamageTakenEvent event) {
 		INFFGirlsTamed.get(event.getDamageSource().getEntity()).ifPresent(t -> {
 			float absorbRate = (float) t.asMob().getAttributeValue(NFFGirlsEntityAttributes.HEALTH_ABSORPTION.get());
-			if (absorbRate >= 1e-9f && !NFFTamedStatics.isLivingAlliedToBM(t, event.getEntity()))
+			if (absorbRate >= 1e-9f && !t.isTamedAlliedTo(event.getEntity()))
 				t.asMob().heal(absorbRate * event.getAmount());
 		});
 	}

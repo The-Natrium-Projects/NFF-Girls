@@ -210,13 +210,7 @@ public class HmagImpEntity extends ImpEntity implements INFFGirlsTamed//, IBlock
 	}
 	*/
 	// Misc
-	
-	// Indicates which mod this mob belongs to
-	@Override
-	public String getModId() {
-		return NFFGirls.MOD_ID;
-	}
-	
+
 	// Sounds
 	
 	@Override

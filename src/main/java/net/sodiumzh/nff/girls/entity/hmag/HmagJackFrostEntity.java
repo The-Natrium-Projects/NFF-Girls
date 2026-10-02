@@ -237,12 +237,6 @@ public class HmagJackFrostEntity extends JackFrostEntity implements INFFGirlsTam
 	}
 	
 	// Misc
-	
-	// Indicates which mod this mob belongs to
-	@Override
-	public String getModId() {
-		return NFFGirls.MOD_ID;
-	}
 
 	@Override
 	@Nonnull

@@ -1,13 +1,11 @@
 package net.sodiumzh.nff.girls.entity;
 
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.util.Mth;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
-import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.entity.EquipmentSlot;
-import net.minecraft.world.entity.Mob;
+import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.GameRules;
@@ -227,8 +225,17 @@ public interface INFFGirlsTamed extends INFFTamed
 	{
 		return !this.asMob().level().getGameRules().getBoolean(GameRules.RULE_KEEPINVENTORY);
 	}
-	
-	// === AttributeMonitor related
+
+    @Override
+    default boolean isTamedAlliedTo(LivingEntity other) {
+        boolean allowsPVP = false;
+        if (!this.asMob().level().isClientSide() && this.asMob().level() instanceof ServerLevel sl) {
+            allowsPVP = !(sl.getServer().isPvpAllowed() && NFFGirlsConfigs.ValueCache.Combat.ENABLE_FRIENDLY_DAMAGE);
+        }
+        return NFFTamedStatics.isLivingAlliesDefault(this.asMob(), other, allowsPVP);
+    }
+
+    // === AttributeMonitor related
 	
 	/*@Override
 	public default void onAttributeChange(EntityAttributeMonitorComponent component, Attribute attribute, double oldVal, double newVal)

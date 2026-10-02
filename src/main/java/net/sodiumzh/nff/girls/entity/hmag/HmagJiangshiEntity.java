@@ -136,12 +136,6 @@ public class HmagJiangshiEntity extends JiangshiEntity implements INFFGirlsTamed
 		this.getDataAccessor().addXP(20);
 	}
 
-	// Indicates which mod this mob belongs to
-	@Override
-	public String getModId() {
-		return NFFGirls.MOD_ID;
-	}
-	
 	// Sounds
 	
 	@Override

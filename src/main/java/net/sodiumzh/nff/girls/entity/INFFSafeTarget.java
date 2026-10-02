@@ -30,19 +30,19 @@ public interface INFFSafeTarget<T extends INFFSafeTarget<T>> {
     public default boolean canAffectNFF(LivingEntity target, INFFTamed source, TargetType targetType) {
         if (Objects.equals(target, this.getIntendedTarget())) return true;
         return switch (targetType) {
-            case ALLY -> NFFTamedStatics.isLivingAlliedToBM(source, target);
-            case NONE_ALLY -> !NFFTamedStatics.isLivingAlliedToBM(source, target);
+            case ALLY -> source.isTamedAlliedTo(target);
+            case NON_ALLY -> !source.isTamedAlliedTo(target);
             case ENEMY_ONLY -> {
                 // Mob that is trying to attack shooter's ally
                 if (target instanceof Mob targetMob
                     && targetMob.getTarget() instanceof Mob targetOfTarget
-                    && NFFTamedStatics.isLivingAlliedToBM(source, targetOfTarget))
+                    && source.isTamedAlliedTo(targetOfTarget))
                     yield true;
                     // Mob that owner is attacking
                 else if (target.getLastAttacker().equals(source.getOwnerInDimension()))
                     yield true;
                     // Mob that shooter's ally is attacking
-                else if (source.asMob().level().getEntities(EntityTypeTest.forClass(Mob.class), source.asMob().getBoundingBox().inflate(8, 8, 8), mob -> NFFTamedStatics.isLivingAlliedToBM(source, mob))
+                else if (source.asMob().level().getEntities(EntityTypeTest.forClass(Mob.class), source.asMob().getBoundingBox().inflate(8, 8, 8), source::isTamedAlliedTo)
                     .stream().anyMatch(mob -> mob.getTarget() != null && mob.getTarget().equals(target)))
                     yield true;
                 yield false;
@@ -54,7 +54,7 @@ public interface INFFSafeTarget<T extends INFFSafeTarget<T>> {
 
     public static enum TargetType {
         ALLY,
-        NONE_ALLY,
+        NON_ALLY,
         ENEMY_ONLY,
         TARGET_ONLY,
         ALL

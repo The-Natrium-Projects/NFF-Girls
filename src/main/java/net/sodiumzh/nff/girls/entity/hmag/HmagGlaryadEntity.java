@@ -164,13 +164,7 @@ public class HmagGlaryadEntity extends GlaryadEntity implements INFFGirlsTamed
 	}
 	
 	// Misc
-	
-	// Indicates which mod this mob belongs to
-	@Override
-	public String getModId() {
-		return NFFGirls.MOD_ID;
-	}
-	
+
 	@OnlyIn(Dist.CLIENT)
 	@Override
 	public void handleEntityEvent(byte id)

@@ -85,7 +85,7 @@ public class NFFGirlsAttackingStrategy {
     }
 
     public boolean shouldActivelyAttack(INFFGirlsTamed attacker, Mob target) {
-        if (NFFTamedStatics.isLivingAlliedToBM(attacker, target)) return false;
+        if (attacker.isTamedAlliedTo(target)) return false;
         if (Arrays.stream(attacker.notAttacksIgnoringStrategy()).anyMatch(et -> target.getType().equals(et))) return false;
         if (Arrays.stream(attacker.activelyAttacksIgnoringStrategy()).anyMatch(et -> target.getType().equals(et))) return true;
         if (notAttackingList.contains(target.getType())) return false;

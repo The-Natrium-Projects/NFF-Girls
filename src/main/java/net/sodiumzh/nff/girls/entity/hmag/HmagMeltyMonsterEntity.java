@@ -538,7 +538,7 @@ public class HmagMeltyMonsterEntity extends MeltyMonsterEntity implements INFFGi
 			{
 				if (!this.level().isClientSide)
 				{
-					if (!NFFTamedStatics.isLivingAlliedToBM(owner, living))
+					if (!owner.isTamedAlliedTo(living))
 						{
 						int i = living.getRemainingFireTicks();
 						living.setSecondsOnFire((int) Math.round(5.0d * (1d + owner.getAttributeValue(Attributes.ATTACK_DAMAGE))));

@@ -106,12 +106,6 @@ public class HmagNecroticReaperEntity extends NecroticReaperEntity implements IN
 
 	}
 
-	// Indicates which mod this mob belongs to
-	@Override
-	public String getModId() {
-		return NFFGirls.MOD_ID;
-	}
-	
 	@Override
 	protected SoundEvent getAmbientSound()
 	{

@@ -69,17 +69,5 @@ public class NFFGirlsEntityStatics
 	{
 		NFUEntityStatics.sendParticlesToEntity(entity, ParticleTypes.CRIT, entity.getBbHeight() - 0.2 + heightOffset, 0.5d, amount, 0.1d);
 	}
-	
-	/**
-	 * @deprecated Use {@link NFFTamedStatics#isLivingAlliedToBM} instead
-	 * Check if a LivingEntity is ally to the given befriended mob.
-	 * <p> Rule: Owner, owner's other befriended mobs, owner's tamed animals; other players and their befriended mobs & tamed animals if no PVP
-	 * <p> Only on server. On client always false.
-	 */
-	@Deprecated
-	public static boolean isAlly(INFFGirlsTamed allyTo, LivingEntity test)
-	{
-		return NFFTamedStatics.isLivingAlliedToBM(allyTo, test);
-	}
 
 }

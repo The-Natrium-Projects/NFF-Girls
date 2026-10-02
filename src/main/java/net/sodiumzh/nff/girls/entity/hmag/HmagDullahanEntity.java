@@ -105,12 +105,6 @@ public class HmagDullahanEntity extends DullahanEntity implements INFFGirlsTamed
 		return NFFGirlsSoundPresets.generalAmbient(super.getAmbientSound());
 	}
 
-	// Indicates which mod this mob belongs to
-	@Override
-	public String getModId() {
-		return NFFGirls.MOD_ID;
-	}
-
 	@Override
 	@Nonnull
 	public Component getTypeName() {

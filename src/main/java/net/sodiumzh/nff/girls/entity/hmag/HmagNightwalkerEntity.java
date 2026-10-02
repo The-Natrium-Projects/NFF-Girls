@@ -173,12 +173,6 @@ public class HmagNightwalkerEntity extends NightwalkerEntity implements INFFGirl
 	}
 
 	// Misc
-	
-	// Indicates which mod this mob belongs to
-	@Override
-	public String getModId() {
-		return NFFGirls.MOD_ID;
-	}
 
 	@Override
 	@Nonnull
@@ -256,7 +250,7 @@ public class HmagNightwalkerEntity extends NightwalkerEntity implements INFFGirl
 			boolean shouldDealDamage = true;
 			if (!this.level().isClientSide
 					&& result.getEntity() instanceof LivingEntity living 
-					&& NFFGirlsEntityStatics.isAlly(getOwner(), living) 
+					&& getOwner().isTamedAlliedTo(living)
 					&& !NFFGirlsConfigs.ValueCache.Combat.ENABLE_PROJECTILE_FRIENDLY_DAMAGE)
 			{
 				shouldDealDamage = false;

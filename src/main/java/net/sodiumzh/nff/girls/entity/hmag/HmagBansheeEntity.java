@@ -268,12 +268,6 @@ public class HmagBansheeEntity extends BansheeEntity implements INFFGirlsTamedSu
 
 	// Misc
 
-	// Indicates which mod this mob belongs to
-	@Override
-	public String getModId() {
-		return NFFGirls.MOD_ID;
-	}
-
 	@Override
 	@Nonnull
 	public Component getTypeName() {

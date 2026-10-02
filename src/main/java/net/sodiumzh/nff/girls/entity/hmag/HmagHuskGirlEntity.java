@@ -207,11 +207,6 @@ public class HmagHuskGirlEntity extends HuskGirlEntity implements INFFGirlsTamed
 	}
 	
 	// ------------------ Misc ------------------ //
-	
-	@Override
-	public String getModId() {
-		return NFFGirls.MOD_ID;
-	}
 
 	@Override
 	@Nonnull

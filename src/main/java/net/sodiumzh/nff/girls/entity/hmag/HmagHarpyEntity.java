@@ -168,12 +168,6 @@ public class HmagHarpyEntity extends HarpyEntity implements INFFGirlsTamed {
 	}
 	
 	// Misc
-	
-	// Indicates which mod this mob belongs to
-	@Override
-	public String getModId() {
-		return NFFGirls.MOD_ID;
-	}
 
 	@Override
 	@Nonnull
