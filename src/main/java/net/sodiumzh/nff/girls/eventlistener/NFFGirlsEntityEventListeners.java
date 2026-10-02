@@ -1430,6 +1430,7 @@ public class NFFGirlsEntityEventListeners
 
 	// Sync each 10 seconds, to prevent possible update issues, also sync in the first tick
 
+	@SubscribeEvent
 	public static void updateFavAndLevelOnTick(LivingTickEvent event) {
 		if (event.getEntity().tickCount / 200 == 1) {
 			INFFGirlsTamed.get(event.getEntity()).ifPresent(t -> {
@@ -1440,6 +1441,14 @@ public class NFFGirlsEntityEventListeners
 		}
 	}
 
+	@SubscribeEvent
+	public static void updateFavAndLevelOnJoinLevel(EntityJoinLevelEvent event) {
+		INFFGirlsTamed.get(event.getEntity()).ifPresent(t -> {
+			var data = t.getDataAccessor();
+			updateFavorability(t.asMob(), data.getFavorability());
+			updateXPModifiers(t.asMob(), data.getExpectedXPLevel());
+		});
+	}
 
 	// NFU MIXIN EVENTS BELOW //
 	
