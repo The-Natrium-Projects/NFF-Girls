@@ -55,7 +55,7 @@ public class NFFGirlsTamingProcesses {
             .setAngerAndInterruptionRules(NFFGirlsAngerRules.DEFAULT.get(), MobAngerRules.ATTACKER.get()));
 
     public static final NFURegistry.Accessor<NFFTamingProcess> HMAG_HORNET = TAMING_PROCESSES.register(
-            "hmag_glaryad",  () -> new HmagHornetTamingProcess()
+            "hmag_hornet",  () -> new HmagHornetTamingProcess()
             .setItemGivingTableOverride(NFFGirlsFriendingItems.BEE)
             .setAngerAndInterruptionRules(NFFGirlsAngerRules.DEFAULT.get(), MobAngerRules.ATTACKER.get()));
     public static final NFURegistry.Accessor<NFFTamingProcess> HMAG_ANIMAL_A = TAMING_PROCESSES.register(
