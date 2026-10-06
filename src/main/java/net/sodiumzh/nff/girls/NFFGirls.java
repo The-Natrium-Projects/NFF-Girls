@@ -50,6 +50,7 @@ public class NFFGirls
         // NFU registries
         NFFGirlsHealingItems.HEALING_ITEMS_COLLECTION.merge();
         NFFGirlsFriendingItems.FRIENDING_ITEM_COLLECTION.merge();
+        NFFGirlsTamingProcesses.TAMING_PROCESSES.merge();
         NFFGirlsFunctions.FUNCTIONS.merge();
         NFFGirlsPredicates.PREDICATES.merge();
         NFFGirlsTrades.TRADE_COLLECTIONS.merge();
@@ -62,6 +63,7 @@ public class NFFGirls
         NFFGirlsAngerReasons.COLLECTION.merge();
         NFFGirlsEntityComponents.COLLECTION.merge();
         NFFGirlsDataSerializers.COLLECTION.merge();
+        NFFGirlsAngerRules.ANGER_RULES.merge();
 
         // Register ourselves for server and other game events we are interested in
         MinecraftForge.EVENT_BUS.register(this);

@@ -1315,9 +1315,9 @@ public class NFFGirlsEntityEventListeners
 			.getSubComponentByPath(NFFEntityComponents.PATH_TAMED_SYNCHER, NFFEntityComponents.TAMED_SYNCHER.get())
 			.ifPresent(c -> {
 				// Access these three fields by NFFGirlsDataAccessor. No direct access.
-				c.createSynchedData(NFFGirlsDataAccessor.KEY_MAX_FAVORABILITY, NFUDataSerializers.DOUBLE, 100d, true);
-				c.createSynchedData(NFFGirlsDataAccessor.KEY_FAVORABILITY, NFUDataSerializers.DOUBLE, 50d, true);
-				c.createSynchedData(NFFGirlsDataAccessor.KEY_XP, NFUDataSerializers.LONG, 0L, true);
+				c.createSynchedData(NFFGirlsDataAccessor.KEY_MAX_FAVORABILITY, NFUDataSerializers.DOUBLE.get(), 100d, true);
+				c.createSynchedData(NFFGirlsDataAccessor.KEY_FAVORABILITY, NFUDataSerializers.DOUBLE.get(), 50d, true);
+				c.createSynchedData(NFFGirlsDataAccessor.KEY_XP, NFUDataSerializers.LONG.get(), 0L, true);
 			});
 	}
 

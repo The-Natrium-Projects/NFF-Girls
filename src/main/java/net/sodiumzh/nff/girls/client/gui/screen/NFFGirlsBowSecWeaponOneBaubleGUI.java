@@ -32,5 +32,4 @@ public class NFFGirlsBowSecWeaponOneBaubleGUI extends NFFGirlsGUIPreset0 {
 		this.addAttributeInfo(graphics, infoPos());
 		this.renderMob(graphics, GuiPos.valueOf(0, 3));
 	}
-
 }
