@@ -544,6 +544,8 @@
   "dict.nffgirls.desc.item.reinforced_block": "A block that cannot be destroyed by entity griefing (e.g., Wither, TNT entities, Ender Dragon). Comes in multiple variants.",
   "dict.nffgirls.desc.item.reinforced_glass": "A transparent glass block that cannot be destroyed by entity griefing.",
   "dict.nffgirls.desc.item.tinted_reinforced_glass": "A tinted glass block that cannot be destroyed by entity griefing. Blocks light like Tinted Glass.",
+  "dict.nffgirls.desc.item.soul_wheat": "A food ingredient harvested from Soul Wheat plant. See Soul Wheat Seeds for how to grow it.",
+  "dict.nffgirls.desc.item.soul_wheat_seeds": "A crop that can be planted only on Soul Powder Block. It grows only at night at open-air places with assistance of a friendly undead NFF monster girl around.",
 
   "dict.nffgirls.desc.interaction.friending": "Generally, you need satisfy them to be friendly with a monster girl by giving them items.$(br2)Most mobs requires you to right-click with the items in hand to give. Sometimes the action of giving also requires additional conditions, such as effects or equipment. After giving, the \"Friending Progress\" increases depending on the item types.",
   "dict.nffgirls.desc.interaction.friending_1": "Some types of mobs have totally different methods to get friendly with, described under the entries of specific mobs.$(br2)Generally, there are cheap and expensive items to give. Cheap items can slightly boost the progress, while the expensive ones can significantly boost the progress, and sometimes even, if lucky enough, succeed immediately.",

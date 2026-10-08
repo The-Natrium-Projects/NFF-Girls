@@ -1,0 +1,13 @@
+{
+  "category": "nffgirls:items",
+  "name": "item.nffgirls.soul_wheat",
+  "icon": "nffgirls:soul_wheat",
+  "sortnum": 20,
+  "pages": [
+    {
+      "type": "patchouli:spotlight",
+      "item": "nffgirls:soul_wheat",
+      "text": "dict.nffgirls.desc.item.soul_wheat"
+    }
+  ]
+}
