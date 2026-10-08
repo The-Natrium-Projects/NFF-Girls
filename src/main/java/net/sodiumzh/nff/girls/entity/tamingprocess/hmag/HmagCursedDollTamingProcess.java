@@ -3,6 +3,7 @@ package net.sodiumzh.nff.girls.entity.tamingprocess.hmag;
 import net.minecraft.nbt.Tag;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
@@ -48,7 +49,7 @@ public class HmagCursedDollTamingProcess extends NFFTamingProcess
 				if (player.getMainHandItem().is(Items.STRING) || ColoredItems.WOOL_ITEMS.contains(player.getMainHandItem().getItem()))
 				{
 					NFUParticleStatics.sendAngryParticlesToEntityDefault(mob);
-					result.setHandled();
+					result.setResult(InteractionResult.SUCCESS);
 				}
 			}
 			// In cooldown. Cooldown is added only after giving string.
@@ -57,7 +58,7 @@ public class HmagCursedDollTamingProcess extends NFFTamingProcess
 				if (ColoredItems.WOOL_ITEMS.contains(player.getMainHandItem().getItem()))
 				{
 					NFUParticleStatics.sendSmokeParticlesToEntityDefault(mob);
-					result.setHandled();
+					result.setResult(InteractionResult.SUCCESS);
 				}
 			}
 			// Phase for giving a wool
@@ -77,7 +78,7 @@ public class HmagCursedDollTamingProcess extends NFFTamingProcess
 						// Duplicate color, skip
 						NFUParticleStatics.sendSmokeParticlesToEntityDefault(mob);
 					}
-					result.setHandled();
+					result.setResult(InteractionResult.SUCCESS);
 				}
 			}
 			// Phase for giving a string
@@ -91,7 +92,7 @@ public class HmagCursedDollTamingProcess extends NFFTamingProcess
 					{
 						NFUParticleStatics.sendHeartParticlesToEntityDefault(mob);
 						ATK_MOD.clear(player, Attributes.ATTACK_DAMAGE);
-						result.setHandled();
+						result.setResult(InteractionResult.SUCCESS);
 						result.setTamedMob(this.doTaming(player, mob));
 						return result;
 					}
