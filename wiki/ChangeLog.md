@@ -1,5 +1,13 @@
 # Change Log
 
+### 0.x.34
+
+Fixed item being used on interaction with item-giveable friendable mobs.
+
+### 0.2.33.3
+
+Fixed mobs losing XP level attribute boost on switching the dimension.
+
 ### 0.2.33.2
 
 Optimized the performance.
