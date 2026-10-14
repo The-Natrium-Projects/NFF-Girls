@@ -91,19 +91,4 @@ public class NFFGirls
 
     }
 
-    @Mod.EventBusSubscriber(bus = Mod.EventBusSubscriber.Bus.MOD, modid = NFFGirls.MOD_ID)
-    public static class SetupEventListeners {
-
-        @SubscribeEvent
-        public static void checkIncompatMod(FMLCommonSetupEvent event) {
-            event.enqueueWork(() -> {
-                ModList.get().getModContainerById("nffgirlsgaia").ifPresent((ModContainer mc) -> {
-                    if (mc.getModInfo().getVersion().getQualifier().equals("0.2.33"))
-                        throw new IllegalStateException("NFF:Girls Gaia Addon 0.2.33 is not compatible with NFF: Girls 0.2.33.1 or above. "
-                        + "Please update NFF:Girls Gaia Addon to 0.2.33.1 or above.");
-                });
-            });
-        }
-    }
-
 }
