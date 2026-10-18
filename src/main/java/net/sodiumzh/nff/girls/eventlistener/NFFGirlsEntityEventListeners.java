@@ -140,7 +140,7 @@ public class NFFGirlsEntityEventListeners
 	        	// Handle undead affinity //
                 EntityComponentAPI.getComponentByPath(mob, NFFGirlsEntityComponents.PATH_UNDEAD_AFFINITY_HANDLER, NFFGirlsEntityComponents.UNDEAD_AFFINITY_HANDLER.get())
                     .ifPresent(c -> {
-                        if (event.getNewTarget() != null && event.getNewTarget().hasEffect(NFFGirlsEffects.UNDEAD_AFFINITY.get()) && !c.isAngryAt(mob.getTarget()))
+                        if (event.getNewTarget() != null && event.getNewTarget().hasEffect(NFFGirlsEffects.UNDEAD_AFFINITY.get()) && !c.isAngryAt(event.getNewTarget()))
                             event.setCanceled(true);
                     });
         		// Handle undead affinity end //
