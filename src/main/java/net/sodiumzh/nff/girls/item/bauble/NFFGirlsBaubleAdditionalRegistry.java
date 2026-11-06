@@ -2,6 +2,7 @@ package net.sodiumzh.nff.girls.item.bauble;
 
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Tuple;
+import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.eventbus.api.Event;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.ModLoader;
@@ -10,13 +11,14 @@ import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
 import net.minecraftforge.fml.event.IModBusEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.sodiumzh.nff.girls.NFFGirls;
+import net.sodiumzh.nfu.item.bauble.FinalizeBaubleRegisterEvent;
 
 import java.util.HashMap;
 
 /**
  * Registry of NFFGirls additional properties for bauble items.
  */
-@EventBusSubscriber(modid = NFFGirls.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD)
+@EventBusSubscriber(modid = NFFGirls.MOD_ID, bus = Mod.EventBusSubscriber.Bus.FORGE)
 public class NFFGirlsBaubleAdditionalRegistry
 {
 	// ResourceLocation key, tier
@@ -27,11 +29,9 @@ public class NFFGirlsBaubleAdditionalRegistry
 	 * allowing baubles to populate {@link #getRegistry()} during common setup.
 	 */
 	@SubscribeEvent
-	public static void fireRegisterEvent(FMLCommonSetupEvent event)
+	public static void fireRegisterEvent(FinalizeBaubleRegisterEvent event)
 	{
-		event.enqueueWork(() -> {
-			ModLoader.get().postEvent(new NFFGirlsBaubleAdditionalRegistry.RegisterEvent());
-		});
+        MinecraftForge.EVENT_BUS.post(new NFFGirlsBaubleAdditionalRegistry.RegisterEvent());
 	}
 	
 	/**
@@ -47,7 +47,7 @@ public class NFFGirlsBaubleAdditionalRegistry
 	 * Mod bus event fired during common setup, allowing baubles to register themselves (or be registered
 	 * by others) into {@link NFFGirlsBaubleAdditionalRegistry#getRegistry()}.
 	 */
-	public static class RegisterEvent extends Event implements IModBusEvent
+	public static class RegisterEvent extends Event
 	{
 		/**
 		 * Register the given bauble under the given category key and tier.

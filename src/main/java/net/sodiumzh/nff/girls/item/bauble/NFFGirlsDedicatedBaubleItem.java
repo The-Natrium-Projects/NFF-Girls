@@ -1,6 +1,5 @@
 package net.sodiumzh.nff.girls.item.bauble;
 
-import com.google.common.base.Suppliers;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.item.Item;
@@ -9,7 +8,6 @@ import net.sodiumzh.nfu.util.NFUMathStatics;
 import org.jetbrains.annotations.Nullable;
 
 import javax.annotation.Nonnull;
-import javax.swing.text.html.Option;
 import java.util.*;
 import java.util.function.Predicate;
 import java.util.function.Supplier;
@@ -17,7 +15,7 @@ import java.util.function.Supplier;
 /**
  * Base class for NFF-Girls baubles that are their own dedicated {@link Item} class, implementing
  * {@link INFFGirlsBauble} on top of NFU-Library's {@link DedicatedBaubleItem}. The bauble's
- * {@link NFFGirlsBaubleProperties} are lazily loaded (since items are registered in the Forge registry
+ * {@link NFFGirlsBaubleProperties_BACKUP} are lazily loaded (since items are registered in the Forge registry
  * phase, while properties are only available in the NFU common-setup registry phase).
  */
 public class NFFGirlsDedicatedBaubleItem extends DedicatedBaubleItem implements INFFGirlsBauble
@@ -28,12 +26,12 @@ public class NFFGirlsDedicatedBaubleItem extends DedicatedBaubleItem implements 
 	private final Map<String, Predicate<Integer>> tags = new HashMap<>();
     // For lazy-loading properties. Items are registered in Forge registry phase,
     // and properties are registered in common setup phase (NFU Registry).
-    private final Supplier<NFFGirlsBaubleProperties> propertiesProvider;
+    private final Supplier<NFFGirlsBaubleProperties_BACKUP> propertiesProvider;
     @Nullable
-    private NFFGirlsBaubleProperties propertiesInstance = null;
+    private NFFGirlsBaubleProperties_BACKUP propertiesInstance = null;
 
 	/** additionalKey uses ResourceLocation format. */
-	public NFFGirlsDedicatedBaubleItem(ResourceLocation categoryKey, int tier, Item.Properties pProperties, Supplier<NFFGirlsBaubleProperties> propertiesProvider)
+	public NFFGirlsDedicatedBaubleItem(ResourceLocation categoryKey, int tier, Item.Properties pProperties, Supplier<NFFGirlsBaubleProperties_BACKUP> propertiesProvider)
 	{
 		super(pProperties);
 		if (tier <= 0)
@@ -118,12 +116,12 @@ public class NFFGirlsDedicatedBaubleItem extends DedicatedBaubleItem implements 
 	}
 
     /**
-     * Lazily resolve (and cache) the {@link NFFGirlsBaubleProperties} from the properties provider given
-     * at construction, running {@link #onPropertiesLoad(NFFGirlsBaubleProperties)} and validating them on
+     * Lazily resolve (and cache) the {@link NFFGirlsBaubleProperties_BACKUP} from the properties provider given
+     * at construction, running {@link #onPropertiesLoad(NFFGirlsBaubleProperties_BACKUP)} and validating them on
      * first access.
      */
     @Override
-    public NFFGirlsBaubleProperties getProperties() {
+    public NFFGirlsBaubleProperties_BACKUP getProperties() {
         this.loadProperties();
         return this.propertiesInstance;
     }
@@ -141,7 +139,7 @@ public class NFFGirlsDedicatedBaubleItem extends DedicatedBaubleItem implements 
     /**
      * Update self (e.g. bauble tags) from properties on load.
      */
-    protected void onPropertiesLoad(@Nonnull NFFGirlsBaubleProperties properties) {
+    protected void onPropertiesLoad(@Nonnull NFFGirlsBaubleProperties_BACKUP properties) {
         // Merge tags
         if (properties.environmentImmune) {
             this.addBaubleTag(INFFGirlsBauble.TAG_ENVIRONMENT_IMMUNITY);
@@ -193,7 +191,7 @@ public class NFFGirlsDedicatedBaubleItem extends DedicatedBaubleItem implements 
 
     // IBaubleRegistryEntry interface //
     /**
-     * Delegates to {@link NFFGirlsBaubleProperties#getTickAction()}.
+     * Delegates to {@link NFFGirlsBaubleProperties_BACKUP#getTickAction()}.
      */
     @Override
     public void slotTick(BaubleProcessingArgs baubleProcessingArgs) {
@@ -201,7 +199,7 @@ public class NFFGirlsDedicatedBaubleItem extends DedicatedBaubleItem implements 
     }
 
     /**
-     * Delegates to {@link NFFGirlsBaubleProperties#getRepeatableModifierSuppliers()}.
+     * Delegates to {@link NFFGirlsBaubleProperties_BACKUP#getRepeatableModifierSuppliers()}.
      */
     @Nullable
     @Override
@@ -211,7 +209,7 @@ public class NFFGirlsDedicatedBaubleItem extends DedicatedBaubleItem implements 
     }
 
     /**
-     * Delegates to {@link NFFGirlsBaubleProperties#getUnrepeatableModifierSuppliers()}.
+     * Delegates to {@link NFFGirlsBaubleProperties_BACKUP#getUnrepeatableModifierSuppliers()}.
      * @throws IllegalStateException If the properties builder hasn't been validated yet.
      */
     @Nullable
@@ -223,7 +221,7 @@ public class NFFGirlsDedicatedBaubleItem extends DedicatedBaubleItem implements 
     }
 
     /**
-     * Delegates to {@link NFFGirlsBaubleProperties}'s configured equipping condition, defaulting to
+     * Delegates to {@link NFFGirlsBaubleProperties_BACKUP}'s configured equipping condition, defaulting to
      * {@code BaubleEquippingConditions.CONDITION_ALWAYS} if none was set.
      */
     @Nonnull

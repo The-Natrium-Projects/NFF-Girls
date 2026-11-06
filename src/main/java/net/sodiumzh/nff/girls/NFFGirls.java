@@ -3,16 +3,11 @@ package net.sodiumzh.nff.girls;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.eventbus.api.IEventBus;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.ModContainer;
-import net.minecraftforge.fml.ModList;
-import net.minecraftforge.fml.ModLoader;
 import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.config.ModConfig;
-import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
-import net.sodiumzh.nff.girls.item.bauble.NFFGirlsBaubleProperties;
+import net.sodiumzh.nff.girls.item.bauble.NFFGirlsBaubleProperties_BACKUP;
 import net.sodiumzh.nff.girls.registry.*;
 import net.sodiumzh.nfu.savedata.redirector.SaveDataLocationRedirector;
 
@@ -59,7 +54,7 @@ public class NFFGirls
         NFFGirlsBaubles.BAUBLE_EFFECT_CONDITION_COLLECTION.merge();
         NFFGirlsBaubles.BAUBLE_EQUIPPING_CONDITION_COLLECTION.merge();
         NFFGirlsEntityAttributeProviders.ATTRIBUTE_PROVIDERS.merge();
-        NFFGirlsBaubleProperties.EQUIPPING_CONDITION_PRESETS.merge();
+        NFFGirlsBaubleProperties_BACKUP.EQUIPPING_CONDITION_PRESETS.merge();
         NFFGirlsAngerReasons.COLLECTION.merge();
         NFFGirlsEntityComponents.COLLECTION.merge();
         NFFGirlsDataSerializers.COLLECTION.merge();

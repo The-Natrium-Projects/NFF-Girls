@@ -22,7 +22,7 @@ import java.util.function.Supplier;
  * Base class for NFF-Girls baubles that are attached to an existing {@link Item} (or a set of items
  * matched by a predicate), as opposed to being a dedicated item class. It implements
  * {@link INFFGirlsBauble} on top of NFU-Library's {@link BaubleBehavior}, delegating attribute
- * modifiers, tick behavior and tooltips to an attached {@link NFFGirlsBaubleProperties} instance.
+ * modifiers, tick behavior and tooltips to an attached {@link NFFGirlsBaubleProperties_BACKUP} instance.
  */
 public class NFFGirlsBaubleBehavior extends BaubleBehavior implements INFFGirlsBauble {
 
@@ -31,10 +31,10 @@ public class NFFGirlsBaubleBehavior extends BaubleBehavior implements INFFGirlsB
     private Map<String, Predicate<Integer>> tags = new HashMap<>();
     private List<Supplier<? extends Component>> tooltips = new ArrayList<>();
     @Nonnull    // No need to lazy load here because it doesn't involve item registration
-    private final NFFGirlsBaubleProperties properties;
+    private final NFFGirlsBaubleProperties_BACKUP properties;
 
     protected NFFGirlsBaubleBehavior(@Nullable Item item, @Nullable BiPredicate<Item, ItemStack> multiItemCondition,
-                                     ResourceLocation categoryKey, int tier, @NotNull NFFGirlsBaubleProperties properties) {
+                                     ResourceLocation categoryKey, int tier, @NotNull NFFGirlsBaubleProperties_BACKUP properties) {
         super(getBaubleRegistryKey(categoryKey, tier), item, multiItemCondition, properties.equippingCondition);
         this.categoryKey = categoryKey;
         this.tier = tier;
@@ -49,7 +49,7 @@ public class NFFGirlsBaubleBehavior extends BaubleBehavior implements INFFGirlsB
      * @param tier Tier of this bauble under the category key.
      * @param properties Properties describing this bauble's effects.
      */
-    public NFFGirlsBaubleBehavior(@NotNull Item item, ResourceLocation categoryKey, int tier, @NotNull NFFGirlsBaubleProperties properties) {
+    public NFFGirlsBaubleBehavior(@NotNull Item item, ResourceLocation categoryKey, int tier, @NotNull NFFGirlsBaubleProperties_BACKUP properties) {
         super(item, getBaubleRegistryKey(categoryKey, tier), properties.equippingCondition);
         this.categoryKey = categoryKey;
         this.tier = tier;
@@ -65,7 +65,7 @@ public class NFFGirlsBaubleBehavior extends BaubleBehavior implements INFFGirlsB
      * @param tier Tier of this bauble under the category key.
      * @param properties Properties describing this bauble's effects.
      */
-    public NFFGirlsBaubleBehavior(@NotNull BiPredicate<Item, ItemStack> condition, ResourceLocation categoryKey, int tier, @NotNull NFFGirlsBaubleProperties properties) {
+    public NFFGirlsBaubleBehavior(@NotNull BiPredicate<Item, ItemStack> condition, ResourceLocation categoryKey, int tier, @NotNull NFFGirlsBaubleProperties_BACKUP properties) {
         super(condition, getBaubleRegistryKey(categoryKey, tier), properties.equippingCondition);
         this.categoryKey = categoryKey;
         this.tier = tier;
@@ -186,10 +186,10 @@ public class NFFGirlsBaubleBehavior extends BaubleBehavior implements INFFGirlsB
     // Properties related //
     
     /**
-     * @return The {@link NFFGirlsBaubleProperties} attached to this behavior, driving its effects.
+     * @return The {@link NFFGirlsBaubleProperties_BACKUP} attached to this behavior, driving its effects.
      */
     @Override
-    public NFFGirlsBaubleProperties getProperties() {
+    public NFFGirlsBaubleProperties_BACKUP getProperties() {
         return this.properties;
     }
 
@@ -215,7 +215,7 @@ public class NFFGirlsBaubleBehavior extends BaubleBehavior implements INFFGirlsB
     }
 
     /**
-     * Delegates to {@link NFFGirlsBaubleProperties#getTickAction()}.
+     * Delegates to {@link NFFGirlsBaubleProperties_BACKUP#getTickAction()}.
      */
     @Override
     public void slotTick(BaubleProcessingArgs baubleProcessingArgs) {
@@ -223,7 +223,7 @@ public class NFFGirlsBaubleBehavior extends BaubleBehavior implements INFFGirlsB
     }
 
     /**
-     * Delegates to {@link NFFGirlsBaubleProperties#getRepeatableModifierSuppliers()}.
+     * Delegates to {@link NFFGirlsBaubleProperties_BACKUP#getRepeatableModifierSuppliers()}.
      */
     @Nullable
     @Override
@@ -233,7 +233,7 @@ public class NFFGirlsBaubleBehavior extends BaubleBehavior implements INFFGirlsB
     }
 
     /**
-     * Delegates to {@link NFFGirlsBaubleProperties#getUnrepeatableModifierSuppliers()}.
+     * Delegates to {@link NFFGirlsBaubleProperties_BACKUP#getUnrepeatableModifierSuppliers()}.
      */
     @Nullable
     @Override

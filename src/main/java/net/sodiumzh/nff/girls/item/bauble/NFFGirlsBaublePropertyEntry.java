@@ -7,9 +7,6 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraftforge.registries.ForgeRegistries;
-import net.sodiumzh.nfu.function.NFUOperator;
-import net.sodiumzh.nfu.item.bauble.BaubleEquippingCondition;
-import net.sodiumzh.nfu.registry.NFURegistries;
 
 import javax.annotation.Nullable;
 import java.util.Arrays;
@@ -66,7 +63,7 @@ public class NFFGirlsBaublePropertyEntry {
         return environmentResistance(null);
     }
 
-    public void modifyBauble(NFFGirlsBaubleProperties properties) {
+    public void modifyBauble(NFFGirlsBaubleProperties_BACKUP properties) {
         switch (this.type) {
             case ATTRIBUTE: {
                 if (this.isRepeatable)
@@ -90,7 +87,7 @@ public class NFFGirlsBaublePropertyEntry {
         this.isRepeatable = false;
     }
 
-    public void apply(NFFGirlsBaubleProperties properties) {
+    public void apply(NFFGirlsBaubleProperties_BACKUP properties) {
         if (this.type.equals(Type.ENVIRONMENT_RESISTANCE)) {
             properties.environmentResistance();
         } else if (this.type.equals(Type.TAG)) {

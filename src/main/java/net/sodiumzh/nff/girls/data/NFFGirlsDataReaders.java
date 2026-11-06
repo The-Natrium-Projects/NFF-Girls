@@ -8,7 +8,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.sodiumzh.nff.girls.item.bauble.NFFGirlsBaubleBehavior;
-import net.sodiumzh.nff.girls.item.bauble.NFFGirlsBaubleProperties;
+import net.sodiumzh.nff.girls.item.bauble.NFFGirlsBaubleProperties_BACKUP;
 import net.sodiumzh.nff.girls.item.bauble.NFFGirlsBaublePropertyEntry;
 import net.sodiumzh.nff.girls.registry.NFFGirlsHealingItems;
 import net.sodiumzh.nff.girls.registry.NFFGirlsItems;
@@ -26,7 +26,6 @@ import javax.annotation.Nullable;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
-import java.util.function.Consumer;
 
 public class NFFGirlsDataReaders {
 
@@ -134,7 +133,7 @@ public class NFFGirlsDataReaders {
         if (!(jsonElement instanceof JsonObject)) return null;
         try {
             JsonObject jsonObject = (JsonObject) jsonElement;
-            NFFGirlsBaubleProperties properties = new NFFGirlsBaubleProperties();
+            NFFGirlsBaubleProperties_BACKUP properties = new NFFGirlsBaubleProperties_BACKUP();
             // Read basic bauble info
             BaubleEquippingCondition condition;
             if (!jsonObject.has("equipping_condition")) condition = null;

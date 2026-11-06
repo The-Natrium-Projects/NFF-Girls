@@ -44,7 +44,7 @@ public class NFFGirlsBaubles {
 
     /**
      * All NFF-Girls baubles, including dedicated items and behaviors.
-     * <p>Do not manually register if the bauble is created from {@link NFFGirlsBaubleProperties}
+     * <p>Do not manually register if the bauble is created from {@link NFFGirlsBaubleProperties_BACKUP}
      * as it's registered during building. Baubles created by other ways still need to register.
      */
     public static final NFURegistry<INFFGirlsBauble> BAUBLE_REGISTRY =
@@ -114,7 +114,7 @@ public class NFFGirlsBaubles {
 
     public static final RegistryObject<NFFGirlsDedicatedBaubleItem> CRUDE_AMULET = BAUBLE_ITEMS.register("crude_amulet", () ->
         new NFFGirlsDedicatedBaubleItem(new ResourceLocation(NFFGirls.MOD_ID, "crude_amulet"), 1, new Item.Properties(),
-            () -> new NFFGirlsBaubleProperties()
+            () -> new NFFGirlsBaubleProperties_BACKUP()
                 .repeatable(Attributes.MAX_HEALTH, 3d, AttributeModifier.Operation.ADDITION)
                 .repeatable(Attributes.ARMOR, 1d, AttributeModifier.Operation.ADDITION)
                 .setRarityTier(0)
@@ -122,7 +122,7 @@ public class NFFGirlsBaubles {
 
     public static final RegistryObject<NFFGirlsDedicatedBaubleItem> REFINED_AMULET = BAUBLE_ITEMS.register("refined_amulet", () ->
         new NFFGirlsDedicatedBaubleItem(new ResourceLocation(NFFGirls.MOD_ID, "refined_amulet"), 1, new Item.Properties(),
-            () -> new NFFGirlsBaubleProperties()
+            () -> new NFFGirlsBaubleProperties_BACKUP()
                 .repeatable(Attributes.MAX_HEALTH, 5d, AttributeModifier.Operation.ADDITION)
                 .repeatable(Attributes.ARMOR, 2d, AttributeModifier.Operation.ADDITION)
                 .repeatable(Attributes.ATTACK_DAMAGE, 1d, AttributeModifier.Operation.ADDITION)
@@ -131,7 +131,7 @@ public class NFFGirlsBaubles {
 
     public static final RegistryObject<NFFGirlsDedicatedBaubleItem> SOUL_AMULET = BAUBLE_ITEMS.register("soul_amulet", () ->
         new NFFGirlsDedicatedBaubleItem(new ResourceLocation(NFFGirls.MOD_ID, "soul_amulet"), 1, new Item.Properties(),
-            () -> new NFFGirlsBaubleProperties()
+            () -> new NFFGirlsBaubleProperties_BACKUP()
                 .equippingCondition(CONDITION_UNDEAD.get())
                 .repeatable(Attributes.MAX_HEALTH, 10d, AttributeModifier.Operation.ADDITION)
                 .repeatable(Attributes.ATTACK_DAMAGE, 3d, AttributeModifier.Operation.ADDITION)
@@ -142,7 +142,7 @@ public class NFFGirlsBaubles {
 
     public static final RegistryObject<NFFGirlsDedicatedBaubleItem> SOUL_AMULET_II = BAUBLE_ITEMS.register("soul_amulet_ii", () ->
         new NFFGirlsDedicatedBaubleItem(new ResourceLocation(NFFGirls.MOD_ID, "soul_amulet"), 2, new Item.Properties(),
-            () -> new NFFGirlsBaubleProperties()
+            () -> new NFFGirlsBaubleProperties_BACKUP()
                 .equippingCondition(CONDITION_UNDEAD.get())
                 .repeatable(Attributes.MAX_HEALTH, 15d, AttributeModifier.Operation.ADDITION)
                 .repeatable(Attributes.ATTACK_DAMAGE, 5d, AttributeModifier.Operation.ADDITION)
@@ -156,7 +156,7 @@ public class NFFGirlsBaubles {
 
     public static final RegistryObject<NFFGirlsDedicatedBaubleItem> SOUL_AMULET_III = BAUBLE_ITEMS.register("soul_amulet_iii", () ->
         new NFFGirlsDedicatedBaubleItem(new ResourceLocation(NFFGirls.MOD_ID, "soul_amulet"), 3, new Item.Properties(),
-            () -> new NFFGirlsBaubleProperties()
+            () -> new NFFGirlsBaubleProperties_BACKUP()
                 .equippingCondition(CONDITION_UNDEAD.get())
                 .repeatable(Attributes.MAX_HEALTH, 25d, AttributeModifier.Operation.ADDITION)
                 .repeatable(Attributes.ATTACK_DAMAGE, 8d, AttributeModifier.Operation.ADDITION)
@@ -171,7 +171,7 @@ public class NFFGirlsBaubles {
 
     public static final RegistryObject<NFFGirlsDedicatedBaubleItem> SOUL_AMULET_IV = BAUBLE_ITEMS.register("soul_amulet_iv", () ->
         new NFFGirlsDedicatedBaubleItem(new ResourceLocation(NFFGirls.MOD_ID, "soul_amulet"), 4, new Item.Properties(),
-            () -> new NFFGirlsBaubleProperties()
+            () -> new NFFGirlsBaubleProperties_BACKUP()
                 .equippingCondition(CONDITION_UNDEAD.get())
                 .repeatable(Attributes.MAX_HEALTH, 40d, AttributeModifier.Operation.ADDITION)
                 .repeatable(Attributes.ATTACK_DAMAGE, 12d, AttributeModifier.Operation.ADDITION)
@@ -191,7 +191,7 @@ public class NFFGirlsBaubles {
 
     public static final RegistryObject<NFFGirlsDedicatedBaubleItem> RESISTANCE_AMULET = BAUBLE_ITEMS.register("resistance_amulet", () ->
         new NFFGirlsDedicatedBaubleItem(new ResourceLocation(NFFGirls.MOD_ID, "resistance_amulet"), 1, new Item.Properties(),
-            () -> new NFFGirlsBaubleProperties()
+            () -> new NFFGirlsBaubleProperties_BACKUP()
                 .repeatable(Attributes.ARMOR, 4.0d, AttributeModifier.Operation.ADDITION)
                 .repeatable(Attributes.MAX_HEALTH, 15.0d, AttributeModifier.Operation.ADDITION)
                 .environmentResistance()
@@ -200,7 +200,7 @@ public class NFFGirlsBaubles {
 
     public static final RegistryObject<NFFGirlsDedicatedBaubleItem> RESISTANCE_AMULET_II = BAUBLE_ITEMS.register("resistance_amulet_ii", () ->
         new NFFGirlsDedicatedBaubleItem(new ResourceLocation(NFFGirls.MOD_ID, "resistance_amulet"), 2, new Item.Properties(),
-            () -> new NFFGirlsBaubleProperties()
+            () -> new NFFGirlsBaubleProperties_BACKUP()
                 .repeatable(Attributes.ARMOR, 6.0d, AttributeModifier.Operation.ADDITION)
                 .repeatable(Attributes.MAX_HEALTH, 25.0d, AttributeModifier.Operation.ADDITION)
                 .repeatable(Attributes.KNOCKBACK_RESISTANCE, 0.1d, AttributeModifier.Operation.MULTIPLY_BASE)
@@ -210,7 +210,7 @@ public class NFFGirlsBaubles {
 
     public static final RegistryObject<NFFGirlsDedicatedBaubleItem> RESISTANCE_AMULET_III = BAUBLE_ITEMS.register("resistance_amulet_iii", () ->
         new NFFGirlsDedicatedBaubleItem(new ResourceLocation(NFFGirls.MOD_ID, "resistance_amulet"), 3, new Item.Properties(),
-            () -> new NFFGirlsBaubleProperties()
+            () -> new NFFGirlsBaubleProperties_BACKUP()
                 .repeatable(Attributes.ARMOR, 8.0d, AttributeModifier.Operation.ADDITION)
                 .repeatable(Attributes.MAX_HEALTH, 40.0d, AttributeModifier.Operation.ADDITION)
                 .repeatable(Attributes.KNOCKBACK_RESISTANCE, 0.3d, AttributeModifier.Operation.MULTIPLY_BASE)
@@ -221,14 +221,14 @@ public class NFFGirlsBaubles {
 
     public static final RegistryObject<NFFGirlsDedicatedBaubleItem> CORRUPTED_AMULET = BAUBLE_ITEMS.register("corrupted_amulet", () ->
         new NFFGirlsDedicatedBaubleItem(new ResourceLocation(NFFGirls.MOD_ID, "corrupted_amulet"), 1, new Item.Properties(),
-            () -> new NFFGirlsBaubleProperties()
+            () -> new NFFGirlsBaubleProperties_BACKUP()
                 .repeatable(NFFGirlsEntityAttributes.WITHER_ASPECT.get(), 1.0d, AttributeModifier.Operation.ADDITION)
                 .setRarityTier(2)
                 .addAllModifierTooltips()));
 
     public static final RegistryObject<NFFGirlsDedicatedBaubleItem> CORRUPTED_AMULET_II = BAUBLE_ITEMS.register("corrupted_amulet_ii", () ->
         new NFFGirlsDedicatedBaubleItem(new ResourceLocation(NFFGirls.MOD_ID, "corrupted_amulet"), 2, new Item.Properties(),
-            () -> new NFFGirlsBaubleProperties()
+            () -> new NFFGirlsBaubleProperties_BACKUP()
                 .repeatable(NFFGirlsEntityAttributes.WITHER_ASPECT.get(), 1.0d, AttributeModifier.Operation.ADDITION)
                 .repeatable(Attributes.ATTACK_DAMAGE, 2.0d, AttributeModifier.Operation.ADDITION)
                 .setRarityTier(2)
@@ -236,7 +236,7 @@ public class NFFGirlsBaubles {
 
     public static final RegistryObject<NFFGirlsDedicatedBaubleItem> WITHER_AMULET = BAUBLE_ITEMS.register("wither_amulet", () ->
         new NFFGirlsDedicatedBaubleItem(new ResourceLocation(NFFGirls.MOD_ID, "wither_amulet"), 1, new Item.Properties(),
-            () -> new NFFGirlsBaubleProperties()
+            () -> new NFFGirlsBaubleProperties_BACKUP()
                 .equippingCondition(CONDITION_NETHER.get())
                 .repeatable(NFFGirlsEntityAttributes.WITHER_ASPECT.get(), 2.0d, AttributeModifier.Operation.ADDITION)
                 .repeatable(Attributes.MAX_HEALTH, 10.0d, AttributeModifier.Operation.ADDITION)
@@ -246,7 +246,7 @@ public class NFFGirlsBaubles {
 
     public static final RegistryObject<NFFGirlsDedicatedBaubleItem> WITHER_AMULET_II = BAUBLE_ITEMS.register("wither_amulet_ii", () ->
         new NFFGirlsDedicatedBaubleItem(new ResourceLocation(NFFGirls.MOD_ID, "wither_amulet"), 2, new Item.Properties(),
-            () -> new NFFGirlsBaubleProperties()
+            () -> new NFFGirlsBaubleProperties_BACKUP()
                 .equippingCondition(CONDITION_NETHER.get())
                 .repeatable(NFFGirlsEntityAttributes.WITHER_ASPECT.get(), 2.5d, AttributeModifier.Operation.ADDITION)
                 .repeatable(Attributes.MAX_HEALTH, 20.0d, AttributeModifier.Operation.ADDITION)
@@ -257,7 +257,7 @@ public class NFFGirlsBaubles {
 
     public static final RegistryObject<NFFGirlsDedicatedBaubleItem> WITHER_AMULET_III = BAUBLE_ITEMS.register("wither_amulet_iii", () ->
         new NFFGirlsDedicatedBaubleItem(new ResourceLocation(NFFGirls.MOD_ID, "wither_amulet"), 3, new Item.Properties(),
-            () -> new NFFGirlsBaubleProperties()
+            () -> new NFFGirlsBaubleProperties_BACKUP()
                 .equippingCondition(CONDITION_NETHER.get())
                 .repeatable(NFFGirlsEntityAttributes.WITHER_ASPECT.get(), 4.0d, AttributeModifier.Operation.ADDITION)
                 .repeatable(Attributes.MAX_HEALTH, 30d, AttributeModifier.Operation.ADDITION)
@@ -269,7 +269,7 @@ public class NFFGirlsBaubles {
 
     public static final RegistryObject<NFFGirlsDedicatedBaubleItem> ABYSS_AMULET = BAUBLE_ITEMS.register("abyss_amulet", () ->
         new NFFGirlsDedicatedBaubleItem(new ResourceLocation(NFFGirls.MOD_ID, "abyss_amulet"), 1, new Item.Properties(),
-            () -> new NFFGirlsBaubleProperties()
+            () -> new NFFGirlsBaubleProperties_BACKUP()
                 .equippingCondition(CONDITION_NETHER_AND_ENDER.get())
                 .repeatable(NFFGirlsEntityAttributes.WITHER_ASPECT.get(), 3.0d, AttributeModifier.Operation.ADDITION)
                 .repeatable(NFFGirlsEntityAttributes.POISON_ASPECT.get(), 3.0d, AttributeModifier.Operation.ADDITION)
@@ -285,7 +285,7 @@ public class NFFGirlsBaubles {
 
     public static final RegistryObject<NFFGirlsDedicatedBaubleItem> ABYSS_AMULET_II = BAUBLE_ITEMS.register("abyss_amulet_ii", () ->
         new NFFGirlsDedicatedBaubleItem(new ResourceLocation(NFFGirls.MOD_ID, "abyss_amulet"), 2, new Item.Properties(),
-            () -> new NFFGirlsBaubleProperties()
+            () -> new NFFGirlsBaubleProperties_BACKUP()
                 .equippingCondition(CONDITION_NETHER_AND_ENDER.get())
                 .repeatable(NFFGirlsEntityAttributes.WITHER_ASPECT.get(), 5.0d, AttributeModifier.Operation.ADDITION)
                 .repeatable(NFFGirlsEntityAttributes.POISON_ASPECT.get(), 5.0d, AttributeModifier.Operation.ADDITION)
@@ -304,7 +304,7 @@ public class NFFGirlsBaubles {
     // =========== BADGE =========== //
     public static final RegistryObject<NFFGirlsDedicatedBaubleItem> CRUDE_BADGE = BAUBLE_ITEMS.register("crude_badge", () ->
         new NFFGirlsDedicatedBaubleItem(new ResourceLocation(NFFGirls.MOD_ID, "crude_badge"), 1, new Item.Properties(),
-            () -> new NFFGirlsBaubleProperties()
+            () -> new NFFGirlsBaubleProperties_BACKUP()
                 .repeatable(Attributes.MAX_HEALTH, 3.0d, AttributeModifier.Operation.ADDITION)
                 .repeatable(Attributes.ATTACK_DAMAGE, 1.0d, AttributeModifier.Operation.ADDITION)
                 .setRarityTier(0)
@@ -312,7 +312,7 @@ public class NFFGirlsBaubles {
 
     public static final RegistryObject<NFFGirlsDedicatedBaubleItem> REFINED_BADGE = BAUBLE_ITEMS.register("refined_badge", () ->
         new NFFGirlsDedicatedBaubleItem(new ResourceLocation(NFFGirls.MOD_ID, "refined_badge"), 1, new Item.Properties(),
-            () -> new NFFGirlsBaubleProperties()
+            () -> new NFFGirlsBaubleProperties_BACKUP()
                 .repeatable(Attributes.MAX_HEALTH, 5.0d, AttributeModifier.Operation.ADDITION)
                 .repeatable(Attributes.ATTACK_DAMAGE, 2d, AttributeModifier.Operation.ADDITION)
                 .setRarityTier(1)
@@ -320,7 +320,7 @@ public class NFFGirlsBaubles {
 
     public static final RegistryObject<NFFGirlsDedicatedBaubleItem> COURAGE_BADGE = BAUBLE_ITEMS.register("courage_badge", () ->
         new NFFGirlsDedicatedBaubleItem(new ResourceLocation(NFFGirls.MOD_ID, "courage_badge"), 1, new Item.Properties(),
-            () -> new NFFGirlsBaubleProperties()
+            () -> new NFFGirlsBaubleProperties_BACKUP()
                 .repeatable(Attributes.ATTACK_DAMAGE, 4.0d, AttributeModifier.Operation.ADDITION)
                 .repeatable(Attributes.MOVEMENT_SPEED, 0.2d, AttributeModifier.Operation.MULTIPLY_BASE)
                 .repeatable(NFFGirlsEntityAttributes.CRITICAL_RATE.get(), 0.1d, AttributeModifier.Operation.ADDITION)
@@ -331,7 +331,7 @@ public class NFFGirlsBaubles {
 
     public static final RegistryObject<NFFGirlsDedicatedBaubleItem> COURAGE_BADGE_II = BAUBLE_ITEMS.register("courage_badge_ii", () ->
         new NFFGirlsDedicatedBaubleItem(new ResourceLocation(NFFGirls.MOD_ID, "courage_badge"), 2, new Item.Properties(),
-            () -> new NFFGirlsBaubleProperties()
+            () -> new NFFGirlsBaubleProperties_BACKUP()
                 .repeatable(Attributes.ATTACK_DAMAGE, 6.0d, AttributeModifier.Operation.ADDITION)
                 .repeatable(Attributes.MOVEMENT_SPEED, 0.3d, AttributeModifier.Operation.MULTIPLY_BASE)
                 .repeatable(NFFGirlsEntityAttributes.CRITICAL_RATE.get(), 0.15d, AttributeModifier.Operation.ADDITION)
@@ -342,7 +342,7 @@ public class NFFGirlsBaubles {
 
     public static final RegistryObject<NFFGirlsDedicatedBaubleItem> COURAGE_BADGE_III = BAUBLE_ITEMS.register("courage_badge_iii", () ->
         new NFFGirlsDedicatedBaubleItem(new ResourceLocation(NFFGirls.MOD_ID, "courage_badge"), 3, new Item.Properties(),
-            () -> new NFFGirlsBaubleProperties()
+            () -> new NFFGirlsBaubleProperties_BACKUP()
                 .repeatable(Attributes.ATTACK_DAMAGE, 9d, AttributeModifier.Operation.ADDITION)
                 .repeatable(Attributes.MOVEMENT_SPEED, 0.4d, AttributeModifier.Operation.MULTIPLY_BASE)
                 .repeatable(NFFGirlsEntityAttributes.CRITICAL_RATE.get(), 0.25d, AttributeModifier.Operation.ADDITION)
@@ -355,7 +355,7 @@ public class NFFGirlsBaubles {
 
     public static final RegistryObject<NFFGirlsDedicatedBaubleItem> TREASURE_HUNTER_BADGE = BAUBLE_ITEMS.register("treasure_hunter_badge", () ->
         new NFFGirlsDedicatedBaubleItem(new ResourceLocation(NFFGirls.MOD_ID, "treasure_hunter_badge"), 1, new Item.Properties(),
-            () -> new NFFGirlsBaubleProperties()
+            () -> new NFFGirlsBaubleProperties_BACKUP()
                 .repeatable(ForgeMod.STEP_HEIGHT_ADDITION.get(), 0.5d, AttributeModifier.Operation.ADDITION)
                 .repeatable(Attributes.MOVEMENT_SPEED, 0.3d, AttributeModifier.Operation.MULTIPLY_BASE)
                 .repeatable(Attributes.LUCK, 1d, AttributeModifier.Operation.ADDITION)
@@ -367,7 +367,7 @@ public class NFFGirlsBaubles {
 
     public static final RegistryObject<NFFGirlsDedicatedBaubleItem> TREASURE_HUNTER_BADGE_II = BAUBLE_ITEMS.register("treasure_hunter_badge_ii", () ->
         new NFFGirlsDedicatedBaubleItem(new ResourceLocation(NFFGirls.MOD_ID, "treasure_hunter_badge"), 2, new Item.Properties(),
-            () -> new NFFGirlsBaubleProperties()
+            () -> new NFFGirlsBaubleProperties_BACKUP()
                 .repeatable(ForgeMod.STEP_HEIGHT_ADDITION.get(), 0.5d, AttributeModifier.Operation.ADDITION)
                 .repeatable(Attributes.MOVEMENT_SPEED, 0.4d, AttributeModifier.Operation.MULTIPLY_BASE)
                 .repeatable(Attributes.LUCK, 2d, AttributeModifier.Operation.ADDITION)
@@ -380,7 +380,7 @@ public class NFFGirlsBaubles {
 
     public static final RegistryObject<NFFGirlsDedicatedBaubleItem> TREASURE_HUNTER_BADGE_III = BAUBLE_ITEMS.register("treasure_hunter_badge_iii", () ->
         new NFFGirlsDedicatedBaubleItem(new ResourceLocation(NFFGirls.MOD_ID, "treasure_hunter_badge"), 3, new Item.Properties(),
-            () -> new NFFGirlsBaubleProperties()
+            () -> new NFFGirlsBaubleProperties_BACKUP()
                 .repeatable(ForgeMod.STEP_HEIGHT_ADDITION.get(), 1d, AttributeModifier.Operation.ADDITION)
                 .repeatable(Attributes.MOVEMENT_SPEED, 0.5d, AttributeModifier.Operation.MULTIPLY_BASE)
                 .repeatable(Attributes.LUCK, 3d, AttributeModifier.Operation.ADDITION)
@@ -394,7 +394,7 @@ public class NFFGirlsBaubles {
 
     public static final RegistryObject<NFFGirlsDedicatedBaubleItem> NATURE_BADGE = BAUBLE_ITEMS.register("nature_badge", () ->
         new NFFGirlsDedicatedBaubleItem(new ResourceLocation(NFFGirls.MOD_ID, "nature_badge"), 1, new Item.Properties(),
-            () -> new NFFGirlsBaubleProperties()
+            () -> new NFFGirlsBaubleProperties_BACKUP()
                 .equippingCondition(CONDITION_PLANT.get())
                 .repeatable(NFFGirlsEntityAttributes.POISON_ASPECT.get(), 1d, AttributeModifier.Operation.ADDITION)
                 .repeatable(NFFGirlsEntityAttributes.PERSISTENT_HEALING.get(), 0.1d, AttributeModifier.Operation.ADDITION, EFFECT_CONDITION_IN_WATER_OR_RAIN.get().asSimplePredicate())
@@ -402,13 +402,13 @@ public class NFFGirlsBaubles {
                     new ResourceLocation(NFFGirls.MOD_ID, "nature_derivatives_speed_boost"))
                 .setRarityTier(1)
                 .addEquippingConditionTooltip()
-                .addAllModifierTooltips(() -> NFFGirlsBaubleProperties.NO_CONDITION.get().asSimplePredicate())
+                .addAllModifierTooltips(() -> NFFGirlsBaubleProperties_BACKUP.NO_CONDITION.get().asSimplePredicate())
                 .addTooltip(EFFECT_CONDITION_IN_WATER_OR_RAIN.get().getTranslation())
                 .addAllModifierTooltips(() -> EFFECT_CONDITION_IN_WATER_OR_RAIN.get().asSimplePredicate())));
 
     public static final RegistryObject<NFFGirlsDedicatedBaubleItem> NATURE_BADGE_II = BAUBLE_ITEMS.register("nature_badge_ii", () ->
         new NFFGirlsDedicatedBaubleItem(new ResourceLocation(NFFGirls.MOD_ID, "nature_badge"), 2, new Item.Properties(),
-            () -> new NFFGirlsBaubleProperties()
+            () -> new NFFGirlsBaubleProperties_BACKUP()
                 .equippingCondition(CONDITION_PLANT.get())
                 .repeatable(NFFGirlsEntityAttributes.POISON_ASPECT.get(), 1d, AttributeModifier.Operation.ADDITION)
                 .repeatable(NFFGirlsEntityAttributes.ANTI_ARTHROPOD.get(), 0.15d, AttributeModifier.Operation.ADDITION)
@@ -417,13 +417,13 @@ public class NFFGirlsBaubles {
                     new ResourceLocation(NFFGirls.MOD_ID, "nature_derivatives_speed_boost"))
                 .setRarityTier(2)
                 .addEquippingConditionTooltip()
-                .addAllModifierTooltips(() -> NFFGirlsBaubleProperties.NO_CONDITION.get().asSimplePredicate())
+                .addAllModifierTooltips(() -> NFFGirlsBaubleProperties_BACKUP.NO_CONDITION.get().asSimplePredicate())
                 .addTooltip(EFFECT_CONDITION_IN_WATER_OR_RAIN.get().getTranslation())
                 .addAllModifierTooltips(() -> EFFECT_CONDITION_IN_WATER_OR_RAIN.get().asSimplePredicate())));
 
     public static final RegistryObject<NFFGirlsDedicatedBaubleItem> NATURE_BADGE_III = BAUBLE_ITEMS.register("nature_badge_iii", () ->
         new NFFGirlsDedicatedBaubleItem(new ResourceLocation(NFFGirls.MOD_ID, "nature_badge"), 3, new Item.Properties(),
-            () -> new NFFGirlsBaubleProperties()
+            () -> new NFFGirlsBaubleProperties_BACKUP()
                 .equippingCondition(CONDITION_PLANT.get())
                 .repeatable(NFFGirlsEntityAttributes.POISON_ASPECT.get(), 2d, AttributeModifier.Operation.ADDITION)
                 .repeatable(NFFGirlsEntityAttributes.ANTI_ARTHROPOD.get(), 0.2d, AttributeModifier.Operation.ADDITION)
@@ -433,14 +433,14 @@ public class NFFGirlsBaubles {
                     new ResourceLocation(NFFGirls.MOD_ID, "nature_derivatives_speed_boost"))
                 .setRarityTier(3)
                 .addEquippingConditionTooltip()
-                .addAllModifierTooltips(() -> NFFGirlsBaubleProperties.NO_CONDITION.get().asSimplePredicate())
+                .addAllModifierTooltips(() -> NFFGirlsBaubleProperties_BACKUP.NO_CONDITION.get().asSimplePredicate())
                 .addTooltip(EFFECT_CONDITION_IN_WATER_OR_RAIN.get().getTranslation())
                 .addAllModifierTooltips(() -> EFFECT_CONDITION_IN_WATER_OR_RAIN.get().asSimplePredicate()))
             .alwaysFoil().cast());
 
     public static final RegistryObject<NFFGirlsDedicatedBaubleItem> NATURE_BADGE_IV = BAUBLE_ITEMS.register("nature_badge_iv", () ->
         new NFFGirlsDedicatedBaubleItem(new ResourceLocation(NFFGirls.MOD_ID, "nature_badge"), 4, new Item.Properties(),
-            () -> new NFFGirlsBaubleProperties()
+            () -> new NFFGirlsBaubleProperties_BACKUP()
                 .equippingCondition(CONDITION_PLANT.get())
                 .repeatable(NFFGirlsEntityAttributes.POISON_ASPECT.get(), 3d, AttributeModifier.Operation.ADDITION)
                 .repeatable(NFFGirlsEntityAttributes.ANTI_ARTHROPOD.get(), 0.3d, AttributeModifier.Operation.ADDITION)
@@ -451,14 +451,14 @@ public class NFFGirlsBaubles {
                 .repeatable(Attributes.MOVEMENT_SPEED, 0.3d, AttributeModifier.Operation.ADDITION, EFFECT_CONDITION_IN_WATER_OR_RAIN.get().asSimplePredicate())
                 .setRarityTier(5)
                 .addEquippingConditionTooltip()
-                .addAllModifierTooltips(() -> NFFGirlsBaubleProperties.NO_CONDITION.get().asSimplePredicate())
+                .addAllModifierTooltips(() -> NFFGirlsBaubleProperties_BACKUP.NO_CONDITION.get().asSimplePredicate())
                 .addTooltip(EFFECT_CONDITION_IN_WATER_OR_RAIN.get().getTranslation())
                 .addAllModifierTooltips(() -> EFFECT_CONDITION_IN_WATER_OR_RAIN.get().asSimplePredicate()))
             .alwaysFoil().cast());
 
     public static final RegistryObject<NFFGirlsDedicatedBaubleItem> NATURE_BADGE_V = BAUBLE_ITEMS.register("nature_badge_v", () ->
         new NFFGirlsDedicatedBaubleItem(new ResourceLocation(NFFGirls.MOD_ID, "nature_badge"), 5, new Item.Properties(),
-            () -> new NFFGirlsBaubleProperties()
+            () -> new NFFGirlsBaubleProperties_BACKUP()
                 .equippingCondition(CONDITION_PLANT.get())
                 .repeatable(NFFGirlsEntityAttributes.POISON_ASPECT.get(), 3d, AttributeModifier.Operation.ADDITION)
                 .repeatable(NFFGirlsEntityAttributes.ANTI_ARTHROPOD.get(), 0.5d, AttributeModifier.Operation.ADDITION)
@@ -471,14 +471,14 @@ public class NFFGirlsBaubles {
                     new ResourceLocation(NFFGirls.MOD_ID, "nature_badge_looting_level"))
                 .setRarityTier(7)
                 .addEquippingConditionTooltip()
-                .addAllModifierTooltips(() -> NFFGirlsBaubleProperties.NO_CONDITION.get().asSimplePredicate())
+                .addAllModifierTooltips(() -> NFFGirlsBaubleProperties_BACKUP.NO_CONDITION.get().asSimplePredicate())
                 .addTooltip(EFFECT_CONDITION_IN_WATER_OR_RAIN.get().getTranslation())
                 .addAllModifierTooltips(() -> EFFECT_CONDITION_IN_WATER_OR_RAIN.get().asSimplePredicate()))
             .alwaysFoil().cast());
 
     public static final RegistryObject<NFFGirlsDedicatedBaubleItem> NATURES_TENDERNESS_BADGE = BAUBLE_ITEMS.register("natures_tenderness_badge", () ->
         new NFFGirlsDedicatedBaubleItem(new ResourceLocation(NFFGirls.MOD_ID, "natures_tenderness_badge"), 1, new Item.Properties(),
-            () -> new NFFGirlsBaubleProperties()
+            () -> new NFFGirlsBaubleProperties_BACKUP()
                 .equippingCondition(CONDITION_PLANT.get())
                 .repeatable(Attributes.MAX_HEALTH, 20d, AttributeModifier.Operation.ADDITION)
                 .repeatable(Attributes.ARMOR, 6d, AttributeModifier.Operation.ADDITION)
@@ -487,13 +487,13 @@ public class NFFGirlsBaubles {
                 .unrepeatable(Attributes.MOVEMENT_SPEED, 0.3d, AttributeModifier.Operation.ADDITION, EFFECT_CONDITION_IN_WATER_OR_RAIN.get().asSimplePredicate())
                 .setRarityTier(4)
                 .addEquippingConditionTooltip()
-                .addAllModifierTooltips(() -> NFFGirlsBaubleProperties.NO_CONDITION.get().asSimplePredicate())
+                .addAllModifierTooltips(() -> NFFGirlsBaubleProperties_BACKUP.NO_CONDITION.get().asSimplePredicate())
                 .addTooltip(EFFECT_CONDITION_IN_WATER_OR_RAIN.get().getTranslation())
                 .addAllModifierTooltips(() -> EFFECT_CONDITION_IN_WATER_OR_RAIN.get().asSimplePredicate())));
 
     public static final RegistryObject<NFFGirlsDedicatedBaubleItem> NATURES_TENDERNESS_BADGE_II = BAUBLE_ITEMS.register("natures_tenderness_badge_ii", () ->
         new NFFGirlsDedicatedBaubleItem(new ResourceLocation(NFFGirls.MOD_ID, "natures_tenderness_badge"), 2, new Item.Properties(),
-            () -> new NFFGirlsBaubleProperties()
+            () -> new NFFGirlsBaubleProperties_BACKUP()
                 .equippingCondition(CONDITION_PLANT.get())
                 .repeatable(Attributes.MAX_HEALTH, 30d, AttributeModifier.Operation.ADDITION)
                 .repeatable(Attributes.ARMOR, 8d, AttributeModifier.Operation.ADDITION)
@@ -504,14 +504,14 @@ public class NFFGirlsBaubles {
                     new ResourceLocation(NFFGirls.MOD_ID, "nature_derivatives_speed_boost"))
                 .setRarityTier(6)
                 .addEquippingConditionTooltip()
-                .addAllModifierTooltips(() -> NFFGirlsBaubleProperties.NO_CONDITION.get().asSimplePredicate())
+                .addAllModifierTooltips(() -> NFFGirlsBaubleProperties_BACKUP.NO_CONDITION.get().asSimplePredicate())
                 .addTooltip(EFFECT_CONDITION_IN_WATER_OR_RAIN.get().getTranslation())
                 .addAllModifierTooltips(() -> EFFECT_CONDITION_IN_WATER_OR_RAIN.get().asSimplePredicate()))
             .alwaysFoil().cast());
 
     public static final RegistryObject<NFFGirlsDedicatedBaubleItem> NATURES_TENDERNESS_BADGE_III = BAUBLE_ITEMS.register("natures_tenderness_badge_iii", () ->
         new NFFGirlsDedicatedBaubleItem(new ResourceLocation(NFFGirls.MOD_ID, "natures_tenderness_badge"), 3, new Item.Properties(),
-            () -> new NFFGirlsBaubleProperties()
+            () -> new NFFGirlsBaubleProperties_BACKUP()
                 .equippingCondition(CONDITION_PLANT.get())
                 .repeatable(Attributes.MAX_HEALTH, 30d, AttributeModifier.Operation.ADDITION)
                 .repeatable(Attributes.ARMOR, 8d, AttributeModifier.Operation.ADDITION)
@@ -524,14 +524,14 @@ public class NFFGirlsBaubles {
                     new ResourceLocation(NFFGirls.MOD_ID, "natures_tenderness_looting_level"))
                 .setRarityTier(8)
                 .addEquippingConditionTooltip()
-                .addAllModifierTooltips(() -> NFFGirlsBaubleProperties.NO_CONDITION.get().asSimplePredicate())
+                .addAllModifierTooltips(() -> NFFGirlsBaubleProperties_BACKUP.NO_CONDITION.get().asSimplePredicate())
                 .addTooltip(EFFECT_CONDITION_IN_WATER_OR_RAIN.get().getTranslation())
                 .addAllModifierTooltips(() -> EFFECT_CONDITION_IN_WATER_OR_RAIN.get().asSimplePredicate()))
             .alwaysFoil().cast());
 
     public static final RegistryObject<NFFGirlsDedicatedBaubleItem> NATURES_RAGE_BADGE = BAUBLE_ITEMS.register("natures_rage_badge", () ->
         new NFFGirlsDedicatedBaubleItem(new ResourceLocation(NFFGirls.MOD_ID, "natures_rage_badge"), 1, new Item.Properties(),
-            () -> new NFFGirlsBaubleProperties()
+            () -> new NFFGirlsBaubleProperties_BACKUP()
                 .equippingCondition(CONDITION_PLANT.get())
                 .repeatable(Attributes.ATTACK_DAMAGE, 4d, AttributeModifier.Operation.ADDITION)
                 .repeatable(Attributes.ATTACK_KNOCKBACK, 0.5d, AttributeModifier.Operation.ADDITION)
@@ -541,13 +541,13 @@ public class NFFGirlsBaubles {
                     new ResourceLocation(NFFGirls.MOD_ID, "nature_derivatives_speed_boost"))
                 .setRarityTier(4)
                 .addEquippingConditionTooltip()
-                .addAllModifierTooltips(() -> NFFGirlsBaubleProperties.NO_CONDITION.get().asSimplePredicate())
+                .addAllModifierTooltips(() -> NFFGirlsBaubleProperties_BACKUP.NO_CONDITION.get().asSimplePredicate())
                 .addTooltip(EFFECT_CONDITION_IN_WATER_OR_RAIN.get().getTranslation())
                 .addAllModifierTooltips(() -> EFFECT_CONDITION_IN_WATER_OR_RAIN.get().asSimplePredicate())));
 
     public static final RegistryObject<NFFGirlsDedicatedBaubleItem> NATURES_RAGE_BADGE_II = BAUBLE_ITEMS.register("natures_rage_badge_ii", () ->
         new NFFGirlsDedicatedBaubleItem(new ResourceLocation(NFFGirls.MOD_ID, "natures_rage_badge"), 2, new Item.Properties(),
-            () -> new NFFGirlsBaubleProperties()
+            () -> new NFFGirlsBaubleProperties_BACKUP()
                 .equippingCondition(CONDITION_PLANT.get())
                 .repeatable(Attributes.ATTACK_DAMAGE, 6d, AttributeModifier.Operation.ADDITION)
                 .repeatable(Attributes.ATTACK_KNOCKBACK, 0.7d, AttributeModifier.Operation.ADDITION)
@@ -557,14 +557,14 @@ public class NFFGirlsBaubles {
                     new ResourceLocation(NFFGirls.MOD_ID, "nature_derivatives_speed_boost"))
                 .setRarityTier(6)
                 .addEquippingConditionTooltip()
-                .addAllModifierTooltips(() -> NFFGirlsBaubleProperties.NO_CONDITION.get().asSimplePredicate())
+                .addAllModifierTooltips(() -> NFFGirlsBaubleProperties_BACKUP.NO_CONDITION.get().asSimplePredicate())
                 .addTooltip(EFFECT_CONDITION_IN_WATER_OR_RAIN.get().getTranslation())
                 .addAllModifierTooltips(() -> EFFECT_CONDITION_IN_WATER_OR_RAIN.get().asSimplePredicate()))
             .alwaysFoil().cast());
 
     public static final RegistryObject<NFFGirlsDedicatedBaubleItem> NATURES_RAGE_BADGE_III = BAUBLE_ITEMS.register("natures_rage_badge_iii", () ->
         new NFFGirlsDedicatedBaubleItem(new ResourceLocation(NFFGirls.MOD_ID, "natures_rage_badge"), 3, new Item.Properties(),
-            () -> new NFFGirlsBaubleProperties()
+            () -> new NFFGirlsBaubleProperties_BACKUP()
                 .equippingCondition(CONDITION_PLANT.get())
                 .repeatable(Attributes.ATTACK_DAMAGE, 9d, AttributeModifier.Operation.ADDITION)
                 .repeatable(Attributes.ATTACK_KNOCKBACK, 1.0d, AttributeModifier.Operation.ADDITION)
@@ -577,7 +577,7 @@ public class NFFGirlsBaubles {
                     new ResourceLocation(NFFGirls.MOD_ID, "natures_rage_looting_level"))
                 .setRarityTier(8)
                 .addEquippingConditionTooltip()
-                .addAllModifierTooltips(() -> NFFGirlsBaubleProperties.NO_CONDITION.get().asSimplePredicate())
+                .addAllModifierTooltips(() -> NFFGirlsBaubleProperties_BACKUP.NO_CONDITION.get().asSimplePredicate())
                 .addTooltip(EFFECT_CONDITION_IN_WATER_OR_RAIN.get().getTranslation())
                 .addAllModifierTooltips(() -> EFFECT_CONDITION_IN_WATER_OR_RAIN.get().asSimplePredicate()))
             .alwaysFoil().cast());
@@ -586,7 +586,7 @@ public class NFFGirlsBaubles {
 
     public static final RegistryObject<NFFGirlsDedicatedBaubleItem> RAW_JADE = BAUBLE_ITEMS.register("raw_jade", () ->
         new NFFGirlsDedicatedBaubleItem(new ResourceLocation(NFFGirls.MOD_ID, "raw_jade"), 1, new Item.Properties(),
-            () -> new NFFGirlsBaubleProperties()
+            () -> new NFFGirlsBaubleProperties_BACKUP()
                 .repeatable(Attributes.MAX_HEALTH, 3d, AttributeModifier.Operation.ADDITION)
                 .repeatable(Attributes.MOVEMENT_SPEED, 0.1d, AttributeModifier.Operation.MULTIPLY_BASE)
                 .setRarityTier(0)
@@ -594,7 +594,7 @@ public class NFFGirlsBaubles {
 
     public static final RegistryObject<NFFGirlsDedicatedBaubleItem> BURNISHED_JADE = BAUBLE_ITEMS.register("burnished_jade", () ->
         new NFFGirlsDedicatedBaubleItem(new ResourceLocation(NFFGirls.MOD_ID, "burnished_jade"), 1, new Item.Properties(),
-            () -> new NFFGirlsBaubleProperties()
+            () -> new NFFGirlsBaubleProperties_BACKUP()
                 .repeatable(Attributes.MAX_HEALTH, 5d, AttributeModifier.Operation.ADDITION)
                 .repeatable(Attributes.ARMOR, 1d, AttributeModifier.Operation.ADDITION)
                 .repeatable(Attributes.MOVEMENT_SPEED, 0.1d, AttributeModifier.Operation.MULTIPLY_BASE)
@@ -603,7 +603,7 @@ public class NFFGirlsBaubles {
 
     public static final RegistryObject<NFFGirlsDedicatedBaubleItem> HOLY_JADE = BAUBLE_ITEMS.register("holy_jade", () ->
         new NFFGirlsDedicatedBaubleItem(new ResourceLocation(NFFGirls.MOD_ID, "holy_jade"), 1, new Item.Properties(),
-            () -> new NFFGirlsBaubleProperties()
+            () -> new NFFGirlsBaubleProperties_BACKUP()
                 .equippingCondition(CONDITION_NOT_UNDEAD.get())
                 .repeatable(NFFGirlsEntityAttributes.ANTI_UNDEAD.get(), 0.2d, AttributeModifier.Operation.ADDITION)
                 .repeatable(Attributes.ARMOR, 3d, AttributeModifier.Operation.ADDITION)
@@ -613,7 +613,7 @@ public class NFFGirlsBaubles {
 
     public static final RegistryObject<NFFGirlsDedicatedBaubleItem> HOLY_JADE_II = BAUBLE_ITEMS.register("holy_jade_ii", () ->
         new NFFGirlsDedicatedBaubleItem(new ResourceLocation(NFFGirls.MOD_ID, "holy_jade"), 2, new Item.Properties(),
-            () -> new NFFGirlsBaubleProperties()
+            () -> new NFFGirlsBaubleProperties_BACKUP()
                 .equippingCondition(CONDITION_NOT_UNDEAD.get())
                 .repeatable(NFFGirlsEntityAttributes.ANTI_UNDEAD.get(), 0.35d, AttributeModifier.Operation.ADDITION)
                 .repeatable(Attributes.ARMOR, 6d, AttributeModifier.Operation.ADDITION)
@@ -626,7 +626,7 @@ public class NFFGirlsBaubles {
 
     public static final RegistryObject<NFFGirlsDedicatedBaubleItem> HOLY_JADE_III = BAUBLE_ITEMS.register("holy_jade_iii", () ->
         new NFFGirlsDedicatedBaubleItem(new ResourceLocation(NFFGirls.MOD_ID, "holy_jade"), 3, new Item.Properties(),
-            () -> new NFFGirlsBaubleProperties()
+            () -> new NFFGirlsBaubleProperties_BACKUP()
                 .equippingCondition(CONDITION_NOT_UNDEAD.get())
                 .repeatable(NFFGirlsEntityAttributes.ANTI_UNDEAD.get(), 0.6d, AttributeModifier.Operation.ADDITION)
                 .repeatable(Attributes.ARMOR, 8d, AttributeModifier.Operation.ADDITION)
@@ -641,21 +641,21 @@ public class NFFGirlsBaubles {
 
     public static final RegistryObject<NFFGirlsDedicatedBaubleItem> HEALING_JADE = BAUBLE_ITEMS.register("healing_jade", () ->
         new NFFGirlsDedicatedBaubleItem(new ResourceLocation(NFFGirls.MOD_ID, "healing_jade"), 1, new Item.Properties(),
-            () -> new NFFGirlsBaubleProperties()
+            () -> new NFFGirlsBaubleProperties_BACKUP()
                 .repeatable(NFFGirlsEntityAttributes.PERSISTENT_HEALING.get(), 0.1d, AttributeModifier.Operation.ADDITION)
                 .setRarityTier(1)
                 .addAllModifierTooltips()));
 
     public static final RegistryObject<NFFGirlsDedicatedBaubleItem> HEALING_JADE_II = BAUBLE_ITEMS.register("healing_jade_ii", () ->
         new NFFGirlsDedicatedBaubleItem(new ResourceLocation(NFFGirls.MOD_ID, "healing_jade"), 2, new Item.Properties(),
-            () -> new NFFGirlsBaubleProperties()
+            () -> new NFFGirlsBaubleProperties_BACKUP()
                 .repeatable(NFFGirlsEntityAttributes.PERSISTENT_HEALING.get(), 0.2d, AttributeModifier.Operation.ADDITION)
                 .setRarityTier(2)
                 .addAllModifierTooltips()));
 
     public static final RegistryObject<NFFGirlsDedicatedBaubleItem> HEALING_JADE_III = BAUBLE_ITEMS.register("healing_jade_iii", () ->
         new NFFGirlsDedicatedBaubleItem(new ResourceLocation(NFFGirls.MOD_ID, "healing_jade"), 3, new Item.Properties(),
-            () -> new NFFGirlsBaubleProperties()
+            () -> new NFFGirlsBaubleProperties_BACKUP()
                 .repeatable(NFFGirlsEntityAttributes.PERSISTENT_HEALING.get(), 0.25d, AttributeModifier.Operation.ADDITION)
                 .repeatable(NFFGirlsEntityAttributes.HEALTH_ABSORPTION.get(), 0.1d, AttributeModifier.Operation.ADDITION)
                 .setRarityTier(4)
@@ -664,7 +664,7 @@ public class NFFGirlsBaubles {
 
     public static final RegistryObject<NFFGirlsDedicatedBaubleItem> LIFE_JADE = BAUBLE_ITEMS.register("life_jade", () ->
         new NFFGirlsDedicatedBaubleItem(new ResourceLocation(NFFGirls.MOD_ID, "life_jade"), 1, new Item.Properties(),
-            () -> new NFFGirlsBaubleProperties()
+            () -> new NFFGirlsBaubleProperties_BACKUP()
                 .repeatable(NFFGirlsEntityAttributes.PERSISTENT_HEALING.get(), 0.15d, AttributeModifier.Operation.ADDITION)
                 .repeatable(Attributes.MAX_HEALTH, 10d, AttributeModifier.Operation.ADDITION)
                 .setRarityTier(2)
@@ -673,7 +673,7 @@ public class NFFGirlsBaubles {
 
     public static final RegistryObject<NFFGirlsDedicatedBaubleItem> LIFE_JADE_II = BAUBLE_ITEMS.register("life_jade_ii", () ->
         new NFFGirlsDedicatedBaubleItem(new ResourceLocation(NFFGirls.MOD_ID, "life_jade"), 2, new Item.Properties(),
-            () -> new NFFGirlsBaubleProperties()
+            () -> new NFFGirlsBaubleProperties_BACKUP()
                 .repeatable(NFFGirlsEntityAttributes.PERSISTENT_HEALING.get(), 0.2d, AttributeModifier.Operation.ADDITION)
                 .repeatable(Attributes.MAX_HEALTH, 20d, AttributeModifier.Operation.ADDITION)
                 .environmentResistance()
@@ -682,7 +682,7 @@ public class NFFGirlsBaubles {
 
     public static final RegistryObject<NFFGirlsDedicatedBaubleItem> LIFE_JADE_III = BAUBLE_ITEMS.register("life_jade_iii", () ->
         new NFFGirlsDedicatedBaubleItem(new ResourceLocation(NFFGirls.MOD_ID, "life_jade"), 3, new Item.Properties(),
-            () -> new NFFGirlsBaubleProperties()
+            () -> new NFFGirlsBaubleProperties_BACKUP()
                 .repeatable(NFFGirlsEntityAttributes.PERSISTENT_HEALING.get(), 0.25d, AttributeModifier.Operation.ADDITION)
                 .repeatable(Attributes.MAX_HEALTH, 25d, AttributeModifier.Operation.ADDITION)
                 .repeatable(Attributes.ARMOR, 3d, AttributeModifier.Operation.ADDITION)
@@ -693,7 +693,7 @@ public class NFFGirlsBaubles {
 
     public static final RegistryObject<NFFGirlsDedicatedBaubleItem> AQUA_JADE = BAUBLE_ITEMS.register("aqua_jade", () ->
         new NFFGirlsDedicatedBaubleItem(new ResourceLocation(NFFGirls.MOD_ID, "aqua_jade"), 1, new Item.Properties(),
-            () -> new NFFGirlsBaubleProperties()
+            () -> new NFFGirlsBaubleProperties_BACKUP()
                 .equippingCondition(CONDITION_AQUATIC.get())
                 .unrepeatable(Attributes.MOVEMENT_SPEED, 0.7d, AttributeModifier.Operation.ADDITION, EFFECT_CONDITION_IN_WATER.get(),
                     new ResourceLocation(NFFGirls.MOD_ID, "aqua_jade_swim_speed_boost"))
@@ -701,14 +701,14 @@ public class NFFGirlsBaubles {
                 .repeatable(NFFGirlsEntityAttributes.WATER_ASPECT.get(), 0.25d, AttributeModifier.Operation.ADDITION)
                 .environmentResistance()
                 .setRarityTier(2)
-                .addRepeatableModifierTooltips(NFFGirlsBaubleProperties.NO_CONDITION::get)
+                .addRepeatableModifierTooltips(NFFGirlsBaubleProperties_BACKUP.NO_CONDITION::get)
                 .environmentResistance()
                 .addTooltipTranslatable("tooltip.nffgirls.bauble.in_water")
                 .addAllModifierTooltips(EFFECT_CONDITION_IN_WATER::get)));
 
     public static final RegistryObject<NFFGirlsDedicatedBaubleItem> AQUA_JADE_II = BAUBLE_ITEMS.register("aqua_jade_ii", () ->
         new NFFGirlsDedicatedBaubleItem(new ResourceLocation(NFFGirls.MOD_ID, "aqua_jade"), 2, new Item.Properties(),
-            () -> new NFFGirlsBaubleProperties()
+            () -> new NFFGirlsBaubleProperties_BACKUP()
                 .equippingCondition(CONDITION_AQUATIC.get())
                 .unrepeatable(Attributes.MOVEMENT_SPEED, 0.8d, AttributeModifier.Operation.ADDITION, EFFECT_CONDITION_IN_WATER.get().asSimplePredicate(),
                     new ResourceLocation(NFFGirls.MOD_ID, "aqua_jade_swim_speed_boost"))
@@ -718,14 +718,14 @@ public class NFFGirlsBaubles {
                 .repeatable(Attributes.ARMOR, 3d, AttributeModifier.Operation.ADDITION, EFFECT_CONDITION_IN_WATER.get().asSimplePredicate())
                 .environmentResistance()
                 .setRarityTier(3)
-                .addRepeatableModifierTooltips(NFFGirlsBaubleProperties.NO_CONDITION::get)
+                .addRepeatableModifierTooltips(NFFGirlsBaubleProperties_BACKUP.NO_CONDITION::get)
                 .environmentResistance()
                 .addTooltipTranslatable("tooltip.nffgirls.bauble.in_water")
                 .addAllModifierTooltips(EFFECT_CONDITION_IN_WATER::get)));
 
     public static final RegistryObject<NFFGirlsDedicatedBaubleItem> AQUA_JADE_III = BAUBLE_ITEMS.register("aqua_jade_iii", () ->
         new NFFGirlsDedicatedBaubleItem(new ResourceLocation(NFFGirls.MOD_ID, "aqua_jade"), 3, new Item.Properties(),
-            () -> new NFFGirlsBaubleProperties()
+            () -> new NFFGirlsBaubleProperties_BACKUP()
                 .equippingCondition(CONDITION_AQUATIC.get())
                 .unrepeatable(Attributes.MOVEMENT_SPEED, 1.0d, AttributeModifier.Operation.ADDITION, EFFECT_CONDITION_IN_WATER.get().asSimplePredicate(),
                     new ResourceLocation(NFFGirls.MOD_ID, "aqua_jade_swim_speed_boost"))
@@ -735,7 +735,7 @@ public class NFFGirlsBaubles {
                 .repeatable(Attributes.ARMOR, 5d, AttributeModifier.Operation.ADDITION, EFFECT_CONDITION_IN_WATER.get().asSimplePredicate())
                 .environmentResistance()
                 .setRarityTier(5)
-                .addRepeatableModifierTooltips(() -> NFFGirlsBaubleProperties.NO_CONDITION.get())
+                .addRepeatableModifierTooltips(() -> NFFGirlsBaubleProperties_BACKUP.NO_CONDITION.get())
                 .environmentResistance()
                 .addTooltipTranslatable("tooltip.nffgirls.bauble.in_water")
                 .addAllModifierTooltips(EFFECT_CONDITION_IN_WATER::get))
@@ -743,7 +743,7 @@ public class NFFGirlsBaubles {
 
     public static final RegistryObject<NFFGirlsDedicatedBaubleItem> POISON_JADE = BAUBLE_ITEMS.register("poison_jade", () ->
         new NFFGirlsDedicatedBaubleItem(new ResourceLocation(NFFGirls.MOD_ID, "poison_jade"), 1, new Item.Properties(),
-            () -> new NFFGirlsBaubleProperties()
+            () -> new NFFGirlsBaubleProperties_BACKUP()
                 .equippingCondition(CONDITION_ARTHROPOD_AND_PLANT.get())
                 .repeatable(NFFGirlsEntityAttributes.POISON_ASPECT.get(), 1.0D, AttributeModifier.Operation.ADDITION)
                 .setRarityTier(1)
@@ -752,7 +752,7 @@ public class NFFGirlsBaubles {
 
     public static final RegistryObject<NFFGirlsDedicatedBaubleItem> POISON_JADE_II = BAUBLE_ITEMS.register("poison_jade_ii", () ->
         new NFFGirlsDedicatedBaubleItem(new ResourceLocation(NFFGirls.MOD_ID, "poison_jade"), 2, new Item.Properties(),
-            () -> new NFFGirlsBaubleProperties()
+            () -> new NFFGirlsBaubleProperties_BACKUP()
                 .equippingCondition(CONDITION_ARTHROPOD_AND_PLANT.get())
                 .repeatable(NFFGirlsEntityAttributes.POISON_ASPECT.get(), 1.5D, AttributeModifier.Operation.ADDITION)
                 .repeatable(Attributes.MOVEMENT_SPEED, 0.1d, AttributeModifier.Operation.MULTIPLY_BASE)
@@ -762,7 +762,7 @@ public class NFFGirlsBaubles {
 
     public static final RegistryObject<NFFGirlsDedicatedBaubleItem> POISON_JADE_III = BAUBLE_ITEMS.register("poison_jade_iii", () ->
         new NFFGirlsDedicatedBaubleItem(new ResourceLocation(NFFGirls.MOD_ID, "poison_jade"), 3, new Item.Properties(),
-            () -> new NFFGirlsBaubleProperties()
+            () -> new NFFGirlsBaubleProperties_BACKUP()
                 .equippingCondition(CONDITION_ARTHROPOD_AND_PLANT.get())
                 .repeatable(NFFGirlsEntityAttributes.POISON_ASPECT.get(), 2.5D, AttributeModifier.Operation.ADDITION)
                 .repeatable(Attributes.MOVEMENT_SPEED, 0.1d, AttributeModifier.Operation.MULTIPLY_BASE)
@@ -774,7 +774,7 @@ public class NFFGirlsBaubles {
 
     public static final RegistryObject<NFFGirlsDedicatedBaubleItem> POISON_JADE_IV = BAUBLE_ITEMS.register("poison_jade_iv", () ->
         new NFFGirlsDedicatedBaubleItem(new ResourceLocation(NFFGirls.MOD_ID, "poison_jade"), 4, new Item.Properties(),
-            () -> new NFFGirlsBaubleProperties()
+            () -> new NFFGirlsBaubleProperties_BACKUP()
                 .equippingCondition(CONDITION_ARTHROPOD_AND_PLANT.get())
                 .repeatable(NFFGirlsEntityAttributes.POISON_ASPECT.get(), 3.5D, AttributeModifier.Operation.ADDITION)
                 .repeatable(Attributes.MOVEMENT_SPEED, 0.15d, AttributeModifier.Operation.MULTIPLY_BASE)
@@ -787,7 +787,7 @@ public class NFFGirlsBaubles {
 
     public static final RegistryObject<NFFGirlsDedicatedBaubleItem> EVIL_JADE = BAUBLE_ITEMS.register("evil_jade", () ->
         new NFFGirlsDedicatedBaubleItem(new ResourceLocation(NFFGirls.MOD_ID, "evil_jade"), 1, new Item.Properties(),
-            () -> new NFFGirlsBaubleProperties()
+            () -> new NFFGirlsBaubleProperties_BACKUP()
                 .repeatable(NFFGirlsEntityAttributes.POISON_ASPECT.get(), 1d, AttributeModifier.Operation.ADDITION)
                 .repeatable(NFFGirlsEntityAttributes.HEALTH_ABSORPTION.get(), 0.1d, AttributeModifier.Operation.ADDITION)
                 .repeatable(NFFGirlsEntityAttributes.CRITICAL_RATE.get(), 0.1d, AttributeModifier.Operation.ADDITION)
@@ -796,7 +796,7 @@ public class NFFGirlsBaubles {
 
     public static final RegistryObject<NFFGirlsDedicatedBaubleItem> EVIL_JADE_II = BAUBLE_ITEMS.register("evil_jade_ii", () ->
         new NFFGirlsDedicatedBaubleItem(new ResourceLocation(NFFGirls.MOD_ID, "evil_jade"), 2, new Item.Properties(),
-            () -> new NFFGirlsBaubleProperties()
+            () -> new NFFGirlsBaubleProperties_BACKUP()
                 .repeatable(NFFGirlsEntityAttributes.POISON_ASPECT.get(), 1.5d, AttributeModifier.Operation.ADDITION)
                 .repeatable(Attributes.ATTACK_DAMAGE, 3d, AttributeModifier.Operation.ADDITION)
                 .repeatable(NFFGirlsEntityAttributes.HEALTH_ABSORPTION.get(), 0.15d, AttributeModifier.Operation.ADDITION)
@@ -806,7 +806,7 @@ public class NFFGirlsBaubles {
 
     public static final RegistryObject<NFFGirlsDedicatedBaubleItem> EVIL_JADE_III = BAUBLE_ITEMS.register("evil_jade_iii", () ->
         new NFFGirlsDedicatedBaubleItem(new ResourceLocation(NFFGirls.MOD_ID, "evil_jade"), 3, new Item.Properties(),
-            () -> new NFFGirlsBaubleProperties()
+            () -> new NFFGirlsBaubleProperties_BACKUP()
                 .repeatable(NFFGirlsEntityAttributes.POISON_ASPECT.get(), 2.5d, AttributeModifier.Operation.ADDITION)
                 .repeatable(Attributes.ATTACK_DAMAGE, 6d, AttributeModifier.Operation.ADDITION)
                 .repeatable(NFFGirlsEntityAttributes.HEALTH_ABSORPTION.get(), 0.2d, AttributeModifier.Operation.ADDITION)
@@ -851,14 +851,14 @@ public class NFFGirlsBaubles {
     // Misc
     public static final RegistryObject<NFFGirlsDedicatedBaubleItem> RESISTANCE_CORE = BAUBLE_ITEMS.register("resistance_core", () ->
         new NFFGirlsDedicatedBaubleItem(new ResourceLocation(NFFGirls.MOD_ID, "resistance_core"), 1, new Item.Properties(),
-            () -> new NFFGirlsBaubleProperties()
+            () -> new NFFGirlsBaubleProperties_BACKUP()
                 .environmentResistance()
                 .setRarityTier(0)));
 
     public static final NFURegistry.Accessor<NFFGirlsBaubleBehavior> INSOMNIA_FRUIT =
         BAUBLE_COLLECTION.register("insomnia_fruit", () -> new NFFGirlsBaubleBehavior(ModItems.INSOMNIA_FRUIT.get(),
             new ResourceLocation(NFFGirls.MOD_ID, "insomnia_fruit"), 1,
-            new NFFGirlsBaubleProperties()
+            new NFFGirlsBaubleProperties_BACKUP()
                 .repeatable(Attributes.ATTACK_DAMAGE, 5d, AttributeModifier.Operation.ADDITION, EFFECT_CONDITION_AT_NIGHT.get())
                 .repeatable(Attributes.MAX_HEALTH, 50d, AttributeModifier.Operation.ADDITION, EFFECT_CONDITION_AT_NIGHT.get())
                 .repeatable(NFFGirlsEntityAttributes.PERSISTENT_HEALING.get(), 0.1d, AttributeModifier.Operation.ADDITION, EFFECT_CONDITION_AT_NIGHT.get())

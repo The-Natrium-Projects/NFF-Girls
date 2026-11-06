@@ -16,7 +16,7 @@ import java.util.List;
  * ({@link IBaubleRegistryEntry}). It adds the "category key" + "tier" concept used to group related
  * baubles (e.g. every tier of the Soul Amulet shares the same category key) as well as a set of
  * string-based "bauble tags" for identifying common behaviors that can't be expressed with plain
- * attribute modifiers, and exposes the {@link NFFGirlsBaubleProperties} that actually drives the
+ * attribute modifiers, and exposes the {@link NFFGirlsBaubleProperties_BACKUP} that actually drives the
  * bauble's effects. It is implemented by both {@link NFFGirlsBaubleBehavior} (baubles attached to an
  * existing item) and {@link NFFGirlsDedicatedBaubleItem} (baubles that are their own dedicated item).
  */
@@ -74,10 +74,10 @@ public interface INFFGirlsBauble extends IBaubleRegistryEntry {
     }
 
     /**
-     * Get the {@link NFFGirlsBaubleProperties} that describe this bauble's attribute modifiers,
+     * Get the {@link NFFGirlsBaubleProperties_BACKUP} that describe this bauble's attribute modifiers,
      * tick behavior and tooltips.
      */
-    public NFFGirlsBaubleProperties getProperties();
+    public NFFGirlsBaubleProperties_BACKUP getProperties();
 
     /**
      * Check if the given mob is currently equipped with a bauble carrying the
