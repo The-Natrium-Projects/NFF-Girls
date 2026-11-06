@@ -7,7 +7,7 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraftforge.registries.ForgeRegistries;
-import net.sodiumzh.nfu.function.RegistrablePredicate;
+import net.sodiumzh.nfu.function.NFUOperator;
 import net.sodiumzh.nfu.item.bauble.BaubleEquippingCondition;
 import net.sodiumzh.nfu.registry.NFURegistries;
 
@@ -111,12 +111,13 @@ public class NFFGirlsBaublePropertyEntry {
             Type type = Type.byName(json.has("type") ? json.get("type").getAsString() : null);
             if (type == null) return null;
             // Get effect condition
-            RegistrablePredicate<LivingEntity> condition = json.has("condition") ?
-                NFURegistries.PREDICATES
+            /*NFUOperator<LivingEntity, Boolean> condition = json.has("condition") ?
+                NFURegistries.OPERATORS
                     .getOptionalValue(new ResourceLocation(json.get("condition").getAsString()))
                     .flatMap(p -> p.castInputType(LivingEntity.class))
                     .orElse(null)
-                : null;
+                : null;*/
+
             // Construct property entry instance
             switch (type) {
                 case ENVIRONMENT_RESISTANCE: {

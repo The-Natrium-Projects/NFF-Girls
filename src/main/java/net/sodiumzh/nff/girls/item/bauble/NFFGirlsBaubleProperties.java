@@ -20,7 +20,7 @@ import net.sodiumzh.nff.girls.registry.NFFGirlsBaubles;
 import net.sodiumzh.nff.girls.registry.NFFGirlsConfigs;
 import net.sodiumzh.nff.girls.registry.NFFGirlsEntityAttributes;
 import net.sodiumzh.nfu.function.ModifiableSupplier;
-import net.sodiumzh.nfu.function.RegistrablePredicate;
+import net.sodiumzh.nfu.function.NFUOperator;
 import net.sodiumzh.nfu.function.UnaryOperatorOneArg;
 import net.sodiumzh.nfu.info.ComponentBuilder;
 import net.sodiumzh.nfu.item.bauble.BaubleAttributeModifier;
@@ -53,27 +53,28 @@ public class NFFGirlsBaubleProperties {
     /**
      * Registry collection holding the predicate presets used as {@link INFFGirlsBauble} equipping
      * conditions, such as {@link #NO_CONDITION}.
+     * <p>Predicate only!!
      */
-    public static NFURegistryEntryCollection<RegistrablePredicate<?>> EQUIPPING_CONDITION_PRESETS
-        = NFURegistryEntryCollection.create(NFURegistries.PREDICATES, NFFGirls.MOD_ID);
+    public static NFURegistryEntryCollection<NFUOperator<?, ?>> EQUIPPING_CONDITION_PRESETS
+        = NFURegistryEntryCollection.create(NFURegistries.OPERATORS, NFFGirls.MOD_ID);
 
     /**
      * A registrable predicate on {@link Mob} that always returns {@code true}, used as the default
      * additional condition for attribute modifiers that don't require a specific mob condition.
      */
-    public static final NFURegistry.Accessor<RegistrablePredicate<Mob>> NO_CONDITION =
+    public static final NFURegistry.Accessor<NFUOperator<Mob, Boolean>> NO_CONDITION =
         EQUIPPING_CONDITION_PRESETS.register("bauble_no_condition", () ->
-            new RegistrablePredicate<>(Mob.class, "nffgirls_bauble_no_condition", mob -> true));
+           NFUOperator.simplePredicate(Mob.class, mob -> true));
 
     private final Map<Supplier<BaubleAttributeModifier>, Predicate<? super Mob>> repeatableModifierSuppliers
         = new HashMap<>();
     private final Map<Supplier<BaubleAttributeModifier>, Predicate<? super Mob>> unrepeatableModifierSuppliers
         = new HashMap<>();
-    // Only for tooltips. Use suppliers for making effects.
-    private final Validatable<Map<BaubleAttributeModifier, Predicate<? super Mob>>> repeatableModifiers
+    // Only for tooltips. Use suppliers for making effects. Value string is display group key.
+    private final Validatable<Map<BaubleAttributeModifier, String>> repeatableModifiers
         = new Validatable<>(new HashMap<>());
-    // Only for tooltips. Use suppliers for making effects.
-    private final Validatable<Map<BaubleAttributeModifier, Predicate<? super Mob>>> unrepeatableModifiers
+    // Only for tooltips. Use suppliers for making effects. Value string is display group key.
+    private final Validatable<Map<BaubleAttributeModifier, String>> unrepeatableModifiers
         = new Validatable<>(new HashMap<>());
     private final List<String> tags = new ArrayList<>();
     private UnaryOperatorOneArg<MutableComponent, ItemStack> nameStyle = (c, i) -> c;
@@ -97,7 +98,7 @@ public class NFFGirlsBaubleProperties {
                 actualAmount *= NFFGirlsConfigs.ValueCache.Baubles.BAUBLE_HEALTH_RECOVERY_SCALE;
         }
         BaubleAttributeModifier res = new BaubleAttributeModifier(attribute, actualAmount, operation);
-        Predicate<? super Mob> cond1 = condition == null ? NO_CONDITION.get() : condition;
+        Predicate<? super Mob> cond1 = condition == null ? NO_CONDITION.get()::applySimple : condition;
         res.setAdditionalCondition(args -> cond1.test(args.user()));
         if (id != null)
             res.setAdditionalID(id);
@@ -114,12 +115,12 @@ public class NFFGirlsBaubleProperties {
      * @param id Explicit modifier id, or null to use a generated one.
      * @return this.
      */
-    public NFFGirlsBaubleProperties repeatable(Attribute attr, double amount, AttributeModifier.Operation operation, @Nullable Predicate<? super Mob> condition, @Nullable ResourceLocation id) {
+    public NFFGirlsBaubleProperties repeatable(Attribute attr, double amount, AttributeModifier.Operation operation, @Nullable String tooltipGroup, @Nullable Predicate<? super Mob> condition, @Nullable ResourceLocation id) {
         if (this.validated.get()) {
             NFUDebugStatics.errorOnce("Builder has been validated, no more modification. Skipped.");
             return this;
         }
-        Predicate<? super Mob> cond1 = condition != null ? condition : NO_CONDITION.get();
+        Predicate<? super Mob> cond1 = condition != null ? condition : NO_CONDITION.get()::applySimple;
         repeatableModifierSuppliers.put(() -> getModifierFromProperties(attr, amount, operation, cond1, id), cond1);
         return this;
     }
@@ -127,22 +128,26 @@ public class NFFGirlsBaubleProperties {
     /**
      * @see #repeatable(Attribute, double, AttributeModifier.Operation, Predicate, ResourceLocation)
      */
-    public NFFGirlsBaubleProperties repeatable(Attribute attr, double amount, AttributeModifier.Operation operation, @Nullable Predicate<? super Mob> condition) {
-        return repeatable(attr, amount, operation, condition, null);
+    public NFFGirlsBaubleProperties repeatable(Attribute attr, double amount, AttributeModifier.Operation operation, @Nullable String tooltipGroup, @Nullable Predicate<? super Mob> condition) {
+        return repeatable(attr, amount, operation, tooltipGroup, condition, null);
     }
 
     /**
      * @see #repeatable(Attribute, double, AttributeModifier.Operation, Predicate, ResourceLocation)
      */
-    public NFFGirlsBaubleProperties repeatable(Attribute attr, double amount, AttributeModifier.Operation operation, @Nullable ResourceLocation id) {
-        return repeatable(attr, amount, operation, null, id);
+    public NFFGirlsBaubleProperties repeatable(Attribute attr, double amount, AttributeModifier.Operation operation, @Nullable String tooltipGroup, @Nullable ResourceLocation id) {
+        return repeatable(attr, amount, operation, tooltipGroup, null, id);
     }
 
     /**
      * @see #repeatable(Attribute, double, AttributeModifier.Operation, Predicate, ResourceLocation)
      */
+    public NFFGirlsBaubleProperties repeatable(Attribute attr, double amount, AttributeModifier.Operation operation, @Nullable String tooltipGroup) {
+        return repeatable(attr, amount, operation, tooltipGroup, null, null);
+    }
+
     public NFFGirlsBaubleProperties repeatable(Attribute attr, double amount, AttributeModifier.Operation operation) {
-        return repeatable(attr, amount, operation, null, null);
+        return repeatable(attr, amount, operation, null);
     }
 
     /**
@@ -160,7 +165,7 @@ public class NFFGirlsBaubleProperties {
             NFUDebugStatics.errorOnce("Builder has been validated, no more modification. Skipped.");
             return this;
         }
-        Predicate<? super Mob> cond1 = condition != null ? condition : NO_CONDITION.get();
+        Predicate<? super Mob> cond1 = condition != null ? condition : NO_CONDITION.get()::applySimple;
         unrepeatableModifierSuppliers.put(() -> getModifierFromProperties(attr, amount, operation, cond1, id), cond1);
         return this;
     }
@@ -470,17 +475,17 @@ public class NFFGirlsBaubleProperties {
     /**
      * Add a tooltip line for each registered repeatable attribute modifier matching the given
      * condition filter, formatted with the given formatter.
-     * @param conditionFilter Only include modifiers whose additional condition equals the supplied
+     * @param groupFilter Only include modifiers whose group ID equals the supplied
      *                        predicate; if null (or the supplier returns null), all modifiers are included.
      * @param format Formatter applied to each generated {@link ModifierTooltipInfo}.
      * @return this.
      */
-    public NFFGirlsBaubleProperties addRepeatableModifierTooltips(@Nullable Supplier<Predicate<? super Mob>> conditionFilter, Consumer<ModifierTooltipInfo> format) {
+    public NFFGirlsBaubleProperties addRepeatableModifierTooltips(@Nullable List<String> groupFilter, Consumer<ModifierTooltipInfo> format) {
         DecimalFormat df = new DecimalFormat("#.##");
         df.setDecimalSeparatorAlwaysShown(false);
         tooltipsSupplier.modify(list -> {
             list.addAll(this.repeatableModifiers.get().entrySet().stream()
-                .filter(e -> conditionFilter == null || conditionFilter.get() == null || conditionFilter.get().equals(e.getValue()))
+                .filter(e -> groupFilter == null || groupFilter.isEmpty() || groupFilter.contains(e.getValue()))
                 .sorted(Map.Entry.comparingByKey(COMPARING_ATTRIBUTE))
                 .map(e -> TooltipInfo.ofAttribute(e::getKey).modifierFormatter(format))
                 .toList());
@@ -489,10 +494,10 @@ public class NFFGirlsBaubleProperties {
     }
 
     /**
-     * @see #addRepeatableModifierTooltips(Supplier, Consumer)
+     * @see #addRepeatableModifierTooltips(List, Consumer)
      */
-    public NFFGirlsBaubleProperties addRepeatableModifierTooltips(@Nullable Supplier<Predicate<? super Mob>> conditionFilter) {
-        return addRepeatableModifierTooltips(conditionFilter, m -> {});
+    public NFFGirlsBaubleProperties addRepeatableModifierTooltips(@Nullable List<String> groupFilter) {
+        return addRepeatableModifierTooltips(groupFilter, m -> {});
     }
 
     /**
@@ -504,29 +509,21 @@ public class NFFGirlsBaubleProperties {
     }
 
     /**
-     * Add a tooltip line for every repeatable attribute modifier that has no additional mob condition.
-     * @return this.
-     */
-    public NFFGirlsBaubleProperties addRepeatableModifierTooltipsUnconditional() {
-        return addRepeatableModifierTooltips(NO_CONDITION::get);
-    }
-
-    /**
      * Add a tooltip line for each registered unrepeatable attribute modifier matching the given
      * condition filter, formatted with the given formatter, optionally appending the default
      * "unrepeatable" tooltip note.
-     * @param conditionFilter Only include modifiers whose additional condition equals the supplied
+     * @param groupFilter Only include modifiers whose additional condition equals the supplied
      *                        predicate; if null (or the supplier returns null), all modifiers are included.
      * @param format Formatter applied to each generated {@link ModifierTooltipInfo}.
      * @param showUnrepeatableTooltip Whether to append the default "unrepeatable" tooltip note.
      * @return this.
      */
-    public NFFGirlsBaubleProperties addUnrepeatableModifierTooltips(@Nullable Supplier<Predicate<? super Mob>> conditionFilter, Consumer<ModifierTooltipInfo> format, boolean showUnrepeatableTooltip) {
+    public NFFGirlsBaubleProperties addUnrepeatableModifierTooltips(@Nullable List<String> groupFilter, Consumer<ModifierTooltipInfo> format, boolean showUnrepeatableTooltip) {
         DecimalFormat df = new DecimalFormat("#.##");
         df.setDecimalSeparatorAlwaysShown(false);
         tooltipsSupplier.modify(list -> {
             list.addAll(this.unrepeatableModifiers.get().entrySet().stream()
-                .filter(e -> conditionFilter == null || conditionFilter.get() == null || conditionFilter.get().equals(e.getValue()))
+                .filter(e -> groupFilter == null || groupFilter.isEmpty() || groupFilter.contains(e.getValue()))
                 .sorted(Map.Entry.comparingByKey(COMPARING_ATTRIBUTE))
                 .map(e -> {
                     TooltipInfo tooltipInfo = TooltipInfo.ofAttribute(e::getKey).modifierFormatter(format);
@@ -538,21 +535,21 @@ public class NFFGirlsBaubleProperties {
     }
 
     /**
-     * @see #addUnrepeatableModifierTooltips(Supplier, Consumer, boolean)
+     * @see #addUnrepeatableModifierTooltips(List, Consumer, boolean)
      */
-    public NFFGirlsBaubleProperties addUnrepeatableModifierTooltips(@Nullable Supplier<Predicate<? super Mob>> conditionFilter, Consumer<ModifierTooltipInfo> format) {
-        return addUnrepeatableModifierTooltips(conditionFilter, format, true);
+    public NFFGirlsBaubleProperties addUnrepeatableModifierTooltips(@Nullable List<String> groupFilter, Consumer<ModifierTooltipInfo> format) {
+        return addUnrepeatableModifierTooltips(groupFilter, format, true);
     }
 
-    public NFFGirlsBaubleProperties addUnrepeatableModifierTooltips(@Nullable Supplier<Predicate<? super Mob>> conditionFilter, boolean showUnrepeatableTooltip) {
-        return addUnrepeatableModifierTooltips(conditionFilter, c -> {}, showUnrepeatableTooltip);
+    public NFFGirlsBaubleProperties addUnrepeatableModifierTooltips(@Nullable List<String> groupFilter, boolean showUnrepeatableTooltip) {
+        return addUnrepeatableModifierTooltips(groupFilter, c -> {}, showUnrepeatableTooltip);
     }
 
     /**
-     * @see #addUnrepeatableModifierTooltips(Supplier, Consumer, boolean)
+     * @see #addUnrepeatableModifierTooltips(List, Consumer, boolean)
      */
-    public NFFGirlsBaubleProperties addUnrepeatableModifierTooltips(@Nullable Supplier<Predicate<? super Mob>> conditionFilter) {
-        return addUnrepeatableModifierTooltips(conditionFilter, c -> {});
+    public NFFGirlsBaubleProperties addUnrepeatableModifierTooltips(@Nullable List<String> groupFilter) {
+        return addUnrepeatableModifierTooltips(groupFilter, c -> {});
     }
 
     /**
@@ -564,37 +561,29 @@ public class NFFGirlsBaubleProperties {
     }
 
     /**
-     * Add a tooltip line for every unrepeatable attribute modifier that has no additional mob condition.
-     * @return this.
-     */
-    public NFFGirlsBaubleProperties addUnrepeatableModifierTooltipsUnconditional() {
-        return addUnrepeatableModifierTooltips(NO_CONDITION::get);
-    }
-
-    /**
      * Add tooltip lines for both repeatable and unrepeatable attribute modifiers matching the given
      * condition filter.
      * @return this.
      */
-    public NFFGirlsBaubleProperties addAllModifierTooltips(@Nullable Supplier<Predicate<? super Mob>> conditionFilter,
+    public NFFGirlsBaubleProperties addAllModifierTooltips(@Nullable List<String> groupFilter,
                                                            Consumer<ModifierTooltipInfo> format, boolean showUnrepeatableTip) {
-        this.addRepeatableModifierTooltips(conditionFilter, format);
-        this.addUnrepeatableModifierTooltips(conditionFilter, format, showUnrepeatableTip);
+        this.addRepeatableModifierTooltips(groupFilter, format);
+        this.addUnrepeatableModifierTooltips(groupFilter, format, showUnrepeatableTip);
         return this;
     }
 
     /**
-     * @see #addAllModifierTooltips(Supplier, Consumer, boolean)
+     * @see #addAllModifierTooltips(List, Consumer, boolean)
      */
-    public NFFGirlsBaubleProperties addAllModifierTooltips(@Nullable Supplier<Predicate<? super Mob>> conditionFilter, Consumer<ModifierTooltipInfo> format) {
-        return addAllModifierTooltips(conditionFilter, format, true);
+    public NFFGirlsBaubleProperties addAllModifierTooltips(@Nullable List<String> groupFilter, Consumer<ModifierTooltipInfo> format) {
+        return addAllModifierTooltips(groupFilter, format, true);
     }
 
     /**
-     * @see #addAllModifierTooltips(Supplier, Consumer, boolean)
+     * @see #addAllModifierTooltips(List, Consumer, boolean)
      */
-    public NFFGirlsBaubleProperties addAllModifierTooltips(@Nullable Supplier<Predicate<? super Mob>> conditionFilter) {
-        return addAllModifierTooltips(conditionFilter, c -> {});
+    public NFFGirlsBaubleProperties addAllModifierTooltips(@Nullable List<String> groupFilter) {
+        return addAllModifierTooltips(groupFilter, c -> {});
     }
 
     /**
@@ -603,14 +592,6 @@ public class NFFGirlsBaubleProperties {
      */
     public NFFGirlsBaubleProperties addAllModifierTooltips() {
         return addAllModifierTooltips(null);
-    }
-
-    /**
-     * Add tooltip lines for every attribute modifier that has no additional mob condition.
-     * @return this.
-     */
-    public NFFGirlsBaubleProperties addAllModifierTooltipsUnconditional() {
-        return addAllModifierTooltips(NO_CONDITION::get);
     }
 
     /**
