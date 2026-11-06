@@ -2,7 +2,19 @@
 
 ### 0.x.34
 
+Now favorability drops by 5 instead of 20 on death.
+
+Now undead mobs can fight against Wither boss.
+
 Fixed item being used on interaction with item-giveable friendable mobs.
+
+Fixed mob GUI unopenable after mob respawn.
+
+Fixed mob respawner item entity not pickable up.
+
+Fixed undead mobs being passive to players with Undead Affinity.
+
+Fixed Lycanite's Mobs not spawning.
 
 ### 0.2.33.3
 
