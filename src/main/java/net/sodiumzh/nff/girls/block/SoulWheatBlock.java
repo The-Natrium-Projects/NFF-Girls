@@ -24,8 +24,6 @@ import net.sodiumzh.nfu.util.NFUEntityStatics;
 
 public class SoulWheatBlock extends CropBlock {
 
-    protected static final RandomSource RND = new ThreadSafeRandomSource();
-
     public SoulWheatBlock(Properties pProperties) {
         super(pProperties);
     }
@@ -37,7 +35,7 @@ public class SoulWheatBlock extends CropBlock {
 
     @Override
     public void randomTick(BlockState pState, ServerLevel pLevel, BlockPos pPos, RandomSource pRandom) {
-        if (RND.nextFloat() < 0.2d // 5x slower growth than vanilla wheat
+        if (pRandom.nextFloat() < 0.5f // 0.5x growth speed than vanilla wheat
             // Only grows under night sky or in Nether/End
             && (pLevel.isNight() && pLevel.canSeeSky(pPos)
                 || pLevel.dimension().equals(ServerLevel.NETHER)
@@ -53,6 +51,9 @@ public class SoulWheatBlock extends CropBlock {
                 MobileParticleSourceEntity.addDefault(pLevel, ParticleTypes.HAPPY_VILLAGER,
                     friendedUndead.getEyePosition(), pPos.getCenter(), 5d, 3);
                 super.randomTick(pState, pLevel, pPos, pRandom);
+            } else {
+                if (pRandom.nextFloat() < 0.4f) // If no undead, 0.4x growth speed
+                    super.randomTick(pState, pLevel, pPos, pRandom);
             }
         }
     }

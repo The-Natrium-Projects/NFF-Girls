@@ -50,7 +50,7 @@ public class NFFGirlsEntityComponents {
                 // Some mods may not be able to load mob type at this phase since many parameters are not initialized
                 // e.g. Target Dummy. At this time ignore it.
                 try {mobtype = mob.getMobType();} catch (NullPointerException ignored) {}
-                if (mobtype.equals(MobType.UNDEAD)) {
+                if (MobType.UNDEAD.equals(mobtype) || mob.getType().is(NFFGirlsTags.AFFECTED_BY_UNDEAD_AFFINITY)) {
                     event.addComponent(PATH_UNDEAD_AFFINITY_HANDLER, UNDEAD_AFFINITY_HANDLER.get());
                 }
                 if (NFFTamingMapping.contains(mob))

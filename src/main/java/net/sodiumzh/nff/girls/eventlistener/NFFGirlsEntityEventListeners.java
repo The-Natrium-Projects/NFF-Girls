@@ -134,8 +134,9 @@ public class NFFGirlsEntityEventListeners
 			
 			// Handle undead mobs start //
 	        if (mob.getMobType() == MobType.UNDEAD 
-	        		&& !(event.getEntity() instanceof INFFTamed) 
-	        		&& !event.getEntity().getType().is(NFFGirlsTags.IGNORES_UNDEAD_AFFINITY))
+	        		&& INFFTamed.get(mob).isEmpty()
+	        		&& !event.getEntity().getType().is(NFFGirlsTags.IGNORES_UNDEAD_AFFINITY)
+			|| mob.getType().is(NFFGirlsTags.AFFECTED_BY_UNDEAD_AFFINITY))
 	        {
 	        	// Handle undead affinity //
                 EntityComponentAPI.getComponentByPath(mob, NFFGirlsEntityComponents.PATH_UNDEAD_AFFINITY_HANDLER, NFFGirlsEntityComponents.UNDEAD_AFFINITY_HANDLER.get())
@@ -279,7 +280,7 @@ public class NFFGirlsEntityEventListeners
 					&& bm.asMob().hasLineOfSight(bm.getOwner())
 					&& !event.getDamageSource().is(DamageTypes.FELL_OUT_OF_WORLD)
 					&& !event.getDamageSource().is(DamageTypes.GENERIC_KILL))
-				bm.getDataAccessor().addFavorability(-20);
+				bm.getDataAccessor().addFavorability(-5);
 			// EXP loses by a half on death
 			// As respawner construction (in befriendmobs) is after posting NFFTamedDeathEvent, it can be set here
 			bm.getDataAccessor().setXP(bm.getDataAccessor().getXP() / 2);

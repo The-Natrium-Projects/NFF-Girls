@@ -61,7 +61,7 @@ public class NFFGirlsItemEventListeners
 		{
 			NFFMobRespawnerInstance ins = NFFMobRespawnerInstance.createIfValid(event.getItem().getItem());
 				// If the mob isn't a nffgirls befriended mob, it should not have this uuid
-			if (ins != null && !ins.getOwnerUUID().equals(event.getEntity().getUUID()))
+			if (ins != null && !Objects.equals(ins.getOwnerUUID().orElse(null), event.getEntity().getUUID()))
 			{
 				event.setCanceled(true);
 			}
