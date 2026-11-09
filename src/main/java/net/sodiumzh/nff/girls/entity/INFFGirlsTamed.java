@@ -148,9 +148,11 @@ public interface INFFGirlsTamed extends INFFTamed
 				return InteractionResult.SUCCESS;
 			}
 			// Handle trade
-			if ((player.getItemInHand(InteractionHand.MAIN_HAND).isEmpty() || player.getItemInHand(InteractionHand.MAIN_HAND).is(NFFGirlsItems.EVIL_GEM.get()))
+			if (NFFGirlsConfigs.ValueCache.Interaction.ENABLES_TRADES
+				&& (player.getItemInHand(InteractionHand.MAIN_HAND).isEmpty() || player.getItemInHand(InteractionHand.MAIN_HAND).is(NFFGirlsItems.EVIL_GEM.get()))
 				&& this.getDataAccessor().getAttackTarget() == null
-				&& !player.isShiftKeyDown()) {
+				&& !player.isShiftKeyDown())
+			{
 				AtomicReference<InteractionResult> res = new AtomicReference<>(InteractionResult.PASS);
 				this.asMob().getCapability(NFFGirlsCapabilities.CAP_TRADE_HANDLER).ifPresent(cap -> {
 					if (cap.isValidTrader()) {

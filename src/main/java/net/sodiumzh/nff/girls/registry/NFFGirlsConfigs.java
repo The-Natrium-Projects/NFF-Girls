@@ -35,6 +35,7 @@ public class NFFGirlsConfigs
 	public static ForgeConfigSpec.BooleanValue ALL_ZOMBIE_GIRLS_CAN_CONVERT_TO_HUSKS;
 	public static ForgeConfigSpec.BooleanValue ALL_DROWNED_GIRLS_CAN_CONVERT_TO_ZOMBIES;
 	public static ForgeConfigSpec.BooleanValue ALL_STRAY_GIRLS_CAN_CONVERT_TO_SKELETONS;
+	public static ForgeConfigSpec.BooleanValue ENABLES_TRADES;
 
 	// Baubles
 	public static ForgeConfigSpec.DoubleValue BAUBLE_HEALTH_RECOVERY_SCALE;
@@ -93,6 +94,8 @@ public class NFFGirlsConfigs
 				.define("allDrownedGirlsCanConvertToZombies", false);
 		ALL_STRAY_GIRLS_CAN_CONVERT_TO_SKELETONS = BUILDER.comment("If true, all friendly Stray Girls can be converted to Skeleton Girls with Flint and Steel, no matter if they're converted from Skeleton Girls.")
 				.define("allStrayGirlsCanConvertToSkeletons", false);
+		ENABLES_TRADES = BUILDER.comment("Enables trading with NFF-Girls mobs if true.")
+			.define("enablesTrades", true);
 		BUILDER.pop();
 		
 		BUILDER.push("baubles");
@@ -146,6 +149,7 @@ public class NFFGirlsConfigs
 			public static boolean ALL_ZOMBIE_GIRLS_CAN_CONVERT_TO_HUSKS;
 			public static boolean ALL_DROWNED_GIRLS_CAN_CONVERT_TO_ZOMBIES;
 			public static boolean ALL_STRAY_GIRLS_CAN_CONVERT_TO_SKELETONS;
+			public static boolean ENABLES_TRADES;
 		}
 		
 		public static class Baubles
@@ -183,6 +187,7 @@ public class NFFGirlsConfigs
 			Interaction.ALL_ZOMBIE_GIRLS_CAN_CONVERT_TO_HUSKS = NFFGirlsConfigs.ALL_ZOMBIE_GIRLS_CAN_CONVERT_TO_HUSKS.get();
 			Interaction.ALL_DROWNED_GIRLS_CAN_CONVERT_TO_ZOMBIES = NFFGirlsConfigs.ALL_DROWNED_GIRLS_CAN_CONVERT_TO_ZOMBIES.get();
 			Interaction.ALL_STRAY_GIRLS_CAN_CONVERT_TO_SKELETONS = NFFGirlsConfigs.ALL_STRAY_GIRLS_CAN_CONVERT_TO_SKELETONS.get();
+			Interaction.ENABLES_TRADES = NFFGirlsConfigs.ENABLES_TRADES.get();
 			Baubles.BAUBLE_HEALTH_RECOVERY_SCALE = NFFGirlsConfigs.BAUBLE_HEALTH_RECOVERY_SCALE.get().floatValue();
 			Baubles.BAUBLE_MAX_HP_BOOSTING_SCALE = NFFGirlsConfigs.BAUBLE_MAX_HP_BOOSTING_SCALE.get();
 			Baubles.BAUBLE_ATK_BOOSTING_SCALE = NFFGirlsConfigs.BAUBLE_ATK_BOOSTING_SCALE.get();
