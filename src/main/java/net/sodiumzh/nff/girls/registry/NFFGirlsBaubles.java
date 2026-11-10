@@ -441,8 +441,7 @@ public class NFFGirlsBaubles {
                     new ResourceLocation(NFFGirls.MOD_ID, "nature_derivatives_speed_boost"), "in_water",
                     propertyConditionByOperator(EFFECT_CONDITION_IN_WATER_OR_RAIN.get()))
                 .addModifier(false, NFFGirlsEntityAttributes.LOOTING_LEVEL.get(), 0.1d, AttributeModifier.Operation.ADDITION,
-                    new ResourceLocation(NFFGirls.MOD_ID, "nature_badge_looting_level"), "in_water",
-                    propertyConditionByOperator(EFFECT_CONDITION_IN_WATER_OR_RAIN.get()))
+                    new ResourceLocation(NFFGirls.MOD_ID, "nature_derivatives_looting_level"), null, null)
                 .descEquippingCondition()
                 .descModifiers(List.of(null), false)
                 .desc(EFFECT_CONDITION_IN_WATER_OR_RAIN.get().getTranslation())
@@ -502,7 +501,7 @@ public class NFFGirlsBaubles {
                     new ResourceLocation(NFFGirls.MOD_ID, "nature_derivatives_speed_boost"), "in_water",
                     propertyConditionByOperator(EFFECT_CONDITION_IN_WATER_OR_RAIN.get()))
                 .addModifier(false, NFFGirlsEntityAttributes.LOOTING_LEVEL.get(), 1.0d, AttributeModifier.Operation.ADDITION,
-                    new ResourceLocation(NFFGirls.MOD_ID, "natures_tenderness_looting_level"), null, null)
+                    new ResourceLocation(NFFGirls.MOD_ID, "nature_derivatives_looting_level"), null, null)
                 .descEquippingCondition()
                 .descModifiers(List.of(null), false)
                 .desc(EFFECT_CONDITION_IN_WATER_OR_RAIN.get().getTranslation())
@@ -555,7 +554,7 @@ public class NFFGirlsBaubles {
                     new ResourceLocation(NFFGirls.MOD_ID, "nature_derivatives_speed_boost"), "in_water",
                     propertyConditionByOperator(EFFECT_CONDITION_IN_WATER_OR_RAIN.get()))
                 .addModifier(false, NFFGirlsEntityAttributes.LOOTING_LEVEL.get(), 1.0d, AttributeModifier.Operation.ADDITION,
-                    new ResourceLocation(NFFGirls.MOD_ID, "natures_rage_looting_level"), null, null)
+                    new ResourceLocation(NFFGirls.MOD_ID, "nature_derivatives_looting_level"), null, null)
                 .descEquippingCondition()
                 .descModifiers(List.of(null), false)
                 .desc(EFFECT_CONDITION_IN_WATER_OR_RAIN.get().getTranslation())
