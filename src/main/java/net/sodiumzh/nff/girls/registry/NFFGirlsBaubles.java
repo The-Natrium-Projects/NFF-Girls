@@ -644,47 +644,67 @@ public class NFFGirlsBaubles {
         new NFFGirlsDedicatedBaubleItem(new ResourceLocation(NFFGirls.MOD_ID, "aqua_jade"), 1, 2, new Item.Properties(),
             () -> new NFFGirlsBaubleProperties()
                 .setEquippingCondition(CONDITION_AQUATIC.get())
-                .addDefaultModifier(false, Attributes.MOVEMENT_SPEED, 0.7d, AttributeModifier.Operation.ADDITION, EFFECT_CONDITION_IN_WATER.get(),
-                    new ResourceLocation(NFFGirls.MOD_ID, "aqua_jade_swim_speed_boost"))
-                .addDefaultModifier(true, NFFGirlsEntityAttributes.PERSISTENT_HEALING.get(), 0.3d, AttributeModifier.Operation.ADDITION)
+                .addModifier(false, Attributes.MOVEMENT_SPEED, 0.7d, AttributeModifier.Operation.ADDITION,
+                    new ResourceLocation(NFFGirls.MOD_ID, "aqua_jade_swim_speed_boost"), "in_water",
+                    propertyConditionByOperator(EFFECT_CONDITION_IN_WATER.get()))
+                .addModifier(true, NFFGirlsEntityAttributes.PERSISTENT_HEALING.get(), 0.3d, AttributeModifier.Operation.ADDITION,
+                    null, "in_water",
+                    propertyConditionByOperator(EFFECT_CONDITION_IN_WATER.get()))
                 .addDefaultModifier(true, NFFGirlsEntityAttributes.WATER_ASPECT.get(), 0.25d, AttributeModifier.Operation.ADDITION)
                 .environmentResistance()
-                .addRepeatableModifierTooltips(NFFGirlsBaubleProperties.NO_CONDITION::get)
-                .environmentResistance()
+                .descEquippingCondition()
+                .descModifiers(List.of(null), false)
+                .descEnvironmentResistanceIfPresent()
                 .desc("tooltip.nffgirls.bauble.in_water")
-                .descAllModifiers(EFFECT_CONDITION_IN_WATER::get)));
+                .descModifiers(List.of("in_water"), false)));
 
     public static final RegistryObject<NFFGirlsDedicatedBaubleItem> AQUA_JADE_II = BAUBLE_ITEMS.register("aqua_jade_ii", () ->
         new NFFGirlsDedicatedBaubleItem(new ResourceLocation(NFFGirls.MOD_ID, "aqua_jade"), 2, 3, new Item.Properties(),
             () -> new NFFGirlsBaubleProperties()
                 .setEquippingCondition(CONDITION_AQUATIC.get())
-                .addDefaultModifier(false, Attributes.MOVEMENT_SPEED, 0.8d, AttributeModifier.Operation.ADDITION, EFFECT_CONDITION_IN_WATER.get().asSimplePredicate(),
-                    new ResourceLocation(NFFGirls.MOD_ID, "aqua_jade_swim_speed_boost"))
-                .addDefaultModifier(true, NFFGirlsEntityAttributes.PERSISTENT_HEALING.get(), 0.35d, AttributeModifier.Operation.ADDITION, EFFECT_CONDITION_IN_WATER.get().asSimplePredicate())
+                .addModifier(false, Attributes.MOVEMENT_SPEED, 0.8d, AttributeModifier.Operation.ADDITION,
+                    new ResourceLocation(NFFGirls.MOD_ID, "aqua_jade_swim_speed_boost"), "in_water",
+                    propertyConditionByOperator(EFFECT_CONDITION_IN_WATER.get()))
+                .addModifier(true, NFFGirlsEntityAttributes.PERSISTENT_HEALING.get(), 0.35d, AttributeModifier.Operation.ADDITION,
+                    null, "in_water",
+                    propertyConditionByOperator(EFFECT_CONDITION_IN_WATER.get()))
                 .addDefaultModifier(true, NFFGirlsEntityAttributes.WATER_ASPECT.get(), 0.35d, AttributeModifier.Operation.ADDITION)
-                .addDefaultModifier(true, Attributes.ATTACK_DAMAGE, 3d, AttributeModifier.Operation.ADDITION, EFFECT_CONDITION_IN_WATER.get().asSimplePredicate())
-                .addDefaultModifier(true, Attributes.ARMOR, 3d, AttributeModifier.Operation.ADDITION, EFFECT_CONDITION_IN_WATER.get().asSimplePredicate())
+                .addModifier(true, Attributes.ATTACK_DAMAGE, 3d, AttributeModifier.Operation.ADDITION,
+                    null, "in_water",
+                    propertyConditionByOperator(EFFECT_CONDITION_IN_WATER.get()))
+                .addModifier(true, Attributes.ARMOR, 3d, AttributeModifier.Operation.ADDITION,
+                    null, "in_water",
+                    propertyConditionByOperator(EFFECT_CONDITION_IN_WATER.get()))
                 .environmentResistance()
-                .addRepeatableModifierTooltips(NFFGirlsBaubleProperties.NO_CONDITION::get)
-                .environmentResistance()
+                .descEquippingCondition()
+                .descModifiers(List.of(null), false)
+                .descEnvironmentResistanceIfPresent()
                 .desc("tooltip.nffgirls.bauble.in_water")
-                .descAllModifiers(EFFECT_CONDITION_IN_WATER::get)));
+                .descModifiers(List.of("in_water"), false)));
 
     public static final RegistryObject<NFFGirlsDedicatedBaubleItem> AQUA_JADE_III = BAUBLE_ITEMS.register("aqua_jade_iii", () ->
         new NFFGirlsDedicatedBaubleItem(new ResourceLocation(NFFGirls.MOD_ID, "aqua_jade"), 3, 5, new Item.Properties(),
             () -> new NFFGirlsBaubleProperties()
                 .setEquippingCondition(CONDITION_AQUATIC.get())
-                .addDefaultModifier(false, Attributes.MOVEMENT_SPEED, 1.0d, AttributeModifier.Operation.ADDITION, EFFECT_CONDITION_IN_WATER.get().asSimplePredicate(),
-                    new ResourceLocation(NFFGirls.MOD_ID, "aqua_jade_swim_speed_boost"))
-                .addDefaultModifier(true, NFFGirlsEntityAttributes.PERSISTENT_HEALING.get(), 0.4d, AttributeModifier.Operation.ADDITION, EFFECT_CONDITION_IN_WATER.get().asSimplePredicate())
+                .addModifier(false, Attributes.MOVEMENT_SPEED, 1.0d, AttributeModifier.Operation.ADDITION,
+                    new ResourceLocation(NFFGirls.MOD_ID, "aqua_jade_swim_speed_boost"), "in_water",
+                    propertyConditionByOperator(EFFECT_CONDITION_IN_WATER.get()))
+                .addModifier(true, NFFGirlsEntityAttributes.PERSISTENT_HEALING.get(), 0.4d, AttributeModifier.Operation.ADDITION,
+                    null, "in_water",
+                    propertyConditionByOperator(EFFECT_CONDITION_IN_WATER.get()))
                 .addDefaultModifier(true, NFFGirlsEntityAttributes.WATER_ASPECT.get(), 0.5d, AttributeModifier.Operation.ADDITION)
-                .addDefaultModifier(true, Attributes.ATTACK_DAMAGE, 5d, AttributeModifier.Operation.ADDITION, EFFECT_CONDITION_IN_WATER.get().asSimplePredicate())
-                .addDefaultModifier(true, Attributes.ARMOR, 5d, AttributeModifier.Operation.ADDITION, EFFECT_CONDITION_IN_WATER.get().asSimplePredicate())
+                .addModifier(true, Attributes.ATTACK_DAMAGE, 5d, AttributeModifier.Operation.ADDITION,
+                    null, "in_water",
+                    propertyConditionByOperator(EFFECT_CONDITION_IN_WATER.get()))
+                .addModifier(true, Attributes.ARMOR, 5d, AttributeModifier.Operation.ADDITION,
+                    null, "in_water",
+                    propertyConditionByOperator(EFFECT_CONDITION_IN_WATER.get()))
                 .environmentResistance()
-                .addRepeatableModifierTooltips(() -> NFFGirlsBaubleProperties.NO_CONDITION.get())
-                .environmentResistance()
+                .descEquippingCondition()
+                .descModifiers(List.of(null), false)
+                .descEnvironmentResistanceIfPresent()
                 .desc("tooltip.nffgirls.bauble.in_water")
-                .descAllModifiers(EFFECT_CONDITION_IN_WATER::get))
+                .descModifiers(List.of("in_water"), false))
             .alwaysFoil().cast());
 
     public static final RegistryObject<NFFGirlsDedicatedBaubleItem> POISON_JADE = BAUBLE_ITEMS.register("poison_jade", () ->
