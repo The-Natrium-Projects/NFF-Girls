@@ -1,11 +1,16 @@
 package net.sodiumzh.nff.girls.item.bauble;
 
+import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.TooltipFlag;
+import net.minecraft.world.level.Level;
 import net.sodiumzh.nfu.item.bauble.*;
 import net.sodiumzh.nfu.util.NFUMathStatics;
+import net.sodiumzh.nfu.util.NFUResourceLocation;
 import org.jetbrains.annotations.Nullable;
 
 import javax.annotation.Nonnull;
@@ -112,7 +117,7 @@ public class NFFGirlsDedicatedBaubleItem extends DedicatedBaubleItem implements 
 
 	@Override
 	public ResourceLocation getBaubleRegistryKey() {
-		return null;
+		return NFUResourceLocation.of(this.getCategoryKey().getNamespace(), this.getCategoryKey().getPath() + this.getTierSuffix());
 	}
 
 	/**
@@ -125,13 +130,5 @@ public class NFFGirlsDedicatedBaubleItem extends DedicatedBaubleItem implements 
         return Optional.ofNullable(this.getProperties().getEquippingCondition())
 			.orElse(BaubleEquippingConditions.CONDITION_ALWAYS.get());
     }
-
-	public static ResourceLocation getBaubleRegistryKey(ResourceLocation categoryKey, int tier)
-	{
-		return new ResourceLocation(categoryKey.getNamespace(), categoryKey.getPath() + getTierSuffix(tier));
-	}
-
-    // NFUItem interface //
-
 
 }

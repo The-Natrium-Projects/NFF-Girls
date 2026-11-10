@@ -3,10 +3,13 @@ package net.sodiumzh.nff.girls.item.bauble;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraftforge.registries.ForgeRegistries;
+import net.sodiumzh.nfu.function.NFUOperator;
 import net.sodiumzh.nfu.info.ComponentBuilder;
 import net.sodiumzh.nfu.item.bauble.BaubleAttributeModifier;
 import net.sodiumzh.nfu.item.bauble.BaubleEquippingCondition;
@@ -194,7 +197,7 @@ public class NFFGirlsBaubleProperties {
         this.properties.stream().filter(p -> p instanceof ModifierProperty)
             .map(p -> (ModifierProperty)p)
             .filter(p -> groupFilter == null || (groupFilter.contains(p.groupName) ^ negate))
-            .sorted(Comparator.comparingInt(p -> attributePriority(p.attribute())))
+            .sorted(Comparator.comparingInt((ModifierProperty p) -> p.repeatable() ? 0 : 1).thenComparing(p -> attributePriority(p.attribute())))
             .forEach(descriptions::add);
         return this;
     }
@@ -237,7 +240,7 @@ public class NFFGirlsBaubleProperties {
     public NFFGirlsBaubleProperties descTickActions() {
         return descTickActions(null, false);
     }
-    
+
     public NFFGirlsBaubleProperties descAll() {
         this.descAllModifiers();
         this.descTags();
@@ -262,7 +265,13 @@ public class NFFGirlsBaubleProperties {
     /**
      * A predicate that tests if a property should be applied to the mob.
      */
-    public interface PropertyApplyingCondition extends Predicate<BaubleProcessingArgs> {}
+    public interface PropertyApplyingCondition extends Predicate<BaubleProcessingArgs> {
+        public static PropertyApplyingCondition byLivingOperator(NFUOperator<? super Mob, Boolean> operator) {
+            return args -> operator.apply(args.user(), Map.of());
+        }
+
+
+    }
 
     /**
      * Any property entry.

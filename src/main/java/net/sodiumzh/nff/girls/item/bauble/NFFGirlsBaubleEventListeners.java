@@ -1,5 +1,6 @@
 package net.sodiumzh.nff.girls.item.bauble;
 
+import net.minecraftforge.event.entity.player.ItemTooltipEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -33,5 +34,13 @@ public class NFFGirlsBaubleEventListeners {
                 event.register((INFFGirlsBauble)(entry.getValue()));
             });
     }
+
+    @SubscribeEvent
+    public static void addTooltips(ItemTooltipEvent event) {
+        if (INFFGirlsBaubleClientTooltipProvider.TOOLTIPS.get().containsKey(event.getItemStack().getItem())) {
+            event.getToolTip().addAll(INFFGirlsBaubleClientTooltipProvider.TOOLTIPS.get().get(event.getItemStack().getItem()));
+        }
+    }
+
 
 }

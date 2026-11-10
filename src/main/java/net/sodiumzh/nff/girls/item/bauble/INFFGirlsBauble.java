@@ -8,10 +8,12 @@ import net.minecraft.world.item.ItemStack;
 import net.sodiumzh.nfu.item.bauble.BaubleProcessingArgs;
 import net.sodiumzh.nfu.item.bauble.IBaubleRegistryEntry;
 import net.sodiumzh.nfu.item.bauble.NFUBaubleAPI;
+import net.sodiumzh.nfu.util.NFUMathStatics;
 import org.jetbrains.annotations.ApiStatus;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 import java.util.stream.Collectors;
 
@@ -91,8 +93,7 @@ public interface INFFGirlsBauble extends IBaubleRegistryEntry {
 
     public static ChatFormatting getRarityStyle(int rarity) {
         return switch (rarity) {
-            case 1 -> ChatFormatting.GRAY;
-            case 2 -> ChatFormatting.WHITE;
+            case 0, 1, 2 -> ChatFormatting.WHITE;
             case 3 -> ChatFormatting.YELLOW;
             case 4 -> ChatFormatting.GREEN;
             case 5 -> ChatFormatting.LIGHT_PURPLE;
@@ -101,7 +102,7 @@ public interface INFFGirlsBauble extends IBaubleRegistryEntry {
             case 8 -> ChatFormatting.RED;
             case 9 -> ChatFormatting.AQUA;
             case 10 -> ChatFormatting.DARK_PURPLE;
-            default -> ChatFormatting.GRAY;
+            default -> ChatFormatting.WHITE;
         };
     }
 
@@ -109,6 +110,18 @@ public interface INFFGirlsBauble extends IBaubleRegistryEntry {
         return NFUBaubleAPI.getAllSlotItems(mob).values().stream()
             .flatMap(is -> NFUBaubleAPI.getAllRelatedEntries(is).stream())
             .anyMatch(entry -> entry instanceof INFFGirlsBauble b && b.getProperties().hasEnvironmentResistance());
+    }
+
+    @Override
+    public default ResourceLocation getBaubleRegistryKey() {
+        return new ResourceLocation(this.getCategoryKey().getNamespace(), this.getCategoryKey().getPath() + getTierSuffix(this.getTier()));
+    }
+
+    public static String getTierSuffix(int tier)
+    {
+        if (tier == 1)
+            return "";
+        return "_" + NFUMathStatics.intToRoman(tier).toLowerCase(Locale.ENGLISH);
     }
 
 }
