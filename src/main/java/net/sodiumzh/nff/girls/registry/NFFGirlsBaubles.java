@@ -926,14 +926,12 @@ public class NFFGirlsBaubles {
         // Load dedicated baubles from items, before registering NFF-Girls baubles to NFU bauble API
         ForgeRegistries.ITEMS.getEntries().stream()
             .filter(entry -> entry.getValue() instanceof INFFGirlsBauble)
-            .filter(entry -> !NFFGirlsBaubles.BAUBLE_REGISTRY.containsKey(entry.getKey().location()))
             .forEach(entry -> {
-                if (entry.getValue() instanceof NFFGirlsDedicatedBaubleItem item)
+                if (entry.getValue() instanceof NFFGirlsDedicatedBaubleItem item) {
                     item.loadProperties();
-                NFFGirlsBaubles.BAUBLE_REGISTRY.register(entry.getKey().location(), () -> (INFFGirlsBauble)entry.getValue());
+                    event.register(item);
+                }
             });
-        NFFGirlsBaubles.BAUBLE_REGISTRY.keySet().stream().map(NFFGirlsBaubles.BAUBLE_REGISTRY::getValue)
-            .forEach(event::register);
         event.register(new NecroticReaperHandHoeBaubleBehavior(new ResourceLocation(NFFGirls.MOD_ID, "necrotic_reaper_hoe")));
         event.register(new EnderManHandBlockBaubleBehavior(new ResourceLocation(NFFGirls.MOD_ID, "enderman_hand_block")));
     }
