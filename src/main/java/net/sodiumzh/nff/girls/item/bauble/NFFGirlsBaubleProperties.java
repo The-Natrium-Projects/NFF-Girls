@@ -11,6 +11,7 @@ import net.sodiumzh.nfu.info.ComponentBuilder;
 import net.sodiumzh.nfu.item.bauble.BaubleAttributeModifier;
 import net.sodiumzh.nfu.item.bauble.BaubleEquippingCondition;
 import net.sodiumzh.nfu.item.bauble.BaubleProcessingArgs;
+import net.sodiumzh.nfu.util.NFUDataStatics;
 import net.sodiumzh.nfu.util.NFUInfoStatics;
 
 import javax.annotation.Nullable;
@@ -134,6 +135,11 @@ public class NFFGirlsBaubleProperties {
         String name,
         Component desc) {
         return addTag(name, desc, null);
+    }
+
+    public NFFGirlsBaubleProperties addTag(
+        String name) {
+        return addTag(name, NFUInfoStatics.createTranslatable("tooltip.nffgirls.bauble.tag." + name), null);
     }
 
     public NFFGirlsBaubleProperties environmentResistance(@Nullable PropertyApplyingCondition applyingCondition) {
