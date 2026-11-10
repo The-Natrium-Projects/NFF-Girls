@@ -125,7 +125,7 @@ public class HmagEnderExecutorEntity extends NFFTamedEnderManPreset implements I
 
 	@Override
 	public boolean isSensitiveToWater() {
-		return !INFFGirlsBauble.isEnvironmentImmunized(this);
+		return !INFFGirlsBauble.isEnvironmentImmune(this);
 	}
 
 	// Initialization end

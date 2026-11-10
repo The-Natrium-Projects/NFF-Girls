@@ -55,7 +55,7 @@ public class HmagJackFrostEntity extends JackFrostEntity implements INFFGirlsTam
 		this.xpReward = 0;
 		Arrays.fill(this.armorDropChances, 0);
 		Arrays.fill(this.handDropChances, 0);
-		this.immuneToHotBiomes.putOptional("bauble", INFFGirlsBauble::isEnvironmentImmunized);
+		this.immuneToHotBiomes.putOptional("bauble", INFFGirlsBauble::isEnvironmentImmune);
 		this.immuneToHotBiomes.putOptional("powder_snow", mob -> mob.isInPowderSnow);
 	}
 	

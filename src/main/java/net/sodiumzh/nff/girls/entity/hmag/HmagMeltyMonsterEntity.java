@@ -131,7 +131,7 @@ public class HmagMeltyMonsterEntity extends MeltyMonsterEntity implements INFFGi
 
 	@Override
 	public boolean isSensitiveToWater() {
-		return !INFFGirlsBauble.isEnvironmentImmunized(this);
+		return !INFFGirlsBauble.isEnvironmentImmune(this);
 	}
 
 	@Override

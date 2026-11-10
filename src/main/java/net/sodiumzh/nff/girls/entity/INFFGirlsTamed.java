@@ -19,6 +19,7 @@ import net.sodiumzh.nff.girls.entity.ai.NFFGirlsAttackingStrategy;
 import net.sodiumzh.nff.girls.entity.vanillatrade.CNFFGirlsTradeHandler;
 import net.sodiumzh.nff.girls.eventlistener.NFFGirlsEntityEventListeners;
 import net.sodiumzh.nff.girls.item.bauble.INFFGirlsBauble;
+import net.sodiumzh.nff.girls.item.bauble.NFFGirlsBaubleStatics;
 import net.sodiumzh.nff.girls.network.ClientboundNFFGirlsMobGeneralSyncPacket;
 import net.sodiumzh.nff.girls.network.NFFGirlsChannels;
 import net.sodiumzh.nff.girls.registry.*;
@@ -28,7 +29,9 @@ import net.sodiumzh.nff.services.entity.taming.NFFTamedStatics;
 import net.sodiumzh.nff.services.item.NFFMobRespawnerItem;
 import net.sodiumzh.nfu.annotation.DontCallManually;
 import net.sodiumzh.nfu.annotation.DontOverride;
+import net.sodiumzh.nfu.container.Tuple2;
 import net.sodiumzh.nfu.entity.MobApplicableItemTable;
+import net.sodiumzh.nfu.item.bauble.BaubleProcessingArgs;
 import net.sodiumzh.nfu.item.bauble.NFUBaubleAPI;
 import net.sodiumzh.nfu.object.FilteredMapper;
 import net.sodiumzh.nfu.util.NFUInfoStatics;
@@ -322,8 +325,8 @@ public interface INFFGirlsTamed extends INFFTamed
 	public default boolean shouldAttackMobsHostileToSelf()
 	{
 		return NFUBaubleAPI.getAllSlotItems(this.asMob()).values().stream()
-			.map(i -> INFFGirlsBauble.asBauble(i.getItem())).reduce(new ArrayList<>(), (a, b) -> { a.addAll(b); return a;})
-			.stream().anyMatch(b -> b.hasBaubleTag(INFFGirlsBauble.TAG_ACTIVE_ATTACK));
+			.flatMap(i -> INFFGirlsBauble.asBauble(i.getItem()).stream().map(b -> new Tuple2<>(i, b)))
+			.anyMatch(b -> b.getB().getProperties().hasTag(INFFGirlsBauble.TAG_ACTIVE_ATTACK, new BaubleProcessingArgs()));
 	}
 	
 	/**
@@ -413,7 +416,7 @@ public interface INFFGirlsTamed extends INFFTamed
 	public default void setupSunImmunityRules()
 	{
 		this.getSunImmunity().putOptional("sunhat", mob -> mob.asMob().getItemBySlot(EquipmentSlot.HEAD).is(NFFGirlsItems.SUNHAT.get()));
-		this.getSunImmunity().putOptional("bauble", mob -> INFFGirlsBauble.isEnvironmentImmunized(mob.asMob()));
+		this.getSunImmunity().putOptional("bauble", mob -> INFFGirlsBauble.isEnvironmentImmune(mob.asMob()));
 	}
 
 	@Mod.EventBusSubscriber(modid = NFFGirls.MOD_ID, bus = Mod.EventBusSubscriber.Bus.FORGE)

@@ -1,22 +1,26 @@
 package net.sodiumzh.nff.girls.item.bauble;
 
+import net.minecraft.ChatFormatting;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
-import net.sodiumzh.nff.girls.registry.NFFGirlsBaubles;
+import net.sodiumzh.nfu.item.bauble.BaubleProcessingArgs;
 import net.sodiumzh.nfu.item.bauble.IBaubleRegistryEntry;
 import net.sodiumzh.nfu.item.bauble.NFUBaubleAPI;
+import org.jetbrains.annotations.ApiStatus;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 /**
  * Common interface of all NFF-Girls bauble entries built on top of NFU-Library's bauble system
  * ({@link IBaubleRegistryEntry}). It adds the "category key" + "tier" concept used to group related
  * baubles (e.g. every tier of the Soul Amulet shares the same category key) as well as a set of
  * string-based "bauble tags" for identifying common behaviors that can't be expressed with plain
- * attribute modifiers, and exposes the {@link NFFGirlsBaubleProperties_BACKUP} that actually drives the
+ * attribute modifiers, and exposes the {@link NFFGirlsBaubleProperties} that actually drives the
  * bauble's effects. It is implemented by both {@link NFFGirlsBaubleBehavior} (baubles attached to an
  * existing item) and {@link NFFGirlsDedicatedBaubleItem} (baubles that are their own dedicated item).
  */
@@ -27,87 +31,84 @@ public interface INFFGirlsBauble extends IBaubleRegistryEntry {
     /** Bauble tag marking a bauble that enables an active attack behavior. */
     public static final String TAG_ACTIVE_ATTACK = "active_attack";
 
+    public static final String META_KEY_CATEGORY_KEY = "categoryKey";
+    public static final String META_KEY_TIER = "tier";
+
+
     /**
      * Get the "category key" of the bauble. E.g. For Soul Amulets of all tiers, the key
      * is "nffgirls:soul_amulet".
      */
-    public ResourceLocation getCategoryKey();
+    @ApiStatus.NonExtendable
+    public default ResourceLocation getCategoryKey() {
+        return this.getMetaDataMap().getOptionalAs(META_KEY_CATEGORY_KEY, ResourceLocation.class)
+            .orElseThrow(() -> new IllegalStateException("NFFGirlsBauble missing category key"));
+    }
 
     /**
      * Get the tier under this category key, deciding the actual effects.
      */
-    public int getTier();
+    @ApiStatus.NonExtendable
+    public default int getTier() {
+        return this.getMetaDataMap().getOptionalAs(META_KEY_TIER, Integer.class)
+            .orElseThrow(() -> new IllegalStateException("NFFGirlsBauble missing tier"));
+    }
 
     /**
      * Get additional string tags to identify common behaviors that cannot be defined with
      * attribute modifiers.
      */
-    public List<String> getBaubleTags();
-
-    /**
-     * Build an {@link UnsupportedOperationException} for the current, unsupported {@link #getTier()}.
-     * Intended to be thrown by implementations when they encounter a tier they don't know how to handle.
-     */
-    public default UnsupportedOperationException unsupportedTier()
-    {
-        return new UnsupportedOperationException("Unsupported bauble tier ( " + this.getTier() + ").");
+    @ApiStatus.NonExtendable
+    public default List<String> getBaubleTags(BaubleProcessingArgs args) {
+        return this.getProperties().getTagProperties(args).stream().map(NFFGirlsBaubleProperties.TagProperty::name).toList();
     }
 
     /**
-     * Check if this bauble currently carries the given {@link #getBaubleTags() bauble tag}.
+     * Check if this bauble currently carries the given {@link #getBaubleTags bauble tag}.
      */
-    public default boolean hasBaubleTag(String tag) {
-        return this.getBaubleTags().contains(tag);
+    @ApiStatus.NonExtendable
+    public default boolean hasBaubleTag(String tag, BaubleProcessingArgs args) {
+        return this.getBaubleTags(args).contains(tag);
     }
 
     /**
-     * A type-safe utility for checking if an Item or ItemStack has a Bauble Tag.
-     */
-    public static boolean hasBaubleTag(Object test, String tag) {
-        if (test instanceof INFFGirlsBauble bauble) {
-            return bauble.hasBaubleTag(tag);
-        }
-        else if (test instanceof ItemStack is && is.getItem() instanceof INFFGirlsBauble bauble) {
-            return bauble.hasBaubleTag(tag);
-        }
-        else return false;
-    }
-
-    /**
-     * Get the {@link NFFGirlsBaubleProperties_BACKUP} that describe this bauble's attribute modifiers,
+     * Get the {@link NFFGirlsBaubleProperties} that describe this bauble's attribute modifiers,
      * tick behavior and tooltips.
      */
-    public NFFGirlsBaubleProperties_BACKUP getProperties();
+    public NFFGirlsBaubleProperties getProperties();
 
     /**
-     * Check if the given mob is currently equipped with a bauble carrying the
-     * {@link #TAG_ENVIRONMENT_IMMUNITY} tag.
+     * Resolve the {@link INFFGirlsBauble} entry (or entries) associated with the given an {@link ItemStack}.
      */
-    public static boolean isEnvironmentImmunized(Mob test) {
-        return NFUBaubleAPI.getAllSlotItems(test).values().stream()
-            .anyMatch(i -> hasBaubleTag(i, TAG_ENVIRONMENT_IMMUNITY));
+    public static Map<ResourceLocation, INFFGirlsBauble> asBauble(ItemStack itemStack) {
+       if (itemStack.getItem() == null)
+           return Map.of();
+        return NFUBaubleAPI.getItemKeyedSingleItemBaubles().get(itemStack.getItem()).stream()
+            .filter(entry -> entry.bauble() instanceof INFFGirlsBauble)
+            .collect(Collectors.toMap(entry -> entry.key(),
+                entry -> (INFFGirlsBauble)(entry.bauble())));
     }
 
-    /**
-     * Resolve the {@link INFFGirlsBauble} entry (or entries) associated with the given object, which
-     * may be an {@link INFFGirlsBauble} itself, an {@link Item}, or an {@link ItemStack}. For items/stacks
-     * that are not themselves a bauble, this also searches {@code NFFGirlsBaubles.BAUBLE_REGISTRY} for
-     * matching {@link NFFGirlsBaubleBehavior} entries (single-item or multi-item condition based).
-     */
-    public static List<INFFGirlsBauble> asBauble(Object obj) {
-        List<INFFGirlsBauble> list = new ArrayList<>();
-        if (obj instanceof INFFGirlsBauble i) {
-            list.add(i);
-        }
-        ItemStack itemStack = (obj instanceof Item item) ? item.getDefaultInstance() :
-            ((obj instanceof ItemStack stack) ? stack : null);
-        if (itemStack == null) return list;
-        list.addAll(NFFGirlsBaubles.BAUBLE_REGISTRY.values().stream().filter(i -> i instanceof NFFGirlsBaubleBehavior)
-            .map(i -> (NFFGirlsBaubleBehavior)i).filter(i -> {
-                if (i.isMulti()) return i.getMultiItemCondition().test(itemStack.getItem(), itemStack);
-                else return i.getItem().equals(itemStack.getItem());
-            }).toList());
-        return list;
+    public static ChatFormatting getRarityStyle(int rarity) {
+        return switch (rarity) {
+            case 1 -> ChatFormatting.GRAY;
+            case 2 -> ChatFormatting.WHITE;
+            case 3 -> ChatFormatting.YELLOW;
+            case 4 -> ChatFormatting.GREEN;
+            case 5 -> ChatFormatting.LIGHT_PURPLE;
+            case 6 -> ChatFormatting.BLUE;
+            case 7 -> ChatFormatting.GOLD;
+            case 8 -> ChatFormatting.RED;
+            case 9 -> ChatFormatting.AQUA;
+            case 10 -> ChatFormatting.DARK_PURPLE;
+            default -> ChatFormatting.GRAY;
+        };
+    }
+
+    public static boolean isEnvironmentImmune(Mob mob) {
+        return NFUBaubleAPI.getAllSlotItems(mob).values().stream()
+            .flatMap(is -> NFUBaubleAPI.getAllRelatedEntries(is).stream())
+            .anyMatch(entry -> entry instanceof INFFGirlsBauble b && b.getProperties().hasEnvironmentResistance());
     }
 
 }

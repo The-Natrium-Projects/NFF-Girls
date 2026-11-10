@@ -7,7 +7,6 @@ import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.config.ModConfig;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
-import net.sodiumzh.nff.girls.item.bauble.NFFGirlsBaubleProperties_BACKUP;
 import net.sodiumzh.nff.girls.registry.*;
 import net.sodiumzh.nfu.savedata.redirector.SaveDataLocationRedirector;
 
@@ -46,15 +45,13 @@ public class NFFGirls
         NFFGirlsHealingItems.HEALING_ITEMS_COLLECTION.merge();
         NFFGirlsFriendingItems.FRIENDING_ITEM_COLLECTION.merge();
         NFFGirlsTamingProcesses.TAMING_PROCESSES.merge();
-        NFFGirlsFunctions.FUNCTIONS.merge();
+        NFFGirlsFunctions.OPERATORS.merge();
         NFFGirlsPredicates.PREDICATES.merge();
         NFFGirlsTrades.TRADE_COLLECTIONS.merge();
         NFFGirlsTrades.TRADE_REGISTRIES.merge();
-        NFFGirlsBaubles.BAUBLE_COLLECTION.merge();
         NFFGirlsBaubles.BAUBLE_EFFECT_CONDITION_COLLECTION.merge();
         NFFGirlsBaubles.BAUBLE_EQUIPPING_CONDITION_COLLECTION.merge();
         NFFGirlsEntityAttributeProviders.ATTRIBUTE_PROVIDERS.merge();
-        NFFGirlsBaubleProperties_BACKUP.EQUIPPING_CONDITION_PRESETS.merge();
         NFFGirlsAngerReasons.COLLECTION.merge();
         NFFGirlsEntityComponents.COLLECTION.merge();
         NFFGirlsDataSerializers.COLLECTION.merge();
