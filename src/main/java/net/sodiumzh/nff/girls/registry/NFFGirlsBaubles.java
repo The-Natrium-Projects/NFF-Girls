@@ -414,13 +414,16 @@ public class NFFGirlsBaubles {
                 .addDefaultModifier(true, NFFGirlsEntityAttributes.ANTI_ARTHROPOD.get(), 0.3d, AttributeModifier.Operation.ADDITION)
                 .addDefaultModifier(true, Attributes.MAX_HEALTH, 15d, AttributeModifier.Operation.ADDITION)
                 .addDefaultModifier(true, NFFGirlsEntityAttributes.XP_GAIN_RATE.get(), 0.2d, AttributeModifier.Operation.ADDITION)
-                .addDefaultModifier(false, NFFGirlsEntityAttributes.PERSISTENT_HEALING.get(), 0.25d, AttributeModifier.Operation.ADDITION, EFFECT_CONDITION_IN_WATER_OR_RAIN.get().asSimplePredicate(),
-                    new ResourceLocation(NFFGirls.MOD_ID, "nature_derivatives_speed_boost"))
-                .addDefaultModifier(true, Attributes.MOVEMENT_SPEED, 0.3d, AttributeModifier.Operation.ADDITION, EFFECT_CONDITION_IN_WATER_OR_RAIN.get().asSimplePredicate())
+                .addModifier(false, NFFGirlsEntityAttributes.PERSISTENT_HEALING.get(), 0.25d, AttributeModifier.Operation.ADDITION,
+                    new ResourceLocation(NFFGirls.MOD_ID, "nature_derivatives_speed_boost"), "in_water",
+                    propertyConditionByOperator(EFFECT_CONDITION_IN_WATER_OR_RAIN.get()))
+                .addModifier(true, Attributes.MOVEMENT_SPEED, 0.3d, AttributeModifier.Operation.ADDITION,
+                    null, "in_water",
+                    propertyConditionByOperator(EFFECT_CONDITION_IN_WATER_OR_RAIN.get()))
                 .descEquippingCondition()
-                .descAllModifiers(() -> NFFGirlsBaubleProperties.NO_CONDITION.get().asSimplePredicate())
-                .addTooltip(EFFECT_CONDITION_IN_WATER_OR_RAIN.get().getTranslation())
-                .descAllModifiers(() -> EFFECT_CONDITION_IN_WATER_OR_RAIN.get().asSimplePredicate()))
+                .descModifiers(List.of(null), false)
+                .desc(EFFECT_CONDITION_IN_WATER_OR_RAIN.get().getTranslation())
+                .descModifiers(List.of("in_water"), false))
             .alwaysFoil().cast());
 
     public static final RegistryObject<NFFGirlsDedicatedBaubleItem> NATURE_BADGE_V = BAUBLE_ITEMS.register("nature_badge_v", () ->
@@ -431,15 +434,18 @@ public class NFFGirlsBaubles {
                 .addDefaultModifier(true, NFFGirlsEntityAttributes.ANTI_ARTHROPOD.get(), 0.5d, AttributeModifier.Operation.ADDITION)
                 .addDefaultModifier(true, Attributes.MAX_HEALTH, 25d, AttributeModifier.Operation.ADDITION)
                 .addDefaultModifier(true, NFFGirlsEntityAttributes.XP_GAIN_RATE.get(), 0.35d, AttributeModifier.Operation.ADDITION)
-                .addDefaultModifier(true, NFFGirlsEntityAttributes.PERSISTENT_HEALING.get(), 0.4d, AttributeModifier.Operation.ADDITION, EFFECT_CONDITION_IN_WATER_OR_RAIN.get().asSimplePredicate())
-                .addDefaultModifier(false, Attributes.MOVEMENT_SPEED, 0.35d, AttributeModifier.Operation.ADDITION, EFFECT_CONDITION_IN_WATER_OR_RAIN.get().asSimplePredicate(),
-                    new ResourceLocation(NFFGirls.MOD_ID, "nature_derivatives_speed_boost"))
-                .addDefaultModifier(false, NFFGirlsEntityAttributes.LOOTING_LEVEL.get(), 0.1d, AttributeModifier.Operation.ADDITION, EFFECT_CONDITION_IN_WATER_OR_RAIN.get().asSimplePredicate(),
-                    new ResourceLocation(NFFGirls.MOD_ID, "nature_badge_looting_level"))
+                .addModifier(true, NFFGirlsEntityAttributes.PERSISTENT_HEALING.get(), 0.4d, AttributeModifier.Operation.ADDITION,
+                    null, "in_water",
+                    propertyConditionByOperator(EFFECT_CONDITION_IN_WATER_OR_RAIN.get()))
+                .addModifier(false, Attributes.MOVEMENT_SPEED, 0.35d, AttributeModifier.Operation.ADDITION,
+                    new ResourceLocation(NFFGirls.MOD_ID, "nature_derivatives_speed_boost"), "in_water",
+                    propertyConditionByOperator(EFFECT_CONDITION_IN_WATER_OR_RAIN.get()))
+                .addModifier(false, NFFGirlsEntityAttributes.LOOTING_LEVEL.get(), 0.1d, AttributeModifier.Operation.ADDITION,
+                    new ResourceLocation(NFFGirls.MOD_ID, "nature_derivatives_looting_level"), null, null)
                 .descEquippingCondition()
-                .descAllModifiers(() -> NFFGirlsBaubleProperties.NO_CONDITION.get().asSimplePredicate())
-                .addTooltip(EFFECT_CONDITION_IN_WATER_OR_RAIN.get().getTranslation())
-                .descAllModifiers(() -> EFFECT_CONDITION_IN_WATER_OR_RAIN.get().asSimplePredicate()))
+                .descModifiers(List.of(null), false)
+                .desc(EFFECT_CONDITION_IN_WATER_OR_RAIN.get().getTranslation())
+                .descModifiers(List.of("in_water"), false))
             .alwaysFoil().cast());
 
     public static final RegistryObject<NFFGirlsDedicatedBaubleItem> NATURES_TENDERNESS_BADGE = BAUBLE_ITEMS.register("natures_tenderness_badge", () ->
@@ -449,12 +455,16 @@ public class NFFGirlsBaubles {
                 .addDefaultModifier(true, Attributes.MAX_HEALTH, 20d, AttributeModifier.Operation.ADDITION)
                 .addDefaultModifier(true, Attributes.ARMOR, 6d, AttributeModifier.Operation.ADDITION)
                 .addDefaultModifier(true, NFFGirlsEntityAttributes.XP_GAIN_RATE.get(), 0.3d, AttributeModifier.Operation.ADDITION)
-                .addDefaultModifier(true, NFFGirlsEntityAttributes.PERSISTENT_HEALING.get(), 0.4d, AttributeModifier.Operation.ADDITION, EFFECT_CONDITION_IN_WATER_OR_RAIN.get().asSimplePredicate())
-                .addDefaultModifier(false, Attributes.MOVEMENT_SPEED, 0.3d, AttributeModifier.Operation.ADDITION, EFFECT_CONDITION_IN_WATER_OR_RAIN.get().asSimplePredicate())
+                .addModifier(true, NFFGirlsEntityAttributes.PERSISTENT_HEALING.get(), 0.4d, AttributeModifier.Operation.ADDITION,
+                    null, "in_water",
+                    propertyConditionByOperator(EFFECT_CONDITION_IN_WATER_OR_RAIN.get()))
+                .addModifier(false, Attributes.MOVEMENT_SPEED, 0.3d, AttributeModifier.Operation.ADDITION,
+                    null, "in_water",
+                    propertyConditionByOperator(EFFECT_CONDITION_IN_WATER_OR_RAIN.get()))
                 .descEquippingCondition()
-                .descAllModifiers(() -> NFFGirlsBaubleProperties.NO_CONDITION.get().asSimplePredicate())
-                .addTooltip(EFFECT_CONDITION_IN_WATER_OR_RAIN.get().getTranslation())
-                .descAllModifiers(() -> EFFECT_CONDITION_IN_WATER_OR_RAIN.get().asSimplePredicate())));
+                .descModifiers(List.of(null), false)
+                .desc(EFFECT_CONDITION_IN_WATER_OR_RAIN.get().getTranslation())
+                .descModifiers(List.of("in_water"), false)));
 
     public static final RegistryObject<NFFGirlsDedicatedBaubleItem> NATURES_TENDERNESS_BADGE_II = BAUBLE_ITEMS.register("natures_tenderness_badge_ii", () ->
         new NFFGirlsDedicatedBaubleItem(new ResourceLocation(NFFGirls.MOD_ID, "natures_tenderness_badge"), 2, 6, new Item.Properties(),
@@ -464,13 +474,16 @@ public class NFFGirlsBaubles {
                 .addDefaultModifier(true, Attributes.ARMOR, 8d, AttributeModifier.Operation.ADDITION)
                 .addDefaultModifier(true, NFFGirlsEntityAttributes.XP_GAIN_RATE.get(), 0.4d, AttributeModifier.Operation.ADDITION)
                 .addDefaultModifier(true, NFFGirlsEntityAttributes.PERSISTENT_RANGED_HEALING.get(), 0.05d, AttributeModifier.Operation.ADDITION)
-                .addDefaultModifier(true, NFFGirlsEntityAttributes.PERSISTENT_HEALING.get(), 0.6d, AttributeModifier.Operation.ADDITION, EFFECT_CONDITION_IN_WATER_OR_RAIN.get().asSimplePredicate())
-                .addDefaultModifier(false, Attributes.MOVEMENT_SPEED, 0.3d, AttributeModifier.Operation.ADDITION, EFFECT_CONDITION_IN_WATER_OR_RAIN.get().asSimplePredicate(),
-                    new ResourceLocation(NFFGirls.MOD_ID, "nature_derivatives_speed_boost"))
+                .addModifier(true, NFFGirlsEntityAttributes.PERSISTENT_HEALING.get(), 0.6d, AttributeModifier.Operation.ADDITION,
+                    null, "in_water",
+                    propertyConditionByOperator(EFFECT_CONDITION_IN_WATER_OR_RAIN.get()))
+                .addModifier(false, Attributes.MOVEMENT_SPEED, 0.3d, AttributeModifier.Operation.ADDITION,
+                    new ResourceLocation(NFFGirls.MOD_ID, "nature_derivatives_speed_boost"), "in_water",
+                    propertyConditionByOperator(EFFECT_CONDITION_IN_WATER_OR_RAIN.get()))
                 .descEquippingCondition()
-                .descAllModifiers(() -> NFFGirlsBaubleProperties.NO_CONDITION.get().asSimplePredicate())
-                .addTooltip(EFFECT_CONDITION_IN_WATER_OR_RAIN.get().getTranslation())
-                .descAllModifiers(() -> EFFECT_CONDITION_IN_WATER_OR_RAIN.get().asSimplePredicate()))
+                .descModifiers(List.of(null), false)
+                .desc(EFFECT_CONDITION_IN_WATER_OR_RAIN.get().getTranslation())
+                .descModifiers(List.of("in_water"), false))
             .alwaysFoil().cast());
 
     public static final RegistryObject<NFFGirlsDedicatedBaubleItem> NATURES_TENDERNESS_BADGE_III = BAUBLE_ITEMS.register("natures_tenderness_badge_iii", () ->
@@ -481,15 +494,18 @@ public class NFFGirlsBaubles {
                 .addDefaultModifier(true, Attributes.ARMOR, 8d, AttributeModifier.Operation.ADDITION)
                 .addDefaultModifier(true, NFFGirlsEntityAttributes.XP_GAIN_RATE.get(), 0.4d, AttributeModifier.Operation.ADDITION)
                 .addDefaultModifier(true, NFFGirlsEntityAttributes.PERSISTENT_RANGED_HEALING.get(), 0.1d, AttributeModifier.Operation.ADDITION)
-                .addDefaultModifier(true, NFFGirlsEntityAttributes.PERSISTENT_HEALING.get(), 0.6d, AttributeModifier.Operation.ADDITION, EFFECT_CONDITION_IN_WATER_OR_RAIN.get().asSimplePredicate())
-                .addDefaultModifier(false, Attributes.MOVEMENT_SPEED, 0.3d, AttributeModifier.Operation.ADDITION, EFFECT_CONDITION_IN_WATER_OR_RAIN.get().asSimplePredicate(),
-                    new ResourceLocation(NFFGirls.MOD_ID, "nature_derivatives_speed_boost"))
-                .addDefaultModifier(false, NFFGirlsEntityAttributes.LOOTING_LEVEL.get(), 1.0d, AttributeModifier.Operation.ADDITION,
-                    new ResourceLocation(NFFGirls.MOD_ID, "natures_tenderness_looting_level"))
+                .addModifier(true, NFFGirlsEntityAttributes.PERSISTENT_HEALING.get(), 0.6d, AttributeModifier.Operation.ADDITION,
+                    null, "in_water",
+                    propertyConditionByOperator(EFFECT_CONDITION_IN_WATER_OR_RAIN.get()))
+                .addModifier(false, Attributes.MOVEMENT_SPEED, 0.3d, AttributeModifier.Operation.ADDITION,
+                    new ResourceLocation(NFFGirls.MOD_ID, "nature_derivatives_speed_boost"), "in_water",
+                    propertyConditionByOperator(EFFECT_CONDITION_IN_WATER_OR_RAIN.get()))
+                .addModifier(false, NFFGirlsEntityAttributes.LOOTING_LEVEL.get(), 1.0d, AttributeModifier.Operation.ADDITION,
+                    new ResourceLocation(NFFGirls.MOD_ID, "nature_derivatives_looting_level"), null, null)
                 .descEquippingCondition()
-                .descAllModifiers(() -> NFFGirlsBaubleProperties.NO_CONDITION.get().asSimplePredicate())
-                .addTooltip(EFFECT_CONDITION_IN_WATER_OR_RAIN.get().getTranslation())
-                .descAllModifiers(() -> EFFECT_CONDITION_IN_WATER_OR_RAIN.get().asSimplePredicate()))
+                .descModifiers(List.of(null), false)
+                .desc(EFFECT_CONDITION_IN_WATER_OR_RAIN.get().getTranslation())
+                .descModifiers(List.of("in_water"), false))
             .alwaysFoil().cast());
 
     public static final RegistryObject<NFFGirlsDedicatedBaubleItem> NATURES_RAGE_BADGE = BAUBLE_ITEMS.register("natures_rage_badge", () ->
@@ -500,12 +516,13 @@ public class NFFGirlsBaubles {
                 .addDefaultModifier(true, Attributes.ATTACK_KNOCKBACK, 0.5d, AttributeModifier.Operation.ADDITION)
                 .addDefaultModifier(true, NFFGirlsEntityAttributes.POISON_ASPECT.get(), 3d, AttributeModifier.Operation.ADDITION)
                 .addDefaultModifier(true, NFFGirlsEntityAttributes.ANTI_ARTHROPOD.get(), 0.5d, AttributeModifier.Operation.ADDITION)
-                .addDefaultModifier(false, Attributes.MOVEMENT_SPEED, 0.35d, AttributeModifier.Operation.ADDITION, EFFECT_CONDITION_IN_WATER_OR_RAIN.get().asSimplePredicate(),
-                    new ResourceLocation(NFFGirls.MOD_ID, "nature_derivatives_speed_boost"))
+                .addModifier(false, Attributes.MOVEMENT_SPEED, 0.35d, AttributeModifier.Operation.ADDITION,
+                    new ResourceLocation(NFFGirls.MOD_ID, "nature_derivatives_speed_boost"), "in_water",
+                    propertyConditionByOperator(EFFECT_CONDITION_IN_WATER_OR_RAIN.get()))
                 .descEquippingCondition()
-                .descAllModifiers(() -> NFFGirlsBaubleProperties.NO_CONDITION.get().asSimplePredicate())
-                .addTooltip(EFFECT_CONDITION_IN_WATER_OR_RAIN.get().getTranslation())
-                .descAllModifiers(() -> EFFECT_CONDITION_IN_WATER_OR_RAIN.get().asSimplePredicate())));
+                .descModifiers(List.of(null), false)
+                .desc(EFFECT_CONDITION_IN_WATER_OR_RAIN.get().getTranslation())
+                .descModifiers(List.of("in_water"), false)));
 
     public static final RegistryObject<NFFGirlsDedicatedBaubleItem> NATURES_RAGE_BADGE_II = BAUBLE_ITEMS.register("natures_rage_badge_ii", () ->
         new NFFGirlsDedicatedBaubleItem(new ResourceLocation(NFFGirls.MOD_ID, "natures_rage_badge"), 2, 6, new Item.Properties(),
@@ -515,12 +532,13 @@ public class NFFGirlsBaubles {
                 .addDefaultModifier(true, Attributes.ATTACK_KNOCKBACK, 0.7d, AttributeModifier.Operation.ADDITION)
                 .addDefaultModifier(true, NFFGirlsEntityAttributes.POISON_ASPECT.get(), 4d, AttributeModifier.Operation.ADDITION)
                 .addDefaultModifier(true, NFFGirlsEntityAttributes.ANTI_ARTHROPOD.get(), 0.75d, AttributeModifier.Operation.ADDITION)
-                .addDefaultModifier(false, Attributes.MOVEMENT_SPEED, 0.35d, AttributeModifier.Operation.ADDITION, EFFECT_CONDITION_IN_WATER_OR_RAIN.get().asSimplePredicate(),
-                    new ResourceLocation(NFFGirls.MOD_ID, "nature_derivatives_speed_boost"))
+                .addModifier(false, Attributes.MOVEMENT_SPEED, 0.35d, AttributeModifier.Operation.ADDITION,
+                    new ResourceLocation(NFFGirls.MOD_ID, "nature_derivatives_speed_boost"), "in_water",
+                    propertyConditionByOperator(EFFECT_CONDITION_IN_WATER_OR_RAIN.get()))
                 .descEquippingCondition()
-                .descAllModifiers(() -> NFFGirlsBaubleProperties.NO_CONDITION.get().asSimplePredicate())
-                .addTooltip(EFFECT_CONDITION_IN_WATER_OR_RAIN.get().getTranslation())
-                .descAllModifiers(() -> EFFECT_CONDITION_IN_WATER_OR_RAIN.get().asSimplePredicate()))
+                .descModifiers(List.of(null), false)
+                .desc(EFFECT_CONDITION_IN_WATER_OR_RAIN.get().getTranslation())
+                .descModifiers(List.of("in_water"), false))
             .alwaysFoil().cast());
 
     public static final RegistryObject<NFFGirlsDedicatedBaubleItem> NATURES_RAGE_BADGE_III = BAUBLE_ITEMS.register("natures_rage_badge_iii", () ->
@@ -532,14 +550,15 @@ public class NFFGirlsBaubles {
                 .addDefaultModifier(true, NFFGirlsEntityAttributes.POISON_ASPECT.get(), 5d, AttributeModifier.Operation.ADDITION)
                 .addDefaultModifier(true, NFFGirlsEntityAttributes.ANTI_ARTHROPOD.get(), 1.0d, AttributeModifier.Operation.ADDITION)
                 .addDefaultModifier(true, NFFGirlsEntityAttributes.HEALTH_ABSORPTION.get(), 0.25d, AttributeModifier.Operation.ADDITION)
-                .addDefaultModifier(false, Attributes.MOVEMENT_SPEED, 0.4d, AttributeModifier.Operation.ADDITION, EFFECT_CONDITION_IN_WATER_OR_RAIN.get().asSimplePredicate(),
-                    new ResourceLocation(NFFGirls.MOD_ID, "nature_derivatives_speed_boost"))
-                .addDefaultModifier(false, NFFGirlsEntityAttributes.LOOTING_LEVEL.get(), 1.0d, AttributeModifier.Operation.ADDITION,
-                    new ResourceLocation(NFFGirls.MOD_ID, "natures_rage_looting_level"))
+                .addModifier(false, Attributes.MOVEMENT_SPEED, 0.4d, AttributeModifier.Operation.ADDITION,
+                    new ResourceLocation(NFFGirls.MOD_ID, "nature_derivatives_speed_boost"), "in_water",
+                    propertyConditionByOperator(EFFECT_CONDITION_IN_WATER_OR_RAIN.get()))
+                .addModifier(false, NFFGirlsEntityAttributes.LOOTING_LEVEL.get(), 1.0d, AttributeModifier.Operation.ADDITION,
+                    new ResourceLocation(NFFGirls.MOD_ID, "nature_derivatives_looting_level"), null, null)
                 .descEquippingCondition()
-                .descAllModifiers(() -> NFFGirlsBaubleProperties.NO_CONDITION.get().asSimplePredicate())
-                .addTooltip(EFFECT_CONDITION_IN_WATER_OR_RAIN.get().getTranslation())
-                .descAllModifiers(() -> EFFECT_CONDITION_IN_WATER_OR_RAIN.get().asSimplePredicate()))
+                .descModifiers(List.of(null), false)
+                .desc(EFFECT_CONDITION_IN_WATER_OR_RAIN.get().getTranslation())
+                .descModifiers(List.of("in_water"), false))
             .alwaysFoil().cast());
 
     // =========== JADE ============ //
