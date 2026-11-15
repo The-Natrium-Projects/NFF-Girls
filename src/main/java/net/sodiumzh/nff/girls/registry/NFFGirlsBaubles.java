@@ -41,7 +41,7 @@ import java.util.Optional;
 import java.util.function.Function;
 import java.util.function.Supplier;
 
-@Mod.EventBusSubscriber(modid = NFFGirls.MOD_ID, bus = Mod.EventBusSubscriber.Bus.FORGE)
+@Mod.EventBusSubscriber(modid = NFFGirls.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class NFFGirlsBaubles {
 
     // Just for loading this class
@@ -923,7 +923,7 @@ public class NFFGirlsBaubles {
     @SubscribeEvent
     public static void baubleRegistration(RegisterBaublesEvent event)
     {
-        // Dedicated bauble items are auto-registered in NFFGirlsBaubleEventListeners
+        // Dedicated bauble items are auto-registered in NFFGirlsBaubleSetupEventListeners
         event.register(INSOMNIA_FRUIT.get());
         event.register(new NecroticReaperHandHoeBaubleBehavior(new ResourceLocation(NFFGirls.MOD_ID, "necrotic_reaper_hoe")));
         event.register(new EnderManHandBlockBaubleBehavior(new ResourceLocation(NFFGirls.MOD_ID, "enderman_hand_block")));

@@ -26,6 +26,8 @@ import java.util.function.Supplier;
  */
 public class NFFGirlsBaubleBehavior extends BaubleBehavior implements INFFGirlsBauble {
 
+    private final ResourceLocation categoryKey;
+    private final int tier;
     @Nonnull
     private final NFFGirlsBaubleProperties properties;
 
@@ -36,10 +38,9 @@ public class NFFGirlsBaubleBehavior extends BaubleBehavior implements INFFGirlsB
         int tier,
         @Nonnull NFFGirlsBaubleProperties properties)
     {
-        super(getBaubleRegistryKey(categoryKey, tier), item, multiItemCondition,
-            Optional.ofNullable(properties.getEquippingCondition()).orElse(BaubleEquippingConditions.CONDITION_ALWAYS.get()));
-        this.metaData.put("categoryKey", categoryKey);
-        this.metaData.put("tier", tier);
+        super(getBaubleRegistryKey(categoryKey, tier), item, multiItemCondition, equippingConditionOf(properties));
+        this.categoryKey = categoryKey;
+        this.tier = tier;
         this.properties = properties;
     }
 
@@ -51,10 +52,7 @@ public class NFFGirlsBaubleBehavior extends BaubleBehavior implements INFFGirlsB
      * @param properties Properties describing this bauble's effects.
      */
     public NFFGirlsBaubleBehavior(@NotNull Item item, ResourceLocation categoryKey, int tier, @Nonnull NFFGirlsBaubleProperties properties) {
-        super(item, getBaubleRegistryKey(categoryKey, tier), properties.getEquippingCondition());
-        this.metaData.put("categoryKey", categoryKey);
-        this.metaData.put("tier", tier);
-        this.properties = properties;
+        this(item, null, categoryKey, tier, properties);
     }
 
     /**
@@ -65,12 +63,24 @@ public class NFFGirlsBaubleBehavior extends BaubleBehavior implements INFFGirlsB
      * @param properties Properties describing this bauble's effects.
      */
     public NFFGirlsBaubleBehavior(@NotNull BiPredicate<Item, ItemStack> condition, ResourceLocation categoryKey, int tier, @NotNull NFFGirlsBaubleProperties properties) {
-        super(condition, getBaubleRegistryKey(categoryKey, tier), properties.getEquippingCondition());
-        this.metaData.put("categoryKey", categoryKey);
-        this.metaData.put("tier", tier);
-        this.properties = properties;
+        this(null, condition, categoryKey, tier, properties);
     }
     
+    private static BaubleEquippingCondition equippingConditionOf(NFFGirlsBaubleProperties properties) {
+        return Optional.ofNullable(properties.getEquippingCondition())
+            .orElseGet(BaubleEquippingConditions.CONDITION_ALWAYS);
+    }
+
+    @Override
+    public ResourceLocation getCategoryKey() {
+        return this.categoryKey;
+    }
+
+    @Override
+    public int getTier() {
+        return this.tier;
+    }
+
     /**
      * Get the tier suffix (e.g. {@code "_ii"}) appended to the category name to build the registry name
      * for this instance's {@link #getTier()}. Empty for tier 1.
@@ -129,7 +139,8 @@ public class NFFGirlsBaubleBehavior extends BaubleBehavior implements INFFGirlsB
     @Nullable
     @Override
     public BaubleAttributeModifier[] getRepeatableModifiers(BaubleProcessingArgs baubleProcessingArgs) {
-        return this.properties.getModifierProperties(baubleProcessingArgs).stream()
+        // Applying conditions are checked by modifiers per tick
+        return this.getProperties().getModifierProperties(null).stream()
             .filter(NFFGirlsBaubleProperties.ModifierProperty::repeatable)
             .map(NFFGirlsBaubleProperties.ModifierProperty::createModifier)
             .toArray(BaubleAttributeModifier[]::new);
@@ -138,9 +149,9 @@ public class NFFGirlsBaubleBehavior extends BaubleBehavior implements INFFGirlsB
     @Nullable
     @Override
     public BaubleAttributeModifier[] getUnrepeatableModifiers(Mob mob) {
-        BaubleProcessingArgs args = new BaubleProcessingArgs(null, mob, null);
-        return this.getProperties().getModifierProperties(args).stream()
-            .filter(NFFGirlsBaubleProperties.ModifierProperty::repeatable)
+        // Applying conditions are checked by modifiers per tick
+        return this.getProperties().getModifierProperties(null).stream()
+            .filter(prop -> !prop.repeatable())
             .map(NFFGirlsBaubleProperties.ModifierProperty::createModifier)
             .toArray(BaubleAttributeModifier[]::new);
     }

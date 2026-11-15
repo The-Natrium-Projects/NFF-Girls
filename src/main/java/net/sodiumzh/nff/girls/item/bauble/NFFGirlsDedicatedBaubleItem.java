@@ -22,15 +22,16 @@ import java.util.function.Supplier;
  * Base class for NFF-Girls baubles that are their own dedicated {@link Item} class, implementing
  * {@link INFFGirlsBauble} on top of NFU-Library's {@link DedicatedBaubleItem}. The bauble's
  * {@link NFFGirlsBaubleProperties} are lazily loaded (since items are registered in the Forge registry
- * phase, while properties are only available in the NFU common-setup registry phase).
+ * phase, while properties depend on NFU registries), on bauble registration in common setup on both sides.
  */
 public class NFFGirlsDedicatedBaubleItem extends DedicatedBaubleItem implements INFFGirlsBauble
 {
+	private final ResourceLocation categoryKey;
+	private final int tier;
 	private final int rarityTier;
     // For lazy-loading properties. Items are registered on Forge registry phase,
-    // and properties are registered on server startup phase
+    // and properties are loaded on bauble registration (common setup)
     private final Supplier<NFFGirlsBaubleProperties> propertiesProvider;
-    // Should be loaded/reloaded on server startup phase
 	@Nullable
     private NFFGirlsBaubleProperties propertiesInstance = null;
 
@@ -45,8 +46,8 @@ public class NFFGirlsDedicatedBaubleItem extends DedicatedBaubleItem implements 
 		super(pProperties);
 		if (tier <= 0)
 			throw new IllegalArgumentException("NFFGirlsDedicatedBaubleItem tier must be positive (not supporting 0).");
-		this.metaData.put("categoryKey", categoryKey);
-		this.metaData.put("tier", tier);
+		this.categoryKey = categoryKey;
+		this.tier = tier;
 		this.rarityTier = rarityTier;
         this.propertiesProvider = propertiesProvider;
 	}
@@ -73,6 +74,16 @@ public class NFFGirlsDedicatedBaubleItem extends DedicatedBaubleItem implements 
 		return "_" + NFUMathStatics.intToRoman(tier).toLowerCase(Locale.ENGLISH);
 	}
 
+	@Override
+	public ResourceLocation getCategoryKey() {
+		return this.categoryKey;
+	}
+
+	@Override
+	public int getTier() {
+		return this.tier;
+	}
+
 	public int getRarityTier() {
 		return this.rarityTier;
 	}
@@ -85,10 +96,15 @@ public class NFFGirlsDedicatedBaubleItem extends DedicatedBaubleItem implements 
     }
 
 	/**
-	 * Only invoked on server startup, refresh bauble properties.
+	 * Load bauble properties. Invoked on bauble registration in common setup (on both sides), before this item
+	 * is registered to the NFU bauble registry. Properties are loaded only once.
 	 */
     public void loadProperties() {
+		if (this.propertiesInstance != null)
+			return;
 		this.propertiesInstance = propertiesProvider.get();
+		if (this.propertiesInstance == null)
+			throw new NullPointerException("NFFGirlsDedicatedBaubleItem properties supplier returned null.");
     }
 
     // IBaubleRegistryEntry interface //
@@ -100,7 +116,8 @@ public class NFFGirlsDedicatedBaubleItem extends DedicatedBaubleItem implements 
 
     @Override
     public BaubleAttributeModifier[] getRepeatableModifiers(BaubleProcessingArgs baubleProcessingArgs) {
-        return this.getProperties().getModifierProperties(baubleProcessingArgs).stream()
+        // Applying conditions are checked by modifiers per tick
+        return this.getProperties().getModifierProperties(null).stream()
 			.filter(NFFGirlsBaubleProperties.ModifierProperty::repeatable)
             .map(NFFGirlsBaubleProperties.ModifierProperty::createModifier)
 			.toArray(BaubleAttributeModifier[]::new);
@@ -108,9 +125,9 @@ public class NFFGirlsDedicatedBaubleItem extends DedicatedBaubleItem implements 
 
     @Override
     public BaubleAttributeModifier[] getUnrepeatableModifiers(Mob mob) {
-		BaubleProcessingArgs args = new BaubleProcessingArgs(null, mob, null);
-		return this.getProperties().getModifierProperties(args).stream()
-			.filter(NFFGirlsBaubleProperties.ModifierProperty::repeatable)
+		// Applying conditions are checked by modifiers per tick
+		return this.getProperties().getModifierProperties(null).stream()
+			.filter(prop -> !prop.repeatable())
 			.map(NFFGirlsBaubleProperties.ModifierProperty::createModifier)
 			.toArray(BaubleAttributeModifier[]::new);
     }

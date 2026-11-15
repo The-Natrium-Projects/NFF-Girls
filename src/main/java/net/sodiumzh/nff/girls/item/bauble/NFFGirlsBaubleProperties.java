@@ -56,7 +56,7 @@ public class NFFGirlsBaubleProperties {
 
     public List<ModifierProperty> getModifierProperties(@Nullable BaubleProcessingArgs argsFilter) {
         return this.properties.stream()
-            .filter(prop -> prop instanceof ModifierProperty erp && (argsFilter == null && erp.applyingCondition.test(argsFilter)))
+            .filter(prop -> prop instanceof ModifierProperty erp && (argsFilter == null || erp.applyingCondition == null || erp.applyingCondition.test(argsFilter)))
             .map(prop -> (ModifierProperty)prop)
             .toList();
     }
@@ -67,7 +67,7 @@ public class NFFGirlsBaubleProperties {
 
     public List<TagProperty> getTagProperties(@Nullable BaubleProcessingArgs argsFilter) {
         return this.properties.stream()
-            .filter(prop -> prop instanceof TagProperty p && (argsFilter == null && p.applyingCondition.test(argsFilter)))
+            .filter(prop -> prop instanceof TagProperty p && (argsFilter == null || p.applyingCondition == null || p.applyingCondition.test(argsFilter)))
             .map(prop -> (TagProperty)prop)
             .toList();
     }
@@ -82,7 +82,7 @@ public class NFFGirlsBaubleProperties {
 
     public boolean hasEnvironmentResistance(@Nullable BaubleProcessingArgs argsFilter) {
         return this.properties.stream().anyMatch(prop ->
-            prop instanceof EnvironmentResistanceProperty erp && (argsFilter == null && erp.applyingCondition.test(argsFilter)));
+            prop instanceof EnvironmentResistanceProperty erp && (argsFilter == null || erp.applyingCondition == null || erp.applyingCondition.test(argsFilter)));
     }
 
     public boolean hasEnvironmentResistance() {
@@ -91,7 +91,7 @@ public class NFFGirlsBaubleProperties {
 
     public List<TickActionProperty> getTickActionProperties(@Nullable BaubleProcessingArgs argsFilter) {
         return this.properties.stream()
-            .filter(prop -> prop instanceof TickActionProperty p && (argsFilter == null && p.applyingCondition.test(argsFilter)))
+            .filter(prop -> prop instanceof TickActionProperty p && (argsFilter == null || p.applyingCondition == null || p.applyingCondition.test(argsFilter)))
             .map(prop -> (TickActionProperty)prop)
             .toList();
     }
@@ -256,7 +256,7 @@ public class NFFGirlsBaubleProperties {
 
     /**
      * Any interface that can provide a row of description. Including property entries and plain suppliers.
-     * <p>Invoked when merging descriptions and sending to the client.
+     * <p>Invoked when building tooltips (client side).
      */
     @FunctionalInterface
     public interface DescriptionProvider {
@@ -268,7 +268,7 @@ public class NFFGirlsBaubleProperties {
      */
     public interface PropertyApplyingCondition extends Predicate<BaubleProcessingArgs> {
         public static PropertyApplyingCondition byLivingOperator(NFUOperator<? super Mob, Boolean> operator) {
-            return args -> operator.apply(args.user());
+            return args -> Boolean.TRUE.equals(operator.apply(args.user()));
         }
 
 

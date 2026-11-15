@@ -1,31 +1,40 @@
 package net.sodiumzh.nff.girls.item.bauble;
 
+import net.minecraft.ChatFormatting;
+import net.minecraft.network.chat.Component;
+import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.event.entity.player.ItemTooltipEvent;
-import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.registries.ForgeRegistries;
 import net.sodiumzh.nff.girls.NFFGirls;
-import net.sodiumzh.nff.girls.network.NFFGirlsChannels;
-import net.sodiumzh.nff.girls.registry.NFFGirlsBaubles;
-import net.sodiumzh.nfu.item.bauble.NFUBaubleAPI;
-import net.sodiumzh.nfu.item.bauble.RegisterBaublesEvent;
-import net.sodiumzh.nfu.util.NFUNetworkStatics;
+import net.sodiumzh.nfu.util.NFUInfoStatics;
 
-@Mod.EventBusSubscriber(modid = NFFGirls.MOD_ID, bus = Mod.EventBusSubscriber.Bus.FORGE)
+import java.util.List;
+import java.util.Map;
+import net.minecraft.resources.ResourceLocation;
+
+/**
+ * Client-side bauble listeners. As the NFU bauble registry is available on both sides,
+ * tooltips are built directly from the client-side registry entries.
+ */
+@Mod.EventBusSubscriber(modid = NFFGirls.MOD_ID, bus = Mod.EventBusSubscriber.Bus.FORGE, value = Dist.CLIENT)
 public class NFFGirlsBaubleEventListeners {
 
     @SubscribeEvent
-    public static void sendTooltips(PlayerEvent.PlayerLoggedInEvent event) {
-        NFUNetworkStatics.sendToPlayer(NFFGirlsChannels.SYNC_CHANNEL, new ClientboundNFFGirlsBaubleTooltipSyncPacket(), event.getEntity());
-    }
-
-    @SubscribeEvent
     public static void addTooltips(ItemTooltipEvent event) {
-        if (INFFGirlsBaubleClientTooltipProvider.TOOLTIPS.get().containsKey(event.getItemStack().getItem())) {
-            event.getToolTip().addAll(INFFGirlsBaubleClientTooltipProvider.TOOLTIPS.get().get(event.getItemStack().getItem()));
+        Map<ResourceLocation, INFFGirlsBauble> baubles = INFFGirlsBauble.asBauble(event.getItemStack());
+        if (baubles.isEmpty())
+            return;
+        List<Component> tooltip = event.getToolTip();
+        // Header (and rarity for dedicated baubles), added once per stack
+        if (event.getItemStack().getItem() instanceof NFFGirlsDedicatedBaubleItem dedicated) {
+            tooltip.add(NFUInfoStatics.createTranslatable("tooltip.nffgirls.bauble.dedicated_item").withStyle(ChatFormatting.WHITE));
+            tooltip.add(NFUInfoStatics.createTranslatable("tooltip.nffgirls.bauble.rarity_tier", dedicated.getRarityTier())
+                .withStyle(INFFGirlsBauble.getRarityStyle(dedicated.getRarityTier())));
+        } else {
+            tooltip.add(NFUInfoStatics.createTranslatable("info.nffgirls.bauble.existing_item").withStyle(ChatFormatting.WHITE));
         }
+        baubles.values().forEach(bauble -> tooltip.addAll(bauble.getProperties().createTooltips()));
     }
-
 
 }

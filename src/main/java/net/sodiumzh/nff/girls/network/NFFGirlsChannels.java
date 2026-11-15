@@ -6,7 +6,6 @@ import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.network.simple.SimpleChannel;
 import net.sodiumzh.nff.girls.NFFGirls;
 import net.sodiumzh.nff.girls.entity.vanillatrade.ClientboundNFFGirlsTradeSyncPacket;
-import net.sodiumzh.nff.girls.item.bauble.ClientboundNFFGirlsBaubleTooltipSyncPacket;
 import net.sodiumzh.nff.girls.jei.ClientboundNFFGirlsJeiDataSyncPacket;
 import net.sodiumzh.nff.girls.jei.ServerboundNFFGirlsJeiDataSyncRequestPacket;
 import net.sodiumzh.nfu.util.NFUNetworkStatics;
@@ -28,7 +27,6 @@ public class NFFGirlsChannels {
     	NFUNetworkStatics.registerDefaultClientGamePacket(nextID(), SYNC_CHANNEL, ClientboundNFFGirlsTradeSyncPacket.class);
         NFUNetworkStatics.registerDefaultClientGamePacket(nextID(), SYNC_CHANNEL, ClientboundNFFGirlsJeiDataSyncPacket.class);
         NFUNetworkStatics.registerDefaultServerGamePacket(nextID(), SYNC_CHANNEL, ServerboundNFFGirlsJeiDataSyncRequestPacket.class);
-        NFUNetworkStatics.registerDefaultClientGamePacket(nextID(), SYNC_CHANNEL, ClientboundNFFGirlsBaubleTooltipSyncPacket.class);
     }
     
     @SubscribeEvent
