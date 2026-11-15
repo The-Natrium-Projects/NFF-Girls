@@ -243,6 +243,7 @@ public class NFFGirlsEntityAttributeProviders
 	public static final NFURegistry.Accessor<EntityAttributeProvider> HMAG_NIGHTWALKER =
 		ATTRIBUTE_PROVIDERS.register("nightwalker", () -> EntityAttributeProvider.from(NFFGIRLS_DEFAULT_ATTRIBUTES.get())
 			.add(Attributes.MAX_HEALTH, 40.0D)
+			.add(Attributes.ATTACK_DAMAGE, 0d)
 			.add(Attributes.MOVEMENT_SPEED, 0.22D)
 			.add(Attributes.ARMOR, 2.0D)
 			.add(Attributes.KNOCKBACK_RESISTANCE, 0.5D)
@@ -251,7 +252,6 @@ public class NFFGirlsEntityAttributeProviders
 
 	@SubscribeEvent
 	public static void registerAttributes(EntityAttributeCreationEvent event) {
-		EntityAttributeProvider.from(NFFGIRLS_DEFAULT_ATTRIBUTES.get());
 		event.put(NFFGirlsEntityTypes.HMAG_ZOMBIE_GIRL.get(), NFFGirlsEntityAttributeProviders.HMAG_ZOMBIE_GIRL.get().get().build());
 		event.put(NFFGirlsEntityTypes.HMAG_HUSK_GIRL.get(), NFFGirlsEntityAttributeProviders.HMAG_ZOMBIE_GIRL.get().get().build());
 		event.put(NFFGirlsEntityTypes.HMAG_DROWNED_GIRL.get(), NFFGirlsEntityAttributeProviders.HMAG_DROWNED_GIRL.get().get().build());

@@ -325,8 +325,8 @@ public interface INFFGirlsTamed extends INFFTamed
 	public default boolean shouldAttackMobsHostileToSelf()
 	{
 		return NFUBaubleAPI.getAllSlotItems(this.asMob()).values().stream()
-			.flatMap(i -> INFFGirlsBauble.asBauble(i.getItem()).stream().map(b -> new Tuple2<>(i, b)))
-			.anyMatch(b -> b.getB().getProperties().hasTag(INFFGirlsBauble.TAG_ACTIVE_ATTACK, new BaubleProcessingArgs()));
+			.flatMap(i -> INFFGirlsBauble.asBauble(i).values().stream())
+			.anyMatch(b -> b.getProperties().hasTag(INFFGirlsBauble.TAG_ACTIVE_ATTACK, new BaubleProcessingArgs(null, this.asMob(), null)));
 	}
 	
 	/**
@@ -335,8 +335,8 @@ public interface INFFGirlsTamed extends INFFTamed
 	public default boolean shouldAttackMobsHostileToOwner()
 	{
 		return NFUBaubleAPI.getAllSlotItems(this.asMob()).values().stream()
-			.map(i -> INFFGirlsBauble.asBauble(i.getItem())).reduce(new ArrayList<>(), (a, b) -> { a.addAll(b); return a;})
-			.stream().anyMatch(b -> b.hasBaubleTag(INFFGirlsBauble.TAG_ACTIVE_ATTACK));
+			.flatMap(i -> INFFGirlsBauble.asBauble(i).values().stream())
+			.anyMatch(b -> b.getProperties().hasTag(INFFGirlsBauble.TAG_ACTIVE_ATTACK, new BaubleProcessingArgs(null, this.asMob(), null)));
 	}
 
 	/**

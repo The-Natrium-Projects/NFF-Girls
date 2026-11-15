@@ -6,6 +6,7 @@ import net.minecraft.world.entity.Mob;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.sodiumzh.nfu.item.bauble.BaubleProcessingArgs;
+import net.sodiumzh.nfu.item.bauble.BaubleRecord;
 import net.sodiumzh.nfu.item.bauble.IBaubleRegistryEntry;
 import net.sodiumzh.nfu.item.bauble.NFUBaubleAPI;
 import net.sodiumzh.nfu.util.NFUMathStatics;
@@ -85,10 +86,12 @@ public interface INFFGirlsBauble extends IBaubleRegistryEntry {
     public static Map<ResourceLocation, INFFGirlsBauble> asBauble(ItemStack itemStack) {
        if (itemStack.getItem() == null)
            return Map.of();
-        return NFUBaubleAPI.getItemKeyedSingleItemBaubles().get(itemStack.getItem()).stream()
-            .filter(entry -> entry.bauble() instanceof INFFGirlsBauble)
-            .collect(Collectors.toMap(entry -> entry.key(),
-                entry -> (INFFGirlsBauble)(entry.bauble())));
+        var entry = NFUBaubleAPI.getItemKeyedSingleItemBaubles().get(itemStack.getItem());
+        if (entry == null) return Map.of();
+        return entry.stream()
+            .filter(entry1 -> entry1.bauble() instanceof INFFGirlsBauble)
+            .collect(Collectors.toMap(BaubleRecord.ItemKeyedSingleItem::key,
+                entry1 -> (INFFGirlsBauble)(entry1.bauble())));
     }
 
     public static ChatFormatting getRarityStyle(int rarity) {

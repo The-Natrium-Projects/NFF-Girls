@@ -15,7 +15,7 @@ public class NFFGirlsItemTooltips {
 
     private static final Validatable<Multimap<Item, NFFGirlsBaubleBehavior>> BAUBLE_BEHAVIOR_ACCESS = new Validatable<>(HashMultimap.create());
 
-    @SubscribeEvent
+    /*@SubscribeEvent
     public static void addTooltips(ItemTooltipEvent event)
     {
         if (!BAUBLE_BEHAVIOR_ACCESS.isValidated())
@@ -28,14 +28,8 @@ public class NFFGirlsItemTooltips {
             BAUBLE_BEHAVIOR_ACCESS.get().get(event.getItemStack().getItem()).forEach(b ->
                 b.getTooltips().forEach(c -> event.getToolTip().add(c.get())));
         }
-        /*if (event.getItemStack().is(ModItems.INSOMNIA_FRUIT.get()))
-        {
-            event.getToolTip().add(NFUInfoStatics.createTranslatable("info.nffgirls.bauble.existing_item").withStyle(ChatFormatting.GRAY));
-            event.getToolTip().add(NFUInfoStatics.createTranslatable("info.nffgirls.bauble.at_night").withStyle(ChatFormatting.GRAY));
-            event.getToolTip().add(NFFGirlsBaubles.baubleHPMax(60d).get());
-            event.getToolTip().add(NFFGirlsBaubles.baubleAtk(8d).get());
-        }*/
 
-    }
+
+    }*/
 
 }

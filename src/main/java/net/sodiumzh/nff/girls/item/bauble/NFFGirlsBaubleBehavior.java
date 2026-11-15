@@ -50,7 +50,7 @@ public class NFFGirlsBaubleBehavior extends BaubleBehavior implements INFFGirlsB
      * @param tier Tier of this bauble under the category name.
      * @param properties Properties describing this bauble's effects.
      */
-    public NFFGirlsBaubleBehavior(@NotNull Item item, ResourceLocation categoryKey, int tier, @NotNull NFFGirlsBaubleProperties properties) {
+    public NFFGirlsBaubleBehavior(@NotNull Item item, ResourceLocation categoryKey, int tier, @Nonnull NFFGirlsBaubleProperties properties) {
         super(item, getBaubleRegistryKey(categoryKey, tier), properties.getEquippingCondition());
         this.metaData.put("categoryKey", categoryKey);
         this.metaData.put("tier", tier);

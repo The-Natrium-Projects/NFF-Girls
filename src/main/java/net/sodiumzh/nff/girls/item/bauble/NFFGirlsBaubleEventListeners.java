@@ -30,8 +30,8 @@ public class NFFGirlsBaubleEventListeners {
             .forEach(entry -> {
                 if (entry.getValue() instanceof NFFGirlsDedicatedBaubleItem item) {
                     item.loadProperties();
+                    event.register((INFFGirlsBauble)(entry.getValue()));
                 }
-                event.register((INFFGirlsBauble)(entry.getValue()));
             });
     }
 

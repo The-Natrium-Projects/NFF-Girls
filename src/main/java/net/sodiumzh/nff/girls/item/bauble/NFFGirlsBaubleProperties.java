@@ -17,6 +17,7 @@ import net.sodiumzh.nfu.item.bauble.BaubleProcessingArgs;
 import net.sodiumzh.nfu.util.NFUDataStatics;
 import net.sodiumzh.nfu.util.NFUInfoStatics;
 
+import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.text.DecimalFormat;
 import java.util.*;
@@ -110,7 +111,7 @@ public class NFFGirlsBaubleProperties {
         @Nullable String groupName,
         @Nullable PropertyApplyingCondition applyingCondition
     ) {
-        ModifierProperty property = new ModifierProperty(repeatable, attribute, amount, operation, unrepeatableIdentifier, groupName, applyingCondition);
+        ModifierProperty property = new ModifierProperty(repeatable, attribute, amount, operation, unrepeatableIdentifier, groupName == null ? "" : groupName, applyingCondition);
         properties.add(property);
         return this;
     }
@@ -156,7 +157,7 @@ public class NFFGirlsBaubleProperties {
 
     public NFFGirlsBaubleProperties addTickAction(Component desc, @Nullable String name, Consumer<BaubleProcessingArgs> action,
                                                   @Nullable PropertyApplyingCondition applyingCondition) {
-        properties.add(new TickActionProperty(action, desc, name, applyingCondition));
+        properties.add(new TickActionProperty(action, desc, name != null ? name : "", applyingCondition));
         return this;
     }
 
@@ -298,7 +299,7 @@ public class NFFGirlsBaubleProperties {
         double amount,
         AttributeModifier.Operation operation,
         @Nullable ResourceLocation unrepeatableIdentifier,
-        @Nullable String groupName,
+        @Nonnull String groupName,
         @Nullable PropertyApplyingCondition applyingCondition) implements IProperty
     {
 
@@ -379,7 +380,7 @@ public class NFFGirlsBaubleProperties {
     public record TickActionProperty(
         Consumer<BaubleProcessingArgs> action,
         Component description,
-        @Nullable String name,
+        @Nonnull String name,
         PropertyApplyingCondition applyingCondition) implements IProperty
     {
 

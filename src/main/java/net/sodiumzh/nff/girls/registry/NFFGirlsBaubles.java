@@ -1,8 +1,10 @@
 package net.sodiumzh.nff.girls.registry;
 
 import com.github.mechalopa.hmag.registry.ModItems;
+import com.google.common.base.Suppliers;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.MobType;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
@@ -31,11 +33,13 @@ import net.sodiumzh.nfu.item.bauble.RegisterBaublesEvent;
 import net.sodiumzh.nfu.registry.NFURegistries;
 import net.sodiumzh.nfu.registry.NFURegistry;
 import net.sodiumzh.nfu.registry.NFURegistryEntryCollection;
-import net.sodiumzh.nfu.registry.NFURegistryGenerateValuesEvent;
 
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 import java.util.function.Function;
+import java.util.function.Supplier;
 
 @Mod.EventBusSubscriber(modid = NFFGirls.MOD_ID, bus = Mod.EventBusSubscriber.Bus.FORGE)
 public class NFFGirlsBaubles {
@@ -366,7 +370,7 @@ public class NFFGirlsBaubles {
                 .addModifier(false, Attributes.MOVEMENT_SPEED, 0.2d, AttributeModifier.Operation.ADDITION,
                     new ResourceLocation(NFFGirls.MOD_ID, "nature_derivatives_speed_boost"), "in_water", propertyConditionByOperator(EFFECT_CONDITION_IN_WATER_OR_RAIN.get()))
                 .descEquippingCondition()
-                .descModifiers(List.of(null), false)
+                .descModifiers(List.of(""), false)
                 .desc(EFFECT_CONDITION_IN_WATER_OR_RAIN.get().getTranslation())
                 .descModifiers(List.of("in_water"), false)));
 
@@ -383,7 +387,7 @@ public class NFFGirlsBaubles {
                     new ResourceLocation(NFFGirls.MOD_ID, "nature_derivatives_speed_boost"), "in_water",
                     propertyConditionByOperator(EFFECT_CONDITION_IN_WATER_OR_RAIN.get()))
                 .descEquippingCondition()
-                .descModifiers(List.of(null), false)
+                .descModifiers(List.of(""), false)
                 .desc(EFFECT_CONDITION_IN_WATER_OR_RAIN.get().getTranslation())
                 .descModifiers(List.of("in_water"), false)));
 
@@ -401,7 +405,7 @@ public class NFFGirlsBaubles {
                     new ResourceLocation(NFFGirls.MOD_ID, "nature_derivatives_speed_boost"), "in_water",
                     propertyConditionByOperator(EFFECT_CONDITION_IN_WATER_OR_RAIN.get()))
                 .descEquippingCondition()
-                .descModifiers(List.of(null), false)
+                .descModifiers(List.of(""), false)
                 .desc(EFFECT_CONDITION_IN_WATER_OR_RAIN.get().getTranslation())
                 .descModifiers(List.of("in_water"), false))
             .alwaysFoil().cast());
@@ -421,7 +425,7 @@ public class NFFGirlsBaubles {
                     null, "in_water",
                     propertyConditionByOperator(EFFECT_CONDITION_IN_WATER_OR_RAIN.get()))
                 .descEquippingCondition()
-                .descModifiers(List.of(null), false)
+                .descModifiers(List.of(""), false)
                 .desc(EFFECT_CONDITION_IN_WATER_OR_RAIN.get().getTranslation())
                 .descModifiers(List.of("in_water"), false))
             .alwaysFoil().cast());
@@ -443,7 +447,7 @@ public class NFFGirlsBaubles {
                 .addModifier(false, NFFGirlsEntityAttributes.LOOTING_LEVEL.get(), 0.1d, AttributeModifier.Operation.ADDITION,
                     new ResourceLocation(NFFGirls.MOD_ID, "nature_derivatives_looting_level"), null, null)
                 .descEquippingCondition()
-                .descModifiers(List.of(null), false)
+                .descModifiers(List.of(""), false)
                 .desc(EFFECT_CONDITION_IN_WATER_OR_RAIN.get().getTranslation())
                 .descModifiers(List.of("in_water"), false))
             .alwaysFoil().cast());
@@ -462,7 +466,7 @@ public class NFFGirlsBaubles {
                     null, "in_water",
                     propertyConditionByOperator(EFFECT_CONDITION_IN_WATER_OR_RAIN.get()))
                 .descEquippingCondition()
-                .descModifiers(List.of(null), false)
+                .descModifiers(List.of(""), false)
                 .desc(EFFECT_CONDITION_IN_WATER_OR_RAIN.get().getTranslation())
                 .descModifiers(List.of("in_water"), false)));
 
@@ -481,7 +485,7 @@ public class NFFGirlsBaubles {
                     new ResourceLocation(NFFGirls.MOD_ID, "nature_derivatives_speed_boost"), "in_water",
                     propertyConditionByOperator(EFFECT_CONDITION_IN_WATER_OR_RAIN.get()))
                 .descEquippingCondition()
-                .descModifiers(List.of(null), false)
+                .descModifiers(List.of(""), false)
                 .desc(EFFECT_CONDITION_IN_WATER_OR_RAIN.get().getTranslation())
                 .descModifiers(List.of("in_water"), false))
             .alwaysFoil().cast());
@@ -503,7 +507,7 @@ public class NFFGirlsBaubles {
                 .addModifier(false, NFFGirlsEntityAttributes.LOOTING_LEVEL.get(), 1.0d, AttributeModifier.Operation.ADDITION,
                     new ResourceLocation(NFFGirls.MOD_ID, "nature_derivatives_looting_level"), null, null)
                 .descEquippingCondition()
-                .descModifiers(List.of(null), false)
+                .descModifiers(List.of(""), false)
                 .desc(EFFECT_CONDITION_IN_WATER_OR_RAIN.get().getTranslation())
                 .descModifiers(List.of("in_water"), false))
             .alwaysFoil().cast());
@@ -520,7 +524,7 @@ public class NFFGirlsBaubles {
                     new ResourceLocation(NFFGirls.MOD_ID, "nature_derivatives_speed_boost"), "in_water",
                     propertyConditionByOperator(EFFECT_CONDITION_IN_WATER_OR_RAIN.get()))
                 .descEquippingCondition()
-                .descModifiers(List.of(null), false)
+                .descModifiers(List.of(""), false)
                 .desc(EFFECT_CONDITION_IN_WATER_OR_RAIN.get().getTranslation())
                 .descModifiers(List.of("in_water"), false)));
 
@@ -536,7 +540,7 @@ public class NFFGirlsBaubles {
                     new ResourceLocation(NFFGirls.MOD_ID, "nature_derivatives_speed_boost"), "in_water",
                     propertyConditionByOperator(EFFECT_CONDITION_IN_WATER_OR_RAIN.get()))
                 .descEquippingCondition()
-                .descModifiers(List.of(null), false)
+                .descModifiers(List.of(""), false)
                 .desc(EFFECT_CONDITION_IN_WATER_OR_RAIN.get().getTranslation())
                 .descModifiers(List.of("in_water"), false))
             .alwaysFoil().cast());
@@ -556,7 +560,7 @@ public class NFFGirlsBaubles {
                 .addModifier(false, NFFGirlsEntityAttributes.LOOTING_LEVEL.get(), 1.0d, AttributeModifier.Operation.ADDITION,
                     new ResourceLocation(NFFGirls.MOD_ID, "nature_derivatives_looting_level"), null, null)
                 .descEquippingCondition()
-                .descModifiers(List.of(null), false)
+                .descModifiers(List.of(""), false)
                 .desc(EFFECT_CONDITION_IN_WATER_OR_RAIN.get().getTranslation())
                 .descModifiers(List.of("in_water"), false))
             .alwaysFoil().cast());
@@ -672,7 +676,7 @@ public class NFFGirlsBaubles {
                 .addDefaultModifier(true, NFFGirlsEntityAttributes.WATER_ASPECT.get(), 0.25d, AttributeModifier.Operation.ADDITION)
                 .environmentResistance()
                 .descEquippingCondition()
-                .descModifiers(List.of(null), false)
+                .descModifiers(List.of(""), false)
                 .descEnvironmentResistanceIfPresent()
                 .desc("tooltip.nffgirls.bauble.in_water")
                 .descModifiers(List.of("in_water"), false)));
@@ -696,7 +700,7 @@ public class NFFGirlsBaubles {
                     propertyConditionByOperator(EFFECT_CONDITION_IN_WATER.get()))
                 .environmentResistance()
                 .descEquippingCondition()
-                .descModifiers(List.of(null), false)
+                .descModifiers(List.of(""), false)
                 .descEnvironmentResistanceIfPresent()
                 .desc("tooltip.nffgirls.bauble.in_water")
                 .descModifiers(List.of("in_water"), false)));
@@ -720,7 +724,7 @@ public class NFFGirlsBaubles {
                     propertyConditionByOperator(EFFECT_CONDITION_IN_WATER.get()))
                 .environmentResistance()
                 .descEquippingCondition()
-                .descModifiers(List.of(null), false)
+                .descModifiers(List.of(""), false)
                 .descEnvironmentResistanceIfPresent()
                 .desc("tooltip.nffgirls.bauble.in_water")
                 .descModifiers(List.of("in_water"), false))
@@ -832,13 +836,16 @@ public class NFFGirlsBaubles {
             () -> new NFFGirlsBaubleProperties()
                 .environmentResistance()));
 
-    public static final NFURegistry.Accessor<NFFGirlsBaubleBehavior> INSOMNIA_FRUIT =
-        BAUBLE_COLLECTION.register("insomnia_fruit", () -> new NFFGirlsBaubleBehavior(ModItems.INSOMNIA_FRUIT.get(),
-            new ResourceLocation(NFFGirls.MOD_ID, "insomnia_fruit"), 1, 1, 
+    public static final Supplier<NFFGirlsBaubleBehavior> INSOMNIA_FRUIT =
+        Suppliers.memoize(() -> new NFFGirlsBaubleBehavior(ModItems.INSOMNIA_FRUIT.get(),
+            new ResourceLocation(NFFGirls.MOD_ID, "insomnia_fruit"),  1,
             new NFFGirlsBaubleProperties()
-                .addDefaultModifier(true, Attributes.ATTACK_DAMAGE, 5d, AttributeModifier.Operation.ADDITION, EFFECT_CONDITION_AT_NIGHT.get())
-                .addDefaultModifier(true, Attributes.MAX_HEALTH, 50d, AttributeModifier.Operation.ADDITION, EFFECT_CONDITION_AT_NIGHT.get())
-                .addDefaultModifier(true, NFFGirlsEntityAttributes.PERSISTENT_HEALING.get(), 0.1d, AttributeModifier.Operation.ADDITION, EFFECT_CONDITION_AT_NIGHT.get())
+                .addModifier(true, Attributes.ATTACK_DAMAGE, 5d, AttributeModifier.Operation.ADDITION,
+                    null, null, propertyConditionByOperator(EFFECT_CONDITION_AT_NIGHT.get()))
+                .addModifier(true, Attributes.MAX_HEALTH, 50d, AttributeModifier.Operation.ADDITION,
+                    null, null, propertyConditionByOperator(EFFECT_CONDITION_AT_NIGHT.get()))
+                .addModifier(true, NFFGirlsEntityAttributes.PERSISTENT_HEALING.get(), 0.1d, AttributeModifier.Operation.ADDITION,
+                    null, null, propertyConditionByOperator(EFFECT_CONDITION_AT_NIGHT.get()))
                 .desc("tooltip.nffgirls.bauble.at_night")
                 .descAllModifiers()));
     
@@ -860,10 +867,10 @@ public class NFFGirlsBaubles {
      * Register a befriended mob with a series of continuous bauble slots in the additional inventory.
      * for example, using index range (3, 6) will register the additional inventory slot 3, 4, 5 with slot name "0", "1", "2" respectively.
      */
-    public static RegisterBaubleEquippableMobsEvent.SlotRegisterer registerWithContinuousSlotSequence(
-        RegisterBaubleEquippableMobsEvent event, Class<? extends Mob> clazz, int minIndex, int maxIndexExclude)
+    public static <T extends Mob> RegisterBaubleEquippableMobsEvent.SlotRegisterer registerWithContinuousSlotSequence(
+        RegisterBaubleEquippableMobsEvent event, EntityType<T> type, Class<T> clazz, int minIndex, int maxIndexExclude)
     {
-        RegisterBaubleEquippableMobsEvent.SlotRegisterer reg = event.register(clazz);
+        RegisterBaubleEquippableMobsEvent.SlotRegisterer<T> reg = event.register(type, clazz);
         for (int i = 0; i < maxIndexExclude - minIndex; ++i)
         {
             reg.addSlot(Integer.toString(i), accessMobAdditionalInventory(minIndex + i));
@@ -878,53 +885,46 @@ public class NFFGirlsBaubles {
     @SubscribeEvent
     public static void baubleEquippableRegistration(RegisterBaubleEquippableMobsEvent event)
     {
-        registerWithContinuousSlotSequence(event, HmagDrownedGirlEntity.class, 6, 8);
-        registerWithContinuousSlotSequence(event, HmagZombieGirlEntity.class, 6, 8);
-        registerWithContinuousSlotSequence(event, HmagHuskGirlEntity.class, 6, 8);
+        registerWithContinuousSlotSequence(event, NFFGirlsEntityTypes.HMAG_DROWNED_GIRL.get(), HmagDrownedGirlEntity.class, 6, 8);
+        registerWithContinuousSlotSequence(event, NFFGirlsEntityTypes.HMAG_ZOMBIE_GIRL.get(), HmagZombieGirlEntity.class, 6, 8);
+        registerWithContinuousSlotSequence(event, NFFGirlsEntityTypes.HMAG_HUSK_GIRL.get(), HmagHuskGirlEntity.class, 6, 8);
 
-        registerWithContinuousSlotSequence(event, HmagSkeletonGirlEntity.class, 6, 7);
-        registerWithContinuousSlotSequence(event, HmagStrayGirlEntity.class, 6, 7);
-        registerWithContinuousSlotSequence(event, HmagWitherSkeletonGirlEntity.class, 6, 7);
+        registerWithContinuousSlotSequence(event, NFFGirlsEntityTypes.HMAG_SKELETON_GIRL.get(), HmagSkeletonGirlEntity.class, 6, 7);
+        registerWithContinuousSlotSequence(event, NFFGirlsEntityTypes.HMAG_STRAY_GIRL.get(), HmagStrayGirlEntity.class, 6, 7);
+        registerWithContinuousSlotSequence(event, NFFGirlsEntityTypes.HMAG_WITHER_SKELETON_GIRL.get(), HmagWitherSkeletonGirlEntity.class, 6, 7);
 
-        registerWithContinuousSlotSequence(event, HmagEnderExecutorEntity.class, 3, 5)
+        registerWithContinuousSlotSequence(event, NFFGirlsEntityTypes.HMAG_ENDER_EXECUTOR.get(), HmagEnderExecutorEntity.class, 3, 5)
             .addSpecialSlot("enderman_hand_block", accessMobAdditionalInventory(2)).addSpecialSlotItem("nffgirls:enderman_hand_block");
 
-        registerWithContinuousSlotSequence(event, HmagAlrauneEntity.class, 0, 3);
-        registerWithContinuousSlotSequence(event, HmagBansheeEntity.class, 2, 5);
-        registerWithContinuousSlotSequence(event, HmagCrimsonSlaughtererEntity.class, 0, 4);
-        registerWithContinuousSlotSequence(event, HmagCursedDollEntity.class, 2, 8);
-        registerWithContinuousSlotSequence(event, HmagDodomekiEntity.class, 2, 6);
-        registerWithContinuousSlotSequence(event, HmagDullahanEntity.class, 2, 6);
-        registerWithContinuousSlotSequence(event, HmagGhastlySeekerEntity.class, 0, 4);
-        registerWithContinuousSlotSequence(event, HmagGlaryadEntity.class, 0, 3);
-        registerWithContinuousSlotSequence(event, HmagHarpyEntity.class, 0, 4);
-        registerWithContinuousSlotSequence(event, HmagHornetEntity.class, 2, 4);
-        registerWithContinuousSlotSequence(event, HmagImpEntity.class, 2, 4);
-        registerWithContinuousSlotSequence(event, HmagJackFrostEntity.class, 0, 4);
-        registerWithContinuousSlotSequence(event, HmagJiangshiEntity.class, 3, 7);
-        registerWithContinuousSlotSequence(event, HmagKoboldEntity.class, 2, 4);
-        registerWithContinuousSlotSequence(event, HmagMeltyMonsterEntity.class, 0, 4);
-        registerWithContinuousSlotSequence(event, HmagNecroticReaperEntity.class, 2, 6)
+        registerWithContinuousSlotSequence(event, NFFGirlsEntityTypes.HMAG_ALRAUNE.get(), HmagAlrauneEntity.class, 0, 3);
+        registerWithContinuousSlotSequence(event, NFFGirlsEntityTypes.HMAG_BANSHEE.get(), HmagBansheeEntity.class, 2, 5);
+        registerWithContinuousSlotSequence(event, NFFGirlsEntityTypes.HMAG_CRIMSON_SLAUGHTERER.get(), HmagCrimsonSlaughtererEntity.class, 0, 4);
+        registerWithContinuousSlotSequence(event, NFFGirlsEntityTypes.HMAG_CURSED_DOLL.get(), HmagCursedDollEntity.class, 2, 8);
+        registerWithContinuousSlotSequence(event, NFFGirlsEntityTypes.HMAG_DODOMEKI.get(), HmagDodomekiEntity.class, 2, 6);
+        registerWithContinuousSlotSequence(event, NFFGirlsEntityTypes.HMAG_DULLAHAN.get(), HmagDullahanEntity.class, 2, 6);
+        registerWithContinuousSlotSequence(event, NFFGirlsEntityTypes.HMAG_GHASTLY_SEEKER.get(), HmagGhastlySeekerEntity.class, 0, 4);
+        registerWithContinuousSlotSequence(event, NFFGirlsEntityTypes.HMAG_GLARYAD.get(), HmagGlaryadEntity.class, 0, 3);
+        registerWithContinuousSlotSequence(event, NFFGirlsEntityTypes.HMAG_HARPY.get(), HmagHarpyEntity.class, 0, 4);
+        registerWithContinuousSlotSequence(event, NFFGirlsEntityTypes.HMAG_HORNET.get(), HmagHornetEntity.class, 2, 4);
+        registerWithContinuousSlotSequence(event, NFFGirlsEntityTypes.HMAG_IMP.get(), HmagImpEntity.class, 2, 4);
+        registerWithContinuousSlotSequence(event, NFFGirlsEntityTypes.HMAG_JACK_FROST.get(), HmagJackFrostEntity.class, 0, 4);
+        registerWithContinuousSlotSequence(event, NFFGirlsEntityTypes.HMAG_JIANGSHI.get(), HmagJiangshiEntity.class, 3, 7);
+        registerWithContinuousSlotSequence(event, NFFGirlsEntityTypes.HMAG_KOBOLD.get(), HmagKoboldEntity.class, 2, 4);
+        registerWithContinuousSlotSequence(event, NFFGirlsEntityTypes.HMAG_MELTY_MONSTER.get(), HmagMeltyMonsterEntity.class, 0, 4);
+        registerWithContinuousSlotSequence(event, NFFGirlsEntityTypes.HMAG_NECROTIC_REAPER.get(), HmagNecroticReaperEntity.class, 2, 6)
             .addSpecialSlot("main_hand", accessMobAdditionalInventory(0)).addSpecialSlotItem("nffgirls:necrotic_reaper_hoe")
             .addSpecialSlot("off_hand", accessMobAdditionalInventory(1)).addSpecialSlotItem("nffgirls:necrotic_reaper_hoe");
-        registerWithContinuousSlotSequence(event, HmagNightwalkerEntity.class, 0, 4);
-        registerWithContinuousSlotSequence(event, HmagRedcapEntity.class, 6, 7);
-        registerWithContinuousSlotSequence(event, HmagSlimeGirlEntity.class, 0, 4);
-        registerWithContinuousSlotSequence(event, HmagSnowCanineEntity.class, 0, 4);
+        registerWithContinuousSlotSequence(event, NFFGirlsEntityTypes.HMAG_NIGHTWALKER.get(), HmagNightwalkerEntity.class, 0, 4);
+        registerWithContinuousSlotSequence(event, NFFGirlsEntityTypes.HMAG_REDCAP.get(), HmagRedcapEntity.class, 6, 7);
+        registerWithContinuousSlotSequence(event, NFFGirlsEntityTypes.HMAG_SLIME_GIRL.get(), HmagSlimeGirlEntity.class, 0, 4);
+        registerWithContinuousSlotSequence(event, NFFGirlsEntityTypes.HMAG_SNOW_CANINE.get(), HmagSnowCanineEntity.class, 0, 4);
     }
 
     @SubscribeEvent
     public static void baubleRegistration(RegisterBaublesEvent event)
     {
-        // Load dedicated baubles from items, before registering NFF-Girls baubles to NFU bauble API
-        ForgeRegistries.ITEMS.getEntries().stream()
-            .filter(entry -> entry.getValue() instanceof INFFGirlsBauble)
-            .forEach(entry -> {
-                if (entry.getValue() instanceof NFFGirlsDedicatedBaubleItem item) {
-                    item.loadProperties();
-                    event.register(item);
-                }
-            });
+        // Dedicated bauble items are auto-registered in NFFGirlsBaubleEventListeners
+        event.register(INSOMNIA_FRUIT.get());
         event.register(new NecroticReaperHandHoeBaubleBehavior(new ResourceLocation(NFFGirls.MOD_ID, "necrotic_reaper_hoe")));
         event.register(new EnderManHandBlockBaubleBehavior(new ResourceLocation(NFFGirls.MOD_ID, "enderman_hand_block")));
     }
