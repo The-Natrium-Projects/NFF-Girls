@@ -268,7 +268,7 @@ public class NFFGirlsBaubleProperties {
      */
     public interface PropertyApplyingCondition extends Predicate<BaubleProcessingArgs> {
         public static PropertyApplyingCondition byLivingOperator(NFUOperator<? super Mob, Boolean> operator) {
-            return args -> operator.apply(args.user(), Map.of());
+            return args -> operator.apply(args.user());
         }
 
 

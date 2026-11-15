@@ -21,21 +21,6 @@ public class NFFGirlsBaubleEventListeners {
     }
 
     @SubscribeEvent
-    public static void mergeBaubles(RegisterBaublesEvent event) {
-        var allBaubles = NFUBaubleAPI.getSingleItemBaubles();
-        // Load dedicated baubles from items, before registering NFF-Girls baubles to NFU bauble API
-        ForgeRegistries.ITEMS.getEntries().stream()
-            .filter(entry -> entry.getValue() instanceof INFFGirlsBauble)
-            .filter(entry -> !allBaubles.containsKey(entry.getKey().location()))
-            .forEach(entry -> {
-                if (entry.getValue() instanceof NFFGirlsDedicatedBaubleItem item) {
-                    item.loadProperties();
-                    event.register((INFFGirlsBauble)(entry.getValue()));
-                }
-            });
-    }
-
-    @SubscribeEvent
     public static void addTooltips(ItemTooltipEvent event) {
         if (INFFGirlsBaubleClientTooltipProvider.TOOLTIPS.get().containsKey(event.getItemStack().getItem())) {
             event.getToolTip().addAll(INFFGirlsBaubleClientTooltipProvider.TOOLTIPS.get().get(event.getItemStack().getItem()));

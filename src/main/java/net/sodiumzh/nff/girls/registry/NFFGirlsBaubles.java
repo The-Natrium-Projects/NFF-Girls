@@ -91,15 +91,15 @@ public class NFFGirlsBaubles {
         CONDITION_NETHER.get().or(CONDITION_ENDER.get()).setTranslation("tooltip.nffgirls.bauble.for_nether_and_ender"));
 
     public static final NFURegistry.Accessor<NFFGirlsPredicate<Entity>> EFFECT_CONDITION_IN_WATER = BAUBLE_EFFECT_CONDITION_COLLECTION.register("in_water", () ->
-        NFFGirlsPredicate.simple(Entity.class, Entity::isInWaterOrBubble)
+        new NFFGirlsPredicate<>(Entity.class, Entity::isInWaterOrBubble)
             .setName("in_water")
             .setTranslation("tooltip.nffgirls.bauble.in_water"));
-    public static final NFURegistry.Accessor<NFFGirlsPredicate<Mob>> EFFECT_CONDITION_AT_NIGHT = BAUBLE_EFFECT_CONDITION_COLLECTION.register("at_night", () ->
-        NFFGirlsPredicate.simple(Mob.class, (Mob m) -> m.level().isNight())
+    public static final NFURegistry.Accessor<NFFGirlsPredicate<Entity>> EFFECT_CONDITION_AT_NIGHT = BAUBLE_EFFECT_CONDITION_COLLECTION.register("at_night", () ->
+        new NFFGirlsPredicate<>(Entity.class, (Entity m) -> m.level().isNight())
             .setName("at_night")
             .setTranslation("tooltip.nffgirls.bauble.at_night"));
     public static final NFURegistry.Accessor<NFFGirlsPredicate<Entity>> EFFECT_CONDITION_IN_WATER_OR_RAIN = BAUBLE_EFFECT_CONDITION_COLLECTION.register("in_water_or_rain", () ->
-        NFFGirlsPredicate.simple(Entity.class, Entity::isInWaterRainOrBubble)
+        new NFFGirlsPredicate<>(Entity.class, Entity::isInWaterRainOrBubble)
             .setName("in_water_or_rain")
             .setTranslation("tooltip.nffgirls.bauble.in_water_or_rain"));
 

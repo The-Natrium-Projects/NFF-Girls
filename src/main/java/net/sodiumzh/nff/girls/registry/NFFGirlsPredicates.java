@@ -22,6 +22,6 @@ public class NFFGirlsPredicates {
      */
     public static final NFURegistry.Accessor<NFFGirlsPredicate<ItemStack>> IS_FLOWER_ITEM_STACK =
         PREDICATES.register("is_flower_item_stack",
-            () -> NFFGirlsPredicate.simple(ItemStack.class, (ItemStack stack) ->
+            () -> new NFFGirlsPredicate<>(ItemStack.class, (ItemStack stack) ->
                 (stack.getItem() instanceof BlockItem blockitem && blockitem.getBlock() instanceof FlowerBlock)));
 }

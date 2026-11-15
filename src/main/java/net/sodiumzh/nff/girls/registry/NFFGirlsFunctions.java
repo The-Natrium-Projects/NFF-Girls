@@ -18,7 +18,7 @@ public class NFFGirlsFunctions {
      */
     public static final NFURegistry.Accessor<NFUOperator<LivingEntity, Double>> MOB_MAX_HEALTH
         = OPERATORS.register("mob_max_health", () ->
-            NFUOperator.simpleFunction(LivingEntity.class, Double.class, (LivingEntity living) -> (double)living.getMaxHealth()));
+            new NFUOperator<>(LivingEntity.class, Double.class, (LivingEntity living) -> (double)living.getMaxHealth()));
 
 
 }
