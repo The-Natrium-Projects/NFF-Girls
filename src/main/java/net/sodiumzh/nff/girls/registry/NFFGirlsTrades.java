@@ -83,7 +83,7 @@ public class NFFGirlsTrades
 					if (!je.isJsonArray()) return;
 					NFFGirlsDataReaders.readTradeListings(l.getNamespace(), je.getAsJsonArray())
 						.forEach((location, listing) ->
-							collections.get(location.getNamespace()).register(location.getPath(), () -> listing));
+							collections.get(location.getNamespace()).registerServerSpecificEntry(location.getPath(), () -> listing));
 			}));
 			collections.values().forEach(NFURegistryEntryCollection::mergeIfAbsent);
 		}
@@ -104,7 +104,7 @@ public class NFFGirlsTrades
 			Map<String, NFURegistryEntryCollection<VanillaTradeListingCollection<?>>> collections = new HashMap<>();
 			allKeys.stream().map(ResourceLocation::getNamespace).collect(Collectors.toSet())
 				.forEach(key -> collections.put(key, NFURegistryEntryCollection.create(NFURegistries.VANILLA_TRADE_LISTING_COLLECTIONS, key)));
-			allKeys.forEach((ResourceLocation key) -> collections.get(key.getNamespace()).register(key.getPath(),
+			allKeys.forEach((ResourceLocation key) -> collections.get(key.getNamespace()).registerServerSpecificEntry(key.getPath(),
 					() -> VanillaTradeListingCollectionHelper.newCollection()
 						.setCurrency(NFFGirlsItems.EVIL_GEM.get())
 						.readData(jsonPath(key)).get()));

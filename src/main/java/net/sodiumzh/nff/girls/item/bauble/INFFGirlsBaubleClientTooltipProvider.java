@@ -2,25 +2,17 @@ package net.sodiumzh.nff.girls.item.bauble;
 
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
-import net.minecraft.world.item.Item;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
-import net.sodiumzh.nfu.object.ClientOnly;
 import net.sodiumzh.nfu.util.NFUInfoStatics;
-import org.checkerframework.checker.units.qual.C;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.function.Supplier;
 
 
 @OnlyIn(Dist.CLIENT)
 public class INFFGirlsBaubleClientTooltipProvider implements Supplier<List<Component>> {
-
-    public static final ClientOnly<Map<Item, List<Component>>> TOOLTIPS
-        = new ClientOnly<>(new HashMap<>());
 
     private static final Component DESC_DEDICATED_BAUBLE
         = NFUInfoStatics.createTranslatable("tooltip.nffgirls.bauble.dedicated_item").withStyle(ChatFormatting.WHITE);

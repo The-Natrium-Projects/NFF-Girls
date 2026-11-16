@@ -6,13 +6,11 @@ import net.minecraft.world.entity.Mob;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.sodiumzh.nfu.item.bauble.BaubleProcessingArgs;
-import net.sodiumzh.nfu.item.bauble.BaubleRecord;
 import net.sodiumzh.nfu.item.bauble.IBaubleRegistryEntry;
 import net.sodiumzh.nfu.item.bauble.NFUBaubleAPI;
 import net.sodiumzh.nfu.util.NFUMathStatics;
 import org.jetbrains.annotations.ApiStatus;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
@@ -34,28 +32,16 @@ public interface INFFGirlsBauble extends IBaubleRegistryEntry {
     /** Bauble tag marking a bauble that enables an active attack behavior. */
     public static final String TAG_ACTIVE_ATTACK = "active_attack";
 
-    public static final String META_KEY_CATEGORY_KEY = "categoryKey";
-    public static final String META_KEY_TIER = "tier";
-
-
     /**
      * Get the "category key" of the bauble. E.g. For Soul Amulets of all tiers, the key
      * is "nffgirls:soul_amulet".
      */
-    @ApiStatus.NonExtendable
-    public default ResourceLocation getCategoryKey() {
-        return this.getMetaDataMap().getOptionalAs(META_KEY_CATEGORY_KEY, ResourceLocation.class)
-            .orElseThrow(() -> new IllegalStateException("NFFGirlsBauble missing category key"));
-    }
+    public ResourceLocation getCategoryKey();
 
     /**
      * Get the tier under this category key, deciding the actual effects.
      */
-    @ApiStatus.NonExtendable
-    public default int getTier() {
-        return this.getMetaDataMap().getOptionalAs(META_KEY_TIER, Integer.class)
-            .orElseThrow(() -> new IllegalStateException("NFFGirlsBauble missing tier"));
-    }
+    public int getTier();
 
     /**
      * Get additional string tags to identify common behaviors that cannot be defined with
@@ -81,17 +67,17 @@ public interface INFFGirlsBauble extends IBaubleRegistryEntry {
     public NFFGirlsBaubleProperties getProperties();
 
     /**
-     * Resolve the {@link INFFGirlsBauble} entry (or entries) associated with the given an {@link ItemStack}.
+     * Resolve the {@link INFFGirlsBauble} entries (keyed by bauble registry key) associated with the given {@link ItemStack},
+     * including both single-item and multi-item entries.
+     * <p>Available on both sides, as the NFU bauble registry is two-sided.
      */
     public static Map<ResourceLocation, INFFGirlsBauble> asBauble(ItemStack itemStack) {
-       if (itemStack.getItem() == null)
-           return Map.of();
-        var entry = NFUBaubleAPI.getItemKeyedSingleItemBaubles().get(itemStack.getItem());
-        if (entry == null) return Map.of();
-        return entry.stream()
-            .filter(entry1 -> entry1.bauble() instanceof INFFGirlsBauble)
-            .collect(Collectors.toMap(BaubleRecord.ItemKeyedSingleItem::key,
-                entry1 -> (INFFGirlsBauble)(entry1.bauble())));
+        if (itemStack.isEmpty())
+            return Map.of();
+        return NFUBaubleAPI.getAllRelatedEntries(itemStack).stream()
+            .filter(entry -> entry instanceof INFFGirlsBauble)
+            .map(entry -> (INFFGirlsBauble) entry)
+            .collect(Collectors.toMap(IBaubleRegistryEntry::getBaubleRegistryKey, bauble -> bauble, (a, b) -> a));
     }
 
     public static ChatFormatting getRarityStyle(int rarity) {

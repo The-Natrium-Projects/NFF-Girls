@@ -1,38 +1,11 @@
 package net.sodiumzh.nff.girls.item.bauble;
 
-import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonParseException;
-import com.mojang.logging.LogUtils;
-import net.minecraft.ChatFormatting;
-import net.minecraft.client.Minecraft;
-import net.minecraft.network.chat.Component;
-import net.minecraft.network.protocol.PacketUtils;
-import net.minecraft.network.protocol.game.ClientGamePacketListener;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.Mob;
-import net.minecraft.world.entity.ai.attributes.Attribute;
-import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.item.ItemStack;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.api.distmarker.OnlyIn;
-import net.minecraftforge.registries.ForgeRegistries;
-import net.sodiumzh.nfu.function.NFUOperator;
-import net.sodiumzh.nfu.item.bauble.BaubleProcessingArgs;
-import net.sodiumzh.nfu.item.bauble.BaubleRecord;
 import net.sodiumzh.nfu.item.bauble.NFUBaubleAPI;
-import net.sodiumzh.nfu.registry.NFURegistries;
-import net.sodiumzh.nfu.util.NFUContainerStatics;
-import net.sodiumzh.nfu.util.NFUDataStatics;
-import net.sodiumzh.nfu.util.NFUInfoStatics;
 
-import javax.annotation.Nullable;
-import java.util.AbstractMap;
 import java.util.Collection;
-import java.util.Map;
-import java.util.Objects;
-import java.util.function.Function;
 import java.util.function.Predicate;
 
 /**
@@ -90,16 +63,6 @@ public class NFFGirlsBaubleStatics
 	public static int countBaubles(Mob mob, ResourceLocation key)
 	{
 		return countBaublesWithMinTier(mob, key, 0); 
-	}
-
-	@OnlyIn(Dist.CLIENT)
-	public static void handleTooltipSync(ClientboundNFFGirlsBaubleTooltipSyncPacket packet, ClientGamePacketListener listener) {
-		Minecraft mc = Minecraft.getInstance();
-		PacketUtils.ensureRunningOnSameThread(packet, listener, mc);
-		INFFGirlsBaubleClientTooltipProvider.TOOLTIPS.get().clear();
-		packet.tooltipMap.forEach((key, value) -> {
-			INFFGirlsBaubleClientTooltipProvider.TOOLTIPS.get().put(ForgeRegistries.ITEMS.getValue(key), value);
-		});
 	}
 
 }
